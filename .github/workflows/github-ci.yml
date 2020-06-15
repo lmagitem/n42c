@@ -1,4 +1,4 @@
-name: Application CI
+name: N42C CI
 on: [push, pull_request]
 jobs:
     pipeline:
