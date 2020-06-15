@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-blog-category-heading" jhiTranslate="n42CApp.blogCategory.home.createOrEditLabel">Create or edit a Blog Category</h2>
+            <h2 id="jhi-blog-category-heading" jhiTranslate="n42cApp.blogCategory.home.createOrEditLabel">Create or edit a Blog Category</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.blogCategory.name" for="field_name" [ngbTooltip]="'n42CApp.blogCategory.help.name' | translate">Name</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.blogCategory.name" for="field_name" [ngbTooltip]="'n42cApp.blogCategory.help.name' | translate">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                     <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
@@ -24,16 +24,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.blogCategory.language" for="field_language" [ngbTooltip]="'n42CApp.blogCategory.help.language' | translate">Language</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.blogCategory.language" for="field_language" [ngbTooltip]="'n42cApp.blogCategory.help.language' | translate">Language</label>
                     <select class="form-control" name="language" formControlName="language" id="field_language">
-                        <option value="EN">{{ 'n42CApp.Language.EN' | translate }}</option>
-                        <option value="FR">{{ 'n42CApp.Language.FR' | translate }}</option>
-                        <option value="ES">{{ 'n42CApp.Language.ES' | translate }}</option>
+                        <option value="EN">{{ 'n42cApp.Language.EN' | translate }}</option>
+                        <option value="FR">{{ 'n42cApp.Language.FR' | translate }}</option>
+                        <option value="ES">{{ 'n42cApp.Language.ES' | translate }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.blogCategory.categories" for="field_categories">Categories</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.blogCategory.categories" for="field_categories">Categories</label>
                     <select class="form-control" id="field_categories" name="categories" formControlName="categories">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="blogPostOption.id === editForm.get('categories')!.value?.id ? editForm.get('categories')!.value : blogPostOption" *ngFor="let blogPostOption of blogposts; trackBy: trackById">{{ blogPostOption.id }}</option>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.blogCategory.subcategories" for="field_subcategories">Subcategories</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.blogCategory.subcategories" for="field_subcategories">Subcategories</label>
                     <select class="form-control" id="field_subcategories" name="subcategories" formControlName="subcategories">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="blogCategoryOption.id === editForm.get('subcategories')!.value?.id ? editForm.get('subcategories')!.value : blogCategoryOption" *ngFor="let blogCategoryOption of blogcategories; trackBy: trackById">{{ blogCategoryOption.id }}</option>

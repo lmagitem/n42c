@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-app-user-heading" jhiTranslate="n42CApp.appUser.home.createOrEditLabel">Create or edit a App User</h2>
+            <h2 id="jhi-app-user-heading" jhiTranslate="n42cApp.appUser.home.createOrEditLabel">Create or edit a App User</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.userName" for="field_userName" [ngbTooltip]="'n42CApp.appUser.help.userName' | translate">User Name</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.appUser.userName" for="field_userName" [ngbTooltip]="'n42cApp.appUser.help.userName' | translate">User Name</label>
                     <input type="text" class="form-control" name="userName" id="field_userName"
                            formControlName="userName"/>
                     <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.displayedName" for="field_displayedName" [ngbTooltip]="'n42CApp.appUser.help.displayedName' | translate">Displayed Name</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.appUser.displayedName" for="field_displayedName" [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate">Displayed Name</label>
                     <input type="text" class="form-control" name="displayedName" id="field_displayedName"
                            formControlName="displayedName"/>
                     <div *ngIf="editForm.get('displayedName')!.invalid && (editForm.get('displayedName')!.dirty || editForm.get('displayedName')!.touched)">
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.email" for="field_email" [ngbTooltip]="'n42CApp.appUser.help.email' | translate">Email</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.appUser.email" for="field_email" [ngbTooltip]="'n42cApp.appUser.help.email' | translate">Email</label>
                     <input type="text" class="form-control" name="email" id="field_email"
                            formControlName="email"/>
                     <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.admin" for="field_admin" [ngbTooltip]="'n42CApp.appUser.help.admin' | translate">Admin</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.appUser.admin" for="field_admin" [ngbTooltip]="'n42cApp.appUser.help.admin' | translate">Admin</label>
                     <input type="checkbox" class="form-control" name="admin" id="field_admin"
                            formControlName="admin"/>
                     <div *ngIf="editForm.get('admin')!.invalid && (editForm.get('admin')!.dirty || editForm.get('admin')!.touched)">
@@ -56,11 +56,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.rights" for="field_rights" [ngbTooltip]="'n42CApp.appUser.help.rights' | translate">Rights</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.appUser.rights" for="field_rights" [ngbTooltip]="'n42cApp.appUser.help.rights' | translate">Rights</label>
                     <select class="form-control" name="rights" formControlName="rights" id="field_rights">
-                        <option value="MOD">{{ 'n42CApp.AppUserRights.MOD' | translate }}</option>
-                        <option value="WRI">{{ 'n42CApp.AppUserRights.WRI' | translate }}</option>
-                        <option value="REA">{{ 'n42CApp.AppUserRights.REA' | translate }}</option>
+                        <option value="MOD">{{ 'n42cApp.AppUserRights.MOD' | translate }}</option>
+                        <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
+                        <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
                     </select>
                     <div *ngIf="editForm.get('rights')!.invalid && (editForm.get('rights')!.dirty || editForm.get('rights')!.touched)">
                         <small class="form-text text-danger"
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.user" for="field_user">User</label>
+                    <label class="form-control-label" jhiTranslate="n42cApp.appUser.user" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" formControlName="user">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>

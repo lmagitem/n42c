@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.profilePartSkill.home.title">Profile Part Skills</span>
+        <span jhiTranslate="n42cApp.profilePartSkill.home.title">Profile Part Skills</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-profile-part-skill" [routerLink]="['/profile-part-skill/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.profilePartSkill.home.createLabel">
+            <span  jhiTranslate="n42cApp.profilePartSkill.home.createLabel">
             Create a new Profile Part Skill
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="profilePartSkills?.length === 0">
-        <span jhiTranslate="n42CApp.profilePartSkill.home.notFound">No profilePartSkills found</span>
+        <span jhiTranslate="n42cApp.profilePartSkill.home.notFound">No profilePartSkills found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="profilePartSkills && profilePartSkills.length > 0">
@@ -23,11 +23,11 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.index">Index</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.level">Level</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.linkedSkills">Linked Skills</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.skills">Skills</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkill.name">Name</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkill.index">Index</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkill.level">Level</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkill.linkedSkills">Linked Skills</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkill.skills">Skills</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -36,7 +36,7 @@
                     <td><a [routerLink]="['/profile-part-skill', profilePartSkill.id, 'view']">{{ profilePartSkill.id }}</a></td>
                     <td>{{ profilePartSkill.name }}</td>
                     <td>{{ profilePartSkill.index }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.LevelOfMastery.' + profilePartSkill.level }}">{{ profilePartSkill.level }}</td>
+                    <td jhiTranslate="{{ 'n42cApp.LevelOfMastery.' + profilePartSkill.level }}">{{ profilePartSkill.level }}</td>
                     <td>
                         <span *ngFor="let linkedSkills of profilePartSkill.linkedSkills; let last = last">
                             <a class="form-control-static" [routerLink]="['/profile-part-linked-experience', linkedSkills?.id, 'view']">{{ linkedSkills.id }}</a>{{ last ? '' : ', ' }}

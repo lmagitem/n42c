@@ -59,10 +59,11 @@ public class LogoutResourceIT {
     public void getLogoutInformation() throws Exception {
         String logoutUrl = this.registrations.findByRegistrationId("oidc").getProviderDetails()
             .getConfigurationMetadata().get("end_session_endpoint").toString();
+
         restLogoutMockMvc.perform(post("/api/logout"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.logoutUrl").value(logoutUrl))
-            .andExpect(jsonPath("$.idToken").value(ID_TOKEN));
+            .andExpect(jsonPath("$.clientId").value("client-id"));
+        ;
     }
 }

@@ -1,46 +1,46 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="profilePartPreciseItem">
-            <h2><span jhiTranslate="n42CApp.profilePartPreciseItem.detail.title">Profile Part Precise Item</span> {{ profilePartPreciseItem.id }}</h2>
+            <h2><span jhiTranslate="n42cApp.profilePartPreciseItem.detail.title">Profile Part Precise Item</span> {{ profilePartPreciseItem.id }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.title" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.title' | translate">Title</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.title" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.title' | translate">Title</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.title }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.subTitle" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.subTitle' | translate">Sub Title</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.subTitle" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.subTitle' | translate">Sub Title</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.subTitle }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.start" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.start' | translate">Start</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.start" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.start' | translate">Start</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.start }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.end" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.end' | translate">End</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.end" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.end' | translate">End</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.end }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.locationName" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.locationName' | translate">Location Name</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.locationName" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.locationName' | translate">Location Name</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.locationName }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.locationLat" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.locationLat' | translate">Location Lat</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.locationLat" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.locationLat' | translate">Location Lat</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.locationLat }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.locationLong" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.locationLong' | translate">Location Long</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.locationLong" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.locationLong' | translate">Location Long</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.locationLong }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.content" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.content' | translate">Content</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.content" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.content' | translate">Content</span></dt>
                 <dd>
                     <span>{{ profilePartPreciseItem.content }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartPreciseItem.preciseItems">Precise Items</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.preciseItems">Precise Items</span></dt>
                 <dd>
                     <div *ngIf="profilePartPreciseItem.preciseItems">
                         <a [routerLink]="['/profile-part', profilePartPreciseItem.preciseItems?.id, 'view']">{{ profilePartPreciseItem.preciseItems?.id }}</a>

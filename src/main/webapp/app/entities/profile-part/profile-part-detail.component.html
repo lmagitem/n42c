@@ -1,30 +1,30 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="profilePart">
-            <h2><span jhiTranslate="n42CApp.profilePart.detail.title">Profile Part</span> {{ profilePart.id }}</h2>
+            <h2><span jhiTranslate="n42cApp.profilePart.detail.title">Profile Part</span> {{ profilePart.id }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.profilePart.title" [ngbTooltip]="'n42CApp.profilePart.help.title' | translate">Title</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePart.title" [ngbTooltip]="'n42cApp.profilePart.help.title' | translate">Title</span></dt>
                 <dd>
                     <span>{{ profilePart.title }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePart.type" [ngbTooltip]="'n42CApp.profilePart.help.type' | translate">Type</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePart.type" [ngbTooltip]="'n42cApp.profilePart.help.type' | translate">Type</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'n42CApp.ProfilePartType.' + profilePart.type }}">{{ profilePart.type }}</span>
+                    <span jhiTranslate="{{ 'n42cApp.ProfilePartType.' + profilePart.type }}">{{ profilePart.type }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePart.index" [ngbTooltip]="'n42CApp.profilePart.help.index' | translate">Index</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePart.index" [ngbTooltip]="'n42cApp.profilePart.help.index' | translate">Index</span></dt>
                 <dd>
                     <span>{{ profilePart.index }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePart.order" [ngbTooltip]="'n42CApp.profilePart.help.order' | translate">Order</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePart.order" [ngbTooltip]="'n42cApp.profilePart.help.order' | translate">Order</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'n42CApp.ProfilePartOrderType.' + profilePart.order }}">{{ profilePart.order }}</span>
+                    <span jhiTranslate="{{ 'n42cApp.ProfilePartOrderType.' + profilePart.order }}">{{ profilePart.order }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.profilePart.categories">Categories</span></dt>
+                <dt><span jhiTranslate="n42cApp.profilePart.categories">Categories</span></dt>
                 <dd>
                     <div *ngIf="profilePart.categories">
                         <a [routerLink]="['/app-user-profile', profilePart.categories?.id, 'view']">{{ profilePart.categories?.id }}</a>

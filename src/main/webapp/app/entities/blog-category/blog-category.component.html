@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.blogCategory.home.title">Blog Categories</span>
+        <span jhiTranslate="n42cApp.blogCategory.home.title">Blog Categories</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-blog-category" [routerLink]="['/blog-category/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.blogCategory.home.createLabel">
+            <span  jhiTranslate="n42cApp.blogCategory.home.createLabel">
             Create a new Blog Category
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="blogCategories?.length === 0">
-        <span jhiTranslate="n42CApp.blogCategory.home.notFound">No blogCategories found</span>
+        <span jhiTranslate="n42cApp.blogCategory.home.notFound">No blogCategories found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="blogCategories && blogCategories.length > 0">
@@ -23,10 +23,10 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.blogCategory.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.blogCategory.language">Language</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.blogCategory.categories">Categories</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.blogCategory.subcategories">Subcategories</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.blogCategory.name">Name</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.blogCategory.language">Language</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.blogCategory.categories">Categories</span></th>
+                    <th scope="col" ><span jhiTranslate="n42cApp.blogCategory.subcategories">Subcategories</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                 <tr *ngFor="let blogCategory of blogCategories ;trackBy: trackId">
                     <td><a [routerLink]="['/blog-category', blogCategory.id, 'view']">{{ blogCategory.id }}</a></td>
                     <td>{{ blogCategory.name }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.Language.' + blogCategory.language }}">{{ blogCategory.language }}</td>
+                    <td jhiTranslate="{{ 'n42cApp.Language.' + blogCategory.language }}">{{ blogCategory.language }}</td>
                     <td>
                         <div *ngIf="blogCategory.categories">
                             <a [routerLink]="['/blog-post', blogCategory.categories?.id, 'view']" >{{ blogCategory.categories?.id }}</a>

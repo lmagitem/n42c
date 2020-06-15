@@ -141,7 +141,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'n42CApp'
+    name: 'n42cApp'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #     allowed-origins: "*"

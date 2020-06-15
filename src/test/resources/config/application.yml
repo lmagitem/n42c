@@ -88,7 +88,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'n42CApp'
+    name: 'n42cApp'
   logging:
     # To test json console appender
     use-json-format: false

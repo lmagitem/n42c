@@ -1,34 +1,34 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="appUser">
-            <h2><span jhiTranslate="n42CApp.appUser.detail.title">App User</span> {{ appUser.id }}</h2>
+            <h2><span jhiTranslate="n42cApp.appUser.detail.title">App User</span> {{ appUser.id }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.appUser.userName" [ngbTooltip]="'n42CApp.appUser.help.userName' | translate">User Name</span></dt>
+                <dt><span jhiTranslate="n42cApp.appUser.userName" [ngbTooltip]="'n42cApp.appUser.help.userName' | translate">User Name</span></dt>
                 <dd>
                     <span>{{ appUser.userName }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.displayedName" [ngbTooltip]="'n42CApp.appUser.help.displayedName' | translate">Displayed Name</span></dt>
+                <dt><span jhiTranslate="n42cApp.appUser.displayedName" [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate">Displayed Name</span></dt>
                 <dd>
                     <span>{{ appUser.displayedName }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.email" [ngbTooltip]="'n42CApp.appUser.help.email' | translate">Email</span></dt>
+                <dt><span jhiTranslate="n42cApp.appUser.email" [ngbTooltip]="'n42cApp.appUser.help.email' | translate">Email</span></dt>
                 <dd>
                     <span>{{ appUser.email }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.admin" [ngbTooltip]="'n42CApp.appUser.help.admin' | translate">Admin</span></dt>
+                <dt><span jhiTranslate="n42cApp.appUser.admin" [ngbTooltip]="'n42cApp.appUser.help.admin' | translate">Admin</span></dt>
                 <dd>
                     <span>{{ appUser.admin }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.rights" [ngbTooltip]="'n42CApp.appUser.help.rights' | translate">Rights</span></dt>
+                <dt><span jhiTranslate="n42cApp.appUser.rights" [ngbTooltip]="'n42cApp.appUser.help.rights' | translate">Rights</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.rights }}">{{ appUser.rights }}</span>
+                    <span jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.rights }}">{{ appUser.rights }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.user">User</span></dt>
+                <dt><span jhiTranslate="n42cApp.appUser.user">User</span></dt>
                 <dd>
                     {{ appUser.user?.id }}
                 </dd>
