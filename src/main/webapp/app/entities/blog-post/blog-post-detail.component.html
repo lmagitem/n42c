@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="blogPost">
+            <h2><span jhiTranslate="n42CApp.blogPost.detail.title">Blog Post</span> {{ blogPost.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.blogPost.published" [ngbTooltip]="'n42CApp.blogPost.help.published' | translate">Published</span></dt>
+                <dd>
+                    <span>{{ blogPost.published }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogPost.excerpt" [ngbTooltip]="'n42CApp.blogPost.help.excerpt' | translate">Excerpt</span></dt>
+                <dd>
+                    <span>{{ blogPost.excerpt }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogPost.content" [ngbTooltip]="'n42CApp.blogPost.help.content' | translate">Content</span></dt>
+                <dd>
+                    <span>{{ blogPost.content }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogPost.language" [ngbTooltip]="'n42CApp.blogPost.help.language' | translate">Language</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'n42CApp.Language.' + blogPost.language }}">{{ blogPost.language }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogPost.author">Author</span></dt>
+                <dd>
+                    <div *ngIf="blogPost.author">
+                        <a [routerLink]="['/app-user', blogPost.author?.id, 'view']">{{ blogPost.author?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/blog-post', blogPost.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

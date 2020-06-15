@@ -7,6 +7,16 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
+        "appUser": "App User",
+        "blogPost": "Blog Post",
+        "blogCategory": "Blog Category",
+        "appUserProfile": "App User Profile",
+        "profilePart": "Profile Part",
+        "profilePartSimpleItem": "Profile Part Simple Item",
+        "profilePartPreciseItem": "Profile Part Precise Item",
+        "profilePartLinkedExperience": "Profile Part Linked Experience",
+        "profilePartSkillCategory": "Profile Part Skill Category",
+        "profilePartSkill": "Profile Part Skill",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

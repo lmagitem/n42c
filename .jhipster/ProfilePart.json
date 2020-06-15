@@ -1,0 +1,75 @@
+{
+  "name": "ProfilePart",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "That part's title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "ProfilePartType",
+      "javadoc": "That part's type.",
+      "fieldValues": "ED (Education),PR (ProfessionalExperiences),SK (Skills),CE (Certifications),CU (Custom)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "index",
+      "fieldType": "Integer",
+      "javadoc": "The index where this item must be ordered alongside similar ones."
+    },
+    {
+      "fieldName": "order",
+      "fieldType": "ProfilePartOrderType",
+      "javadoc": "The order to use when displaying the elements contained in this part.",
+      "fieldValues": "AZA (AlphabeticalAscending),AZD (AlphabeticalDescending),YEA (YearlyAscending),YED (YearlyDescending),MOA (MonthlyAscending),MOD (MonthlyDescending),CAA (CalendaredAscending),CAD (CalendaredDescending)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profilePartSimpleItem",
+      "otherEntityRelationshipName": "simpleItems",
+      "relationshipName": "profilePartSimpleItem"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profilePartPreciseItem",
+      "otherEntityRelationshipName": "preciseItems",
+      "relationshipName": "profilePartPreciseItem"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profilePartSkillCategory",
+      "otherEntityRelationshipName": "skillCategories",
+      "relationshipName": "profilePartSkillCategory"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "appUserProfile",
+      "otherEntityRelationshipName": "profilePart",
+      "relationshipName": "categories",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144417",
+  "javadoc": "A category in which to display the content of a profile.",
+  "entityTableName": "profile_part",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

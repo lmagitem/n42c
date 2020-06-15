@@ -1,0 +1,31 @@
+{
+  "n42CApp": {
+    "profilePartSkill": {
+      "home": {
+        "title": "ProfilePartSkills",
+        "createLabel": "Créer un nouveau Profile Part Skill",
+        "createOrEditLabel": "Créer ou éditer un Profile Part Skill",
+        "notFound": "Aucun Profile Part Skill trouvé"
+      },
+      "created": "Un nouveau Profile Part Skill a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Profile Part Skill avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Profile Part Skill avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Profile Part Skill {{ id }} ?"
+      },
+      "detail": {
+        "title": "Profile Part Skill"
+      },
+      "name": "Name",
+      "index": "Index",
+      "level": "Level",
+      "linkedSkills": "Linked Skills",
+      "skills": "Skills",
+      "help": {
+        "name": "This skill&#39;s name.",
+        "index": "The index where this item must be ordered alongside similar ones.",
+        "level": "This skill&#39;s level of mastery."
+      }
+    }
+  }
+}

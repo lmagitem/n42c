@@ -1,0 +1,52 @@
+{
+  "name": "ProfilePartSimpleItem",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "This item's title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "subTitle",
+      "fieldType": "String",
+      "javadoc": "This item's subtitle"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "javadoc": "This item's date. Might be used to order the items.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "This item's content."
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profilePart",
+      "otherEntityRelationshipName": "profilePartSimpleItem",
+      "relationshipName": "simpleItems",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144517",
+  "javadoc": "A simple item to display in a profile part.",
+  "entityTableName": "profile_part_simple_item",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,29 @@
+{
+  "n42CApp": {
+    "profilePartSkillCategory": {
+      "home": {
+        "title": "ProfilePartSkillCategories",
+        "createLabel": "Créer un nouveau Profile Part Skill Category",
+        "createOrEditLabel": "Créer ou éditer un Profile Part Skill Category",
+        "notFound": "Aucun Profile Part Skill Category trouvé"
+      },
+      "created": "Un nouveau Profile Part Skill Category a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Profile Part Skill Category avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Profile Part Skill Category avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Profile Part Skill Category {{ id }} ?"
+      },
+      "detail": {
+        "title": "Profile Part Skill Category"
+      },
+      "name": "Name",
+      "index": "Index",
+      "profilePartSkill": "Profile Part Skill",
+      "skillCategories": "Skill Categories",
+      "help": {
+        "name": "This category&#39;s title.",
+        "index": "The index where this item must be ordered alongside similar ones."
+      }
+    }
+  }
+}

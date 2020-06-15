@@ -1,0 +1,193 @@
+/** AppUsers of the app. */
+entity AppUser {
+    /** The user account's name. */
+    userName String required unique,
+    /** The name shown throughout the app. */
+    displayedName String unique,
+    /** The user email adress. */
+    email String required unique,
+    /** Does the user have admin rights? */
+    admin Boolean required,
+    /** The user rights regarding the Scriptorium. */
+    rights AppUserRights required
+}
+
+
+/** Blog posts to show on the app. */
+@paginate(pagination)
+entity BlogPost {
+    /** The date and time at which this post was published. */
+	published Instant required,
+    /** An excerpt of the post to show on the blog page. */
+    excerpt String,
+    /** The content of the post. */
+    content String required,
+    /** This post's language. */
+    language Language
+}
+
+/** Categories in which a blog post might be filled. */
+entity BlogCategory {
+    /** This category's name. */
+    name String required,
+    /** This category's language. */
+    language Language
+}
+
+/** Data used to build an user profile page. */
+entity AppUserProfile {
+    /** The displayed name for that user. */
+    name String required,
+    /** The title of this profile. */
+    title String,
+    /** A summary to show on the user profile. */
+    summary String,
+    /** The picture to show in the profile header. */
+    headerBackgroundURI String,
+    /** This profile's language. */
+    language Language
+}
+
+/** A category in which to display the content of a profile. */
+entity ProfilePart {
+    /** That part's title. */
+    title String required,
+    /** That part's type. */
+    type ProfilePartType required,
+    /** The index where this item must be ordered alongside similar ones. */
+    index Integer,
+    /** The order to use when displaying the elements contained in this part. */
+    order ProfilePartOrderType required
+}
+
+/** A simple item to display in a profile part. */
+@paginate(infinite-scroll)
+entity ProfilePartSimpleItem {
+    /** This item's title. */
+    title String required,
+    /** This item's subtitle */
+    subTitle String,
+    /** This item's date. Might be used to order the items. */
+    date Instant required,
+    /** This item's content. */
+    content String
+}
+
+/** A precise item to display in a profile part. Contains informations about the duration
+ *  and the place where the item took place, and can be linked to several individual experiences. */
+@paginate(infinite-scroll)
+entity ProfilePartPreciseItem {
+    /** This item's title. */
+    title String required,
+    /** This item's subtitle */
+    subTitle String,
+    /** This item's beginning date. */
+    start Instant required,
+    /** This item's end date. */
+    end Instant,
+    /** This item's location name. */
+    locationName String,
+    /** This item's location latitude. */
+    locationLat Double,
+    /** This item's location longitude. */
+    locationLong Double,
+    /** This item's content. */
+    content String
+}
+
+/** An individual experience that can be linked to a precise item. */
+entity ProfilePartLinkedExperience {
+    /** This experience's title. */
+    title String required,
+    /** This experience's subtitle */
+    subTitle String,
+    /** This experience's date. */
+    date Instant required,
+    /** This experience's content. */
+    content String
+}
+
+/** A category in which to display various skills with their levels. */
+entity ProfilePartSkillCategory {
+    /** This category's title. */
+    name String required,
+    /** The index where this item must be ordered alongside similar ones. */
+    index Integer
+}
+
+/** A skill with its level of mastery. */
+entity ProfilePartSkill {
+    /** This skill's name. */
+    name String required,
+    /** The index where this item must be ordered alongside similar ones. */
+    index Integer,
+    /** This skill's level of mastery. */
+    level LevelOfMastery required
+}
+
+/** AppUser rights regarding the Scriptorium. */
+enum AppUserRights {
+    MOD (Moderator),
+    WRI (Writer),
+    REA (Reader)
+}
+
+/** Languages used in the app. */
+enum Language {
+    EN (English),
+    FR (French),
+    ES (Spanish)
+}
+
+/** Types of categories that can be displayed on a profile. Used to know how to display them. */
+enum ProfilePartType {
+    ED (Education),
+    PR (ProfessionalExperiences),
+    SK (Skills),
+    CE (Certifications),
+    CU (Custom)
+}
+
+/** Orders used to display the elements of a profile category. */
+enum ProfilePartOrderType {
+    AZA (AlphabeticalAscending),
+    AZD (AlphabeticalDescending),
+    YEA (YearlyAscending),
+    YED (YearlyDescending),
+    MOA (MonthlyAscending),
+    MOD (MonthlyDescending),
+    CAA (CalendaredAscending),
+    CAD (CalendaredDescending)
+}
+
+/** Levels that describe the degree of mastery of a skill. */
+enum LevelOfMastery {
+    DA (Dabbling),
+    NO (Novice),
+    AD (Adequate),
+    CO (Competent),
+    PR (Proficient),
+    EX (Expert),
+    MA (Master)
+}
+
+relationship OneToOne {
+    AppUser to User
+}
+
+relationship OneToMany {
+	AppUser to BlogPost{author},
+    BlogPost to BlogCategory{categories},
+    BlogCategory to BlogCategory{subcategories},
+    AppUser to AppUserProfile{profiles},
+    AppUserProfile to ProfilePart{categories},
+    ProfilePart to ProfilePartSimpleItem{simpleItems},
+    ProfilePart to ProfilePartPreciseItem{preciseItems},
+    ProfilePartPreciseItem to ProfilePartLinkedExperience{experiences},
+    ProfilePart to ProfilePartSkillCategory{skillCategories},
+    ProfilePartSkillCategory to ProfilePartSkill{skills}
+}
+
+relationship ManyToMany {
+    ProfilePartSkill{linkedSkills} to ProfilePartLinkedExperience{linkedExperiences}
+}

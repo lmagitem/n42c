@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-blog-post-heading" jhiTranslate="n42CApp.blogPost.home.createOrEditLabel">Create or edit a Blog Post</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.published" for="field_published" [ngbTooltip]="'n42CApp.blogPost.help.published' | translate">Published</label>
+                    <div class="d-flex">
+                        <input id="field_published" type="datetime-local" class="form-control" name="published" formControlName="published" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('published')!.invalid && (editForm.get('published')!.dirty || editForm.get('published')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('published')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('published')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.excerpt" for="field_excerpt" [ngbTooltip]="'n42CApp.blogPost.help.excerpt' | translate">Excerpt</label>
+                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
+                           formControlName="excerpt"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.content" for="field_content" [ngbTooltip]="'n42CApp.blogPost.help.content' | translate">Content</label>
+                    <input type="text" class="form-control" name="content" id="field_content"
+                           formControlName="content"/>
+                    <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('content')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.language" for="field_language" [ngbTooltip]="'n42CApp.blogPost.help.language' | translate">Language</label>
+                    <select class="form-control" name="language" formControlName="language" id="field_language">
+                        <option value="EN">{{ 'n42CApp.Language.EN' | translate }}</option>
+                        <option value="FR">{{ 'n42CApp.Language.FR' | translate }}</option>
+                        <option value="ES">{{ 'n42CApp.Language.ES' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.author" for="field_author">Author</label>
+                    <select class="form-control" id="field_author" name="author" formControlName="author">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="appUserOption.id === editForm.get('author')!.value?.id ? editForm.get('author')!.value : appUserOption" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "n42CApp": {
+    "LevelOfMastery": {
+      "null": "",
+      "DA": "Dabbling",
+      "NO": "Novice",
+      "AD": "Adequate",
+      "CO": "Competent",
+      "PR": "Proficient",
+      "EX": "Expert",
+      "MA": "Master"
+    }
+  }
+}

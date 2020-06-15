@@ -1,0 +1,59 @@
+{
+  "name": "BlogPost",
+  "fields": [
+    {
+      "fieldName": "published",
+      "fieldType": "Instant",
+      "javadoc": "The date and time at which this post was published.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "excerpt",
+      "fieldType": "String",
+      "javadoc": "An excerpt of the post to show on the blog page."
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "The content of the post.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This post's language.",
+      "fieldValues": "EN (English),FR (French),ES (Spanish)"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "blogCategory",
+      "otherEntityRelationshipName": "categories",
+      "relationshipName": "blogCategory"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "blogPost",
+      "relationshipName": "author",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144117",
+  "javadoc": "Blog posts to show on the app.",
+  "entityTableName": "blog_post",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

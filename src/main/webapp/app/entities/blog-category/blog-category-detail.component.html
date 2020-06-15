@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="blogCategory">
+            <h2><span jhiTranslate="n42CApp.blogCategory.detail.title">Blog Category</span> {{ blogCategory.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.blogCategory.name" [ngbTooltip]="'n42CApp.blogCategory.help.name' | translate">Name</span></dt>
+                <dd>
+                    <span>{{ blogCategory.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogCategory.language" [ngbTooltip]="'n42CApp.blogCategory.help.language' | translate">Language</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'n42CApp.Language.' + blogCategory.language }}">{{ blogCategory.language }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogCategory.categories">Categories</span></dt>
+                <dd>
+                    <div *ngIf="blogCategory.categories">
+                        <a [routerLink]="['/blog-post', blogCategory.categories?.id, 'view']">{{ blogCategory.categories?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.blogCategory.subcategories">Subcategories</span></dt>
+                <dd>
+                    <div *ngIf="blogCategory.subcategories">
+                        <a [routerLink]="['/blog-category', blogCategory.subcategories?.id, 'view']">{{ blogCategory.subcategories?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/blog-category', blogCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

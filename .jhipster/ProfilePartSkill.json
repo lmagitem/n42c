@@ -1,0 +1,56 @@
+{
+  "name": "ProfilePartSkill",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This skill's name.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "index",
+      "fieldType": "Integer",
+      "javadoc": "The index where this item must be ordered alongside similar ones."
+    },
+    {
+      "fieldName": "level",
+      "fieldType": "LevelOfMastery",
+      "javadoc": "This skill's level of mastery.",
+      "fieldValues": "DA (Dabbling),NO (Novice),AD (Adequate),CO (Competent),PR (Proficient),EX (Expert),MA (Master)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "profilePartLinkedExperience",
+      "otherEntityRelationshipName": "linkedExperiences",
+      "relationshipName": "linkedSkills",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profilePartSkillCategory",
+      "otherEntityRelationshipName": "profilePartSkill",
+      "relationshipName": "skills",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144917",
+  "javadoc": "A skill with its level of mastery.",
+  "entityTableName": "profile_part_skill",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

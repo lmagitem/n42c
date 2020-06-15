@@ -1,0 +1,35 @@
+{
+  "n42CApp": {
+    "profilePart": {
+      "home": {
+        "title": "ProfileParts",
+        "createLabel": "Créer un nouveau Profile Part",
+        "createOrEditLabel": "Créer ou éditer un Profile Part",
+        "notFound": "Aucun Profile Part trouvé"
+      },
+      "created": "Un nouveau Profile Part a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Profile Part avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Profile Part avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Profile Part {{ id }} ?"
+      },
+      "detail": {
+        "title": "Profile Part"
+      },
+      "title": "Title",
+      "type": "Type",
+      "index": "Index",
+      "order": "Order",
+      "profilePartSimpleItem": "Profile Part Simple Item",
+      "profilePartPreciseItem": "Profile Part Precise Item",
+      "profilePartSkillCategory": "Profile Part Skill Category",
+      "categories": "Categories",
+      "help": {
+        "title": "That part&#39;s title.",
+        "type": "That part&#39;s type.",
+        "index": "The index where this item must be ordered alongside similar ones.",
+        "order": "The order to use when displaying the elements contained in this part."
+      }
+    }
+  }
+}

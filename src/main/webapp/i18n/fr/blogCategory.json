@@ -1,0 +1,30 @@
+{
+  "n42CApp": {
+    "blogCategory": {
+      "home": {
+        "title": "BlogCategories",
+        "createLabel": "Créer un nouveau Blog Category",
+        "createOrEditLabel": "Créer ou éditer un Blog Category",
+        "notFound": "Aucun Blog Category trouvé"
+      },
+      "created": "Un nouveau Blog Category a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Blog Category avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Blog Category avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Blog Category {{ id }} ?"
+      },
+      "detail": {
+        "title": "Blog Category"
+      },
+      "name": "Name",
+      "language": "Language",
+      "blogCategory": "Blog Category",
+      "categories": "Categories",
+      "subcategories": "Subcategories",
+      "help": {
+        "name": "This category&#39;s name.",
+        "language": "This category&#39;s language."
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity AppUserProfile.
+    -->
+    <changeSet id="20200615144317-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="profiles_id"
+                                 baseTableName="app_user_profile"
+                                 constraintName="fk_app_user_profile_profiles_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+    </changeSet>
+</databaseChangeLog>

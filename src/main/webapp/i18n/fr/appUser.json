@@ -1,0 +1,36 @@
+{
+  "n42CApp": {
+    "appUser": {
+      "home": {
+        "title": "AppUsers",
+        "createLabel": "Créer un nouveau App User",
+        "createOrEditLabel": "Créer ou éditer un App User",
+        "notFound": "Aucun App User trouvé"
+      },
+      "created": "Un nouveau App User a été créé avec l'identifiant {{ param }}",
+      "updated": "Le App User avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le App User avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le App User {{ id }} ?"
+      },
+      "detail": {
+        "title": "App User"
+      },
+      "userName": "User Name",
+      "displayedName": "Displayed Name",
+      "email": "Email",
+      "admin": "Admin",
+      "rights": "Rights",
+      "user": "User",
+      "blogPost": "Blog Post",
+      "appUserProfile": "App User Profile",
+      "help": {
+        "userName": "The user account&#39;s name.",
+        "displayedName": "The name shown throughout the app.",
+        "email": "The user email adress.",
+        "admin": "Does the user have admin rights?",
+        "rights": "The user rights regarding the Scriptorium."
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "n42CApp": {
+    "appUserProfile": {
+      "home": {
+        "title": "App User Profiles",
+        "createLabel": "Create a new App User Profile",
+        "createOrEditLabel": "Create or edit a App User Profile",
+        "notFound": "No App User Profiles found"
+      },
+      "created": "A new App User Profile is created with identifier {{ param }}",
+      "updated": "A App User Profile is updated with identifier {{ param }}",
+      "deleted": "A App User Profile is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete App User Profile {{ id }}?"
+      },
+      "detail": {
+        "title": "App User Profile"
+      },
+      "name": "Name",
+      "title": "Title",
+      "summary": "Summary",
+      "headerBackgroundURI": "Header Background URI",
+      "language": "Language",
+      "profilePart": "Profile Part",
+      "profiles": "Profiles",
+      "help": {
+        "name": "The displayed name for that user.",
+        "title": "The title of this profile.",
+        "summary": "A summary to show on the user profile.",
+        "headerBackgroundURI": "The picture to show in the profile header.",
+        "language": "This profile&#39;s language."
+      }
+    }
+  }
+}

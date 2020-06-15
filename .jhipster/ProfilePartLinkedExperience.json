@@ -1,0 +1,60 @@
+{
+  "name": "ProfilePartLinkedExperience",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "This experience's title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "subTitle",
+      "fieldType": "String",
+      "javadoc": "This experience's subtitle"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "javadoc": "This experience's date.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "This experience's content."
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profilePartPreciseItem",
+      "otherEntityRelationshipName": "profilePartLinkedExperience",
+      "relationshipName": "experiences",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "profilePartSkill",
+      "otherEntityRelationshipName": "linkedSkills",
+      "relationshipName": "linkedExperiences",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200615144717",
+  "javadoc": "An individual experience that can be linked to a precise item.",
+  "entityTableName": "profile_part_linked_experience",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

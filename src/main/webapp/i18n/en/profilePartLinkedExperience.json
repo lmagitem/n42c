@@ -1,0 +1,33 @@
+{
+  "n42CApp": {
+    "profilePartLinkedExperience": {
+      "home": {
+        "title": "Profile Part Linked Experiences",
+        "createLabel": "Create a new Profile Part Linked Experience",
+        "createOrEditLabel": "Create or edit a Profile Part Linked Experience",
+        "notFound": "No Profile Part Linked Experiences found"
+      },
+      "created": "A new Profile Part Linked Experience is created with identifier {{ param }}",
+      "updated": "A Profile Part Linked Experience is updated with identifier {{ param }}",
+      "deleted": "A Profile Part Linked Experience is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Profile Part Linked Experience {{ id }}?"
+      },
+      "detail": {
+        "title": "Profile Part Linked Experience"
+      },
+      "title": "Title",
+      "subTitle": "Sub Title",
+      "date": "Date",
+      "content": "Content",
+      "experiences": "Experiences",
+      "linkedExperiences": "Linked Experiences",
+      "help": {
+        "title": "This experience&#39;s title.",
+        "subTitle": "This experience&#39;s subtitle",
+        "date": "This experience&#39;s date.",
+        "content": "This experience&#39;s content."
+      }
+    }
+  }
+}

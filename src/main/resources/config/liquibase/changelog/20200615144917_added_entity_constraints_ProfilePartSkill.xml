@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ProfilePartSkill.
+    -->
+    <changeSet id="20200615144917-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="profile_part_skill_id"
+                                 baseTableName="profile_part_skill_linked_skills"
+                                 constraintName="fk_profile_part_skill_linked_skills_profile_part_skill_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile_part_skill"/>
+
+        <addForeignKeyConstraint baseColumnNames="linked_skills_id"
+                                 baseTableName="profile_part_skill_linked_skills"
+                                 constraintName="fk_profile_part_skill_linked_skills_linked_skills_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile_part_linked_experience"/>
+        
+        <addForeignKeyConstraint baseColumnNames="skills_id"
+                                 baseTableName="profile_part_skill"
+                                 constraintName="fk_profile_part_skill_skills_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile_part_skill_category"/>
+
+    </changeSet>
+</databaseChangeLog>

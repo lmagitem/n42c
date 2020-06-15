@@ -1,0 +1,32 @@
+{
+  "n42CApp": {
+    "profilePartSimpleItem": {
+      "home": {
+        "title": "Profile Part Simple Items",
+        "createLabel": "Crear nuevo Profile Part Simple Item",
+        "createOrEditLabel": "Crear o editar Profile Part Simple Item",
+        "notFound": "Ningún Profile Part Simple Items encontrado"
+      },
+      "created": "Un nuevo Profile Part Simple Item ha sido creado con el identificador {{ param }}",
+      "updated": "Un Profile Part Simple Item ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Profile Part Simple Item ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Profile Part Simple Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Profile Part Simple Item"
+      },
+      "title": "Title",
+      "subTitle": "Sub Title",
+      "date": "Date",
+      "content": "Content",
+      "simpleItems": "Simple Items",
+      "help": {
+        "title": "This item&#39;s title.",
+        "subTitle": "This item&#39;s subtitle",
+        "date": "This item&#39;s date. Might be used to order the items.",
+        "content": "This item&#39;s content."
+      }
+    }
+  }
+}

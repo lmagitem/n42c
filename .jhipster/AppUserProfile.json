@@ -1,0 +1,61 @@
+{
+  "name": "AppUserProfile",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "The displayed name for that user.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "The title of this profile."
+    },
+    {
+      "fieldName": "summary",
+      "fieldType": "String",
+      "javadoc": "A summary to show on the user profile."
+    },
+    {
+      "fieldName": "headerBackgroundURI",
+      "fieldType": "String",
+      "javadoc": "The picture to show in the profile header."
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This profile's language.",
+      "fieldValues": "EN (English),FR (French),ES (Spanish)"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profilePart",
+      "otherEntityRelationshipName": "categories",
+      "relationshipName": "profilePart"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "appUserProfile",
+      "relationshipName": "profiles",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144317",
+  "javadoc": "Data used to build an user profile page.",
+  "entityTableName": "app_user_profile",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

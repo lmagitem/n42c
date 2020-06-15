@@ -1,0 +1,12 @@
+{
+  "n42CApp": {
+    "ProfilePartType": {
+      "null": "",
+      "ED": "Education",
+      "PR": "ProfessionalExperiences",
+      "SK": "Skills",
+      "CE": "Certifications",
+      "CU": "Custom"
+    }
+  }
+}

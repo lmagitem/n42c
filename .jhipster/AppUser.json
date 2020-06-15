@@ -1,0 +1,82 @@
+{
+  "name": "AppUser",
+  "fields": [
+    {
+      "fieldName": "userName",
+      "fieldType": "String",
+      "javadoc": "The user account's name.",
+      "fieldValidateRules": [
+        "required",
+        "unique"
+      ]
+    },
+    {
+      "fieldName": "displayedName",
+      "fieldType": "String",
+      "javadoc": "The name shown throughout the app.",
+      "fieldValidateRules": [
+        "unique"
+      ]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "javadoc": "The user email adress.",
+      "fieldValidateRules": [
+        "required",
+        "unique"
+      ]
+    },
+    {
+      "fieldName": "admin",
+      "fieldType": "Boolean",
+      "javadoc": "Does the user have admin rights?",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "rights",
+      "fieldType": "AppUserRights",
+      "javadoc": "The user rights regarding the Scriptorium.",
+      "fieldValues": "MOD (Moderator),WRI (Writer),REA (Reader)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "blogPost",
+      "otherEntityRelationshipName": "author",
+      "relationshipName": "blogPost"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "appUserProfile",
+      "otherEntityRelationshipName": "profiles",
+      "relationshipName": "appUserProfile"
+    }
+  ],
+  "changelogDate": "20200615144017",
+  "javadoc": "AppUsers of the app.",
+  "entityTableName": "app_user",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

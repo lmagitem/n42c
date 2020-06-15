@@ -1,0 +1,33 @@
+{
+  "n42CApp": {
+    "blogPost": {
+      "home": {
+        "title": "Blog Posts",
+        "createLabel": "Create a new Blog Post",
+        "createOrEditLabel": "Create or edit a Blog Post",
+        "notFound": "No Blog Posts found"
+      },
+      "created": "A new Blog Post is created with identifier {{ param }}",
+      "updated": "A Blog Post is updated with identifier {{ param }}",
+      "deleted": "A Blog Post is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Blog Post {{ id }}?"
+      },
+      "detail": {
+        "title": "Blog Post"
+      },
+      "published": "Published",
+      "excerpt": "Excerpt",
+      "content": "Content",
+      "language": "Language",
+      "blogCategory": "Blog Category",
+      "author": "Author",
+      "help": {
+        "published": "The date and time at which this post was published.",
+        "excerpt": "An excerpt of the post to show on the blog page.",
+        "content": "The content of the post.",
+        "language": "This post&#39;s language."
+      }
+    }
+  }
+}

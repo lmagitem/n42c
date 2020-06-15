@@ -1,0 +1,78 @@
+{
+  "name": "ProfilePartPreciseItem",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "This item's title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "subTitle",
+      "fieldType": "String",
+      "javadoc": "This item's subtitle"
+    },
+    {
+      "fieldName": "start",
+      "fieldType": "Instant",
+      "javadoc": "This item's beginning date.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "end",
+      "fieldType": "Instant",
+      "javadoc": "This item's end date."
+    },
+    {
+      "fieldName": "locationName",
+      "fieldType": "String",
+      "javadoc": "This item's location name."
+    },
+    {
+      "fieldName": "locationLat",
+      "fieldType": "Double",
+      "javadoc": "This item's location latitude."
+    },
+    {
+      "fieldName": "locationLong",
+      "fieldType": "Double",
+      "javadoc": "This item's location longitude."
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "This item's content."
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profilePartLinkedExperience",
+      "otherEntityRelationshipName": "experiences",
+      "relationshipName": "profilePartLinkedExperience"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profilePart",
+      "otherEntityRelationshipName": "profilePartPreciseItem",
+      "relationshipName": "preciseItems",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144617",
+  "javadoc": "A precise item to display in a profile part. Contains informations about the duration\\nand the place where the item took place, and can be linked to several individual experiences.",
+  "entityTableName": "profile_part_precise_item",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

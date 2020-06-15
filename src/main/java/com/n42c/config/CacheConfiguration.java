@@ -48,6 +48,28 @@ public class CacheConfiguration {
             createCache(cm, com.n42c.domain.User.class.getName());
             createCache(cm, com.n42c.domain.Authority.class.getName());
             createCache(cm, com.n42c.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.n42c.domain.AppUser.class.getName());
+            createCache(cm, com.n42c.domain.AppUser.class.getName() + ".blogPosts");
+            createCache(cm, com.n42c.domain.AppUser.class.getName() + ".appUserProfiles");
+            createCache(cm, com.n42c.domain.BlogPost.class.getName());
+            createCache(cm, com.n42c.domain.BlogPost.class.getName() + ".blogCategories");
+            createCache(cm, com.n42c.domain.BlogCategory.class.getName());
+            createCache(cm, com.n42c.domain.BlogCategory.class.getName() + ".blogCategories");
+            createCache(cm, com.n42c.domain.AppUserProfile.class.getName());
+            createCache(cm, com.n42c.domain.AppUserProfile.class.getName() + ".profileParts");
+            createCache(cm, com.n42c.domain.ProfilePart.class.getName());
+            createCache(cm, com.n42c.domain.ProfilePart.class.getName() + ".profilePartSimpleItems");
+            createCache(cm, com.n42c.domain.ProfilePart.class.getName() + ".profilePartPreciseItems");
+            createCache(cm, com.n42c.domain.ProfilePart.class.getName() + ".profilePartSkillCategories");
+            createCache(cm, com.n42c.domain.ProfilePartSimpleItem.class.getName());
+            createCache(cm, com.n42c.domain.ProfilePartPreciseItem.class.getName());
+            createCache(cm, com.n42c.domain.ProfilePartPreciseItem.class.getName() + ".profilePartLinkedExperiences");
+            createCache(cm, com.n42c.domain.ProfilePartLinkedExperience.class.getName());
+            createCache(cm, com.n42c.domain.ProfilePartLinkedExperience.class.getName() + ".linkedExperiences");
+            createCache(cm, com.n42c.domain.ProfilePartSkillCategory.class.getName());
+            createCache(cm, com.n42c.domain.ProfilePartSkillCategory.class.getName() + ".profilePartSkills");
+            createCache(cm, com.n42c.domain.ProfilePartSkill.class.getName());
+            createCache(cm, com.n42c.domain.ProfilePartSkill.class.getName() + ".linkedSkills");
             // jhipster-needle-ehcache-add-entry
         };
     }

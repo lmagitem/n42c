@@ -1,0 +1,45 @@
+{
+  "name": "ProfilePartSkillCategory",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This category's title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "index",
+      "fieldType": "Integer",
+      "javadoc": "The index where this item must be ordered alongside similar ones."
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profilePartSkill",
+      "otherEntityRelationshipName": "skills",
+      "relationshipName": "profilePartSkill"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profilePart",
+      "otherEntityRelationshipName": "profilePartSkillCategory",
+      "relationshipName": "skillCategories",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144817",
+  "javadoc": "A category in which to display various skills with their levels.",
+  "entityTableName": "profile_part_skill_category",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

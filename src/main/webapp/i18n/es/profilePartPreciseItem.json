@@ -1,0 +1,41 @@
+{
+  "n42CApp": {
+    "profilePartPreciseItem": {
+      "home": {
+        "title": "Profile Part Precise Items",
+        "createLabel": "Crear nuevo Profile Part Precise Item",
+        "createOrEditLabel": "Crear o editar Profile Part Precise Item",
+        "notFound": "Ningún Profile Part Precise Items encontrado"
+      },
+      "created": "Un nuevo Profile Part Precise Item ha sido creado con el identificador {{ param }}",
+      "updated": "Un Profile Part Precise Item ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Profile Part Precise Item ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Profile Part Precise Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Profile Part Precise Item"
+      },
+      "title": "Title",
+      "subTitle": "Sub Title",
+      "start": "Start",
+      "end": "End",
+      "locationName": "Location Name",
+      "locationLat": "Location Lat",
+      "locationLong": "Location Long",
+      "content": "Content",
+      "profilePartLinkedExperience": "Profile Part Linked Experience",
+      "preciseItems": "Precise Items",
+      "help": {
+        "title": "This item&#39;s title.",
+        "subTitle": "This item&#39;s subtitle",
+        "start": "This item&#39;s beginning date.",
+        "end": "This item&#39;s end date.",
+        "locationName": "This item&#39;s location name.",
+        "locationLat": "This item&#39;s location latitude.",
+        "locationLong": "This item&#39;s location longitude.",
+        "content": "This item&#39;s content."
+      }
+    }
+  }
+}

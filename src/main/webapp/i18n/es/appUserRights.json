@@ -1,0 +1,10 @@
+{
+  "n42CApp": {
+    "AppUserRights": {
+      "null": "",
+      "MOD": "Moderator",
+      "WRI": "Writer",
+      "REA": "Reader"
+    }
+  }
+}

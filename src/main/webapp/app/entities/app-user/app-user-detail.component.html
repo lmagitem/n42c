@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="appUser">
+            <h2><span jhiTranslate="n42CApp.appUser.detail.title">App User</span> {{ appUser.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.appUser.userName" [ngbTooltip]="'n42CApp.appUser.help.userName' | translate">User Name</span></dt>
+                <dd>
+                    <span>{{ appUser.userName }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.appUser.displayedName" [ngbTooltip]="'n42CApp.appUser.help.displayedName' | translate">Displayed Name</span></dt>
+                <dd>
+                    <span>{{ appUser.displayedName }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.appUser.email" [ngbTooltip]="'n42CApp.appUser.help.email' | translate">Email</span></dt>
+                <dd>
+                    <span>{{ appUser.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.appUser.admin" [ngbTooltip]="'n42CApp.appUser.help.admin' | translate">Admin</span></dt>
+                <dd>
+                    <span>{{ appUser.admin }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.appUser.rights" [ngbTooltip]="'n42CApp.appUser.help.rights' | translate">Rights</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.rights }}">{{ appUser.rights }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.appUser.user">User</span></dt>
+                <dd>
+                    {{ appUser.user?.id }}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/app-user', appUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+{
+  "name": "BlogCategory",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This category's name.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This category's language.",
+      "fieldValues": "EN (English),FR (French),ES (Spanish)"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "blogCategory",
+      "otherEntityRelationshipName": "subcategories",
+      "relationshipName": "blogCategory"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blogPost",
+      "otherEntityRelationshipName": "blogCategory",
+      "relationshipName": "categories",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blogCategory",
+      "otherEntityRelationshipName": "blogCategory",
+      "relationshipName": "subcategories",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200615144217",
+  "javadoc": "Categories in which a blog post might be filled.",
+  "entityTableName": "blog_category",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity ProfilePartSimpleItem.
+    -->
+    <changeSet id="20200615144517-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="simple_items_id"
+                                 baseTableName="profile_part_simple_item"
+                                 constraintName="fk_profile_part_simple_item_simple_items_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile_part"/>
+
+    </changeSet>
+</databaseChangeLog>
