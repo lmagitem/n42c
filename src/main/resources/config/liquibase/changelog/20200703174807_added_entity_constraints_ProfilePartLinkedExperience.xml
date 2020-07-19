@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity ProfilePartLinkedExperience.
     -->
-    <changeSet id="20200615144717-2" author="jhipster">
+    <changeSet id="20200703174807-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="experiences_id"
                                  baseTableName="profile_part_linked_experience"

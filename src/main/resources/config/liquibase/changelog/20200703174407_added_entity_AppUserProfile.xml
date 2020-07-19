@@ -6,14 +6,13 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-        <property name="autoIncrement" value="true"/>
-
+    
     <!--
         Added the entity AppUserProfile.
     -->
-    <changeSet id="20200615144317-1" author="jhipster">
+    <changeSet id="20200703174407-1" author="jhipster">
         <createTable tableName="app_user_profile" remarks="Data used to build an user profile page.">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)" remarks="The displayed name for that user.">
@@ -38,7 +37,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="20200615144317-1-relations" author="jhipster">
+    <changeSet id="20200703174407-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -51,7 +50,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200615144317-1-data" author="jhipster" context="faker">
+    <changeSet id="20200703174407-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/app_user_profile.csv"
                   separator=";"

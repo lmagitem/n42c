@@ -38,7 +38,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144217",
+  "changelogDate": "20200703174307",
   "javadoc": "Categories in which a blog post might be filled.",
   "entityTableName": "blog_category",
   "dto": "no",

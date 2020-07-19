@@ -6,17 +6,14 @@ services:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:mysql://n42c-mysql:3306/n42c?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
-      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:5432/n42c
+      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=${COGNITO_URI}
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=${COGNITO_ID}
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=${COGNITO_SECRET}
+      - JHIPSTER_SLEEP=50 # gives time for other services to boot before the application
     ports:
       - 8080:8080
-  n42c-mysql:
-    extends:
-      file: mysql.yml
-      service: n42c-mysql
+
   keycloak:
     extends:
       file: keycloak.yml

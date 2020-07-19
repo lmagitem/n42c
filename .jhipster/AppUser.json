@@ -67,7 +67,7 @@
       "relationshipName": "appUserProfile"
     }
   ],
-  "changelogDate": "20200615144017",
+  "changelogDate": "20200703174107",
   "javadoc": "AppUsers of the app.",
   "entityTableName": "app_user",
   "dto": "no",

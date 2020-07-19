@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity ProfilePart.
     -->
-    <changeSet id="20200615144417-2" author="jhipster">
+    <changeSet id="20200703174507-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="categories_id"
                                  baseTableName="profile_part"

@@ -37,7 +37,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144517",
+  "changelogDate": "20200703174607",
   "javadoc": "A simple item to display in a profile part.",
   "entityTableName": "profile_part_simple_item",
   "dto": "no",

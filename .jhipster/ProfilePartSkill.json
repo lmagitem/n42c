@@ -41,7 +41,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144917",
+  "changelogDate": "20200703175007",
   "javadoc": "A skill with its level of mastery.",
   "entityTableName": "profile_part_skill",
   "dto": "no",

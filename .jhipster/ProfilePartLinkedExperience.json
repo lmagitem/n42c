@@ -45,7 +45,7 @@
       "ownerSide": false
     }
   ],
-  "changelogDate": "20200615144717",
+  "changelogDate": "20200703174807",
   "javadoc": "An individual experience that can be linked to a precise item.",
   "entityTableName": "profile_part_linked_experience",
   "dto": "no",

@@ -26,7 +26,8 @@ public class ProfilePartPreciseItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     /**
@@ -56,7 +57,7 @@ public class ProfilePartPreciseItem implements Serializable {
      * This item's end date.
      */
     @ApiModelProperty(value = "This item's end date.")
-    @Column(name = "end")
+    @Column(name = "jhi_end")
     private Instant end;
 
     /**

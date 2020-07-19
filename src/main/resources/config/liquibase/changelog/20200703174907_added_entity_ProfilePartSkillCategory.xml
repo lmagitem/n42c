@@ -6,37 +6,29 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-        <property name="autoIncrement" value="true"/>
-
+    
     <!--
-        Added the entity ProfilePartLinkedExperience.
+        Added the entity ProfilePartSkillCategory.
     -->
-    <changeSet id="20200615144717-1" author="jhipster">
-        <createTable tableName="profile_part_linked_experience" remarks="An individual experience that can be linked to a precise item.">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+    <changeSet id="20200703174907-1" author="jhipster">
+        <createTable tableName="profile_part_skill_category" remarks="A category in which to display various skills with their levels.">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="title" type="varchar(255)" remarks="This experience&apos;s title.">
+            <column name="name" type="varchar(255)" remarks="This category&apos;s title.">
                 <constraints nullable="false" />
             </column>
-            <column name="sub_title" type="varchar(255)" remarks="This experience&apos;s subtitle">
+            <column name="index" type="integer" remarks="The index where this item must be ordered alongside similar ones.">
                 <constraints nullable="true" />
             </column>
-            <column name="date" type="datetime" remarks="This experience&apos;s date.">
-                <constraints nullable="false" />
-            </column>
-            <column name="content" type="varchar(255)" remarks="This experience&apos;s content.">
-                <constraints nullable="true" />
-            </column>
-            <column name="experiences_id" type="bigint">
+            <column name="skill_categories_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="profile_part_linked_experience" columnName="date" columnDataType="datetime"/>
     </changeSet>
 
-    <changeSet id="20200615144717-1-relations" author="jhipster">
+    <changeSet id="20200703174907-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -49,16 +41,14 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200615144717-1-data" author="jhipster" context="faker">
+    <changeSet id="20200703174907-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/profile_part_linked_experience.csv"
+                  file="config/liquibase/fake-data/profile_part_skill_category.csv"
                   separator=";"
-                  tableName="profile_part_linked_experience">
+                  tableName="profile_part_skill_category">
             <column name="id" type="numeric"/>
-            <column name="title" type="string"/>
-            <column name="sub_title" type="string"/>
-            <column name="date" type="datetime"/>
-            <column name="content" type="string"/>
+            <column name="name" type="string"/>
+            <column name="index" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

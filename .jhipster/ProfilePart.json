@@ -60,7 +60,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144417",
+  "changelogDate": "20200703174507",
   "javadoc": "A category in which to display the content of a profile.",
   "entityTableName": "profile_part",
   "dto": "no",

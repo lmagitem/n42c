@@ -46,7 +46,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144317",
+  "changelogDate": "20200703174407",
   "javadoc": "Data used to build an user profile page.",
   "entityTableName": "app_user_profile",
   "dto": "no",

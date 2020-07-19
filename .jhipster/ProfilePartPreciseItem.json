@@ -63,7 +63,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144617",
+  "changelogDate": "20200703174707",
   "javadoc": "A precise item to display in a profile part. Contains informations about the duration\\nand the place where the item took place, and can be linked to several individual experiences.",
   "entityTableName": "profile_part_precise_item",
   "dto": "no",

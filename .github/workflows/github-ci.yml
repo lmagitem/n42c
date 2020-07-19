@@ -20,8 +20,6 @@ jobs:
             - uses: actions/setup-java@v1
               with:
                   java-version: '11.x'
-            - name: Stop MySQL server
-              run: sudo /etc/init.d/mysql stop
             - name: Install node.js packages
               run: npm install
             - name: Run backend test
@@ -42,14 +40,9 @@ jobs:
                   fi
             - name: Package application
               run: ./mvnw -ntp package -Pprod -DskipTests
-            - name: Deploy to Heroku
-              if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-              env:
-                  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-              run: ./mvnw -ntp com.heroku.sdk:heroku-maven-plugin:2.0.5:deploy -DskipTests -Pprod -Dheroku.buildpacks=heroku/jvm -Dheroku.appName=n42c
             - name: Build and publish docker image
               if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/'))
               run: |
                   GIT_TAG=:${GITHUB_REF#refs/tags/}
                   DOCKER_TAG=${GIT_TAG#:refs/heads/master}
-                  ./mvnw -ntp jib:build -Djib.to.image=jhipster/n42c${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}"
+                  ./mvnw -ntp jib:build -Djib.to.image=n42c/n42c${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}"

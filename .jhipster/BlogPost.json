@@ -44,7 +44,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144117",
+  "changelogDate": "20200703174207",
   "javadoc": "Blog posts to show on the app.",
   "entityTableName": "blog_post",
   "dto": "no",

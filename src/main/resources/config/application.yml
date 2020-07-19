@@ -116,11 +116,11 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: ${{ secrets.COGNITO_URI }}
+            issuer-uri: ${COGNITO_URI}
         registration:
           oidc:
-            client-id: ${{ secrets.COGNITO_ID }}
-            client-secret: ${{ secrets.COGNITO_SECRET }}
+            client-id: ${COGNITO_ID}
+            client-secret: ${COGNITO_SECRET}
 
 server:
   servlet:

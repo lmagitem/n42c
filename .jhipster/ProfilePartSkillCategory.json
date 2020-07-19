@@ -30,7 +30,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200615144817",
+  "changelogDate": "20200703174907",
   "javadoc": "A category in which to display various skills with their levels.",
   "entityTableName": "profile_part_skill_category",
   "dto": "no",

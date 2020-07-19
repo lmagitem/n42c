@@ -25,7 +25,8 @@ public class ProfilePartSkillCategory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     /**
@@ -40,7 +41,7 @@ public class ProfilePartSkillCategory implements Serializable {
      * The index where this item must be ordered alongside similar ones.
      */
     @ApiModelProperty(value = "The index where this item must be ordered alongside similar ones.")
-    @Column(name = "jhi_index")
+    @Column(name = "index")
     private Integer index;
 
     @OneToMany(mappedBy = "skills")
