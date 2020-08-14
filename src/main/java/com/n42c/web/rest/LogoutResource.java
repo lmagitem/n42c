@@ -31,7 +31,6 @@ public class LogoutResource {
      */
     @PostMapping("/api/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
-
         Map<String, String> logoutDetails = new HashMap<>();
         logoutDetails.put("logoutUrl", "https://n42c.auth.eu-west-1.amazoncognito.com/logout");
         logoutDetails.put("clientId", registration.getClientId());

@@ -1,9 +1,10 @@
-version: '2'
+version: '3'
 services:
-  n42c-app:
+  n42c:
     image: n42c
+    restart: unless-stopped
     environment:
-      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m -Djdk.tls.ephemeralDHKeySize=2048
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:5432/n42c
@@ -13,8 +14,3 @@ services:
       - JHIPSTER_SLEEP=50 # gives time for other services to boot before the application
     ports:
       - 8080:8080
-
-  keycloak:
-    extends:
-      file: keycloak.yml
-      service: keycloak
