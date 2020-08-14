@@ -121,8 +121,12 @@ spring:
           oidc:
             client-id: ${COGNITO_ID}
             client-secret: ${COGNITO_SECRET}
+        # use-current-uri: false
+        # pre-established-redirect-uri: https://n42c.com/login
+        # registered-redirect-uri: https://n42c.com/login
 
 server:
+  forward-headers-strategy: framework
   servlet:
     session:
       cookie:
