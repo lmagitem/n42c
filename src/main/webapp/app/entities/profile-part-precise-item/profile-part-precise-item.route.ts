@@ -40,7 +40,7 @@ export const profilePartPreciseItemRoute: Routes = [
     component: ProfilePartPreciseItemComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartPreciseItem.home.title',
+      pageTitle: 'n42CApp.profilePartPreciseItem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const profilePartPreciseItemRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartPreciseItem.home.title',
+      pageTitle: 'n42CApp.profilePartPreciseItem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const profilePartPreciseItemRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartPreciseItem.home.title',
+      pageTitle: 'n42CApp.profilePartPreciseItem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const profilePartPreciseItemRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartPreciseItem.home.title',
+      pageTitle: 'n42CApp.profilePartPreciseItem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

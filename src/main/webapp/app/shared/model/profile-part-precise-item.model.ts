@@ -12,8 +12,8 @@ export interface IProfilePartPreciseItem {
   locationLat?: number;
   locationLong?: number;
   content?: string;
-  profilePartLinkedExperiences?: IProfilePartLinkedExperience[];
-  preciseItems?: IProfilePart;
+  experiences?: IProfilePartLinkedExperience[];
+  profilePart?: IProfilePart;
 }
 
 export class ProfilePartPreciseItem implements IProfilePartPreciseItem {
@@ -27,7 +27,7 @@ export class ProfilePartPreciseItem implements IProfilePartPreciseItem {
     public locationLat?: number,
     public locationLong?: number,
     public content?: string,
-    public profilePartLinkedExperiences?: IProfilePartLinkedExperience[],
-    public preciseItems?: IProfilePart
+    public experiences?: IProfilePartLinkedExperience[],
+    public profilePart?: IProfilePart
   ) {}
 }

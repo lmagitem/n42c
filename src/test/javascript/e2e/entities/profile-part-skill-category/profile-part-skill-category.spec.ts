@@ -28,7 +28,7 @@ describe('ProfilePartSkillCategory e2e test', () => {
     await navBarPage.goToEntity('profile-part-skill-category');
     profilePartSkillCategoryComponentsPage = new ProfilePartSkillCategoryComponentsPage();
     await browser.wait(ec.visibilityOf(profilePartSkillCategoryComponentsPage.title), 5000);
-    expect(await profilePartSkillCategoryComponentsPage.getTitle()).to.eq('n42cApp.profilePartSkillCategory.home.title');
+    expect(await profilePartSkillCategoryComponentsPage.getTitle()).to.eq('n42CApp.profilePartSkillCategory.home.title');
     await browser.wait(
       ec.or(
         ec.visibilityOf(profilePartSkillCategoryComponentsPage.entities),
@@ -41,7 +41,7 @@ describe('ProfilePartSkillCategory e2e test', () => {
   it('should load create ProfilePartSkillCategory page', async () => {
     await profilePartSkillCategoryComponentsPage.clickOnCreateButton();
     profilePartSkillCategoryUpdatePage = new ProfilePartSkillCategoryUpdatePage();
-    expect(await profilePartSkillCategoryUpdatePage.getPageTitle()).to.eq('n42cApp.profilePartSkillCategory.home.createOrEditLabel');
+    expect(await profilePartSkillCategoryUpdatePage.getPageTitle()).to.eq('n42CApp.profilePartSkillCategory.home.createOrEditLabel');
     await profilePartSkillCategoryUpdatePage.cancel();
   });
 
@@ -53,7 +53,7 @@ describe('ProfilePartSkillCategory e2e test', () => {
     await promise.all([
       profilePartSkillCategoryUpdatePage.setNameInput('name'),
       profilePartSkillCategoryUpdatePage.setIndexInput('5'),
-      profilePartSkillCategoryUpdatePage.skillCategoriesSelectLastOption(),
+      profilePartSkillCategoryUpdatePage.profilePartSelectLastOption(),
     ]);
 
     expect(await profilePartSkillCategoryUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
@@ -73,7 +73,7 @@ describe('ProfilePartSkillCategory e2e test', () => {
     await profilePartSkillCategoryComponentsPage.clickOnLastDeleteButton();
 
     profilePartSkillCategoryDeleteDialog = new ProfilePartSkillCategoryDeleteDialog();
-    expect(await profilePartSkillCategoryDeleteDialog.getDialogTitle()).to.eq('n42cApp.profilePartSkillCategory.delete.question');
+    expect(await profilePartSkillCategoryDeleteDialog.getDialogTitle()).to.eq('n42CApp.profilePartSkillCategory.delete.question');
     await profilePartSkillCategoryDeleteDialog.clickOnConfirmButton();
 
     expect(await profilePartSkillCategoryComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

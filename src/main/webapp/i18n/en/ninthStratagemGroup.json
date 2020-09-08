@@ -1,0 +1,27 @@
+{
+  "n42CApp": {
+    "ninthStratagemGroup": {
+      "home": {
+        "title": "Ninth Stratagem Groups",
+        "createLabel": "Create a new Ninth Stratagem Group",
+        "createOrEditLabel": "Create or edit a Ninth Stratagem Group",
+        "notFound": "No Ninth Stratagem Groups found"
+      },
+      "created": "A new Ninth Stratagem Group is created with identifier {{ param }}",
+      "updated": "A Ninth Stratagem Group is updated with identifier {{ param }}",
+      "deleted": "A Ninth Stratagem Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ninth Stratagem Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Stratagem Group"
+      },
+      "shareable": "Shareable",
+      "localizations": "Localizations",
+      "stratagems": "Stratagems",
+      "author": "Author",
+      "campaigns": "Campaigns",
+      "missions": "Missions"
+    }
+  }
+}

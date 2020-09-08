@@ -102,9 +102,7 @@ class BlogPostGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "published":"2020-01-01T00:00:00.000Z"
-                , "excerpt":"SAMPLE_TEXT"
-                , "content":"SAMPLE_TEXT"
-                , "language":"EN"
+                , "modified":"2020-01-01T00:00:00.000Z"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_blogPost_url"))).exitHereIfFailed

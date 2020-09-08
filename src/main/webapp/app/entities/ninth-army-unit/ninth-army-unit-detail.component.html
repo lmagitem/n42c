@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="ninthArmyUnit">
+            <h2><span jhiTranslate="n42CApp.ninthArmyUnit.detail.title">Ninth Army Unit</span> {{ ninthArmyUnit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.ninthArmyUnit.selectableKeywords">Selectable Keywords</span></dt>
+                <dd>
+                    <span>{{ ninthArmyUnit.selectableKeywords }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthArmyUnit.army">Army</span></dt>
+                <dd>
+                    <div *ngIf="ninthArmyUnit.army">
+                        <a [routerLink]="['/ninth-army', ninthArmyUnit.army?.id, 'view']">{{ ninthArmyUnit.army?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthArmyUnit.unit">Unit</span></dt>
+                <dd>
+                    <div *ngIf="ninthArmyUnit.unit">
+                        <a [routerLink]="['/ninth-unit', ninthArmyUnit.unit?.id, 'view']">{{ ninthArmyUnit.unit?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ninth-army-unit', ninthArmyUnit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

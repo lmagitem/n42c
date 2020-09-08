@@ -1,0 +1,25 @@
+{
+  "n42CApp": {
+    "ninthUnitMoment": {
+      "home": {
+        "title": "NinthUnitMoments",
+        "createLabel": "Créer un nouveau Ninth Unit Moment",
+        "createOrEditLabel": "Créer ou éditer un Ninth Unit Moment",
+        "notFound": "Aucun Ninth Unit Moment trouvé"
+      },
+      "created": "Un nouveau Ninth Unit Moment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Unit Moment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Unit Moment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Unit Moment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Unit Moment"
+      },
+      "current": "Current",
+      "sinceInstant": "Since Instant",
+      "pictureUrl": "Picture Url",
+      "unit": "Unit"
+    }
+  }
+}

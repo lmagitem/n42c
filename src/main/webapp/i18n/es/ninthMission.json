@@ -1,0 +1,31 @@
+{
+  "n42CApp": {
+    "ninthMission": {
+      "home": {
+        "title": "Ninth Missions",
+        "createLabel": "Crear nuevo Ninth Mission",
+        "createOrEditLabel": "Crear o editar Ninth Mission",
+        "notFound": "Ningún Ninth Missions encontrado"
+      },
+      "created": "Un nuevo Ninth Mission ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ninth Mission ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ninth Mission ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ninth Mission {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Mission"
+      },
+      "gameType": "Game Type",
+      "gameSize": "Game Size",
+      "shareable": "Shareable",
+      "battles": "Battles",
+      "localizations": "Localizations",
+      "missionStratagems": "Mission Stratagems",
+      "primaryObjectives": "Primary Objectives",
+      "allowedSecondaries": "Allowed Secondaries",
+      "rules": "Rules",
+      "missionDeployment": "Mission Deployment"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "name": "NinthArmyMoment",
+  "fields": [
+    {
+      "fieldName": "current",
+      "fieldType": "Boolean",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "sinceInstant",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "majorVictories",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minorVictories",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "draws",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "minorDefeats",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "majorDefeats",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "requisition",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "supplyLimit",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "supplyUsed",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "objectives",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthArmyUnit",
+      "otherEntityRelationshipName": "selections",
+      "relationshipName": "selectedUnits",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthObjective",
+      "otherEntityRelationshipName": "selections",
+      "relationshipName": "selectedObjectives",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthBattle",
+      "otherEntityRelationshipName": "armies",
+      "relationshipName": "battle",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthArmy",
+      "otherEntityRelationshipName": "moments",
+      "relationshipName": "army",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195312",
+  "entityTableName": "ninth_army_moment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

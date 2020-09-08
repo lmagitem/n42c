@@ -1,33 +1,33 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="profilePartLinkedExperience">
-            <h2><span jhiTranslate="n42cApp.profilePartLinkedExperience.detail.title">Profile Part Linked Experience</span> {{ profilePartLinkedExperience.id }}</h2>
+            <h2><span jhiTranslate="n42CApp.profilePartLinkedExperience.detail.title">Profile Part Linked Experience</span> {{ profilePartLinkedExperience.id }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42cApp.profilePartLinkedExperience.title" [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.title' | translate">Title</span></dt>
+                <dt><span jhiTranslate="n42CApp.profilePartLinkedExperience.title" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.title' | translate">Title</span></dt>
                 <dd>
                     <span>{{ profilePartLinkedExperience.title }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.profilePartLinkedExperience.subTitle" [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.subTitle' | translate">Sub Title</span></dt>
+                <dt><span jhiTranslate="n42CApp.profilePartLinkedExperience.subTitle" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.subTitle' | translate">Sub Title</span></dt>
                 <dd>
                     <span>{{ profilePartLinkedExperience.subTitle }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.profilePartLinkedExperience.date" [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.date' | translate">Date</span></dt>
+                <dt><span jhiTranslate="n42CApp.profilePartLinkedExperience.date" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.date' | translate">Date</span></dt>
                 <dd>
                     <span>{{ profilePartLinkedExperience.date }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.profilePartLinkedExperience.content" [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.content' | translate">Content</span></dt>
+                <dt><span jhiTranslate="n42CApp.profilePartLinkedExperience.content" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.content' | translate">Content</span></dt>
                 <dd>
                     <span>{{ profilePartLinkedExperience.content }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.profilePartLinkedExperience.experiences">Experiences</span></dt>
+                <dt><span jhiTranslate="n42CApp.profilePartLinkedExperience.linkedItem">Linked Item</span></dt>
                 <dd>
-                    <div *ngIf="profilePartLinkedExperience.experiences">
-                        <a [routerLink]="['/profile-part-precise-item', profilePartLinkedExperience.experiences?.id, 'view']">{{ profilePartLinkedExperience.experiences?.id }}</a>
+                    <div *ngIf="profilePartLinkedExperience.linkedItem">
+                        <a [routerLink]="['/profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']">{{ profilePartLinkedExperience.linkedItem?.id }}</a>
                     </div>
                 </dd>
             </dl>

@@ -40,7 +40,7 @@ export const profilePartLinkedExperienceRoute: Routes = [
     component: ProfilePartLinkedExperienceComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartLinkedExperience.home.title',
+      pageTitle: 'n42CApp.profilePartLinkedExperience.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const profilePartLinkedExperienceRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartLinkedExperience.home.title',
+      pageTitle: 'n42CApp.profilePartLinkedExperience.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const profilePartLinkedExperienceRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartLinkedExperience.home.title',
+      pageTitle: 'n42CApp.profilePartLinkedExperience.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const profilePartLinkedExperienceRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42cApp.profilePartLinkedExperience.home.title',
+      pageTitle: 'n42CApp.profilePartLinkedExperience.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

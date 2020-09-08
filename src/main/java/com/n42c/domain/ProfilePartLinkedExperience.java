@@ -62,8 +62,8 @@ public class ProfilePartLinkedExperience implements Serializable {
     private String content;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profilePartLinkedExperiences", allowSetters = true)
-    private ProfilePartPreciseItem experiences;
+    @JsonIgnoreProperties(value = "experiences", allowSetters = true)
+    private ProfilePartPreciseItem linkedItem;
 
     @ManyToMany(mappedBy = "linkedSkills")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -131,17 +131,17 @@ public class ProfilePartLinkedExperience implements Serializable {
         this.content = content;
     }
 
-    public ProfilePartPreciseItem getExperiences() {
-        return experiences;
+    public ProfilePartPreciseItem getLinkedItem() {
+        return linkedItem;
     }
 
-    public ProfilePartLinkedExperience experiences(ProfilePartPreciseItem profilePartPreciseItem) {
-        this.experiences = profilePartPreciseItem;
+    public ProfilePartLinkedExperience linkedItem(ProfilePartPreciseItem profilePartPreciseItem) {
+        this.linkedItem = profilePartPreciseItem;
         return this;
     }
 
-    public void setExperiences(ProfilePartPreciseItem profilePartPreciseItem) {
-        this.experiences = profilePartPreciseItem;
+    public void setLinkedItem(ProfilePartPreciseItem profilePartPreciseItem) {
+        this.linkedItem = profilePartPreciseItem;
     }
 
     public Set<ProfilePartSkill> getLinkedExperiences() {

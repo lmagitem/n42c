@@ -1,0 +1,55 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { JhiEventManager } from 'ng-jhipster';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
+import { NinthCampaignMomentService } from './ninth-campaign-moment.service';
+import { NinthCampaignMomentDeleteDialogComponent } from './ninth-campaign-moment-delete-dialog.component';
+
+@Component({
+  selector: 'jhi-ninth-campaign-moment',
+  templateUrl: './ninth-campaign-moment.component.html',
+})
+export class NinthCampaignMomentComponent implements OnInit, OnDestroy {
+  ninthCampaignMoments?: INinthCampaignMoment[];
+  eventSubscriber?: Subscription;
+
+  constructor(
+    protected ninthCampaignMomentService: NinthCampaignMomentService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
+  ) {}
+
+  loadAll(): void {
+    this.ninthCampaignMomentService
+      .query()
+      .subscribe((res: HttpResponse<INinthCampaignMoment[]>) => (this.ninthCampaignMoments = res.body || []));
+  }
+
+  ngOnInit(): void {
+    this.loadAll();
+    this.registerChangeInNinthCampaignMoments();
+  }
+
+  ngOnDestroy(): void {
+    if (this.eventSubscriber) {
+      this.eventManager.destroy(this.eventSubscriber);
+    }
+  }
+
+  trackId(index: number, item: INinthCampaignMoment): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
+  }
+
+  registerChangeInNinthCampaignMoments(): void {
+    this.eventSubscriber = this.eventManager.subscribe('ninthCampaignMomentListModification', () => this.loadAll());
+  }
+
+  delete(ninthCampaignMoment: INinthCampaignMoment): void {
+    const modalRef = this.modalService.open(NinthCampaignMomentDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.ninthCampaignMoment = ninthCampaignMoment;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "n42CApp": {
+    "NinthCrusadeRank": {
+      "null": "",
+      "RE": "Ready",
+      "BL": "Bloodied",
+      "BH": "BattleHardened",
+      "HE": "Heroic",
+      "LE": "Legendary"
+    }
+  }
+}

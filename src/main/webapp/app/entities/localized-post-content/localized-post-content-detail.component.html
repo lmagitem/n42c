@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="localizedPostContent">
+            <h2><span jhiTranslate="n42CApp.localizedPostContent.detail.title">Localized Post Content</span> {{ localizedPostContent.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.localizedPostContent.excerpt" [ngbTooltip]="'n42CApp.localizedPostContent.help.excerpt' | translate">Excerpt</span></dt>
+                <dd>
+                    <span>{{ localizedPostContent.excerpt }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedPostContent.content" [ngbTooltip]="'n42CApp.localizedPostContent.help.content' | translate">Content</span></dt>
+                <dd>
+                    <span>{{ localizedPostContent.content }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedPostContent.language" [ngbTooltip]="'n42CApp.localizedPostContent.help.language' | translate">Language</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'n42CApp.Language.' + localizedPostContent.language }}">{{ localizedPostContent.language }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedPostContent.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="localizedPostContent.post">
+                        <a [routerLink]="['/blog-post', localizedPostContent.post?.id, 'view']">{{ localizedPostContent.post?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/localized-post-content', localizedPostContent.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

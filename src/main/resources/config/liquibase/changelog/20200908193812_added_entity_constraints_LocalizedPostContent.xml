@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity LocalizedPostContent.
+    -->
+    <changeSet id="20200908193812-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="localized_post_content"
+                                 constraintName="fk_localized_post_content_post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blog_post"/>
+
+    </changeSet>
+</databaseChangeLog>

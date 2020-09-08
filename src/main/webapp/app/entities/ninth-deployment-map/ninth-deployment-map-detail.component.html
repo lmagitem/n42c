@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="ninthDeploymentMap">
+            <h2><span jhiTranslate="n42CApp.ninthDeploymentMap.detail.title">Ninth Deployment Map</span> {{ ninthDeploymentMap.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.ninthDeploymentMap.url">Url</span></dt>
+                <dd>
+                    <span>{{ ninthDeploymentMap.url }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthDeploymentMap.shareable">Shareable</span></dt>
+                <dd>
+                    <span>{{ ninthDeploymentMap.shareable }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthDeploymentMap.usedInMissions">Used In Missions</span></dt>
+                <dd>
+                    <span *ngFor="let usedInMissions of ninthDeploymentMap.usedInMissions; let last = last">
+                        <a [routerLink]="['/ninth-mission', usedInMissions?.id, 'view']">{{ usedInMissions.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ninth-deployment-map', ninthDeploymentMap.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

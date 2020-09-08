@@ -10,6 +10,8 @@ import { AppUserService } from './app-user.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 
+type SelectableEntity = IUser | IAppUser;
+
 @Component({
   selector: 'jhi-app-user-update',
   templateUrl: './app-user-update.component.html',
@@ -17,6 +19,7 @@ import { UserService } from 'app/core/user/user.service';
 export class AppUserUpdateComponent implements OnInit {
   isSaving = false;
   users: IUser[] = [];
+  appusers: IAppUser[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -24,8 +27,14 @@ export class AppUserUpdateComponent implements OnInit {
     displayedName: [null, []],
     email: [null, [Validators.required]],
     admin: [null, [Validators.required]],
-    rights: [null, [Validators.required]],
+    shopRights: [null, [Validators.required]],
+    blogRights: [null, [Validators.required]],
+    profileRights: [null, [Validators.required]],
+    scriptoriumRights: [null, [Validators.required]],
+    avatarUrl: [],
     user: [],
+    givenFriendships: [],
+    askedFriendRequests: [],
   });
 
   constructor(
@@ -40,6 +49,8 @@ export class AppUserUpdateComponent implements OnInit {
       this.updateForm(appUser);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.appUserService.query().subscribe((res: HttpResponse<IAppUser[]>) => (this.appusers = res.body || []));
     });
   }
 
@@ -50,8 +61,14 @@ export class AppUserUpdateComponent implements OnInit {
       displayedName: appUser.displayedName,
       email: appUser.email,
       admin: appUser.admin,
-      rights: appUser.rights,
+      shopRights: appUser.shopRights,
+      blogRights: appUser.blogRights,
+      profileRights: appUser.profileRights,
+      scriptoriumRights: appUser.scriptoriumRights,
+      avatarUrl: appUser.avatarUrl,
       user: appUser.user,
+      givenFriendships: appUser.givenFriendships,
+      askedFriendRequests: appUser.askedFriendRequests,
     });
   }
 
@@ -77,8 +94,14 @@ export class AppUserUpdateComponent implements OnInit {
       displayedName: this.editForm.get(['displayedName'])!.value,
       email: this.editForm.get(['email'])!.value,
       admin: this.editForm.get(['admin'])!.value,
-      rights: this.editForm.get(['rights'])!.value,
+      shopRights: this.editForm.get(['shopRights'])!.value,
+      blogRights: this.editForm.get(['blogRights'])!.value,
+      profileRights: this.editForm.get(['profileRights'])!.value,
+      scriptoriumRights: this.editForm.get(['scriptoriumRights'])!.value,
+      avatarUrl: this.editForm.get(['avatarUrl'])!.value,
       user: this.editForm.get(['user'])!.value,
+      givenFriendships: this.editForm.get(['givenFriendships'])!.value,
+      askedFriendRequests: this.editForm.get(['askedFriendRequests'])!.value,
     };
   }
 
@@ -98,7 +121,18 @@ export class AppUserUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IUser): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

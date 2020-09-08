@@ -1,0 +1,30 @@
+{
+  "n42CApp": {
+    "localizedPostContent": {
+      "home": {
+        "title": "Localized Post Contents",
+        "createLabel": "Create a new Localized Post Content",
+        "createOrEditLabel": "Create or edit a Localized Post Content",
+        "notFound": "No Localized Post Contents found"
+      },
+      "created": "A new Localized Post Content is created with identifier {{ param }}",
+      "updated": "A Localized Post Content is updated with identifier {{ param }}",
+      "deleted": "A Localized Post Content is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Post Content {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Post Content"
+      },
+      "excerpt": "Excerpt",
+      "content": "Content",
+      "language": "Language",
+      "post": "Post",
+      "help": {
+        "excerpt": "An excerpt of the post to show on the blog page.",
+        "content": "The content of the post.",
+        "language": "This post&#39;s language."
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-ninth-army-unit-moment-heading" jhiTranslate="n42CApp.ninthArmyUnitMoment.home.createOrEditLabel">Create or edit a Ninth Army Unit Moment</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.current" for="field_current">Current</label>
+                    <input type="checkbox" class="form-control" name="current" id="field_current"
+                           formControlName="current"/>
+                    <div *ngIf="editForm.get('current')!.invalid && (editForm.get('current')!.dirty || editForm.get('current')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('current')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.sinceInstant" for="field_sinceInstant">Since Instant</label>
+                    <div class="d-flex">
+                        <input id="field_sinceInstant" type="datetime-local" class="form-control" name="sinceInstant" formControlName="sinceInstant" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sinceInstant')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('sinceInstant')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.pointsCost" for="field_pointsCost">Points Cost</label>
+                    <input type="number" class="form-control" name="pointsCost" id="field_pointsCost"
+                           formControlName="pointsCost"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.powerRating" for="field_powerRating">Power Rating</label>
+                    <input type="number" class="form-control" name="powerRating" id="field_powerRating"
+                           formControlName="powerRating"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.experiencePoints" for="field_experiencePoints">Experience Points</label>
+                    <input type="number" class="form-control" name="experiencePoints" id="field_experiencePoints"
+                           formControlName="experiencePoints"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.crusadePoints" for="field_crusadePoints">Crusade Points</label>
+                    <input type="number" class="form-control" name="crusadePoints" id="field_crusadePoints"
+                           formControlName="crusadePoints"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.equipment" for="field_equipment">Equipment</label>
+                    <input type="text" class="form-control" name="equipment" id="field_equipment"
+                           formControlName="equipment"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.psychicPowers" for="field_psychicPowers">Psychic Powers</label>
+                    <input type="text" class="form-control" name="psychicPowers" id="field_psychicPowers"
+                           formControlName="psychicPowers"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.warlordTraits" for="field_warlordTraits">Warlord Traits</label>
+                    <input type="text" class="form-control" name="warlordTraits" id="field_warlordTraits"
+                           formControlName="warlordTraits"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.relics" for="field_relics">Relics</label>
+                    <input type="text" class="form-control" name="relics" id="field_relics"
+                           formControlName="relics"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.otherUpgrades" for="field_otherUpgrades">Other Upgrades</label>
+                    <input type="text" class="form-control" name="otherUpgrades" id="field_otherUpgrades"
+                           formControlName="otherUpgrades"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.battlesPlayed" for="field_battlesPlayed">Battles Played</label>
+                    <input type="number" class="form-control" name="battlesPlayed" id="field_battlesPlayed"
+                           formControlName="battlesPlayed"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.battlesSurvived" for="field_battlesSurvived">Battles Survived</label>
+                    <input type="number" class="form-control" name="battlesSurvived" id="field_battlesSurvived"
+                           formControlName="battlesSurvived"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.rangedKills" for="field_rangedKills">Ranged Kills</label>
+                    <input type="number" class="form-control" name="rangedKills" id="field_rangedKills"
+                           formControlName="rangedKills"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.meleeKills" for="field_meleeKills">Melee Kills</label>
+                    <input type="number" class="form-control" name="meleeKills" id="field_meleeKills"
+                           formControlName="meleeKills"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.psychicKills" for="field_psychicKills">Psychic Kills</label>
+                    <input type="number" class="form-control" name="psychicKills" id="field_psychicKills"
+                           formControlName="psychicKills"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.crusadeRank" for="field_crusadeRank">Crusade Rank</label>
+                    <select class="form-control" name="crusadeRank" formControlName="crusadeRank" id="field_crusadeRank">
+                        <option value="RE">{{ 'n42CApp.NinthCrusadeRank.RE' | translate }}</option>
+                        <option value="BL">{{ 'n42CApp.NinthCrusadeRank.BL' | translate }}</option>
+                        <option value="BH">{{ 'n42CApp.NinthCrusadeRank.BH' | translate }}</option>
+                        <option value="HE">{{ 'n42CApp.NinthCrusadeRank.HE' | translate }}</option>
+                        <option value="LE">{{ 'n42CApp.NinthCrusadeRank.LE' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.battleHonours" for="field_battleHonours">Battle Honours</label>
+                    <input type="text" class="form-control" name="battleHonours" id="field_battleHonours"
+                           formControlName="battleHonours"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.battleScars" for="field_battleScars">Battle Scars</label>
+                    <input type="text" class="form-control" name="battleScars" id="field_battleScars"
+                           formControlName="battleScars"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyUnitMoment.armyUnit" for="field_armyUnit">Army Unit</label>
+                    <select class="form-control" id="field_armyUnit" name="armyUnit" formControlName="armyUnit">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="ninthArmyUnitOption.id === editForm.get('armyUnit')!.value?.id ? editForm.get('armyUnit')!.value : ninthArmyUnitOption" *ngFor="let ninthArmyUnitOption of nintharmyunits; trackBy: trackById">{{ ninthArmyUnitOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

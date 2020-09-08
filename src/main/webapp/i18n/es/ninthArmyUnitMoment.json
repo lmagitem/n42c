@@ -1,0 +1,41 @@
+{
+  "n42CApp": {
+    "ninthArmyUnitMoment": {
+      "home": {
+        "title": "Ninth Army Unit Moments",
+        "createLabel": "Crear nuevo Ninth Army Unit Moment",
+        "createOrEditLabel": "Crear o editar Ninth Army Unit Moment",
+        "notFound": "Ningún Ninth Army Unit Moments encontrado"
+      },
+      "created": "Un nuevo Ninth Army Unit Moment ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ninth Army Unit Moment ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ninth Army Unit Moment ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ninth Army Unit Moment {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Army Unit Moment"
+      },
+      "current": "Current",
+      "sinceInstant": "Since Instant",
+      "pointsCost": "Points Cost",
+      "powerRating": "Power Rating",
+      "experiencePoints": "Experience Points",
+      "crusadePoints": "Crusade Points",
+      "equipment": "Equipment",
+      "psychicPowers": "Psychic Powers",
+      "warlordTraits": "Warlord Traits",
+      "relics": "Relics",
+      "otherUpgrades": "Other Upgrades",
+      "battlesPlayed": "Battles Played",
+      "battlesSurvived": "Battles Survived",
+      "rangedKills": "Ranged Kills",
+      "meleeKills": "Melee Kills",
+      "psychicKills": "Psychic Kills",
+      "crusadeRank": "Crusade Rank",
+      "battleHonours": "Battle Honours",
+      "battleScars": "Battle Scars",
+      "armyUnit": "Army Unit"
+    }
+  }
+}

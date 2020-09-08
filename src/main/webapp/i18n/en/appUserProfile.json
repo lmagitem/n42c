@@ -1,5 +1,5 @@
 {
-  "n42cApp": {
+  "n42CApp": {
     "appUserProfile": {
       "home": {
         "title": "App User Profiles",
@@ -21,8 +21,8 @@
       "summary": "Summary",
       "headerBackgroundURI": "Header Background URI",
       "language": "Language",
-      "profilePart": "Profile Part",
-      "profiles": "Profiles",
+      "profileParts": "Profile Parts",
+      "user": "User",
       "help": {
         "name": "The displayed name for that user.",
         "title": "The title of this profile.",

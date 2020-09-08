@@ -1,0 +1,26 @@
+{
+  "n42CApp": {
+    "ninthArmyUnit": {
+      "home": {
+        "title": "NinthArmyUnits",
+        "createLabel": "Créer un nouveau Ninth Army Unit",
+        "createOrEditLabel": "Créer ou éditer un Ninth Army Unit",
+        "notFound": "Aucun Ninth Army Unit trouvé"
+      },
+      "created": "Un nouveau Ninth Army Unit a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Army Unit avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Army Unit avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Army Unit {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Army Unit"
+      },
+      "selectableKeywords": "Selectable Keywords",
+      "moments": "Moments",
+      "army": "Army",
+      "unit": "Unit",
+      "selections": "Selections"
+    }
+  }
+}

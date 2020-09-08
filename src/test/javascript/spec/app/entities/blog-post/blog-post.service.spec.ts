@@ -4,7 +4,6 @@ import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
 import { IBlogPost, BlogPost } from 'app/shared/model/blog-post.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
 
 describe('Service Tests', () => {
   describe('BlogPost Service', () => {
@@ -25,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new BlogPost(0, currentDate, 'AAAAAAA', 'AAAAAAA', Language.EN);
+      elemDefault = new BlogPost(0, currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -33,6 +32,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             published: currentDate.format(DATE_TIME_FORMAT),
+            modified: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -49,6 +49,7 @@ describe('Service Tests', () => {
           {
             id: 0,
             published: currentDate.format(DATE_TIME_FORMAT),
+            modified: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -56,6 +57,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             published: currentDate,
+            modified: currentDate,
           },
           returnedFromService
         );
@@ -71,9 +73,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             published: currentDate.format(DATE_TIME_FORMAT),
-            excerpt: 'BBBBBB',
-            content: 'BBBBBB',
-            language: 'BBBBBB',
+            modified: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -81,6 +81,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             published: currentDate,
+            modified: currentDate,
           },
           returnedFromService
         );
@@ -96,9 +97,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             published: currentDate.format(DATE_TIME_FORMAT),
-            excerpt: 'BBBBBB',
-            content: 'BBBBBB',
-            language: 'BBBBBB',
+            modified: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -106,6 +105,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             published: currentDate,
+            modified: currentDate,
           },
           returnedFromService
         );

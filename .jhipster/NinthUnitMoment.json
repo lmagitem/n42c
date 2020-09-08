@@ -1,0 +1,43 @@
+{
+  "name": "NinthUnitMoment",
+  "fields": [
+    {
+      "fieldName": "current",
+      "fieldType": "Boolean",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "sinceInstant",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "pictureUrl",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthUnit",
+      "otherEntityRelationshipName": "moments",
+      "relationshipName": "unit",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195712",
+  "entityTableName": "ninth_unit_moment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

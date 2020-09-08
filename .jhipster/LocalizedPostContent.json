@@ -1,0 +1,48 @@
+{
+  "name": "LocalizedPostContent",
+  "fields": [
+    {
+      "fieldName": "excerpt",
+      "fieldType": "String",
+      "javadoc": "An excerpt of the post to show on the blog page."
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "javadoc": "The content of the post.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This post's language.",
+      "fieldValues": "EN (English),FR (French),ES (Spanish),GE (German),RU (Russian),AR (Arabic),CH (Mandarin),PR (Portuguese),IT (Italian),PO (Polish),DU (Dutch),GR (Greek),SW (Swedish),TU (Turkish),RO (Romanian),JP (Japanese),KO (Korean),HU (Hungarian),DA (Danish)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blogPost",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipName": "post",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908193812",
+  "javadoc": "The content of a post, in a specific language.",
+  "entityTableName": "localized_post_content",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

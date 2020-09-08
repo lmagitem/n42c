@@ -59,8 +59,8 @@ public class ProfilePartSimpleItem implements Serializable {
     private String content;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profilePartSimpleItems", allowSetters = true)
-    private ProfilePart simpleItems;
+    @JsonIgnoreProperties(value = "simpleItems", allowSetters = true)
+    private ProfilePart profilePart;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -123,17 +123,17 @@ public class ProfilePartSimpleItem implements Serializable {
         this.content = content;
     }
 
-    public ProfilePart getSimpleItems() {
-        return simpleItems;
+    public ProfilePart getProfilePart() {
+        return profilePart;
     }
 
-    public ProfilePartSimpleItem simpleItems(ProfilePart profilePart) {
-        this.simpleItems = profilePart;
+    public ProfilePartSimpleItem profilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
         return this;
     }
 
-    public void setSimpleItems(ProfilePart profilePart) {
-        this.simpleItems = profilePart;
+    public void setProfilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

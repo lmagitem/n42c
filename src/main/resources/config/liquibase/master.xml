@@ -24,6 +24,34 @@
     <include file="config/liquibase/changelog/20200703174807_added_entity_ProfilePartLinkedExperience.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200703174907_added_entity_ProfilePartSkillCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200703175007_added_entity_ProfilePartSkill.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193312_added_entity_Shop.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193412_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193512_added_entity_LocalizedProduct.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193612_added_entity_Blog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193812_added_entity_LocalizedPostContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908194012_added_entity_LocalizedBlogCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908194812_added_entity_Player.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908194912_added_entity_NinthCampaign.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195012_added_entity_NinthCampaignMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195112_added_entity_NinthBattle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195212_added_entity_NinthArmy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195312_added_entity_NinthArmyMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195412_added_entity_NinthArmyUnit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195512_added_entity_NinthArmyUnitMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195612_added_entity_NinthUnit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195712_added_entity_NinthUnitMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195812_added_entity_NinthMission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195912_added_entity_LocalizedNinthMission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200012_added_entity_NinthDeploymentMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200112_added_entity_LocalizedNinthDeploymentMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200212_added_entity_NinthMissionRule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200312_added_entity_LocalizedNinthMissionRule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200412_added_entity_NinthStratagemGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200512_added_entity_LocalizedNinthStratagemGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200612_added_entity_NinthStratagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200712_added_entity_LocalizedNinthStratagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200812_added_entity_NinthObjective.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200912_added_entity_LocalizedNinthObjective.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200703174107_added_entity_constraints_AppUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200703174207_added_entity_constraints_BlogPost.xml" relativeToChangelogFile="false"/>
@@ -35,6 +63,31 @@
     <include file="config/liquibase/changelog/20200703174807_added_entity_constraints_ProfilePartLinkedExperience.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200703174907_added_entity_constraints_ProfilePartSkillCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200703175007_added_entity_constraints_ProfilePartSkill.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193412_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193512_added_entity_constraints_LocalizedProduct.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193612_added_entity_constraints_Blog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193812_added_entity_constraints_LocalizedPostContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908194012_added_entity_constraints_LocalizedBlogCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908194812_added_entity_constraints_Player.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908194912_added_entity_constraints_NinthCampaign.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195012_added_entity_constraints_NinthCampaignMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195112_added_entity_constraints_NinthBattle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195212_added_entity_constraints_NinthArmy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195312_added_entity_constraints_NinthArmyMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195412_added_entity_constraints_NinthArmyUnit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195512_added_entity_constraints_NinthArmyUnitMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195612_added_entity_constraints_NinthUnit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195712_added_entity_constraints_NinthUnitMoment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195812_added_entity_constraints_NinthMission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908195912_added_entity_constraints_LocalizedNinthMission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200012_added_entity_constraints_NinthDeploymentMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200112_added_entity_constraints_LocalizedNinthDeploymentMap.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200312_added_entity_constraints_LocalizedNinthMissionRule.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200412_added_entity_constraints_NinthStratagemGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200512_added_entity_constraints_LocalizedNinthStratagemGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200612_added_entity_constraints_NinthStratagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200712_added_entity_constraints_LocalizedNinthStratagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908200912_added_entity_constraints_LocalizedNinthObjective.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

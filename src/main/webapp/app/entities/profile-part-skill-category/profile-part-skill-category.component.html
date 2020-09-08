@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42cApp.profilePartSkillCategory.home.title">Profile Part Skill Categories</span>
+        <span jhiTranslate="n42CApp.profilePartSkillCategory.home.title">Profile Part Skill Categories</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-profile-part-skill-category" [routerLink]="['/profile-part-skill-category/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42cApp.profilePartSkillCategory.home.createLabel">
+            <span  jhiTranslate="n42CApp.profilePartSkillCategory.home.createLabel">
             Create a new Profile Part Skill Category
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="profilePartSkillCategories?.length === 0">
-        <span jhiTranslate="n42cApp.profilePartSkillCategory.home.notFound">No profilePartSkillCategories found</span>
+        <span jhiTranslate="n42CApp.profilePartSkillCategory.home.notFound">No profilePartSkillCategories found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="profilePartSkillCategories && profilePartSkillCategories.length > 0">
@@ -23,9 +23,9 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkillCategory.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkillCategory.index">Index</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePartSkillCategory.skillCategories">Skill Categories</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkillCategory.name">Name</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkillCategory.index">Index</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkillCategory.profilePart">Profile Part</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,8 +35,8 @@
                     <td>{{ profilePartSkillCategory.name }}</td>
                     <td>{{ profilePartSkillCategory.index }}</td>
                     <td>
-                        <div *ngIf="profilePartSkillCategory.skillCategories">
-                            <a [routerLink]="['/profile-part', profilePartSkillCategory.skillCategories?.id, 'view']" >{{ profilePartSkillCategory.skillCategories?.id }}</a>
+                        <div *ngIf="profilePartSkillCategory.profilePart">
+                            <a [routerLink]="['/profile-part', profilePartSkillCategory.profilePart?.id, 'view']" >{{ profilePartSkillCategory.profilePart?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

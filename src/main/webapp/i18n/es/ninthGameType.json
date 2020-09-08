@@ -1,0 +1,11 @@
+{
+  "n42CApp": {
+    "NinthGameType": {
+      "null": "",
+      "OP": "OpenPlay",
+      "MP": "MatchedPlay",
+      "CR": "Crusade",
+      "NG": "Narrative"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "n42CApp": {
+    "localizedNinthMission": {
+      "home": {
+        "title": "Localized Ninth Missions",
+        "createLabel": "Create a new Localized Ninth Mission",
+        "createOrEditLabel": "Create or edit a Localized Ninth Mission",
+        "notFound": "No Localized Ninth Missions found"
+      },
+      "created": "A new Localized Ninth Mission is created with identifier {{ param }}",
+      "updated": "A Localized Ninth Mission is updated with identifier {{ param }}",
+      "deleted": "A Localized Ninth Mission is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Ninth Mission {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Ninth Mission"
+      },
+      "name": "Name",
+      "briefing": "Briefing",
+      "mission": "Mission"
+    }
+  }
+}

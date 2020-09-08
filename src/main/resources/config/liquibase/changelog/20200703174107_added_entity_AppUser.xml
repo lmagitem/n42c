@@ -27,8 +27,20 @@
             <column name="admin" type="boolean" remarks="Does the user have admin rights?">
                 <constraints nullable="false" />
             </column>
-            <column name="rights" type="varchar(255)" remarks="The user rights regarding the Scriptorium.">
+            <column name="shop_rights" type="varchar(255)" remarks="The user rights regarding the shop.">
                 <constraints nullable="false" />
+            </column>
+            <column name="blog_rights" type="varchar(255)" remarks="The user rights regarding blog writing.">
+                <constraints nullable="false" />
+            </column>
+            <column name="profile_rights" type="varchar(255)" remarks="The user rights regarding its profile.">
+                <constraints nullable="false" />
+            </column>
+            <column name="scriptorium_rights" type="varchar(255)" remarks="The user rights regarding the Scriptorium.">
+                <constraints nullable="false" />
+            </column>
+            <column name="avatar_url" type="varchar(255)" remarks="The user&apos;s avatar url.">
+                <constraints nullable="true" />
             </column>
             <column name="user_id" type="varchar(100)">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_app_user_user_id" />
@@ -39,6 +51,28 @@
 
     <changeSet id="20200703174107-1-relations" author="jhipster">
 
+        <createTable tableName="app_user_given_friendships">
+            <column name="given_friendships_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="app_user_id, given_friendships_id" tableName="app_user_given_friendships"/>
+        
+        <createTable tableName="app_user_asked_friend_requests">
+            <column name="asked_friend_requests_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="app_user_id, asked_friend_requests_id" tableName="app_user_asked_friend_requests"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
@@ -60,7 +94,11 @@
             <column name="displayed_name" type="string"/>
             <column name="email" type="string"/>
             <column name="admin" type="boolean"/>
-            <column name="rights" type="string"/>
+            <column name="shop_rights" type="string"/>
+            <column name="blog_rights" type="string"/>
+            <column name="profile_rights" type="string"/>
+            <column name="scriptorium_rights" type="string"/>
+            <column name="avatar_url" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

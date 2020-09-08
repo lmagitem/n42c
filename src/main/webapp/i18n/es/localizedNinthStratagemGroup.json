@@ -1,0 +1,23 @@
+{
+  "n42CApp": {
+    "localizedNinthStratagemGroup": {
+      "home": {
+        "title": "Localized Ninth Stratagem Groups",
+        "createLabel": "Crear nuevo Localized Ninth Stratagem Group",
+        "createOrEditLabel": "Crear o editar Localized Ninth Stratagem Group",
+        "notFound": "Ningún Localized Ninth Stratagem Groups encontrado"
+      },
+      "created": "Un nuevo Localized Ninth Stratagem Group ha sido creado con el identificador {{ param }}",
+      "updated": "Un Localized Ninth Stratagem Group ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Localized Ninth Stratagem Group ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Localized Ninth Stratagem Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Ninth Stratagem Group"
+      },
+      "name": "Name",
+      "stratagemGroup": "Stratagem Group"
+    }
+  }
+}

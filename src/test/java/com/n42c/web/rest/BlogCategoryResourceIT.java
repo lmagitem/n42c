@@ -23,7 +23,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link BlogCategoryResource} REST controller.
  */
@@ -31,12 +30,6 @@ import com.n42c.domain.enumeration.Language;
 @AutoConfigureMockMvc
 @WithMockUser
 public class BlogCategoryResourceIT {
-
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    private static final Language DEFAULT_LANGUAGE = Language.EN;
-    private static final Language UPDATED_LANGUAGE = Language.FR;
 
     @Autowired
     private BlogCategoryRepository blogCategoryRepository;
@@ -56,9 +49,7 @@ public class BlogCategoryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static BlogCategory createEntity(EntityManager em) {
-        BlogCategory blogCategory = new BlogCategory()
-            .name(DEFAULT_NAME)
-            .language(DEFAULT_LANGUAGE);
+        BlogCategory blogCategory = new BlogCategory();
         return blogCategory;
     }
     /**
@@ -68,9 +59,7 @@ public class BlogCategoryResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static BlogCategory createUpdatedEntity(EntityManager em) {
-        BlogCategory blogCategory = new BlogCategory()
-            .name(UPDATED_NAME)
-            .language(UPDATED_LANGUAGE);
+        BlogCategory blogCategory = new BlogCategory();
         return blogCategory;
     }
 
@@ -93,8 +82,6 @@ public class BlogCategoryResourceIT {
         List<BlogCategory> blogCategoryList = blogCategoryRepository.findAll();
         assertThat(blogCategoryList).hasSize(databaseSizeBeforeCreate + 1);
         BlogCategory testBlogCategory = blogCategoryList.get(blogCategoryList.size() - 1);
-        assertThat(testBlogCategory.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testBlogCategory.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
     }
 
     @Test
@@ -119,25 +106,6 @@ public class BlogCategoryResourceIT {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = blogCategoryRepository.findAll().size();
-        // set the field null
-        blogCategory.setName(null);
-
-        // Create the BlogCategory, which fails.
-
-
-        restBlogCategoryMockMvc.perform(post("/api/blog-categories").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogCategory)))
-            .andExpect(status().isBadRequest());
-
-        List<BlogCategory> blogCategoryList = blogCategoryRepository.findAll();
-        assertThat(blogCategoryList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllBlogCategories() throws Exception {
         // Initialize the database
         blogCategoryRepository.saveAndFlush(blogCategory);
@@ -146,9 +114,7 @@ public class BlogCategoryResourceIT {
         restBlogCategoryMockMvc.perform(get("/api/blog-categories?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(blogCategory.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(blogCategory.getId().intValue())));
     }
     
     @Test
@@ -161,9 +127,7 @@ public class BlogCategoryResourceIT {
         restBlogCategoryMockMvc.perform(get("/api/blog-categories/{id}", blogCategory.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(blogCategory.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
+            .andExpect(jsonPath("$.id").value(blogCategory.getId().intValue()));
     }
     @Test
     @Transactional
@@ -185,9 +149,6 @@ public class BlogCategoryResourceIT {
         BlogCategory updatedBlogCategory = blogCategoryRepository.findById(blogCategory.getId()).get();
         // Disconnect from session so that the updates on updatedBlogCategory are not directly saved in db
         em.detach(updatedBlogCategory);
-        updatedBlogCategory
-            .name(UPDATED_NAME)
-            .language(UPDATED_LANGUAGE);
 
         restBlogCategoryMockMvc.perform(put("/api/blog-categories").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -198,8 +159,6 @@ public class BlogCategoryResourceIT {
         List<BlogCategory> blogCategoryList = blogCategoryRepository.findAll();
         assertThat(blogCategoryList).hasSize(databaseSizeBeforeUpdate);
         BlogCategory testBlogCategory = blogCategoryList.get(blogCategoryList.size() - 1);
-        assertThat(testBlogCategory.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testBlogCategory.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
     }
 
     @Test

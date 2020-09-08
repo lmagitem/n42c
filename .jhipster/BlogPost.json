@@ -10,37 +10,42 @@
       ]
     },
     {
-      "fieldName": "excerpt",
-      "fieldType": "String",
-      "javadoc": "An excerpt of the post to show on the blog page."
-    },
-    {
-      "fieldName": "content",
-      "fieldType": "String",
-      "javadoc": "The content of the post.",
+      "fieldName": "modified",
+      "fieldType": "Instant",
+      "javadoc": "The last date and time at which this post was modified.",
       "fieldValidateRules": [
         "required"
       ]
-    },
-    {
-      "fieldName": "language",
-      "fieldType": "Language",
-      "javadoc": "This post's language.",
-      "fieldValues": "EN (English),FR (French),ES (Spanish)"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-many",
+      "otherEntityName": "localizedPostContent",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "posts",
+      "relationshipName": "authors",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
       "otherEntityName": "blogCategory",
-      "otherEntityRelationshipName": "categories",
-      "relationshipName": "blogCategory"
+      "otherEntityRelationshipName": "posts",
+      "relationshipName": "categories",
+      "otherEntityField": "id",
+      "ownerSide": true
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "appUser",
-      "otherEntityRelationshipName": "blogPost",
-      "relationshipName": "author",
+      "otherEntityName": "blog",
+      "otherEntityRelationshipName": "posts",
+      "relationshipName": "blog",
       "otherEntityField": "id"
     }
   ],

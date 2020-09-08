@@ -1,5 +1,5 @@
 {
-  "n42cApp": {
+  "n42CApp": {
     "profilePartPreciseItem": {
       "home": {
         "title": "Profile Part Precise Items",
@@ -24,8 +24,8 @@
       "locationLat": "Location Lat",
       "locationLong": "Location Long",
       "content": "Content",
-      "profilePartLinkedExperience": "Profile Part Linked Experience",
-      "preciseItems": "Precise Items",
+      "experiences": "Experiences",
+      "profilePart": "Profile Part",
       "help": {
         "title": "This item&#39;s title.",
         "subTitle": "This item&#39;s subtitle",

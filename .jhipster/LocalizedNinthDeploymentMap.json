@@ -1,0 +1,33 @@
+{
+  "name": "LocalizedNinthDeploymentMap",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthDeploymentMap",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipName": "deploymentMap",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908200112",
+  "entityTableName": "localized_ninth_deployment_map",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

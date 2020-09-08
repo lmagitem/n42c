@@ -28,7 +28,7 @@ describe('ProfilePartPreciseItem e2e test', () => {
     await navBarPage.goToEntity('profile-part-precise-item');
     profilePartPreciseItemComponentsPage = new ProfilePartPreciseItemComponentsPage();
     await browser.wait(ec.visibilityOf(profilePartPreciseItemComponentsPage.title), 5000);
-    expect(await profilePartPreciseItemComponentsPage.getTitle()).to.eq('n42cApp.profilePartPreciseItem.home.title');
+    expect(await profilePartPreciseItemComponentsPage.getTitle()).to.eq('n42CApp.profilePartPreciseItem.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(profilePartPreciseItemComponentsPage.entities), ec.visibilityOf(profilePartPreciseItemComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('ProfilePartPreciseItem e2e test', () => {
   it('should load create ProfilePartPreciseItem page', async () => {
     await profilePartPreciseItemComponentsPage.clickOnCreateButton();
     profilePartPreciseItemUpdatePage = new ProfilePartPreciseItemUpdatePage();
-    expect(await profilePartPreciseItemUpdatePage.getPageTitle()).to.eq('n42cApp.profilePartPreciseItem.home.createOrEditLabel');
+    expect(await profilePartPreciseItemUpdatePage.getPageTitle()).to.eq('n42CApp.profilePartPreciseItem.home.createOrEditLabel');
     await profilePartPreciseItemUpdatePage.cancel();
   });
 
@@ -56,7 +56,7 @@ describe('ProfilePartPreciseItem e2e test', () => {
       profilePartPreciseItemUpdatePage.setLocationLatInput('5'),
       profilePartPreciseItemUpdatePage.setLocationLongInput('5'),
       profilePartPreciseItemUpdatePage.setContentInput('content'),
-      profilePartPreciseItemUpdatePage.preciseItemsSelectLastOption(),
+      profilePartPreciseItemUpdatePage.profilePartSelectLastOption(),
     ]);
 
     expect(await profilePartPreciseItemUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
@@ -91,7 +91,7 @@ describe('ProfilePartPreciseItem e2e test', () => {
     await profilePartPreciseItemComponentsPage.clickOnLastDeleteButton();
 
     profilePartPreciseItemDeleteDialog = new ProfilePartPreciseItemDeleteDialog();
-    expect(await profilePartPreciseItemDeleteDialog.getDialogTitle()).to.eq('n42cApp.profilePartPreciseItem.delete.question');
+    expect(await profilePartPreciseItemDeleteDialog.getDialogTitle()).to.eq('n42CApp.profilePartPreciseItem.delete.question');
     await profilePartPreciseItemDeleteDialog.clickOnConfirmButton();
 
     expect(await profilePartPreciseItemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

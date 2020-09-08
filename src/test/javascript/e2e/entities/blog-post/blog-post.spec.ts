@@ -24,14 +24,14 @@ describe('BlogPost e2e test', () => {
     await navBarPage.goToEntity('blog-post');
     blogPostComponentsPage = new BlogPostComponentsPage();
     await browser.wait(ec.visibilityOf(blogPostComponentsPage.title), 5000);
-    expect(await blogPostComponentsPage.getTitle()).to.eq('n42cApp.blogPost.home.title');
+    expect(await blogPostComponentsPage.getTitle()).to.eq('n42CApp.blogPost.home.title');
     await browser.wait(ec.or(ec.visibilityOf(blogPostComponentsPage.entities), ec.visibilityOf(blogPostComponentsPage.noResult)), 1000);
   });
 
   it('should load create BlogPost page', async () => {
     await blogPostComponentsPage.clickOnCreateButton();
     blogPostUpdatePage = new BlogPostUpdatePage();
-    expect(await blogPostUpdatePage.getPageTitle()).to.eq('n42cApp.blogPost.home.createOrEditLabel');
+    expect(await blogPostUpdatePage.getPageTitle()).to.eq('n42CApp.blogPost.home.createOrEditLabel');
     await blogPostUpdatePage.cancel();
   });
 
@@ -42,18 +42,20 @@ describe('BlogPost e2e test', () => {
 
     await promise.all([
       blogPostUpdatePage.setPublishedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      blogPostUpdatePage.setExcerptInput('excerpt'),
-      blogPostUpdatePage.setContentInput('content'),
-      blogPostUpdatePage.languageSelectLastOption(),
-      blogPostUpdatePage.authorSelectLastOption(),
+      blogPostUpdatePage.setModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+      // blogPostUpdatePage.authorsSelectLastOption(),
+      // blogPostUpdatePage.categoriesSelectLastOption(),
+      blogPostUpdatePage.blogSelectLastOption(),
     ]);
 
     expect(await blogPostUpdatePage.getPublishedInput()).to.contain(
       '2001-01-01T02:30',
       'Expected published value to be equals to 2000-12-31'
     );
-    expect(await blogPostUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
-    expect(await blogPostUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
+    expect(await blogPostUpdatePage.getModifiedInput()).to.contain(
+      '2001-01-01T02:30',
+      'Expected modified value to be equals to 2000-12-31'
+    );
 
     await blogPostUpdatePage.save();
     expect(await blogPostUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
@@ -66,7 +68,7 @@ describe('BlogPost e2e test', () => {
     await blogPostComponentsPage.clickOnLastDeleteButton();
 
     blogPostDeleteDialog = new BlogPostDeleteDialog();
-    expect(await blogPostDeleteDialog.getDialogTitle()).to.eq('n42cApp.blogPost.delete.question');
+    expect(await blogPostDeleteDialog.getDialogTitle()).to.eq('n42CApp.blogPost.delete.question');
     await blogPostDeleteDialog.clickOnConfirmButton();
 
     expect(await blogPostComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

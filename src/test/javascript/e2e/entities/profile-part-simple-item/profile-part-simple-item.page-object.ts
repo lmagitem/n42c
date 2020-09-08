@@ -34,7 +34,7 @@ export class ProfilePartSimpleItemUpdatePage {
   dateInput = element(by.id('field_date'));
   contentInput = element(by.id('field_content'));
 
-  simpleItemsSelect = element(by.id('field_simpleItems'));
+  profilePartSelect = element(by.id('field_profilePart'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -72,20 +72,20 @@ export class ProfilePartSimpleItemUpdatePage {
     return await this.contentInput.getAttribute('value');
   }
 
-  async simpleItemsSelectLastOption(): Promise<void> {
-    await this.simpleItemsSelect.all(by.tagName('option')).last().click();
+  async profilePartSelectLastOption(): Promise<void> {
+    await this.profilePartSelect.all(by.tagName('option')).last().click();
   }
 
-  async simpleItemsSelectOption(option: string): Promise<void> {
-    await this.simpleItemsSelect.sendKeys(option);
+  async profilePartSelectOption(option: string): Promise<void> {
+    await this.profilePartSelect.sendKeys(option);
   }
 
-  getSimpleItemsSelect(): ElementFinder {
-    return this.simpleItemsSelect;
+  getProfilePartSelect(): ElementFinder {
+    return this.profilePartSelect;
   }
 
-  async getSimpleItemsSelectedOption(): Promise<string> {
-    return await this.simpleItemsSelect.element(by.css('option:checked')).getText();
+  async getProfilePartSelectedOption(): Promise<string> {
+    return await this.profilePartSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

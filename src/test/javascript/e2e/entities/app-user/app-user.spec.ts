@@ -24,14 +24,14 @@ describe('AppUser e2e test', () => {
     await navBarPage.goToEntity('app-user');
     appUserComponentsPage = new AppUserComponentsPage();
     await browser.wait(ec.visibilityOf(appUserComponentsPage.title), 5000);
-    expect(await appUserComponentsPage.getTitle()).to.eq('n42cApp.appUser.home.title');
+    expect(await appUserComponentsPage.getTitle()).to.eq('n42CApp.appUser.home.title');
     await browser.wait(ec.or(ec.visibilityOf(appUserComponentsPage.entities), ec.visibilityOf(appUserComponentsPage.noResult)), 1000);
   });
 
   it('should load create AppUser page', async () => {
     await appUserComponentsPage.clickOnCreateButton();
     appUserUpdatePage = new AppUserUpdatePage();
-    expect(await appUserUpdatePage.getPageTitle()).to.eq('n42cApp.appUser.home.createOrEditLabel');
+    expect(await appUserUpdatePage.getPageTitle()).to.eq('n42CApp.appUser.home.createOrEditLabel');
     await appUserUpdatePage.cancel();
   });
 
@@ -44,8 +44,14 @@ describe('AppUser e2e test', () => {
       appUserUpdatePage.setUserNameInput('userName'),
       appUserUpdatePage.setDisplayedNameInput('displayedName'),
       appUserUpdatePage.setEmailInput('email'),
-      appUserUpdatePage.rightsSelectLastOption(),
+      appUserUpdatePage.shopRightsSelectLastOption(),
+      appUserUpdatePage.blogRightsSelectLastOption(),
+      appUserUpdatePage.profileRightsSelectLastOption(),
+      appUserUpdatePage.scriptoriumRightsSelectLastOption(),
+      appUserUpdatePage.setAvatarUrlInput('avatarUrl'),
       appUserUpdatePage.userSelectLastOption(),
+      // appUserUpdatePage.givenFriendshipsSelectLastOption(),
+      // appUserUpdatePage.askedFriendRequestsSelectLastOption(),
     ]);
 
     expect(await appUserUpdatePage.getUserNameInput()).to.eq('userName', 'Expected UserName value to be equals to userName');
@@ -62,6 +68,7 @@ describe('AppUser e2e test', () => {
       await appUserUpdatePage.getAdminInput().click();
       expect(await appUserUpdatePage.getAdminInput().isSelected(), 'Expected admin to be selected').to.be.true;
     }
+    expect(await appUserUpdatePage.getAvatarUrlInput()).to.eq('avatarUrl', 'Expected AvatarUrl value to be equals to avatarUrl');
 
     await appUserUpdatePage.save();
     expect(await appUserUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
@@ -74,7 +81,7 @@ describe('AppUser e2e test', () => {
     await appUserComponentsPage.clickOnLastDeleteButton();
 
     appUserDeleteDialog = new AppUserDeleteDialog();
-    expect(await appUserDeleteDialog.getDialogTitle()).to.eq('n42cApp.appUser.delete.question');
+    expect(await appUserDeleteDialog.getDialogTitle()).to.eq('n42CApp.appUser.delete.question');
     await appUserDeleteDialog.clickOnConfirmButton();
 
     expect(await appUserComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

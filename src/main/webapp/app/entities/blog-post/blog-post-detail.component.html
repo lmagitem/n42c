@@ -1,33 +1,37 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="blogPost">
-            <h2><span jhiTranslate="n42cApp.blogPost.detail.title">Blog Post</span> {{ blogPost.id }}</h2>
+            <h2><span jhiTranslate="n42CApp.blogPost.detail.title">Blog Post</span> {{ blogPost.id }}</h2>
 
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42cApp.blogPost.published" [ngbTooltip]="'n42cApp.blogPost.help.published' | translate">Published</span></dt>
+                <dt><span jhiTranslate="n42CApp.blogPost.published" [ngbTooltip]="'n42CApp.blogPost.help.published' | translate">Published</span></dt>
                 <dd>
                     <span>{{ blogPost.published }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.blogPost.excerpt" [ngbTooltip]="'n42cApp.blogPost.help.excerpt' | translate">Excerpt</span></dt>
+                <dt><span jhiTranslate="n42CApp.blogPost.modified" [ngbTooltip]="'n42CApp.blogPost.help.modified' | translate">Modified</span></dt>
                 <dd>
-                    <span>{{ blogPost.excerpt }}</span>
+                    <span>{{ blogPost.modified }}</span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.blogPost.content" [ngbTooltip]="'n42cApp.blogPost.help.content' | translate">Content</span></dt>
+                <dt><span jhiTranslate="n42CApp.blogPost.authors">Authors</span></dt>
                 <dd>
-                    <span>{{ blogPost.content }}</span>
+                    <span *ngFor="let authors of blogPost.authors; let last = last">
+                        <a [routerLink]="['/app-user', authors?.id, 'view']">{{ authors.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.blogPost.language" [ngbTooltip]="'n42cApp.blogPost.help.language' | translate">Language</span></dt>
+                <dt><span jhiTranslate="n42CApp.blogPost.categories">Categories</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'n42cApp.Language.' + blogPost.language }}">{{ blogPost.language }}</span>
+                    <span *ngFor="let categories of blogPost.categories; let last = last">
+                        <a [routerLink]="['/blog-category', categories?.id, 'view']">{{ categories.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
                 </dd>
-                <dt><span jhiTranslate="n42cApp.blogPost.author">Author</span></dt>
+                <dt><span jhiTranslate="n42CApp.blogPost.blog">Blog</span></dt>
                 <dd>
-                    <div *ngIf="blogPost.author">
-                        <a [routerLink]="['/app-user', blogPost.author?.id, 'view']">{{ blogPost.author?.id }}</a>
+                    <div *ngIf="blogPost.blog">
+                        <a [routerLink]="['/blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.id }}</a>
                     </div>
                 </dd>
             </dl>

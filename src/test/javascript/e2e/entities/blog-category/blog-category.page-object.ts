@@ -29,66 +29,26 @@ export class BlogCategoryUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  nameInput = element(by.id('field_name'));
-  languageSelect = element(by.id('field_language'));
-
-  categoriesSelect = element(by.id('field_categories'));
-  subcategoriesSelect = element(by.id('field_subcategories'));
+  parentCategorySelect = element(by.id('field_parentCategory'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
   }
 
-  async setNameInput(name: string): Promise<void> {
-    await this.nameInput.sendKeys(name);
+  async parentCategorySelectLastOption(): Promise<void> {
+    await this.parentCategorySelect.all(by.tagName('option')).last().click();
   }
 
-  async getNameInput(): Promise<string> {
-    return await this.nameInput.getAttribute('value');
+  async parentCategorySelectOption(option: string): Promise<void> {
+    await this.parentCategorySelect.sendKeys(option);
   }
 
-  async setLanguageSelect(language: string): Promise<void> {
-    await this.languageSelect.sendKeys(language);
+  getParentCategorySelect(): ElementFinder {
+    return this.parentCategorySelect;
   }
 
-  async getLanguageSelect(): Promise<string> {
-    return await this.languageSelect.element(by.css('option:checked')).getText();
-  }
-
-  async languageSelectLastOption(): Promise<void> {
-    await this.languageSelect.all(by.tagName('option')).last().click();
-  }
-
-  async categoriesSelectLastOption(): Promise<void> {
-    await this.categoriesSelect.all(by.tagName('option')).last().click();
-  }
-
-  async categoriesSelectOption(option: string): Promise<void> {
-    await this.categoriesSelect.sendKeys(option);
-  }
-
-  getCategoriesSelect(): ElementFinder {
-    return this.categoriesSelect;
-  }
-
-  async getCategoriesSelectedOption(): Promise<string> {
-    return await this.categoriesSelect.element(by.css('option:checked')).getText();
-  }
-
-  async subcategoriesSelectLastOption(): Promise<void> {
-    await this.subcategoriesSelect.all(by.tagName('option')).last().click();
-  }
-
-  async subcategoriesSelectOption(option: string): Promise<void> {
-    await this.subcategoriesSelect.sendKeys(option);
-  }
-
-  getSubcategoriesSelect(): ElementFinder {
-    return this.subcategoriesSelect;
-  }
-
-  async getSubcategoriesSelectedOption(): Promise<string> {
-    return await this.subcategoriesSelect.element(by.css('option:checked')).getText();
+  async getParentCategorySelectedOption(): Promise<string> {
+    return await this.parentCategorySelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

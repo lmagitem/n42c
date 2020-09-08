@@ -20,9 +20,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="profile_part_linked_experience"/>
         
-        <addForeignKeyConstraint baseColumnNames="skills_id"
+        <addForeignKeyConstraint baseColumnNames="skill_category_id"
                                  baseTableName="profile_part_skill"
-                                 constraintName="fk_profile_part_skill_skills_id"
+                                 constraintName="fk_profile_part_skill_skill_category_id"
                                  referencedColumnNames="id"
                                  referencedTableName="profile_part_skill_category"/>
 

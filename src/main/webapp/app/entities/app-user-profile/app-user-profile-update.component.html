@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-app-user-profile-heading" jhiTranslate="n42cApp.appUserProfile.home.createOrEditLabel">Create or edit a App User Profile</h2>
+            <h2 id="jhi-app-user-profile-heading" jhiTranslate="n42CApp.appUserProfile.home.createOrEditLabel">Create or edit a App User Profile</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.appUserProfile.name" for="field_name" [ngbTooltip]="'n42cApp.appUserProfile.help.name' | translate">Name</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.appUserProfile.name" for="field_name" [ngbTooltip]="'n42CApp.appUserProfile.help.name' | translate">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                     <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
@@ -24,37 +24,53 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.appUserProfile.title" for="field_title" [ngbTooltip]="'n42cApp.appUserProfile.help.title' | translate">Title</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.appUserProfile.title" for="field_title" [ngbTooltip]="'n42CApp.appUserProfile.help.title' | translate">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
                            formControlName="title"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.appUserProfile.summary" for="field_summary" [ngbTooltip]="'n42cApp.appUserProfile.help.summary' | translate">Summary</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.appUserProfile.summary" for="field_summary" [ngbTooltip]="'n42CApp.appUserProfile.help.summary' | translate">Summary</label>
                     <input type="text" class="form-control" name="summary" id="field_summary"
                            formControlName="summary"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.appUserProfile.headerBackgroundURI" for="field_headerBackgroundURI" [ngbTooltip]="'n42cApp.appUserProfile.help.headerBackgroundURI' | translate">Header Background URI</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.appUserProfile.headerBackgroundURI" for="field_headerBackgroundURI" [ngbTooltip]="'n42CApp.appUserProfile.help.headerBackgroundURI' | translate">Header Background URI</label>
                     <input type="text" class="form-control" name="headerBackgroundURI" id="field_headerBackgroundURI"
                            formControlName="headerBackgroundURI"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.appUserProfile.language" for="field_language" [ngbTooltip]="'n42cApp.appUserProfile.help.language' | translate">Language</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.appUserProfile.language" for="field_language" [ngbTooltip]="'n42CApp.appUserProfile.help.language' | translate">Language</label>
                     <select class="form-control" name="language" formControlName="language" id="field_language">
-                        <option value="EN">{{ 'n42cApp.Language.EN' | translate }}</option>
-                        <option value="FR">{{ 'n42cApp.Language.FR' | translate }}</option>
-                        <option value="ES">{{ 'n42cApp.Language.ES' | translate }}</option>
+                        <option value="EN">{{ 'n42CApp.Language.EN' | translate }}</option>
+                        <option value="FR">{{ 'n42CApp.Language.FR' | translate }}</option>
+                        <option value="ES">{{ 'n42CApp.Language.ES' | translate }}</option>
+                        <option value="GE">{{ 'n42CApp.Language.GE' | translate }}</option>
+                        <option value="RU">{{ 'n42CApp.Language.RU' | translate }}</option>
+                        <option value="AR">{{ 'n42CApp.Language.AR' | translate }}</option>
+                        <option value="CH">{{ 'n42CApp.Language.CH' | translate }}</option>
+                        <option value="PR">{{ 'n42CApp.Language.PR' | translate }}</option>
+                        <option value="IT">{{ 'n42CApp.Language.IT' | translate }}</option>
+                        <option value="PO">{{ 'n42CApp.Language.PO' | translate }}</option>
+                        <option value="DU">{{ 'n42CApp.Language.DU' | translate }}</option>
+                        <option value="GR">{{ 'n42CApp.Language.GR' | translate }}</option>
+                        <option value="SW">{{ 'n42CApp.Language.SW' | translate }}</option>
+                        <option value="TU">{{ 'n42CApp.Language.TU' | translate }}</option>
+                        <option value="RO">{{ 'n42CApp.Language.RO' | translate }}</option>
+                        <option value="JP">{{ 'n42CApp.Language.JP' | translate }}</option>
+                        <option value="KO">{{ 'n42CApp.Language.KO' | translate }}</option>
+                        <option value="HU">{{ 'n42CApp.Language.HU' | translate }}</option>
+                        <option value="DA">{{ 'n42CApp.Language.DA' | translate }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.appUserProfile.profiles" for="field_profiles">Profiles</label>
-                    <select class="form-control" id="field_profiles" name="profiles" formControlName="profiles">
+                    <label class="form-control-label" jhiTranslate="n42CApp.appUserProfile.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="user">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="appUserOption.id === editForm.get('profiles')!.value?.id ? editForm.get('profiles')!.value : appUserOption" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
+                        <option [ngValue]="appUserOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : appUserOption" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
                     </select>
                 </div>
             </div>

@@ -1,0 +1,27 @@
+{
+  "n42CApp": {
+    "ninthObjective": {
+      "home": {
+        "title": "Ninth Objectives",
+        "createLabel": "Crear nuevo Ninth Objective",
+        "createOrEditLabel": "Crear o editar Ninth Objective",
+        "notFound": "Ningún Ninth Objectives encontrado"
+      },
+      "created": "Un nuevo Ninth Objective ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ninth Objective ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ninth Objective ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ninth Objective {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Objective"
+      },
+      "shareable": "Shareable",
+      "type": "Type",
+      "localizations": "Localizations",
+      "selections": "Selections",
+      "allowedAsPrimaries": "Allowed As Primaries",
+      "allowedAsSecondaries": "Allowed As Secondaries"
+    }
+  }
+}

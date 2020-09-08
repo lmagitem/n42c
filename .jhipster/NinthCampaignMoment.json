@@ -1,0 +1,57 @@
+{
+  "name": "NinthCampaignMoment",
+  "fields": [
+    {
+      "fieldName": "current",
+      "fieldType": "Boolean",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "sinceInstant",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "summary",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthBattle",
+      "otherEntityRelationshipName": "campaignMoment",
+      "relationshipName": "battles"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthCampaign",
+      "otherEntityRelationshipName": "events",
+      "relationshipName": "campaign",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195012",
+  "entityTableName": "ninth_campaign_moment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

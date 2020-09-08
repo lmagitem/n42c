@@ -1,0 +1,43 @@
+{
+  "name": "LocalizedBlogCategory",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This category's name.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This category's language.",
+      "fieldValues": "EN (English),FR (French),ES (Spanish),GE (German),RU (Russian),AR (Arabic),CH (Mandarin),PR (Portuguese),IT (Italian),PO (Polish),DU (Dutch),GR (Greek),SW (Swedish),TU (Turkish),RO (Romanian),JP (Japanese),KO (Korean),HU (Hungarian),DA (Danish)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blogCategory",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipName": "category",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908194012",
+  "javadoc": "The localization for this category",
+  "entityTableName": "localized_blog_category",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

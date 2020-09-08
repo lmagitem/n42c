@@ -1,0 +1,30 @@
+{
+  "n42CApp": {
+    "ninthUnit": {
+      "home": {
+        "title": "NinthUnits",
+        "createLabel": "Créer un nouveau Ninth Unit",
+        "createOrEditLabel": "Créer ou éditer un Ninth Unit",
+        "notFound": "Aucun Ninth Unit trouvé"
+      },
+      "created": "Un nouveau Ninth Unit a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Unit avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Unit avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Unit {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Unit"
+      },
+      "name": "Name",
+      "datasheet": "Datasheet",
+      "faction": "Faction",
+      "subfaction": "Subfaction",
+      "battlefieldRole": "Battlefield Role",
+      "keywords": "Keywords",
+      "selections": "Selections",
+      "moments": "Moments",
+      "owner": "Owner"
+    }
+  }
+}

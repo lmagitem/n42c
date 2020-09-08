@@ -1,0 +1,31 @@
+{
+  "name": "NinthMissionRule",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedNinthMissionRule",
+      "otherEntityRelationshipName": "rule",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "rules",
+      "relationshipName": "missions",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200908200212",
+  "entityTableName": "ninth_mission_rule",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

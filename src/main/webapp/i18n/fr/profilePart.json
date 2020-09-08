@@ -1,5 +1,5 @@
 {
-  "n42cApp": {
+  "n42CApp": {
     "profilePart": {
       "home": {
         "title": "ProfileParts",
@@ -20,10 +20,10 @@
       "type": "Type",
       "index": "Index",
       "order": "Order",
-      "profilePartSimpleItem": "Profile Part Simple Item",
-      "profilePartPreciseItem": "Profile Part Precise Item",
-      "profilePartSkillCategory": "Profile Part Skill Category",
-      "categories": "Categories",
+      "simpleItems": "Simple Items",
+      "preciseItems": "Precise Items",
+      "skillCategories": "Skill Categories",
+      "profile": "Profile",
       "help": {
         "title": "That part&#39;s title.",
         "type": "That part&#39;s type.",

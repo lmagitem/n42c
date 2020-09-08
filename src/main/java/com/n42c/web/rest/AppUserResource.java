@@ -18,6 +18,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link com.n42c.domain.AppUser}.
@@ -83,12 +85,21 @@ public class AppUserResource {
     /**
      * {@code GET  /app-users} : get all the appUsers.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of appUsers in body.
      */
     @GetMapping("/app-users")
-    public List<AppUser> getAllAppUsers() {
+    public List<AppUser> getAllAppUsers(@RequestParam(required = false) String filter,@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+        if ("player-is-null".equals(filter)) {
+            log.debug("REST request to get all AppUsers where player is null");
+            return StreamSupport
+                .stream(appUserRepository.findAll().spliterator(), false)
+                .filter(appUser -> appUser.getPlayer() == null)
+                .collect(Collectors.toList());
+        }
         log.debug("REST request to get all AppUsers");
-        return appUserRepository.findAll();
+        return appUserRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -100,7 +111,7 @@ public class AppUserResource {
     @GetMapping("/app-users/{id}")
     public ResponseEntity<AppUser> getAppUser(@PathVariable Long id) {
         log.debug("REST request to get AppUser : {}", id);
-        Optional<AppUser> appUser = appUserRepository.findById(id);
+        Optional<AppUser> appUser = appUserRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(appUser);
     }
 

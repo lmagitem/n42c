@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-blog-post-heading" jhiTranslate="n42cApp.blogPost.home.createOrEditLabel">Create or edit a Blog Post</h2>
+            <h2 id="jhi-blog-post-heading" jhiTranslate="n42CApp.blogPost.home.createOrEditLabel">Create or edit a Blog Post</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.blogPost.published" for="field_published" [ngbTooltip]="'n42cApp.blogPost.help.published' | translate">Published</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.published" for="field_published" [ngbTooltip]="'n42CApp.blogPost.help.published' | translate">Published</label>
                     <div class="d-flex">
                         <input id="field_published" type="datetime-local" class="form-control" name="published" formControlName="published" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
@@ -29,37 +29,41 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.blogPost.excerpt" for="field_excerpt" [ngbTooltip]="'n42cApp.blogPost.help.excerpt' | translate">Excerpt</label>
-                    <input type="text" class="form-control" name="excerpt" id="field_excerpt"
-                           formControlName="excerpt"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.blogPost.content" for="field_content" [ngbTooltip]="'n42cApp.blogPost.help.content' | translate">Content</label>
-                    <input type="text" class="form-control" name="content" id="field_content"
-                           formControlName="content"/>
-                    <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.modified" for="field_modified" [ngbTooltip]="'n42CApp.blogPost.help.modified' | translate">Modified</label>
+                    <div class="d-flex">
+                        <input id="field_modified" type="datetime-local" class="form-control" name="modified" formControlName="modified" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('modified')!.invalid && (editForm.get('modified')!.dirty || editForm.get('modified')!.touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('content')?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('modified')?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('modified')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
                         </small>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.blogPost.language" for="field_language" [ngbTooltip]="'n42cApp.blogPost.help.language' | translate">Language</label>
-                    <select class="form-control" name="language" formControlName="language" id="field_language">
-                        <option value="EN">{{ 'n42cApp.Language.EN' | translate }}</option>
-                        <option value="FR">{{ 'n42cApp.Language.FR' | translate }}</option>
-                        <option value="ES">{{ 'n42cApp.Language.ES' | translate }}</option>
+                    <label jhiTranslate="n42CApp.blogPost.authors" for="field_authors">Authors</label>
+                    <select class="form-control" id="field_authors" multiple name="authors" formControlName="authors">
+                        <option [ngValue]="getSelected(editForm.get('authors')!.value, appUserOption)" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.blogPost.author" for="field_author">Author</label>
-                    <select class="form-control" id="field_author" name="author" formControlName="author">
+                    <label jhiTranslate="n42CApp.blogPost.categories" for="field_categories">Categories</label>
+                    <select class="form-control" id="field_categories" multiple name="categories" formControlName="categories">
+                        <option [ngValue]="getSelected(editForm.get('categories')!.value, blogCategoryOption)" *ngFor="let blogCategoryOption of blogcategories; trackBy: trackById">{{ blogCategoryOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.blogPost.blog" for="field_blog">Blog</label>
+                    <select class="form-control" id="field_blog" name="blog" formControlName="blog">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="appUserOption.id === editForm.get('author')!.value?.id ? editForm.get('author')!.value : appUserOption" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
+                        <option [ngValue]="blogOption.id === editForm.get('blog')!.value?.id ? editForm.get('blog')!.value : blogOption" *ngFor="let blogOption of blogs; trackBy: trackById">{{ blogOption.id }}</option>
                     </select>
                 </div>
             </div>

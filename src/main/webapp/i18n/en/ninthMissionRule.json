@@ -1,0 +1,23 @@
+{
+  "n42CApp": {
+    "ninthMissionRule": {
+      "home": {
+        "title": "Ninth Mission Rules",
+        "createLabel": "Create a new Ninth Mission Rule",
+        "createOrEditLabel": "Create or edit a Ninth Mission Rule",
+        "notFound": "No Ninth Mission Rules found"
+      },
+      "created": "A new Ninth Mission Rule is created with identifier {{ param }}",
+      "updated": "A Ninth Mission Rule is updated with identifier {{ param }}",
+      "deleted": "A Ninth Mission Rule is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ninth Mission Rule {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Mission Rule"
+      },
+      "localizations": "Localizations",
+      "missions": "Missions"
+    }
+  }
+}

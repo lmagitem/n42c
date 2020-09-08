@@ -14,5 +14,29 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="app_user_id"
+                                 baseTableName="app_user_given_friendships"
+                                 constraintName="fk_app_user_given_friendships_app_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="given_friendships_id"
+                                 baseTableName="app_user_given_friendships"
+                                 constraintName="fk_app_user_given_friendships_given_friendships_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+        
+        <addForeignKeyConstraint baseColumnNames="app_user_id"
+                                 baseTableName="app_user_asked_friend_requests"
+                                 constraintName="fk_app_user_asked_friend_requests_app_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="asked_friend_requests_id"
+                                 baseTableName="app_user_asked_friend_requests"
+                                 constraintName="fk_app_user_asked_friend_requests_asked_friend_requests_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app_user"/>
+        
     </changeSet>
 </databaseChangeLog>

@@ -1,0 +1,25 @@
+{
+  "n42CApp": {
+    "ninthDeploymentMap": {
+      "home": {
+        "title": "Ninth Deployment Maps",
+        "createLabel": "Crear nuevo Ninth Deployment Map",
+        "createOrEditLabel": "Crear o editar Ninth Deployment Map",
+        "notFound": "Ningún Ninth Deployment Maps encontrado"
+      },
+      "created": "Un nuevo Ninth Deployment Map ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ninth Deployment Map ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ninth Deployment Map ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ninth Deployment Map {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Deployment Map"
+      },
+      "url": "Url",
+      "shareable": "Shareable",
+      "localizations": "Localizations",
+      "usedInMissions": "Used In Missions"
+    }
+  }
+}

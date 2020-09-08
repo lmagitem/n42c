@@ -1,0 +1,11 @@
+id;game_type;game_size;shareable
+1;NG;IN;true
+2;NG;ON;false
+3;OP;ON;true
+4;OP;ON;false
+5;NG;SF;true
+6;OP;ON;false
+7;CR;ON;false
+8;CR;SF;true
+9;NG;SF;false
+10;NG;CP;true

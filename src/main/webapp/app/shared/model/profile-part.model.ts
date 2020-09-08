@@ -11,10 +11,10 @@ export interface IProfilePart {
   type?: ProfilePartType;
   index?: number;
   order?: ProfilePartOrderType;
-  profilePartSimpleItems?: IProfilePartSimpleItem[];
-  profilePartPreciseItems?: IProfilePartPreciseItem[];
-  profilePartSkillCategories?: IProfilePartSkillCategory[];
-  categories?: IAppUserProfile;
+  simpleItems?: IProfilePartSimpleItem[];
+  preciseItems?: IProfilePartPreciseItem[];
+  skillCategories?: IProfilePartSkillCategory[];
+  profile?: IAppUserProfile;
 }
 
 export class ProfilePart implements IProfilePart {
@@ -24,9 +24,9 @@ export class ProfilePart implements IProfilePart {
     public type?: ProfilePartType,
     public index?: number,
     public order?: ProfilePartOrderType,
-    public profilePartSimpleItems?: IProfilePartSimpleItem[],
-    public profilePartPreciseItems?: IProfilePartPreciseItem[],
-    public profilePartSkillCategories?: IProfilePartSkillCategory[],
-    public categories?: IAppUserProfile
+    public simpleItems?: IProfilePartSimpleItem[],
+    public preciseItems?: IProfilePartPreciseItem[],
+    public skillCategories?: IProfilePartSkillCategory[],
+    public profile?: IAppUserProfile
   ) {}
 }

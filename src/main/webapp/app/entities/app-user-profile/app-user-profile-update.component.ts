@@ -25,7 +25,7 @@ export class AppUserProfileUpdateComponent implements OnInit {
     summary: [],
     headerBackgroundURI: [],
     language: [],
-    profiles: [],
+    user: [],
   });
 
   constructor(
@@ -51,7 +51,7 @@ export class AppUserProfileUpdateComponent implements OnInit {
       summary: appUserProfile.summary,
       headerBackgroundURI: appUserProfile.headerBackgroundURI,
       language: appUserProfile.language,
-      profiles: appUserProfile.profiles,
+      user: appUserProfile.user,
     });
   }
 
@@ -78,7 +78,7 @@ export class AppUserProfileUpdateComponent implements OnInit {
       summary: this.editForm.get(['summary'])!.value,
       headerBackgroundURI: this.editForm.get(['headerBackgroundURI'])!.value,
       language: this.editForm.get(['language'])!.value,
-      profiles: this.editForm.get(['profiles'])!.value,
+      user: this.editForm.get(['user'])!.value,
     };
   }
 

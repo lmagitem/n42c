@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42cApp.appUserProfile.home.title">App User Profiles</span>
+        <span jhiTranslate="n42CApp.appUserProfile.home.title">App User Profiles</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-app-user-profile" [routerLink]="['/app-user-profile/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42cApp.appUserProfile.home.createLabel">
+            <span  jhiTranslate="n42CApp.appUserProfile.home.createLabel">
             Create a new App User Profile
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="appUserProfiles?.length === 0">
-        <span jhiTranslate="n42cApp.appUserProfile.home.notFound">No appUserProfiles found</span>
+        <span jhiTranslate="n42CApp.appUserProfile.home.notFound">No appUserProfiles found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="appUserProfiles && appUserProfiles.length > 0">
@@ -23,12 +23,12 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUserProfile.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUserProfile.title">Title</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUserProfile.summary">Summary</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUserProfile.headerBackgroundURI">Header Background URI</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUserProfile.language">Language</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUserProfile.profiles">Profiles</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUserProfile.name">Name</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUserProfile.title">Title</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUserProfile.summary">Summary</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUserProfile.headerBackgroundURI">Header Background URI</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUserProfile.language">Language</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUserProfile.user">User</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -39,10 +39,10 @@
                     <td>{{ appUserProfile.title }}</td>
                     <td>{{ appUserProfile.summary }}</td>
                     <td>{{ appUserProfile.headerBackgroundURI }}</td>
-                    <td jhiTranslate="{{ 'n42cApp.Language.' + appUserProfile.language }}">{{ appUserProfile.language }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.Language.' + appUserProfile.language }}">{{ appUserProfile.language }}</td>
                     <td>
-                        <div *ngIf="appUserProfile.profiles">
-                            <a [routerLink]="['/app-user', appUserProfile.profiles?.id, 'view']" >{{ appUserProfile.profiles?.id }}</a>
+                        <div *ngIf="appUserProfile.user">
+                            <a [routerLink]="['/app-user', appUserProfile.user?.id, 'view']" >{{ appUserProfile.user?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

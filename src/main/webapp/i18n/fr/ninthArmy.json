@@ -1,0 +1,28 @@
+{
+  "n42CApp": {
+    "ninthArmy": {
+      "home": {
+        "title": "NinthArmies",
+        "createLabel": "Créer un nouveau Ninth Army",
+        "createOrEditLabel": "Créer ou éditer un Ninth Army",
+        "notFound": "Aucun Ninth Army trouvé"
+      },
+      "created": "Un nouveau Ninth Army a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Army avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Army avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Army {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Army"
+      },
+      "name": "Name",
+      "crusade": "Crusade",
+      "faction": "Faction",
+      "subfaction": "Subfaction",
+      "units": "Units",
+      "moments": "Moments",
+      "author": "Author"
+    }
+  }
+}

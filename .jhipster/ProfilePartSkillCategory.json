@@ -19,14 +19,14 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "profilePartSkill",
-      "otherEntityRelationshipName": "skills",
-      "relationshipName": "profilePartSkill"
+      "otherEntityRelationshipName": "skillCategory",
+      "relationshipName": "skills"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "profilePart",
-      "otherEntityRelationshipName": "profilePartSkillCategory",
-      "relationshipName": "skillCategories",
+      "otherEntityRelationshipName": "skillCategories",
+      "relationshipName": "profilePart",
       "otherEntityField": "id"
     }
   ],

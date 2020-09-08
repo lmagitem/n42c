@@ -44,13 +44,13 @@ public class ProfilePartSkillCategory implements Serializable {
     @Column(name = "index")
     private Integer index;
 
-    @OneToMany(mappedBy = "skills")
+    @OneToMany(mappedBy = "skillCategory")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProfilePartSkill> profilePartSkills = new HashSet<>();
+    private Set<ProfilePartSkill> skills = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profilePartSkillCategories", allowSetters = true)
-    private ProfilePart skillCategories;
+    @JsonIgnoreProperties(value = "skillCategories", allowSetters = true)
+    private ProfilePart profilePart;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -87,42 +87,42 @@ public class ProfilePartSkillCategory implements Serializable {
         this.index = index;
     }
 
-    public Set<ProfilePartSkill> getProfilePartSkills() {
-        return profilePartSkills;
+    public Set<ProfilePartSkill> getSkills() {
+        return skills;
     }
 
-    public ProfilePartSkillCategory profilePartSkills(Set<ProfilePartSkill> profilePartSkills) {
-        this.profilePartSkills = profilePartSkills;
+    public ProfilePartSkillCategory skills(Set<ProfilePartSkill> profilePartSkills) {
+        this.skills = profilePartSkills;
         return this;
     }
 
-    public ProfilePartSkillCategory addProfilePartSkill(ProfilePartSkill profilePartSkill) {
-        this.profilePartSkills.add(profilePartSkill);
-        profilePartSkill.setSkills(this);
+    public ProfilePartSkillCategory addSkills(ProfilePartSkill profilePartSkill) {
+        this.skills.add(profilePartSkill);
+        profilePartSkill.setSkillCategory(this);
         return this;
     }
 
-    public ProfilePartSkillCategory removeProfilePartSkill(ProfilePartSkill profilePartSkill) {
-        this.profilePartSkills.remove(profilePartSkill);
-        profilePartSkill.setSkills(null);
+    public ProfilePartSkillCategory removeSkills(ProfilePartSkill profilePartSkill) {
+        this.skills.remove(profilePartSkill);
+        profilePartSkill.setSkillCategory(null);
         return this;
     }
 
-    public void setProfilePartSkills(Set<ProfilePartSkill> profilePartSkills) {
-        this.profilePartSkills = profilePartSkills;
+    public void setSkills(Set<ProfilePartSkill> profilePartSkills) {
+        this.skills = profilePartSkills;
     }
 
-    public ProfilePart getSkillCategories() {
-        return skillCategories;
+    public ProfilePart getProfilePart() {
+        return profilePart;
     }
 
-    public ProfilePartSkillCategory skillCategories(ProfilePart profilePart) {
-        this.skillCategories = profilePart;
+    public ProfilePartSkillCategory profilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
         return this;
     }
 
-    public void setSkillCategories(ProfilePart profilePart) {
-        this.skillCategories = profilePart;
+    public void setProfilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

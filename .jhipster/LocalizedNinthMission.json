@@ -1,0 +1,33 @@
+{
+  "name": "LocalizedNinthMission",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "briefing",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipName": "mission",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195912",
+  "entityTableName": "localized_ninth_mission",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

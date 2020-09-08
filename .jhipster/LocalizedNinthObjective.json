@@ -1,0 +1,33 @@
+{
+  "name": "LocalizedNinthObjective",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthObjective",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipName": "objective",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908200912",
+  "entityTableName": "localized_ninth_objective",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

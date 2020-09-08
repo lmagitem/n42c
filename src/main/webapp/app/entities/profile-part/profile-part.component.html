@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42cApp.profilePart.home.title">Profile Parts</span>
+        <span jhiTranslate="n42CApp.profilePart.home.title">Profile Parts</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-profile-part" [routerLink]="['/profile-part/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42cApp.profilePart.home.createLabel">
+            <span  jhiTranslate="n42CApp.profilePart.home.createLabel">
             Create a new Profile Part
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="profileParts?.length === 0">
-        <span jhiTranslate="n42cApp.profilePart.home.notFound">No profileParts found</span>
+        <span jhiTranslate="n42CApp.profilePart.home.notFound">No profileParts found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="profileParts && profileParts.length > 0">
@@ -23,11 +23,11 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePart.title">Title</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePart.type">Type</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePart.index">Index</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePart.order">Order</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.profilePart.categories">Categories</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePart.title">Title</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePart.type">Type</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePart.index">Index</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePart.order">Order</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.profilePart.profile">Profile</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,12 +35,12 @@
                 <tr *ngFor="let profilePart of profileParts ;trackBy: trackId">
                     <td><a [routerLink]="['/profile-part', profilePart.id, 'view']">{{ profilePart.id }}</a></td>
                     <td>{{ profilePart.title }}</td>
-                    <td jhiTranslate="{{ 'n42cApp.ProfilePartType.' + profilePart.type }}">{{ profilePart.type }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.ProfilePartType.' + profilePart.type }}">{{ profilePart.type }}</td>
                     <td>{{ profilePart.index }}</td>
-                    <td jhiTranslate="{{ 'n42cApp.ProfilePartOrderType.' + profilePart.order }}">{{ profilePart.order }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.ProfilePartOrderType.' + profilePart.order }}">{{ profilePart.order }}</td>
                     <td>
-                        <div *ngIf="profilePart.categories">
-                            <a [routerLink]="['/app-user-profile', profilePart.categories?.id, 'view']" >{{ profilePart.categories?.id }}</a>
+                        <div *ngIf="profilePart.profile">
+                            <a [routerLink]="['/app-user-profile', profilePart.profile?.id, 'view']" >{{ profilePart.profile?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

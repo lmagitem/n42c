@@ -1,0 +1,22 @@
+{
+  "n42CApp": {
+    "shop": {
+      "home": {
+        "title": "Shops",
+        "createLabel": "Crear nuevo Shop",
+        "createOrEditLabel": "Crear o editar Shop",
+        "notFound": "Ningún Shops encontrado"
+      },
+      "created": "Un nuevo Shop ha sido creado con el identificador {{ param }}",
+      "updated": "Un Shop ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Shop ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Shop {{ id }}?"
+      },
+      "detail": {
+        "title": "Shop"
+      },
+      "products": "Products"
+    }
+  }
+}

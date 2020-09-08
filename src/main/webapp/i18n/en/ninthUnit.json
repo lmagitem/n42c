@@ -1,0 +1,30 @@
+{
+  "n42CApp": {
+    "ninthUnit": {
+      "home": {
+        "title": "Ninth Units",
+        "createLabel": "Create a new Ninth Unit",
+        "createOrEditLabel": "Create or edit a Ninth Unit",
+        "notFound": "No Ninth Units found"
+      },
+      "created": "A new Ninth Unit is created with identifier {{ param }}",
+      "updated": "A Ninth Unit is updated with identifier {{ param }}",
+      "deleted": "A Ninth Unit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Ninth Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Unit"
+      },
+      "name": "Name",
+      "datasheet": "Datasheet",
+      "faction": "Faction",
+      "subfaction": "Subfaction",
+      "battlefieldRole": "Battlefield Role",
+      "keywords": "Keywords",
+      "selections": "Selections",
+      "moments": "Moments",
+      "owner": "Owner"
+    }
+  }
+}

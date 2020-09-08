@@ -30,11 +30,11 @@ export class BlogPostUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   publishedInput = element(by.id('field_published'));
-  excerptInput = element(by.id('field_excerpt'));
-  contentInput = element(by.id('field_content'));
-  languageSelect = element(by.id('field_language'));
+  modifiedInput = element(by.id('field_modified'));
 
-  authorSelect = element(by.id('field_author'));
+  authorsSelect = element(by.id('field_authors'));
+  categoriesSelect = element(by.id('field_categories'));
+  blogSelect = element(by.id('field_blog'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -48,48 +48,60 @@ export class BlogPostUpdatePage {
     return await this.publishedInput.getAttribute('value');
   }
 
-  async setExcerptInput(excerpt: string): Promise<void> {
-    await this.excerptInput.sendKeys(excerpt);
+  async setModifiedInput(modified: string): Promise<void> {
+    await this.modifiedInput.sendKeys(modified);
   }
 
-  async getExcerptInput(): Promise<string> {
-    return await this.excerptInput.getAttribute('value');
+  async getModifiedInput(): Promise<string> {
+    return await this.modifiedInput.getAttribute('value');
   }
 
-  async setContentInput(content: string): Promise<void> {
-    await this.contentInput.sendKeys(content);
+  async authorsSelectLastOption(): Promise<void> {
+    await this.authorsSelect.all(by.tagName('option')).last().click();
   }
 
-  async getContentInput(): Promise<string> {
-    return await this.contentInput.getAttribute('value');
+  async authorsSelectOption(option: string): Promise<void> {
+    await this.authorsSelect.sendKeys(option);
   }
 
-  async setLanguageSelect(language: string): Promise<void> {
-    await this.languageSelect.sendKeys(language);
+  getAuthorsSelect(): ElementFinder {
+    return this.authorsSelect;
   }
 
-  async getLanguageSelect(): Promise<string> {
-    return await this.languageSelect.element(by.css('option:checked')).getText();
+  async getAuthorsSelectedOption(): Promise<string> {
+    return await this.authorsSelect.element(by.css('option:checked')).getText();
   }
 
-  async languageSelectLastOption(): Promise<void> {
-    await this.languageSelect.all(by.tagName('option')).last().click();
+  async categoriesSelectLastOption(): Promise<void> {
+    await this.categoriesSelect.all(by.tagName('option')).last().click();
   }
 
-  async authorSelectLastOption(): Promise<void> {
-    await this.authorSelect.all(by.tagName('option')).last().click();
+  async categoriesSelectOption(option: string): Promise<void> {
+    await this.categoriesSelect.sendKeys(option);
   }
 
-  async authorSelectOption(option: string): Promise<void> {
-    await this.authorSelect.sendKeys(option);
+  getCategoriesSelect(): ElementFinder {
+    return this.categoriesSelect;
   }
 
-  getAuthorSelect(): ElementFinder {
-    return this.authorSelect;
+  async getCategoriesSelectedOption(): Promise<string> {
+    return await this.categoriesSelect.element(by.css('option:checked')).getText();
   }
 
-  async getAuthorSelectedOption(): Promise<string> {
-    return await this.authorSelect.element(by.css('option:checked')).getText();
+  async blogSelectLastOption(): Promise<void> {
+    await this.blogSelect.all(by.tagName('option')).last().click();
+  }
+
+  async blogSelectOption(option: string): Promise<void> {
+    await this.blogSelect.sendKeys(option);
+  }
+
+  getBlogSelect(): ElementFinder {
+    return this.blogSelect;
+  }
+
+  async getBlogSelectedOption(): Promise<string> {
+    return await this.blogSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

@@ -1,0 +1,89 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="n42CApp.ninthMission.home.title">Ninth Missions</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ninth-mission" [routerLink]="['/ninth-mission/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="n42CApp.ninthMission.home.createLabel">
+            Create a new Ninth Mission
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="ninthMissions?.length === 0">
+        <span jhiTranslate="n42CApp.ninthMission.home.notFound">No ninthMissions found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="ninthMissions && ninthMissions.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.gameType">Game Type</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.gameSize">Game Size</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.shareable">Shareable</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.missionStratagems">Mission Stratagems</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.primaryObjectives">Primary Objectives</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.allowedSecondaries">Allowed Secondaries</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.ninthMission.rules">Rules</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ninthMission of ninthMissions ;trackBy: trackId">
+                    <td><a [routerLink]="['/ninth-mission', ninthMission.id, 'view']">{{ ninthMission.id }}</a></td>
+                    <td jhiTranslate="{{ 'n42CApp.NinthGameType.' + ninthMission.gameType }}">{{ ninthMission.gameType }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.NinthGameSize.' + ninthMission.gameSize }}">{{ ninthMission.gameSize }}</td>
+                    <td>{{ ninthMission.shareable }}</td>
+                    <td>
+                        <span *ngFor="let missionStratagems of ninthMission.missionStratagems; let last = last">
+                            <a class="form-control-static" [routerLink]="['/ninth-stratagem-group', missionStratagems?.id, 'view']">{{ missionStratagems.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngFor="let primaryObjectives of ninthMission.primaryObjectives; let last = last">
+                            <a class="form-control-static" [routerLink]="['/ninth-objective', primaryObjectives?.id, 'view']">{{ primaryObjectives.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngFor="let allowedSecondaries of ninthMission.allowedSecondaries; let last = last">
+                            <a class="form-control-static" [routerLink]="['/ninth-objective', allowedSecondaries?.id, 'view']">{{ allowedSecondaries.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngFor="let rules of ninthMission.rules; let last = last">
+                            <a class="form-control-static" [routerLink]="['/ninth-mission-rule', rules?.id, 'view']">{{ rules.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/ninth-mission', ninthMission.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/ninth-mission', ninthMission.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(ninthMission)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

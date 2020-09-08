@@ -88,13 +88,13 @@ public class ProfilePartPreciseItem implements Serializable {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "experiences")
+    @OneToMany(mappedBy = "linkedItem")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProfilePartLinkedExperience> profilePartLinkedExperiences = new HashSet<>();
+    private Set<ProfilePartLinkedExperience> experiences = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profilePartPreciseItems", allowSetters = true)
-    private ProfilePart preciseItems;
+    @JsonIgnoreProperties(value = "preciseItems", allowSetters = true)
+    private ProfilePart profilePart;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -209,42 +209,42 @@ public class ProfilePartPreciseItem implements Serializable {
         this.content = content;
     }
 
-    public Set<ProfilePartLinkedExperience> getProfilePartLinkedExperiences() {
-        return profilePartLinkedExperiences;
+    public Set<ProfilePartLinkedExperience> getExperiences() {
+        return experiences;
     }
 
-    public ProfilePartPreciseItem profilePartLinkedExperiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
-        this.profilePartLinkedExperiences = profilePartLinkedExperiences;
+    public ProfilePartPreciseItem experiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
+        this.experiences = profilePartLinkedExperiences;
         return this;
     }
 
-    public ProfilePartPreciseItem addProfilePartLinkedExperience(ProfilePartLinkedExperience profilePartLinkedExperience) {
-        this.profilePartLinkedExperiences.add(profilePartLinkedExperience);
-        profilePartLinkedExperience.setExperiences(this);
+    public ProfilePartPreciseItem addExperiences(ProfilePartLinkedExperience profilePartLinkedExperience) {
+        this.experiences.add(profilePartLinkedExperience);
+        profilePartLinkedExperience.setLinkedItem(this);
         return this;
     }
 
-    public ProfilePartPreciseItem removeProfilePartLinkedExperience(ProfilePartLinkedExperience profilePartLinkedExperience) {
-        this.profilePartLinkedExperiences.remove(profilePartLinkedExperience);
-        profilePartLinkedExperience.setExperiences(null);
+    public ProfilePartPreciseItem removeExperiences(ProfilePartLinkedExperience profilePartLinkedExperience) {
+        this.experiences.remove(profilePartLinkedExperience);
+        profilePartLinkedExperience.setLinkedItem(null);
         return this;
     }
 
-    public void setProfilePartLinkedExperiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
-        this.profilePartLinkedExperiences = profilePartLinkedExperiences;
+    public void setExperiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
+        this.experiences = profilePartLinkedExperiences;
     }
 
-    public ProfilePart getPreciseItems() {
-        return preciseItems;
+    public ProfilePart getProfilePart() {
+        return profilePart;
     }
 
-    public ProfilePartPreciseItem preciseItems(ProfilePart profilePart) {
-        this.preciseItems = profilePart;
+    public ProfilePartPreciseItem profilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
         return this;
     }
 
-    public void setPreciseItems(ProfilePart profilePart) {
-        this.preciseItems = profilePart;
+    public void setProfilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -32,8 +32,8 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "profilePartPreciseItem",
-      "otherEntityRelationshipName": "profilePartLinkedExperience",
-      "relationshipName": "experiences",
+      "otherEntityRelationshipName": "experiences",
+      "relationshipName": "linkedItem",
       "otherEntityField": "id"
     },
     {
