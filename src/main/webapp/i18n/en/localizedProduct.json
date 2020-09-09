@@ -1,0 +1,32 @@
+{
+  "n42CApp": {
+    "localizedProduct": {
+      "home": {
+        "title": "Localized Products",
+        "createLabel": "Create a new Localized Product",
+        "createOrEditLabel": "Create or edit a Localized Product",
+        "notFound": "No Localized Products found"
+      },
+      "created": "A new Localized Product is created with identifier {{ param }}",
+      "updated": "A Localized Product is updated with identifier {{ param }}",
+      "deleted": "A Localized Product is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Product"
+      },
+      "excerpt": "Excerpt",
+      "pictureUrl": "Picture Url",
+      "content": "Content",
+      "language": "Language",
+      "product": "Product",
+      "help": {
+        "excerpt": "An excerpt of the product to show on the shop.",
+        "pictureUrl": "The url of a picture representing the item.",
+        "content": "The text describing this product.",
+        "language": "This item&#39;s language."
+      }
+    }
+  }
+}

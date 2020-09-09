@@ -1,0 +1,63 @@
+{
+  "name": "NinthCampaign",
+  "fields": [
+    {
+      "fieldName": "gameType",
+      "fieldType": "NinthGameType",
+      "fieldValues": "OP (OpenPlay),MP (MatchedPlay),CR (Crusade),NG (Narrative)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "usePowerRating",
+      "fieldType": "Boolean",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthCampaignMoment",
+      "otherEntityRelationshipName": "campaign",
+      "relationshipName": "events"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "authoredCampaigns",
+      "relationshipName": "authors",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "campaigns",
+      "relationshipName": "participants",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthStratagemGroup",
+      "otherEntityRelationshipName": "campaigns",
+      "relationshipName": "campaignStratagems",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200908194912",
+  "entityTableName": "ninth_campaign",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

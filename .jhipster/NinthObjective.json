@@ -1,0 +1,57 @@
+{
+  "name": "NinthObjective",
+  "fields": [
+    {
+      "fieldName": "shareable",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "NinthObjectiveType",
+      "fieldValues": "PR (Progressive),EN (Endgame),PE (ProgressiveEndgame)"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedNinthObjective",
+      "otherEntityRelationshipName": "objective",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthArmyMoment",
+      "otherEntityRelationshipName": "selectedObjectives",
+      "relationshipName": "selections",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "primaryObjectives",
+      "relationshipName": "allowedAsPrimaries",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "allowedSecondaries",
+      "relationshipName": "allowedAsSecondaries",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200908200812",
+  "entityTableName": "ninth_objective",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

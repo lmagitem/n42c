@@ -6,7 +6,23 @@ package com.n42c.domain.enumeration;
 public enum Language {
     EN("English"),
     FR("French"),
-    ES("Spanish");
+    ES("Spanish"),
+    GE("German"),
+    RU("Russian"),
+    AR("Arabic"),
+    CH("Mandarin"),
+    PR("Portuguese"),
+    IT("Italian"),
+    PO("Polish"),
+    DU("Dutch"),
+    GR("Greek"),
+    SW("Swedish"),
+    TU("Turkish"),
+    RO("Romanian"),
+    JP("Japanese"),
+    KO("Korean"),
+    HU("Hungarian"),
+    DA("Danish");
 
     private final String value;
 

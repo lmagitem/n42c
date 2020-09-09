@@ -7,27 +7,38 @@ import com.n42c.repository.AppUserRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
 /**
  * Integration tests for the {@link AppUserResource} REST controller.
  */
 @SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class AppUserResourceIT {
@@ -44,11 +55,26 @@ public class AppUserResourceIT {
     private static final Boolean DEFAULT_ADMIN = false;
     private static final Boolean UPDATED_ADMIN = true;
 
-    private static final AppUserRights DEFAULT_RIGHTS = AppUserRights.MOD;
-    private static final AppUserRights UPDATED_RIGHTS = AppUserRights.WRI;
+    private static final AppUserRights DEFAULT_SHOP_RIGHTS = AppUserRights.MOD;
+    private static final AppUserRights UPDATED_SHOP_RIGHTS = AppUserRights.WRI;
+
+    private static final AppUserRights DEFAULT_BLOG_RIGHTS = AppUserRights.MOD;
+    private static final AppUserRights UPDATED_BLOG_RIGHTS = AppUserRights.WRI;
+
+    private static final AppUserRights DEFAULT_PROFILE_RIGHTS = AppUserRights.MOD;
+    private static final AppUserRights UPDATED_PROFILE_RIGHTS = AppUserRights.WRI;
+
+    private static final AppUserRights DEFAULT_SCRIPTORIUM_RIGHTS = AppUserRights.MOD;
+    private static final AppUserRights UPDATED_SCRIPTORIUM_RIGHTS = AppUserRights.WRI;
+
+    private static final String DEFAULT_AVATAR_URL = "AAAAAAAAAA";
+    private static final String UPDATED_AVATAR_URL = "BBBBBBBBBB";
 
     @Autowired
     private AppUserRepository appUserRepository;
+
+    @Mock
+    private AppUserRepository appUserRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -70,7 +96,11 @@ public class AppUserResourceIT {
             .displayedName(DEFAULT_DISPLAYED_NAME)
             .email(DEFAULT_EMAIL)
             .admin(DEFAULT_ADMIN)
-            .rights(DEFAULT_RIGHTS);
+            .shopRights(DEFAULT_SHOP_RIGHTS)
+            .blogRights(DEFAULT_BLOG_RIGHTS)
+            .profileRights(DEFAULT_PROFILE_RIGHTS)
+            .scriptoriumRights(DEFAULT_SCRIPTORIUM_RIGHTS)
+            .avatarUrl(DEFAULT_AVATAR_URL);
         return appUser;
     }
     /**
@@ -85,7 +115,11 @@ public class AppUserResourceIT {
             .displayedName(UPDATED_DISPLAYED_NAME)
             .email(UPDATED_EMAIL)
             .admin(UPDATED_ADMIN)
-            .rights(UPDATED_RIGHTS);
+            .shopRights(UPDATED_SHOP_RIGHTS)
+            .blogRights(UPDATED_BLOG_RIGHTS)
+            .profileRights(UPDATED_PROFILE_RIGHTS)
+            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
+            .avatarUrl(UPDATED_AVATAR_URL);
         return appUser;
     }
 
@@ -112,7 +146,11 @@ public class AppUserResourceIT {
         assertThat(testAppUser.getDisplayedName()).isEqualTo(DEFAULT_DISPLAYED_NAME);
         assertThat(testAppUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testAppUser.isAdmin()).isEqualTo(DEFAULT_ADMIN);
-        assertThat(testAppUser.getRights()).isEqualTo(DEFAULT_RIGHTS);
+        assertThat(testAppUser.getShopRights()).isEqualTo(DEFAULT_SHOP_RIGHTS);
+        assertThat(testAppUser.getBlogRights()).isEqualTo(DEFAULT_BLOG_RIGHTS);
+        assertThat(testAppUser.getProfileRights()).isEqualTo(DEFAULT_PROFILE_RIGHTS);
+        assertThat(testAppUser.getScriptoriumRights()).isEqualTo(DEFAULT_SCRIPTORIUM_RIGHTS);
+        assertThat(testAppUser.getAvatarUrl()).isEqualTo(DEFAULT_AVATAR_URL);
     }
 
     @Test
@@ -194,10 +232,67 @@ public class AppUserResourceIT {
 
     @Test
     @Transactional
-    public void checkRightsIsRequired() throws Exception {
+    public void checkShopRightsIsRequired() throws Exception {
         int databaseSizeBeforeTest = appUserRepository.findAll().size();
         // set the field null
-        appUser.setRights(null);
+        appUser.setShopRights(null);
+
+        // Create the AppUser, which fails.
+
+
+        restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
+
+        List<AppUser> appUserList = appUserRepository.findAll();
+        assertThat(appUserList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkBlogRightsIsRequired() throws Exception {
+        int databaseSizeBeforeTest = appUserRepository.findAll().size();
+        // set the field null
+        appUser.setBlogRights(null);
+
+        // Create the AppUser, which fails.
+
+
+        restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
+
+        List<AppUser> appUserList = appUserRepository.findAll();
+        assertThat(appUserList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkProfileRightsIsRequired() throws Exception {
+        int databaseSizeBeforeTest = appUserRepository.findAll().size();
+        // set the field null
+        appUser.setProfileRights(null);
+
+        // Create the AppUser, which fails.
+
+
+        restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
+
+        List<AppUser> appUserList = appUserRepository.findAll();
+        assertThat(appUserList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkScriptoriumRightsIsRequired() throws Exception {
+        int databaseSizeBeforeTest = appUserRepository.findAll().size();
+        // set the field null
+        appUser.setScriptoriumRights(null);
 
         // Create the AppUser, which fails.
 
@@ -226,9 +321,33 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.[*].displayedName").value(hasItem(DEFAULT_DISPLAYED_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].admin").value(hasItem(DEFAULT_ADMIN.booleanValue())))
-            .andExpect(jsonPath("$.[*].rights").value(hasItem(DEFAULT_RIGHTS.toString())));
+            .andExpect(jsonPath("$.[*].shopRights").value(hasItem(DEFAULT_SHOP_RIGHTS.toString())))
+            .andExpect(jsonPath("$.[*].blogRights").value(hasItem(DEFAULT_BLOG_RIGHTS.toString())))
+            .andExpect(jsonPath("$.[*].profileRights").value(hasItem(DEFAULT_PROFILE_RIGHTS.toString())))
+            .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())))
+            .andExpect(jsonPath("$.[*].avatarUrl").value(hasItem(DEFAULT_AVATAR_URL)));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllAppUsersWithEagerRelationshipsIsEnabled() throws Exception {
+        when(appUserRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restAppUserMockMvc.perform(get("/api/app-users?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(appUserRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllAppUsersWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(appUserRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restAppUserMockMvc.perform(get("/api/app-users?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(appUserRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getAppUser() throws Exception {
@@ -244,7 +363,11 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.displayedName").value(DEFAULT_DISPLAYED_NAME))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.admin").value(DEFAULT_ADMIN.booleanValue()))
-            .andExpect(jsonPath("$.rights").value(DEFAULT_RIGHTS.toString()));
+            .andExpect(jsonPath("$.shopRights").value(DEFAULT_SHOP_RIGHTS.toString()))
+            .andExpect(jsonPath("$.blogRights").value(DEFAULT_BLOG_RIGHTS.toString()))
+            .andExpect(jsonPath("$.profileRights").value(DEFAULT_PROFILE_RIGHTS.toString()))
+            .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()))
+            .andExpect(jsonPath("$.avatarUrl").value(DEFAULT_AVATAR_URL));
     }
     @Test
     @Transactional
@@ -271,7 +394,11 @@ public class AppUserResourceIT {
             .displayedName(UPDATED_DISPLAYED_NAME)
             .email(UPDATED_EMAIL)
             .admin(UPDATED_ADMIN)
-            .rights(UPDATED_RIGHTS);
+            .shopRights(UPDATED_SHOP_RIGHTS)
+            .blogRights(UPDATED_BLOG_RIGHTS)
+            .profileRights(UPDATED_PROFILE_RIGHTS)
+            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
+            .avatarUrl(UPDATED_AVATAR_URL);
 
         restAppUserMockMvc.perform(put("/api/app-users").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -286,7 +413,11 @@ public class AppUserResourceIT {
         assertThat(testAppUser.getDisplayedName()).isEqualTo(UPDATED_DISPLAYED_NAME);
         assertThat(testAppUser.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testAppUser.isAdmin()).isEqualTo(UPDATED_ADMIN);
-        assertThat(testAppUser.getRights()).isEqualTo(UPDATED_RIGHTS);
+        assertThat(testAppUser.getShopRights()).isEqualTo(UPDATED_SHOP_RIGHTS);
+        assertThat(testAppUser.getBlogRights()).isEqualTo(UPDATED_BLOG_RIGHTS);
+        assertThat(testAppUser.getProfileRights()).isEqualTo(UPDATED_PROFILE_RIGHTS);
+        assertThat(testAppUser.getScriptoriumRights()).isEqualTo(UPDATED_SCRIPTORIUM_RIGHTS);
+        assertThat(testAppUser.getAvatarUrl()).isEqualTo(UPDATED_AVATAR_URL);
     }
 
     @Test

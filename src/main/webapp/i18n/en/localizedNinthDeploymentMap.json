@@ -1,0 +1,24 @@
+{
+  "n42CApp": {
+    "localizedNinthDeploymentMap": {
+      "home": {
+        "title": "Localized Ninth Deployment Maps",
+        "createLabel": "Create a new Localized Ninth Deployment Map",
+        "createOrEditLabel": "Create or edit a Localized Ninth Deployment Map",
+        "notFound": "No Localized Ninth Deployment Maps found"
+      },
+      "created": "A new Localized Ninth Deployment Map is created with identifier {{ param }}",
+      "updated": "A Localized Ninth Deployment Map is updated with identifier {{ param }}",
+      "deleted": "A Localized Ninth Deployment Map is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Ninth Deployment Map {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Ninth Deployment Map"
+      },
+      "name": "Name",
+      "description": "Description",
+      "deploymentMap": "Deployment Map"
+    }
+  }
+}

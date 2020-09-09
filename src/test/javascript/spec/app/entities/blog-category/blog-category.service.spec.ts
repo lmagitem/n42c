@@ -2,7 +2,6 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { BlogCategoryService } from 'app/entities/blog-category/blog-category.service';
 import { IBlogCategory, BlogCategory } from 'app/shared/model/blog-category.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
 
 describe('Service Tests', () => {
   describe('BlogCategory Service', () => {
@@ -21,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(BlogCategoryService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new BlogCategory(0, 'AAAAAAA', Language.EN);
+      elemDefault = new BlogCategory(0);
     });
 
     describe('Service methods', () => {
@@ -53,13 +52,7 @@ describe('Service Tests', () => {
       });
 
       it('should update a BlogCategory', () => {
-        const returnedFromService = Object.assign(
-          {
-            name: 'BBBBBB',
-            language: 'BBBBBB',
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);
 
@@ -71,13 +64,7 @@ describe('Service Tests', () => {
       });
 
       it('should return a list of BlogCategory', () => {
-        const returnedFromService = Object.assign(
-          {
-            name: 'BBBBBB',
-            language: 'BBBBBB',
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);
 

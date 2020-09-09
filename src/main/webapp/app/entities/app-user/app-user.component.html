@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42cApp.appUser.home.title">App Users</span>
+        <span jhiTranslate="n42CApp.appUser.home.title">App Users</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-app-user" [routerLink]="['/app-user/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42cApp.appUser.home.createLabel">
+            <span  jhiTranslate="n42CApp.appUser.home.createLabel">
             Create a new App User
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="appUsers?.length === 0">
-        <span jhiTranslate="n42cApp.appUser.home.notFound">No appUsers found</span>
+        <span jhiTranslate="n42CApp.appUser.home.notFound">No appUsers found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="appUsers && appUsers.length > 0">
@@ -23,12 +23,18 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUser.userName">User Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUser.displayedName">Displayed Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUser.email">Email</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUser.admin">Admin</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUser.rights">Rights</span></th>
-                    <th scope="col" ><span jhiTranslate="n42cApp.appUser.user">User</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.userName">User Name</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.displayedName">Displayed Name</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.email">Email</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.admin">Admin</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.shopRights">Shop Rights</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.blogRights">Blog Rights</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.profileRights">Profile Rights</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.scriptoriumRights">Scriptorium Rights</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.avatarUrl">Avatar Url</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.user">User</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.givenFriendships">Given Friendships</span></th>
+                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.askedFriendRequests">Asked Friend Requests</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -39,9 +45,23 @@
                     <td>{{ appUser.displayedName }}</td>
                     <td>{{ appUser.email }}</td>
                     <td>{{ appUser.admin }}</td>
-                    <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.rights }}">{{ appUser.rights }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
+                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
+                    <td>{{ appUser.avatarUrl }}</td>
                     <td>
                         {{ appUser.user?.id }}
+                    </td>
+                    <td>
+                        <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
+                            <a class="form-control-static" [routerLink]="['/app-user', givenFriendships?.id, 'view']">{{ givenFriendships.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
+                            <a class="form-control-static" [routerLink]="['/app-user', askedFriendRequests?.id, 'view']">{{ askedFriendRequests.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

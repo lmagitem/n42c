@@ -8,9 +8,9 @@
     -->
     <changeSet id="20200703174907-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="skill_categories_id"
+        <addForeignKeyConstraint baseColumnNames="profile_part_id"
                                  baseTableName="profile_part_skill_category"
-                                 constraintName="fk_profile_part_skill_category_skill_categories_id"
+                                 constraintName="fk_profile_part_skill_category_profile_part_id"
                                  referencedColumnNames="id"
                                  referencedTableName="profile_part"/>
 

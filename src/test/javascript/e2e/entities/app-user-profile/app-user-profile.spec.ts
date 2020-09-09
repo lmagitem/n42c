@@ -24,7 +24,7 @@ describe('AppUserProfile e2e test', () => {
     await navBarPage.goToEntity('app-user-profile');
     appUserProfileComponentsPage = new AppUserProfileComponentsPage();
     await browser.wait(ec.visibilityOf(appUserProfileComponentsPage.title), 5000);
-    expect(await appUserProfileComponentsPage.getTitle()).to.eq('n42cApp.appUserProfile.home.title');
+    expect(await appUserProfileComponentsPage.getTitle()).to.eq('n42CApp.appUserProfile.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(appUserProfileComponentsPage.entities), ec.visibilityOf(appUserProfileComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('AppUserProfile e2e test', () => {
   it('should load create AppUserProfile page', async () => {
     await appUserProfileComponentsPage.clickOnCreateButton();
     appUserProfileUpdatePage = new AppUserProfileUpdatePage();
-    expect(await appUserProfileUpdatePage.getPageTitle()).to.eq('n42cApp.appUserProfile.home.createOrEditLabel');
+    expect(await appUserProfileUpdatePage.getPageTitle()).to.eq('n42CApp.appUserProfile.home.createOrEditLabel');
     await appUserProfileUpdatePage.cancel();
   });
 
@@ -49,7 +49,7 @@ describe('AppUserProfile e2e test', () => {
       appUserProfileUpdatePage.setSummaryInput('summary'),
       appUserProfileUpdatePage.setHeaderBackgroundURIInput('headerBackgroundURI'),
       appUserProfileUpdatePage.languageSelectLastOption(),
-      appUserProfileUpdatePage.profilesSelectLastOption(),
+      appUserProfileUpdatePage.userSelectLastOption(),
     ]);
 
     expect(await appUserProfileUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
@@ -74,7 +74,7 @@ describe('AppUserProfile e2e test', () => {
     await appUserProfileComponentsPage.clickOnLastDeleteButton();
 
     appUserProfileDeleteDialog = new AppUserProfileDeleteDialog();
-    expect(await appUserProfileDeleteDialog.getDialogTitle()).to.eq('n42cApp.appUserProfile.delete.question');
+    expect(await appUserProfileDeleteDialog.getDialogTitle()).to.eq('n42CApp.appUserProfile.delete.question');
     await appUserProfileDeleteDialog.clickOnConfirmButton();
 
     expect(await appUserProfileComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

@@ -24,7 +24,7 @@
             <column name="level" type="varchar(255)" remarks="This skill&apos;s level of mastery.">
                 <constraints nullable="false" />
             </column>
-            <column name="skills_id" type="bigint">
+            <column name="skill_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

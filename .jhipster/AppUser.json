@@ -36,13 +36,45 @@
       ]
     },
     {
-      "fieldName": "rights",
+      "fieldName": "shopRights",
+      "fieldType": "AppUserRights",
+      "javadoc": "The user rights regarding the shop.",
+      "fieldValues": "MOD (Moderator),WRI (Writer),REA (Reader)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "blogRights",
+      "fieldType": "AppUserRights",
+      "javadoc": "The user rights regarding blog writing.",
+      "fieldValues": "MOD (Moderator),WRI (Writer),REA (Reader)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "profileRights",
+      "fieldType": "AppUserRights",
+      "javadoc": "The user rights regarding its profile.",
+      "fieldValues": "MOD (Moderator),WRI (Writer),REA (Reader)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "scriptoriumRights",
       "fieldType": "AppUserRights",
       "javadoc": "The user rights regarding the Scriptorium.",
       "fieldValues": "MOD (Moderator),WRI (Writer),REA (Reader)",
       "fieldValidateRules": [
         "required"
       ]
+    },
+    {
+      "fieldName": "avatarUrl",
+      "fieldType": "String",
+      "javadoc": "The user's avatar url."
     }
   ],
   "relationships": [
@@ -56,15 +88,70 @@
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "blogPost",
+      "otherEntityName": "blog",
       "otherEntityRelationshipName": "author",
-      "relationshipName": "blogPost"
+      "relationshipName": "blogs"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "appUserProfile",
-      "otherEntityRelationshipName": "profiles",
-      "relationshipName": "appUserProfile"
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "profiles"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "receivedFriendships",
+      "relationshipName": "givenFriendships",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "pendingFriendRequests",
+      "relationshipName": "askedFriendRequests",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "player",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "givenFriendships",
+      "relationshipName": "receivedFriendships",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "askedFriendRequests",
+      "relationshipName": "pendingFriendRequests",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "authors",
+      "relationshipName": "products",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "blogPost",
+      "otherEntityRelationshipName": "authors",
+      "relationshipName": "posts",
+      "otherEntityField": "id",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20200703174107",

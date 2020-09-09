@@ -34,7 +34,7 @@ export class ProfilePartUpdatePage {
   indexInput = element(by.id('field_index'));
   orderSelect = element(by.id('field_order'));
 
-  categoriesSelect = element(by.id('field_categories'));
+  profileSelect = element(by.id('field_profile'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -80,20 +80,20 @@ export class ProfilePartUpdatePage {
     await this.orderSelect.all(by.tagName('option')).last().click();
   }
 
-  async categoriesSelectLastOption(): Promise<void> {
-    await this.categoriesSelect.all(by.tagName('option')).last().click();
+  async profileSelectLastOption(): Promise<void> {
+    await this.profileSelect.all(by.tagName('option')).last().click();
   }
 
-  async categoriesSelectOption(option: string): Promise<void> {
-    await this.categoriesSelect.sendKeys(option);
+  async profileSelectOption(option: string): Promise<void> {
+    await this.profileSelect.sendKeys(option);
   }
 
-  getCategoriesSelect(): ElementFinder {
-    return this.categoriesSelect;
+  getProfileSelect(): ElementFinder {
+    return this.profileSelect;
   }
 
-  async getCategoriesSelectedOption(): Promise<string> {
-    return await this.categoriesSelect.element(by.css('option:checked')).getText();
+  async getProfileSelectedOption(): Promise<string> {
+    return await this.profileSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

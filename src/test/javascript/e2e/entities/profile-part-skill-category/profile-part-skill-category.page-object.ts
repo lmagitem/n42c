@@ -32,7 +32,7 @@ export class ProfilePartSkillCategoryUpdatePage {
   nameInput = element(by.id('field_name'));
   indexInput = element(by.id('field_index'));
 
-  skillCategoriesSelect = element(by.id('field_skillCategories'));
+  profilePartSelect = element(by.id('field_profilePart'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -54,20 +54,20 @@ export class ProfilePartSkillCategoryUpdatePage {
     return await this.indexInput.getAttribute('value');
   }
 
-  async skillCategoriesSelectLastOption(): Promise<void> {
-    await this.skillCategoriesSelect.all(by.tagName('option')).last().click();
+  async profilePartSelectLastOption(): Promise<void> {
+    await this.profilePartSelect.all(by.tagName('option')).last().click();
   }
 
-  async skillCategoriesSelectOption(option: string): Promise<void> {
-    await this.skillCategoriesSelect.sendKeys(option);
+  async profilePartSelectOption(option: string): Promise<void> {
+    await this.profilePartSelect.sendKeys(option);
   }
 
-  getSkillCategoriesSelect(): ElementFinder {
-    return this.skillCategoriesSelect;
+  getProfilePartSelect(): ElementFinder {
+    return this.profilePartSelect;
   }
 
-  async getSkillCategoriesSelectedOption(): Promise<string> {
-    return await this.skillCategoriesSelect.element(by.css('option:checked')).getText();
+  async getProfilePartSelectedOption(): Promise<string> {
+    return await this.profilePartSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

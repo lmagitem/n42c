@@ -5,8 +5,8 @@ export interface IProfilePartSkillCategory {
   id?: number;
   name?: string;
   index?: number;
-  profilePartSkills?: IProfilePartSkill[];
-  skillCategories?: IProfilePart;
+  skills?: IProfilePartSkill[];
+  profilePart?: IProfilePart;
 }
 
 export class ProfilePartSkillCategory implements IProfilePartSkillCategory {
@@ -14,7 +14,7 @@ export class ProfilePartSkillCategory implements IProfilePartSkillCategory {
     public id?: number,
     public name?: string,
     public index?: number,
-    public profilePartSkills?: IProfilePartSkill[],
-    public skillCategories?: IProfilePart
+    public skills?: IProfilePartSkill[],
+    public profilePart?: IProfilePart
   ) {}
 }

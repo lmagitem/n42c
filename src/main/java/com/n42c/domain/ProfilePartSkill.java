@@ -63,8 +63,8 @@ public class ProfilePartSkill implements Serializable {
     private Set<ProfilePartLinkedExperience> linkedSkills = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "profilePartSkills", allowSetters = true)
-    private ProfilePartSkillCategory skills;
+    @JsonIgnoreProperties(value = "skills", allowSetters = true)
+    private ProfilePartSkillCategory skillCategory;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -139,17 +139,17 @@ public class ProfilePartSkill implements Serializable {
         this.linkedSkills = profilePartLinkedExperiences;
     }
 
-    public ProfilePartSkillCategory getSkills() {
-        return skills;
+    public ProfilePartSkillCategory getSkillCategory() {
+        return skillCategory;
     }
 
-    public ProfilePartSkill skills(ProfilePartSkillCategory profilePartSkillCategory) {
-        this.skills = profilePartSkillCategory;
+    public ProfilePartSkill skillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
+        this.skillCategory = profilePartSkillCategory;
         return this;
     }
 
-    public void setSkills(ProfilePartSkillCategory profilePartSkillCategory) {
-        this.skills = profilePartSkillCategory;
+    public void setSkillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
+        this.skillCategory = profilePartSkillCategory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

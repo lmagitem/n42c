@@ -33,9 +33,15 @@ export class AppUserUpdatePage {
   displayedNameInput = element(by.id('field_displayedName'));
   emailInput = element(by.id('field_email'));
   adminInput = element(by.id('field_admin'));
-  rightsSelect = element(by.id('field_rights'));
+  shopRightsSelect = element(by.id('field_shopRights'));
+  blogRightsSelect = element(by.id('field_blogRights'));
+  profileRightsSelect = element(by.id('field_profileRights'));
+  scriptoriumRightsSelect = element(by.id('field_scriptoriumRights'));
+  avatarUrlInput = element(by.id('field_avatarUrl'));
 
   userSelect = element(by.id('field_user'));
+  givenFriendshipsSelect = element(by.id('field_givenFriendships'));
+  askedFriendRequestsSelect = element(by.id('field_askedFriendRequests'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -69,16 +75,60 @@ export class AppUserUpdatePage {
     return this.adminInput;
   }
 
-  async setRightsSelect(rights: string): Promise<void> {
-    await this.rightsSelect.sendKeys(rights);
+  async setShopRightsSelect(shopRights: string): Promise<void> {
+    await this.shopRightsSelect.sendKeys(shopRights);
   }
 
-  async getRightsSelect(): Promise<string> {
-    return await this.rightsSelect.element(by.css('option:checked')).getText();
+  async getShopRightsSelect(): Promise<string> {
+    return await this.shopRightsSelect.element(by.css('option:checked')).getText();
   }
 
-  async rightsSelectLastOption(): Promise<void> {
-    await this.rightsSelect.all(by.tagName('option')).last().click();
+  async shopRightsSelectLastOption(): Promise<void> {
+    await this.shopRightsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async setBlogRightsSelect(blogRights: string): Promise<void> {
+    await this.blogRightsSelect.sendKeys(blogRights);
+  }
+
+  async getBlogRightsSelect(): Promise<string> {
+    return await this.blogRightsSelect.element(by.css('option:checked')).getText();
+  }
+
+  async blogRightsSelectLastOption(): Promise<void> {
+    await this.blogRightsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async setProfileRightsSelect(profileRights: string): Promise<void> {
+    await this.profileRightsSelect.sendKeys(profileRights);
+  }
+
+  async getProfileRightsSelect(): Promise<string> {
+    return await this.profileRightsSelect.element(by.css('option:checked')).getText();
+  }
+
+  async profileRightsSelectLastOption(): Promise<void> {
+    await this.profileRightsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async setScriptoriumRightsSelect(scriptoriumRights: string): Promise<void> {
+    await this.scriptoriumRightsSelect.sendKeys(scriptoriumRights);
+  }
+
+  async getScriptoriumRightsSelect(): Promise<string> {
+    return await this.scriptoriumRightsSelect.element(by.css('option:checked')).getText();
+  }
+
+  async scriptoriumRightsSelectLastOption(): Promise<void> {
+    await this.scriptoriumRightsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async setAvatarUrlInput(avatarUrl: string): Promise<void> {
+    await this.avatarUrlInput.sendKeys(avatarUrl);
+  }
+
+  async getAvatarUrlInput(): Promise<string> {
+    return await this.avatarUrlInput.getAttribute('value');
   }
 
   async userSelectLastOption(): Promise<void> {
@@ -95,6 +145,38 @@ export class AppUserUpdatePage {
 
   async getUserSelectedOption(): Promise<string> {
     return await this.userSelect.element(by.css('option:checked')).getText();
+  }
+
+  async givenFriendshipsSelectLastOption(): Promise<void> {
+    await this.givenFriendshipsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async givenFriendshipsSelectOption(option: string): Promise<void> {
+    await this.givenFriendshipsSelect.sendKeys(option);
+  }
+
+  getGivenFriendshipsSelect(): ElementFinder {
+    return this.givenFriendshipsSelect;
+  }
+
+  async getGivenFriendshipsSelectedOption(): Promise<string> {
+    return await this.givenFriendshipsSelect.element(by.css('option:checked')).getText();
+  }
+
+  async askedFriendRequestsSelectLastOption(): Promise<void> {
+    await this.askedFriendRequestsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async askedFriendRequestsSelectOption(option: string): Promise<void> {
+    await this.askedFriendRequestsSelect.sendKeys(option);
+  }
+
+  getAskedFriendRequestsSelect(): ElementFinder {
+    return this.askedFriendRequestsSelect;
+  }
+
+  async getAskedFriendRequestsSelectedOption(): Promise<string> {
+    return await this.askedFriendRequestsSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

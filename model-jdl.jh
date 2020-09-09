@@ -1,144 +1,179 @@
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !                              Shared                                 !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/** Languages used in the app. */
+enum Language {
+    EN (English), FR (French), ES (Spanish), GE (German), RU (Russian), AR (Arabic), CH (Mandarin), PR (Portuguese), IT (Italian), PO (Polish), DU (Dutch), GR (Greek), SW (Swedish), TU (Turkish), RO (Romanian), JP (Japanese), KO (Korean), HU (Hungarian), DA (Danish)
+}
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !                              Users                                  !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** AppUsers of the app. */
 entity AppUser {
     /** The user account's name. */
-    userName String required unique,
+    userName String required unique
     /** The name shown throughout the app. */
-    displayedName String unique,
+    displayedName String unique
     /** The user email adress. */
-    email String required unique,
+    email String required unique
     /** Does the user have admin rights? */
-    admin Boolean required,
+    admin Boolean required
+    /** The user rights regarding the shop. */
+    shopRights AppUserRights required
+    /** The user rights regarding blog writing. */
+    blogRights AppUserRights required
+    /** The user rights regarding its profile. */
+    profileRights AppUserRights required
     /** The user rights regarding the Scriptorium. */
-    rights AppUserRights required
+    scriptoriumRights AppUserRights required
+    /** The user's avatar url. */
+    avatarUrl String
 }
-
-
+/** AppUser rights. */
+enum AppUserRights {
+    MOD (Moderator), WRI (Writer), REA (Reader)
+}
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !                              Shop                                   !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/** A shop to display on the website */
+entity Shop {
+}
+/** An entry to display in the shop */
+entity Product {}
+/** The Localized content of that product. */
+entity LocalizedProduct {
+    /** An excerpt of the product to show on the shop. */
+    excerpt String
+    /** The url of a picture representing the item. */
+    pictureUrl String
+    /** The text describing this product. */
+    content String required
+    /** This item's language. */
+    language Language required
+}
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !                               Blogs                                 !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/** A specific blog, owned by a user */
+entity Blog {
+    /** This blog's name. */
+    name String required
+}
 /** Blog posts to show on the app. */
 @paginate(pagination)
 entity BlogPost {
     /** The date and time at which this post was published. */
-	published Instant required,
+	published Instant required
+    /** The last date and time at which this post was modified. */
+	modified Instant required
+}
+/** The content of a post, in a specific language. */
+entity LocalizedPostContent {
     /** An excerpt of the post to show on the blog page. */
-    excerpt String,
+    excerpt String
     /** The content of the post. */
-    content String required,
+    content String required
     /** This post's language. */
-    language Language
+    language Language required
 }
-
 /** Categories in which a blog post might be filled. */
-entity BlogCategory {
+entity BlogCategory
+/** The localization for this category */
+entity LocalizedBlogCategory {
     /** This category's name. */
-    name String required,
+    name String required
     /** This category's language. */
-    language Language
+    language Language required
 }
-
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !                               Profiles                              !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** Data used to build an user profile page. */
 entity AppUserProfile {
     /** The displayed name for that user. */
-    name String required,
+    name String required
     /** The title of this profile. */
-    title String,
+    title String
     /** A summary to show on the user profile. */
-    summary String,
+    summary String
     /** The picture to show in the profile header. */
-    headerBackgroundURI String,
+    headerBackgroundURI String
     /** This profile's language. */
     language Language
 }
-
 /** A category in which to display the content of a profile. */
 entity ProfilePart {
     /** That part's title. */
-    title String required,
+    title String required
     /** That part's type. */
-    type ProfilePartType required,
+    type ProfilePartType required
     /** The index where this item must be ordered alongside similar ones. */
-    index Integer,
+    index Integer
     /** The order to use when displaying the elements contained in this part. */
     order ProfilePartOrderType required
 }
-
 /** A simple item to display in a profile part. */
 @paginate(infinite-scroll)
 entity ProfilePartSimpleItem {
     /** This item's title. */
-    title String required,
+    title String required
     /** This item's subtitle */
-    subTitle String,
+    subTitle String
     /** This item's date. Might be used to order the items. */
-    date Instant required,
+    date Instant required
     /** This item's content. */
     content String
 }
-
 /** A precise item to display in a profile part. Contains informations about the duration
  *  and the place where the item took place, and can be linked to several individual experiences. */
 @paginate(infinite-scroll)
 entity ProfilePartPreciseItem {
     /** This item's title. */
-    title String required,
+    title String required
     /** This item's subtitle */
-    subTitle String,
+    subTitle String
     /** This item's beginning date. */
-    start Instant required,
+    start Instant required
     /** This item's end date. */
-    end Instant,
+    end Instant
     /** This item's location name. */
-    locationName String,
+    locationName String
     /** This item's location latitude. */
-    locationLat Double,
+    locationLat Double
     /** This item's location longitude. */
-    locationLong Double,
+    locationLong Double
     /** This item's content. */
     content String
 }
-
 /** An individual experience that can be linked to a precise item. */
 entity ProfilePartLinkedExperience {
     /** This experience's title. */
-    title String required,
+    title String required
     /** This experience's subtitle */
-    subTitle String,
+    subTitle String
     /** This experience's date. */
-    date Instant required,
+    date Instant required
     /** This experience's content. */
     content String
 }
-
 /** A category in which to display various skills with their levels. */
 entity ProfilePartSkillCategory {
     /** This category's title. */
-    name String required,
+    name String required
     /** The index where this item must be ordered alongside similar ones. */
     index Integer
 }
-
 /** A skill with its level of mastery. */
 entity ProfilePartSkill {
     /** This skill's name. */
-    name String required,
+    name String required
     /** The index where this item must be ordered alongside similar ones. */
-    index Integer,
+    index Integer
     /** This skill's level of mastery. */
     level LevelOfMastery required
 }
-
-/** AppUser rights regarding the Scriptorium. */
-enum AppUserRights {
-    MOD (Moderator),
-    WRI (Writer),
-    REA (Reader)
-}
-
-/** Languages used in the app. */
-enum Language {
-    EN (English),
-    FR (French),
-    ES (Spanish)
-}
-
 /** Types of categories that can be displayed on a profile. Used to know how to display them. */
 enum ProfilePartType {
     ED (Education),
@@ -147,7 +182,6 @@ enum ProfilePartType {
     CE (Certifications),
     CU (Custom)
 }
-
 /** Orders used to display the elements of a profile category. */
 enum ProfilePartOrderType {
     AZA (AlphabeticalAscending),
@@ -159,7 +193,6 @@ enum ProfilePartOrderType {
     CAA (CalendaredAscending),
     CAD (CalendaredDescending)
 }
-
 /** Levels that describe the degree of mastery of a skill. */
 enum LevelOfMastery {
     DA (Dabbling),
@@ -170,24 +203,329 @@ enum LevelOfMastery {
     EX (Expert),
     MA (Master)
 }
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !                             Scriptorium                             !
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/** Scriptorium's player. */
+entity Player {
+}
+
+entity NinthCampaign {
+	gameType NinthGameType required
+    usePowerRating Boolean required
+}
+
+entity NinthCampaignMoment {
+    current Boolean required
+    sinceInstant Instant required
+    name String
+    summary String
+  	description String
+}
+
+entity NinthBattle {
+    name String
+}
+
+entity NinthArmy {
+    name String required
+    crusade Boolean required
+    faction Faction
+    subfaction SubFaction
+}
+
+entity NinthArmyMoment {
+    current Boolean required
+    sinceInstant Instant required
+    majorVictories Integer
+    minorVictories Integer
+    draws Integer
+    minorDefeats Integer
+    majorDefeats Integer
+    requisition Integer
+    supplyLimit Integer
+    supplyUsed Integer
+    objectives String
+    notes String
+}
+
+entity NinthArmyUnit {
+    selectableKeywords String
+}
+
+entity NinthArmyUnitMoment {
+    current Boolean required
+    sinceInstant Instant required
+    pointsCost Integer
+    powerRating Integer
+    experiencePoints Integer
+    crusadePoints Integer
+    equipment String
+    psychicPowers String
+    warlordTraits String
+    relics String
+    otherUpgrades String
+    battlesPlayed Integer
+    battlesSurvived Integer
+    rangedKills Integer
+    meleeKills Integer
+    psychicKills Integer
+    crusadeRank NinthCrusadeRank
+    battleHonours String
+    battleScars String
+}
+
+entity NinthUnit {
+    name String required
+    datasheet String
+    faction Faction
+    subfaction SubFaction
+    battlefieldRole NinthBattlefieldRole
+    keywords String
+}
+
+entity NinthUnitMoment {
+    current Boolean required
+    sinceInstant Instant required
+    pictureUrl String
+}
+
+entity NinthMission {
+	gameType NinthGameType
+    gameSize NinthGameSize
+    shareable Boolean
+}
+
+entity LocalizedNinthMission {
+	name String
+	briefing String
+}
+
+entity NinthDeploymentMap {
+	url String
+    shareable Boolean
+}
+
+entity LocalizedNinthDeploymentMap {
+	name String
+    description String
+}
+
+entity NinthMissionRule {
+	
+}
+
+entity LocalizedNinthMissionRule {
+	name String
+	description String
+}
+
+entity NinthStratagemGroup {
+    shareable Boolean
+}
+
+entity LocalizedNinthStratagemGroup { 
+    name String
+}
+
+entity NinthStratagem {
+    cost Integer
+    faction Faction
+    subfaction SubFaction
+    turn NinthGameTurn
+    phase NinthGamePhase
+}
+
+entity LocalizedNinthStratagem {
+    name String
+    summary String
+    description String
+    keywords String
+}
+
+entity NinthObjective {
+    shareable Boolean
+    type NinthObjectiveType
+}
+
+entity LocalizedNinthObjective {
+	name String
+    description String
+}
+
+enum NinthObjectiveType {
+    PR (Progressive),
+    EN (Endgame),
+    PE (ProgressiveEndgame)
+}
+
+enum Faction {
+    IM (Imperium),
+    CH (Chaos),
+    EL (Eldar),
+    TY (Tyranid),
+    OR (Ork),
+    NE (Necron),
+    TA (Tau),
+    OT (Other),
+    NA (None)
+}
+
+enum SubFaction {
+    SM (SpaceMarines),
+    BA (BloodAngels),
+    DA (DarkAngels),
+    DW (Deathwatch),
+    GK (GreyKnights),
+    SW (SpaceWolves),
+    GU (ImperialGuard),
+    IN (Inquisition),
+    OA (OfficioAssassinorum),
+    CU (Custodes),
+    SO (Sororitas),
+    ME (Mechanicus),
+    KN (ImperialKnights),
+    SS (SistersOfSilence),
+    SQ (Squats),
+    DZ (Daemons),
+    CK (ChaosKnights),
+    CM (ChaosMarines),
+    DG (DeathGuard),
+    TS (ThousandSons),
+    RH (RenegadesAndHeretics),
+    DM (DarkMechanicum),
+    GC (GenestealerCults),
+    TY (Tyranids),
+    TA (Tau),
+    KR (Kroots),
+    NE (Necrons),
+    OR (Orks),
+    CE (CraftworldEldars),
+    DE (DarkEldars),
+    HA (Harlequins),
+    YN (Ynnari),
+    OT (Others),
+    MX (Mixed)
+}
+
+enum NinthBattlefieldRole {
+    HQ (HQs),
+    TR (Troops),
+    EL (Elites),
+    FA (FastAttack),
+    HS (HeavySupport),
+    FL (Flyers),
+    AT (DedicatedTransports),
+    FO (Fortifications),
+    LW (LordOfWar)
+}
+
+enum NinthCrusadeRank {
+    RE (Ready),
+    BL (Bloodied),
+    BH (BattleHardened),
+    HE (Heroic),
+    LE (Legendary)
+}
+
+enum NinthGameType {
+    OP (OpenPlay),
+    MP (MatchedPlay),
+    CR (Crusade),
+    NG (Narrative)
+}
+
+enum NinthGameSize {
+    CP (CombatPatrol),
+    IN (Incursion),
+    SF (StrikeForce),
+    ON (Onslaught)
+}
+
+enum NinthGameTurn {
+    US (User),
+    OP (Opponent)
+}
+
+enum NinthGamePhase {
+    PG (PreGame),
+    CP (CommandPhase),
+    MP (MovementPhase),
+    PP (PsychicPhase),
+    SP (ShootingPhase),
+    CH (ChargePhase),
+    FP (FightPhase),
+    MO (MoralePhase),
+    NA (None)
+}
 
 relationship OneToOne {
-    AppUser to User
+    // General
+    AppUser to User,
+    // 40k
+    Player to AppUser
 }
 
 relationship OneToMany {
-	AppUser to BlogPost{author},
-    BlogPost to BlogCategory{categories},
-    BlogCategory to BlogCategory{subcategories},
-    AppUser to AppUserProfile{profiles},
-    AppUserProfile to ProfilePart{categories},
-    ProfilePart to ProfilePartSimpleItem{simpleItems},
-    ProfilePart to ProfilePartPreciseItem{preciseItems},
-    ProfilePartPreciseItem to ProfilePartLinkedExperience{experiences},
-    ProfilePart to ProfilePartSkillCategory{skillCategories},
-    ProfilePartSkillCategory to ProfilePartSkill{skills}
+    // Shop
+	Shop{products} to Product{shop},
+    Product{localizations} to LocalizedProduct{product},
+	// Blog
+	AppUser{blogs} to Blog{author},
+	Blog{posts} to BlogPost{blog},
+    BlogPost{localizations} to LocalizedPostContent{post},
+    BlogCategory{subcategories} to BlogCategory{parentCategory},
+    BlogCategory{localizations} to LocalizedBlogCategory{category},
+    // Profile
+    AppUser{profiles} to AppUserProfile{user},
+    AppUserProfile{profileParts} to ProfilePart{profile},
+    ProfilePart{simpleItems} to ProfilePartSimpleItem{profilePart},
+    ProfilePart{preciseItems} to ProfilePartPreciseItem{profilePart},
+    ProfilePartPreciseItem{experiences} to ProfilePartLinkedExperience{linkedItem},
+    ProfilePart{skillCategories} to ProfilePartSkillCategory{profilePart},
+    ProfilePartSkillCategory{skills} to ProfilePartSkill{skillCategory},
+    // 40k
+	Player{lists} to NinthArmy{author},
+	Player{collection} to NinthUnit{owner},
+    Player{stratagemGroups} to NinthStratagemGroup{author},
+	NinthBattle{armies} to NinthArmyMoment{battle},
+	NinthArmy{units} to NinthArmyUnit{army},
+	NinthArmy{moments} to NinthArmyMoment{army},
+	NinthArmyUnit{moments} to NinthArmyUnitMoment{armyUnit},
+	NinthUnit{selections} to NinthArmyUnit{unit},
+	NinthUnit{moments} to NinthUnitMoment{unit},
+    NinthCampaign{events} to NinthCampaignMoment{campaign},
+    NinthCampaignMoment{battles} to NinthBattle{campaignMoment},
+    NinthStratagemGroup{localizations} to LocalizedNinthStratagemGroup{stratagemGroup},
+    NinthStratagemGroup{stratagems} to NinthStratagem{group},
+	NinthMission{battles} to NinthBattle{mission},
+    NinthMission{localizations} to LocalizedNinthMission{mission},
+    NinthMissionRule{localizations} to LocalizedNinthMissionRule{rule},
+    NinthStratagem{localizations} to LocalizedNinthStratagem{stratagem},
+    NinthObjective{localizations} to LocalizedNinthObjective{objective},
+    NinthDeploymentMap{localizations} to LocalizedNinthDeploymentMap{deploymentMap}
 }
 
 relationship ManyToMany {
-    ProfilePartSkill{linkedSkills} to ProfilePartLinkedExperience{linkedExperiences}
+	// General
+    AppUser{givenFriendships} to AppUser{receivedFriendships}, 
+    AppUser{askedFriendRequests} to AppUser{pendingFriendRequests},
+    // Shop
+	Product{authors} to AppUser{products},
+    // Blog
+	BlogPost{authors} to AppUser{posts},
+    BlogPost{categories} to BlogCategory{posts},
+    // Profile
+    ProfilePartSkill{linkedSkills} to ProfilePartLinkedExperience{linkedExperiences},
+    // 40k
+	NinthArmyMoment{selectedUnits} to NinthArmyUnit{selections},
+	NinthArmyMoment{selectedObjectives} to NinthObjective{selections},
+    NinthCampaign{authors} to Player{authoredCampaigns},
+    NinthCampaign{participants} to Player{campaigns},
+    NinthCampaign{campaignStratagems} to NinthStratagemGroup{campaigns},
+    NinthMission{missionStratagems} to NinthStratagemGroup{missions}
+    NinthMission{primaryObjectives} to NinthObjective{allowedAsPrimaries},
+    NinthMission{allowedSecondaries} to NinthObjective{allowedAsSecondaries},
+    NinthMission{rules} to NinthMissionRule{missions},
+	NinthDeploymentMap{usedInMissions} to NinthMission{missionDeployment}
 }

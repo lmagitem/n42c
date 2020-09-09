@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-profile-part-precise-item-heading" jhiTranslate="n42cApp.profilePartPreciseItem.home.createOrEditLabel">Create or edit a Profile Part Precise Item</h2>
+            <h2 id="jhi-profile-part-precise-item-heading" jhiTranslate="n42CApp.profilePartPreciseItem.home.createOrEditLabel">Create or edit a Profile Part Precise Item</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.title" for="field_title" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.title' | translate">Title</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.title" for="field_title" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.title' | translate">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
                            formControlName="title"/>
                     <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
@@ -24,13 +24,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.subTitle" for="field_subTitle" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.subTitle' | translate">Sub Title</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.subTitle" for="field_subTitle" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.subTitle' | translate">Sub Title</label>
                     <input type="text" class="form-control" name="subTitle" id="field_subTitle"
                            formControlName="subTitle"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.start" for="field_start" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.start' | translate">Start</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.start" for="field_start" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.start' | translate">Start</label>
                     <div class="d-flex">
                         <input id="field_start" type="datetime-local" class="form-control" name="start" formControlName="start" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
@@ -47,41 +47,41 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.end" for="field_end" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.end' | translate">End</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.end" for="field_end" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.end' | translate">End</label>
                     <div class="d-flex">
                         <input id="field_end" type="datetime-local" class="form-control" name="end" formControlName="end" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.locationName" for="field_locationName" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.locationName' | translate">Location Name</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.locationName" for="field_locationName" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.locationName' | translate">Location Name</label>
                     <input type="text" class="form-control" name="locationName" id="field_locationName"
                            formControlName="locationName"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.locationLat" for="field_locationLat" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.locationLat' | translate">Location Lat</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.locationLat" for="field_locationLat" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.locationLat' | translate">Location Lat</label>
                     <input type="number" class="form-control" name="locationLat" id="field_locationLat"
                            formControlName="locationLat"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.locationLong" for="field_locationLong" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.locationLong' | translate">Location Long</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.locationLong" for="field_locationLong" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.locationLong' | translate">Location Long</label>
                     <input type="number" class="form-control" name="locationLong" id="field_locationLong"
                            formControlName="locationLong"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.content" for="field_content" [ngbTooltip]="'n42cApp.profilePartPreciseItem.help.content' | translate">Content</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.content" for="field_content" [ngbTooltip]="'n42CApp.profilePartPreciseItem.help.content' | translate">Content</label>
                     <input type="text" class="form-control" name="content" id="field_content"
                            formControlName="content"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartPreciseItem.preciseItems" for="field_preciseItems">Precise Items</label>
-                    <select class="form-control" id="field_preciseItems" name="preciseItems" formControlName="preciseItems">
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartPreciseItem.profilePart" for="field_profilePart">Profile Part</label>
+                    <select class="form-control" id="field_profilePart" name="profilePart" formControlName="profilePart">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="profilePartOption.id === editForm.get('preciseItems')!.value?.id ? editForm.get('preciseItems')!.value : profilePartOption" *ngFor="let profilePartOption of profileparts; trackBy: trackById">{{ profilePartOption.id }}</option>
+                        <option [ngValue]="profilePartOption.id === editForm.get('profilePart')!.value?.id ? editForm.get('profilePart')!.value : profilePartOption" *ngFor="let profilePartOption of profileparts; trackBy: trackById">{{ profilePartOption.id }}</option>
                     </select>
                 </div>
             </div>

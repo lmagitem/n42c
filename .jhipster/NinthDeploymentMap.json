@@ -1,0 +1,40 @@
+{
+  "name": "NinthDeploymentMap",
+  "fields": [
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shareable",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedNinthDeploymentMap",
+      "otherEntityRelationshipName": "deploymentMap",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "missionDeployment",
+      "relationshipName": "usedInMissions",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200908200012",
+  "entityTableName": "ninth_deployment_map",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

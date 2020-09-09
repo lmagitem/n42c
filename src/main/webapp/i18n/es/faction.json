@@ -1,0 +1,16 @@
+{
+  "n42CApp": {
+    "Faction": {
+      "null": "",
+      "IM": "Imperium",
+      "CH": "Chaos",
+      "EL": "Eldar",
+      "TY": "Tyranid",
+      "OR": "Ork",
+      "NE": "Necron",
+      "TA": "Tau",
+      "OT": "Other",
+      "NA": "None"
+    }
+  }
+}

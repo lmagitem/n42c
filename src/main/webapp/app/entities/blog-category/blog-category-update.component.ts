@@ -7,10 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IBlogCategory, BlogCategory } from 'app/shared/model/blog-category.model';
 import { BlogCategoryService } from './blog-category.service';
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
-
-type SelectableEntity = IBlogPost | IBlogCategory;
 
 @Component({
   selector: 'jhi-blog-category-update',
@@ -18,29 +14,18 @@ type SelectableEntity = IBlogPost | IBlogCategory;
 })
 export class BlogCategoryUpdateComponent implements OnInit {
   isSaving = false;
-  blogposts: IBlogPost[] = [];
   blogcategories: IBlogCategory[] = [];
 
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.required]],
-    language: [],
-    categories: [],
-    subcategories: [],
+    parentCategory: [],
   });
 
-  constructor(
-    protected blogCategoryService: BlogCategoryService,
-    protected blogPostService: BlogPostService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected blogCategoryService: BlogCategoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ blogCategory }) => {
       this.updateForm(blogCategory);
-
-      this.blogPostService.query().subscribe((res: HttpResponse<IBlogPost[]>) => (this.blogposts = res.body || []));
 
       this.blogCategoryService.query().subscribe((res: HttpResponse<IBlogCategory[]>) => (this.blogcategories = res.body || []));
     });
@@ -49,10 +34,7 @@ export class BlogCategoryUpdateComponent implements OnInit {
   updateForm(blogCategory: IBlogCategory): void {
     this.editForm.patchValue({
       id: blogCategory.id,
-      name: blogCategory.name,
-      language: blogCategory.language,
-      categories: blogCategory.categories,
-      subcategories: blogCategory.subcategories,
+      parentCategory: blogCategory.parentCategory,
     });
   }
 
@@ -74,10 +56,7 @@ export class BlogCategoryUpdateComponent implements OnInit {
     return {
       ...new BlogCategory(),
       id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      language: this.editForm.get(['language'])!.value,
-      categories: this.editForm.get(['categories'])!.value,
-      subcategories: this.editForm.get(['subcategories'])!.value,
+      parentCategory: this.editForm.get(['parentCategory'])!.value,
     };
   }
 
@@ -97,7 +76,7 @@ export class BlogCategoryUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
+  trackById(index: number, item: IBlogCategory): any {
     return item.id;
   }
 }

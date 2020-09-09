@@ -8,7 +8,7 @@ export interface IProfilePartLinkedExperience {
   subTitle?: string;
   date?: Moment;
   content?: string;
-  experiences?: IProfilePartPreciseItem;
+  linkedItem?: IProfilePartPreciseItem;
   linkedExperiences?: IProfilePartSkill[];
 }
 
@@ -19,7 +19,7 @@ export class ProfilePartLinkedExperience implements IProfilePartLinkedExperience
     public subTitle?: string,
     public date?: Moment,
     public content?: string,
-    public experiences?: IProfilePartPreciseItem,
+    public linkedItem?: IProfilePartPreciseItem,
     public linkedExperiences?: IProfilePartSkill[]
   ) {}
 }

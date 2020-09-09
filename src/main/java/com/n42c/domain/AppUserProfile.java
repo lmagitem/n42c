@@ -68,13 +68,13 @@ public class AppUserProfile implements Serializable {
     @Column(name = "language")
     private Language language;
 
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "profile")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ProfilePart> profileParts = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "appUserProfiles", allowSetters = true)
-    private AppUser profiles;
+    @JsonIgnoreProperties(value = "profiles", allowSetters = true)
+    private AppUser user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -159,15 +159,15 @@ public class AppUserProfile implements Serializable {
         return this;
     }
 
-    public AppUserProfile addProfilePart(ProfilePart profilePart) {
+    public AppUserProfile addProfileParts(ProfilePart profilePart) {
         this.profileParts.add(profilePart);
-        profilePart.setCategories(this);
+        profilePart.setProfile(this);
         return this;
     }
 
-    public AppUserProfile removeProfilePart(ProfilePart profilePart) {
+    public AppUserProfile removeProfileParts(ProfilePart profilePart) {
         this.profileParts.remove(profilePart);
-        profilePart.setCategories(null);
+        profilePart.setProfile(null);
         return this;
     }
 
@@ -175,17 +175,17 @@ public class AppUserProfile implements Serializable {
         this.profileParts = profileParts;
     }
 
-    public AppUser getProfiles() {
-        return profiles;
+    public AppUser getUser() {
+        return user;
     }
 
-    public AppUserProfile profiles(AppUser appUser) {
-        this.profiles = appUser;
+    public AppUserProfile user(AppUser appUser) {
+        this.user = appUser;
         return this;
     }
 
-    public void setProfiles(AppUser appUser) {
-        this.profiles = appUser;
+    public void setUser(AppUser appUser) {
+        this.user = appUser;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

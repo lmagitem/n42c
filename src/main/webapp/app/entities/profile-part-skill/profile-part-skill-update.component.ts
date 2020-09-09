@@ -29,7 +29,7 @@ export class ProfilePartSkillUpdateComponent implements OnInit {
     index: [],
     level: [null, [Validators.required]],
     linkedSkills: [],
-    skills: [],
+    skillCategory: [],
   });
 
   constructor(
@@ -61,7 +61,7 @@ export class ProfilePartSkillUpdateComponent implements OnInit {
       index: profilePartSkill.index,
       level: profilePartSkill.level,
       linkedSkills: profilePartSkill.linkedSkills,
-      skills: profilePartSkill.skills,
+      skillCategory: profilePartSkill.skillCategory,
     });
   }
 
@@ -87,7 +87,7 @@ export class ProfilePartSkillUpdateComponent implements OnInit {
       index: this.editForm.get(['index'])!.value,
       level: this.editForm.get(['level'])!.value,
       linkedSkills: this.editForm.get(['linkedSkills'])!.value,
-      skills: this.editForm.get(['skills'])!.value,
+      skillCategory: this.editForm.get(['skillCategory'])!.value,
     };
   }
 

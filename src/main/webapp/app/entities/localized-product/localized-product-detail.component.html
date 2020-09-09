@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="localizedProduct">
+            <h2><span jhiTranslate="n42CApp.localizedProduct.detail.title">Localized Product</span> {{ localizedProduct.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.localizedProduct.excerpt" [ngbTooltip]="'n42CApp.localizedProduct.help.excerpt' | translate">Excerpt</span></dt>
+                <dd>
+                    <span>{{ localizedProduct.excerpt }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedProduct.pictureUrl" [ngbTooltip]="'n42CApp.localizedProduct.help.pictureUrl' | translate">Picture Url</span></dt>
+                <dd>
+                    <span>{{ localizedProduct.pictureUrl }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedProduct.content" [ngbTooltip]="'n42CApp.localizedProduct.help.content' | translate">Content</span></dt>
+                <dd>
+                    <span>{{ localizedProduct.content }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedProduct.language" [ngbTooltip]="'n42CApp.localizedProduct.help.language' | translate">Language</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'n42CApp.Language.' + localizedProduct.language }}">{{ localizedProduct.language }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.localizedProduct.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="localizedProduct.product">
+                        <a [routerLink]="['/product', localizedProduct.product?.id, 'view']">{{ localizedProduct.product?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/localized-product', localizedProduct.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

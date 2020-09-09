@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="ninthCampaignMoment">
+            <h2><span jhiTranslate="n42CApp.ninthCampaignMoment.detail.title">Ninth Campaign Moment</span> {{ ninthCampaignMoment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42CApp.ninthCampaignMoment.current">Current</span></dt>
+                <dd>
+                    <span>{{ ninthCampaignMoment.current }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthCampaignMoment.sinceInstant">Since Instant</span></dt>
+                <dd>
+                    <span>{{ ninthCampaignMoment.sinceInstant }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthCampaignMoment.name">Name</span></dt>
+                <dd>
+                    <span>{{ ninthCampaignMoment.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthCampaignMoment.summary">Summary</span></dt>
+                <dd>
+                    <span>{{ ninthCampaignMoment.summary }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthCampaignMoment.description">Description</span></dt>
+                <dd>
+                    <span>{{ ninthCampaignMoment.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42CApp.ninthCampaignMoment.campaign">Campaign</span></dt>
+                <dd>
+                    <div *ngIf="ninthCampaignMoment.campaign">
+                        <a [routerLink]="['/ninth-campaign', ninthCampaignMoment.campaign?.id, 'view']">{{ ninthCampaignMoment.campaign?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

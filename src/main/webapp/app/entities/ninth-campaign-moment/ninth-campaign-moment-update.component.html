@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-ninth-campaign-moment-heading" jhiTranslate="n42CApp.ninthCampaignMoment.home.createOrEditLabel">Create or edit a Ninth Campaign Moment</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthCampaignMoment.current" for="field_current">Current</label>
+                    <input type="checkbox" class="form-control" name="current" id="field_current"
+                           formControlName="current"/>
+                    <div *ngIf="editForm.get('current')!.invalid && (editForm.get('current')!.dirty || editForm.get('current')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('current')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthCampaignMoment.sinceInstant" for="field_sinceInstant">Since Instant</label>
+                    <div class="d-flex">
+                        <input id="field_sinceInstant" type="datetime-local" class="form-control" name="sinceInstant" formControlName="sinceInstant" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sinceInstant')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('sinceInstant')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthCampaignMoment.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthCampaignMoment.summary" for="field_summary">Summary</label>
+                    <input type="text" class="form-control" name="summary" id="field_summary"
+                           formControlName="summary"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthCampaignMoment.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="n42CApp.ninthCampaignMoment.campaign" for="field_campaign">Campaign</label>
+                    <select class="form-control" id="field_campaign" name="campaign" formControlName="campaign">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="ninthCampaignOption.id === editForm.get('campaign')!.value?.id ? editForm.get('campaign')!.value : ninthCampaignOption" *ngFor="let ninthCampaignOption of ninthcampaigns; trackBy: trackById">{{ ninthCampaignOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

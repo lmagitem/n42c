@@ -10,7 +10,7 @@ export interface IAppUserProfile {
   headerBackgroundURI?: string;
   language?: Language;
   profileParts?: IProfilePart[];
-  profiles?: IAppUser;
+  user?: IAppUser;
 }
 
 export class AppUserProfile implements IAppUserProfile {
@@ -22,6 +22,6 @@ export class AppUserProfile implements IAppUserProfile {
     public headerBackgroundURI?: string,
     public language?: Language,
     public profileParts?: IProfilePart[],
-    public profiles?: IAppUser
+    public user?: IAppUser
   ) {}
 }

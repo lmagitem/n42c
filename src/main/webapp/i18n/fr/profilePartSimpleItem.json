@@ -1,5 +1,5 @@
 {
-  "n42cApp": {
+  "n42CApp": {
     "profilePartSimpleItem": {
       "home": {
         "title": "ProfilePartSimpleItems",
@@ -20,7 +20,7 @@
       "subTitle": "Sub Title",
       "date": "Date",
       "content": "Content",
-      "simpleItems": "Simple Items",
+      "profilePart": "Profile Part",
       "help": {
         "title": "This item&#39;s title.",
         "subTitle": "This item&#39;s subtitle",

@@ -35,7 +35,7 @@ export class AppUserProfileUpdatePage {
   headerBackgroundURIInput = element(by.id('field_headerBackgroundURI'));
   languageSelect = element(by.id('field_language'));
 
-  profilesSelect = element(by.id('field_profiles'));
+  userSelect = element(by.id('field_user'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -85,20 +85,20 @@ export class AppUserProfileUpdatePage {
     await this.languageSelect.all(by.tagName('option')).last().click();
   }
 
-  async profilesSelectLastOption(): Promise<void> {
-    await this.profilesSelect.all(by.tagName('option')).last().click();
+  async userSelectLastOption(): Promise<void> {
+    await this.userSelect.all(by.tagName('option')).last().click();
   }
 
-  async profilesSelectOption(option: string): Promise<void> {
-    await this.profilesSelect.sendKeys(option);
+  async userSelectOption(option: string): Promise<void> {
+    await this.userSelect.sendKeys(option);
   }
 
-  getProfilesSelect(): ElementFinder {
-    return this.profilesSelect;
+  getUserSelect(): ElementFinder {
+    return this.userSelect;
   }
 
-  async getProfilesSelectedOption(): Promise<string> {
-    return await this.profilesSelect.element(by.css('option:checked')).getText();
+  async getUserSelectedOption(): Promise<string> {
+    return await this.userSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

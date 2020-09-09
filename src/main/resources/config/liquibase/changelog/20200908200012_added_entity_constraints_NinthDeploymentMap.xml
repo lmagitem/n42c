@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity NinthDeploymentMap.
+    -->
+    <changeSet id="20200908200012-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="ninth_deployment_map_id"
+                                 baseTableName="ninth_deployment_map_used_in_missions"
+                                 constraintName="ninth_deployment_map_used_in_m_ninth_deployment_map_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_deployment_map"/>
+
+        <addForeignKeyConstraint baseColumnNames="used_in_missions_id"
+                                 baseTableName="ninth_deployment_map_used_in_missions"
+                                 constraintName="fk_ninth_deployment_map_used_in_missions_used_in_missions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_mission"/>
+        
+    </changeSet>
+</databaseChangeLog>

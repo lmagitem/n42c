@@ -38,7 +38,7 @@ export class ProfilePartPreciseItemUpdatePage {
   locationLongInput = element(by.id('field_locationLong'));
   contentInput = element(by.id('field_content'));
 
-  preciseItemsSelect = element(by.id('field_preciseItems'));
+  profilePartSelect = element(by.id('field_profilePart'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -108,20 +108,20 @@ export class ProfilePartPreciseItemUpdatePage {
     return await this.contentInput.getAttribute('value');
   }
 
-  async preciseItemsSelectLastOption(): Promise<void> {
-    await this.preciseItemsSelect.all(by.tagName('option')).last().click();
+  async profilePartSelectLastOption(): Promise<void> {
+    await this.profilePartSelect.all(by.tagName('option')).last().click();
   }
 
-  async preciseItemsSelectOption(option: string): Promise<void> {
-    await this.preciseItemsSelect.sendKeys(option);
+  async profilePartSelectOption(option: string): Promise<void> {
+    await this.profilePartSelect.sendKeys(option);
   }
 
-  getPreciseItemsSelect(): ElementFinder {
-    return this.preciseItemsSelect;
+  getProfilePartSelect(): ElementFinder {
+    return this.profilePartSelect;
   }
 
-  async getPreciseItemsSelectedOption(): Promise<string> {
-    return await this.preciseItemsSelect.element(by.css('option:checked')).getText();
+  async getProfilePartSelectedOption(): Promise<string> {
+    return await this.profilePartSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

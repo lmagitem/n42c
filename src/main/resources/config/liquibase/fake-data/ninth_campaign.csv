@@ -1,0 +1,11 @@
+id;game_type;use_power_rating
+1;MP;true
+2;NG;true
+3;CR;false
+4;MP;false
+5;CR;true
+6;OP;true
+7;OP;false
+8;MP;false
+9;OP;true
+10;NG;true

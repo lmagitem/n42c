@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity NinthMission.
+    -->
+    <changeSet id="20200908195812-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id"
+                                 baseTableName="ninth_mission_mission_stratagems"
+                                 constraintName="fk_ninth_mission_mission_stratagems_ninth_mission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_mission"/>
+
+        <addForeignKeyConstraint baseColumnNames="mission_stratagems_id"
+                                 baseTableName="ninth_mission_mission_stratagems"
+                                 constraintName="fk_ninth_mission_mission_stratagems_mission_stratagems_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_stratagem_group"/>
+        
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id"
+                                 baseTableName="ninth_mission_primary_objectives"
+                                 constraintName="fk_ninth_mission_primary_objectives_ninth_mission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_mission"/>
+
+        <addForeignKeyConstraint baseColumnNames="primary_objectives_id"
+                                 baseTableName="ninth_mission_primary_objectives"
+                                 constraintName="fk_ninth_mission_primary_objectives_primary_objectives_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_objective"/>
+        
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id"
+                                 baseTableName="ninth_mission_allowed_secondaries"
+                                 constraintName="fk_ninth_mission_allowed_secondaries_ninth_mission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_mission"/>
+
+        <addForeignKeyConstraint baseColumnNames="allowed_secondaries_id"
+                                 baseTableName="ninth_mission_allowed_secondaries"
+                                 constraintName="fk_ninth_mission_allowed_secondaries_allowed_secondaries_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_objective"/>
+        
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id"
+                                 baseTableName="ninth_mission_rules"
+                                 constraintName="fk_ninth_mission_rules_ninth_mission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_mission"/>
+
+        <addForeignKeyConstraint baseColumnNames="rules_id"
+                                 baseTableName="ninth_mission_rules"
+                                 constraintName="fk_ninth_mission_rules_rules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ninth_mission_rule"/>
+        
+    </changeSet>
+</databaseChangeLog>

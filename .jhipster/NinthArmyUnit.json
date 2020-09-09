@@ -1,0 +1,50 @@
+{
+  "name": "NinthArmyUnit",
+  "fields": [
+    {
+      "fieldName": "selectableKeywords",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthArmyUnitMoment",
+      "otherEntityRelationshipName": "armyUnit",
+      "relationshipName": "moments"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthArmy",
+      "otherEntityRelationshipName": "units",
+      "relationshipName": "army",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthUnit",
+      "otherEntityRelationshipName": "selections",
+      "relationshipName": "unit",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthArmyMoment",
+      "otherEntityRelationshipName": "selectedUnits",
+      "relationshipName": "selections",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200908195412",
+  "entityTableName": "ninth_army_unit",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

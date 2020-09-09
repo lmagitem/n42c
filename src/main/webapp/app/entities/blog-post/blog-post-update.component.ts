@@ -11,6 +11,14 @@ import { IBlogPost, BlogPost } from 'app/shared/model/blog-post.model';
 import { BlogPostService } from './blog-post.service';
 import { IAppUser } from 'app/shared/model/app-user.model';
 import { AppUserService } from 'app/entities/app-user/app-user.service';
+import { IBlogCategory } from 'app/shared/model/blog-category.model';
+import { BlogCategoryService } from 'app/entities/blog-category/blog-category.service';
+import { IBlog } from 'app/shared/model/blog.model';
+import { BlogService } from 'app/entities/blog/blog.service';
+
+type SelectableEntity = IAppUser | IBlogCategory | IBlog;
+
+type SelectableManyToManyEntity = IAppUser | IBlogCategory;
 
 @Component({
   selector: 'jhi-blog-post-update',
@@ -19,19 +27,23 @@ import { AppUserService } from 'app/entities/app-user/app-user.service';
 export class BlogPostUpdateComponent implements OnInit {
   isSaving = false;
   appusers: IAppUser[] = [];
+  blogcategories: IBlogCategory[] = [];
+  blogs: IBlog[] = [];
 
   editForm = this.fb.group({
     id: [],
     published: [null, [Validators.required]],
-    excerpt: [],
-    content: [null, [Validators.required]],
-    language: [],
-    author: [],
+    modified: [null, [Validators.required]],
+    authors: [],
+    categories: [],
+    blog: [],
   });
 
   constructor(
     protected blogPostService: BlogPostService,
     protected appUserService: AppUserService,
+    protected blogCategoryService: BlogCategoryService,
+    protected blogService: BlogService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -41,11 +53,16 @@ export class BlogPostUpdateComponent implements OnInit {
       if (!blogPost.id) {
         const today = moment().startOf('day');
         blogPost.published = today;
+        blogPost.modified = today;
       }
 
       this.updateForm(blogPost);
 
       this.appUserService.query().subscribe((res: HttpResponse<IAppUser[]>) => (this.appusers = res.body || []));
+
+      this.blogCategoryService.query().subscribe((res: HttpResponse<IBlogCategory[]>) => (this.blogcategories = res.body || []));
+
+      this.blogService.query().subscribe((res: HttpResponse<IBlog[]>) => (this.blogs = res.body || []));
     });
   }
 
@@ -53,10 +70,10 @@ export class BlogPostUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: blogPost.id,
       published: blogPost.published ? blogPost.published.format(DATE_TIME_FORMAT) : null,
-      excerpt: blogPost.excerpt,
-      content: blogPost.content,
-      language: blogPost.language,
-      author: blogPost.author,
+      modified: blogPost.modified ? blogPost.modified.format(DATE_TIME_FORMAT) : null,
+      authors: blogPost.authors,
+      categories: blogPost.categories,
+      blog: blogPost.blog,
     });
   }
 
@@ -79,10 +96,10 @@ export class BlogPostUpdateComponent implements OnInit {
       ...new BlogPost(),
       id: this.editForm.get(['id'])!.value,
       published: this.editForm.get(['published'])!.value ? moment(this.editForm.get(['published'])!.value, DATE_TIME_FORMAT) : undefined,
-      excerpt: this.editForm.get(['excerpt'])!.value,
-      content: this.editForm.get(['content'])!.value,
-      language: this.editForm.get(['language'])!.value,
-      author: this.editForm.get(['author'])!.value,
+      modified: this.editForm.get(['modified'])!.value ? moment(this.editForm.get(['modified'])!.value, DATE_TIME_FORMAT) : undefined,
+      authors: this.editForm.get(['authors'])!.value,
+      categories: this.editForm.get(['categories'])!.value,
+      blog: this.editForm.get(['blog'])!.value,
     };
   }
 
@@ -102,7 +119,18 @@ export class BlogPostUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IAppUser): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  getSelected(selectedVals: SelectableManyToManyEntity[], option: SelectableManyToManyEntity): SelectableManyToManyEntity {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

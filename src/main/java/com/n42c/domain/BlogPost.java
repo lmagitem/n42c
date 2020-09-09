@@ -14,8 +14,6 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.n42c.domain.enumeration.Language;
-
 /**
  * Blog posts to show on the app.
  */
@@ -41,35 +39,34 @@ public class BlogPost implements Serializable {
     private Instant published;
 
     /**
-     * An excerpt of the post to show on the blog page.
-     */
-    @ApiModelProperty(value = "An excerpt of the post to show on the blog page.")
-    @Column(name = "excerpt")
-    private String excerpt;
-
-    /**
-     * The content of the post.
+     * The last date and time at which this post was modified.
      */
     @NotNull
-    @ApiModelProperty(value = "The content of the post.", required = true)
-    @Column(name = "content", nullable = false)
-    private String content;
+    @ApiModelProperty(value = "The last date and time at which this post was modified.", required = true)
+    @Column(name = "modified", nullable = false)
+    private Instant modified;
 
-    /**
-     * This post's language.
-     */
-    @ApiModelProperty(value = "This post's language.")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "language")
-    private Language language;
-
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BlogCategory> blogCategories = new HashSet<>();
+    private Set<LocalizedPostContent> localizations = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(name = "blog_post_authors",
+               joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
+    private Set<AppUser> authors = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(name = "blog_post_categories",
+               joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
+    private Set<BlogCategory> categories = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "blogPosts", allowSetters = true)
-    private AppUser author;
+    @JsonIgnoreProperties(value = "posts", allowSetters = true)
+    private Blog blog;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -93,81 +90,105 @@ public class BlogPost implements Serializable {
         this.published = published;
     }
 
-    public String getExcerpt() {
-        return excerpt;
+    public Instant getModified() {
+        return modified;
     }
 
-    public BlogPost excerpt(String excerpt) {
-        this.excerpt = excerpt;
+    public BlogPost modified(Instant modified) {
+        this.modified = modified;
         return this;
     }
 
-    public void setExcerpt(String excerpt) {
-        this.excerpt = excerpt;
+    public void setModified(Instant modified) {
+        this.modified = modified;
     }
 
-    public String getContent() {
-        return content;
+    public Set<LocalizedPostContent> getLocalizations() {
+        return localizations;
     }
 
-    public BlogPost content(String content) {
-        this.content = content;
+    public BlogPost localizations(Set<LocalizedPostContent> localizedPostContents) {
+        this.localizations = localizedPostContents;
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public BlogPost language(Language language) {
-        this.language = language;
+    public BlogPost addLocalizations(LocalizedPostContent localizedPostContent) {
+        this.localizations.add(localizedPostContent);
+        localizedPostContent.setPost(this);
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
-    public Set<BlogCategory> getBlogCategories() {
-        return blogCategories;
-    }
-
-    public BlogPost blogCategories(Set<BlogCategory> blogCategories) {
-        this.blogCategories = blogCategories;
+    public BlogPost removeLocalizations(LocalizedPostContent localizedPostContent) {
+        this.localizations.remove(localizedPostContent);
+        localizedPostContent.setPost(null);
         return this;
     }
 
-    public BlogPost addBlogCategory(BlogCategory blogCategory) {
-        this.blogCategories.add(blogCategory);
-        blogCategory.setCategories(this);
+    public void setLocalizations(Set<LocalizedPostContent> localizedPostContents) {
+        this.localizations = localizedPostContents;
+    }
+
+    public Set<AppUser> getAuthors() {
+        return authors;
+    }
+
+    public BlogPost authors(Set<AppUser> appUsers) {
+        this.authors = appUsers;
         return this;
     }
 
-    public BlogPost removeBlogCategory(BlogCategory blogCategory) {
-        this.blogCategories.remove(blogCategory);
-        blogCategory.setCategories(null);
+    public BlogPost addAuthors(AppUser appUser) {
+        this.authors.add(appUser);
+        appUser.getPosts().add(this);
         return this;
     }
 
-    public void setBlogCategories(Set<BlogCategory> blogCategories) {
-        this.blogCategories = blogCategories;
-    }
-
-    public AppUser getAuthor() {
-        return author;
-    }
-
-    public BlogPost author(AppUser appUser) {
-        this.author = appUser;
+    public BlogPost removeAuthors(AppUser appUser) {
+        this.authors.remove(appUser);
+        appUser.getPosts().remove(this);
         return this;
     }
 
-    public void setAuthor(AppUser appUser) {
-        this.author = appUser;
+    public void setAuthors(Set<AppUser> appUsers) {
+        this.authors = appUsers;
+    }
+
+    public Set<BlogCategory> getCategories() {
+        return categories;
+    }
+
+    public BlogPost categories(Set<BlogCategory> blogCategories) {
+        this.categories = blogCategories;
+        return this;
+    }
+
+    public BlogPost addCategories(BlogCategory blogCategory) {
+        this.categories.add(blogCategory);
+        blogCategory.getPosts().add(this);
+        return this;
+    }
+
+    public BlogPost removeCategories(BlogCategory blogCategory) {
+        this.categories.remove(blogCategory);
+        blogCategory.getPosts().remove(this);
+        return this;
+    }
+
+    public void setCategories(Set<BlogCategory> blogCategories) {
+        this.categories = blogCategories;
+    }
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public BlogPost blog(Blog blog) {
+        this.blog = blog;
+        return this;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -193,9 +214,7 @@ public class BlogPost implements Serializable {
         return "BlogPost{" +
             "id=" + getId() +
             ", published='" + getPublished() + "'" +
-            ", excerpt='" + getExcerpt() + "'" +
-            ", content='" + getContent() + "'" +
-            ", language='" + getLanguage() + "'" +
+            ", modified='" + getModified() + "'" +
             "}";
     }
 }

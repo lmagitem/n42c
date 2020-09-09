@@ -1,0 +1,42 @@
+{
+  "name": "NinthBattle",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthArmyMoment",
+      "otherEntityRelationshipName": "battle",
+      "relationshipName": "armies"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthCampaignMoment",
+      "otherEntityRelationshipName": "battles",
+      "relationshipName": "campaignMoment",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "battles",
+      "relationshipName": "mission",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195112",
+  "entityTableName": "ninth_battle",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

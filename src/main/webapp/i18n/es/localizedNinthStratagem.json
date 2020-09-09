@@ -1,0 +1,26 @@
+{
+  "n42CApp": {
+    "localizedNinthStratagem": {
+      "home": {
+        "title": "Localized Ninth Stratagems",
+        "createLabel": "Crear nuevo Localized Ninth Stratagem",
+        "createOrEditLabel": "Crear o editar Localized Ninth Stratagem",
+        "notFound": "Ningún Localized Ninth Stratagems encontrado"
+      },
+      "created": "Un nuevo Localized Ninth Stratagem ha sido creado con el identificador {{ param }}",
+      "updated": "Un Localized Ninth Stratagem ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Localized Ninth Stratagem ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Localized Ninth Stratagem {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Ninth Stratagem"
+      },
+      "name": "Name",
+      "summary": "Summary",
+      "description": "Description",
+      "keywords": "Keywords",
+      "stratagem": "Stratagem"
+    }
+  }
+}

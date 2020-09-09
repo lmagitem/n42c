@@ -1,41 +1,33 @@
 {
   "name": "BlogCategory",
-  "fields": [
-    {
-      "fieldName": "name",
-      "fieldType": "String",
-      "javadoc": "This category's name.",
-      "fieldValidateRules": [
-        "required"
-      ]
-    },
-    {
-      "fieldName": "language",
-      "fieldType": "Language",
-      "javadoc": "This category's language.",
-      "fieldValues": "EN (English),FR (French),ES (Spanish)"
-    }
-  ],
+  "fields": [],
   "relationships": [
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "blogCategory",
-      "otherEntityRelationshipName": "subcategories",
-      "relationshipName": "blogCategory"
+      "otherEntityRelationshipName": "parentCategory",
+      "relationshipName": "subcategories"
     },
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "blogPost",
-      "otherEntityRelationshipName": "blogCategory",
-      "relationshipName": "categories",
-      "otherEntityField": "id"
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedBlogCategory",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "localizations"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "blogCategory",
-      "otherEntityRelationshipName": "blogCategory",
-      "relationshipName": "subcategories",
+      "otherEntityRelationshipName": "subcategories",
+      "relationshipName": "parentCategory",
       "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "blogPost",
+      "otherEntityRelationshipName": "categories",
+      "relationshipName": "posts",
+      "otherEntityField": "id",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20200703174307",

@@ -26,7 +26,7 @@ export class ProfilePartSimpleItemUpdateComponent implements OnInit {
     subTitle: [],
     date: [null, [Validators.required]],
     content: [],
-    simpleItems: [],
+    profilePart: [],
   });
 
   constructor(
@@ -56,7 +56,7 @@ export class ProfilePartSimpleItemUpdateComponent implements OnInit {
       subTitle: profilePartSimpleItem.subTitle,
       date: profilePartSimpleItem.date ? profilePartSimpleItem.date.format(DATE_TIME_FORMAT) : null,
       content: profilePartSimpleItem.content,
-      simpleItems: profilePartSimpleItem.simpleItems,
+      profilePart: profilePartSimpleItem.profilePart,
     });
   }
 
@@ -82,7 +82,7 @@ export class ProfilePartSimpleItemUpdateComponent implements OnInit {
       subTitle: this.editForm.get(['subTitle'])!.value,
       date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       content: this.editForm.get(['content'])!.value,
-      simpleItems: this.editForm.get(['simpleItems'])!.value,
+      profilePart: this.editForm.get(['profilePart'])!.value,
     };
   }
 

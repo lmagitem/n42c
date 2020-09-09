@@ -1,0 +1,11 @@
+{
+  "n42CApp": {
+    "NinthGameSize": {
+      "null": "",
+      "CP": "CombatPatrol",
+      "IN": "Incursion",
+      "SF": "StrikeForce",
+      "ON": "Onslaught"
+    }
+  }
+}

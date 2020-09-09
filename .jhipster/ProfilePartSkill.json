@@ -36,8 +36,8 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "profilePartSkillCategory",
-      "otherEntityRelationshipName": "profilePartSkill",
-      "relationshipName": "skills",
+      "otherEntityRelationshipName": "skills",
+      "relationshipName": "skillCategory",
       "otherEntityField": "id"
     }
   ],

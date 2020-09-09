@@ -1,0 +1,84 @@
+{
+  "name": "NinthMission",
+  "fields": [
+    {
+      "fieldName": "gameType",
+      "fieldType": "NinthGameType",
+      "fieldValues": "OP (OpenPlay),MP (MatchedPlay),CR (Crusade),NG (Narrative)"
+    },
+    {
+      "fieldName": "gameSize",
+      "fieldType": "NinthGameSize",
+      "fieldValues": "CP (CombatPatrol),IN (Incursion),SF (StrikeForce),ON (Onslaught)"
+    },
+    {
+      "fieldName": "shareable",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthBattle",
+      "otherEntityRelationshipName": "mission",
+      "relationshipName": "battles"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedNinthMission",
+      "otherEntityRelationshipName": "mission",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthStratagemGroup",
+      "otherEntityRelationshipName": "missions",
+      "relationshipName": "missionStratagems",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthObjective",
+      "otherEntityRelationshipName": "allowedAsPrimaries",
+      "relationshipName": "primaryObjectives",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthObjective",
+      "otherEntityRelationshipName": "allowedAsSecondaries",
+      "relationshipName": "allowedSecondaries",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthMissionRule",
+      "otherEntityRelationshipName": "missions",
+      "relationshipName": "rules",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthDeploymentMap",
+      "otherEntityRelationshipName": "usedInMissions",
+      "relationshipName": "missionDeployment",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200908195812",
+  "entityTableName": "ninth_mission",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

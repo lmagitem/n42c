@@ -22,7 +22,7 @@ export class ProfilePartSkillCategoryUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     index: [],
-    skillCategories: [],
+    profilePart: [],
   });
 
   constructor(
@@ -45,7 +45,7 @@ export class ProfilePartSkillCategoryUpdateComponent implements OnInit {
       id: profilePartSkillCategory.id,
       name: profilePartSkillCategory.name,
       index: profilePartSkillCategory.index,
-      skillCategories: profilePartSkillCategory.skillCategories,
+      profilePart: profilePartSkillCategory.profilePart,
     });
   }
 
@@ -69,7 +69,7 @@ export class ProfilePartSkillCategoryUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       index: this.editForm.get(['index'])!.value,
-      skillCategories: this.editForm.get(['skillCategories'])!.value,
+      profilePart: this.editForm.get(['profilePart'])!.value,
     };
   }
 

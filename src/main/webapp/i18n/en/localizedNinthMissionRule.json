@@ -1,0 +1,24 @@
+{
+  "n42CApp": {
+    "localizedNinthMissionRule": {
+      "home": {
+        "title": "Localized Ninth Mission Rules",
+        "createLabel": "Create a new Localized Ninth Mission Rule",
+        "createOrEditLabel": "Create or edit a Localized Ninth Mission Rule",
+        "notFound": "No Localized Ninth Mission Rules found"
+      },
+      "created": "A new Localized Ninth Mission Rule is created with identifier {{ param }}",
+      "updated": "A Localized Ninth Mission Rule is updated with identifier {{ param }}",
+      "deleted": "A Localized Ninth Mission Rule is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Ninth Mission Rule {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Ninth Mission Rule"
+      },
+      "name": "Name",
+      "description": "Description",
+      "rule": "Rule"
+    }
+  }
+}

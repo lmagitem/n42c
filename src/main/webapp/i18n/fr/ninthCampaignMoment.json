@@ -1,0 +1,28 @@
+{
+  "n42CApp": {
+    "ninthCampaignMoment": {
+      "home": {
+        "title": "NinthCampaignMoments",
+        "createLabel": "Créer un nouveau Ninth Campaign Moment",
+        "createOrEditLabel": "Créer ou éditer un Ninth Campaign Moment",
+        "notFound": "Aucun Ninth Campaign Moment trouvé"
+      },
+      "created": "Un nouveau Ninth Campaign Moment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Campaign Moment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Campaign Moment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Campaign Moment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Campaign Moment"
+      },
+      "current": "Current",
+      "sinceInstant": "Since Instant",
+      "name": "Name",
+      "summary": "Summary",
+      "description": "Description",
+      "battles": "Battles",
+      "campaign": "Campaign"
+    }
+  }
+}

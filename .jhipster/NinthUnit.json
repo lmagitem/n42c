@@ -1,0 +1,67 @@
+{
+  "name": "NinthUnit",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "datasheet",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "faction",
+      "fieldType": "Faction",
+      "fieldValues": "IM (Imperium),CH (Chaos),EL (Eldar),TY (Tyranid),OR (Ork),NE (Necron),TA (Tau),OT (Other),NA (None)"
+    },
+    {
+      "fieldName": "subfaction",
+      "fieldType": "SubFaction",
+      "fieldValues": "SM (SpaceMarines),BA (BloodAngels),DA (DarkAngels),DW (Deathwatch),GK (GreyKnights),SW (SpaceWolves),GU (ImperialGuard),IN (Inquisition),OA (OfficioAssassinorum),CU (Custodes),SO (Sororitas),ME (Mechanicus),KN (ImperialKnights),SS (SistersOfSilence),SQ (Squats),DZ (Daemons),CK (ChaosKnights),CM (ChaosMarines),DG (DeathGuard),TS (ThousandSons),RH (RenegadesAndHeretics),DM (DarkMechanicum),GC (GenestealerCults),TY (Tyranids),TA (Tau),KR (Kroots),NE (Necrons),OR (Orks),CE (CraftworldEldars),DE (DarkEldars),HA (Harlequins),YN (Ynnari),OT (Others),MX (Mixed)"
+    },
+    {
+      "fieldName": "battlefieldRole",
+      "fieldType": "NinthBattlefieldRole",
+      "fieldValues": "HQ (HQs),TR (Troops),EL (Elites),FA (FastAttack),HS (HeavySupport),FL (Flyers),AT (DedicatedTransports),FO (Fortifications),LW (LordOfWar)"
+    },
+    {
+      "fieldName": "keywords",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthArmyUnit",
+      "otherEntityRelationshipName": "unit",
+      "relationshipName": "selections"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthUnitMoment",
+      "otherEntityRelationshipName": "unit",
+      "relationshipName": "moments"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "collection",
+      "relationshipName": "owner",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195612",
+  "entityTableName": "ninth_unit",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

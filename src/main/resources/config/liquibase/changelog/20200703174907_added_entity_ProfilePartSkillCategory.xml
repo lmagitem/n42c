@@ -21,7 +21,7 @@
             <column name="index" type="integer" remarks="The index where this item must be ordered alongside similar ones.">
                 <constraints nullable="true" />
             </column>
-            <column name="skill_categories_id" type="bigint">
+            <column name="profile_part_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

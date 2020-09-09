@@ -1,0 +1,25 @@
+{
+  "n42CApp": {
+    "ninthBattle": {
+      "home": {
+        "title": "Ninth Battles",
+        "createLabel": "Crear nuevo Ninth Battle",
+        "createOrEditLabel": "Crear o editar Ninth Battle",
+        "notFound": "Ningún Ninth Battles encontrado"
+      },
+      "created": "Un nuevo Ninth Battle ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ninth Battle ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ninth Battle ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ninth Battle {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninth Battle"
+      },
+      "name": "Name",
+      "armies": "Armies",
+      "campaignMoment": "Campaign Moment",
+      "mission": "Mission"
+    }
+  }
+}

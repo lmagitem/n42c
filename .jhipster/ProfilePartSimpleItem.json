@@ -32,8 +32,8 @@
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "profilePart",
-      "otherEntityRelationshipName": "profilePartSimpleItem",
-      "relationshipName": "simpleItems",
+      "otherEntityRelationshipName": "simpleItems",
+      "relationshipName": "profilePart",
       "otherEntityField": "id"
     }
   ],

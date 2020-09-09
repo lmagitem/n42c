@@ -66,21 +66,21 @@ public class ProfilePart implements Serializable {
     @Column(name = "jhi_order", nullable = false)
     private ProfilePartOrderType order;
 
-    @OneToMany(mappedBy = "simpleItems")
+    @OneToMany(mappedBy = "profilePart")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProfilePartSimpleItem> profilePartSimpleItems = new HashSet<>();
+    private Set<ProfilePartSimpleItem> simpleItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "preciseItems")
+    @OneToMany(mappedBy = "profilePart")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProfilePartPreciseItem> profilePartPreciseItems = new HashSet<>();
+    private Set<ProfilePartPreciseItem> preciseItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "skillCategories")
+    @OneToMany(mappedBy = "profilePart")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<ProfilePartSkillCategory> profilePartSkillCategories = new HashSet<>();
+    private Set<ProfilePartSkillCategory> skillCategories = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "profileParts", allowSetters = true)
-    private AppUserProfile categories;
+    private AppUserProfile profile;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -143,92 +143,92 @@ public class ProfilePart implements Serializable {
         this.order = order;
     }
 
-    public Set<ProfilePartSimpleItem> getProfilePartSimpleItems() {
-        return profilePartSimpleItems;
+    public Set<ProfilePartSimpleItem> getSimpleItems() {
+        return simpleItems;
     }
 
-    public ProfilePart profilePartSimpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
-        this.profilePartSimpleItems = profilePartSimpleItems;
+    public ProfilePart simpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
+        this.simpleItems = profilePartSimpleItems;
         return this;
     }
 
-    public ProfilePart addProfilePartSimpleItem(ProfilePartSimpleItem profilePartSimpleItem) {
-        this.profilePartSimpleItems.add(profilePartSimpleItem);
-        profilePartSimpleItem.setSimpleItems(this);
+    public ProfilePart addSimpleItems(ProfilePartSimpleItem profilePartSimpleItem) {
+        this.simpleItems.add(profilePartSimpleItem);
+        profilePartSimpleItem.setProfilePart(this);
         return this;
     }
 
-    public ProfilePart removeProfilePartSimpleItem(ProfilePartSimpleItem profilePartSimpleItem) {
-        this.profilePartSimpleItems.remove(profilePartSimpleItem);
-        profilePartSimpleItem.setSimpleItems(null);
+    public ProfilePart removeSimpleItems(ProfilePartSimpleItem profilePartSimpleItem) {
+        this.simpleItems.remove(profilePartSimpleItem);
+        profilePartSimpleItem.setProfilePart(null);
         return this;
     }
 
-    public void setProfilePartSimpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
-        this.profilePartSimpleItems = profilePartSimpleItems;
+    public void setSimpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
+        this.simpleItems = profilePartSimpleItems;
     }
 
-    public Set<ProfilePartPreciseItem> getProfilePartPreciseItems() {
-        return profilePartPreciseItems;
+    public Set<ProfilePartPreciseItem> getPreciseItems() {
+        return preciseItems;
     }
 
-    public ProfilePart profilePartPreciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
-        this.profilePartPreciseItems = profilePartPreciseItems;
+    public ProfilePart preciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
+        this.preciseItems = profilePartPreciseItems;
         return this;
     }
 
-    public ProfilePart addProfilePartPreciseItem(ProfilePartPreciseItem profilePartPreciseItem) {
-        this.profilePartPreciseItems.add(profilePartPreciseItem);
-        profilePartPreciseItem.setPreciseItems(this);
+    public ProfilePart addPreciseItems(ProfilePartPreciseItem profilePartPreciseItem) {
+        this.preciseItems.add(profilePartPreciseItem);
+        profilePartPreciseItem.setProfilePart(this);
         return this;
     }
 
-    public ProfilePart removeProfilePartPreciseItem(ProfilePartPreciseItem profilePartPreciseItem) {
-        this.profilePartPreciseItems.remove(profilePartPreciseItem);
-        profilePartPreciseItem.setPreciseItems(null);
+    public ProfilePart removePreciseItems(ProfilePartPreciseItem profilePartPreciseItem) {
+        this.preciseItems.remove(profilePartPreciseItem);
+        profilePartPreciseItem.setProfilePart(null);
         return this;
     }
 
-    public void setProfilePartPreciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
-        this.profilePartPreciseItems = profilePartPreciseItems;
+    public void setPreciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
+        this.preciseItems = profilePartPreciseItems;
     }
 
-    public Set<ProfilePartSkillCategory> getProfilePartSkillCategories() {
-        return profilePartSkillCategories;
+    public Set<ProfilePartSkillCategory> getSkillCategories() {
+        return skillCategories;
     }
 
-    public ProfilePart profilePartSkillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
-        this.profilePartSkillCategories = profilePartSkillCategories;
+    public ProfilePart skillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
+        this.skillCategories = profilePartSkillCategories;
         return this;
     }
 
-    public ProfilePart addProfilePartSkillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
-        this.profilePartSkillCategories.add(profilePartSkillCategory);
-        profilePartSkillCategory.setSkillCategories(this);
+    public ProfilePart addSkillCategories(ProfilePartSkillCategory profilePartSkillCategory) {
+        this.skillCategories.add(profilePartSkillCategory);
+        profilePartSkillCategory.setProfilePart(this);
         return this;
     }
 
-    public ProfilePart removeProfilePartSkillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
-        this.profilePartSkillCategories.remove(profilePartSkillCategory);
-        profilePartSkillCategory.setSkillCategories(null);
+    public ProfilePart removeSkillCategories(ProfilePartSkillCategory profilePartSkillCategory) {
+        this.skillCategories.remove(profilePartSkillCategory);
+        profilePartSkillCategory.setProfilePart(null);
         return this;
     }
 
-    public void setProfilePartSkillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
-        this.profilePartSkillCategories = profilePartSkillCategories;
+    public void setSkillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
+        this.skillCategories = profilePartSkillCategories;
     }
 
-    public AppUserProfile getCategories() {
-        return categories;
+    public AppUserProfile getProfile() {
+        return profile;
     }
 
-    public ProfilePart categories(AppUserProfile appUserProfile) {
-        this.categories = appUserProfile;
+    public ProfilePart profile(AppUserProfile appUserProfile) {
+        this.profile = appUserProfile;
         return this;
     }
 
-    public void setCategories(AppUserProfile appUserProfile) {
-        this.categories = appUserProfile;
+    public void setProfile(AppUserProfile appUserProfile) {
+        this.profile = appUserProfile;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

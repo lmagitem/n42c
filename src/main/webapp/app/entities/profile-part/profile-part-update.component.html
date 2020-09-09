@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-profile-part-heading" jhiTranslate="n42cApp.profilePart.home.createOrEditLabel">Create or edit a Profile Part</h2>
+            <h2 id="jhi-profile-part-heading" jhiTranslate="n42CApp.profilePart.home.createOrEditLabel">Create or edit a Profile Part</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePart.title" for="field_title" [ngbTooltip]="'n42cApp.profilePart.help.title' | translate">Title</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePart.title" for="field_title" [ngbTooltip]="'n42CApp.profilePart.help.title' | translate">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
                            formControlName="title"/>
                     <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
@@ -24,13 +24,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePart.type" for="field_type" [ngbTooltip]="'n42cApp.profilePart.help.type' | translate">Type</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePart.type" for="field_type" [ngbTooltip]="'n42CApp.profilePart.help.type' | translate">Type</label>
                     <select class="form-control" name="type" formControlName="type" id="field_type">
-                        <option value="ED">{{ 'n42cApp.ProfilePartType.ED' | translate }}</option>
-                        <option value="PR">{{ 'n42cApp.ProfilePartType.PR' | translate }}</option>
-                        <option value="SK">{{ 'n42cApp.ProfilePartType.SK' | translate }}</option>
-                        <option value="CE">{{ 'n42cApp.ProfilePartType.CE' | translate }}</option>
-                        <option value="CU">{{ 'n42cApp.ProfilePartType.CU' | translate }}</option>
+                        <option value="ED">{{ 'n42CApp.ProfilePartType.ED' | translate }}</option>
+                        <option value="PR">{{ 'n42CApp.ProfilePartType.PR' | translate }}</option>
+                        <option value="SK">{{ 'n42CApp.ProfilePartType.SK' | translate }}</option>
+                        <option value="CE">{{ 'n42CApp.ProfilePartType.CE' | translate }}</option>
+                        <option value="CU">{{ 'n42CApp.ProfilePartType.CU' | translate }}</option>
                     </select>
                     <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
                         <small class="form-text text-danger"
@@ -41,22 +41,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePart.index" for="field_index" [ngbTooltip]="'n42cApp.profilePart.help.index' | translate">Index</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePart.index" for="field_index" [ngbTooltip]="'n42CApp.profilePart.help.index' | translate">Index</label>
                     <input type="number" class="form-control" name="index" id="field_index"
                            formControlName="index"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePart.order" for="field_order" [ngbTooltip]="'n42cApp.profilePart.help.order' | translate">Order</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePart.order" for="field_order" [ngbTooltip]="'n42CApp.profilePart.help.order' | translate">Order</label>
                     <select class="form-control" name="order" formControlName="order" id="field_order">
-                        <option value="AZA">{{ 'n42cApp.ProfilePartOrderType.AZA' | translate }}</option>
-                        <option value="AZD">{{ 'n42cApp.ProfilePartOrderType.AZD' | translate }}</option>
-                        <option value="YEA">{{ 'n42cApp.ProfilePartOrderType.YEA' | translate }}</option>
-                        <option value="YED">{{ 'n42cApp.ProfilePartOrderType.YED' | translate }}</option>
-                        <option value="MOA">{{ 'n42cApp.ProfilePartOrderType.MOA' | translate }}</option>
-                        <option value="MOD">{{ 'n42cApp.ProfilePartOrderType.MOD' | translate }}</option>
-                        <option value="CAA">{{ 'n42cApp.ProfilePartOrderType.CAA' | translate }}</option>
-                        <option value="CAD">{{ 'n42cApp.ProfilePartOrderType.CAD' | translate }}</option>
+                        <option value="AZA">{{ 'n42CApp.ProfilePartOrderType.AZA' | translate }}</option>
+                        <option value="AZD">{{ 'n42CApp.ProfilePartOrderType.AZD' | translate }}</option>
+                        <option value="YEA">{{ 'n42CApp.ProfilePartOrderType.YEA' | translate }}</option>
+                        <option value="YED">{{ 'n42CApp.ProfilePartOrderType.YED' | translate }}</option>
+                        <option value="MOA">{{ 'n42CApp.ProfilePartOrderType.MOA' | translate }}</option>
+                        <option value="MOD">{{ 'n42CApp.ProfilePartOrderType.MOD' | translate }}</option>
+                        <option value="CAA">{{ 'n42CApp.ProfilePartOrderType.CAA' | translate }}</option>
+                        <option value="CAD">{{ 'n42CApp.ProfilePartOrderType.CAD' | translate }}</option>
                     </select>
                     <div *ngIf="editForm.get('order')!.invalid && (editForm.get('order')!.dirty || editForm.get('order')!.touched)">
                         <small class="form-text text-danger"
@@ -67,10 +67,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePart.categories" for="field_categories">Categories</label>
-                    <select class="form-control" id="field_categories" name="categories" formControlName="categories">
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePart.profile" for="field_profile">Profile</label>
+                    <select class="form-control" id="field_profile" name="profile" formControlName="profile">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="appUserProfileOption.id === editForm.get('categories')!.value?.id ? editForm.get('categories')!.value : appUserProfileOption" *ngFor="let appUserProfileOption of appuserprofiles; trackBy: trackById">{{ appUserProfileOption.id }}</option>
+                        <option [ngValue]="appUserProfileOption.id === editForm.get('profile')!.value?.id ? editForm.get('profile')!.value : appUserProfileOption" *ngFor="let appUserProfileOption of appuserprofiles; trackBy: trackById">{{ appUserProfileOption.id }}</option>
                     </select>
                 </div>
             </div>

@@ -8,11 +8,35 @@
     -->
     <changeSet id="20200703174207-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="author_id"
-                                 baseTableName="blog_post"
-                                 constraintName="fk_blog_post_author_id"
+        <addForeignKeyConstraint baseColumnNames="blog_post_id"
+                                 baseTableName="blog_post_authors"
+                                 constraintName="fk_blog_post_authors_blog_post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blog_post"/>
+
+        <addForeignKeyConstraint baseColumnNames="authors_id"
+                                 baseTableName="blog_post_authors"
+                                 constraintName="fk_blog_post_authors_authors_id"
                                  referencedColumnNames="id"
                                  referencedTableName="app_user"/>
+        
+        <addForeignKeyConstraint baseColumnNames="blog_post_id"
+                                 baseTableName="blog_post_categories"
+                                 constraintName="fk_blog_post_categories_blog_post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blog_post"/>
+
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="blog_post_categories"
+                                 constraintName="fk_blog_post_categories_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blog_category"/>
+        
+        <addForeignKeyConstraint baseColumnNames="blog_id"
+                                 baseTableName="blog_post"
+                                 constraintName="fk_blog_post_blog_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="blog"/>
 
     </changeSet>
 </databaseChangeLog>

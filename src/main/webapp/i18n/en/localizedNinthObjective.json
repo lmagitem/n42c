@@ -1,0 +1,24 @@
+{
+  "n42CApp": {
+    "localizedNinthObjective": {
+      "home": {
+        "title": "Localized Ninth Objectives",
+        "createLabel": "Create a new Localized Ninth Objective",
+        "createOrEditLabel": "Create or edit a Localized Ninth Objective",
+        "notFound": "No Localized Ninth Objectives found"
+      },
+      "created": "A new Localized Ninth Objective is created with identifier {{ param }}",
+      "updated": "A Localized Ninth Objective is updated with identifier {{ param }}",
+      "deleted": "A Localized Ninth Objective is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Ninth Objective {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Ninth Objective"
+      },
+      "name": "Name",
+      "description": "Description",
+      "objective": "Objective"
+    }
+  }
+}

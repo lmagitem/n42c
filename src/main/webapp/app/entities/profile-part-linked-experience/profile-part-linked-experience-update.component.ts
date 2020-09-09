@@ -26,7 +26,7 @@ export class ProfilePartLinkedExperienceUpdateComponent implements OnInit {
     subTitle: [],
     date: [null, [Validators.required]],
     content: [],
-    experiences: [],
+    linkedItem: [],
   });
 
   constructor(
@@ -58,7 +58,7 @@ export class ProfilePartLinkedExperienceUpdateComponent implements OnInit {
       subTitle: profilePartLinkedExperience.subTitle,
       date: profilePartLinkedExperience.date ? profilePartLinkedExperience.date.format(DATE_TIME_FORMAT) : null,
       content: profilePartLinkedExperience.content,
-      experiences: profilePartLinkedExperience.experiences,
+      linkedItem: profilePartLinkedExperience.linkedItem,
     });
   }
 
@@ -84,7 +84,7 @@ export class ProfilePartLinkedExperienceUpdateComponent implements OnInit {
       subTitle: this.editForm.get(['subTitle'])!.value,
       date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       content: this.editForm.get(['content'])!.value,
-      experiences: this.editForm.get(['experiences'])!.value,
+      linkedItem: this.editForm.get(['linkedItem'])!.value,
     };
   }
 

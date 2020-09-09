@@ -1,0 +1,55 @@
+{
+  "name": "NinthStratagem",
+  "fields": [
+    {
+      "fieldName": "cost",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "faction",
+      "fieldType": "Faction",
+      "fieldValues": "IM (Imperium),CH (Chaos),EL (Eldar),TY (Tyranid),OR (Ork),NE (Necron),TA (Tau),OT (Other),NA (None)"
+    },
+    {
+      "fieldName": "subfaction",
+      "fieldType": "SubFaction",
+      "fieldValues": "SM (SpaceMarines),BA (BloodAngels),DA (DarkAngels),DW (Deathwatch),GK (GreyKnights),SW (SpaceWolves),GU (ImperialGuard),IN (Inquisition),OA (OfficioAssassinorum),CU (Custodes),SO (Sororitas),ME (Mechanicus),KN (ImperialKnights),SS (SistersOfSilence),SQ (Squats),DZ (Daemons),CK (ChaosKnights),CM (ChaosMarines),DG (DeathGuard),TS (ThousandSons),RH (RenegadesAndHeretics),DM (DarkMechanicum),GC (GenestealerCults),TY (Tyranids),TA (Tau),KR (Kroots),NE (Necrons),OR (Orks),CE (CraftworldEldars),DE (DarkEldars),HA (Harlequins),YN (Ynnari),OT (Others),MX (Mixed)"
+    },
+    {
+      "fieldName": "turn",
+      "fieldType": "NinthGameTurn",
+      "fieldValues": "US (User),OP (Opponent)"
+    },
+    {
+      "fieldName": "phase",
+      "fieldType": "NinthGamePhase",
+      "fieldValues": "PG (PreGame),CP (CommandPhase),MP (MovementPhase),PP (PsychicPhase),SP (ShootingPhase),CH (ChargePhase),FP (FightPhase),MO (MoralePhase),NA (None)"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedNinthStratagem",
+      "otherEntityRelationshipName": "stratagem",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthStratagemGroup",
+      "otherEntityRelationshipName": "stratagems",
+      "relationshipName": "group",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908200612",
+  "entityTableName": "ninth_stratagem",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

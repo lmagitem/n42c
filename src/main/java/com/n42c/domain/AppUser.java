@@ -1,5 +1,6 @@
 package com.n42c.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -63,13 +64,47 @@ public class AppUser implements Serializable {
     private Boolean admin;
 
     /**
+     * The user rights regarding the shop.
+     */
+    @NotNull
+    @ApiModelProperty(value = "The user rights regarding the shop.", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "shop_rights", nullable = false)
+    private AppUserRights shopRights;
+
+    /**
+     * The user rights regarding blog writing.
+     */
+    @NotNull
+    @ApiModelProperty(value = "The user rights regarding blog writing.", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "blog_rights", nullable = false)
+    private AppUserRights blogRights;
+
+    /**
+     * The user rights regarding its profile.
+     */
+    @NotNull
+    @ApiModelProperty(value = "The user rights regarding its profile.", required = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "profile_rights", nullable = false)
+    private AppUserRights profileRights;
+
+    /**
      * The user rights regarding the Scriptorium.
      */
     @NotNull
     @ApiModelProperty(value = "The user rights regarding the Scriptorium.", required = true)
     @Enumerated(EnumType.STRING)
-    @Column(name = "rights", nullable = false)
-    private AppUserRights rights;
+    @Column(name = "scriptorium_rights", nullable = false)
+    private AppUserRights scriptoriumRights;
+
+    /**
+     * The user's avatar url.
+     */
+    @ApiModelProperty(value = "The user's avatar url.")
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -77,11 +112,49 @@ public class AppUser implements Serializable {
 
     @OneToMany(mappedBy = "author")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BlogPost> blogPosts = new HashSet<>();
+    private Set<Blog> blogs = new HashSet<>();
 
-    @OneToMany(mappedBy = "profiles")
+    @OneToMany(mappedBy = "user")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<AppUserProfile> appUserProfiles = new HashSet<>();
+    private Set<AppUserProfile> profiles = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(name = "app_user_given_friendships",
+               joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
+    private Set<AppUser> givenFriendships = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JoinTable(name = "app_user_asked_friend_requests",
+               joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
+    private Set<AppUser> askedFriendRequests = new HashSet<>();
+
+    @OneToOne(mappedBy = "appUser")
+    @JsonIgnore
+    private Player player;
+
+    @ManyToMany(mappedBy = "givenFriendships")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<AppUser> receivedFriendships = new HashSet<>();
+
+    @ManyToMany(mappedBy = "askedFriendRequests")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<AppUser> pendingFriendRequests = new HashSet<>();
+
+    @ManyToMany(mappedBy = "authors")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<Product> products = new HashSet<>();
+
+    @ManyToMany(mappedBy = "authors")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<BlogPost> posts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -144,17 +217,69 @@ public class AppUser implements Serializable {
         this.admin = admin;
     }
 
-    public AppUserRights getRights() {
-        return rights;
+    public AppUserRights getShopRights() {
+        return shopRights;
     }
 
-    public AppUser rights(AppUserRights rights) {
-        this.rights = rights;
+    public AppUser shopRights(AppUserRights shopRights) {
+        this.shopRights = shopRights;
         return this;
     }
 
-    public void setRights(AppUserRights rights) {
-        this.rights = rights;
+    public void setShopRights(AppUserRights shopRights) {
+        this.shopRights = shopRights;
+    }
+
+    public AppUserRights getBlogRights() {
+        return blogRights;
+    }
+
+    public AppUser blogRights(AppUserRights blogRights) {
+        this.blogRights = blogRights;
+        return this;
+    }
+
+    public void setBlogRights(AppUserRights blogRights) {
+        this.blogRights = blogRights;
+    }
+
+    public AppUserRights getProfileRights() {
+        return profileRights;
+    }
+
+    public AppUser profileRights(AppUserRights profileRights) {
+        this.profileRights = profileRights;
+        return this;
+    }
+
+    public void setProfileRights(AppUserRights profileRights) {
+        this.profileRights = profileRights;
+    }
+
+    public AppUserRights getScriptoriumRights() {
+        return scriptoriumRights;
+    }
+
+    public AppUser scriptoriumRights(AppUserRights scriptoriumRights) {
+        this.scriptoriumRights = scriptoriumRights;
+        return this;
+    }
+
+    public void setScriptoriumRights(AppUserRights scriptoriumRights) {
+        this.scriptoriumRights = scriptoriumRights;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public AppUser avatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+        return this;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public User getUser() {
@@ -170,54 +295,217 @@ public class AppUser implements Serializable {
         this.user = user;
     }
 
-    public Set<BlogPost> getBlogPosts() {
-        return blogPosts;
+    public Set<Blog> getBlogs() {
+        return blogs;
     }
 
-    public AppUser blogPosts(Set<BlogPost> blogPosts) {
-        this.blogPosts = blogPosts;
+    public AppUser blogs(Set<Blog> blogs) {
+        this.blogs = blogs;
         return this;
     }
 
-    public AppUser addBlogPost(BlogPost blogPost) {
-        this.blogPosts.add(blogPost);
-        blogPost.setAuthor(this);
+    public AppUser addBlogs(Blog blog) {
+        this.blogs.add(blog);
+        blog.setAuthor(this);
         return this;
     }
 
-    public AppUser removeBlogPost(BlogPost blogPost) {
-        this.blogPosts.remove(blogPost);
-        blogPost.setAuthor(null);
+    public AppUser removeBlogs(Blog blog) {
+        this.blogs.remove(blog);
+        blog.setAuthor(null);
         return this;
     }
 
-    public void setBlogPosts(Set<BlogPost> blogPosts) {
-        this.blogPosts = blogPosts;
+    public void setBlogs(Set<Blog> blogs) {
+        this.blogs = blogs;
     }
 
-    public Set<AppUserProfile> getAppUserProfiles() {
-        return appUserProfiles;
+    public Set<AppUserProfile> getProfiles() {
+        return profiles;
     }
 
-    public AppUser appUserProfiles(Set<AppUserProfile> appUserProfiles) {
-        this.appUserProfiles = appUserProfiles;
+    public AppUser profiles(Set<AppUserProfile> appUserProfiles) {
+        this.profiles = appUserProfiles;
         return this;
     }
 
-    public AppUser addAppUserProfile(AppUserProfile appUserProfile) {
-        this.appUserProfiles.add(appUserProfile);
-        appUserProfile.setProfiles(this);
+    public AppUser addProfiles(AppUserProfile appUserProfile) {
+        this.profiles.add(appUserProfile);
+        appUserProfile.setUser(this);
         return this;
     }
 
-    public AppUser removeAppUserProfile(AppUserProfile appUserProfile) {
-        this.appUserProfiles.remove(appUserProfile);
-        appUserProfile.setProfiles(null);
+    public AppUser removeProfiles(AppUserProfile appUserProfile) {
+        this.profiles.remove(appUserProfile);
+        appUserProfile.setUser(null);
         return this;
     }
 
-    public void setAppUserProfiles(Set<AppUserProfile> appUserProfiles) {
-        this.appUserProfiles = appUserProfiles;
+    public void setProfiles(Set<AppUserProfile> appUserProfiles) {
+        this.profiles = appUserProfiles;
+    }
+
+    public Set<AppUser> getGivenFriendships() {
+        return givenFriendships;
+    }
+
+    public AppUser givenFriendships(Set<AppUser> appUsers) {
+        this.givenFriendships = appUsers;
+        return this;
+    }
+
+    public AppUser addGivenFriendships(AppUser appUser) {
+        this.givenFriendships.add(appUser);
+        appUser.getReceivedFriendships().add(this);
+        return this;
+    }
+
+    public AppUser removeGivenFriendships(AppUser appUser) {
+        this.givenFriendships.remove(appUser);
+        appUser.getReceivedFriendships().remove(this);
+        return this;
+    }
+
+    public void setGivenFriendships(Set<AppUser> appUsers) {
+        this.givenFriendships = appUsers;
+    }
+
+    public Set<AppUser> getAskedFriendRequests() {
+        return askedFriendRequests;
+    }
+
+    public AppUser askedFriendRequests(Set<AppUser> appUsers) {
+        this.askedFriendRequests = appUsers;
+        return this;
+    }
+
+    public AppUser addAskedFriendRequests(AppUser appUser) {
+        this.askedFriendRequests.add(appUser);
+        appUser.getPendingFriendRequests().add(this);
+        return this;
+    }
+
+    public AppUser removeAskedFriendRequests(AppUser appUser) {
+        this.askedFriendRequests.remove(appUser);
+        appUser.getPendingFriendRequests().remove(this);
+        return this;
+    }
+
+    public void setAskedFriendRequests(Set<AppUser> appUsers) {
+        this.askedFriendRequests = appUsers;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public AppUser player(Player player) {
+        this.player = player;
+        return this;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Set<AppUser> getReceivedFriendships() {
+        return receivedFriendships;
+    }
+
+    public AppUser receivedFriendships(Set<AppUser> appUsers) {
+        this.receivedFriendships = appUsers;
+        return this;
+    }
+
+    public AppUser addReceivedFriendships(AppUser appUser) {
+        this.receivedFriendships.add(appUser);
+        appUser.getGivenFriendships().add(this);
+        return this;
+    }
+
+    public AppUser removeReceivedFriendships(AppUser appUser) {
+        this.receivedFriendships.remove(appUser);
+        appUser.getGivenFriendships().remove(this);
+        return this;
+    }
+
+    public void setReceivedFriendships(Set<AppUser> appUsers) {
+        this.receivedFriendships = appUsers;
+    }
+
+    public Set<AppUser> getPendingFriendRequests() {
+        return pendingFriendRequests;
+    }
+
+    public AppUser pendingFriendRequests(Set<AppUser> appUsers) {
+        this.pendingFriendRequests = appUsers;
+        return this;
+    }
+
+    public AppUser addPendingFriendRequests(AppUser appUser) {
+        this.pendingFriendRequests.add(appUser);
+        appUser.getAskedFriendRequests().add(this);
+        return this;
+    }
+
+    public AppUser removePendingFriendRequests(AppUser appUser) {
+        this.pendingFriendRequests.remove(appUser);
+        appUser.getAskedFriendRequests().remove(this);
+        return this;
+    }
+
+    public void setPendingFriendRequests(Set<AppUser> appUsers) {
+        this.pendingFriendRequests = appUsers;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public AppUser products(Set<Product> products) {
+        this.products = products;
+        return this;
+    }
+
+    public AppUser addProducts(Product product) {
+        this.products.add(product);
+        product.getAuthors().add(this);
+        return this;
+    }
+
+    public AppUser removeProducts(Product product) {
+        this.products.remove(product);
+        product.getAuthors().remove(this);
+        return this;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public Set<BlogPost> getPosts() {
+        return posts;
+    }
+
+    public AppUser posts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
+        return this;
+    }
+
+    public AppUser addPosts(BlogPost blogPost) {
+        this.posts.add(blogPost);
+        blogPost.getAuthors().add(this);
+        return this;
+    }
+
+    public AppUser removePosts(BlogPost blogPost) {
+        this.posts.remove(blogPost);
+        blogPost.getAuthors().remove(this);
+        return this;
+    }
+
+    public void setPosts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -246,7 +534,11 @@ public class AppUser implements Serializable {
             ", displayedName='" + getDisplayedName() + "'" +
             ", email='" + getEmail() + "'" +
             ", admin='" + isAdmin() + "'" +
-            ", rights='" + getRights() + "'" +
+            ", shopRights='" + getShopRights() + "'" +
+            ", blogRights='" + getBlogRights() + "'" +
+            ", profileRights='" + getProfileRights() + "'" +
+            ", scriptoriumRights='" + getScriptoriumRights() + "'" +
+            ", avatarUrl='" + getAvatarUrl() + "'" +
             "}";
     }
 }

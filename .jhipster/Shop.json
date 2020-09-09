@@ -1,0 +1,24 @@
+{
+  "name": "Shop",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "shop",
+      "relationshipName": "products"
+    }
+  ],
+  "changelogDate": "20200908193312",
+  "javadoc": "A shop to display on the website",
+  "entityTableName": "shop",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

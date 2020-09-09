@@ -1,22 +1,20 @@
+import { ILocalizedBlogCategory } from 'app/shared/model/localized-blog-category.model';
 import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
 
 export interface IBlogCategory {
   id?: number;
-  name?: string;
-  language?: Language;
-  blogCategories?: IBlogCategory[];
-  categories?: IBlogPost;
-  subcategories?: IBlogCategory;
+  subcategories?: IBlogCategory[];
+  localizations?: ILocalizedBlogCategory[];
+  parentCategory?: IBlogCategory;
+  posts?: IBlogPost[];
 }
 
 export class BlogCategory implements IBlogCategory {
   constructor(
     public id?: number,
-    public name?: string,
-    public language?: Language,
-    public blogCategories?: IBlogCategory[],
-    public categories?: IBlogPost,
-    public subcategories?: IBlogCategory
+    public subcategories?: IBlogCategory[],
+    public localizations?: ILocalizedBlogCategory[],
+    public parentCategory?: IBlogCategory,
+    public posts?: IBlogPost[]
   ) {}
 }

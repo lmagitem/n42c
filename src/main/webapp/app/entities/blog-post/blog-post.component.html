@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="n42cApp.blogPost.home.title">Blog Posts</span>
+        <span jhiTranslate="n42CApp.blogPost.home.title">Blog Posts</span>
 
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-blog-post" [routerLink]="['/blog-post/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42cApp.blogPost.home.createLabel">
+            <span  jhiTranslate="n42CApp.blogPost.home.createLabel">
             Create a new Blog Post
             </span>
         </button>
@@ -15,7 +15,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="blogPosts?.length === 0">
-        <span jhiTranslate="n42cApp.blogPost.home.notFound">No blogPosts found</span>
+        <span jhiTranslate="n42CApp.blogPost.home.notFound">No blogPosts found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="blogPosts && blogPosts.length > 0">
@@ -23,11 +23,9 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="published"><span jhiTranslate="n42cApp.blogPost.published">Published</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="excerpt"><span jhiTranslate="n42cApp.blogPost.excerpt">Excerpt</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="content"><span jhiTranslate="n42cApp.blogPost.content">Content</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="language"><span jhiTranslate="n42cApp.blogPost.language">Language</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="author.id"><span jhiTranslate="n42cApp.blogPost.author">Author</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="published"><span jhiTranslate="n42CApp.blogPost.published">Published</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="modified"><span jhiTranslate="n42CApp.blogPost.modified">Modified</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="blog.id"><span jhiTranslate="n42CApp.blogPost.blog">Blog</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -35,12 +33,10 @@
                 <tr *ngFor="let blogPost of blogPosts ;trackBy: trackId">
                     <td><a [routerLink]="['/blog-post', blogPost.id, 'view']">{{ blogPost.id }}</a></td>
                     <td>{{ blogPost.published | date:'medium' }}</td>
-                    <td>{{ blogPost.excerpt }}</td>
-                    <td>{{ blogPost.content }}</td>
-                    <td jhiTranslate="{{ 'n42cApp.Language.' + blogPost.language }}">{{ blogPost.language }}</td>
+                    <td>{{ blogPost.modified | date:'medium' }}</td>
                     <td>
-                        <div *ngIf="blogPost.author">
-                            <a [routerLink]="['/app-user', blogPost.author?.id, 'view']" >{{ blogPost.author?.id }}</a>
+                        <div *ngIf="blogPost.blog">
+                            <a [routerLink]="['/blog', blogPost.blog?.id, 'view']" >{{ blogPost.blog?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

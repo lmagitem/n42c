@@ -90,12 +90,18 @@ public class BlogPostResource {
      * {@code GET  /blog-posts} : get all the blogPosts.
      *
      * @param pageable the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogPosts in body.
      */
     @GetMapping("/blog-posts")
-    public ResponseEntity<List<BlogPost>> getAllBlogPosts(Pageable pageable) {
+    public ResponseEntity<List<BlogPost>> getAllBlogPosts(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of BlogPosts");
-        Page<BlogPost> page = blogPostRepository.findAll(pageable);
+        Page<BlogPost> page;
+        if (eagerload) {
+            page = blogPostRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            page = blogPostRepository.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -109,7 +115,7 @@ public class BlogPostResource {
     @GetMapping("/blog-posts/{id}")
     public ResponseEntity<BlogPost> getBlogPost(@PathVariable Long id) {
         log.debug("REST request to get BlogPost : {}", id);
-        Optional<BlogPost> blogPost = blogPostRepository.findById(id);
+        Optional<BlogPost> blogPost = blogPostRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(blogPost);
     }
 

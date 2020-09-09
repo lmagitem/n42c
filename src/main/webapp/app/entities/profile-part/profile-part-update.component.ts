@@ -24,7 +24,7 @@ export class ProfilePartUpdateComponent implements OnInit {
     type: [null, [Validators.required]],
     index: [],
     order: [null, [Validators.required]],
-    categories: [],
+    profile: [],
   });
 
   constructor(
@@ -49,7 +49,7 @@ export class ProfilePartUpdateComponent implements OnInit {
       type: profilePart.type,
       index: profilePart.index,
       order: profilePart.order,
-      categories: profilePart.categories,
+      profile: profilePart.profile,
     });
   }
 
@@ -75,7 +75,7 @@ export class ProfilePartUpdateComponent implements OnInit {
       type: this.editForm.get(['type'])!.value,
       index: this.editForm.get(['index'])!.value,
       order: this.editForm.get(['order'])!.value,
-      categories: this.editForm.get(['categories'])!.value,
+      profile: this.editForm.get(['profile'])!.value,
     };
   }
 

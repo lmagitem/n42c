@@ -27,7 +27,7 @@
             <column name="jhi_order" type="varchar(255)" remarks="The order to use when displaying the elements contained in this part.">
                 <constraints nullable="false" />
             </column>
-            <column name="categories_id" type="bigint">
+            <column name="profile_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

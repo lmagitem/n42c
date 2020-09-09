@@ -1,0 +1,28 @@
+{
+  "n42CApp": {
+    "localizedBlogCategory": {
+      "home": {
+        "title": "LocalizedBlogCategories",
+        "createLabel": "Créer un nouveau Localized Blog Category",
+        "createOrEditLabel": "Créer ou éditer un Localized Blog Category",
+        "notFound": "Aucun Localized Blog Category trouvé"
+      },
+      "created": "Un nouveau Localized Blog Category a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Localized Blog Category avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Localized Blog Category avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Localized Blog Category {{ id }} ?"
+      },
+      "detail": {
+        "title": "Localized Blog Category"
+      },
+      "name": "Name",
+      "language": "Language",
+      "category": "Category",
+      "help": {
+        "name": "This category&#39;s name.",
+        "language": "This category&#39;s language."
+      }
+    }
+  }
+}

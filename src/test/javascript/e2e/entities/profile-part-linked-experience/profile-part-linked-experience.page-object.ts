@@ -34,7 +34,7 @@ export class ProfilePartLinkedExperienceUpdatePage {
   dateInput = element(by.id('field_date'));
   contentInput = element(by.id('field_content'));
 
-  experiencesSelect = element(by.id('field_experiences'));
+  linkedItemSelect = element(by.id('field_linkedItem'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -72,20 +72,20 @@ export class ProfilePartLinkedExperienceUpdatePage {
     return await this.contentInput.getAttribute('value');
   }
 
-  async experiencesSelectLastOption(): Promise<void> {
-    await this.experiencesSelect.all(by.tagName('option')).last().click();
+  async linkedItemSelectLastOption(): Promise<void> {
+    await this.linkedItemSelect.all(by.tagName('option')).last().click();
   }
 
-  async experiencesSelectOption(option: string): Promise<void> {
-    await this.experiencesSelect.sendKeys(option);
+  async linkedItemSelectOption(option: string): Promise<void> {
+    await this.linkedItemSelect.sendKeys(option);
   }
 
-  getExperiencesSelect(): ElementFinder {
-    return this.experiencesSelect;
+  getLinkedItemSelect(): ElementFinder {
+    return this.linkedItemSelect;
   }
 
-  async getExperiencesSelectedOption(): Promise<string> {
-    return await this.experiencesSelect.element(by.css('option:checked')).getText();
+  async getLinkedItemSelectedOption(): Promise<string> {
+    return await this.linkedItemSelect.element(by.css('option:checked')).getText();
   }
 
   async save(): Promise<void> {

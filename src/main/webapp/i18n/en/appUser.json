@@ -1,5 +1,5 @@
 {
-  "n42cApp": {
+  "n42CApp": {
     "appUser": {
       "home": {
         "title": "App Users",
@@ -20,16 +20,31 @@
       "displayedName": "Displayed Name",
       "email": "Email",
       "admin": "Admin",
-      "rights": "Rights",
+      "shopRights": "Shop Rights",
+      "blogRights": "Blog Rights",
+      "profileRights": "Profile Rights",
+      "scriptoriumRights": "Scriptorium Rights",
+      "avatarUrl": "Avatar Url",
       "user": "User",
-      "blogPost": "Blog Post",
-      "appUserProfile": "App User Profile",
+      "blogs": "Blogs",
+      "profiles": "Profiles",
+      "givenFriendships": "Given Friendships",
+      "askedFriendRequests": "Asked Friend Requests",
+      "player": "Player",
+      "receivedFriendships": "Received Friendships",
+      "pendingFriendRequests": "Pending Friend Requests",
+      "products": "Products",
+      "posts": "Posts",
       "help": {
         "userName": "The user account&#39;s name.",
         "displayedName": "The name shown throughout the app.",
         "email": "The user email adress.",
         "admin": "Does the user have admin rights?",
-        "rights": "The user rights regarding the Scriptorium."
+        "shopRights": "The user rights regarding the shop.",
+        "blogRights": "The user rights regarding blog writing.",
+        "profileRights": "The user rights regarding its profile.",
+        "scriptoriumRights": "The user rights regarding the Scriptorium.",
+        "avatarUrl": "The user&#39;s avatar url."
       }
     }
   }

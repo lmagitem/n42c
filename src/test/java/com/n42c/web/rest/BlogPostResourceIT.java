@@ -7,9 +7,14 @@ import com.n42c.repository.BlogPostRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,19 +22,21 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link BlogPostResource} REST controller.
  */
 @SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 public class BlogPostResourceIT {
@@ -37,17 +44,14 @@ public class BlogPostResourceIT {
     private static final Instant DEFAULT_PUBLISHED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_PUBLISHED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_EXCERPT = "AAAAAAAAAA";
-    private static final String UPDATED_EXCERPT = "BBBBBBBBBB";
-
-    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
-    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
-
-    private static final Language DEFAULT_LANGUAGE = Language.EN;
-    private static final Language UPDATED_LANGUAGE = Language.FR;
+    private static final Instant DEFAULT_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private BlogPostRepository blogPostRepository;
+
+    @Mock
+    private BlogPostRepository blogPostRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -66,9 +70,7 @@ public class BlogPostResourceIT {
     public static BlogPost createEntity(EntityManager em) {
         BlogPost blogPost = new BlogPost()
             .published(DEFAULT_PUBLISHED)
-            .excerpt(DEFAULT_EXCERPT)
-            .content(DEFAULT_CONTENT)
-            .language(DEFAULT_LANGUAGE);
+            .modified(DEFAULT_MODIFIED);
         return blogPost;
     }
     /**
@@ -80,9 +82,7 @@ public class BlogPostResourceIT {
     public static BlogPost createUpdatedEntity(EntityManager em) {
         BlogPost blogPost = new BlogPost()
             .published(UPDATED_PUBLISHED)
-            .excerpt(UPDATED_EXCERPT)
-            .content(UPDATED_CONTENT)
-            .language(UPDATED_LANGUAGE);
+            .modified(UPDATED_MODIFIED);
         return blogPost;
     }
 
@@ -106,9 +106,7 @@ public class BlogPostResourceIT {
         assertThat(blogPostList).hasSize(databaseSizeBeforeCreate + 1);
         BlogPost testBlogPost = blogPostList.get(blogPostList.size() - 1);
         assertThat(testBlogPost.getPublished()).isEqualTo(DEFAULT_PUBLISHED);
-        assertThat(testBlogPost.getExcerpt()).isEqualTo(DEFAULT_EXCERPT);
-        assertThat(testBlogPost.getContent()).isEqualTo(DEFAULT_CONTENT);
-        assertThat(testBlogPost.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
+        assertThat(testBlogPost.getModified()).isEqualTo(DEFAULT_MODIFIED);
     }
 
     @Test
@@ -152,10 +150,10 @@ public class BlogPostResourceIT {
 
     @Test
     @Transactional
-    public void checkContentIsRequired() throws Exception {
+    public void checkModifiedIsRequired() throws Exception {
         int databaseSizeBeforeTest = blogPostRepository.findAll().size();
         // set the field null
-        blogPost.setContent(null);
+        blogPost.setModified(null);
 
         // Create the BlogPost, which fails.
 
@@ -181,11 +179,29 @@ public class BlogPostResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(blogPost.getId().intValue())))
             .andExpect(jsonPath("$.[*].published").value(hasItem(DEFAULT_PUBLISHED.toString())))
-            .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
-            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
+            .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllBlogPostsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restBlogPostMockMvc.perform(get("/api/blog-posts?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(blogPostRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllBlogPostsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restBlogPostMockMvc.perform(get("/api/blog-posts?eagerload=true"))
+            .andExpect(status().isOk());
+
+        verify(blogPostRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getBlogPost() throws Exception {
@@ -198,9 +214,7 @@ public class BlogPostResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(blogPost.getId().intValue()))
             .andExpect(jsonPath("$.published").value(DEFAULT_PUBLISHED.toString()))
-            .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
-            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
+            .andExpect(jsonPath("$.modified").value(DEFAULT_MODIFIED.toString()));
     }
     @Test
     @Transactional
@@ -224,9 +238,7 @@ public class BlogPostResourceIT {
         em.detach(updatedBlogPost);
         updatedBlogPost
             .published(UPDATED_PUBLISHED)
-            .excerpt(UPDATED_EXCERPT)
-            .content(UPDATED_CONTENT)
-            .language(UPDATED_LANGUAGE);
+            .modified(UPDATED_MODIFIED);
 
         restBlogPostMockMvc.perform(put("/api/blog-posts").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -238,9 +250,7 @@ public class BlogPostResourceIT {
         assertThat(blogPostList).hasSize(databaseSizeBeforeUpdate);
         BlogPost testBlogPost = blogPostList.get(blogPostList.size() - 1);
         assertThat(testBlogPost.getPublished()).isEqualTo(UPDATED_PUBLISHED);
-        assertThat(testBlogPost.getExcerpt()).isEqualTo(UPDATED_EXCERPT);
-        assertThat(testBlogPost.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testBlogPost.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
+        assertThat(testBlogPost.getModified()).isEqualTo(UPDATED_MODIFIED);
     }
 
     @Test

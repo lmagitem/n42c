@@ -27,7 +27,7 @@
             <column name="content" type="varchar(255)" remarks="This experience&apos;s content.">
                 <constraints nullable="true" />
             </column>
-            <column name="experiences_id" type="bigint">
+            <column name="linked_item_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

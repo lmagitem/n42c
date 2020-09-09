@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-profile-part-skill-category-heading" jhiTranslate="n42cApp.profilePartSkillCategory.home.createOrEditLabel">Create or edit a Profile Part Skill Category</h2>
+            <h2 id="jhi-profile-part-skill-category-heading" jhiTranslate="n42CApp.profilePartSkillCategory.home.createOrEditLabel">Create or edit a Profile Part Skill Category</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartSkillCategory.name" for="field_name" [ngbTooltip]="'n42cApp.profilePartSkillCategory.help.name' | translate">Name</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartSkillCategory.name" for="field_name" [ngbTooltip]="'n42CApp.profilePartSkillCategory.help.name' | translate">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
                     <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
@@ -24,16 +24,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartSkillCategory.index" for="field_index" [ngbTooltip]="'n42cApp.profilePartSkillCategory.help.index' | translate">Index</label>
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartSkillCategory.index" for="field_index" [ngbTooltip]="'n42CApp.profilePartSkillCategory.help.index' | translate">Index</label>
                     <input type="number" class="form-control" name="index" id="field_index"
                            formControlName="index"/>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42cApp.profilePartSkillCategory.skillCategories" for="field_skillCategories">Skill Categories</label>
-                    <select class="form-control" id="field_skillCategories" name="skillCategories" formControlName="skillCategories">
+                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartSkillCategory.profilePart" for="field_profilePart">Profile Part</label>
+                    <select class="form-control" id="field_profilePart" name="profilePart" formControlName="profilePart">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="profilePartOption.id === editForm.get('skillCategories')!.value?.id ? editForm.get('skillCategories')!.value : profilePartOption" *ngFor="let profilePartOption of profileparts; trackBy: trackById">{{ profilePartOption.id }}</option>
+                        <option [ngValue]="profilePartOption.id === editForm.get('profilePart')!.value?.id ? editForm.get('profilePart')!.value : profilePartOption" *ngFor="let profilePartOption of profileparts; trackBy: trackById">{{ profilePartOption.id }}</option>
                     </select>
                 </div>
             </div>

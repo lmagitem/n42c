@@ -1,0 +1,27 @@
+{
+  "n42CApp": {
+    "ninthCampaign": {
+      "home": {
+        "title": "NinthCampaigns",
+        "createLabel": "Créer un nouveau Ninth Campaign",
+        "createOrEditLabel": "Créer ou éditer un Ninth Campaign",
+        "notFound": "Aucun Ninth Campaign trouvé"
+      },
+      "created": "Un nouveau Ninth Campaign a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Campaign avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Campaign avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Campaign {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Campaign"
+      },
+      "gameType": "Game Type",
+      "usePowerRating": "Use Power Rating",
+      "events": "Events",
+      "authors": "Authors",
+      "participants": "Participants",
+      "campaignStratagems": "Campaign Stratagems"
+    }
+  }
+}

@@ -39,7 +39,7 @@
             <column name="content" type="varchar(255)" remarks="This item&apos;s content.">
                 <constraints nullable="true" />
             </column>
-            <column name="precise_items_id" type="bigint">
+            <column name="profile_part_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

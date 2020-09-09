@@ -1,0 +1,37 @@
+{
+  "n42CApp": {
+    "ninthArmyMoment": {
+      "home": {
+        "title": "NinthArmyMoments",
+        "createLabel": "Créer un nouveau Ninth Army Moment",
+        "createOrEditLabel": "Créer ou éditer un Ninth Army Moment",
+        "notFound": "Aucun Ninth Army Moment trouvé"
+      },
+      "created": "Un nouveau Ninth Army Moment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Army Moment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Army Moment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Army Moment {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Army Moment"
+      },
+      "current": "Current",
+      "sinceInstant": "Since Instant",
+      "majorVictories": "Major Victories",
+      "minorVictories": "Minor Victories",
+      "draws": "Draws",
+      "minorDefeats": "Minor Defeats",
+      "majorDefeats": "Major Defeats",
+      "requisition": "Requisition",
+      "supplyLimit": "Supply Limit",
+      "supplyUsed": "Supply Used",
+      "objectives": "Objectives",
+      "notes": "Notes",
+      "selectedUnits": "Selected Units",
+      "selectedObjectives": "Selected Objectives",
+      "battle": "Battle",
+      "army": "Army"
+    }
+  }
+}

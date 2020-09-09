@@ -1,0 +1,108 @@
+{
+  "name": "NinthArmyUnitMoment",
+  "fields": [
+    {
+      "fieldName": "current",
+      "fieldType": "Boolean",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "sinceInstant",
+      "fieldType": "Instant",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "pointsCost",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "powerRating",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "experiencePoints",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "crusadePoints",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "equipment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "psychicPowers",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "warlordTraits",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "relics",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "otherUpgrades",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "battlesPlayed",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "battlesSurvived",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rangedKills",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "meleeKills",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "psychicKills",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "crusadeRank",
+      "fieldType": "NinthCrusadeRank",
+      "fieldValues": "RE (Ready),BL (Bloodied),BH (BattleHardened),HE (Heroic),LE (Legendary)"
+    },
+    {
+      "fieldName": "battleHonours",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "battleScars",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthArmyUnit",
+      "otherEntityRelationshipName": "moments",
+      "relationshipName": "armyUnit",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908195512",
+  "entityTableName": "ninth_army_unit_moment",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

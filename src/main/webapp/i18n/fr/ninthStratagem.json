@@ -1,0 +1,28 @@
+{
+  "n42CApp": {
+    "ninthStratagem": {
+      "home": {
+        "title": "NinthStratagems",
+        "createLabel": "Créer un nouveau Ninth Stratagem",
+        "createOrEditLabel": "Créer ou éditer un Ninth Stratagem",
+        "notFound": "Aucun Ninth Stratagem trouvé"
+      },
+      "created": "Un nouveau Ninth Stratagem a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ninth Stratagem avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ninth Stratagem avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Ninth Stratagem {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ninth Stratagem"
+      },
+      "cost": "Cost",
+      "faction": "Faction",
+      "subfaction": "Subfaction",
+      "turn": "Turn",
+      "phase": "Phase",
+      "localizations": "Localizations",
+      "group": "Group"
+    }
+  }
+}

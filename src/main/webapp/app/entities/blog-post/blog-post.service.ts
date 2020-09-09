@@ -51,6 +51,7 @@ export class BlogPostService {
   protected convertDateFromClient(blogPost: IBlogPost): IBlogPost {
     const copy: IBlogPost = Object.assign({}, blogPost, {
       published: blogPost.published && blogPost.published.isValid() ? blogPost.published.toJSON() : undefined,
+      modified: blogPost.modified && blogPost.modified.isValid() ? blogPost.modified.toJSON() : undefined,
     });
     return copy;
   }
@@ -58,6 +59,7 @@ export class BlogPostService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.published = res.body.published ? moment(res.body.published) : undefined;
+      res.body.modified = res.body.modified ? moment(res.body.modified) : undefined;
     }
     return res;
   }
@@ -66,6 +68,7 @@ export class BlogPostService {
     if (res.body) {
       res.body.forEach((blogPost: IBlogPost) => {
         blogPost.published = blogPost.published ? moment(blogPost.published) : undefined;
+        blogPost.modified = blogPost.modified ? moment(blogPost.modified) : undefined;
       });
     }
     return res;

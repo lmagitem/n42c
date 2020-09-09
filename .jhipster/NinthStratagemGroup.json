@@ -1,0 +1,57 @@
+{
+  "name": "NinthStratagemGroup",
+  "fields": [
+    {
+      "fieldName": "shareable",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedNinthStratagemGroup",
+      "otherEntityRelationshipName": "stratagemGroup",
+      "relationshipName": "localizations"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthStratagem",
+      "otherEntityRelationshipName": "group",
+      "relationshipName": "stratagems"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "player",
+      "otherEntityRelationshipName": "stratagemGroups",
+      "relationshipName": "author",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthCampaign",
+      "otherEntityRelationshipName": "campaignStratagems",
+      "relationshipName": "campaigns",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthMission",
+      "otherEntityRelationshipName": "missionStratagems",
+      "relationshipName": "missions",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200908200412",
+  "entityTableName": "ninth_stratagem_group",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

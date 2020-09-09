@@ -1,19 +1,16 @@
 package com.n42c.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * Categories in which a blog post might be filled.
@@ -31,33 +28,22 @@ public class BlogCategory implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    /**
-     * This category's name.
-     */
-    @NotNull
-    @ApiModelProperty(value = "This category's name.", required = true)
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    /**
-     * This category's language.
-     */
-    @ApiModelProperty(value = "This category's language.")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "language")
-    private Language language;
-
-    @OneToMany(mappedBy = "subcategories")
+    @OneToMany(mappedBy = "parentCategory")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<BlogCategory> blogCategories = new HashSet<>();
+    private Set<BlogCategory> subcategories = new HashSet<>();
+
+    @OneToMany(mappedBy = "category")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<LocalizedBlogCategory> localizations = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "blogCategories", allowSetters = true)
-    private BlogPost categories;
+    @JsonIgnoreProperties(value = "subcategories", allowSetters = true)
+    private BlogCategory parentCategory;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "blogCategories", allowSetters = true)
-    private BlogCategory subcategories;
+    @ManyToMany(mappedBy = "categories")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnore
+    private Set<BlogPost> posts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -68,81 +54,92 @@ public class BlogCategory implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public BlogCategory name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Language getLanguage() {
-        return language;
-    }
-
-    public BlogCategory language(Language language) {
-        this.language = language;
-        return this;
-    }
-
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
-    public Set<BlogCategory> getBlogCategories() {
-        return blogCategories;
-    }
-
-    public BlogCategory blogCategories(Set<BlogCategory> blogCategories) {
-        this.blogCategories = blogCategories;
-        return this;
-    }
-
-    public BlogCategory addBlogCategory(BlogCategory blogCategory) {
-        this.blogCategories.add(blogCategory);
-        blogCategory.setSubcategories(this);
-        return this;
-    }
-
-    public BlogCategory removeBlogCategory(BlogCategory blogCategory) {
-        this.blogCategories.remove(blogCategory);
-        blogCategory.setSubcategories(null);
-        return this;
-    }
-
-    public void setBlogCategories(Set<BlogCategory> blogCategories) {
-        this.blogCategories = blogCategories;
-    }
-
-    public BlogPost getCategories() {
-        return categories;
-    }
-
-    public BlogCategory categories(BlogPost blogPost) {
-        this.categories = blogPost;
-        return this;
-    }
-
-    public void setCategories(BlogPost blogPost) {
-        this.categories = blogPost;
-    }
-
-    public BlogCategory getSubcategories() {
+    public Set<BlogCategory> getSubcategories() {
         return subcategories;
     }
 
-    public BlogCategory subcategories(BlogCategory blogCategory) {
-        this.subcategories = blogCategory;
+    public BlogCategory subcategories(Set<BlogCategory> blogCategories) {
+        this.subcategories = blogCategories;
         return this;
     }
 
-    public void setSubcategories(BlogCategory blogCategory) {
-        this.subcategories = blogCategory;
+    public BlogCategory addSubcategories(BlogCategory blogCategory) {
+        this.subcategories.add(blogCategory);
+        blogCategory.setParentCategory(this);
+        return this;
+    }
+
+    public BlogCategory removeSubcategories(BlogCategory blogCategory) {
+        this.subcategories.remove(blogCategory);
+        blogCategory.setParentCategory(null);
+        return this;
+    }
+
+    public void setSubcategories(Set<BlogCategory> blogCategories) {
+        this.subcategories = blogCategories;
+    }
+
+    public Set<LocalizedBlogCategory> getLocalizations() {
+        return localizations;
+    }
+
+    public BlogCategory localizations(Set<LocalizedBlogCategory> localizedBlogCategories) {
+        this.localizations = localizedBlogCategories;
+        return this;
+    }
+
+    public BlogCategory addLocalizations(LocalizedBlogCategory localizedBlogCategory) {
+        this.localizations.add(localizedBlogCategory);
+        localizedBlogCategory.setCategory(this);
+        return this;
+    }
+
+    public BlogCategory removeLocalizations(LocalizedBlogCategory localizedBlogCategory) {
+        this.localizations.remove(localizedBlogCategory);
+        localizedBlogCategory.setCategory(null);
+        return this;
+    }
+
+    public void setLocalizations(Set<LocalizedBlogCategory> localizedBlogCategories) {
+        this.localizations = localizedBlogCategories;
+    }
+
+    public BlogCategory getParentCategory() {
+        return parentCategory;
+    }
+
+    public BlogCategory parentCategory(BlogCategory blogCategory) {
+        this.parentCategory = blogCategory;
+        return this;
+    }
+
+    public void setParentCategory(BlogCategory blogCategory) {
+        this.parentCategory = blogCategory;
+    }
+
+    public Set<BlogPost> getPosts() {
+        return posts;
+    }
+
+    public BlogCategory posts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
+        return this;
+    }
+
+    public BlogCategory addPosts(BlogPost blogPost) {
+        this.posts.add(blogPost);
+        blogPost.getCategories().add(this);
+        return this;
+    }
+
+    public BlogCategory removePosts(BlogPost blogPost) {
+        this.posts.remove(blogPost);
+        blogPost.getCategories().remove(this);
+        return this;
+    }
+
+    public void setPosts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -167,8 +164,6 @@ public class BlogCategory implements Serializable {
     public String toString() {
         return "BlogCategory{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", language='" + getLanguage() + "'" +
             "}";
     }
 }

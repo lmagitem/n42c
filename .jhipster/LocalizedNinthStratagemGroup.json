@@ -1,0 +1,29 @@
+{
+  "name": "LocalizedNinthStratagemGroup",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "ninthStratagemGroup",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipName": "stratagemGroup",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200908200512",
+  "entityTableName": "localized_ninth_stratagem_group",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

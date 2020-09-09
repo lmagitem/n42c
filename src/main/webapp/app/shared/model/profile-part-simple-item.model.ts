@@ -7,7 +7,7 @@ export interface IProfilePartSimpleItem {
   subTitle?: string;
   date?: Moment;
   content?: string;
-  simpleItems?: IProfilePart;
+  profilePart?: IProfilePart;
 }
 
 export class ProfilePartSimpleItem implements IProfilePartSimpleItem {
@@ -17,6 +17,6 @@ export class ProfilePartSimpleItem implements IProfilePartSimpleItem {
     public subTitle?: string,
     public date?: Moment,
     public content?: string,
-    public simpleItems?: IProfilePart
+    public profilePart?: IProfilePart
   ) {}
 }

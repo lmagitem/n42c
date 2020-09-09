@@ -1,5 +1,5 @@
 {
-  "n42cApp": {
+  "n42CApp": {
     "blogCategory": {
       "home": {
         "title": "Blog Categories",
@@ -16,15 +16,10 @@
       "detail": {
         "title": "Blog Category"
       },
-      "name": "Name",
-      "language": "Language",
-      "blogCategory": "Blog Category",
-      "categories": "Categories",
       "subcategories": "Subcategories",
-      "help": {
-        "name": "This category&#39;s name.",
-        "language": "This category&#39;s language."
-      }
+      "localizations": "Localizations",
+      "parentCategory": "Parent Category",
+      "posts": "Posts"
     }
   }
 }

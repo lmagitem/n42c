@@ -1,0 +1,60 @@
+{
+  "name": "Player",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "player",
+      "relationshipName": "appUser",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthArmy",
+      "otherEntityRelationshipName": "author",
+      "relationshipName": "lists"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthUnit",
+      "otherEntityRelationshipName": "owner",
+      "relationshipName": "collection"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "ninthStratagemGroup",
+      "otherEntityRelationshipName": "author",
+      "relationshipName": "stratagemGroups"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthCampaign",
+      "otherEntityRelationshipName": "authors",
+      "relationshipName": "authoredCampaigns",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "ninthCampaign",
+      "otherEntityRelationshipName": "participants",
+      "relationshipName": "campaigns",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200908194812",
+  "javadoc": "Scriptorium's player.",
+  "entityTableName": "player",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

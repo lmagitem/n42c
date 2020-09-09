@@ -30,7 +30,7 @@ export class ProfilePartPreciseItemUpdateComponent implements OnInit {
     locationLat: [],
     locationLong: [],
     content: [],
-    preciseItems: [],
+    profilePart: [],
   });
 
   constructor(
@@ -65,7 +65,7 @@ export class ProfilePartPreciseItemUpdateComponent implements OnInit {
       locationLat: profilePartPreciseItem.locationLat,
       locationLong: profilePartPreciseItem.locationLong,
       content: profilePartPreciseItem.content,
-      preciseItems: profilePartPreciseItem.preciseItems,
+      profilePart: profilePartPreciseItem.profilePart,
     });
   }
 
@@ -95,7 +95,7 @@ export class ProfilePartPreciseItemUpdateComponent implements OnInit {
       locationLat: this.editForm.get(['locationLat'])!.value,
       locationLong: this.editForm.get(['locationLong'])!.value,
       content: this.editForm.get(['content'])!.value,
-      preciseItems: this.editForm.get(['preciseItems'])!.value,
+      profilePart: this.editForm.get(['profilePart'])!.value,
     };
   }
 

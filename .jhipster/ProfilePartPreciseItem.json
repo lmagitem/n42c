@@ -52,14 +52,14 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "profilePartLinkedExperience",
-      "otherEntityRelationshipName": "experiences",
-      "relationshipName": "profilePartLinkedExperience"
+      "otherEntityRelationshipName": "linkedItem",
+      "relationshipName": "experiences"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "profilePart",
-      "otherEntityRelationshipName": "profilePartPreciseItem",
-      "relationshipName": "preciseItems",
+      "otherEntityRelationshipName": "preciseItems",
+      "relationshipName": "profilePart",
       "otherEntityField": "id"
     }
   ],

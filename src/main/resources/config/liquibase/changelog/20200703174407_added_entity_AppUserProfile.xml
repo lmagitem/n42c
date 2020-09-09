@@ -30,7 +30,7 @@
             <column name="language" type="varchar(255)" remarks="This profile&apos;s language.">
                 <constraints nullable="true" />
             </column>
-            <column name="profiles_id" type="bigint">
+            <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

@@ -8,7 +8,7 @@ export interface IProfilePartSkill {
   index?: number;
   level?: LevelOfMastery;
   linkedSkills?: IProfilePartLinkedExperience[];
-  skills?: IProfilePartSkillCategory;
+  skillCategory?: IProfilePartSkillCategory;
 }
 
 export class ProfilePartSkill implements IProfilePartSkill {
@@ -18,6 +18,6 @@ export class ProfilePartSkill implements IProfilePartSkill {
     public index?: number,
     public level?: LevelOfMastery,
     public linkedSkills?: IProfilePartLinkedExperience[],
-    public skills?: IProfilePartSkillCategory
+    public skillCategory?: IProfilePartSkillCategory
   ) {}
 }

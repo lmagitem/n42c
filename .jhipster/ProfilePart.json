@@ -37,26 +37,26 @@
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "profilePartSimpleItem",
-      "otherEntityRelationshipName": "simpleItems",
-      "relationshipName": "profilePartSimpleItem"
+      "otherEntityRelationshipName": "profilePart",
+      "relationshipName": "simpleItems"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "profilePartPreciseItem",
-      "otherEntityRelationshipName": "preciseItems",
-      "relationshipName": "profilePartPreciseItem"
+      "otherEntityRelationshipName": "profilePart",
+      "relationshipName": "preciseItems"
     },
     {
       "relationshipType": "one-to-many",
       "otherEntityName": "profilePartSkillCategory",
-      "otherEntityRelationshipName": "skillCategories",
-      "relationshipName": "profilePartSkillCategory"
+      "otherEntityRelationshipName": "profilePart",
+      "relationshipName": "skillCategories"
     },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "appUserProfile",
-      "otherEntityRelationshipName": "profilePart",
-      "relationshipName": "categories",
+      "otherEntityRelationshipName": "profileParts",
+      "relationshipName": "profile",
       "otherEntityField": "id"
     }
   ],
