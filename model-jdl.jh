@@ -15,8 +15,6 @@ entity AppUser {
     userName String required unique
     /** The name shown throughout the app. */
     displayedName String unique
-    /** The user email adress. */
-    email String required unique
     /** Does the user have admin rights? */
     admin Boolean required
     /** The user rights regarding the shop. */
@@ -27,8 +25,6 @@ entity AppUser {
     profileRights AppUserRights required
     /** The user rights regarding the Scriptorium. */
     scriptoriumRights AppUserRights required
-    /** The user's avatar url. */
-    avatarUrl String
 }
 /** AppUser rights. */
 enum AppUserRights {
@@ -312,7 +308,7 @@ entity LocalizedNinthDeploymentMap {
 }
 
 entity NinthMissionRule {
-	
+
 }
 
 entity LocalizedNinthMissionRule {
@@ -324,7 +320,7 @@ entity NinthStratagemGroup {
     shareable Boolean
 }
 
-entity LocalizedNinthStratagemGroup { 
+entity LocalizedNinthStratagemGroup {
     name String
 }
 
@@ -508,7 +504,7 @@ relationship OneToMany {
 
 relationship ManyToMany {
 	// General
-    AppUser{givenFriendships} to AppUser{receivedFriendships}, 
+    AppUser{givenFriendships} to AppUser{receivedFriendships},
     AppUser{askedFriendRequests} to AppUser{pendingFriendRequests},
     // Shop
 	Product{authors} to AppUser{products},

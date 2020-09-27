@@ -1,4 +1,4 @@
-import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
+import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
 
 export interface ILocalizedNinthStratagem {
   id?: number;

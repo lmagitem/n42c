@@ -40,7 +40,7 @@ export const ninthDeploymentMapRoute: Routes = [
     component: NinthDeploymentMapComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthDeploymentMap.home.title',
+      pageTitle: 'n42cApp.ninthDeploymentMap.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const ninthDeploymentMapRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthDeploymentMap.home.title',
+      pageTitle: 'n42cApp.ninthDeploymentMap.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const ninthDeploymentMapRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthDeploymentMap.home.title',
+      pageTitle: 'n42cApp.ninthDeploymentMap.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const ninthDeploymentMapRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthDeploymentMap.home.title',
+      pageTitle: 'n42cApp.ninthDeploymentMap.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

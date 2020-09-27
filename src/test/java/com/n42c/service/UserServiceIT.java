@@ -3,7 +3,9 @@ package com.n42c.service;
 import com.n42c.N42CApp;
 import com.n42c.config.Constants;
 import com.n42c.config.TestSecurityConfiguration;
+import com.n42c.domain.AppUser;
 import com.n42c.domain.User;
+import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.repository.UserRepository;
 import com.n42c.security.AuthoritiesConstants;
 import com.n42c.service.dto.UserDTO;
@@ -98,7 +100,7 @@ public class UserServiceIT {
         OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
-        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(userDTO.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
         assertThat(userDTO.getLastName()).isEqualTo(DEFAULT_LASTNAME);
         assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
@@ -162,6 +164,22 @@ public class UserServiceIT {
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
         assertThat(userDTO.getLangKey()).isEqualTo("en");
+    }
+
+    @Test
+    @Transactional
+    public void testAppUser() {
+        OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
+        UserDTO userDTO = userService.getUserFromAuthentication(authentication);
+        AppUser appUser = userService.getAppUser(userDTO.getId());
+
+        assertThat(appUser).isNotNull();
+        assertThat(appUser.getUser().getId()).isEqualTo(userDTO.getId());
+        assertThat(appUser.isAdmin()).isFalse();
+        assertThat(appUser.getShopRights()).isEqualByComparingTo(AppUserRights.REA);
+        assertThat(appUser.getBlogRights()).isEqualByComparingTo(AppUserRights.REA);
+        assertThat(appUser.getProfileRights()).isEqualByComparingTo(AppUserRights.REA);
+        assertThat(appUser.getScriptoriumRights()).isEqualByComparingTo(AppUserRights.REA);
     }
 
     private OAuth2AuthenticationToken createMockOAuth2AuthenticationToken(Map<String, Object> userDetails) {

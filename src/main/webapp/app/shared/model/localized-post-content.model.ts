@@ -1,5 +1,5 @@
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedPostContent {
   id?: number;

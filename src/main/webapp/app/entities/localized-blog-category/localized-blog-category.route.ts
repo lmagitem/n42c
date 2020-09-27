@@ -40,7 +40,7 @@ export const localizedBlogCategoryRoute: Routes = [
     component: LocalizedBlogCategoryComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedBlogCategory.home.title',
+      pageTitle: 'n42cApp.localizedBlogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const localizedBlogCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedBlogCategory.home.title',
+      pageTitle: 'n42cApp.localizedBlogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const localizedBlogCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedBlogCategory.home.title',
+      pageTitle: 'n42cApp.localizedBlogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const localizedBlogCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedBlogCategory.home.title',
+      pageTitle: 'n42cApp.localizedBlogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

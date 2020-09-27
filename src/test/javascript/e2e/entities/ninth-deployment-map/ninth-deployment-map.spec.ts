@@ -28,7 +28,7 @@ describe('NinthDeploymentMap e2e test', () => {
     await navBarPage.goToEntity('ninth-deployment-map');
     ninthDeploymentMapComponentsPage = new NinthDeploymentMapComponentsPage();
     await browser.wait(ec.visibilityOf(ninthDeploymentMapComponentsPage.title), 5000);
-    expect(await ninthDeploymentMapComponentsPage.getTitle()).to.eq('n42CApp.ninthDeploymentMap.home.title');
+    expect(await ninthDeploymentMapComponentsPage.getTitle()).to.eq('n42cApp.ninthDeploymentMap.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthDeploymentMapComponentsPage.entities), ec.visibilityOf(ninthDeploymentMapComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('NinthDeploymentMap e2e test', () => {
   it('should load create NinthDeploymentMap page', async () => {
     await ninthDeploymentMapComponentsPage.clickOnCreateButton();
     ninthDeploymentMapUpdatePage = new NinthDeploymentMapUpdatePage();
-    expect(await ninthDeploymentMapUpdatePage.getPageTitle()).to.eq('n42CApp.ninthDeploymentMap.home.createOrEditLabel');
+    expect(await ninthDeploymentMapUpdatePage.getPageTitle()).to.eq('n42cApp.ninthDeploymentMap.home.createOrEditLabel');
     await ninthDeploymentMapUpdatePage.cancel();
   });
 
@@ -76,7 +76,7 @@ describe('NinthDeploymentMap e2e test', () => {
     await ninthDeploymentMapComponentsPage.clickOnLastDeleteButton();
 
     ninthDeploymentMapDeleteDialog = new NinthDeploymentMapDeleteDialog();
-    expect(await ninthDeploymentMapDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthDeploymentMap.delete.question');
+    expect(await ninthDeploymentMapDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthDeploymentMap.delete.question');
     await ninthDeploymentMapDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthDeploymentMapComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

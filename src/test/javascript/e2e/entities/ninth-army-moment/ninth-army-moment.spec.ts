@@ -24,7 +24,7 @@ describe('NinthArmyMoment e2e test', () => {
     await navBarPage.goToEntity('ninth-army-moment');
     ninthArmyMomentComponentsPage = new NinthArmyMomentComponentsPage();
     await browser.wait(ec.visibilityOf(ninthArmyMomentComponentsPage.title), 5000);
-    expect(await ninthArmyMomentComponentsPage.getTitle()).to.eq('n42CApp.ninthArmyMoment.home.title');
+    expect(await ninthArmyMomentComponentsPage.getTitle()).to.eq('n42cApp.ninthArmyMoment.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthArmyMomentComponentsPage.entities), ec.visibilityOf(ninthArmyMomentComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('NinthArmyMoment e2e test', () => {
   it('should load create NinthArmyMoment page', async () => {
     await ninthArmyMomentComponentsPage.clickOnCreateButton();
     ninthArmyMomentUpdatePage = new NinthArmyMomentUpdatePage();
-    expect(await ninthArmyMomentUpdatePage.getPageTitle()).to.eq('n42CApp.ninthArmyMoment.home.createOrEditLabel');
+    expect(await ninthArmyMomentUpdatePage.getPageTitle()).to.eq('n42cApp.ninthArmyMoment.home.createOrEditLabel');
     await ninthArmyMomentUpdatePage.cancel();
   });
 
@@ -101,7 +101,7 @@ describe('NinthArmyMoment e2e test', () => {
     await ninthArmyMomentComponentsPage.clickOnLastDeleteButton();
 
     ninthArmyMomentDeleteDialog = new NinthArmyMomentDeleteDialog();
-    expect(await ninthArmyMomentDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthArmyMoment.delete.question');
+    expect(await ninthArmyMomentDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthArmyMoment.delete.question');
     await ninthArmyMomentDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthArmyMomentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

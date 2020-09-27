@@ -18,6 +18,8 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
+  background-color: $black;
+
   .dropdown-item.active,
   .dropdown-item.active:focus,
   .dropdown-item.active:hover {
@@ -45,10 +47,11 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 34px;
+  width: 116px;
+  margin-right: 6px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/logo-n42c.png') no-repeat center center;
   background-size: contain;
 }

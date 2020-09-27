@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "localizedPostContent": {
       "home": {
         "title": "LocalizedPostContents",
@@ -23,7 +23,7 @@
       "help": {
         "excerpt": "An excerpt of the post to show on the blog page.",
         "content": "The content of the post.",
-        "language": "This post&#39;s language."
+        "language": "This post's language."
       }
     }
   }

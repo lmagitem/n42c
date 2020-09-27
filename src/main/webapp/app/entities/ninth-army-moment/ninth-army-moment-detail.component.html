@@ -1,98 +1,96 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="ninthArmyMoment">
-            <h2><span jhiTranslate="n42CApp.ninthArmyMoment.detail.title">Ninth Army Moment</span> {{ ninthArmyMoment.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="ninthArmyMoment">
+      <h2><span jhiTranslate="n42cApp.ninthArmyMoment.detail.title">Ninth Army Moment</span> {{ ninthArmyMoment.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.current">Current</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.current }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.sinceInstant">Since Instant</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.sinceInstant }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.majorVictories">Major Victories</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.majorVictories }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.minorVictories">Minor Victories</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.minorVictories }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.draws">Draws</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.draws }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.minorDefeats">Minor Defeats</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.minorDefeats }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.majorDefeats">Major Defeats</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.majorDefeats }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.requisition">Requisition</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.requisition }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.supplyLimit">Supply Limit</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.supplyLimit }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.supplyUsed">Supply Used</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.supplyUsed }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.objectives">Objectives</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.objectives }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.notes">Notes</span></dt>
-                <dd>
-                    <span>{{ ninthArmyMoment.notes }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.selectedUnits">Selected Units</span></dt>
-                <dd>
-                    <span *ngFor="let selectedUnits of ninthArmyMoment.selectedUnits; let last = last">
-                        <a [routerLink]="['/ninth-army-unit', selectedUnits?.id, 'view']">{{ selectedUnits.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.selectedObjectives">Selected Objectives</span></dt>
-                <dd>
-                    <span *ngFor="let selectedObjectives of ninthArmyMoment.selectedObjectives; let last = last">
-                        <a [routerLink]="['/ninth-objective', selectedObjectives?.id, 'view']">{{ selectedObjectives.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.battle">Battle</span></dt>
-                <dd>
-                    <div *ngIf="ninthArmyMoment.battle">
-                        <a [routerLink]="['/ninth-battle', ninthArmyMoment.battle?.id, 'view']">{{ ninthArmyMoment.battle?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyMoment.army">Army</span></dt>
-                <dd>
-                    <div *ngIf="ninthArmyMoment.army">
-                        <a [routerLink]="['/ninth-army', ninthArmyMoment.army?.id, 'view']">{{ ninthArmyMoment.army?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.current">Current</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.current }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.sinceInstant">Since Instant</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.sinceInstant }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.majorVictories">Major Victories</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.majorVictories }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.minorVictories">Minor Victories</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.minorVictories }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.draws">Draws</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.draws }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.minorDefeats">Minor Defeats</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.minorDefeats }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.majorDefeats">Major Defeats</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.majorDefeats }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.requisition">Requisition</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.requisition }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.supplyLimit">Supply Limit</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.supplyLimit }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.supplyUsed">Supply Used</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.supplyUsed }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.objectives">Objectives</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.objectives }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.notes">Notes</span></dt>
+        <dd>
+          <span>{{ ninthArmyMoment.notes }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.selectedUnits">Selected Units</span></dt>
+        <dd>
+          <span *ngFor="let selectedUnits of ninthArmyMoment.selectedUnits; let last = last">
+            <a [routerLink]="['/ninth-army-unit', selectedUnits?.id, 'view']">{{ selectedUnits.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.selectedObjectives">Selected Objectives</span></dt>
+        <dd>
+          <span *ngFor="let selectedObjectives of ninthArmyMoment.selectedObjectives; let last = last">
+            <a [routerLink]="['/ninth-objective', selectedObjectives?.id, 'view']">{{ selectedObjectives.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.battle">Battle</span></dt>
+        <dd>
+          <div *ngIf="ninthArmyMoment.battle">
+            <a [routerLink]="['/ninth-battle', ninthArmyMoment.battle?.id, 'view']">{{ ninthArmyMoment.battle?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyMoment.army">Army</span></dt>
+        <dd>
+          <div *ngIf="ninthArmyMoment.army">
+            <a [routerLink]="['/ninth-army', ninthArmyMoment.army?.id, 'view']">{{ ninthArmyMoment.army?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

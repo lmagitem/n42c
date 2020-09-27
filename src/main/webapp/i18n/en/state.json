@@ -1,0 +1,8 @@
+{
+  "state": {
+    "title": "App State",
+    "account": {
+      "title": "Current account"
+    }
+  }
+}

@@ -40,7 +40,7 @@ export const ninthObjectiveRoute: Routes = [
     component: NinthObjectiveComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthObjective.home.title',
+      pageTitle: 'n42cApp.ninthObjective.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const ninthObjectiveRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthObjective.home.title',
+      pageTitle: 'n42cApp.ninthObjective.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const ninthObjectiveRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthObjective.home.title',
+      pageTitle: 'n42cApp.ninthObjective.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const ninthObjectiveRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthObjective.home.title',
+      pageTitle: 'n42cApp.ninthObjective.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

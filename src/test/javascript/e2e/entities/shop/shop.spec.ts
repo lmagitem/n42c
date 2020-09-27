@@ -24,14 +24,14 @@ describe('Shop e2e test', () => {
     await navBarPage.goToEntity('shop');
     shopComponentsPage = new ShopComponentsPage();
     await browser.wait(ec.visibilityOf(shopComponentsPage.title), 5000);
-    expect(await shopComponentsPage.getTitle()).to.eq('n42CApp.shop.home.title');
+    expect(await shopComponentsPage.getTitle()).to.eq('n42cApp.shop.home.title');
     await browser.wait(ec.or(ec.visibilityOf(shopComponentsPage.entities), ec.visibilityOf(shopComponentsPage.noResult)), 1000);
   });
 
   it('should load create Shop page', async () => {
     await shopComponentsPage.clickOnCreateButton();
     shopUpdatePage = new ShopUpdatePage();
-    expect(await shopUpdatePage.getPageTitle()).to.eq('n42CApp.shop.home.createOrEditLabel');
+    expect(await shopUpdatePage.getPageTitle()).to.eq('n42cApp.shop.home.createOrEditLabel');
     await shopUpdatePage.cancel();
   });
 
@@ -53,7 +53,7 @@ describe('Shop e2e test', () => {
     await shopComponentsPage.clickOnLastDeleteButton();
 
     shopDeleteDialog = new ShopDeleteDialog();
-    expect(await shopDeleteDialog.getDialogTitle()).to.eq('n42CApp.shop.delete.question');
+    expect(await shopDeleteDialog.getDialogTitle()).to.eq('n42cApp.shop.delete.question');
     await shopDeleteDialog.clickOnConfirmButton();
 
     expect(await shopComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

@@ -1,4 +1,4 @@
-import { IProduct } from 'app/shared/model/product.model';
+import {IProduct} from 'app/shared/model/product.model';
 
 export interface IShop {
   id?: number;

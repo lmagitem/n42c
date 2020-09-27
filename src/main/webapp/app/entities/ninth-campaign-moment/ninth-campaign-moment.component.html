@@ -1,75 +1,80 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.ninthCampaignMoment.home.title">Ninth Campaign Moments</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.ninthCampaignMoment.home.title">Ninth Campaign Moments</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ninth-campaign-moment" [routerLink]="['/ninth-campaign-moment/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.ninthCampaignMoment.home.createLabel">
-            Create a new Ninth Campaign Moment
-            </span>
-        </button>
-    </h2>
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-ninth-campaign-moment"
+      [routerLink]="['/ninth-campaign-moment/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.ninthCampaignMoment.home.createLabel">
+        Create a new Ninth Campaign Moment
+      </span>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="ninthCampaignMoments?.length === 0">
-        <span jhiTranslate="n42CApp.ninthCampaignMoment.home.notFound">No ninthCampaignMoments found</span>
-    </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="ninthCampaignMoments?.length === 0">
+    <span jhiTranslate="n42cApp.ninthCampaignMoment.home.notFound">No ninthCampaignMoments found</span>
+  </div>
 
-    <div class="table-responsive" id="entities" *ngIf="ninthCampaignMoments && ninthCampaignMoments.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthCampaignMoment.current">Current</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthCampaignMoment.sinceInstant">Since Instant</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthCampaignMoment.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthCampaignMoment.summary">Summary</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthCampaignMoment.description">Description</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthCampaignMoment.campaign">Campaign</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let ninthCampaignMoment of ninthCampaignMoments ;trackBy: trackId">
-                    <td><a [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'view']">{{ ninthCampaignMoment.id }}</a></td>
-                    <td>{{ ninthCampaignMoment.current }}</td>
-                    <td>{{ ninthCampaignMoment.sinceInstant | date:'medium' }}</td>
-                    <td>{{ ninthCampaignMoment.name }}</td>
-                    <td>{{ ninthCampaignMoment.summary }}</td>
-                    <td>{{ ninthCampaignMoment.description }}</td>
-                    <td>
-                        <div *ngIf="ninthCampaignMoment.campaign">
-                            <a [routerLink]="['/ninth-campaign', ninthCampaignMoment.campaign?.id, 'view']" >{{ ninthCampaignMoment.campaign?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
+  <div class="table-responsive" id="entities" *ngIf="ninthCampaignMoments && ninthCampaignMoments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaignMoment.current">Current</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaignMoment.sinceInstant">Since Instant</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaignMoment.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaignMoment.summary">Summary</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaignMoment.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaignMoment.campaign">Campaign</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ninthCampaignMoment of ninthCampaignMoments; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'view']">{{ ninthCampaignMoment.id }}</a>
+          </td>
+          <td>{{ ninthCampaignMoment.current }}</td>
+          <td>{{ ninthCampaignMoment.sinceInstant | date: 'medium' }}</td>
+          <td>{{ ninthCampaignMoment.name }}</td>
+          <td>{{ ninthCampaignMoment.summary }}</td>
+          <td>{{ ninthCampaignMoment.description }}</td>
+          <td>
+            <div *ngIf="ninthCampaignMoment.campaign">
+              <a [routerLink]="['/ninth-campaign', ninthCampaignMoment.campaign?.id, 'view']">{{ ninthCampaignMoment.campaign?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-                            <button type="submit"
-                                    [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+              <button
+                type="submit"
+                [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-                            <button type="submit" (click)="delete(ninthCampaignMoment)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(ninthCampaignMoment)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

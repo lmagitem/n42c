@@ -10,12 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,9 +93,30 @@ public class BlogResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogs in body.
      */
     @GetMapping("/blogs")
-    public List<Blog> getAllBlogs() {
-        log.debug("REST request to get all Blogs");
-        return blogRepository.findAll();
+    public List<Blog> getAllBlogs(Principal principal) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return getBlogsByCurrentUserOrWriter();
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return getBlogsByCurrentUserOrWriter();
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        if (authorities == null)
+            return getBlogsByCurrentUserOrWriter();
+
+        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            log.debug("REST request to get all Blogs - as Admin");
+            return blogRepository.findAll();
+        } else {
+            return getBlogsByCurrentUserOrWriter();
+        }
+    }
+
+    private List<Blog> getBlogsByCurrentUserOrWriter() {
+        log.debug("REST request to get all Blogs - as User");
+        return blogRepository.findByUserIsCurrentUserOrWriter();
     }
 
     /**

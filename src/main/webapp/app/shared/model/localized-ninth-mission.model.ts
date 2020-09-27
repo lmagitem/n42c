@@ -1,4 +1,4 @@
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
 
 export interface ILocalizedNinthMission {
   id?: number;

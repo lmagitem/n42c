@@ -1,5 +1,5 @@
-import { Moment } from 'moment';
-import { INinthUnit } from 'app/shared/model/ninth-unit.model';
+import {Moment} from 'moment';
+import {INinthUnit} from 'app/shared/model/ninth-unit.model';
 
 export interface INinthUnitMoment {
   id?: number;

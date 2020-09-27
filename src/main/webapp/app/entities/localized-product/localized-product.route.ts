@@ -40,7 +40,7 @@ export const localizedProductRoute: Routes = [
     component: LocalizedProductComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedProduct.home.title',
+      pageTitle: 'n42cApp.localizedProduct.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const localizedProductRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedProduct.home.title',
+      pageTitle: 'n42cApp.localizedProduct.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const localizedProductRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedProduct.home.title',
+      pageTitle: 'n42cApp.localizedProduct.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const localizedProductRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedProduct.home.title',
+      pageTitle: 'n42cApp.localizedProduct.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

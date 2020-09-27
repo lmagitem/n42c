@@ -1,71 +1,72 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.ninthUnitMoment.home.title">Ninth Unit Moments</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.ninthUnitMoment.home.title">Ninth Unit Moments</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ninth-unit-moment" [routerLink]="['/ninth-unit-moment/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.ninthUnitMoment.home.createLabel">
-            Create a new Ninth Unit Moment
-            </span>
-        </button>
-    </h2>
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-ninth-unit-moment"
+      [routerLink]="['/ninth-unit-moment/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.ninthUnitMoment.home.createLabel">
+        Create a new Ninth Unit Moment
+      </span>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="ninthUnitMoments?.length === 0">
-        <span jhiTranslate="n42CApp.ninthUnitMoment.home.notFound">No ninthUnitMoments found</span>
-    </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="ninthUnitMoments?.length === 0">
+    <span jhiTranslate="n42cApp.ninthUnitMoment.home.notFound">No ninthUnitMoments found</span>
+  </div>
 
-    <div class="table-responsive" id="entities" *ngIf="ninthUnitMoments && ninthUnitMoments.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthUnitMoment.current">Current</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthUnitMoment.sinceInstant">Since Instant</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthUnitMoment.pictureUrl">Picture Url</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthUnitMoment.unit">Unit</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let ninthUnitMoment of ninthUnitMoments ;trackBy: trackId">
-                    <td><a [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'view']">{{ ninthUnitMoment.id }}</a></td>
-                    <td>{{ ninthUnitMoment.current }}</td>
-                    <td>{{ ninthUnitMoment.sinceInstant | date:'medium' }}</td>
-                    <td>{{ ninthUnitMoment.pictureUrl }}</td>
-                    <td>
-                        <div *ngIf="ninthUnitMoment.unit">
-                            <a [routerLink]="['/ninth-unit', ninthUnitMoment.unit?.id, 'view']" >{{ ninthUnitMoment.unit?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
+  <div class="table-responsive" id="entities" *ngIf="ninthUnitMoments && ninthUnitMoments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthUnitMoment.current">Current</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthUnitMoment.sinceInstant">Since Instant</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthUnitMoment.pictureUrl">Picture Url</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthUnitMoment.unit">Unit</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ninthUnitMoment of ninthUnitMoments; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'view']">{{ ninthUnitMoment.id }}</a>
+          </td>
+          <td>{{ ninthUnitMoment.current }}</td>
+          <td>{{ ninthUnitMoment.sinceInstant | date: 'medium' }}</td>
+          <td>{{ ninthUnitMoment.pictureUrl }}</td>
+          <td>
+            <div *ngIf="ninthUnitMoment.unit">
+              <a [routerLink]="['/ninth-unit', ninthUnitMoment.unit?.id, 'view']">{{ ninthUnitMoment.unit?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-                            <button type="submit"
-                                    [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+              <button type="submit" [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-                            <button type="submit" (click)="delete(ninthUnitMoment)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(ninthUnitMoment)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

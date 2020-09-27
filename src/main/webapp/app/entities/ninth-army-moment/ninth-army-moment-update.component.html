@@ -1,145 +1,645 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-ninth-army-moment-heading" jhiTranslate="n42CApp.ninthArmyMoment.home.createOrEditLabel">Create or edit a Ninth Army Moment</h2>
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-ninth-army-moment-heading" jhiTranslate="n42cApp.ninthArmyMoment.home.createOrEditLabel">
+        Create or edit a Ninth Army Moment
+      </h2>
 
-            <div>
-                <jhi-alert-error></jhi-alert-error>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id" jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.current" for="field_current">Current</label>
-                    <input type="checkbox" class="form-control" name="current" id="field_current"
-                           formControlName="current"/>
-                    <div *ngIf="editForm.get('current')!.invalid && (editForm.get('current')!.dirty || editForm.get('current')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('current')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.current" for="field_current">Current</label>
+          <input type="checkbox" class="form-control" name="current" id="field_current" formControlName="current" />
+          <div *ngIf="editForm.get('current')!.invalid && (editForm.get('current')!.dirty || editForm.get('current')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('current')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.sinceInstant" for="field_sinceInstant">Since Instant</label>
-                    <div class="d-flex">
-                        <input id="field_sinceInstant" type="datetime-local" class="form-control" name="sinceInstant" formControlName="sinceInstant" placeholder="YYYY-MM-DD HH:mm"/>
-                    </div>
-                    <div *ngIf="editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('sinceInstant')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('sinceInstant')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.sinceInstant" for="field_sinceInstant"
+            >Since Instant</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_sinceInstant"
+              type="datetime-local"
+              class="form-control"
+              name="sinceInstant"
+              formControlName="sinceInstant"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sinceInstant')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('sinceInstant')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.majorVictories" for="field_majorVictories">Major Victories</label>
-                    <input type="number" class="form-control" name="majorVictories" id="field_majorVictories"
-                           formControlName="majorVictories"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.majorVictories" for="field_majorVictories"
+            >Major Victories</label
+          >
+          <input type="number" class="form-control" name="majorVictories" id="field_majorVictories" formControlName="majorVictories" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.minorVictories" for="field_minorVictories">Minor Victories</label>
-                    <input type="number" class="form-control" name="minorVictories" id="field_minorVictories"
-                           formControlName="minorVictories"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.minorVictories" for="field_minorVictories"
+            >Minor Victories</label
+          >
+          <input type="number" class="form-control" name="minorVictories" id="field_minorVictories" formControlName="minorVictories" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.draws" for="field_draws">Draws</label>
-                    <input type="number" class="form-control" name="draws" id="field_draws"
-                           formControlName="draws"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.draws" for="field_draws">Draws</label>
+          <input type="number" class="form-control" name="draws" id="field_draws" formControlName="draws" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.minorDefeats" for="field_minorDefeats">Minor Defeats</label>
-                    <input type="number" class="form-control" name="minorDefeats" id="field_minorDefeats"
-                           formControlName="minorDefeats"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.minorDefeats" for="field_minorDefeats"
+            >Minor Defeats</label
+          >
+          <input type="number" class="form-control" name="minorDefeats" id="field_minorDefeats" formControlName="minorDefeats" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.majorDefeats" for="field_majorDefeats">Major Defeats</label>
-                    <input type="number" class="form-control" name="majorDefeats" id="field_majorDefeats"
-                           formControlName="majorDefeats"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.majorDefeats" for="field_majorDefeats"
+            >Major Defeats</label
+          >
+          <input type="number" class="form-control" name="majorDefeats" id="field_majorDefeats" formControlName="majorDefeats" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.requisition" for="field_requisition">Requisition</label>
-                    <input type="number" class="form-control" name="requisition" id="field_requisition"
-                           formControlName="requisition"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.requisition" for="field_requisition">Requisition</label>
+          <input type="number" class="form-control" name="requisition" id="field_requisition" formControlName="requisition" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.supplyLimit" for="field_supplyLimit">Supply Limit</label>
-                    <input type="number" class="form-control" name="supplyLimit" id="field_supplyLimit"
-                           formControlName="supplyLimit"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.supplyLimit" for="field_supplyLimit">Supply Limit</label>
+          <input type="number" class="form-control" name="supplyLimit" id="field_supplyLimit" formControlName="supplyLimit" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.supplyUsed" for="field_supplyUsed">Supply Used</label>
-                    <input type="number" class="form-control" name="supplyUsed" id="field_supplyUsed"
-                           formControlName="supplyUsed"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.supplyUsed" for="field_supplyUsed">Supply Used</label>
+          <input type="number" class="form-control" name="supplyUsed" id="field_supplyUsed" formControlName="supplyUsed" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.objectives" for="field_objectives">Objectives</label>
-                    <input type="text" class="form-control" name="objectives" id="field_objectives"
-                           formControlName="objectives"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.objectives" for="field_objectives">Objectives</label>
+          <input type="text" class="form-control" name="objectives" id="field_objectives" formControlName="objectives" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.notes" for="field_notes">Notes</label>
-                    <input type="text" class="form-control" name="notes" id="field_notes"
-                           formControlName="notes"/>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.notes" for="field_notes">Notes</label>
+          <input type="text" class="form-control" name="notes" id="field_notes" formControlName="notes" />
+        </div>
 
-                <div class="form-group">
-                    <label jhiTranslate="n42CApp.ninthArmyMoment.selectedUnits" for="field_selectedUnits">Selected Units</label>
-                    <select class="form-control" id="field_selectedUnits" multiple name="selectedUnits" formControlName="selectedUnits">
-                        <option [ngValue]="getSelected(editForm.get('selectedUnits')!.value, ninthArmyUnitOption)" *ngFor="let ninthArmyUnitOption of nintharmyunits; trackBy: trackById">{{ ninthArmyUnitOption.id }}</option>
-                    </select>
-                </div>
+        <div class="form-group">
+          <label jhiTranslate="n42cApp.ninthArmyMoment.selectedUnits" for="field_selectedUnits">Selected Units</label>
+          <select class="form-control" id="field_selectedUnits" multiple name="selectedUnits" formControlName="selectedUnits">
+            <option
+              [ngValue]="getSelected(editForm.get('selectedUnits')!.value, ninthArmyUnitOption)"
+              *ngFor="let ninthArmyUnitOption of nintharmyunits; trackBy: trackById"
+              >{{ ninthArmyUnitOption.id }}</option
+            >
+          </select>
+        </div>
 
-                <div class="form-group">
-                    <label jhiTranslate="n42CApp.ninthArmyMoment.selectedObjectives" for="field_selectedObjectives">Selected Objectives</label>
-                    <select class="form-control" id="field_selectedObjectives" multiple name="selectedObjectives" formControlName="selectedObjectives">
-                        <option [ngValue]="getSelected(editForm.get('selectedObjectives')!.value, ninthObjectiveOption)" *ngFor="let ninthObjectiveOption of ninthobjectives; trackBy: trackById">{{ ninthObjectiveOption.id }}</option>
-                    </select>
-                </div>
+        <div class="form-group">
+          <label jhiTranslate="n42cApp.ninthArmyMoment.selectedObjectives" for="field_selectedObjectives">Selected Objectives</label>
+          <select
+            class="form-control"
+            id="field_selectedObjectives"
+            multiple
+            name="selectedObjectives"
+            formControlName="selectedObjectives"
+          >
+            <option
+              [ngValue]="getSelected(editForm.get('selectedObjectives')!.value, ninthObjectiveOption)"
+              *ngFor="let ninthObjectiveOption of ninthobjectives; trackBy: trackById"
+              >{{ ninthObjectiveOption.id }}</option
+            >
+          </select>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.battle" for="field_battle">Battle</label>
-                    <select class="form-control" id="field_battle" name="battle" formControlName="battle">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ninthBattleOption.id === editForm.get('battle')!.value?.id ? editForm.get('battle')!.value : ninthBattleOption" *ngFor="let ninthBattleOption of ninthbattles; trackBy: trackById">{{ ninthBattleOption.id }}</option>
-                    </select>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.battle" for="field_battle">Battle</label>
+          <select class="form-control" id="field_battle" name="battle" formControlName="battle">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="ninthBattleOption.id === editForm.get('battle')!.value?.id ? editForm.get('battle')!.value : ninthBattleOption"
+              *ngFor="let ninthBattleOption of ninthbattles; trackBy: trackById"
+              >{{ ninthBattleOption.id }}</option
+            >
+          </select>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.ninthArmyMoment.army" for="field_army">Army</label>
-                    <select class="form-control" id="field_army" name="army" formControlName="army">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ninthArmyOption.id === editForm.get('army')!.value?.id ? editForm.get('army')!.value : ninthArmyOption" *ngFor="let ninthArmyOption of nintharmies; trackBy: trackById">{{ ninthArmyOption.id }}</option>
-                    </select>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyMoment.army" for="field_army">Army</label>
+          <select class="form-control" id="field_army" name="army" formControlName="army">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="ninthArmyOption.id === editForm.get('army')!.value?.id ? editForm.get('army')!.value : ninthArmyOption"
+              *ngFor="let ninthArmyOption of nintharmies; trackBy: trackById"
+              >{{ ninthArmyOption.id }}</option
+            >
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+    <div class="panel-body">
+      <form ng-submit="vm.onSubmit()" class="ng-pristine ng-invalid ng-invalid-required">
+        <ng-form
+          class="formly ng-pristine ng-isolate-scope ng-invalid ng-invalid-required"
+          name="formly_1"
+          role="form"
+          id="saveFormlyFom"
+          model="vm.model"
+          fields="vm.wfFormFields"
+        >
+          <div
+            class="formly-field ng-scope ng-isolate-scope"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <div class="row ng-scope">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="text-center">Order of Battle</h2>
+                <h2></h2>
+              </div>
             </div>
+            <hr class="ng-scope" />
+          </div>
+          <div
+            class="formly-field ng-scope ng-isolate-scope formly-field-group"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <ng-form
+              class="row formly ng-pristine ng-scope ng-isolate-scope ng-invalid ng-invalid-required"
+              name="formly_101"
+              role="form"
+              id="saveFormlyFom"
+              model="model"
+              fields="options.fieldGroup"
+              options="options.options"
+              form="options.form"
+              is-field-group=""
+            >
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-4 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_101"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_98_input_input-1600492782141_0" class="control-label ng-binding">
+                      Crusade Force Name *
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                      ng-model="model[options.key]"
+                      id="formly_98_input_input-1600492782141_0"
+                      name="formly_98_input_input-1600492782141_0"
+                      formly-custom-validation=""
+                      required="true"
+                      placeholder="41st Cadian Recon"
+                      type=""
+                      aria-describedby="formly_98_input_input-1600492782141_0_description"
+                      style="
+                        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==');
+                        background-repeat: no-repeat;
+                        background-attachment: scroll;
+                        background-size: 16px 18px;
+                        background-position: 98% 50%;
+                      "
+                    />
+                    <p id="formly_98_input_input-1600492782141_0_description" class="help-block ng-binding ng-scope" ng-if="to.description">
+                      Enter the name of your mighty ost.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-4 formly-field-basicSelect"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_101"
+                form-state="options.formState"
+                index="$index"
+              >
+                <ol
+                  class="nya-bs-select col-sm-12 col-xs-12 col-md-12 col-lg12 ng-pristine ng-untouched ng-valid btn-group ng-scope"
+                  ng-model="model[options.key || index]"
+                  id="formly_98_basicSelect_basicSelect-1600492786043_1"
+                  disabled="options.templateOptions.options.length === 0"
+                  name="formly_98_basicSelect_basicSelect-1600492786043_1"
+                  formly-custom-validation=""
+                  placeholder=""
+                  aria-describedby="formly_98_basicSelect_basicSelect-1600492786043_1_description"
+                  type=""
+                >
+                  <button class="btn btn-default dropdown-toggle" type="button">
+                    <span class="pull-left filter-option">Nothing selected</span>&nbsp;<span class="caret"></span>
+                  </button>
+                  <div class="dropdown-menu open">
+                    <ul class="dropdown-menu inner">
+                      <!-- nyaBsOption: option in options.templateOptions.options -->
+                      <li class="nya-bs-option ng-scope" nya-bs-option="option in options.templateOptions.options">
+                        <a tabindex="0" class="ng-binding">Faction</a>
+                      </li>
+                    </ul>
+                  </div>
+                </ol>
+                <p
+                  id="formly_98_basicSelect_basicSelect-1600492786043_1_description"
+                  class="help-block ng-binding ng-scope"
+                  ng-if="to.description"
+                >
+                  The faction your ost is drawn from.
+                </p>
+              </div>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-4 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_101"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_98_input_input-1600492777797_2" class="control-label ng-binding">
+                      Player Name
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-valid"
+                      ng-model="model[options.key]"
+                      id="formly_98_input_input-1600492777797_2"
+                      name="formly_98_input_input-1600492777797_2"
+                      formly-custom-validation=""
+                      placeholder=""
+                      type=""
+                      aria-describedby="formly_98_input_input-1600492777797_2_description"
+                    />
+                    <p id="formly_98_input_input-1600492777797_2_description" class="help-block ng-binding ng-scope" ng-if="to.description">
+                      Your own name.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div ng-transclude=""></div>
+            </ng-form>
+          </div>
+          <div
+            class="formly-field ng-scope ng-isolate-scope formly-field-group"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <ng-form
+              class="row formly ng-pristine ng-valid ng-scope ng-isolate-scope"
+              name="formly_102"
+              role="form"
+              id="saveFormlyFom"
+              model="model"
+              fields="options.fieldGroup"
+              options="options.options"
+              form="options.form"
+              is-field-group=""
+            >
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-4 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_102"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_99_input_input-1600492859477_0" class="control-label ng-binding">
+                      Battle Tally
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-valid"
+                      ng-model="model[options.key]"
+                      id="formly_99_input_input-1600492859477_0"
+                      name="formly_99_input_input-1600492859477_0"
+                      formly-custom-validation=""
+                      placeholder="0"
+                      type=""
+                      aria-describedby="formly_99_input_input-1600492859477_0_description"
+                    />
+                    <p id="formly_99_input_input-1600492859477_0_description" class="help-block ng-binding ng-scope" ng-if="to.description">
+                      The number of battles your ost has fought.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-4 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_102"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_99_input_input-1600492895247_1" class="control-label ng-binding">
+                      Battles Won
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-valid"
+                      ng-model="model[options.key]"
+                      id="formly_99_input_input-1600492895247_1"
+                      name="formly_99_input_input-1600492895247_1"
+                      formly-custom-validation=""
+                      placeholder="0"
+                      type=""
+                      aria-describedby="formly_99_input_input-1600492895247_1_description"
+                    />
+                    <p id="formly_99_input_input-1600492895247_1_description" class="help-block ng-binding ng-scope" ng-if="to.description">
+                      The number of battles your ost has won.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-4 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_102"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_99_input_input-1600492949261_2" class="control-label ng-binding">
+                      Requisition Points
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-valid"
+                      ng-model="model[options.key]"
+                      id="formly_99_input_input-1600492949261_2"
+                      name="formly_99_input_input-1600492949261_2"
+                      formly-custom-validation=""
+                      placeholder="0"
+                      type=""
+                      aria-describedby="formly_99_input_input-1600492949261_2_description"
+                    />
+                    <p id="formly_99_input_input-1600492949261_2_description" class="help-block ng-binding ng-scope" ng-if="to.description">
+                      The number of Requisition Points (RP) available to your Crusade Force.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div ng-transclude=""></div>
+            </ng-form>
+          </div>
+          <div
+            class="formly-field ng-scope ng-isolate-scope formly-field-group"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <ng-form
+              class="row formly ng-pristine ng-valid ng-scope ng-isolate-scope"
+              name="formly_103"
+              role="form"
+              id="saveFormlyFom"
+              model="model"
+              fields="options.fieldGroup"
+              options="options.options"
+              form="options.form"
+              is-field-group=""
+            >
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-6 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_103"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_100_input_input-1600493240747_0" class="control-label ng-binding">
+                      Supply Limit
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-valid"
+                      ng-model="model[options.key]"
+                      id="formly_100_input_input-1600493240747_0"
+                      name="formly_100_input_input-1600493240747_0"
+                      formly-custom-validation=""
+                      placeholder="50"
+                      type=""
+                      aria-describedby="formly_100_input_input-1600493240747_0_description"
+                    />
+                    <p
+                      id="formly_100_input_input-1600493240747_0_description"
+                      class="help-block ng-binding ng-scope"
+                      ng-if="to.description"
+                    >
+                      The Supply Limit of your Crusade Force. In this Campaign, Points/Power Level are used.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="formly-field ng-scope ng-isolate-scope col-xs-6 formly-field-input"
+                options="field"
+                model="field.model || model"
+                fields="fields"
+                form="theFormlyForm"
+                form-id="formly_103"
+                form-state="options.formState"
+                index="$index"
+              >
+                <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+                  <div>
+                    <label for="formly_100_input_input-1600493263598_1" class="control-label ng-binding">
+                      Supply Used
+                    </label>
+                    <input
+                      class="form-control ng-pristine ng-untouched ng-valid"
+                      ng-model="model[options.key]"
+                      id="formly_100_input_input-1600493263598_1"
+                      name="formly_100_input_input-1600493263598_1"
+                      formly-custom-validation=""
+                      placeholder="0"
+                      type=""
+                      aria-describedby="formly_100_input_input-1600493263598_1_description"
+                    />
+                    <p
+                      id="formly_100_input_input-1600493263598_1_description"
+                      class="help-block ng-binding ng-scope"
+                      ng-if="to.description"
+                    >
+                      The Supply Limit of your Crusade Force. In this Campaign, Points/Power Level are used.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div ng-transclude=""></div>
+            </ng-form>
+          </div>
+          <div
+            class="formly-field ng-scope ng-isolate-scope col-xs-12 formly-field-subTitle"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <div class="row ng-scope">
+              <div class="">
+                <h4 class="text-center ng-binding">Crusade Cards</h4>
+                <h4>
+                  <hr />
+                </h4>
+              </div>
             </div>
-        </form>
+          </div>
+
+          <div
+            class="formly-field ng-scope ng-isolate-scope col-xs-12 formly-field-subTitle"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <div class="row ng-scope">
+              <div class="">
+                <h4 class="text-center ng-binding">This is my list of Crusade Cards</h4>
+                <h4>
+                  <hr />
+                </h4>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="formly-field ng-scope ng-isolate-scope col-xs-12 formly-field-textarea"
+            options="field"
+            model="field.model || model"
+            fields="fields"
+            form="theFormlyForm"
+            form-id="formly_1"
+            form-state="options.formState"
+            index="$index"
+          >
+            <div class="form-group ng-scope" ng-class="{ 'has-error': showError }">
+              <div>
+                <label for="formly_2_textarea_textarea-1600493419734_6" class="control-label ng-binding">
+                  Crusade Goals, Information, and Notable Victories
+                </label>
+                <textarea
+                  class="form-control ng-pristine ng-untouched ng-valid"
+                  ng-model="model[options.key]"
+                  id="formly_2_textarea_textarea-1600493419734_6"
+                  name="formly_2_textarea_textarea-1600493419734_6"
+                  formly-custom-validation=""
+                  placeholder=""
+                  type=""
+                  aria-describedby="formly_2_textarea_textarea-1600493419734_6_description"
+                ></textarea>
+                <p id="formly_2_textarea_textarea-1600493419734_6_description" class="help-block ng-binding ng-scope">
+                  Keep track of your ost's records here.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div ng-transclude="">
+            <span class="pull-right ng-scope">
+              <button class="btn btn-primary ng-binding" type="submit">Done</button>
+              <button class="btn btn-primary ng-binding" type="cancel">Cancel</button>
+            </span>
+          </div>
+        </ng-form>
+      </form>
     </div>
+  </div>
 </div>

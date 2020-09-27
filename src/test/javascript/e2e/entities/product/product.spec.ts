@@ -24,14 +24,14 @@ describe('Product e2e test', () => {
     await navBarPage.goToEntity('product');
     productComponentsPage = new ProductComponentsPage();
     await browser.wait(ec.visibilityOf(productComponentsPage.title), 5000);
-    expect(await productComponentsPage.getTitle()).to.eq('n42CApp.product.home.title');
+    expect(await productComponentsPage.getTitle()).to.eq('n42cApp.product.home.title');
     await browser.wait(ec.or(ec.visibilityOf(productComponentsPage.entities), ec.visibilityOf(productComponentsPage.noResult)), 1000);
   });
 
   it('should load create Product page', async () => {
     await productComponentsPage.clickOnCreateButton();
     productUpdatePage = new ProductUpdatePage();
-    expect(await productUpdatePage.getPageTitle()).to.eq('n42CApp.product.home.createOrEditLabel');
+    expect(await productUpdatePage.getPageTitle()).to.eq('n42cApp.product.home.createOrEditLabel');
     await productUpdatePage.cancel();
   });
 
@@ -56,7 +56,7 @@ describe('Product e2e test', () => {
     await productComponentsPage.clickOnLastDeleteButton();
 
     productDeleteDialog = new ProductDeleteDialog();
-    expect(await productDeleteDialog.getDialogTitle()).to.eq('n42CApp.product.delete.question');
+    expect(await productDeleteDialog.getDialogTitle()).to.eq('n42cApp.product.delete.question');
     await productDeleteDialog.clickOnConfirmButton();
 
     expect(await productComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

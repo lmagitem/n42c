@@ -40,7 +40,7 @@ export const productRoute: Routes = [
     component: ProductComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.product.home.title',
+      pageTitle: 'n42cApp.product.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.product.home.title',
+      pageTitle: 'n42cApp.product.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.product.home.title',
+      pageTitle: 'n42cApp.product.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const productRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.product.home.title',
+      pageTitle: 'n42cApp.product.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

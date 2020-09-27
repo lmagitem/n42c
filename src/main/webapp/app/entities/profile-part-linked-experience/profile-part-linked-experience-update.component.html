@@ -1,75 +1,116 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-profile-part-linked-experience-heading" jhiTranslate="n42CApp.profilePartLinkedExperience.home.createOrEditLabel">Create or edit a Profile Part Linked Experience</h2>
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-profile-part-linked-experience-heading" jhiTranslate="n42cApp.profilePartLinkedExperience.home.createOrEditLabel">
+        Create or edit a Profile Part Linked Experience
+      </h2>
 
-            <div>
-                <jhi-alert-error></jhi-alert-error>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id" jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartLinkedExperience.title" for="field_title" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.title' | translate">Title</label>
-                    <input type="text" class="form-control" name="title" id="field_title"
-                           formControlName="title"/>
-                    <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.profilePartLinkedExperience.title"
+            for="field_title"
+            [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.title' | translate"
+            >Title</label
+          >
+          <input type="text" class="form-control" name="title" id="field_title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartLinkedExperience.subTitle" for="field_subTitle" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.subTitle' | translate">Sub Title</label>
-                    <input type="text" class="form-control" name="subTitle" id="field_subTitle"
-                           formControlName="subTitle"/>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.profilePartLinkedExperience.subTitle"
+            for="field_subTitle"
+            [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.subTitle' | translate"
+            >Sub Title</label
+          >
+          <input type="text" class="form-control" name="subTitle" id="field_subTitle" formControlName="subTitle" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartLinkedExperience.date" for="field_date" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.date' | translate">Date</label>
-                    <div class="d-flex">
-                        <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
-                    </div>
-                    <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('date')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.profilePartLinkedExperience.date"
+            for="field_date"
+            [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.date' | translate"
+            >Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_date"
+              type="datetime-local"
+              class="form-control"
+              name="date"
+              formControlName="date"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('date')!.invalid && (editForm.get('date')!.dirty || editForm.get('date')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('date')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartLinkedExperience.content" for="field_content" [ngbTooltip]="'n42CApp.profilePartLinkedExperience.help.content' | translate">Content</label>
-                    <input type="text" class="form-control" name="content" id="field_content"
-                           formControlName="content"/>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.profilePartLinkedExperience.content"
+            for="field_content"
+            [ngbTooltip]="'n42cApp.profilePartLinkedExperience.help.content' | translate"
+            >Content</label
+          >
+          <input type="text" class="form-control" name="content" id="field_content" formControlName="content" />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.profilePartLinkedExperience.linkedItem" for="field_linkedItem">Linked Item</label>
-                    <select class="form-control" id="field_linkedItem" name="linkedItem" formControlName="linkedItem">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="profilePartPreciseItemOption.id === editForm.get('linkedItem')!.value?.id ? editForm.get('linkedItem')!.value : profilePartPreciseItemOption" *ngFor="let profilePartPreciseItemOption of profilepartpreciseitems; trackBy: trackById">{{ profilePartPreciseItemOption.id }}</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.profilePartLinkedExperience.linkedItem" for="field_linkedItem"
+            >Linked Item</label
+          >
+          <select class="form-control" id="field_linkedItem" name="linkedItem" formControlName="linkedItem">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                profilePartPreciseItemOption.id === editForm.get('linkedItem')!.value?.id
+                  ? editForm.get('linkedItem')!.value
+                  : profilePartPreciseItemOption
+              "
+              *ngFor="let profilePartPreciseItemOption of profilepartpreciseitems; trackBy: trackById"
+              >{{ profilePartPreciseItemOption.id }}</option
+            >
+          </select>
+        </div>
+      </div>
 
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

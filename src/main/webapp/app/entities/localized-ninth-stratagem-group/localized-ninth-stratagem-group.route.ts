@@ -40,7 +40,7 @@ export const localizedNinthStratagemGroupRoute: Routes = [
     component: LocalizedNinthStratagemGroupComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedNinthStratagemGroup.home.title',
+      pageTitle: 'n42cApp.localizedNinthStratagemGroup.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const localizedNinthStratagemGroupRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedNinthStratagemGroup.home.title',
+      pageTitle: 'n42cApp.localizedNinthStratagemGroup.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const localizedNinthStratagemGroupRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedNinthStratagemGroup.home.title',
+      pageTitle: 'n42cApp.localizedNinthStratagemGroup.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const localizedNinthStratagemGroupRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.localizedNinthStratagemGroup.home.title',
+      pageTitle: 'n42cApp.localizedNinthStratagemGroup.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

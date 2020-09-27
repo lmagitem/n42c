@@ -24,7 +24,7 @@ describe('LocalizedProduct e2e test', () => {
     await navBarPage.goToEntity('localized-product');
     localizedProductComponentsPage = new LocalizedProductComponentsPage();
     await browser.wait(ec.visibilityOf(localizedProductComponentsPage.title), 5000);
-    expect(await localizedProductComponentsPage.getTitle()).to.eq('n42CApp.localizedProduct.home.title');
+    expect(await localizedProductComponentsPage.getTitle()).to.eq('n42cApp.localizedProduct.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(localizedProductComponentsPage.entities), ec.visibilityOf(localizedProductComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('LocalizedProduct e2e test', () => {
   it('should load create LocalizedProduct page', async () => {
     await localizedProductComponentsPage.clickOnCreateButton();
     localizedProductUpdatePage = new LocalizedProductUpdatePage();
-    expect(await localizedProductUpdatePage.getPageTitle()).to.eq('n42CApp.localizedProduct.home.createOrEditLabel');
+    expect(await localizedProductUpdatePage.getPageTitle()).to.eq('n42cApp.localizedProduct.home.createOrEditLabel');
     await localizedProductUpdatePage.cancel();
   });
 
@@ -72,7 +72,7 @@ describe('LocalizedProduct e2e test', () => {
     await localizedProductComponentsPage.clickOnLastDeleteButton();
 
     localizedProductDeleteDialog = new LocalizedProductDeleteDialog();
-    expect(await localizedProductDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedProduct.delete.question');
+    expect(await localizedProductDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedProduct.delete.question');
     await localizedProductDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedProductComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

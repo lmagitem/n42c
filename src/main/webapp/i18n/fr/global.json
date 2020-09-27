@@ -4,6 +4,11 @@
     "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
     "menu": {
       "home": "Accueil",
+      "blog": "Blogs",
+      "profile": "Profils",
+      "shop": "Échoppe",
+      "campaign": "Campagnes",
+      "scriptorium": "Scriptorium",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
@@ -49,6 +54,7 @@
       },
       "account": {
         "main": "Compte",
+        "mine": "Mon Compte",
         "settings": "Profil",
         "password": "Mot de passe",
         "sessions": "Sessions",
@@ -60,6 +66,7 @@
         "main": "Administration",
         "userManagement": "Gestion des utilisateurs",
         "tracker": "Suivi des utilisateurs",
+        "state": "État de l'application",
         "metrics": "Métriques",
         "health": "Diagnostics",
         "configuration": "Configuration",
@@ -174,5 +181,8 @@
       "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
     }
   },
-  "footer": "Ceci est votre pied de page"
+  "footer": {
+    "love": "Fait avec amour",
+    "by": " par "
+  }
 }

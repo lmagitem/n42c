@@ -1,32 +1,28 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="blogCategory">
-            <h2><span jhiTranslate="n42CApp.blogCategory.detail.title">Blog Category</span> {{ blogCategory.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="blogCategory">
+      <h2><span jhiTranslate="n42cApp.blogCategory.detail.title">Blog Category</span> {{ blogCategory.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.blogCategory.parentCategory">Parent Category</span></dt>
-                <dd>
-                    <div *ngIf="blogCategory.parentCategory">
-                        <a [routerLink]="['/blog-category', blogCategory.parentCategory?.id, 'view']">{{ blogCategory.parentCategory?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.blogCategory.parentCategory">Parent Category</span></dt>
+        <dd>
+          <div *ngIf="blogCategory.parentCategory">
+            <a [routerLink]="['/entities/blog-category', blogCategory.parentCategory?.id, 'view']">{{ blogCategory.parentCategory?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/blog-category', blogCategory.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities/blog-category', blogCategory.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

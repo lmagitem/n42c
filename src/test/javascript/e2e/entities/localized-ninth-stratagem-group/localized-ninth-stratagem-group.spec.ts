@@ -28,7 +28,7 @@ describe('LocalizedNinthStratagemGroup e2e test', () => {
     await navBarPage.goToEntity('localized-ninth-stratagem-group');
     localizedNinthStratagemGroupComponentsPage = new LocalizedNinthStratagemGroupComponentsPage();
     await browser.wait(ec.visibilityOf(localizedNinthStratagemGroupComponentsPage.title), 5000);
-    expect(await localizedNinthStratagemGroupComponentsPage.getTitle()).to.eq('n42CApp.localizedNinthStratagemGroup.home.title');
+    expect(await localizedNinthStratagemGroupComponentsPage.getTitle()).to.eq('n42cApp.localizedNinthStratagemGroup.home.title');
     await browser.wait(
       ec.or(
         ec.visibilityOf(localizedNinthStratagemGroupComponentsPage.entities),
@@ -42,7 +42,7 @@ describe('LocalizedNinthStratagemGroup e2e test', () => {
     await localizedNinthStratagemGroupComponentsPage.clickOnCreateButton();
     localizedNinthStratagemGroupUpdatePage = new LocalizedNinthStratagemGroupUpdatePage();
     expect(await localizedNinthStratagemGroupUpdatePage.getPageTitle()).to.eq(
-      'n42CApp.localizedNinthStratagemGroup.home.createOrEditLabel'
+      'n42cApp.localizedNinthStratagemGroup.home.createOrEditLabel'
     );
     await localizedNinthStratagemGroupUpdatePage.cancel();
   });
@@ -73,7 +73,7 @@ describe('LocalizedNinthStratagemGroup e2e test', () => {
     await localizedNinthStratagemGroupComponentsPage.clickOnLastDeleteButton();
 
     localizedNinthStratagemGroupDeleteDialog = new LocalizedNinthStratagemGroupDeleteDialog();
-    expect(await localizedNinthStratagemGroupDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedNinthStratagemGroup.delete.question');
+    expect(await localizedNinthStratagemGroupDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthStratagemGroup.delete.question');
     await localizedNinthStratagemGroupDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedNinthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

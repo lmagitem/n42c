@@ -1,56 +1,52 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="ninthUnit">
-            <h2><span jhiTranslate="n42CApp.ninthUnit.detail.title">Ninth Unit</span> {{ ninthUnit.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="ninthUnit">
+      <h2><span jhiTranslate="n42cApp.ninthUnit.detail.title">Ninth Unit</span> {{ ninthUnit.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.ninthUnit.name">Name</span></dt>
-                <dd>
-                    <span>{{ ninthUnit.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthUnit.datasheet">Datasheet</span></dt>
-                <dd>
-                    <span>{{ ninthUnit.datasheet }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthUnit.faction">Faction</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.Faction.' + ninthUnit.faction }}">{{ ninthUnit.faction }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthUnit.subfaction">Subfaction</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.SubFaction.' + ninthUnit.subfaction }}">{{ ninthUnit.subfaction }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthUnit.battlefieldRole">Battlefield Role</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.NinthBattlefieldRole.' + ninthUnit.battlefieldRole }}">{{ ninthUnit.battlefieldRole }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthUnit.keywords">Keywords</span></dt>
-                <dd>
-                    <span>{{ ninthUnit.keywords }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthUnit.owner">Owner</span></dt>
-                <dd>
-                    <div *ngIf="ninthUnit.owner">
-                        <a [routerLink]="['/player', ninthUnit.owner?.id, 'view']">{{ ninthUnit.owner?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthUnit.name">Name</span></dt>
+        <dd>
+          <span>{{ ninthUnit.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthUnit.datasheet">Datasheet</span></dt>
+        <dd>
+          <span>{{ ninthUnit.datasheet }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthUnit.faction">Faction</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Faction.' + ninthUnit.faction }}">{{ ninthUnit.faction }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthUnit.subfaction">Subfaction</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.SubFaction.' + ninthUnit.subfaction }}">{{ ninthUnit.subfaction }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthUnit.battlefieldRole">Battlefield Role</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.NinthBattlefieldRole.' + ninthUnit.battlefieldRole }}">{{ ninthUnit.battlefieldRole }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthUnit.keywords">Keywords</span></dt>
+        <dd>
+          <span>{{ ninthUnit.keywords }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthUnit.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="ninthUnit.owner">
+            <a [routerLink]="['/player', ninthUnit.owner?.id, 'view']">{{ ninthUnit.owner?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/ninth-unit', ninthUnit.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/ninth-unit', ninthUnit.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

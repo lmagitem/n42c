@@ -19,15 +19,6 @@
       ]
     },
     {
-      "fieldName": "email",
-      "fieldType": "String",
-      "javadoc": "The user email adress.",
-      "fieldValidateRules": [
-        "required",
-        "unique"
-      ]
-    },
-    {
       "fieldName": "admin",
       "fieldType": "Boolean",
       "javadoc": "Does the user have admin rights?",
@@ -70,11 +61,6 @@
       "fieldValidateRules": [
         "required"
       ]
-    },
-    {
-      "fieldName": "avatarUrl",
-      "fieldType": "String",
-      "javadoc": "The user's avatar url."
     }
   ],
   "relationships": [

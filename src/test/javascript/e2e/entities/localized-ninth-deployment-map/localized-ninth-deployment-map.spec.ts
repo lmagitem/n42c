@@ -28,7 +28,7 @@ describe('LocalizedNinthDeploymentMap e2e test', () => {
     await navBarPage.goToEntity('localized-ninth-deployment-map');
     localizedNinthDeploymentMapComponentsPage = new LocalizedNinthDeploymentMapComponentsPage();
     await browser.wait(ec.visibilityOf(localizedNinthDeploymentMapComponentsPage.title), 5000);
-    expect(await localizedNinthDeploymentMapComponentsPage.getTitle()).to.eq('n42CApp.localizedNinthDeploymentMap.home.title');
+    expect(await localizedNinthDeploymentMapComponentsPage.getTitle()).to.eq('n42cApp.localizedNinthDeploymentMap.home.title');
     await browser.wait(
       ec.or(
         ec.visibilityOf(localizedNinthDeploymentMapComponentsPage.entities),
@@ -41,7 +41,7 @@ describe('LocalizedNinthDeploymentMap e2e test', () => {
   it('should load create LocalizedNinthDeploymentMap page', async () => {
     await localizedNinthDeploymentMapComponentsPage.clickOnCreateButton();
     localizedNinthDeploymentMapUpdatePage = new LocalizedNinthDeploymentMapUpdatePage();
-    expect(await localizedNinthDeploymentMapUpdatePage.getPageTitle()).to.eq('n42CApp.localizedNinthDeploymentMap.home.createOrEditLabel');
+    expect(await localizedNinthDeploymentMapUpdatePage.getPageTitle()).to.eq('n42cApp.localizedNinthDeploymentMap.home.createOrEditLabel');
     await localizedNinthDeploymentMapUpdatePage.cancel();
   });
 
@@ -76,7 +76,7 @@ describe('LocalizedNinthDeploymentMap e2e test', () => {
     await localizedNinthDeploymentMapComponentsPage.clickOnLastDeleteButton();
 
     localizedNinthDeploymentMapDeleteDialog = new LocalizedNinthDeploymentMapDeleteDialog();
-    expect(await localizedNinthDeploymentMapDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedNinthDeploymentMap.delete.question');
+    expect(await localizedNinthDeploymentMapDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthDeploymentMap.delete.question');
     await localizedNinthDeploymentMapDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedNinthDeploymentMapComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

@@ -1,4 +1,4 @@
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
 
 export interface ILocalizedNinthObjective {
   id?: number;

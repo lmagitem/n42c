@@ -1,8 +1,8 @@
-import { ILocalizedNinthStratagemGroup } from 'app/shared/model/localized-ninth-stratagem-group.model';
-import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
-import { IPlayer } from 'app/shared/model/player.model';
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
+import {ILocalizedNinthStratagemGroup} from 'app/shared/model/localized-ninth-stratagem-group.model';
+import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
+import {IPlayer} from 'app/shared/model/player.model';
+import {INinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
 
 export interface INinthStratagemGroup {
   id?: number;

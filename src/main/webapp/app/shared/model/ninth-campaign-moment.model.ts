@@ -1,6 +1,6 @@
-import { Moment } from 'moment';
-import { INinthBattle } from 'app/shared/model/ninth-battle.model';
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
+import {Moment} from 'moment';
+import {INinthBattle} from 'app/shared/model/ninth-battle.model';
+import {INinthCampaign} from 'app/shared/model/ninth-campaign.model';
 
 export interface INinthCampaignMoment {
   id?: number;

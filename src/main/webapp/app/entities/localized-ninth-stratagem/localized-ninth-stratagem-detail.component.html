@@ -1,48 +1,48 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="localizedNinthStratagem">
-            <h2><span jhiTranslate="n42CApp.localizedNinthStratagem.detail.title">Localized Ninth Stratagem</span> {{ localizedNinthStratagem.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="localizedNinthStratagem">
+      <h2>
+        <span jhiTranslate="n42cApp.localizedNinthStratagem.detail.title">Localized Ninth Stratagem</span> {{ localizedNinthStratagem.id }}
+      </h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagem.name">Name</span></dt>
-                <dd>
-                    <span>{{ localizedNinthStratagem.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagem.summary">Summary</span></dt>
-                <dd>
-                    <span>{{ localizedNinthStratagem.summary }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagem.description">Description</span></dt>
-                <dd>
-                    <span>{{ localizedNinthStratagem.description }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagem.keywords">Keywords</span></dt>
-                <dd>
-                    <span>{{ localizedNinthStratagem.keywords }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagem.stratagem">Stratagem</span></dt>
-                <dd>
-                    <div *ngIf="localizedNinthStratagem.stratagem">
-                        <a [routerLink]="['/ninth-stratagem', localizedNinthStratagem.stratagem?.id, 'view']">{{ localizedNinthStratagem.stratagem?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagem.name">Name</span></dt>
+        <dd>
+          <span>{{ localizedNinthStratagem.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagem.summary">Summary</span></dt>
+        <dd>
+          <span>{{ localizedNinthStratagem.summary }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagem.description">Description</span></dt>
+        <dd>
+          <span>{{ localizedNinthStratagem.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagem.keywords">Keywords</span></dt>
+        <dd>
+          <span>{{ localizedNinthStratagem.keywords }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagem.stratagem">Stratagem</span></dt>
+        <dd>
+          <div *ngIf="localizedNinthStratagem.stratagem">
+            <a [routerLink]="['/ninth-stratagem', localizedNinthStratagem.stratagem?.id, 'view']">{{
+              localizedNinthStratagem.stratagem?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/localized-ninth-stratagem', localizedNinthStratagem.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/localized-ninth-stratagem', localizedNinthStratagem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

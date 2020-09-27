@@ -1,8 +1,8 @@
-import { Moment } from 'moment';
-import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
-import { INinthBattle } from 'app/shared/model/ninth-battle.model';
-import { INinthArmy } from 'app/shared/model/ninth-army.model';
+import {Moment} from 'moment';
+import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
+import {INinthBattle} from 'app/shared/model/ninth-battle.model';
+import {INinthArmy} from 'app/shared/model/ninth-army.model';
 
 export interface INinthArmyMoment {
   id?: number;

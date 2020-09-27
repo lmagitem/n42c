@@ -1,93 +1,96 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.appUser.home.title">App Users</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.appUser.home.title">App Users</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-app-user" [routerLink]="['/app-user/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.appUser.home.createLabel">
-            Create a new App User
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-app-user"
+      [routerLink]="['/entities/app-user/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.appUser.home.createLabel">
+        Create a new App User
+      </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="appUsers?.length === 0">
+    <span jhiTranslate="n42cApp.appUser.home.notFound">No appUsers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="appUsers && appUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.userName">User Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.displayedName">Displayed Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.admin">Admin</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.shopRights">Shop Rights</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.blogRights">Blog Rights</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.profileRights">Profile Rights</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.scriptoriumRights">Scriptorium Rights</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.user">User</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.givenFriendships">Given Friendships</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUser.askedFriendRequests">Asked Friend Requests</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appUser of appUsers; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities/app-user', appUser.id, 'view']">{{ appUser.id }}</a>
+          </td>
+          <td>{{ appUser.userName }}</td>
+          <td>{{ appUser.displayedName }}</td>
+          <td>{{ appUser.admin }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
+          <td>
+            {{ appUser.user?.id }}
+          </td>
+          <td>
+            <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities/app-user', givenFriendships?.id, 'view']">{{
+                givenFriendships.id
+              }}</a
+              >{{ last ? '' : ', ' }}
             </span>
-        </button>
-    </h2>
+          </td>
+          <td>
+            <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities/app-user', askedFriendRequests?.id, 'view']">{{
+                askedFriendRequests.id
+              }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/entities/app-user', appUser.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-    <jhi-alert-error></jhi-alert-error>
+              <button type="submit" [routerLink]="['/entities/app-user', appUser.id, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-    <jhi-alert></jhi-alert>
-
-    <div class="alert alert-warning" id="no-result" *ngIf="appUsers?.length === 0">
-        <span jhiTranslate="n42CApp.appUser.home.notFound">No appUsers found</span>
-    </div>
-
-    <div class="table-responsive" id="entities" *ngIf="appUsers && appUsers.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.userName">User Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.displayedName">Displayed Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.email">Email</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.admin">Admin</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.shopRights">Shop Rights</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.blogRights">Blog Rights</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.profileRights">Profile Rights</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.scriptoriumRights">Scriptorium Rights</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.avatarUrl">Avatar Url</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.user">User</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.givenFriendships">Given Friendships</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.appUser.askedFriendRequests">Asked Friend Requests</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let appUser of appUsers ;trackBy: trackId">
-                    <td><a [routerLink]="['/app-user', appUser.id, 'view']">{{ appUser.id }}</a></td>
-                    <td>{{ appUser.userName }}</td>
-                    <td>{{ appUser.displayedName }}</td>
-                    <td>{{ appUser.email }}</td>
-                    <td>{{ appUser.admin }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
-                    <td>{{ appUser.avatarUrl }}</td>
-                    <td>
-                        {{ appUser.user?.id }}
-                    </td>
-                    <td>
-                        <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
-                            <a class="form-control-static" [routerLink]="['/app-user', givenFriendships?.id, 'view']">{{ givenFriendships.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
-                    <td>
-                        <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
-                            <a class="form-control-static" [routerLink]="['/app-user', askedFriendRequests?.id, 'view']">{{ askedFriendRequests.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/app-user', appUser.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-
-                            <button type="submit"
-                                    [routerLink]="['/app-user', appUser.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
-                            <button type="submit" (click)="delete(appUser)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(appUser)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

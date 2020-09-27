@@ -1,5 +1,5 @@
-import { IProduct } from 'app/shared/model/product.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {IProduct} from 'app/shared/model/product.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedProduct {
   id?: number;

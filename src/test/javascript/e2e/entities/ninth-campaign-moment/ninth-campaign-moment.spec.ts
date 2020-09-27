@@ -28,7 +28,7 @@ describe('NinthCampaignMoment e2e test', () => {
     await navBarPage.goToEntity('ninth-campaign-moment');
     ninthCampaignMomentComponentsPage = new NinthCampaignMomentComponentsPage();
     await browser.wait(ec.visibilityOf(ninthCampaignMomentComponentsPage.title), 5000);
-    expect(await ninthCampaignMomentComponentsPage.getTitle()).to.eq('n42CApp.ninthCampaignMoment.home.title');
+    expect(await ninthCampaignMomentComponentsPage.getTitle()).to.eq('n42cApp.ninthCampaignMoment.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthCampaignMomentComponentsPage.entities), ec.visibilityOf(ninthCampaignMomentComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('NinthCampaignMoment e2e test', () => {
   it('should load create NinthCampaignMoment page', async () => {
     await ninthCampaignMomentComponentsPage.clickOnCreateButton();
     ninthCampaignMomentUpdatePage = new NinthCampaignMomentUpdatePage();
-    expect(await ninthCampaignMomentUpdatePage.getPageTitle()).to.eq('n42CApp.ninthCampaignMoment.home.createOrEditLabel');
+    expect(await ninthCampaignMomentUpdatePage.getPageTitle()).to.eq('n42cApp.ninthCampaignMoment.home.createOrEditLabel');
     await ninthCampaignMomentUpdatePage.cancel();
   });
 
@@ -88,7 +88,7 @@ describe('NinthCampaignMoment e2e test', () => {
     await ninthCampaignMomentComponentsPage.clickOnLastDeleteButton();
 
     ninthCampaignMomentDeleteDialog = new NinthCampaignMomentDeleteDialog();
-    expect(await ninthCampaignMomentDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthCampaignMoment.delete.question');
+    expect(await ninthCampaignMomentDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthCampaignMoment.delete.question');
     await ninthCampaignMomentDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthCampaignMomentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

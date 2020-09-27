@@ -1,6 +1,6 @@
-import { Moment } from 'moment';
-import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
-import { NinthCrusadeRank } from 'app/shared/model/enumerations/ninth-crusade-rank.model';
+import {Moment} from 'moment';
+import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
+import {NinthCrusadeRank} from 'app/shared/model/enumerations/ninth-crusade-rank.model';
 
 export interface INinthArmyUnitMoment {
   id?: number;

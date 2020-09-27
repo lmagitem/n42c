@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { N42CSharedModule } from 'app/shared/shared.module';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {N42CSharedModule} from 'app/shared/shared.module';
 
-import { AuditsComponent } from './audits.component';
+import {AuditsComponent} from './audits.component';
 
-import { auditsRoute } from './audits.route';
+import {auditsRoute} from './audits.route';
 
 @NgModule({
   imports: [N42CSharedModule, RouterModule.forChild([auditsRoute])],

@@ -1,40 +1,36 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="localizedNinthMission">
-            <h2><span jhiTranslate="n42CApp.localizedNinthMission.detail.title">Localized Ninth Mission</span> {{ localizedNinthMission.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="localizedNinthMission">
+      <h2><span jhiTranslate="n42cApp.localizedNinthMission.detail.title">Localized Ninth Mission</span> {{ localizedNinthMission.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.localizedNinthMission.name">Name</span></dt>
-                <dd>
-                    <span>{{ localizedNinthMission.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthMission.briefing">Briefing</span></dt>
-                <dd>
-                    <span>{{ localizedNinthMission.briefing }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthMission.mission">Mission</span></dt>
-                <dd>
-                    <div *ngIf="localizedNinthMission.mission">
-                        <a [routerLink]="['/ninth-mission', localizedNinthMission.mission?.id, 'view']">{{ localizedNinthMission.mission?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.localizedNinthMission.name">Name</span></dt>
+        <dd>
+          <span>{{ localizedNinthMission.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthMission.briefing">Briefing</span></dt>
+        <dd>
+          <span>{{ localizedNinthMission.briefing }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthMission.mission">Mission</span></dt>
+        <dd>
+          <div *ngIf="localizedNinthMission.mission">
+            <a [routerLink]="['/ninth-mission', localizedNinthMission.mission?.id, 'view']">{{ localizedNinthMission.mission?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/localized-ninth-mission', localizedNinthMission.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/localized-ninth-mission', localizedNinthMission.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

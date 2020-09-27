@@ -28,7 +28,7 @@ describe('ProfilePartSimpleItem e2e test', () => {
     await navBarPage.goToEntity('profile-part-simple-item');
     profilePartSimpleItemComponentsPage = new ProfilePartSimpleItemComponentsPage();
     await browser.wait(ec.visibilityOf(profilePartSimpleItemComponentsPage.title), 5000);
-    expect(await profilePartSimpleItemComponentsPage.getTitle()).to.eq('n42CApp.profilePartSimpleItem.home.title');
+    expect(await profilePartSimpleItemComponentsPage.getTitle()).to.eq('n42cApp.profilePartSimpleItem.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(profilePartSimpleItemComponentsPage.entities), ec.visibilityOf(profilePartSimpleItemComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('ProfilePartSimpleItem e2e test', () => {
   it('should load create ProfilePartSimpleItem page', async () => {
     await profilePartSimpleItemComponentsPage.clickOnCreateButton();
     profilePartSimpleItemUpdatePage = new ProfilePartSimpleItemUpdatePage();
-    expect(await profilePartSimpleItemUpdatePage.getPageTitle()).to.eq('n42CApp.profilePartSimpleItem.home.createOrEditLabel');
+    expect(await profilePartSimpleItemUpdatePage.getPageTitle()).to.eq('n42cApp.profilePartSimpleItem.home.createOrEditLabel');
     await profilePartSimpleItemUpdatePage.cancel();
   });
 
@@ -77,7 +77,7 @@ describe('ProfilePartSimpleItem e2e test', () => {
     await profilePartSimpleItemComponentsPage.clickOnLastDeleteButton();
 
     profilePartSimpleItemDeleteDialog = new ProfilePartSimpleItemDeleteDialog();
-    expect(await profilePartSimpleItemDeleteDialog.getDialogTitle()).to.eq('n42CApp.profilePartSimpleItem.delete.question');
+    expect(await profilePartSimpleItemDeleteDialog.getDialogTitle()).to.eq('n42cApp.profilePartSimpleItem.delete.question');
     await profilePartSimpleItemDeleteDialog.clickOnConfirmButton();
 
     expect(await profilePartSimpleItemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

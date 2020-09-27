@@ -1,6 +1,6 @@
-import { IProfilePartLinkedExperience } from 'app/shared/model/profile-part-linked-experience.model';
-import { IProfilePartSkillCategory } from 'app/shared/model/profile-part-skill-category.model';
-import { LevelOfMastery } from 'app/shared/model/enumerations/level-of-mastery.model';
+import {IProfilePartLinkedExperience} from 'app/shared/model/profile-part-linked-experience.model';
+import {IProfilePartSkillCategory} from 'app/shared/model/profile-part-skill-category.model';
+import {LevelOfMastery} from 'app/shared/model/enumerations/level-of-mastery.model';
 
 export interface IProfilePartSkill {
   id?: number;

@@ -1,19 +1,22 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "question": "If you have any question on JHipster:",
+    "construction": "This website is currently under construction",
     "link": {
-      "homepage": "JHipster homepage",
-      "stackoverflow": "JHipster on Stack Overflow",
-      "bugtracker": "JHipster bug tracker",
-      "chat": "JHipster public chat room",
-      "follow": "follow @jhipster on Twitter"
+      "looking": "If you are looking for my old blog, you can reach it ",
+      "oldblog": "by following this link"
     },
-    "like": "If you like JHipster, don't forget to give us a star on",
-    "github": "GitHub"
+    "like": {
+      "find": "You can find this project on ",
+      "github": "GitHub",
+      "follow": "; follow me on Twitter: ",
+      "look": "; take a look at my ",
+      "instagram": "Instagram account",
+      "or": " or my ",
+      "youtube": "Youtube channel",
+      "mail": "; and email me at: lucmagitem [at] gmail [dot] com."
+    }
   }
 }

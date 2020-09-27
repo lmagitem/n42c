@@ -28,7 +28,7 @@ describe('LocalizedNinthMissionRule e2e test', () => {
     await navBarPage.goToEntity('localized-ninth-mission-rule');
     localizedNinthMissionRuleComponentsPage = new LocalizedNinthMissionRuleComponentsPage();
     await browser.wait(ec.visibilityOf(localizedNinthMissionRuleComponentsPage.title), 5000);
-    expect(await localizedNinthMissionRuleComponentsPage.getTitle()).to.eq('n42CApp.localizedNinthMissionRule.home.title');
+    expect(await localizedNinthMissionRuleComponentsPage.getTitle()).to.eq('n42cApp.localizedNinthMissionRule.home.title');
     await browser.wait(
       ec.or(
         ec.visibilityOf(localizedNinthMissionRuleComponentsPage.entities),
@@ -41,7 +41,7 @@ describe('LocalizedNinthMissionRule e2e test', () => {
   it('should load create LocalizedNinthMissionRule page', async () => {
     await localizedNinthMissionRuleComponentsPage.clickOnCreateButton();
     localizedNinthMissionRuleUpdatePage = new LocalizedNinthMissionRuleUpdatePage();
-    expect(await localizedNinthMissionRuleUpdatePage.getPageTitle()).to.eq('n42CApp.localizedNinthMissionRule.home.createOrEditLabel');
+    expect(await localizedNinthMissionRuleUpdatePage.getPageTitle()).to.eq('n42cApp.localizedNinthMissionRule.home.createOrEditLabel');
     await localizedNinthMissionRuleUpdatePage.cancel();
   });
 
@@ -76,7 +76,7 @@ describe('LocalizedNinthMissionRule e2e test', () => {
     await localizedNinthMissionRuleComponentsPage.clickOnLastDeleteButton();
 
     localizedNinthMissionRuleDeleteDialog = new LocalizedNinthMissionRuleDeleteDialog();
-    expect(await localizedNinthMissionRuleDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedNinthMissionRule.delete.question');
+    expect(await localizedNinthMissionRuleDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthMissionRule.delete.question');
     await localizedNinthMissionRuleDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedNinthMissionRuleComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

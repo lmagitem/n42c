@@ -1,4 +1,4 @@
-import { INinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
+import {INinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
 
 export interface ILocalizedNinthDeploymentMap {
   id?: number;

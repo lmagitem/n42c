@@ -1,158 +1,223 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-app-user-heading" jhiTranslate="n42CApp.appUser.home.createOrEditLabel">Create or edit a App User</h2>
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-app-user-heading" jhiTranslate="n42cApp.appUser.home.createOrEditLabel">Create or edit a App User</h2>
 
-            <div>
-                <jhi-alert-error></jhi-alert-error>
+      <div>
+        <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id" jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.userName" for="field_userName" [ngbTooltip]="'n42CApp.appUser.help.userName' | translate">User Name</label>
-                    <input type="text" class="form-control" name="userName" id="field_userName"
-                           formControlName="userName"/>
-                    <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('userName')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.userName"
+            for="field_userName"
+            [ngbTooltip]="'n42cApp.appUser.help.userName' | translate"
+            >User Name</label
+          >
+          <input type="text" class="form-control" name="userName" id="field_userName" formControlName="userName" />
+          <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('userName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.displayedName" for="field_displayedName" [ngbTooltip]="'n42CApp.appUser.help.displayedName' | translate">Displayed Name</label>
-                    <input type="text" class="form-control" name="displayedName" id="field_displayedName"
-                           formControlName="displayedName"/>
-                    <div *ngIf="editForm.get('displayedName')!.invalid && (editForm.get('displayedName')!.dirty || editForm.get('displayedName')!.touched)">
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.displayedName"
+            for="field_displayedName"
+            [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate"
+            >Displayed Name</label
+          >
+          <input type="text" class="form-control" name="displayedName" id="field_displayedName" formControlName="displayedName" />
+          <div
+            *ngIf="
+              editForm.get('displayedName')!.invalid && (editForm.get('displayedName')!.dirty || editForm.get('displayedName')!.touched)
+            "
+          ></div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.email" for="field_email" [ngbTooltip]="'n42CApp.appUser.help.email' | translate">Email</label>
-                    <input type="text" class="form-control" name="email" id="field_email"
-                           formControlName="email"/>
-                    <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('email')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.admin"
+            for="field_admin"
+            [ngbTooltip]="'n42cApp.appUser.help.admin' | translate"
+            >Admin</label
+          >
+          <input type="checkbox" class="form-control" name="admin" id="field_admin" formControlName="admin" />
+          <div *ngIf="editForm.get('admin')!.invalid && (editForm.get('admin')!.dirty || editForm.get('admin')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('admin')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.admin" for="field_admin" [ngbTooltip]="'n42CApp.appUser.help.admin' | translate">Admin</label>
-                    <input type="checkbox" class="form-control" name="admin" id="field_admin"
-                           formControlName="admin"/>
-                    <div *ngIf="editForm.get('admin')!.invalid && (editForm.get('admin')!.dirty || editForm.get('admin')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('admin')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.shopRights"
+            for="field_shopRights"
+            [ngbTooltip]="'n42cApp.appUser.help.shopRights' | translate"
+            >Shop Rights</label
+          >
+          <select class="form-control" name="shopRights" formControlName="shopRights" id="field_shopRights">
+            <option value="MOD">{{ 'n42cApp.AppUserRights.MOD' | translate }}</option>
+            <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
+            <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('shopRights')!.invalid && (editForm.get('shopRights')!.dirty || editForm.get('shopRights')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('shopRights')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.shopRights" for="field_shopRights" [ngbTooltip]="'n42CApp.appUser.help.shopRights' | translate">Shop Rights</label>
-                    <select class="form-control" name="shopRights" formControlName="shopRights" id="field_shopRights">
-                        <option value="MOD">{{ 'n42CApp.AppUserRights.MOD' | translate }}</option>
-                        <option value="WRI">{{ 'n42CApp.AppUserRights.WRI' | translate }}</option>
-                        <option value="REA">{{ 'n42CApp.AppUserRights.REA' | translate }}</option>
-                    </select>
-                    <div *ngIf="editForm.get('shopRights')!.invalid && (editForm.get('shopRights')!.dirty || editForm.get('shopRights')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('shopRights')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.blogRights"
+            for="field_blogRights"
+            [ngbTooltip]="'n42cApp.appUser.help.blogRights' | translate"
+            >Blog Rights</label
+          >
+          <select class="form-control" name="blogRights" formControlName="blogRights" id="field_blogRights">
+            <option value="MOD">{{ 'n42cApp.AppUserRights.MOD' | translate }}</option>
+            <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
+            <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('blogRights')!.invalid && (editForm.get('blogRights')!.dirty || editForm.get('blogRights')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('blogRights')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.blogRights" for="field_blogRights" [ngbTooltip]="'n42CApp.appUser.help.blogRights' | translate">Blog Rights</label>
-                    <select class="form-control" name="blogRights" formControlName="blogRights" id="field_blogRights">
-                        <option value="MOD">{{ 'n42CApp.AppUserRights.MOD' | translate }}</option>
-                        <option value="WRI">{{ 'n42CApp.AppUserRights.WRI' | translate }}</option>
-                        <option value="REA">{{ 'n42CApp.AppUserRights.REA' | translate }}</option>
-                    </select>
-                    <div *ngIf="editForm.get('blogRights')!.invalid && (editForm.get('blogRights')!.dirty || editForm.get('blogRights')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('blogRights')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.profileRights"
+            for="field_profileRights"
+            [ngbTooltip]="'n42cApp.appUser.help.profileRights' | translate"
+            >Profile Rights</label
+          >
+          <select class="form-control" name="profileRights" formControlName="profileRights" id="field_profileRights">
+            <option value="MOD">{{ 'n42cApp.AppUserRights.MOD' | translate }}</option>
+            <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
+            <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('profileRights')!.invalid && (editForm.get('profileRights')!.dirty || editForm.get('profileRights')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('profileRights')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.profileRights" for="field_profileRights" [ngbTooltip]="'n42CApp.appUser.help.profileRights' | translate">Profile Rights</label>
-                    <select class="form-control" name="profileRights" formControlName="profileRights" id="field_profileRights">
-                        <option value="MOD">{{ 'n42CApp.AppUserRights.MOD' | translate }}</option>
-                        <option value="WRI">{{ 'n42CApp.AppUserRights.WRI' | translate }}</option>
-                        <option value="REA">{{ 'n42CApp.AppUserRights.REA' | translate }}</option>
-                    </select>
-                    <div *ngIf="editForm.get('profileRights')!.invalid && (editForm.get('profileRights')!.dirty || editForm.get('profileRights')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('profileRights')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.appUser.scriptoriumRights"
+            for="field_scriptoriumRights"
+            [ngbTooltip]="'n42cApp.appUser.help.scriptoriumRights' | translate"
+            >Scriptorium Rights</label
+          >
+          <select class="form-control" name="scriptoriumRights" formControlName="scriptoriumRights" id="field_scriptoriumRights">
+            <option value="MOD">{{ 'n42cApp.AppUserRights.MOD' | translate }}</option>
+            <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
+            <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('scriptoriumRights')!.invalid &&
+              (editForm.get('scriptoriumRights')!.dirty || editForm.get('scriptoriumRights')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('scriptoriumRights')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.scriptoriumRights" for="field_scriptoriumRights" [ngbTooltip]="'n42CApp.appUser.help.scriptoriumRights' | translate">Scriptorium Rights</label>
-                    <select class="form-control" name="scriptoriumRights" formControlName="scriptoriumRights" id="field_scriptoriumRights">
-                        <option value="MOD">{{ 'n42CApp.AppUserRights.MOD' | translate }}</option>
-                        <option value="WRI">{{ 'n42CApp.AppUserRights.WRI' | translate }}</option>
-                        <option value="REA">{{ 'n42CApp.AppUserRights.REA' | translate }}</option>
-                    </select>
-                    <div *ngIf="editForm.get('scriptoriumRights')!.invalid && (editForm.get('scriptoriumRights')!.dirty || editForm.get('scriptoriumRights')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('scriptoriumRights')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.appUser.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of users; trackBy: trackById"
+              >{{ userOption.id }}</option
+            >
+          </select>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.avatarUrl" for="field_avatarUrl" [ngbTooltip]="'n42CApp.appUser.help.avatarUrl' | translate">Avatar Url</label>
-                    <input type="text" class="form-control" name="avatarUrl" id="field_avatarUrl"
-                           formControlName="avatarUrl"/>
-                </div>
+        <div class="form-group">
+          <label jhiTranslate="n42cApp.appUser.givenFriendships" for="field_givenFriendships">Given Friendships</label>
+          <select class="form-control" id="field_givenFriendships" multiple name="givenFriendships" formControlName="givenFriendships">
+            <option
+              [ngValue]="getSelected(editForm.get('givenFriendships')!.value, appUserOption)"
+              *ngFor="let appUserOption of appusers; trackBy: trackById"
+              >{{ appUserOption.id }}</option
+            >
+          </select>
+        </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="n42CApp.appUser.user" for="field_user">User</label>
-                    <select class="form-control" id="field_user" name="user" formControlName="user">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
-                    </select>
-                </div>
+        <div class="form-group">
+          <label jhiTranslate="n42cApp.appUser.askedFriendRequests" for="field_askedFriendRequests">Asked Friend Requests</label>
+          <select
+            class="form-control"
+            id="field_askedFriendRequests"
+            multiple
+            name="askedFriendRequests"
+            formControlName="askedFriendRequests"
+          >
+            <option
+              [ngValue]="getSelected(editForm.get('askedFriendRequests')!.value, appUserOption)"
+              *ngFor="let appUserOption of appusers; trackBy: trackById"
+              >{{ appUserOption.id }}</option
+            >
+          </select>
+        </div>
+      </div>
 
-                <div class="form-group">
-                    <label jhiTranslate="n42CApp.appUser.givenFriendships" for="field_givenFriendships">Given Friendships</label>
-                    <select class="form-control" id="field_givenFriendships" multiple name="givenFriendships" formControlName="givenFriendships">
-                        <option [ngValue]="getSelected(editForm.get('givenFriendships')!.value, appUserOption)" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
-                    </select>
-                </div>
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
 
-                <div class="form-group">
-                    <label jhiTranslate="n42CApp.appUser.askedFriendRequests" for="field_askedFriendRequests">Asked Friend Requests</label>
-                    <select class="form-control" id="field_askedFriendRequests" multiple name="askedFriendRequests" formControlName="askedFriendRequests">
-                        <option [ngValue]="getSelected(editForm.get('askedFriendRequests')!.value, appUserOption)" *ngFor="let appUserOption of appusers; trackBy: trackById">{{ appUserOption.id }}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

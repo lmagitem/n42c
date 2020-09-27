@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IAppUser, AppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from './app-user.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import {IAppUser, AppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from './app-user.service';
+import {IUser} from 'app/core/user/user.model';
+import {UserService} from 'app/core/user/user.service';
+import {AccountService} from "app/core/auth/account.service";
 
 type SelectableEntity = IUser | IAppUser;
 
@@ -25,13 +26,11 @@ export class AppUserUpdateComponent implements OnInit {
     id: [],
     userName: [null, [Validators.required]],
     displayedName: [null, []],
-    email: [null, [Validators.required]],
     admin: [null, [Validators.required]],
     shopRights: [null, [Validators.required]],
     blogRights: [null, [Validators.required]],
     profileRights: [null, [Validators.required]],
     scriptoriumRights: [null, [Validators.required]],
-    avatarUrl: [],
     user: [],
     givenFriendships: [],
     askedFriendRequests: [],
@@ -41,11 +40,13 @@ export class AppUserUpdateComponent implements OnInit {
     protected appUserService: AppUserService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ appUser }) => {
+    this.activatedRoute.data.subscribe(({appUser}) => {
       this.updateForm(appUser);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
@@ -59,13 +60,11 @@ export class AppUserUpdateComponent implements OnInit {
       id: appUser.id,
       userName: appUser.userName,
       displayedName: appUser.displayedName,
-      email: appUser.email,
       admin: appUser.admin,
       shopRights: appUser.shopRights,
       blogRights: appUser.blogRights,
       profileRights: appUser.profileRights,
       scriptoriumRights: appUser.scriptoriumRights,
-      avatarUrl: appUser.avatarUrl,
       user: appUser.user,
       givenFriendships: appUser.givenFriendships,
       askedFriendRequests: appUser.askedFriendRequests,
@@ -92,13 +91,11 @@ export class AppUserUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       userName: this.editForm.get(['userName'])!.value,
       displayedName: this.editForm.get(['displayedName'])!.value,
-      email: this.editForm.get(['email'])!.value,
       admin: this.editForm.get(['admin'])!.value,
       shopRights: this.editForm.get(['shopRights'])!.value,
       blogRights: this.editForm.get(['blogRights'])!.value,
       profileRights: this.editForm.get(['profileRights'])!.value,
       scriptoriumRights: this.editForm.get(['scriptoriumRights'])!.value,
-      avatarUrl: this.editForm.get(['avatarUrl'])!.value,
       user: this.editForm.get(['user'])!.value,
       givenFriendships: this.editForm.get(['givenFriendships'])!.value,
       askedFriendRequests: this.editForm.get(['askedFriendRequests'])!.value,
@@ -115,6 +112,9 @@ export class AppUserUpdateComponent implements OnInit {
   protected onSaveSuccess(): void {
     this.isSaving = false;
     this.previousState();
+
+    // Update the stored appUser
+    this.accountService.identity(true);
   }
 
   protected onSaveError(): void {

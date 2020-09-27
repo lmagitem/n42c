@@ -48,14 +48,6 @@ public class AppUser implements Serializable {
     private String displayedName;
 
     /**
-     * The user email adress.
-     */
-    @NotNull
-    @ApiModelProperty(value = "The user email adress.", required = true)
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-
-    /**
      * Does the user have admin rights?
      */
     @NotNull
@@ -98,13 +90,6 @@ public class AppUser implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "scriptorium_rights", nullable = false)
     private AppUserRights scriptoriumRights;
-
-    /**
-     * The user's avatar url.
-     */
-    @ApiModelProperty(value = "The user's avatar url.")
-    @Column(name = "avatar_url")
-    private String avatarUrl;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -191,19 +176,6 @@ public class AppUser implements Serializable {
         this.displayedName = displayedName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public AppUser email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Boolean isAdmin() {
         return admin;
     }
@@ -267,19 +239,6 @@ public class AppUser implements Serializable {
 
     public void setScriptoriumRights(AppUserRights scriptoriumRights) {
         this.scriptoriumRights = scriptoriumRights;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public AppUser avatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-        return this;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public User getUser() {
@@ -532,13 +491,11 @@ public class AppUser implements Serializable {
             "id=" + getId() +
             ", userName='" + getUserName() + "'" +
             ", displayedName='" + getDisplayedName() + "'" +
-            ", email='" + getEmail() + "'" +
             ", admin='" + isAdmin() + "'" +
             ", shopRights='" + getShopRights() + "'" +
             ", blogRights='" + getBlogRights() + "'" +
             ", profileRights='" + getProfileRights() + "'" +
             ", scriptoriumRights='" + getScriptoriumRights() + "'" +
-            ", avatarUrl='" + getAvatarUrl() + "'" +
             "}";
     }
 }

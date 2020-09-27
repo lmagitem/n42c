@@ -1,52 +1,48 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="ninthStratagem">
-            <h2><span jhiTranslate="n42CApp.ninthStratagem.detail.title">Ninth Stratagem</span> {{ ninthStratagem.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="ninthStratagem">
+      <h2><span jhiTranslate="n42cApp.ninthStratagem.detail.title">Ninth Stratagem</span> {{ ninthStratagem.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.ninthStratagem.cost">Cost</span></dt>
-                <dd>
-                    <span>{{ ninthStratagem.cost }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthStratagem.faction">Faction</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.Faction.' + ninthStratagem.faction }}">{{ ninthStratagem.faction }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthStratagem.subfaction">Subfaction</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.SubFaction.' + ninthStratagem.subfaction }}">{{ ninthStratagem.subfaction }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthStratagem.turn">Turn</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.NinthGameTurn.' + ninthStratagem.turn }}">{{ ninthStratagem.turn }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthStratagem.phase">Phase</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.NinthGamePhase.' + ninthStratagem.phase }}">{{ ninthStratagem.phase }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthStratagem.group">Group</span></dt>
-                <dd>
-                    <div *ngIf="ninthStratagem.group">
-                        <a [routerLink]="['/ninth-stratagem-group', ninthStratagem.group?.id, 'view']">{{ ninthStratagem.group?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthStratagem.cost">Cost</span></dt>
+        <dd>
+          <span>{{ ninthStratagem.cost }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthStratagem.faction">Faction</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Faction.' + ninthStratagem.faction }}">{{ ninthStratagem.faction }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthStratagem.subfaction">Subfaction</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.SubFaction.' + ninthStratagem.subfaction }}">{{ ninthStratagem.subfaction }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthStratagem.turn">Turn</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.NinthGameTurn.' + ninthStratagem.turn }}">{{ ninthStratagem.turn }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthStratagem.phase">Phase</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.NinthGamePhase.' + ninthStratagem.phase }}">{{ ninthStratagem.phase }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthStratagem.group">Group</span></dt>
+        <dd>
+          <div *ngIf="ninthStratagem.group">
+            <a [routerLink]="['/ninth-stratagem-group', ninthStratagem.group?.id, 'view']">{{ ninthStratagem.group?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/ninth-stratagem', ninthStratagem.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/ninth-stratagem', ninthStratagem.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

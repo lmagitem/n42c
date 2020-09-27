@@ -1,77 +1,91 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.profilePartSkill.home.title">Profile Part Skills</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.profilePartSkill.home.title">Profile Part Skills</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-profile-part-skill" [routerLink]="['/profile-part-skill/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.profilePartSkill.home.createLabel">
-            Create a new Profile Part Skill
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-profile-part-skill"
+      [routerLink]="['/entities/profile-part-skill/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.profilePartSkill.home.createLabel">
+        Create a new Profile Part Skill
+      </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="profilePartSkills?.length === 0">
+    <span jhiTranslate="n42cApp.profilePartSkill.home.notFound">No profilePartSkills found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="profilePartSkills && profilePartSkills.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartSkill.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartSkill.index">Index</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartSkill.level">Level</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartSkill.linkedSkills">Linked Skills</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartSkill.skillCategory">Skill Category</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profilePartSkill of profilePartSkills; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities/profile-part-skill', profilePartSkill.id, 'view']">{{ profilePartSkill.id }}</a>
+          </td>
+          <td>{{ profilePartSkill.name }}</td>
+          <td>{{ profilePartSkill.index }}</td>
+          <td jhiTranslate="{{ 'n42cApp.LevelOfMastery.' + profilePartSkill.level }}">{{ profilePartSkill.level }}</td>
+          <td>
+            <span *ngFor="let linkedSkills of profilePartSkill.linkedSkills; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities/profile-part-linked-experience', linkedSkills?.id, 'view']">{{
+                linkedSkills.id
+              }}</a
+              >{{ last ? '' : ', ' }}
             </span>
-        </button>
-    </h2>
+          </td>
+          <td>
+            <div *ngIf="profilePartSkill.skillCategory">
+              <a [routerLink]="['/entities/profile-part-skill-category', profilePartSkill.skillCategory?.id, 'view']">{{
+                profilePartSkill.skillCategory?.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/entities/profile-part-skill', profilePartSkill.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-    <jhi-alert-error></jhi-alert-error>
+              <button
+                type="submit"
+                [routerLink]="['/entities/profile-part-skill', profilePartSkill.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-    <jhi-alert></jhi-alert>
-
-    <div class="alert alert-warning" id="no-result" *ngIf="profilePartSkills?.length === 0">
-        <span jhiTranslate="n42CApp.profilePartSkill.home.notFound">No profilePartSkills found</span>
-    </div>
-
-    <div class="table-responsive" id="entities" *ngIf="profilePartSkills && profilePartSkills.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.index">Index</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.level">Level</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.linkedSkills">Linked Skills</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartSkill.skillCategory">Skill Category</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let profilePartSkill of profilePartSkills ;trackBy: trackId">
-                    <td><a [routerLink]="['/profile-part-skill', profilePartSkill.id, 'view']">{{ profilePartSkill.id }}</a></td>
-                    <td>{{ profilePartSkill.name }}</td>
-                    <td>{{ profilePartSkill.index }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.LevelOfMastery.' + profilePartSkill.level }}">{{ profilePartSkill.level }}</td>
-                    <td>
-                        <span *ngFor="let linkedSkills of profilePartSkill.linkedSkills; let last = last">
-                            <a class="form-control-static" [routerLink]="['/profile-part-linked-experience', linkedSkills?.id, 'view']">{{ linkedSkills.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
-                    <td>
-                        <div *ngIf="profilePartSkill.skillCategory">
-                            <a [routerLink]="['/profile-part-skill-category', profilePartSkill.skillCategory?.id, 'view']" >{{ profilePartSkill.skillCategory?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/profile-part-skill', profilePartSkill.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-
-                            <button type="submit"
-                                    [routerLink]="['/profile-part-skill', profilePartSkill.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
-                            <button type="submit" (click)="delete(profilePartSkill)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(profilePartSkill)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

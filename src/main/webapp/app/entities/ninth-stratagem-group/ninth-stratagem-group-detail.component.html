@@ -1,36 +1,32 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="ninthStratagemGroup">
-            <h2><span jhiTranslate="n42CApp.ninthStratagemGroup.detail.title">Ninth Stratagem Group</span> {{ ninthStratagemGroup.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="ninthStratagemGroup">
+      <h2><span jhiTranslate="n42cApp.ninthStratagemGroup.detail.title">Ninth Stratagem Group</span> {{ ninthStratagemGroup.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.ninthStratagemGroup.shareable">Shareable</span></dt>
-                <dd>
-                    <span>{{ ninthStratagemGroup.shareable }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthStratagemGroup.author">Author</span></dt>
-                <dd>
-                    <div *ngIf="ninthStratagemGroup.author">
-                        <a [routerLink]="['/player', ninthStratagemGroup.author?.id, 'view']">{{ ninthStratagemGroup.author?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthStratagemGroup.shareable">Shareable</span></dt>
+        <dd>
+          <span>{{ ninthStratagemGroup.shareable }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthStratagemGroup.author">Author</span></dt>
+        <dd>
+          <div *ngIf="ninthStratagemGroup.author">
+            <a [routerLink]="['/entities/player', ninthStratagemGroup.author?.id, 'view']">{{ ninthStratagemGroup.author?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/ninth-stratagem-group', ninthStratagemGroup.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities/ninth-stratagem-group', ninthStratagemGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

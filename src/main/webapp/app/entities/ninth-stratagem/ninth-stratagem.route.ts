@@ -40,7 +40,7 @@ export const ninthStratagemRoute: Routes = [
     component: NinthStratagemComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthStratagem.home.title',
+      pageTitle: 'n42cApp.ninthStratagem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const ninthStratagemRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthStratagem.home.title',
+      pageTitle: 'n42cApp.ninthStratagem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const ninthStratagemRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthStratagem.home.title',
+      pageTitle: 'n42cApp.ninthStratagem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const ninthStratagemRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthStratagem.home.title',
+      pageTitle: 'n42cApp.ninthStratagem.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

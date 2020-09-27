@@ -1,78 +1,84 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="appUser">
-            <h2><span jhiTranslate="n42CApp.appUser.detail.title">App User</span> {{ appUser.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="appUser">
+      <h2><span jhiTranslate="n42cApp.appUser.detail.title">App User</span> {{ appUser.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.appUser.userName" [ngbTooltip]="'n42CApp.appUser.help.userName' | translate">User Name</span></dt>
-                <dd>
-                    <span>{{ appUser.userName }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.displayedName" [ngbTooltip]="'n42CApp.appUser.help.displayedName' | translate">Displayed Name</span></dt>
-                <dd>
-                    <span>{{ appUser.displayedName }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.email" [ngbTooltip]="'n42CApp.appUser.help.email' | translate">Email</span></dt>
-                <dd>
-                    <span>{{ appUser.email }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.admin" [ngbTooltip]="'n42CApp.appUser.help.admin' | translate">Admin</span></dt>
-                <dd>
-                    <span>{{ appUser.admin }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.shopRights" [ngbTooltip]="'n42CApp.appUser.help.shopRights' | translate">Shop Rights</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.blogRights" [ngbTooltip]="'n42CApp.appUser.help.blogRights' | translate">Blog Rights</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.profileRights" [ngbTooltip]="'n42CApp.appUser.help.profileRights' | translate">Profile Rights</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.scriptoriumRights" [ngbTooltip]="'n42CApp.appUser.help.scriptoriumRights' | translate">Scriptorium Rights</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.avatarUrl" [ngbTooltip]="'n42CApp.appUser.help.avatarUrl' | translate">Avatar Url</span></dt>
-                <dd>
-                    <span>{{ appUser.avatarUrl }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.user">User</span></dt>
-                <dd>
-                    {{ appUser.user?.id }}
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.givenFriendships">Given Friendships</span></dt>
-                <dd>
-                    <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
-                        <a [routerLink]="['/app-user', givenFriendships?.id, 'view']">{{ givenFriendships.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.appUser.askedFriendRequests">Asked Friend Requests</span></dt>
-                <dd>
-                    <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
-                        <a [routerLink]="['/app-user', askedFriendRequests?.id, 'view']">{{ askedFriendRequests.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.appUser.userName" [ngbTooltip]="'n42cApp.appUser.help.userName' | translate">User Name</span></dt>
+        <dd>
+          <span>{{ appUser.userName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUser.displayedName" [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate"
+            >Displayed Name</span
+          >
+        </dt>
+        <dd>
+          <span>{{ appUser.displayedName }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.appUser.admin" [ngbTooltip]="'n42cApp.appUser.help.admin' | translate">Admin</span></dt>
+        <dd>
+          <span>{{ appUser.admin }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUser.shopRights" [ngbTooltip]="'n42cApp.appUser.help.shopRights' | translate">Shop Rights</span>
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUser.blogRights" [ngbTooltip]="'n42cApp.appUser.help.blogRights' | translate">Blog Rights</span>
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUser.profileRights" [ngbTooltip]="'n42cApp.appUser.help.profileRights' | translate"
+            >Profile Rights</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUser.scriptoriumRights" [ngbTooltip]="'n42cApp.appUser.help.scriptoriumRights' | translate"
+            >Scriptorium Rights</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.appUser.user">User</span></dt>
+        <dd>
+          {{ appUser.user?.id }}
+        </dd>
+        <dt><span jhiTranslate="n42cApp.appUser.givenFriendships">Given Friendships</span></dt>
+        <dd>
+          <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
+            <a [routerLink]="['/entities/app-user', givenFriendships?.id, 'view']">{{ givenFriendships.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.appUser.askedFriendRequests">Asked Friend Requests</span></dt>
+        <dd>
+          <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
+            <a [routerLink]="['/entities/app-user', askedFriendRequests?.id, 'view']">{{ askedFriendRequests.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/app-user', appUser.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities/app-user', appUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>
