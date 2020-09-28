@@ -29,6 +29,7 @@
       "givenFriendships": "Given Friendships",
       "askedFriendRequests": "Asked Friend Requests",
       "player": "Player",
+      "imageUrl": "Avatar URL",
       "receivedFriendships": "Received Friendships",
       "pendingFriendRequests": "Pending Friend Requests",
       "products": "Products",
@@ -44,7 +45,8 @@
         "profileRights": "The user rights regarding its profile.",
         "scriptoriumRights": "The user rights regarding the Scriptorium.",
         "givenFriendships": "The user's list of friends in the app.",
-        "askedFriendRequests": "The user's not yet answered friend requests."
+        "askedFriendRequests": "The user's not yet answered friend requests.",
+        "imageUrl": "The URL used to display this user's avatar."
       }
     }
   }

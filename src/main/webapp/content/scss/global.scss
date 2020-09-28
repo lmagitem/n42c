@@ -3,7 +3,6 @@
 @import '~bootswatch/dist/solar/variables';
 @import '~bootstrap/scss/variables';
 
-$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -13,7 +12,10 @@ $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black: #000 !default;
+$color-dark: #2b2624;
+$color-desaturated-brown: #724833;
+$color-off-white: #ffeada;
+$color-dark: #2b2624;
 $color-dark-gray: #333;
 $color-gray: #444;
 $color-table-border: #606060;
@@ -98,6 +100,41 @@ Generic styles
   padding: 1.5%;
   margin-top: 20px;
   border: none;
+}
+
+.p-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #e8ded2;
+  background-color: #3a3937;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control {
+  background-color: #c3bcb0;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #837365;
+}
+
+.form-control:focus,
+.form-control:active {
+  background-color: #d9c3a0;
+  border-color: #b57d13;
+}
+
+.card {
+  margin-bottom: 8px;
 }
 
 .error {

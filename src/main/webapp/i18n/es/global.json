@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "N42c",
+    "title": "N42C",
     "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=es\">actualice su navegador</a> para mejorar su experiencia.",
     "menu": {
       "home": "Inicio",
@@ -131,7 +131,8 @@
     "ribbon": {
       "dev": "Development"
     },
-    "item-count": "Mostrando {{first}} - {{second}} de {{total}} elementos."
+    "item-count": "Mostrando {{first}} - {{second}} de {{total}} elementos.",
+    "adminPanel": "Admin Panel"
   },
   "entity": {
     "action": {
@@ -162,7 +163,12 @@
       "maxbytes": "Este campo no puede tener más de {{max}} bytes.",
       "pattern": "Este campo debe seguir el patrón {{pattern}}.",
       "number": "Este campo debe ser un número.",
-      "datetimelocal": "Este campo debe ser una fecha y hora."
+      "datetimelocal": "Este campo debe ser una fecha y hora.",
+      "imageUrlInvalid": "No valid picture can be found at this adress."
+    },
+    "bool": {
+      "true": "Yes",
+      "false": "No"
     }
   },
   "error": {

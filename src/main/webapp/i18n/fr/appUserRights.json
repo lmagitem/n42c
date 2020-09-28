@@ -2,9 +2,9 @@
   "n42cApp": {
     "AppUserRights": {
       "null": "",
-      "MOD": "Moderator",
-      "WRI": "Writer",
-      "REA": "Reader"
+      "MOD": "Modérateur",
+      "WRI": "Contributeur",
+      "REA": "Lecteur"
     }
   }
 }

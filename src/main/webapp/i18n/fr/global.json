@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "N42c",
+    "title": "N42C",
     "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
     "menu": {
       "home": "Accueil",
@@ -131,7 +131,8 @@
     "ribbon": {
       "dev": "Développement"
     },
-    "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
+    "adminPanel": "Panneau d'administration"
   },
   "entity": {
     "action": {
@@ -163,7 +164,12 @@
       "pattern": "Ce champ doit suivre l'expression régulière {{pattern}}.",
       "number": "Ce champ doit être un nombre.",
       "datetimelocal": "Ce champ doit être une date et une heure.",
-      "patternLogin": "Ce champ ne peut contenir que des lettres, des chiffres ou des adresses e-mail."
+      "patternLogin": "Ce champ ne peut contenir que des lettres, des chiffres ou des adresses e-mail.",
+      "imageUrlInvalid": "Aucune image valide trouvée à cette adresse."
+    },
+    "bool": {
+      "true": "Oui",
+      "false": "Non"
     }
   },
   "error": {

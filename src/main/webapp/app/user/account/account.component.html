@@ -7,11 +7,12 @@
 
         <div id="card-admin" class="card" *jhiHasAnyAuthority="'ROLE_ADMIN'">
           <div class="card-body">
-            <h3 class="card-title">Admin</h3>
+            <h3 class="card-title" jhiTranslate="global.field.id">Admin Panel</h3>
 
             <div class="form-group" [hidden]="!editForm.get('id')!.value">
               <label for="id" jhiTranslate="global.field.id" [ngbTooltip]="'n42cApp.appUser.help.id' | translate">ID</label>
               <input
+                *ngIf="isEditing"
                 type="text"
                 class="form-control"
                 id="id"
@@ -20,6 +21,9 @@
                 readonly
                 [ngbTooltip]="'n42cApp.appUser.help.id' | translate"
               />
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.id' | translate">
+                {{ editForm.get('id')?.value }}
+              </p>
             </div>
 
             <div class="form-group">
@@ -31,6 +35,7 @@
                 >User ID</label
               >
               <select
+                *ngIf="isEditing"
                 class="form-control"
                 id="field_user"
                 name="user"
@@ -44,6 +49,9 @@
                   >{{ userOption.id }}</option
                 >
               </select>
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.userId' | translate">
+                {{ editForm.get('user')?.value?.id }}
+              </p>
             </div>
 
             <div class="form-group">
@@ -55,6 +63,7 @@
                 >Admin</label
               >
               <input
+                *ngIf="isEditing"
                 type="checkbox"
                 class="form-control"
                 name="admin"
@@ -62,6 +71,9 @@
                 formControlName="admin"
                 [ngbTooltip]="'n42cApp.appUser.help.admin' | translate"
               />
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.admin' | translate">
+                {{ 'entity.bool.' + editForm.get('admin')?.value | translate }}
+              </p>
               <div *ngIf="editForm.get('admin')!.invalid && (editForm.get('admin')!.dirty || editForm.get('admin')!.touched)">
                 <small
                   class="form-text text-danger"
@@ -82,6 +94,7 @@
                 >Shop Rights</label
               >
               <select
+                *ngIf="isEditing"
                 class="form-control"
                 name="shopRights"
                 formControlName="shopRights"
@@ -92,6 +105,9 @@
                 <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
                 <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
               </select>
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.shopRights' | translate">
+                {{ getRightsTranslationPath(editForm.get('shopRights')?.value) | translate }}
+              </p>
               <div
                 *ngIf="editForm.get('shopRights')!.invalid && (editForm.get('shopRights')!.dirty || editForm.get('shopRights')!.touched)"
               >
@@ -114,6 +130,7 @@
                 >Blog Rights</label
               >
               <select
+                *ngIf="isEditing"
                 class="form-control"
                 name="blogRights"
                 formControlName="blogRights"
@@ -124,6 +141,9 @@
                 <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
                 <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
               </select>
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.blogRights' | translate">
+                {{ getRightsTranslationPath(editForm.get('blogRights')?.value) | translate }}
+              </p>
               <div
                 *ngIf="editForm.get('blogRights')!.invalid && (editForm.get('blogRights')!.dirty || editForm.get('blogRights')!.touched)"
               >
@@ -146,6 +166,7 @@
                 >Profile Rights</label
               >
               <select
+                *ngIf="isEditing"
                 class="form-control"
                 name="profileRights"
                 formControlName="profileRights"
@@ -156,6 +177,9 @@
                 <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
                 <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
               </select>
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.profileRights' | translate">
+                {{ getRightsTranslationPath(editForm.get('profileRights')?.value) | translate }}
+              </p>
               <div
                 *ngIf="
                   editForm.get('profileRights')!.invalid && (editForm.get('profileRights')!.dirty || editForm.get('profileRights')!.touched)
@@ -180,6 +204,7 @@
                 >Scriptorium Rights</label
               >
               <select
+                *ngIf="isEditing"
                 class="form-control"
                 name="scriptoriumRights"
                 formControlName="scriptoriumRights"
@@ -190,6 +215,9 @@
                 <option value="WRI">{{ 'n42cApp.AppUserRights.WRI' | translate }}</option>
                 <option value="REA">{{ 'n42cApp.AppUserRights.REA' | translate }}</option>
               </select>
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.scriptoriumRights' | translate">
+                {{ getRightsTranslationPath(editForm.get('scriptoriumRights')?.value) | translate }}
+              </p>
               <div
                 *ngIf="
                   editForm.get('scriptoriumRights')!.invalid &&
@@ -212,108 +240,176 @@
       <div id="card-user" class="card">
         <div class="card-body">
           <h3 class="card-title">My account</h3>
-
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              jhiTranslate="n42cApp.appUser.userName"
-              for="field_userName"
-              [ngbTooltip]="'n42cApp.appUser.help.userName' | translate"
-              >User Name</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              name="userName"
-              id="field_userName"
-              formControlName="userName"
-              readonly
-              [ngbTooltip]="'n42cApp.appUser.help.userName' | translate"
-            />
-            <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
-              <small
-                class="form-text text-danger"
-                *ngIf="editForm.get('userName')?.errors?.required"
-                jhiTranslate="entity.validation.required"
-              >
-                This field is required.
-              </small>
-            </div>
-
-            <div class="form-group">
-              <label
-                class="form-control-label"
-                jhiTranslate="n42cApp.appUser.displayedName"
-                for="field_displayedName"
-                [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate"
-                >Displayed Name</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                name="displayedName"
-                id="field_displayedName"
-                formControlName="displayedName"
-                [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate"
-              />
-              <div
-                *ngIf="
-                  editForm.get('displayedName')!.invalid && (editForm.get('displayedName')!.dirty || editForm.get('displayedName')!.touched)
-                "
-              ></div>
-            </div>
-
-            <div class="form-group">
-              <label
-                jhiTranslate="n42cApp.appUser.givenFriendships"
-                for="field_givenFriendships"
-                [ngbTooltip]="'n42cApp.appUser.help.givenFriendships' | translate"
-                >Given Friendships</label
-              >
-              <select
-                class="form-control"
-                id="field_givenFriendships"
-                multiple
-                name="givenFriendships"
-                formControlName="givenFriendships"
-                [ngbTooltip]="'n42cApp.appUser.help.givenFriendships' | translate"
-              >
-                <option
-                  [ngValue]="getSelected(editForm.get('givenFriendships')!.value, appUserOption)"
-                  *ngFor="let appUserOption of appusers; trackBy: trackById"
-                  [disabled]="appUserOption.id === editForm.get('id')?.value"
-                  >{{ appUserOption.displayedName }}</option
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <div class="form-group">
+                <h4>Avatar</h4>
+                <jhi-customizable-image
+                  [imageUrl]="editForm.get('imageUrl')?.value"
+                  (imageUrlLoaded)="updateImageValidStatus($event)"
+                ></jhi-customizable-image>
+                <label
+                  *ngIf="isEditing"
+                  class="form-control-label"
+                  jhiTranslate="n42cApp.appUser.imageUrl"
+                  for="field_imageUrl"
+                  [ngbTooltip]="'n42cApp.appUser.help.imageUrl' | translate"
+                  >Avatar URL</label
                 >
-              </select>
+                <input
+                  *ngIf="isEditing"
+                  type="text"
+                  class="form-control"
+                  name="imageUrl"
+                  id="field_imageUrl"
+                  formControlName="imageUrl"
+                  [ngbTooltip]="'n42cApp.appUser.help.imageUrl' | translate"
+                />
+                <div *ngIf="!isImageValid">
+                  <small class="form-text text-danger" jhiTranslate="entity.validation.imageUrlInvalid">
+                    No valid picture can be found at this adress.
+                  </small>
+                </div>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label jhiTranslate="n42cApp.appUser.askedFriendRequests" for="field_askedFriendRequests">Asked Friend Requests</label>
-              <select
-                class="form-control"
-                id="field_askedFriendRequests"
-                multiple
-                name="askedFriendRequests"
-                formControlName="askedFriendRequests"
-              >
-                <option
-                  [ngValue]="getSelected(editForm.get('askedFriendRequests')!.value, appUserOption)"
-                  *ngFor="let appUserOption of appusers; trackBy: trackById"
-                  [disabled]="appUserOption.id === editForm.get('id')?.value"
-                  >{{ appUserOption.displayedName }}</option
+            <div class="col-12 col-md-9">
+              <div class="form-group">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="n42cApp.appUser.userName"
+                  for="field_userName"
+                  [ngbTooltip]="'n42cApp.appUser.help.userName' | translate"
+                  >User Name</label
                 >
-              </select>
+                <input
+                  *ngIf="isEditing"
+                  type="text"
+                  class="form-control"
+                  name="userName"
+                  id="field_userName"
+                  formControlName="userName"
+                  readonly
+                  [ngbTooltip]="'n42cApp.appUser.help.userName' | translate"
+                />
+                <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.userName' | translate">
+                  {{ editForm.get('userName')?.value }}
+                </p>
+                <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editForm.get('userName')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="n42cApp.appUser.displayedName"
+                    for="field_displayedName"
+                    [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate"
+                    >Displayed Name</label
+                  >
+                  <input
+                    *ngIf="isEditing"
+                    type="text"
+                    class="form-control"
+                    name="displayedName"
+                    id="field_displayedName"
+                    formControlName="displayedName"
+                    [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate"
+                  />
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.displayedName' | translate">
+                    {{ editForm.get('displayedName')?.value }}
+                  </p>
+                  <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('displayedName')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    jhiTranslate="n42cApp.appUser.givenFriendships"
+                    for="field_givenFriendships"
+                    [ngbTooltip]="'n42cApp.appUser.help.givenFriendships' | translate"
+                    >Given Friendships</label
+                  >
+                  <select
+                    *ngIf="isEditing"
+                    class="form-control"
+                    id="field_givenFriendships"
+                    multiple
+                    name="givenFriendships"
+                    formControlName="givenFriendships"
+                    [ngbTooltip]="'n42cApp.appUser.help.givenFriendships' | translate"
+                  >
+                    <option
+                      [ngValue]="getSelected(editForm.get('givenFriendships')!.value, appUserOption)"
+                      *ngFor="let appUserOption of appusers; trackBy: trackById"
+                      [disabled]="appUserOption.id === editForm.get('id')?.value"
+                      >{{ appUserOption.displayedName }}</option
+                    >
+                  </select>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.givenFriendships' | translate">
+                    <span *ngFor="let friend of editForm.get('givenFriendships')?.value; let isLast = last">{{
+                      friend.displayedName + (isLast ? '.' : ', ')
+                    }}</span>
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    jhiTranslate="n42cApp.appUser.askedFriendRequests"
+                    for="field_askedFriendRequests"
+                    [ngbTooltip]="'n42cApp.appUser.help.askedFriendRequests' | translate"
+                    >Asked Friend Requests</label
+                  >
+                  <select
+                    *ngIf="isEditing"
+                    class="form-control"
+                    id="field_askedFriendRequests"
+                    multiple
+                    name="askedFriendRequests"
+                    formControlName="askedFriendRequests"
+                    [ngbTooltip]="'n42cApp.appUser.help.askedFriendRequests' | translate"
+                  >
+                    <option
+                      [ngValue]="getSelected(editForm.get('askedFriendRequests')!.value, appUserOption)"
+                      *ngFor="let appUserOption of appusers; trackBy: trackById"
+                      [disabled]="appUserOption.id === editForm.get('id')?.value"
+                      >{{ appUserOption.displayedName }}</option
+                    >
+                  </select>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.askedFriendRequests' | translate">
+                    <span *ngFor="let friend of editForm.get('askedFriendRequests')?.value; let isLast = last">{{
+                      friend.displayedName + (isLast ? '.' : ', ')
+                    }}</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+      <div class="text-right">
+        <button *ngIf="!isEditing" type="button" id="edit-entity" class="btn btn-primary" (click)="isEditing = !isEditing">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+
+        <button *ngIf="isEditing" type="button" id="cancel-save" class="btn btn-secondary" (click)="cancel()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
 
-        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+        <button *ngIf="isEditing" type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
       </div>
