@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -188,8 +189,8 @@ public class NinthCampaignMomentResourceIT {
             .andExpect(jsonPath("$.[*].current").value(hasItem(DEFAULT_CURRENT.booleanValue())))
             .andExpect(jsonPath("$.[*].sinceInstant").value(hasItem(DEFAULT_SINCE_INSTANT.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
     
     @Test
@@ -206,8 +207,8 @@ public class NinthCampaignMomentResourceIT {
             .andExpect(jsonPath("$.current").value(DEFAULT_CURRENT.booleanValue()))
             .andExpect(jsonPath("$.sinceInstant").value(DEFAULT_SINCE_INSTANT.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
     @Test
     @Transactional

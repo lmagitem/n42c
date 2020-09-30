@@ -13,8 +13,9 @@
     },
     {
       "fieldName": "content",
-      "fieldType": "String",
+      "fieldType": "byte[]",
       "javadoc": "The text describing this product.",
+      "fieldTypeBlobContent": "text",
       "fieldValidateRules": [
         "required"
       ]

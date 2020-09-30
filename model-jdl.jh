@@ -45,7 +45,7 @@ entity LocalizedProduct {
     /** The url of a picture representing the item. */
     pictureUrl String
     /** The text describing this product. */
-    content String required
+    content TextBlob required
     /** This item's language. */
     language Language required
 }
@@ -68,9 +68,9 @@ entity BlogPost {
 /** The content of a post, in a specific language. */
 entity LocalizedPostContent {
     /** An excerpt of the post to show on the blog page. */
-    excerpt String
+    excerpt TextBlob
     /** The content of the post. */
-    content String required
+    content TextBlob required
     /** This post's language. */
     language Language required
 }
@@ -93,7 +93,7 @@ entity AppUserProfile {
     /** The title of this profile. */
     title String
     /** A summary to show on the user profile. */
-    summary String
+    summary TextBlob
     /** The picture to show in the profile header. */
     headerBackgroundURI String
     /** This profile's language. */
@@ -141,7 +141,7 @@ entity ProfilePartPreciseItem {
     /** This item's location longitude. */
     locationLong Double
     /** This item's content. */
-    content String
+    content TextBlob
 }
 /** An individual experience that can be linked to a precise item. */
 entity ProfilePartLinkedExperience {
@@ -152,7 +152,7 @@ entity ProfilePartLinkedExperience {
     /** This experience's date. */
     date Instant required
     /** This experience's content. */
-    content String
+    content TextBlob
 }
 /** A category in which to display various skills with their levels. */
 entity ProfilePartSkillCategory {
@@ -207,16 +207,18 @@ entity Player {
 }
 
 entity NinthCampaign {
+    name String required
 	gameType NinthGameType required
     usePowerRating Boolean required
+  	description TextBlob
 }
 
 entity NinthCampaignMoment {
     current Boolean required
     sinceInstant Instant required
     name String
-    summary String
-  	description String
+    summary TextBlob
+  	description TextBlob
 }
 
 entity NinthBattle {
@@ -241,8 +243,8 @@ entity NinthArmyMoment {
     requisition Integer
     supplyLimit Integer
     supplyUsed Integer
-    objectives String
-    notes String
+    objectives TextBlob
+    notes TextBlob
 }
 
 entity NinthArmyUnit {
@@ -294,7 +296,7 @@ entity NinthMission {
 
 entity LocalizedNinthMission {
 	name String
-	briefing String
+	briefing TextBlob
 }
 
 entity NinthDeploymentMap {
@@ -304,7 +306,7 @@ entity NinthDeploymentMap {
 
 entity LocalizedNinthDeploymentMap {
 	name String
-    description String
+    description TextBlob
 }
 
 entity NinthMissionRule {
@@ -313,7 +315,7 @@ entity NinthMissionRule {
 
 entity LocalizedNinthMissionRule {
 	name String
-	description String
+	description TextBlob
 }
 
 entity NinthStratagemGroup {
@@ -335,8 +337,8 @@ entity NinthStratagem {
 entity LocalizedNinthStratagem {
     name String
     summary String
-    description String
-    keywords String
+    description TextBlob
+    keywords TextBlob
 }
 
 entity NinthObjective {
@@ -346,7 +348,7 @@ entity NinthObjective {
 
 entity LocalizedNinthObjective {
 	name String
-    description String
+    description TextBlob
 }
 
 enum NinthObjectiveType {

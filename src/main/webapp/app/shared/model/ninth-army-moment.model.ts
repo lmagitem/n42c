@@ -1,8 +1,8 @@
-import {Moment} from 'moment';
-import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
-import {INinthObjective} from 'app/shared/model/ninth-objective.model';
-import {INinthBattle} from 'app/shared/model/ninth-battle.model';
-import {INinthArmy} from 'app/shared/model/ninth-army.model';
+import { Moment } from 'moment';
+import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
+import { INinthObjective } from 'app/shared/model/ninth-objective.model';
+import { INinthBattle } from 'app/shared/model/ninth-battle.model';
+import { INinthArmy } from 'app/shared/model/ninth-army.model';
 
 export interface INinthArmyMoment {
   id?: number;
@@ -16,8 +16,8 @@ export interface INinthArmyMoment {
   requisition?: number;
   supplyLimit?: number;
   supplyUsed?: number;
-  objectives?: string;
-  notes?: string;
+  objectives?: any;
+  notes?: any;
   selectedUnits?: INinthArmyUnit[];
   selectedObjectives?: INinthObjective[];
   battle?: INinthBattle;
@@ -37,8 +37,8 @@ export class NinthArmyMoment implements INinthArmyMoment {
     public requisition?: number,
     public supplyLimit?: number,
     public supplyUsed?: number,
-    public objectives?: string,
-    public notes?: string,
+    public objectives?: any,
+    public notes?: any,
     public selectedUnits?: INinthArmyUnit[],
     public selectedObjectives?: INinthObjective[],
     public battle?: INinthBattle,

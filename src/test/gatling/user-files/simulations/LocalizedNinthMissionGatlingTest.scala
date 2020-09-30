@@ -102,7 +102,7 @@ class LocalizedNinthMissionGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "name":"SAMPLE_TEXT"
-                , "briefing":"SAMPLE_TEXT"
+                , "briefing":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_localizedNinthMission_url"))).exitHereIfFailed

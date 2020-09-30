@@ -44,8 +44,9 @@
     },
     {
       "fieldName": "content",
-      "fieldType": "String",
-      "javadoc": "This item's content."
+      "fieldType": "byte[]",
+      "javadoc": "This item's content.",
+      "fieldTypeBlobContent": "text"
     }
   ],
   "relationships": [

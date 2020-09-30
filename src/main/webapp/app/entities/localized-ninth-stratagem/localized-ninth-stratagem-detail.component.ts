@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { ILocalizedNinthStratagem } from 'app/shared/model/localized-ninth-stratagem.model';
 
@@ -10,10 +11,18 @@ import { ILocalizedNinthStratagem } from 'app/shared/model/localized-ninth-strat
 export class LocalizedNinthStratagemDetailComponent implements OnInit {
   localizedNinthStratagem: ILocalizedNinthStratagem | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ localizedNinthStratagem }) => (this.localizedNinthStratagem = localizedNinthStratagem));
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType = '', base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
   }
 
   previousState(): void {

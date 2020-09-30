@@ -103,7 +103,7 @@ class LocalizedProductGatlingTest extends Simulation {
                 "id":null
                 , "excerpt":"SAMPLE_TEXT"
                 , "pictureUrl":"SAMPLE_TEXT"
-                , "content":"SAMPLE_TEXT"
+                , "content":null
                 , "language":"EN"
                 }""")).asJson
             .check(status.is(201))

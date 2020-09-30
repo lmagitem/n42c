@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-unit-moment"
-      [routerLink]="['/ninth-unit-moment/new']"
+      [routerLink]="['/entities/ninth-unit-moment/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthUnitMoment.home.createLabel">
@@ -37,24 +37,28 @@
       <tbody>
         <tr *ngFor="let ninthUnitMoment of ninthUnitMoments; trackBy: trackId">
           <td>
-            <a [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'view']">{{ ninthUnitMoment.id }}</a>
+            <a [routerLink]="['/entities/ninth-unit-moment', ninthUnitMoment.id, 'view']">{{ ninthUnitMoment.id }}</a>
           </td>
           <td>{{ ninthUnitMoment.current }}</td>
           <td>{{ ninthUnitMoment.sinceInstant | date: 'medium' }}</td>
           <td>{{ ninthUnitMoment.pictureUrl }}</td>
           <td>
             <div *ngIf="ninthUnitMoment.unit">
-              <a [routerLink]="['/ninth-unit', ninthUnitMoment.unit?.id, 'view']">{{ ninthUnitMoment.unit?.id }}</a>
+              <a [routerLink]="['/entities/ninth-unit', ninthUnitMoment.unit?.id, 'view']">{{ ninthUnitMoment.unit?.id }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['/entities/ninth-unit-moment', ninthUnitMoment.id, 'view']" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/ninth-unit-moment', ninthUnitMoment.id, 'edit']" class="btn btn-primary btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities/ninth-unit-moment', ninthUnitMoment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

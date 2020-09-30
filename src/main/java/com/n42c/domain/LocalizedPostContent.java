@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -33,14 +34,18 @@ public class LocalizedPostContent implements Serializable {
      * An excerpt of the post to show on the blog page.
      */
     @ApiModelProperty(value = "An excerpt of the post to show on the blog page.")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "excerpt")
     private String excerpt;
 
     /**
      * The content of the post.
      */
-    @NotNull
+    
     @ApiModelProperty(value = "The content of the post.", required = true)
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content", nullable = false)
     private String content;
 

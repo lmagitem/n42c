@@ -4,9 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { ILocalizedNinthMissionRule, LocalizedNinthMissionRule } from 'app/shared/model/localized-ninth-mission-rule.model';
 import { LocalizedNinthMissionRuleService } from './localized-ninth-mission-rule.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { INinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
 import { NinthMissionRuleService } from 'app/entities/ninth-mission-rule/ninth-mission-rule.service';
 
@@ -26,6 +28,8 @@ export class LocalizedNinthMissionRuleUpdateComponent implements OnInit {
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected localizedNinthMissionRuleService: LocalizedNinthMissionRuleService,
     protected ninthMissionRuleService: NinthMissionRuleService,
     protected activatedRoute: ActivatedRoute,
@@ -46,6 +50,22 @@ export class LocalizedNinthMissionRuleUpdateComponent implements OnInit {
       name: localizedNinthMissionRule.name,
       description: localizedNinthMissionRule.description,
       rule: localizedNinthMissionRule.rule,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 

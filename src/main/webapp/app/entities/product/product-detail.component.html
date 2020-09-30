@@ -11,14 +11,14 @@
         <dt><span jhiTranslate="n42cApp.product.authors">Authors</span></dt>
         <dd>
           <span *ngFor="let authors of product.authors; let last = last">
-            <a [routerLink]="['/app-user', authors?.id, 'view']">{{ authors.id }}</a
+            <a [routerLink]="['/entities/app-user', authors?.id, 'view']">{{ authors.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.product.shop">Shop</span></dt>
         <dd>
           <div *ngIf="product.shop">
-            <a [routerLink]="['/shop', product.shop?.id, 'view']">{{ product.shop?.id }}</a>
+            <a [routerLink]="['/entities/shop', product.shop?.id, 'view']">{{ product.shop?.id }}</a>
           </div>
         </dd>
       </dl>
@@ -27,7 +27,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/product', product.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities/product', product.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

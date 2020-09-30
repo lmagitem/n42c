@@ -19,7 +19,7 @@
         <dt><span jhiTranslate="n42cApp.ninthDeploymentMap.usedInMissions">Used In Missions</span></dt>
         <dd>
           <span *ngFor="let usedInMissions of ninthDeploymentMap.usedInMissions; let last = last">
-            <a [routerLink]="['/ninth-mission', usedInMissions?.id, 'view']">{{ usedInMissions.id }}</a
+            <a [routerLink]="['/entities/ninth-mission', usedInMissions?.id, 'view']">{{ usedInMissions.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
@@ -29,7 +29,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/ninth-deployment-map', ninthDeploymentMap.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities/ninth-deployment-map', ninthDeploymentMap.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

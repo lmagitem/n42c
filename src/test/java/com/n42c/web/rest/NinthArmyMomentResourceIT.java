@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -248,8 +249,8 @@ public class NinthArmyMomentResourceIT {
             .andExpect(jsonPath("$.[*].requisition").value(hasItem(DEFAULT_REQUISITION)))
             .andExpect(jsonPath("$.[*].supplyLimit").value(hasItem(DEFAULT_SUPPLY_LIMIT)))
             .andExpect(jsonPath("$.[*].supplyUsed").value(hasItem(DEFAULT_SUPPLY_USED)))
-            .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES)))
-            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
+            .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES.toString())))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES.toString())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -293,8 +294,8 @@ public class NinthArmyMomentResourceIT {
             .andExpect(jsonPath("$.requisition").value(DEFAULT_REQUISITION))
             .andExpect(jsonPath("$.supplyLimit").value(DEFAULT_SUPPLY_LIMIT))
             .andExpect(jsonPath("$.supplyUsed").value(DEFAULT_SUPPLY_USED))
-            .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES))
-            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
+            .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES.toString()))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES.toString()));
     }
     @Test
     @Transactional

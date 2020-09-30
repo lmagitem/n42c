@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -167,7 +168,7 @@ public class AppUserProfileResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(appUserProfile.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY)))
+            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
             .andExpect(jsonPath("$.[*].headerBackgroundURI").value(hasItem(DEFAULT_HEADER_BACKGROUND_URI)))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
@@ -185,7 +186,7 @@ public class AppUserProfileResourceIT {
             .andExpect(jsonPath("$.id").value(appUserProfile.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY))
+            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()))
             .andExpect(jsonPath("$.headerBackgroundURI").value(DEFAULT_HEADER_BACKGROUND_URI))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }

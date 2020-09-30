@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-localized-product-heading" jhiTranslate="n42cApp.localizedProduct.home.createOrEditLabel">
         Create or edit a Localized Product
@@ -43,7 +43,7 @@
             [ngbTooltip]="'n42cApp.localizedProduct.help.content' | translate"
             >Content</label
           >
-          <input type="text" class="form-control" name="content" id="field_content" formControlName="content" />
+          <textarea class="form-control" name="content" id="field_content" formControlName="content"></textarea>
           <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
             <small
               class="form-text text-danger"

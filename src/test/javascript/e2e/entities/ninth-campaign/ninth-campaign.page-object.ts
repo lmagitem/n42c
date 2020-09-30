@@ -29,8 +29,10 @@ export class NinthCampaignUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
+  nameInput = element(by.id('field_name'));
   gameTypeSelect = element(by.id('field_gameType'));
   usePowerRatingInput = element(by.id('field_usePowerRating'));
+  descriptionInput = element(by.id('field_description'));
 
   authorsSelect = element(by.id('field_authors'));
   participantsSelect = element(by.id('field_participants'));
@@ -38,6 +40,14 @@ export class NinthCampaignUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
+  }
+
+  async setNameInput(name: string): Promise<void> {
+    await this.nameInput.sendKeys(name);
+  }
+
+  async getNameInput(): Promise<string> {
+    return await this.nameInput.getAttribute('value');
   }
 
   async setGameTypeSelect(gameType: string): Promise<void> {
@@ -54,6 +64,14 @@ export class NinthCampaignUpdatePage {
 
   getUsePowerRatingInput(): ElementFinder {
     return this.usePowerRatingInput;
+  }
+
+  async setDescriptionInput(description: string): Promise<void> {
+    await this.descriptionInput.sendKeys(description);
+  }
+
+  async getDescriptionInput(): Promise<string> {
+    return await this.descriptionInput.getAttribute('value');
   }
 
   async authorsSelectLastOption(): Promise<void> {

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -58,6 +59,8 @@ public class ProfilePartLinkedExperience implements Serializable {
      * This experience's content.
      */
     @ApiModelProperty(value = "This experience's content.")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content")
     private String content;
 

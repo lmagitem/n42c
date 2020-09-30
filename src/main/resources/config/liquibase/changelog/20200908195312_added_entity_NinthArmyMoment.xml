@@ -45,10 +45,10 @@
             <column name="supply_used" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="objectives" type="varchar(255)">
+            <column name="objectives" type="${clobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="notes" type="varchar(255)">
+            <column name="notes" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="battle_id" type="bigint">
@@ -113,8 +113,8 @@
             <column name="requisition" type="numeric"/>
             <column name="supply_limit" type="numeric"/>
             <column name="supply_used" type="numeric"/>
-            <column name="objectives" type="string"/>
-            <column name="notes" type="string"/>
+            <column name="objectives" type="clob"/>
+            <column name="notes" type="clob"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

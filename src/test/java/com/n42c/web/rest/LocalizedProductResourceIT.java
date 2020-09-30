@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -131,25 +132,6 @@ public class LocalizedProductResourceIT {
 
     @Test
     @Transactional
-    public void checkContentIsRequired() throws Exception {
-        int databaseSizeBeforeTest = localizedProductRepository.findAll().size();
-        // set the field null
-        localizedProduct.setContent(null);
-
-        // Create the LocalizedProduct, which fails.
-
-
-        restLocalizedProductMockMvc.perform(post("/api/localized-products").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedProduct)))
-            .andExpect(status().isBadRequest());
-
-        List<LocalizedProduct> localizedProductList = localizedProductRepository.findAll();
-        assertThat(localizedProductList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkLanguageIsRequired() throws Exception {
         int databaseSizeBeforeTest = localizedProductRepository.findAll().size();
         // set the field null
@@ -180,7 +162,7 @@ public class LocalizedProductResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedProduct.getId().intValue())))
             .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT)))
             .andExpect(jsonPath("$.[*].pictureUrl").value(hasItem(DEFAULT_PICTURE_URL)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
@@ -197,7 +179,7 @@ public class LocalizedProductResourceIT {
             .andExpect(jsonPath("$.id").value(localizedProduct.getId().intValue()))
             .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT))
             .andExpect(jsonPath("$.pictureUrl").value(DEFAULT_PICTURE_URL))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test

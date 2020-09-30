@@ -2,11 +2,7 @@
   <h2 id="page-heading">
     <span jhiTranslate="n42cApp.ninthCampaign.home.title">Ninth Campaigns</span>
 
-    <button
-      id="jh-create-entity"
-      class="btn btn-primary float-right jh-create-entity create-ninth-campaign"
-      [routerLink]="['/ninth-campaign/new']"
-    >
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-campaign" [routerLink]="['/campaign/new']">
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthCampaign.home.createLabel">
         Create a new Ninth Campaign
@@ -27,6 +23,7 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.name">Name</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.usePowerRating">Use Power Rating</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></th>
@@ -38,40 +35,42 @@
       <tbody>
         <tr *ngFor="let ninthCampaign of ninthCampaigns; trackBy: trackId">
           <td>
-            <a [routerLink]="['/ninth-campaign', ninthCampaign.id, 'view']">{{ ninthCampaign.id }}</a>
+            <a [routerLink]="['/campaign', ninthCampaign.id]">{{ ninthCampaign.id }}</a>
           </td>
+          <td>{{ ninthCampaign.name }}</td>
           <td jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthCampaign.gameType }}">{{ ninthCampaign.gameType }}</td>
           <td>{{ ninthCampaign.usePowerRating }}</td>
           <td>
-            <span *ngFor="let authors of ninthCampaign.authors; let last = last">
-              <a class="form-control-static" [routerLink]="['/player', authors?.id, 'view']">{{ authors.id }}</a
+            <span *ngFor="let author of ninthCampaign.authors; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities/player', author?.id, 'view']">{{
+                !!author.appUser ? author.appUser.displayedName : author.id
+              }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td>
-            <span *ngFor="let participants of ninthCampaign.participants; let last = last">
-              <a class="form-control-static" [routerLink]="['/player', participants?.id, 'view']">{{ participants.id }}</a
+            <span *ngFor="let participant of ninthCampaign.participants; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities/player', participant?.id, 'view']">{{
+                !!participant.appUser ? participant.appUser.displayedName : participant.id
+              }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td>
             <span *ngFor="let campaignStratagems of ninthCampaign.campaignStratagems; let last = last">
-              <a class="form-control-static" [routerLink]="['/ninth-stratagem-group', campaignStratagems?.id, 'view']">{{
-                campaignStratagems.id
+              <a class="form-control-static" [routerLink]="['/entities/ninth-stratagem-group', campaignStratagems?.id, 'view']">{{
+                !!campaignStratagems.localizations && campaignStratagems.localizations.length > 0
+                  ? campaignStratagems.localizations[0].name
+                  : campaignStratagems.id
               }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/ninth-campaign', ninthCampaign.id, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['/campaign', ninthCampaign.id]" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
-
-              <button type="submit" [routerLink]="['/ninth-campaign', ninthCampaign.id, 'edit']" class="btn btn-primary btn-sm">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
               <button type="submit" (click)="delete(ninthCampaign)" class="btn btn-danger btn-sm">

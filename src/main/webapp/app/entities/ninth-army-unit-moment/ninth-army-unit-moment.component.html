@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-army-unit-moment"
-      [routerLink]="['/ninth-army-unit-moment/new']"
+      [routerLink]="['/entities/ninth-army-unit-moment/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthArmyUnitMoment.home.createLabel">
@@ -53,7 +53,7 @@
       <tbody>
         <tr *ngFor="let ninthArmyUnitMoment of ninthArmyUnitMoments; trackBy: trackId">
           <td>
-            <a [routerLink]="['/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'view']">{{ ninthArmyUnitMoment.id }}</a>
+            <a [routerLink]="['/entities/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'view']">{{ ninthArmyUnitMoment.id }}</a>
           </td>
           <td>{{ ninthArmyUnitMoment.current }}</td>
           <td>{{ ninthArmyUnitMoment.sinceInstant | date: 'medium' }}</td>
@@ -76,19 +76,25 @@
           <td>{{ ninthArmyUnitMoment.battleScars }}</td>
           <td>
             <div *ngIf="ninthArmyUnitMoment.armyUnit">
-              <a [routerLink]="['/ninth-army-unit', ninthArmyUnitMoment.armyUnit?.id, 'view']">{{ ninthArmyUnitMoment.armyUnit?.id }}</a>
+              <a [routerLink]="['/entities/ninth-army-unit', ninthArmyUnitMoment.armyUnit?.id, 'view']">{{
+                ninthArmyUnitMoment.armyUnit?.id
+              }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'view']" class="btn btn-info btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
               <button
                 type="submit"
-                [routerLink]="['/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'edit']"
+                [routerLink]="['/entities/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

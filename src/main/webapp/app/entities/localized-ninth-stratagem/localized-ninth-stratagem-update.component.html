@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-localized-ninth-stratagem-heading" jhiTranslate="n42cApp.localizedNinthStratagem.home.createOrEditLabel">
         Create or edit a Localized Ninth Stratagem
@@ -27,12 +27,12 @@
           <label class="form-control-label" jhiTranslate="n42cApp.localizedNinthStratagem.description" for="field_description"
             >Description</label
           >
-          <input type="text" class="form-control" name="description" id="field_description" formControlName="description" />
+          <textarea class="form-control" name="description" id="field_description" formControlName="description"></textarea>
         </div>
 
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedNinthStratagem.keywords" for="field_keywords">Keywords</label>
-          <input type="text" class="form-control" name="keywords" id="field_keywords" formControlName="keywords" />
+          <textarea class="form-control" name="keywords" id="field_keywords" formControlName="keywords"></textarea>
         </div>
 
         <div class="form-group">

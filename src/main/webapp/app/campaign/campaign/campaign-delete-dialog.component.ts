@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
 import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
+import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
+import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
-  templateUrl: './ninth-campaign-delete-dialog.component.html',
+  templateUrl: './campaign-delete-dialog.component.html',
 })
-export class NinthCampaignDeleteDialogComponent {
+export class CampaignDeleteDialogComponent {
   ninthCampaign?: INinthCampaign;
 
   constructor(

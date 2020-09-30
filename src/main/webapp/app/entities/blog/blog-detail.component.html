@@ -15,7 +15,7 @@
         <dt><span jhiTranslate="n42cApp.blog.author">Author</span></dt>
         <dd>
           <div *ngIf="blog.author">
-            <a [routerLink]="['/app-user', blog.author?.id, 'view']">{{ blog.author?.id }}</a>
+            <a [routerLink]="['/entities/app-user', blog.author?.id, 'view']">{{ blog.author?.id }}</a>
           </div>
         </dd>
       </dl>
@@ -24,7 +24,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/blog', blog.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities/blog', blog.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

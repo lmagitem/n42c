@@ -1,5 +1,6 @@
 {
   "home": {
+    "title": "N42C",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     },

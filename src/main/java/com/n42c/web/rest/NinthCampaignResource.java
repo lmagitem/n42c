@@ -93,6 +93,18 @@ public class NinthCampaignResource {
     }
 
     /**
+     * {@code GET  /ninth-campaigns/:id/ninth-campaign-moments} : get the ninthCampaignMoments' ids linked to this ninthCampaign.
+     *
+     * @param id the id of the ninthCampaign for which to retrieve ninthCampaignMoments ids.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ids in body.
+     */
+    @GetMapping("/ninth-campaigns/{id}/ninth-campaign-moments")
+    public List<Long> getLinkedNinthCampaignMoments(@PathVariable Long id) {
+        log.debug("REST request to get NinthCampaignMoments' ids linked to NinthCampaign : {}", id);
+        return ninthCampaignRepository.findLinkedNinthCampaignMomentsIds(id);
+    }
+
+    /**
      * {@code GET  /ninth-campaigns/:id} : get the "id" ninthCampaign.
      *
      * @param id the id of the ninthCampaign to retrieve.

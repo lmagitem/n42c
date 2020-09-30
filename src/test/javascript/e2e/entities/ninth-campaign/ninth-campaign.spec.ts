@@ -44,12 +44,15 @@ describe('NinthCampaign e2e test', () => {
     await ninthCampaignComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      ninthCampaignUpdatePage.setNameInput('name'),
       ninthCampaignUpdatePage.gameTypeSelectLastOption(),
+      ninthCampaignUpdatePage.setDescriptionInput('description'),
       // ninthCampaignUpdatePage.authorsSelectLastOption(),
       // ninthCampaignUpdatePage.participantsSelectLastOption(),
       // ninthCampaignUpdatePage.campaignStratagemsSelectLastOption(),
     ]);
 
+    expect(await ninthCampaignUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     const selectedUsePowerRating = ninthCampaignUpdatePage.getUsePowerRatingInput();
     if (await selectedUsePowerRating.isSelected()) {
       await ninthCampaignUpdatePage.getUsePowerRatingInput().click();
@@ -58,6 +61,10 @@ describe('NinthCampaign e2e test', () => {
       await ninthCampaignUpdatePage.getUsePowerRatingInput().click();
       expect(await ninthCampaignUpdatePage.getUsePowerRatingInput().isSelected(), 'Expected usePowerRating to be selected').to.be.true;
     }
+    expect(await ninthCampaignUpdatePage.getDescriptionInput()).to.eq(
+      'description',
+      'Expected Description value to be equals to description'
+    );
 
     await ninthCampaignUpdatePage.save();
     expect(await ninthCampaignUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

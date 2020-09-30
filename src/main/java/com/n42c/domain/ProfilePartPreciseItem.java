@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -85,6 +86,8 @@ public class ProfilePartPreciseItem implements Serializable {
      * This item's content.
      */
     @ApiModelProperty(value = "This item's content.")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content")
     private String content;
 

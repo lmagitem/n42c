@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-mission"
-      [routerLink]="['/entities/ninth-mission/new']"
+      [routerLink]="['/entities/entities/ninth-mission/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthMission.home.createLabel">
@@ -40,14 +40,14 @@
       <tbody>
         <tr *ngFor="let ninthMission of ninthMissions; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/ninth-mission', ninthMission.id, 'view']">{{ ninthMission.id }}</a>
+            <a [routerLink]="['/entities/entities/ninth-mission', ninthMission.id, 'view']">{{ ninthMission.id }}</a>
           </td>
           <td jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthMission.gameType }}">{{ ninthMission.gameType }}</td>
           <td jhiTranslate="{{ 'n42cApp.NinthGameSize.' + ninthMission.gameSize }}">{{ ninthMission.gameSize }}</td>
           <td>{{ ninthMission.shareable }}</td>
           <td>
             <span *ngFor="let missionStratagems of ninthMission.missionStratagems; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/ninth-stratagem-group', missionStratagems?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities/entities/ninth-stratagem-group', missionStratagems?.id, 'view']">{{
                 missionStratagems.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -55,7 +55,7 @@
           </td>
           <td>
             <span *ngFor="let primaryObjectives of ninthMission.primaryObjectives; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/ninth-objective', primaryObjectives?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities/entities/ninth-objective', primaryObjectives?.id, 'view']">{{
                 primaryObjectives.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -63,7 +63,7 @@
           </td>
           <td>
             <span *ngFor="let allowedSecondaries of ninthMission.allowedSecondaries; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/ninth-objective', allowedSecondaries?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities/entities/ninth-objective', allowedSecondaries?.id, 'view']">{{
                 allowedSecondaries.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -71,18 +71,22 @@
           </td>
           <td>
             <span *ngFor="let rules of ninthMission.rules; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/ninth-mission-rule', rules?.id, 'view']">{{ rules.id }}</a
+              <a class="form-control-static" [routerLink]="['/entities/entities/ninth-mission-rule', rules?.id, 'view']">{{ rules.id }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/entities/ninth-mission', ninthMission.id, 'view']" class="btn btn-info btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities/entities/ninth-mission', ninthMission.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/ninth-mission', ninthMission.id, 'edit']" class="btn btn-primary btn-sm">
+              <button type="submit" [routerLink]="['/entities/ninth-mission', ninthMission.id, 'edit']" class="btn btn-primary btn-sm">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

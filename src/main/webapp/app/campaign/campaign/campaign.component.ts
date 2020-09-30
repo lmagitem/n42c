@@ -4,14 +4,14 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignDeleteDialogComponent } from './ninth-campaign-delete-dialog.component';
 import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
+import { CampaignDeleteDialogComponent } from './campaign-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-campaign',
-  templateUrl: './ninth-campaign.component.html',
+  templateUrl: './campaign.component.html',
 })
-export class NinthCampaignComponent implements OnInit, OnDestroy {
+export class CampaignComponent implements OnInit, OnDestroy {
   ninthCampaigns?: INinthCampaign[];
   eventSubscriber?: Subscription;
 
@@ -46,7 +46,7 @@ export class NinthCampaignComponent implements OnInit, OnDestroy {
   }
 
   delete(ninthCampaign: INinthCampaign): void {
-    const modalRef = this.modalService.open(NinthCampaignDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(CampaignDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.ninthCampaign = ninthCampaign;
   }
 }

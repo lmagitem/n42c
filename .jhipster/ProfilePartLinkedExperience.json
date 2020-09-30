@@ -24,8 +24,9 @@
     },
     {
       "fieldName": "content",
-      "fieldType": "String",
-      "javadoc": "This experience's content."
+      "fieldType": "byte[]",
+      "javadoc": "This experience's content.",
+      "fieldTypeBlobContent": "text"
     }
   ],
   "relationships": [

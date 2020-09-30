@@ -4,9 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { ILocalizedProduct, LocalizedProduct } from 'app/shared/model/localized-product.model';
 import { LocalizedProductService } from './localized-product.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IProduct } from 'app/shared/model/product.model';
 import { ProductService } from 'app/entities/product/product.service';
 
@@ -28,6 +30,8 @@ export class LocalizedProductUpdateComponent implements OnInit {
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected localizedProductService: LocalizedProductService,
     protected productService: ProductService,
     protected activatedRoute: ActivatedRoute,
@@ -50,6 +54,22 @@ export class LocalizedProductUpdateComponent implements OnInit {
       content: localizedProduct.content,
       language: localizedProduct.language,
       product: localizedProduct.product,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 

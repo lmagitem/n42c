@@ -18,7 +18,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="briefing" type="varchar(255)">
+            <column name="briefing" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="mission_id" type="bigint">
@@ -48,7 +48,7 @@
                   tableName="localized_ninth_mission">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="briefing" type="string"/>
+            <column name="briefing" type="clob"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

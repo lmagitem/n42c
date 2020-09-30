@@ -101,8 +101,10 @@ class NinthCampaignGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
+                , "name":"SAMPLE_TEXT"
                 , "gameType":"OP"
                 , "usePowerRating":null
+                , "description":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_ninthCampaign_url"))).exitHereIfFailed

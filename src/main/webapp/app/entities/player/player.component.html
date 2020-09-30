@@ -2,7 +2,11 @@
   <h2 id="page-heading">
     <span jhiTranslate="n42cApp.player.home.title">Players</span>
 
-    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-player" [routerLink]="['/player/new']">
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-player"
+      [routerLink]="['/entities/player/new']"
+    >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.player.home.createLabel">
         Create a new Player
@@ -30,21 +34,21 @@
       <tbody>
         <tr *ngFor="let player of players; trackBy: trackId">
           <td>
-            <a [routerLink]="['/player', player.id, 'view']">{{ player.id }}</a>
+            <a [routerLink]="['/entities/player', player.id, 'view']">{{ player.id }}</a>
           </td>
           <td>
             <div *ngIf="player.appUser">
-              <a [routerLink]="['/app-user', player.appUser?.id, 'view']">{{ player.appUser?.id }}</a>
+              <a [routerLink]="['/entities/app-user', player.appUser?.id, 'view']">{{ player.appUser?.id }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/player', player.id, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['/entities/player', player.id, 'view']" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/player', player.id, 'edit']" class="btn btn-primary btn-sm">
+              <button type="submit" [routerLink]="['/entities/player', player.id, 'edit']" class="btn btn-primary btn-sm">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

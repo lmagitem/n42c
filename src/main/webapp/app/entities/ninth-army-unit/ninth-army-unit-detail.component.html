@@ -15,13 +15,13 @@
         <dt><span jhiTranslate="n42cApp.ninthArmyUnit.army">Army</span></dt>
         <dd>
           <div *ngIf="ninthArmyUnit.army">
-            <a [routerLink]="['/ninth-army', ninthArmyUnit.army?.id, 'view']">{{ ninthArmyUnit.army?.id }}</a>
+            <a [routerLink]="['/entities/ninth-army', ninthArmyUnit.army?.id, 'view']">{{ ninthArmyUnit.army?.id }}</a>
           </div>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthArmyUnit.unit">Unit</span></dt>
         <dd>
           <div *ngIf="ninthArmyUnit.unit">
-            <a [routerLink]="['/ninth-unit', ninthArmyUnit.unit?.id, 'view']">{{ ninthArmyUnit.unit?.id }}</a>
+            <a [routerLink]="['/entities/ninth-unit', ninthArmyUnit.unit?.id, 'view']">{{ ninthArmyUnit.unit?.id }}</a>
           </div>
         </dd>
       </dl>
@@ -30,7 +30,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/ninth-army-unit', ninthArmyUnit.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities/ninth-army-unit', ninthArmyUnit.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

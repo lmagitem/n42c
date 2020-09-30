@@ -4,9 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { ILocalizedNinthStratagem, LocalizedNinthStratagem } from 'app/shared/model/localized-ninth-stratagem.model';
 import { LocalizedNinthStratagemService } from './localized-ninth-stratagem.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
 import { NinthStratagemService } from 'app/entities/ninth-stratagem/ninth-stratagem.service';
 
@@ -28,6 +30,8 @@ export class LocalizedNinthStratagemUpdateComponent implements OnInit {
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected localizedNinthStratagemService: LocalizedNinthStratagemService,
     protected ninthStratagemService: NinthStratagemService,
     protected activatedRoute: ActivatedRoute,
@@ -50,6 +54,22 @@ export class LocalizedNinthStratagemUpdateComponent implements OnInit {
       description: localizedNinthStratagem.description,
       keywords: localizedNinthStratagem.keywords,
       stratagem: localizedNinthStratagem.stratagem,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 

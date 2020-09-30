@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-localized-post-content-heading" jhiTranslate="n42cApp.localizedPostContent.home.createOrEditLabel">
         Create or edit a Localized Post Content
@@ -21,7 +21,7 @@
             [ngbTooltip]="'n42cApp.localizedPostContent.help.excerpt' | translate"
             >Excerpt</label
           >
-          <input type="text" class="form-control" name="excerpt" id="field_excerpt" formControlName="excerpt" />
+          <textarea class="form-control" name="excerpt" id="field_excerpt" formControlName="excerpt"></textarea>
         </div>
 
         <div class="form-group">
@@ -32,7 +32,7 @@
             [ngbTooltip]="'n42cApp.localizedPostContent.help.content' | translate"
             >Content</label
           >
-          <input type="text" class="form-control" name="content" id="field_content" formControlName="content" />
+          <textarea class="form-control" name="content" id="field_content" formControlName="content"></textarea>
           <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
             <small
               class="form-text text-danger"

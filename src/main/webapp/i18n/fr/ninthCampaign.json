@@ -16,8 +16,10 @@
       "detail": {
         "title": "Ninth Campaign"
       },
+      "name": "Name",
       "gameType": "Game Type",
       "usePowerRating": "Use Power Rating",
+      "description": "Description",
       "events": "Events",
       "authors": "Authors",
       "participants": "Participants",

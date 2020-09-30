@@ -13,7 +13,7 @@ import { Authority } from 'app/shared/constants/authority.constants';
           authorities: [Authority.USER],
         },
         canActivate: [UserRouteAccessService],
-        loadChildren: () => import('./campaign/ninth-campaign.module').then(m => m.CampaignModule),
+        loadChildren: () => import('./campaign/campaign.module').then(m => m.CampaignModule),
       },
     ]),
   ],

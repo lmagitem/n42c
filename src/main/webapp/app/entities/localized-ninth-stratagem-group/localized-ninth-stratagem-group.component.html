@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-ninth-stratagem-group"
-      [routerLink]="['/localized-ninth-stratagem-group/new']"
+      [routerLink]="['/entities/localized-ninth-stratagem-group/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedNinthStratagemGroup.home.createLabel">
@@ -35,14 +35,14 @@
       <tbody>
         <tr *ngFor="let localizedNinthStratagemGroup of localizedNinthStratagemGroups; trackBy: trackId">
           <td>
-            <a [routerLink]="['/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'view']">{{
+            <a [routerLink]="['/entities/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'view']">{{
               localizedNinthStratagemGroup.id
             }}</a>
           </td>
           <td>{{ localizedNinthStratagemGroup.name }}</td>
           <td>
             <div *ngIf="localizedNinthStratagemGroup.stratagemGroup">
-              <a [routerLink]="['/ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{
+              <a [routerLink]="['/entities/ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{
                 localizedNinthStratagemGroup.stratagemGroup?.id
               }}</a>
             </div>
@@ -51,7 +51,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'view']"
+                [routerLink]="['/entities/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -60,7 +60,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'edit']"
+                [routerLink]="['/entities/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

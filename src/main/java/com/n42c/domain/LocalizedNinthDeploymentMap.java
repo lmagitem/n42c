@@ -3,6 +3,7 @@ package com.n42c.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -26,6 +27,8 @@ public class LocalizedNinthDeploymentMap implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "description")
     private String description;
 

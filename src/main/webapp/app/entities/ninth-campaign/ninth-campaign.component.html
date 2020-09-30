@@ -27,8 +27,10 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.name">Name</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.usePowerRating">Use Power Rating</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.description">Description</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.participants">Participants</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.campaignStratagems">Campaign Stratagems</span></th>
@@ -40,8 +42,10 @@
           <td>
             <a [routerLink]="['/ninth-campaign', ninthCampaign.id, 'view']">{{ ninthCampaign.id }}</a>
           </td>
+          <td>{{ ninthCampaign.name }}</td>
           <td jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthCampaign.gameType }}">{{ ninthCampaign.gameType }}</td>
           <td>{{ ninthCampaign.usePowerRating }}</td>
+          <td>{{ ninthCampaign.description }}</td>
           <td>
             <span *ngFor="let authors of ninthCampaign.authors; let last = last">
               <a class="form-control-static" [routerLink]="['/player', authors?.id, 'view']">{{ authors.id }}</a

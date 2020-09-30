@@ -111,8 +111,8 @@ class NinthArmyMomentGatlingTest extends Simulation {
                 , "requisition":"0"
                 , "supplyLimit":"0"
                 , "supplyUsed":"0"
-                , "objectives":"SAMPLE_TEXT"
-                , "notes":"SAMPLE_TEXT"
+                , "objectives":null
+                , "notes":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_ninthArmyMoment_url"))).exitHereIfFailed

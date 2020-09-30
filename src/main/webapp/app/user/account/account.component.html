@@ -360,7 +360,7 @@
                   </select>
                   <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.givenFriendships' | translate">
                     <span *ngFor="let friend of editForm.get('givenFriendships')?.value; let isLast = last">{{
-                      friend.displayedName + (isLast ? '.' : ', ')
+                      friend.displayedName + (isLast ? '' : ', ')
                     }}</span>
                   </p>
                 </div>
@@ -390,7 +390,7 @@
                   </select>
                   <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.appUser.help.askedFriendRequests' | translate">
                     <span *ngFor="let friend of editForm.get('askedFriendRequests')?.value; let isLast = last">{{
-                      friend.displayedName + (isLast ? '.' : ', ')
+                      friend.displayedName + (isLast ? '' : ', ')
                     }}</span>
                   </p>
                 </div>

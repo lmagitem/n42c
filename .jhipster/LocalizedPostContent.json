@@ -3,13 +3,15 @@
   "fields": [
     {
       "fieldName": "excerpt",
-      "fieldType": "String",
-      "javadoc": "An excerpt of the post to show on the blog page."
+      "fieldType": "byte[]",
+      "javadoc": "An excerpt of the post to show on the blog page.",
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "content",
-      "fieldType": "String",
+      "fieldType": "byte[]",
       "javadoc": "The content of the post.",
+      "fieldTypeBlobContent": "text",
       "fieldValidateRules": [
         "required"
       ]

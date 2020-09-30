@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -46,8 +47,10 @@ public class LocalizedProduct implements Serializable {
     /**
      * The text describing this product.
      */
-    @NotNull
+    
     @ApiModelProperty(value = "The text describing this product.", required = true)
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content", nullable = false)
     private String content;
 

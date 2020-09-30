@@ -1,11 +1,11 @@
-import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
+import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
 
 export interface ILocalizedNinthStratagem {
   id?: number;
   name?: string;
   summary?: string;
-  description?: string;
-  keywords?: string;
+  description?: any;
+  keywords?: any;
   stratagem?: INinthStratagem;
 }
 
@@ -14,8 +14,8 @@ export class LocalizedNinthStratagem implements ILocalizedNinthStratagem {
     public id?: number,
     public name?: string,
     public summary?: string,
-    public description?: string,
-    public keywords?: string,
+    public description?: any,
+    public keywords?: any,
     public stratagem?: INinthStratagem
   ) {}
 }

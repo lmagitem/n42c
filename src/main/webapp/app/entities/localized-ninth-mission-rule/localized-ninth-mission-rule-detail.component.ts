@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { JhiDataUtils } from 'ng-jhipster';
 
 import { ILocalizedNinthMissionRule } from 'app/shared/model/localized-ninth-mission-rule.model';
 
@@ -10,10 +11,18 @@ import { ILocalizedNinthMissionRule } from 'app/shared/model/localized-ninth-mis
 export class LocalizedNinthMissionRuleDetailComponent implements OnInit {
   localizedNinthMissionRule: ILocalizedNinthMissionRule | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ localizedNinthMissionRule }) => (this.localizedNinthMissionRule = localizedNinthMissionRule));
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType = '', base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
   }
 
   previousState(): void {

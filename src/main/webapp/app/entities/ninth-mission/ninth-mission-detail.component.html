@@ -23,28 +23,28 @@
         <dt><span jhiTranslate="n42cApp.ninthMission.missionStratagems">Mission Stratagems</span></dt>
         <dd>
           <span *ngFor="let missionStratagems of ninthMission.missionStratagems; let last = last">
-            <a [routerLink]="['/ninth-stratagem-group', missionStratagems?.id, 'view']">{{ missionStratagems.id }}</a
+            <a [routerLink]="['/entities/ninth-stratagem-group', missionStratagems?.id, 'view']">{{ missionStratagems.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthMission.primaryObjectives">Primary Objectives</span></dt>
         <dd>
           <span *ngFor="let primaryObjectives of ninthMission.primaryObjectives; let last = last">
-            <a [routerLink]="['/ninth-objective', primaryObjectives?.id, 'view']">{{ primaryObjectives.id }}</a
+            <a [routerLink]="['/entities/ninth-objective', primaryObjectives?.id, 'view']">{{ primaryObjectives.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthMission.allowedSecondaries">Allowed Secondaries</span></dt>
         <dd>
           <span *ngFor="let allowedSecondaries of ninthMission.allowedSecondaries; let last = last">
-            <a [routerLink]="['/ninth-objective', allowedSecondaries?.id, 'view']">{{ allowedSecondaries.id }}</a
+            <a [routerLink]="['/entities/ninth-objective', allowedSecondaries?.id, 'view']">{{ allowedSecondaries.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthMission.rules">Rules</span></dt>
         <dd>
           <span *ngFor="let rules of ninthMission.rules; let last = last">
-            <a [routerLink]="['/ninth-mission-rule', rules?.id, 'view']">{{ rules.id }}</a
+            <a [routerLink]="['/entities/ninth-mission-rule', rules?.id, 'view']">{{ rules.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
@@ -54,7 +54,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/ninth-mission', ninthMission.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities/ninth-mission', ninthMission.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

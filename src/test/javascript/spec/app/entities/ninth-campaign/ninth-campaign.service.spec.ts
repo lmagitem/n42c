@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(NinthCampaignService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new NinthCampaign(0, NinthGameType.OP, false);
+      elemDefault = new NinthCampaign(0, 'AAAAAAA', NinthGameType.OP, false, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -55,8 +55,10 @@ describe('Service Tests', () => {
       it('should update a NinthCampaign', () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
             gameType: 'BBBBBB',
             usePowerRating: true,
+            description: 'BBBBBB',
           },
           elemDefault
         );
@@ -73,8 +75,10 @@ describe('Service Tests', () => {
       it('should return a list of NinthCampaign', () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
             gameType: 'BBBBBB',
             usePowerRating: true,
+            description: 'BBBBBB',
           },
           elemDefault
         );

@@ -6,10 +6,9 @@ import { flatMap } from 'rxjs/operators';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignComponent } from './ninth-campaign.component';
-import { NinthCampaignDetailComponent } from './ninth-campaign-detail.component';
-import { NinthCampaignUpdateComponent } from './ninth-campaign-update.component';
 import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
+import { CampaignViewComponent } from './campaign-view.component';
+import { CampaignComponent } from './campaign.component';
 
 @Injectable({ providedIn: 'root' })
 export class NinthCampaignResolve implements Resolve<INinthCampaign> {
@@ -33,22 +32,10 @@ export class NinthCampaignResolve implements Resolve<INinthCampaign> {
   }
 }
 
-export const ninthCampaignRoute: Routes = [
+export const campaignRoute: Routes = [
   {
     path: '',
-    component: NinthCampaignComponent,
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'n42cApp.ninthCampaign.home.title',
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/view',
-    component: NinthCampaignDetailComponent,
-    resolve: {
-      ninthCampaign: NinthCampaignResolve,
-    },
+    component: CampaignComponent,
     data: {
       authorities: [Authority.USER],
       pageTitle: 'n42cApp.ninthCampaign.home.title',
@@ -57,7 +44,7 @@ export const ninthCampaignRoute: Routes = [
   },
   {
     path: 'new',
-    component: NinthCampaignUpdateComponent,
+    component: CampaignViewComponent,
     resolve: {
       ninthCampaign: NinthCampaignResolve,
     },
@@ -68,8 +55,8 @@ export const ninthCampaignRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
-    component: NinthCampaignUpdateComponent,
+    path: ':id',
+    component: CampaignViewComponent,
     resolve: {
       ninthCampaign: NinthCampaignResolve,
     },

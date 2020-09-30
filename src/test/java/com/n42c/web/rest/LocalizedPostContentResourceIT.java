@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -125,25 +126,6 @@ public class LocalizedPostContentResourceIT {
 
     @Test
     @Transactional
-    public void checkContentIsRequired() throws Exception {
-        int databaseSizeBeforeTest = localizedPostContentRepository.findAll().size();
-        // set the field null
-        localizedPostContent.setContent(null);
-
-        // Create the LocalizedPostContent, which fails.
-
-
-        restLocalizedPostContentMockMvc.perform(post("/api/localized-post-contents").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedPostContent)))
-            .andExpect(status().isBadRequest());
-
-        List<LocalizedPostContent> localizedPostContentList = localizedPostContentRepository.findAll();
-        assertThat(localizedPostContentList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkLanguageIsRequired() throws Exception {
         int databaseSizeBeforeTest = localizedPostContentRepository.findAll().size();
         // set the field null
@@ -172,8 +154,8 @@ public class LocalizedPostContentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedPostContent.getId().intValue())))
-            .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
+            .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
@@ -188,8 +170,8 @@ public class LocalizedPostContentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedPostContent.getId().intValue()))
-            .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
+            .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT.toString()))
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test

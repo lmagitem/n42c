@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <div *ngIf="profilePartLinkedExperience">
       <h2>
         <span jhiTranslate="n42cApp.profilePartLinkedExperience.detail.title">Profile Part Linked Experience</span>
@@ -54,7 +54,7 @@
         <dt><span jhiTranslate="n42cApp.profilePartLinkedExperience.linkedItem">Linked Item</span></dt>
         <dd>
           <div *ngIf="profilePartLinkedExperience.linkedItem">
-            <a [routerLink]="['/entities/profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']">{{
+            <a [routerLink]="['/profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']">{{
               profilePartLinkedExperience.linkedItem?.id
             }}</a>
           </div>
@@ -67,7 +67,7 @@
 
       <button
         type="button"
-        [routerLink]="['/entities/profile-part-linked-experience', profilePartLinkedExperience.id, 'edit']"
+        [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'edit']"
         class="btn btn-primary"
       >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>

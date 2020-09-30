@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <div *ngIf="ninthCampaign">
       <h2><span jhiTranslate="n42cApp.ninthCampaign.detail.title">Ninth Campaign</span> {{ ninthCampaign.id }}</h2>
 
@@ -8,6 +8,10 @@
       <jhi-alert-error></jhi-alert-error>
 
       <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthCampaign.name">Name</span></dt>
+        <dd>
+          <span>{{ ninthCampaign.name }}</span>
+        </dd>
         <dt><span jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</span></dt>
         <dd>
           <span jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthCampaign.gameType }}">{{ ninthCampaign.gameType }}</span>
@@ -15,6 +19,10 @@
         <dt><span jhiTranslate="n42cApp.ninthCampaign.usePowerRating">Use Power Rating</span></dt>
         <dd>
           <span>{{ ninthCampaign.usePowerRating }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthCampaign.description">Description</span></dt>
+        <dd>
+          <span>{{ ninthCampaign.description }}</span>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></dt>
         <dd>

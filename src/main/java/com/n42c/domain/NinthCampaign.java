@@ -2,6 +2,7 @@ package com.n42c.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -28,6 +29,10 @@ public class NinthCampaign implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "game_type", nullable = false)
     private NinthGameType gameType;
@@ -35,6 +40,11 @@ public class NinthCampaign implements Serializable {
     @NotNull
     @Column(name = "use_power_rating", nullable = false)
     private Boolean usePowerRating;
+
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(name = "description")
+    private String description;
 
     @OneToMany(mappedBy = "campaign")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -70,6 +80,19 @@ public class NinthCampaign implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public NinthCampaign name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public NinthGameType getGameType() {
         return gameType;
     }
@@ -94,6 +117,19 @@ public class NinthCampaign implements Serializable {
 
     public void setUsePowerRating(Boolean usePowerRating) {
         this.usePowerRating = usePowerRating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public NinthCampaign description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<NinthCampaignMoment> getEvents() {
@@ -218,8 +254,10 @@ public class NinthCampaign implements Serializable {
     public String toString() {
         return "NinthCampaign{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", gameType='" + getGameType() + "'" +
             ", usePowerRating='" + isUsePowerRating() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }
