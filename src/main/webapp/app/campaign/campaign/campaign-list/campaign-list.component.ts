@@ -9,9 +9,9 @@ import { CampaignDeleteDialogComponent } from './campaign-delete-dialog.componen
 
 @Component({
   selector: 'jhi-ninth-campaign',
-  templateUrl: './campaign.component.html',
+  templateUrl: './campaign-list.component.html',
 })
-export class CampaignComponent implements OnInit, OnDestroy {
+export class CampaignListComponent implements OnInit, OnDestroy {
   ninthCampaigns?: INinthCampaign[];
   eventSubscriber?: Subscription;
 

@@ -22,7 +22,8 @@
       "summary": "Summary",
       "description": "Description",
       "battles": "Battles",
-      "campaign": "Campaign"
+      "campaign": "Campaign",
+      "add": "Ajouter une étape"
     }
   }
 }

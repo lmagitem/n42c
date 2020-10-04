@@ -144,7 +144,9 @@
       "edit": "Editar",
       "open": "Abrir",
       "save": "Guardar",
-      "view": "Vista"
+      "view": "Vista",
+      "previous": "Previous",
+      "next": "Next"
     },
     "detail": {
       "field": "Campo",

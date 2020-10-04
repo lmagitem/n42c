@@ -1,43 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
-import { CampaignViewComponent } from './campaign-view.component';
-import { CampaignComponent } from './campaign.component';
+import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
+import { CampaignViewComponent } from './campaign-view/campaign-view.component';
+import { CampaignListComponent } from './campaign-list/campaign-list.component';
+import { CampaignService } from '../campaign.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class NinthCampaignResolve implements Resolve<INinthCampaign> {
-  constructor(private service: NinthCampaignService, private router: Router) {}
+export class CampaignResolve implements Resolve<INinthCampaign> {
+  constructor(private campaignService: CampaignService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthCampaign> | Observable<never> {
-    const id = route.params['id'];
-    if (id) {
-      return this.service.find(id).pipe(
-        flatMap((ninthCampaign: HttpResponse<NinthCampaign>) => {
-          if (ninthCampaign.body) {
-            return of(ninthCampaign.body);
-          } else {
-            this.router.navigate(['404']);
-            return EMPTY;
-          }
-        })
-      );
-    }
-    return of(new NinthCampaign());
+    this.campaignService.updateSelectedCampaignId(route.params['id']);
+    return this.campaignService.selectedCampaign$.pipe(take(1));
   }
 }
 
 export const campaignRoute: Routes = [
   {
     path: '',
-    component: CampaignComponent,
+    component: CampaignListComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.PLAYER, Authority.ADMIN],
       pageTitle: 'n42cApp.ninthCampaign.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -46,10 +33,10 @@ export const campaignRoute: Routes = [
     path: 'new',
     component: CampaignViewComponent,
     resolve: {
-      ninthCampaign: NinthCampaignResolve,
+      ninthCampaign: CampaignResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.PLAYER, Authority.ADMIN],
       pageTitle: 'n42cApp.ninthCampaign.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -57,11 +44,18 @@ export const campaignRoute: Routes = [
   {
     path: ':id',
     component: CampaignViewComponent,
+    children: [
+      { path: '', redirectTo: 'moment', pathMatch: 'full' },
+      {
+        path: 'moment',
+        loadChildren: () => import('./campaign-moment/campaign-moment.module').then(m => m.CampaignMomentModule),
+      },
+    ],
     resolve: {
-      ninthCampaign: NinthCampaignResolve,
+      ninthCampaign: CampaignResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [Authority.PLAYER, Authority.ADMIN],
       pageTitle: 'n42cApp.ninthCampaign.home.title',
     },
     canActivate: [UserRouteAccessService],
