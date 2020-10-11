@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 type EntityResponseType = HttpResponse<INinthCampaignMoment>;
 type EntityArrayResponseType = HttpResponse<INinthCampaignMoment[]>;
@@ -60,7 +61,7 @@ export class NinthCampaignMomentService {
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.sinceInstant = res.body.sinceInstant ? moment(res.body.sinceInstant) : undefined;
+      res.body.sinceInstant = res.body.sinceInstant ? moment(res.body.sinceInstant, DATE_TIME_FORMAT) : undefined;
     }
     return res;
   }

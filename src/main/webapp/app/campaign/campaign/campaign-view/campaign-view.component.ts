@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,8 +12,7 @@ import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign
 import { NinthGameType } from 'app/shared/model/enumerations/ninth-game-type.model';
 import { TranslationUtils } from 'app/shared/util/translation-utils';
 import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
-import { first } from 'rxjs/operators';
-import { CampaignService } from 'app/campaign/campaign.service';
+import { CampaignService } from '../campaign.service';
 
 type SelectableEntity = IPlayer | INinthStratagemGroup;
 
@@ -29,6 +27,7 @@ export class CampaignViewComponent implements OnInit {
   isSaving = false;
   players: IPlayer[] = [];
   ninthstratagemgroups: INinthStratagemGroup[] = [];
+  selectedCampaignId = -1;
   selectedMomentId = -1;
 
   editForm = this.fb.group({
@@ -56,44 +55,30 @@ export class CampaignViewComponent implements OnInit {
   ngOnInit(): void {
     // Get the current campaign and everything that it needs
     this.campaignService.selectedCampaign$.subscribe(ninthCampaign => {
-      this.updateForm(ninthCampaign);
-      this.playerService.query().subscribe((res: HttpResponse<IPlayer[]>) => (this.players = res.body || []));
-      this.ninthStratagemGroupService
-        .query()
-        .subscribe((res: HttpResponse<INinthStratagemGroup[]>) => (this.ninthstratagemgroups = res.body || []));
+      if (ninthCampaign !== null) {
+        this.updateForm(ninthCampaign);
+        this.playerService.query().subscribe((res: HttpResponse<IPlayer[]>) => (this.players = res.body || []));
+        this.ninthStratagemGroupService
+          .query()
+          .subscribe((res: HttpResponse<INinthStratagemGroup[]>) => (this.ninthstratagemgroups = res.body || []));
+      }
     });
 
     // Update the editing status
     this.campaignService.currentlyEditingCampaign$.subscribe(status => (this.isEditing = status));
-    this.campaignService.currentlyEditingCampaignMoment$.subscribe(status => {
-      this.isEditingMoment = status;
-      this.navigateToMomentRoute();
-    });
+    this.campaignService.currentlyEditingCampaignMoment$.subscribe(status => (this.isEditingMoment = status));
 
-    // Update the selected CampaignMoment id
-    this.campaignService.selectedCampaignMomentId$.subscribe(id => {
-      this.selectedMomentId = id;
-      this.navigateToMomentRoute();
-    });
-  }
-
-  /** If the CampaignMoment editing status changes, navigate to the proper route */
-  private navigateToMomentRoute(): void {
-    if (this.selectedMomentId === -1) {
-      this.router.navigate(['moment', 'new'], {
-        relativeTo: this.activatedRoute,
-      });
-    } else {
-      if (this.isEditingMoment) {
-        this.router.navigate(['moment', this.selectedMomentId, 'view'], {
-          relativeTo: this.activatedRoute,
-        });
-      } else {
-        this.router.navigate(['moment', this.selectedMomentId, 'edit'], {
-          relativeTo: this.activatedRoute,
-        });
+    // Update the selected ids
+    this.campaignService.selectedCampaignId$.subscribe(id => {
+      if (id !== null && this.selectedCampaignId !== id) {
+        this.selectedCampaignId = id;
       }
-    }
+    });
+    this.campaignService.selectedCampaignMomentId$.subscribe(id => {
+      if (id !== null && this.selectedMomentId !== id) {
+        this.selectedMomentId = id;
+      }
+    });
   }
 
   updateForm(ninthCampaign: INinthCampaign): void {
@@ -135,6 +120,9 @@ export class CampaignViewComponent implements OnInit {
 
   cancel(): void {
     this.campaignService.setCampaignEditingStatus(false);
+    if (this.selectedCampaignId === -1) {
+      this.router.navigate(['campaign']);
+    }
   }
 
   save(): void {
@@ -165,16 +153,21 @@ export class CampaignViewComponent implements OnInit {
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<any>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<INinthCampaign>>): void {
     result.subscribe(
-      () => this.onSaveSuccess(),
+      response => this.onSaveSuccess(response),
       () => this.onSaveError()
     );
   }
 
-  protected onSaveSuccess(): void {
+  protected onSaveSuccess(response: HttpResponse<INinthCampaign>): void {
     this.isSaving = false;
     this.campaignService.setCampaignEditingStatus(false);
+
+    const id = response.body !== undefined && response.body !== null ? response.body.id : -1;
+    if (id !== -1) {
+      this.router.navigate(['campaign', id]);
+    }
   }
 
   protected onSaveError(): void {

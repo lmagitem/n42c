@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-mission-rule"
-      [routerLink]="['/entities/ninth-mission-rule/new']"
+      [routerLink]="['/entities', 'ninth-mission-rule', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthMissionRule.home.createLabel">
@@ -33,13 +33,13 @@
       <tbody>
         <tr *ngFor="let ninthMissionRule of ninthMissionRules; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/ninth-mission-rule', ninthMissionRule.id, 'view']">{{ ninthMissionRule.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-mission-rule', ninthMissionRule.id, 'view']">{{ ninthMissionRule.id }}</a>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/entities/ninth-mission-rule', ninthMissionRule.id, 'view']"
+                [routerLink]="['/entities', 'ninth-mission-rule', ninthMissionRule.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -48,7 +48,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/entities/ninth-mission-rule', ninthMissionRule.id, 'edit']"
+                [routerLink]="['/entities', 'ninth-mission-rule', ninthMissionRule.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

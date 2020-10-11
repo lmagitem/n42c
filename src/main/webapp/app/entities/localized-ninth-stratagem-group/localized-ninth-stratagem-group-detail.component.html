@@ -18,7 +18,7 @@
         <dt><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.stratagemGroup">Stratagem Group</span></dt>
         <dd>
           <div *ngIf="localizedNinthStratagemGroup.stratagemGroup">
-            <a [routerLink]="['/entities/ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{
               localizedNinthStratagemGroup.stratagemGroup?.id
             }}</a>
           </div>
@@ -31,7 +31,7 @@
 
       <button
         type="button"
-        [routerLink]="['/entities/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'edit']"
+        [routerLink]="['/entities', 'localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'edit']"
         class="btn btn-primary"
       >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>

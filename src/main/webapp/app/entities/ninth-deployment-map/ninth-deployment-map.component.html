@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-deployment-map"
-      [routerLink]="['/entities/ninth-deployment-map/new']"
+      [routerLink]="['/entities', 'ninth-deployment-map', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthDeploymentMap.home.createLabel">
@@ -36,13 +36,13 @@
       <tbody>
         <tr *ngFor="let ninthDeploymentMap of ninthDeploymentMaps; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/ninth-deployment-map', ninthDeploymentMap.id, 'view']">{{ ninthDeploymentMap.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-deployment-map', ninthDeploymentMap.id, 'view']">{{ ninthDeploymentMap.id }}</a>
           </td>
           <td>{{ ninthDeploymentMap.url }}</td>
           <td>{{ ninthDeploymentMap.shareable }}</td>
           <td>
             <span *ngFor="let usedInMissions of ninthDeploymentMap.usedInMissions; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/ninth-mission', usedInMissions?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-mission', usedInMissions?.id, 'view']">{{
                 usedInMissions.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -52,7 +52,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/entities/ninth-deployment-map', ninthDeploymentMap.id, 'view']"
+                [routerLink]="['/entities', 'ninth-deployment-map', ninthDeploymentMap.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -61,7 +61,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/entities/ninth-deployment-map', ninthDeploymentMap.id, 'edit']"
+                [routerLink]="['/entities', 'ninth-deployment-map', ninthDeploymentMap.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

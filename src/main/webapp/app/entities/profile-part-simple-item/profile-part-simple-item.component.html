@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-profile-part-simple-item"
-      [routerLink]="['/entities/profile-part-simple-item/new']"
+      [routerLink]="['/entities', 'profile-part-simple-item', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.profilePartSimpleItem.home.createLabel">
@@ -48,7 +48,7 @@
       <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
         <tr *ngFor="let profilePartSimpleItem of profilePartSimpleItems; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/profile-part-simple-item', profilePartSimpleItem.id, 'view']">{{ profilePartSimpleItem.id }}</a>
+            <a [routerLink]="['/entities', 'profile-part-simple-item', profilePartSimpleItem.id, 'view']">{{ profilePartSimpleItem.id }}</a>
           </td>
           <td>{{ profilePartSimpleItem.title }}</td>
           <td>{{ profilePartSimpleItem.subTitle }}</td>
@@ -56,7 +56,7 @@
           <td>{{ profilePartSimpleItem.content }}</td>
           <td>
             <div *ngIf="profilePartSimpleItem.profilePart">
-              <a [routerLink]="['/entities/profile-part', profilePartSimpleItem.profilePart?.id, 'view']">{{
+              <a [routerLink]="['/entities', 'profile-part', profilePartSimpleItem.profilePart?.id, 'view']">{{
                 profilePartSimpleItem.profilePart?.id
               }}</a>
             </div>
@@ -65,7 +65,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/entities/profile-part-simple-item', profilePartSimpleItem.id, 'view']"
+                [routerLink]="['/entities', 'profile-part-simple-item', profilePartSimpleItem.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -74,7 +74,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/entities/profile-part-simple-item', profilePartSimpleItem.id, 'edit']"
+                [routerLink]="['/entities', 'profile-part-simple-item', profilePartSimpleItem.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

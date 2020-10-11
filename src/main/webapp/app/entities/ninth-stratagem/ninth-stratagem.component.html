@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-stratagem"
-      [routerLink]="['/entities/ninth-stratagem/new']"
+      [routerLink]="['/entities', 'ninth-stratagem', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthStratagem.home.createLabel">
@@ -39,7 +39,7 @@
       <tbody>
         <tr *ngFor="let ninthStratagem of ninthStratagems; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/ninth-stratagem', ninthStratagem.id, 'view']">{{ ninthStratagem.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-stratagem', ninthStratagem.id, 'view']">{{ ninthStratagem.id }}</a>
           </td>
           <td>{{ ninthStratagem.cost }}</td>
           <td jhiTranslate="{{ 'n42cApp.Faction.' + ninthStratagem.faction }}">{{ ninthStratagem.faction }}</td>
@@ -48,17 +48,21 @@
           <td jhiTranslate="{{ 'n42cApp.NinthGamePhase.' + ninthStratagem.phase }}">{{ ninthStratagem.phase }}</td>
           <td>
             <div *ngIf="ninthStratagem.group">
-              <a [routerLink]="['/entities/ninth-stratagem-group', ninthStratagem.group?.id, 'view']">{{ ninthStratagem.group?.id }}</a>
+              <a [routerLink]="['/entities', 'ninth-stratagem-group', ninthStratagem.group?.id, 'view']">{{ ninthStratagem.group?.id }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/entities/ninth-stratagem', ninthStratagem.id, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['/entities', 'ninth-stratagem', ninthStratagem.id, 'view']" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/entities/ninth-stratagem', ninthStratagem.id, 'edit']" class="btn btn-primary btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'ninth-stratagem', ninthStratagem.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-campaign-moment"
-      [routerLink]="['/ninth-campaign-moment/new']"
+      [routerLink]="['/entities', 'ninth-campaign-moment', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthCampaignMoment.home.createLabel">
@@ -39,7 +39,7 @@
       <tbody>
         <tr *ngFor="let ninthCampaignMoment of ninthCampaignMoments; trackBy: trackId">
           <td>
-            <a [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'view']">{{ ninthCampaignMoment.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-campaign-moment', ninthCampaignMoment.id, 'view']">{{ ninthCampaignMoment.id }}</a>
           </td>
           <td>{{ ninthCampaignMoment.current }}</td>
           <td>{{ ninthCampaignMoment.sinceInstant | date: 'medium' }}</td>
@@ -48,19 +48,25 @@
           <td>{{ ninthCampaignMoment.description }}</td>
           <td>
             <div *ngIf="ninthCampaignMoment.campaign">
-              <a [routerLink]="['/ninth-campaign', ninthCampaignMoment.campaign?.id, 'view']">{{ ninthCampaignMoment.campaign?.id }}</a>
+              <a [routerLink]="['/entities', 'ninth-campaign', ninthCampaignMoment.campaign?.id, 'view']">{{
+                ninthCampaignMoment.campaign?.id
+              }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'view']" class="btn btn-info btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'ninth-campaign-moment', ninthCampaignMoment.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
               <button
                 type="submit"
-                [routerLink]="['/ninth-campaign-moment', ninthCampaignMoment.id, 'edit']"
+                [routerLink]="['/entities', 'ninth-campaign-moment', ninthCampaignMoment.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

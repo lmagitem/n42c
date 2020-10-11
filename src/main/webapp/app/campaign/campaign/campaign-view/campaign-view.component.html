@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-12">
     <div class="row">
-      <div class="col-12">
+      <div *ngIf="selectedCampaignId !== -1" class="col-12">
         <div class="flex-container">
           <h2 id="campaign-name" class="flex-item">{{ editForm.get('name')?.value }}</h2>
           <div class="flex-item">
@@ -26,8 +26,16 @@
           </div>
         </div>
       </div>
+      <h2
+        *ngIf="selectedCampaignId === -1"
+        id="jhi-campaign-heading"
+        class="col-12"
+        jhiTranslate="n42cApp.ninthCampaign.home.createOrEditLabel"
+      >
+        Create or edit a Ninth Campaign
+      </h2>
 
-      <div class="col-12 col-md-3">
+      <div [class]="selectedCampaignId !== -1 ? 'col-12 col-md-3' : 'col-12'">
         <form
           class="card"
           name="editForm"
@@ -298,7 +306,7 @@
         </form>
       </div>
 
-      <div class="col-12 col-md-9">
+      <div *ngIf="selectedCampaignId !== -1" class="col-12 col-md-9">
         <router-outlet></router-outlet>
       </div>
     </div>

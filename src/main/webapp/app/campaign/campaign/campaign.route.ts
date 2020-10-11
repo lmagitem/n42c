@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
 import { CampaignViewComponent } from './campaign-view/campaign-view.component';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
-import { CampaignService } from '../campaign.service';
-import { take } from 'rxjs/operators';
+import { CampaignService } from './campaign.service';
 
 @Injectable({ providedIn: 'root' })
 export class CampaignResolve implements Resolve<INinthCampaign> {
   constructor(private campaignService: CampaignService) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthCampaign> | Observable<never> {
-    this.campaignService.updateSelectedCampaignId(route.params['id']);
-    return this.campaignService.selectedCampaign$.pipe(take(1));
+    this.campaignService.enableRerouting(true);
+
+    const param = route.params['id'];
+    if (param === 'new') {
+      this.campaignService.updateSelectedCampaignId(-1);
+    } else {
+      this.campaignService.updateSelectedCampaignId(param);
+    }
+    return of({});
   }
 }
 
@@ -45,7 +51,6 @@ export const campaignRoute: Routes = [
     path: ':id',
     component: CampaignViewComponent,
     children: [
-      { path: '', redirectTo: 'moment', pathMatch: 'full' },
       {
         path: 'moment',
         loadChildren: () => import('./campaign-moment/campaign-moment.module').then(m => m.CampaignMomentModule),

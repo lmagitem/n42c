@@ -2,7 +2,7 @@
   <h2 id="page-heading">
     <span jhiTranslate="n42cApp.ninthCampaign.home.title">Ninth Campaigns</span>
 
-    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-campaign" [routerLink]="['/campaign/new']">
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-campaign" [routerLink]="['/campaign', 'new']">
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthCampaign.home.createLabel">
         Create a new Ninth Campaign
@@ -42,7 +42,7 @@
           <td>{{ ninthCampaign.usePowerRating }}</td>
           <td>
             <span *ngFor="let author of ninthCampaign.authors; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/player', author?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities', 'player', author?.id, 'view']">{{
                 !!author.appUser ? author.appUser.displayedName : author.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -50,7 +50,7 @@
           </td>
           <td>
             <span *ngFor="let participant of ninthCampaign.participants; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/player', participant?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities', 'player', participant?.id, 'view']">{{
                 !!participant.appUser ? participant.appUser.displayedName : participant.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -58,7 +58,7 @@
           </td>
           <td>
             <span *ngFor="let campaignStratagems of ninthCampaign.campaignStratagems; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities/ninth-stratagem-group', campaignStratagems?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-stratagem-group', campaignStratagems?.id, 'view']">{{
                 !!campaignStratagems.localizations && campaignStratagems.localizations.length > 0
                   ? campaignStratagems.localizations[0].name
                   : campaignStratagems.id

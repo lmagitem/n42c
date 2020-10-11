@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-profile-part-skill-category"
-      [routerLink]="['/entities/profile-part-skill-category/new']"
+      [routerLink]="['/entities', 'profile-part-skill-category', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.profilePartSkillCategory.home.createLabel">
@@ -36,7 +36,7 @@
       <tbody>
         <tr *ngFor="let profilePartSkillCategory of profilePartSkillCategories; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/profile-part-skill-category', profilePartSkillCategory.id, 'view']">{{
+            <a [routerLink]="['/entities', 'profile-part-skill-category', profilePartSkillCategory.id, 'view']">{{
               profilePartSkillCategory.id
             }}</a>
           </td>
@@ -44,7 +44,7 @@
           <td>{{ profilePartSkillCategory.index }}</td>
           <td>
             <div *ngIf="profilePartSkillCategory.profilePart">
-              <a [routerLink]="['/entities/profile-part', profilePartSkillCategory.profilePart?.id, 'view']">{{
+              <a [routerLink]="['/entities', 'profile-part', profilePartSkillCategory.profilePart?.id, 'view']">{{
                 profilePartSkillCategory.profilePart?.id
               }}</a>
             </div>
@@ -53,7 +53,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/entities/profile-part-skill-category', profilePartSkillCategory.id, 'view']"
+                [routerLink]="['/entities', 'profile-part-skill-category', profilePartSkillCategory.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -62,7 +62,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/entities/profile-part-skill-category', profilePartSkillCategory.id, 'edit']"
+                [routerLink]="['/entities', 'profile-part-skill-category', profilePartSkillCategory.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

@@ -5,7 +5,6 @@ import { Authority } from 'app/shared/constants/authority.constants';
 
 @NgModule({
   imports: [
-    /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
     RouterModule.forChild([
       {
         path: '',

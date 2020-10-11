@@ -2,7 +2,11 @@
   <h2 id="page-heading">
     <span jhiTranslate="n42cApp.blog.home.title">Blogs</span>
 
-    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-blog" [routerLink]="['/entities/blog/new']">
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-blog"
+      [routerLink]="['/entities', 'blog', 'new']"
+    >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.blog.home.createLabel">
         Create a new Blog
@@ -31,22 +35,22 @@
       <tbody>
         <tr *ngFor="let blog of blogs; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/blog', blog.id, 'view']">{{ blog.id }}</a>
+            <a [routerLink]="['/entities', 'blog', blog.id, 'view']">{{ blog.id }}</a>
           </td>
           <td>{{ blog.name }}</td>
           <td>
             <div *ngIf="blog.author">
-              <a [routerLink]="['/entities/app-user', blog.author?.id, 'view']">{{ blog.author?.id }}</a>
+              <a [routerLink]="['/entities', 'app-user', blog.author?.id, 'view']">{{ blog.author?.id }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/entities/blog', blog.id, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['/entities', 'blog', blog.id, 'view']" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/entities/blog', blog.id, 'edit']" class="btn btn-primary btn-sm">
+              <button type="submit" [routerLink]="['/entities', 'blog', blog.id, 'edit']" class="btn btn-primary btn-sm">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

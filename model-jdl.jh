@@ -223,6 +223,7 @@ entity NinthCampaignMoment {
 
 entity NinthBattle {
     name String
+    resolved Boolean required
 }
 
 entity NinthArmy {
@@ -234,7 +235,6 @@ entity NinthArmy {
 
 entity NinthArmyMoment {
     current Boolean required
-    sinceInstant Instant required
     majorVictories Integer
     minorVictories Integer
     draws Integer
@@ -297,6 +297,7 @@ entity NinthMission {
 entity LocalizedNinthMission {
 	name String
 	briefing TextBlob
+    language Language required
 }
 
 entity NinthDeploymentMap {
@@ -307,6 +308,7 @@ entity NinthDeploymentMap {
 entity LocalizedNinthDeploymentMap {
 	name String
     description TextBlob
+    language Language required
 }
 
 entity NinthMissionRule {
@@ -316,6 +318,7 @@ entity NinthMissionRule {
 entity LocalizedNinthMissionRule {
 	name String
 	description TextBlob
+    language Language required
 }
 
 entity NinthStratagemGroup {
@@ -324,6 +327,7 @@ entity NinthStratagemGroup {
 
 entity LocalizedNinthStratagemGroup {
     name String
+    language Language required
 }
 
 entity NinthStratagem {
@@ -339,6 +343,7 @@ entity LocalizedNinthStratagem {
     summary String
     description TextBlob
     keywords TextBlob
+    language Language required
 }
 
 entity NinthObjective {
@@ -349,6 +354,7 @@ entity NinthObjective {
 entity LocalizedNinthObjective {
 	name String
     description TextBlob
+    language Language required
 }
 
 enum NinthObjectiveType {

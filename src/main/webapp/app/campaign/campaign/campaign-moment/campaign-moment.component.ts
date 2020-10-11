@@ -1,18 +1,26 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
 import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
 import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
 import { PlayerService } from 'app/entities/player/player.service';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { NinthGameSize } from 'app/shared/model/enumerations/ninth-game-size.model';
+import { NinthGameType } from 'app/shared/model/enumerations/ninth-game-type.model';
+import { LocalizedNinthMission } from 'app/shared/model/localized-ninth-mission.model';
+import { NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
+import { NinthArmy } from 'app/shared/model/ninth-army.model';
+import { NinthBattle } from 'app/shared/model/ninth-battle.model';
 import { INinthCampaignMoment, NinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { NinthCampaign } from 'app/shared/model/ninth-campaign.model';
+import { NinthMission } from 'app/shared/model/ninth-mission.model';
+import { ImperialDateConverter } from 'app/shared/util/imperial-date-converter';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { CampaignService } from '../campaign.service';
 
 @Component({
   selector: 'jhi-campaign-moment',
@@ -22,6 +30,115 @@ import { first } from 'rxjs/operators';
 export class CampaignMomentComponent implements OnInit {
   isEditing = false;
   isSaving = false;
+
+  battles = [
+    new NinthBattle(
+      1,
+      'Waterloo',
+      [
+        new NinthArmyMoment(
+          1,
+          false,
+          moment(new Date()),
+          2,
+          1,
+          5,
+          6,
+          8,
+          7,
+          4,
+          2,
+          [],
+          'Ceci est une note',
+          [],
+          [],
+          undefined,
+          new NinthArmy(1, 'Le nom de mon armée')
+        ),
+        new NinthArmyMoment(
+          2,
+          false,
+          moment(new Date()),
+          7,
+          4,
+          2,
+          2,
+          1,
+          5,
+          6,
+          8,
+          [],
+          'Ceci est une note',
+          [],
+          [],
+          undefined,
+          new NinthArmy(2, "Le nom de l'autre armée")
+        ),
+      ],
+      undefined,
+      new NinthMission(
+        1,
+        NinthGameType.CR,
+        NinthGameSize.CP,
+        false,
+        [],
+        [new LocalizedNinthMission(1, 'La mission jouée', 'Il faut faire ça', undefined)]
+      )
+    ),
+    new NinthBattle(
+      2,
+      'Austerlitz',
+      [
+        new NinthArmyMoment(
+          3,
+          false,
+          moment(new Date()),
+          2,
+          1,
+          5,
+          6,
+          8,
+          7,
+          4,
+          2,
+          [],
+          'Ceci est une note',
+          [],
+          [],
+          undefined,
+          new NinthArmy(1, 'Le nom de mon armée')
+        ),
+        new NinthArmyMoment(
+          4,
+          false,
+          moment(new Date()),
+          7,
+          4,
+          2,
+          2,
+          1,
+          5,
+          6,
+          8,
+          [],
+          'Ceci est une note',
+          [],
+          [],
+          undefined,
+          new NinthArmy(2, "Le nom de l'autre armée")
+        ),
+      ],
+      undefined,
+      new NinthMission(
+        1,
+        NinthGameType.CR,
+        NinthGameSize.CP,
+        false,
+        [],
+        [new LocalizedNinthMission(1, 'La mission jouée', 'Il faut faire ça', undefined)]
+      )
+    ),
+  ];
 
   editForm = this.fb.group({
     id: [],
@@ -41,14 +158,20 @@ export class CampaignMomentComponent implements OnInit {
     protected ninthStratagemGroupService: NinthStratagemGroupService,
     protected activatedRoute: ActivatedRoute,
     private translate: TranslateService,
-    private router: Router,
+    private campaignService: CampaignService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthCampaignMoment }) => {
-      this.updateForm(ninthCampaignMoment);
+    // Get the current moment and everything that it needs
+    this.campaignService.selectedCampaignMoment$.subscribe(ninthCampaignMoment => {
+      if (ninthCampaignMoment !== null) {
+        this.updateForm(ninthCampaignMoment);
+      }
     });
+
+    // Update the editing status
+    this.campaignService.currentlyEditingCampaignMoment$.subscribe(status => (this.isEditing = status));
   }
 
   private createFromForm(): INinthCampaignMoment {
@@ -102,8 +225,11 @@ export class CampaignMomentComponent implements OnInit {
         .pipe(first())
         .subscribe(s => (name = s));
     }
-    const date = this.editForm.get('sinceInstant')?.value || '????';
-    return date + ' - ' + name;
+    return this.convertToImperial(this.editForm.get(['sinceInstant'])!.value, this.editForm.get('check')?.value) + ' - ' + name;
+  }
+
+  convertToImperial(instant: any, check?: number): string {
+    return ImperialDateConverter.convertToImperial(moment(instant, DATE_TIME_FORMAT).toDate(), check);
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<any>>): void {
@@ -123,5 +249,7 @@ export class CampaignMomentComponent implements OnInit {
     this.switchEditingStatus();
   }
 
-  private switchEditingStatus(): void {}
+  private switchEditingStatus(): void {
+    this.campaignService.setCampaignMomentEditingStatus(!this.isEditing);
+  }
 }

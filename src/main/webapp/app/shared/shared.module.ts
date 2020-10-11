@@ -7,10 +7,19 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomizableImageComponent } from './components/customizable-image/customizable-image.component';
+import { ImperialDatePickerComponent } from './components/imperial-date-picker/imperial-date-picker.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [N42CSharedLibsModule, CommonModule, FormsModule, ReactiveFormsModule],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, HasAnyAuthorityDirective, CustomizableImageComponent],
+  imports: [RouterModule, N42CSharedLibsModule, CommonModule, FormsModule, ReactiveFormsModule],
+  declarations: [
+    FindLanguageFromKeyPipe,
+    AlertComponent,
+    AlertErrorComponent,
+    HasAnyAuthorityDirective,
+    CustomizableImageComponent,
+    ImperialDatePickerComponent,
+  ],
   exports: [
     N42CSharedLibsModule,
     FindLanguageFromKeyPipe,
@@ -18,6 +27,7 @@ import { CustomizableImageComponent } from './components/customizable-image/cust
     AlertErrorComponent,
     HasAnyAuthorityDirective,
     CustomizableImageComponent,
+    ImperialDatePickerComponent,
   ],
 })
 export class N42CSharedModule {}

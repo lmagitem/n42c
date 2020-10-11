@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-stratagem-group"
-      [routerLink]="['/entities/ninth-stratagem-group/new']"
+      [routerLink]="['/entities', 'ninth-stratagem-group', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthStratagemGroup.home.createLabel">
@@ -35,19 +35,19 @@
       <tbody>
         <tr *ngFor="let ninthStratagemGroup of ninthStratagemGroups; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities/ninth-stratagem-group', ninthStratagemGroup.id, 'view']">{{ ninthStratagemGroup.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-stratagem-group', ninthStratagemGroup.id, 'view']">{{ ninthStratagemGroup.id }}</a>
           </td>
           <td>{{ ninthStratagemGroup.shareable }}</td>
           <td>
             <div *ngIf="ninthStratagemGroup.author">
-              <a [routerLink]="['/entities/player', ninthStratagemGroup.author?.id, 'view']">{{ ninthStratagemGroup.author?.id }}</a>
+              <a [routerLink]="['/entities', 'player', ninthStratagemGroup.author?.id, 'view']">{{ ninthStratagemGroup.author?.id }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/entities/ninth-stratagem-group', ninthStratagemGroup.id, 'view']"
+                [routerLink]="['/entities', 'ninth-stratagem-group', ninthStratagemGroup.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -56,7 +56,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/entities/ninth-stratagem-group', ninthStratagemGroup.id, 'edit']"
+                [routerLink]="['/entities', 'ninth-stratagem-group', ninthStratagemGroup.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

@@ -76,25 +76,20 @@
               <label
                 class="form-control-label"
                 jhiTranslate="n42cApp.ninthCampaignMoment.sinceInstant"
-                for="field_sinceInstant"
                 [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
                 >Since Instant</label
               >
-              <div class="d-flex">
-                <input
-                  *ngIf="isEditing"
-                  id="field_sinceInstant"
-                  type="datetime-local"
-                  class="form-control"
-                  name="sinceInstant"
-                  formControlName="sinceInstant"
-                  placeholder="YYYY-MM-DD HH:mm"
-                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
-                />
-                <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate">
-                  {{ editForm.get('current')?.value }}
-                </p>
-              </div>
+              <jhi-imperial-date-picker
+                *ngIf="isEditing"
+                id="field_sinceInstant"
+                class="row"
+                [form]="editForm"
+                [checkName]="'check'"
+                [instantName]="'sinceInstant'"
+              ></jhi-imperial-date-picker>
+              <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate">
+                {{ convertToImperial(editForm.get('sinceInstant')?.value, this.editForm.get('check')?.value) }}
+              </p>
               <div
                 *ngIf="
                   editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)
@@ -181,6 +176,17 @@
               <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate">
                 {{ editForm.get('description')?.value }}
               </p>
+            </div>
+
+            <div class="row">
+              <div *ngFor="let battle of battles" class="col-12 col-md-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title text-center">{{ battle.name }}</h2>
+                    <p>Ceci est un texte</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </form>

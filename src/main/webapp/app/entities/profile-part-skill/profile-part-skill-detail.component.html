@@ -29,14 +29,14 @@
         <dt><span jhiTranslate="n42cApp.profilePartSkill.linkedSkills">Linked Skills</span></dt>
         <dd>
           <span *ngFor="let linkedSkills of profilePartSkill.linkedSkills; let last = last">
-            <a [routerLink]="['/entities/profile-part-linked-experience', linkedSkills?.id, 'view']">{{ linkedSkills.id }}</a
+            <a [routerLink]="['/entities', 'profile-part-linked-experience', linkedSkills?.id, 'view']">{{ linkedSkills.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.profilePartSkill.skillCategory">Skill Category</span></dt>
         <dd>
           <div *ngIf="profilePartSkill.skillCategory">
-            <a [routerLink]="['/entities/profile-part-skill-category', profilePartSkill.skillCategory?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'profile-part-skill-category', profilePartSkill.skillCategory?.id, 'view']">{{
               profilePartSkill.skillCategory?.id
             }}</a>
           </div>
@@ -47,7 +47,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/entities/profile-part-skill', profilePartSkill.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities', 'profile-part-skill', profilePartSkill.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

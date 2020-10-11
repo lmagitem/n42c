@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import './vendor';
 import { N42CSharedModule } from 'app/shared/shared.module';
 import { N42CCoreModule } from 'app/core/core.module';
@@ -16,6 +17,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     N42CSharedModule,
     N42CCoreModule,
     N42CHomeModule,

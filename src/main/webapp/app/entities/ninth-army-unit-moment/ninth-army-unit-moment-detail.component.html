@@ -89,7 +89,7 @@
         <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.armyUnit">Army Unit</span></dt>
         <dd>
           <div *ngIf="ninthArmyUnitMoment.armyUnit">
-            <a [routerLink]="['/entities/ninth-army-unit', ninthArmyUnitMoment.armyUnit?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'ninth-army-unit', ninthArmyUnitMoment.armyUnit?.id, 'view']">{{
               ninthArmyUnitMoment.armyUnit?.id
             }}</a>
           </div>
@@ -100,7 +100,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/entities/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities', 'ninth-army-unit-moment', ninthArmyUnitMoment.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>
