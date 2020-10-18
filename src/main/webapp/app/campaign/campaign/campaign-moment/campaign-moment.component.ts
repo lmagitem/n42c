@@ -35,11 +35,11 @@ export class CampaignMomentComponent implements OnInit {
     new NinthBattle(
       1,
       'Waterloo',
+      true,
       [
         new NinthArmyMoment(
           1,
           false,
-          moment(new Date()),
           2,
           1,
           5,
@@ -58,7 +58,6 @@ export class CampaignMomentComponent implements OnInit {
         new NinthArmyMoment(
           2,
           false,
-          moment(new Date()),
           7,
           4,
           2,
@@ -88,11 +87,11 @@ export class CampaignMomentComponent implements OnInit {
     new NinthBattle(
       2,
       'Austerlitz',
+      true,
       [
         new NinthArmyMoment(
           3,
           false,
-          moment(new Date()),
           2,
           1,
           5,
@@ -111,7 +110,6 @@ export class CampaignMomentComponent implements OnInit {
         new NinthArmyMoment(
           4,
           false,
-          moment(new Date()),
           7,
           4,
           2,

@@ -9,13 +9,6 @@
       ]
     },
     {
-      "fieldName": "sinceInstant",
-      "fieldType": "Instant",
-      "fieldValidateRules": [
-        "required"
-      ]
-    },
-    {
       "fieldName": "majorVictories",
       "fieldType": "Integer"
     },

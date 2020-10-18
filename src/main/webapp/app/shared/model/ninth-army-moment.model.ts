@@ -1,4 +1,3 @@
-import { Moment } from 'moment';
 import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
 import { INinthObjective } from 'app/shared/model/ninth-objective.model';
 import { INinthBattle } from 'app/shared/model/ninth-battle.model';
@@ -7,7 +6,6 @@ import { INinthArmy } from 'app/shared/model/ninth-army.model';
 export interface INinthArmyMoment {
   id?: number;
   current?: boolean;
-  sinceInstant?: Moment;
   majorVictories?: number;
   minorVictories?: number;
   draws?: number;
@@ -28,7 +26,6 @@ export class NinthArmyMoment implements INinthArmyMoment {
   constructor(
     public id?: number,
     public current?: boolean,
-    public sinceInstant?: Moment,
     public majorVictories?: number,
     public minorVictories?: number,
     public draws?: number,

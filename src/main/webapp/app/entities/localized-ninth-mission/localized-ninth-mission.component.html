@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-ninth-mission"
-      [routerLink]="['/localized-ninth-mission', 'new']"
+      [routerLink]="['/localized-ninth-mission/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedNinthMission.home.createLabel">
@@ -29,6 +29,7 @@
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMission.name">Name</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMission.briefing">Briefing</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMission.language">Language</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMission.mission">Mission</span></th>
           <th scope="col"></th>
         </tr>
@@ -40,6 +41,7 @@
           </td>
           <td>{{ localizedNinthMission.name }}</td>
           <td>{{ localizedNinthMission.briefing }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthMission.language }}">{{ localizedNinthMission.language }}</td>
           <td>
             <div *ngIf="localizedNinthMission.mission">
               <a [routerLink]="['/ninth-mission', localizedNinthMission.mission?.id, 'view']">{{ localizedNinthMission.mission?.id }}</a>

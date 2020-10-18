@@ -24,6 +24,7 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
     id: [],
     name: [],
     briefing: [],
+    language: [null, [Validators.required]],
     mission: [],
   });
 
@@ -49,6 +50,7 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
       id: localizedNinthMission.id,
       name: localizedNinthMission.name,
       briefing: localizedNinthMission.briefing,
+      language: localizedNinthMission.language,
       mission: localizedNinthMission.mission,
     });
   }
@@ -89,6 +91,7 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       briefing: this.editForm.get(['briefing'])!.value,
+      language: this.editForm.get(['language'])!.value,
       mission: this.editForm.get(['mission'])!.value,
     };
   }

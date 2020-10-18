@@ -28,6 +28,7 @@
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.resolved">Resolved</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.campaignMoment">Campaign Moment</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.mission">Mission</span></th>
           <th scope="col"></th>
@@ -36,9 +37,10 @@
       <tbody>
         <tr *ngFor="let ninthBattle of ninthBattles; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'view']">{{ ninthBattle.id }}</a>
+            <a [routerLink]="['/ninth-battle', ninthBattle.id, 'view']">{{ ninthBattle.id }}</a>
           </td>
           <td>{{ ninthBattle.name }}</td>
+          <td>{{ ninthBattle.resolved }}</td>
           <td>
             <div *ngIf="ninthBattle.campaignMoment">
               <a [routerLink]="['/entities', 'ninth-campaign-moment', ninthBattle.campaignMoment?.id, 'view']">{{

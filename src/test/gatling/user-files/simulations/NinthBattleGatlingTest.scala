@@ -102,6 +102,7 @@ class NinthBattleGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "name":"SAMPLE_TEXT"
+                , "resolved":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_ninthBattle_url"))).exitHereIfFailed

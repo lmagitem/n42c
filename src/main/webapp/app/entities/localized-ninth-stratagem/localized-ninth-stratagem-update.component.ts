@@ -26,6 +26,7 @@ export class LocalizedNinthStratagemUpdateComponent implements OnInit {
     summary: [],
     description: [],
     keywords: [],
+    language: [null, [Validators.required]],
     stratagem: [],
   });
 
@@ -53,6 +54,7 @@ export class LocalizedNinthStratagemUpdateComponent implements OnInit {
       summary: localizedNinthStratagem.summary,
       description: localizedNinthStratagem.description,
       keywords: localizedNinthStratagem.keywords,
+      language: localizedNinthStratagem.language,
       stratagem: localizedNinthStratagem.stratagem,
     });
   }
@@ -95,6 +97,7 @@ export class LocalizedNinthStratagemUpdateComponent implements OnInit {
       summary: this.editForm.get(['summary'])!.value,
       description: this.editForm.get(['description'])!.value,
       keywords: this.editForm.get(['keywords'])!.value,
+      language: this.editForm.get(['language'])!.value,
       stratagem: this.editForm.get(['stratagem'])!.value,
     };
   }

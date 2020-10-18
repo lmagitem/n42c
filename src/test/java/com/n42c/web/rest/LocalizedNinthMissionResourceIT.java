@@ -24,6 +24,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedNinthMissionResource} REST controller.
  */
@@ -37,6 +38,9 @@ public class LocalizedNinthMissionResourceIT {
 
     private static final String DEFAULT_BRIEFING = "AAAAAAAAAA";
     private static final String UPDATED_BRIEFING = "BBBBBBBBBB";
+
+    private static final Language DEFAULT_LANGUAGE = Language.EN;
+    private static final Language UPDATED_LANGUAGE = Language.FR;
 
     @Autowired
     private LocalizedNinthMissionRepository localizedNinthMissionRepository;
@@ -58,7 +62,8 @@ public class LocalizedNinthMissionResourceIT {
     public static LocalizedNinthMission createEntity(EntityManager em) {
         LocalizedNinthMission localizedNinthMission = new LocalizedNinthMission()
             .name(DEFAULT_NAME)
-            .briefing(DEFAULT_BRIEFING);
+            .briefing(DEFAULT_BRIEFING)
+            .language(DEFAULT_LANGUAGE);
         return localizedNinthMission;
     }
     /**
@@ -70,7 +75,8 @@ public class LocalizedNinthMissionResourceIT {
     public static LocalizedNinthMission createUpdatedEntity(EntityManager em) {
         LocalizedNinthMission localizedNinthMission = new LocalizedNinthMission()
             .name(UPDATED_NAME)
-            .briefing(UPDATED_BRIEFING);
+            .briefing(UPDATED_BRIEFING)
+            .language(UPDATED_LANGUAGE);
         return localizedNinthMission;
     }
 
@@ -95,6 +101,7 @@ public class LocalizedNinthMissionResourceIT {
         LocalizedNinthMission testLocalizedNinthMission = localizedNinthMissionList.get(localizedNinthMissionList.size() - 1);
         assertThat(testLocalizedNinthMission.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLocalizedNinthMission.getBriefing()).isEqualTo(DEFAULT_BRIEFING);
+        assertThat(testLocalizedNinthMission.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
     }
 
     @Test
@@ -119,6 +126,25 @@ public class LocalizedNinthMissionResourceIT {
 
     @Test
     @Transactional
+    public void checkLanguageIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedNinthMissionRepository.findAll().size();
+        // set the field null
+        localizedNinthMission.setLanguage(null);
+
+        // Create the LocalizedNinthMission, which fails.
+
+
+        restLocalizedNinthMissionMockMvc.perform(post("/api/localized-ninth-missions").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedNinthMission)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedNinthMission> localizedNinthMissionList = localizedNinthMissionRepository.findAll();
+        assertThat(localizedNinthMissionList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLocalizedNinthMissions() throws Exception {
         // Initialize the database
         localizedNinthMissionRepository.saveAndFlush(localizedNinthMission);
@@ -129,7 +155,8 @@ public class LocalizedNinthMissionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedNinthMission.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].briefing").value(hasItem(DEFAULT_BRIEFING.toString())));
+            .andExpect(jsonPath("$.[*].briefing").value(hasItem(DEFAULT_BRIEFING.toString())))
+            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
     @Test
@@ -144,7 +171,8 @@ public class LocalizedNinthMissionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedNinthMission.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.briefing").value(DEFAULT_BRIEFING.toString()));
+            .andExpect(jsonPath("$.briefing").value(DEFAULT_BRIEFING.toString()))
+            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test
     @Transactional
@@ -168,7 +196,8 @@ public class LocalizedNinthMissionResourceIT {
         em.detach(updatedLocalizedNinthMission);
         updatedLocalizedNinthMission
             .name(UPDATED_NAME)
-            .briefing(UPDATED_BRIEFING);
+            .briefing(UPDATED_BRIEFING)
+            .language(UPDATED_LANGUAGE);
 
         restLocalizedNinthMissionMockMvc.perform(put("/api/localized-ninth-missions").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -181,6 +210,7 @@ public class LocalizedNinthMissionResourceIT {
         LocalizedNinthMission testLocalizedNinthMission = localizedNinthMissionList.get(localizedNinthMissionList.size() - 1);
         assertThat(testLocalizedNinthMission.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLocalizedNinthMission.getBriefing()).isEqualTo(UPDATED_BRIEFING);
+        assertThat(testLocalizedNinthMission.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
     }
 
     @Test

@@ -50,6 +50,14 @@ describe('NinthBattle e2e test', () => {
     ]);
 
     expect(await ninthBattleUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+    const selectedResolved = ninthBattleUpdatePage.getResolvedInput();
+    if (await selectedResolved.isSelected()) {
+      await ninthBattleUpdatePage.getResolvedInput().click();
+      expect(await ninthBattleUpdatePage.getResolvedInput().isSelected(), 'Expected resolved not to be selected').to.be.false;
+    } else {
+      await ninthBattleUpdatePage.getResolvedInput().click();
+      expect(await ninthBattleUpdatePage.getResolvedInput().isSelected(), 'Expected resolved to be selected').to.be.true;
+    }
 
     await ninthBattleUpdatePage.save();
     expect(await ninthBattleUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

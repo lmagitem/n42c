@@ -621,6 +621,18 @@
                             <span jhiTranslate="global.menu.entities.localizedNinthObjective">Localized Ninth Objective</span>
                         </a>
                     </li>
+          <li>
+                        <a class="dropdown-item" routerLink="ninth-battle" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthBattle">Ninth Battle</span>
+                        </a>
+                    </li>
+          <li>
+                        <a class="dropdown-item" routerLink="localized-ninth-stratagem-group" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthStratagemGroup">Localized Ninth Stratagem Group</span>
+                        </a>
+                    </li>
           <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
         </ul>
       </li>

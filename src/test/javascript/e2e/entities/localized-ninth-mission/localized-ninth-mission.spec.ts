@@ -50,6 +50,7 @@ describe('LocalizedNinthMission e2e test', () => {
     await promise.all([
       localizedNinthMissionUpdatePage.setNameInput('name'),
       localizedNinthMissionUpdatePage.setBriefingInput('briefing'),
+      localizedNinthMissionUpdatePage.languageSelectLastOption(),
       localizedNinthMissionUpdatePage.missionSelectLastOption(),
     ]);
 

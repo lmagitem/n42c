@@ -4,8 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { INinthArmyMoment, NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
@@ -38,7 +36,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     current: [null, [Validators.required]],
-    sinceInstant: [null, [Validators.required]],
     majorVictories: [],
     minorVictories: [],
     draws: [],
@@ -69,11 +66,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ ninthArmyMoment }) => {
-      if (!ninthArmyMoment.id) {
-        const today = moment().startOf('day');
-        ninthArmyMoment.sinceInstant = today;
-      }
-
       this.updateForm(ninthArmyMoment);
 
       this.ninthArmyUnitService.query().subscribe((res: HttpResponse<INinthArmyUnit[]>) => (this.nintharmyunits = res.body || []));
@@ -90,7 +82,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: ninthArmyMoment.id,
       current: ninthArmyMoment.current,
-      sinceInstant: ninthArmyMoment.sinceInstant ? ninthArmyMoment.sinceInstant.format(DATE_TIME_FORMAT) : null,
       majorVictories: ninthArmyMoment.majorVictories,
       minorVictories: ninthArmyMoment.minorVictories,
       draws: ninthArmyMoment.draws,
@@ -143,9 +134,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
       ...new NinthArmyMoment(),
       id: this.editForm.get(['id'])!.value,
       current: this.editForm.get(['current'])!.value,
-      sinceInstant: this.editForm.get(['sinceInstant'])!.value
-        ? moment(this.editForm.get(['sinceInstant'])!.value, DATE_TIME_FORMAT)
-        : undefined,
       majorVictories: this.editForm.get(['majorVictories'])!.value,
       minorVictories: this.editForm.get(['minorVictories'])!.value,
       draws: this.editForm.get(['draws'])!.value,

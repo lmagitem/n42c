@@ -1,11 +1,11 @@
-id;name;briefing
-1;users Towels;../fake-data/blob/hipster.txt
-2;dynamic revolutionary Gorgeous;../fake-data/blob/hipster.txt
-3;Senior;../fake-data/blob/hipster.txt
-4;synergistic Refined Fresh Sausages Executive;../fake-data/blob/hipster.txt
-5;reboot bus methodologies;../fake-data/blob/hipster.txt
-6;target New Jersey;../fake-data/blob/hipster.txt
-7;digital Unbranded;../fake-data/blob/hipster.txt
-8;Swedish Krona Director;../fake-data/blob/hipster.txt
-9;extend Grocery;../fake-data/blob/hipster.txt
-10;web-readiness bandwidth;../fake-data/blob/hipster.txt
+id;name;briefing;language
+1;users Towels;../fake-data/blob/hipster.txt;AR
+2;Unbranded Plastic Fish Refined Fresh Sausages Executive;../fake-data/blob/hipster.txt;SW
+3;Borders New Mexico;../fake-data/blob/hipster.txt;DA
+4;Haiti auxiliary;../fake-data/blob/hipster.txt;DA
+5;Awesome Fresh Salad;../fake-data/blob/hipster.txt;DU
+6;input;../fake-data/blob/hipster.txt;RO
+7;Gorgeous Plastic Car Concrete Clothing;../fake-data/blob/hipster.txt;RU
+8;Handcrafted Fresh Sausages yellow;../fake-data/blob/hipster.txt;SW
+9;Bike system;../fake-data/blob/hipster.txt;ES
+10;disintermediate;../fake-data/blob/hipster.txt;EN

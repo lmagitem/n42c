@@ -18,6 +18,7 @@
       },
       "name": "Name",
       "briefing": "Briefing",
+      "language": "Language",
       "mission": "Mission"
     }
   }

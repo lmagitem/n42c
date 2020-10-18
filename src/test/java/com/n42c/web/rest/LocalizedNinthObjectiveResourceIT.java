@@ -24,6 +24,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedNinthObjectiveResource} REST controller.
  */
@@ -37,6 +38,9 @@ public class LocalizedNinthObjectiveResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final Language DEFAULT_LANGUAGE = Language.EN;
+    private static final Language UPDATED_LANGUAGE = Language.FR;
 
     @Autowired
     private LocalizedNinthObjectiveRepository localizedNinthObjectiveRepository;
@@ -58,7 +62,8 @@ public class LocalizedNinthObjectiveResourceIT {
     public static LocalizedNinthObjective createEntity(EntityManager em) {
         LocalizedNinthObjective localizedNinthObjective = new LocalizedNinthObjective()
             .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .language(DEFAULT_LANGUAGE);
         return localizedNinthObjective;
     }
     /**
@@ -70,7 +75,8 @@ public class LocalizedNinthObjectiveResourceIT {
     public static LocalizedNinthObjective createUpdatedEntity(EntityManager em) {
         LocalizedNinthObjective localizedNinthObjective = new LocalizedNinthObjective()
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .language(UPDATED_LANGUAGE);
         return localizedNinthObjective;
     }
 
@@ -95,6 +101,7 @@ public class LocalizedNinthObjectiveResourceIT {
         LocalizedNinthObjective testLocalizedNinthObjective = localizedNinthObjectiveList.get(localizedNinthObjectiveList.size() - 1);
         assertThat(testLocalizedNinthObjective.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLocalizedNinthObjective.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testLocalizedNinthObjective.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
     }
 
     @Test
@@ -119,6 +126,25 @@ public class LocalizedNinthObjectiveResourceIT {
 
     @Test
     @Transactional
+    public void checkLanguageIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedNinthObjectiveRepository.findAll().size();
+        // set the field null
+        localizedNinthObjective.setLanguage(null);
+
+        // Create the LocalizedNinthObjective, which fails.
+
+
+        restLocalizedNinthObjectiveMockMvc.perform(post("/api/localized-ninth-objectives").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedNinthObjective)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedNinthObjective> localizedNinthObjectiveList = localizedNinthObjectiveRepository.findAll();
+        assertThat(localizedNinthObjectiveList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLocalizedNinthObjectives() throws Exception {
         // Initialize the database
         localizedNinthObjectiveRepository.saveAndFlush(localizedNinthObjective);
@@ -129,7 +155,8 @@ public class LocalizedNinthObjectiveResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedNinthObjective.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
     @Test
@@ -144,7 +171,8 @@ public class LocalizedNinthObjectiveResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedNinthObjective.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test
     @Transactional
@@ -168,7 +196,8 @@ public class LocalizedNinthObjectiveResourceIT {
         em.detach(updatedLocalizedNinthObjective);
         updatedLocalizedNinthObjective
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .language(UPDATED_LANGUAGE);
 
         restLocalizedNinthObjectiveMockMvc.perform(put("/api/localized-ninth-objectives").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -181,6 +210,7 @@ public class LocalizedNinthObjectiveResourceIT {
         LocalizedNinthObjective testLocalizedNinthObjective = localizedNinthObjectiveList.get(localizedNinthObjectiveList.size() - 1);
         assertThat(testLocalizedNinthObjective.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLocalizedNinthObjective.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testLocalizedNinthObjective.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
     }
 
     @Test

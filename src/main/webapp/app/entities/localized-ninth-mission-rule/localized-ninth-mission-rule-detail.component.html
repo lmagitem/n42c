@@ -19,6 +19,12 @@
         <dd>
           <span>{{ localizedNinthMissionRule.description }}</span>
         </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthMissionRule.language">Language</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthMissionRule.language }}">{{
+            localizedNinthMissionRule.language
+          }}</span>
+        </dd>
         <dt><span jhiTranslate="n42cApp.localizedNinthMissionRule.rule">Rule</span></dt>
         <dd>
           <div *ngIf="localizedNinthMissionRule.rule">

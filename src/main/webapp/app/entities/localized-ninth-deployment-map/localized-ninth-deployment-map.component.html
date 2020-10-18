@@ -29,6 +29,7 @@
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.name">Name</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.language">Language</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.deploymentMap">Deployment Map</span></th>
           <th scope="col"></th>
         </tr>
@@ -42,6 +43,9 @@
           </td>
           <td>{{ localizedNinthDeploymentMap.name }}</td>
           <td>{{ localizedNinthDeploymentMap.description }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthDeploymentMap.language }}">
+            {{ localizedNinthDeploymentMap.language }}
+          </td>
           <td>
             <div *ngIf="localizedNinthDeploymentMap.deploymentMap">
               <a [routerLink]="['/ninth-deployment-map', localizedNinthDeploymentMap.deploymentMap?.id, 'view']">{{

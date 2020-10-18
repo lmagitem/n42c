@@ -24,6 +24,7 @@ export class LocalizedNinthDeploymentMapUpdateComponent implements OnInit {
     id: [],
     name: [],
     description: [],
+    language: [null, [Validators.required]],
     deploymentMap: [],
   });
 
@@ -51,6 +52,7 @@ export class LocalizedNinthDeploymentMapUpdateComponent implements OnInit {
       id: localizedNinthDeploymentMap.id,
       name: localizedNinthDeploymentMap.name,
       description: localizedNinthDeploymentMap.description,
+      language: localizedNinthDeploymentMap.language,
       deploymentMap: localizedNinthDeploymentMap.deploymentMap,
     });
   }
@@ -91,6 +93,7 @@ export class LocalizedNinthDeploymentMapUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       description: this.editForm.get(['description'])!.value,
+      language: this.editForm.get(['language'])!.value,
       deploymentMap: this.editForm.get(['deploymentMap'])!.value,
     };
   }

@@ -103,6 +103,7 @@ class LocalizedNinthMissionRuleGatlingTest extends Simulation {
                 "id":null
                 , "name":"SAMPLE_TEXT"
                 , "description":null
+                , "language":"EN"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_localizedNinthMissionRule_url"))).exitHereIfFailed

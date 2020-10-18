@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { LocalizedNinthStratagemService } from 'app/entities/localized-ninth-stratagem/localized-ninth-stratagem.service';
 import { ILocalizedNinthStratagem, LocalizedNinthStratagem } from 'app/shared/model/localized-ninth-stratagem.model';
+import { Language } from 'app/shared/model/enumerations/language.model';
 
 describe('Service Tests', () => {
   describe('LocalizedNinthStratagem Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LocalizedNinthStratagemService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new LocalizedNinthStratagem(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new LocalizedNinthStratagem(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', Language.EN);
     });
 
     describe('Service methods', () => {
@@ -58,6 +59,7 @@ describe('Service Tests', () => {
             summary: 'BBBBBB',
             description: 'BBBBBB',
             keywords: 'BBBBBB',
+            language: 'BBBBBB',
           },
           elemDefault
         );
@@ -78,6 +80,7 @@ describe('Service Tests', () => {
             summary: 'BBBBBB',
             description: 'BBBBBB',
             keywords: 'BBBBBB',
+            language: 'BBBBBB',
           },
           elemDefault
         );

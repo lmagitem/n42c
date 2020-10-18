@@ -102,7 +102,6 @@ class NinthArmyMomentGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "current":null
-                , "sinceInstant":"2020-01-01T00:00:00.000Z"
                 , "majorVictories":"0"
                 , "minorVictories":"0"
                 , "draws":"0"

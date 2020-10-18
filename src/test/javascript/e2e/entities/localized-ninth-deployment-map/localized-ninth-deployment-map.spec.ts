@@ -53,6 +53,7 @@ describe('LocalizedNinthDeploymentMap e2e test', () => {
     await promise.all([
       localizedNinthDeploymentMapUpdatePage.setNameInput('name'),
       localizedNinthDeploymentMapUpdatePage.setDescriptionInput('description'),
+      localizedNinthDeploymentMapUpdatePage.languageSelectLastOption(),
       localizedNinthDeploymentMapUpdatePage.deploymentMapSelectLastOption(),
     ]);
 

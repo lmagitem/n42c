@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
+import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { NinthArmyMomentComponentsPage, NinthArmyMomentDeleteDialog, NinthArmyMomentUpdatePage } from './ninth-army-moment.page-object';
@@ -44,7 +44,6 @@ describe('NinthArmyMoment e2e test', () => {
     await ninthArmyMomentComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      ninthArmyMomentUpdatePage.setSinceInstantInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       ninthArmyMomentUpdatePage.setMajorVictoriesInput('5'),
       ninthArmyMomentUpdatePage.setMinorVictoriesInput('5'),
       ninthArmyMomentUpdatePage.setDrawsInput('5'),
@@ -69,10 +68,6 @@ describe('NinthArmyMoment e2e test', () => {
       await ninthArmyMomentUpdatePage.getCurrentInput().click();
       expect(await ninthArmyMomentUpdatePage.getCurrentInput().isSelected(), 'Expected current to be selected').to.be.true;
     }
-    expect(await ninthArmyMomentUpdatePage.getSinceInstantInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected sinceInstant value to be equals to 2000-12-31'
-    );
     expect(await ninthArmyMomentUpdatePage.getMajorVictoriesInput()).to.eq('5', 'Expected majorVictories value to be equals to 5');
     expect(await ninthArmyMomentUpdatePage.getMinorVictoriesInput()).to.eq('5', 'Expected minorVictories value to be equals to 5');
     expect(await ninthArmyMomentUpdatePage.getDrawsInput()).to.eq('5', 'Expected draws value to be equals to 5');

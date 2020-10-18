@@ -24,6 +24,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedNinthMissionRuleResource} REST controller.
  */
@@ -37,6 +38,9 @@ public class LocalizedNinthMissionRuleResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final Language DEFAULT_LANGUAGE = Language.EN;
+    private static final Language UPDATED_LANGUAGE = Language.FR;
 
     @Autowired
     private LocalizedNinthMissionRuleRepository localizedNinthMissionRuleRepository;
@@ -58,7 +62,8 @@ public class LocalizedNinthMissionRuleResourceIT {
     public static LocalizedNinthMissionRule createEntity(EntityManager em) {
         LocalizedNinthMissionRule localizedNinthMissionRule = new LocalizedNinthMissionRule()
             .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .language(DEFAULT_LANGUAGE);
         return localizedNinthMissionRule;
     }
     /**
@@ -70,7 +75,8 @@ public class LocalizedNinthMissionRuleResourceIT {
     public static LocalizedNinthMissionRule createUpdatedEntity(EntityManager em) {
         LocalizedNinthMissionRule localizedNinthMissionRule = new LocalizedNinthMissionRule()
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .language(UPDATED_LANGUAGE);
         return localizedNinthMissionRule;
     }
 
@@ -95,6 +101,7 @@ public class LocalizedNinthMissionRuleResourceIT {
         LocalizedNinthMissionRule testLocalizedNinthMissionRule = localizedNinthMissionRuleList.get(localizedNinthMissionRuleList.size() - 1);
         assertThat(testLocalizedNinthMissionRule.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLocalizedNinthMissionRule.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testLocalizedNinthMissionRule.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
     }
 
     @Test
@@ -119,6 +126,25 @@ public class LocalizedNinthMissionRuleResourceIT {
 
     @Test
     @Transactional
+    public void checkLanguageIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedNinthMissionRuleRepository.findAll().size();
+        // set the field null
+        localizedNinthMissionRule.setLanguage(null);
+
+        // Create the LocalizedNinthMissionRule, which fails.
+
+
+        restLocalizedNinthMissionRuleMockMvc.perform(post("/api/localized-ninth-mission-rules").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedNinthMissionRule)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedNinthMissionRule> localizedNinthMissionRuleList = localizedNinthMissionRuleRepository.findAll();
+        assertThat(localizedNinthMissionRuleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLocalizedNinthMissionRules() throws Exception {
         // Initialize the database
         localizedNinthMissionRuleRepository.saveAndFlush(localizedNinthMissionRule);
@@ -129,7 +155,8 @@ public class LocalizedNinthMissionRuleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedNinthMissionRule.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
     @Test
@@ -144,7 +171,8 @@ public class LocalizedNinthMissionRuleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedNinthMissionRule.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test
     @Transactional
@@ -168,7 +196,8 @@ public class LocalizedNinthMissionRuleResourceIT {
         em.detach(updatedLocalizedNinthMissionRule);
         updatedLocalizedNinthMissionRule
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .language(UPDATED_LANGUAGE);
 
         restLocalizedNinthMissionRuleMockMvc.perform(put("/api/localized-ninth-mission-rules").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -181,6 +210,7 @@ public class LocalizedNinthMissionRuleResourceIT {
         LocalizedNinthMissionRule testLocalizedNinthMissionRule = localizedNinthMissionRuleList.get(localizedNinthMissionRuleList.size() - 1);
         assertThat(testLocalizedNinthMissionRule.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLocalizedNinthMissionRule.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testLocalizedNinthMissionRule.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
     }
 
     @Test

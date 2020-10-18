@@ -28,7 +28,6 @@
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.current">Current</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.sinceInstant">Since Instant</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.majorVictories">Major Victories</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.minorVictories">Minor Victories</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.draws">Draws</span></th>
@@ -52,7 +51,6 @@
             <a [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'view']">{{ ninthArmyMoment.id }}</a>
           </td>
           <td>{{ ninthArmyMoment.current }}</td>
-          <td>{{ ninthArmyMoment.sinceInstant | date: 'medium' }}</td>
           <td>{{ ninthArmyMoment.majorVictories }}</td>
           <td>{{ ninthArmyMoment.minorVictories }}</td>
           <td>{{ ninthArmyMoment.draws }}</td>

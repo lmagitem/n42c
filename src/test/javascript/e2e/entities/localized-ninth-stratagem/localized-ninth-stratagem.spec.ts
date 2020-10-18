@@ -55,6 +55,7 @@ describe('LocalizedNinthStratagem e2e test', () => {
       localizedNinthStratagemUpdatePage.setSummaryInput('summary'),
       localizedNinthStratagemUpdatePage.setDescriptionInput('description'),
       localizedNinthStratagemUpdatePage.setKeywordsInput('keywords'),
+      localizedNinthStratagemUpdatePage.languageSelectLastOption(),
       localizedNinthStratagemUpdatePage.stratagemSelectLastOption(),
     ]);
 

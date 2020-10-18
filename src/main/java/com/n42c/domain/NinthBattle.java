@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -27,6 +28,10 @@ public class NinthBattle implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @NotNull
+    @Column(name = "resolved", nullable = false)
+    private Boolean resolved;
 
     @OneToMany(mappedBy = "battle")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -60,6 +65,19 @@ public class NinthBattle implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean isResolved() {
+        return resolved;
+    }
+
+    public NinthBattle resolved(Boolean resolved) {
+        this.resolved = resolved;
+        return this;
+    }
+
+    public void setResolved(Boolean resolved) {
+        this.resolved = resolved;
     }
 
     public Set<NinthArmyMoment> getArmies() {
@@ -136,6 +154,7 @@ public class NinthBattle implements Serializable {
         return "NinthBattle{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", resolved='" + isResolved() + "'" +
             "}";
     }
 }

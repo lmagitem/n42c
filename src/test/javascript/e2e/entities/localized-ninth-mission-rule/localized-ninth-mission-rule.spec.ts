@@ -53,6 +53,7 @@ describe('LocalizedNinthMissionRule e2e test', () => {
     await promise.all([
       localizedNinthMissionRuleUpdatePage.setNameInput('name'),
       localizedNinthMissionRuleUpdatePage.setDescriptionInput('description'),
+      localizedNinthMissionRuleUpdatePage.languageSelectLastOption(),
       localizedNinthMissionRuleUpdatePage.ruleSelectLastOption(),
     ]);
 

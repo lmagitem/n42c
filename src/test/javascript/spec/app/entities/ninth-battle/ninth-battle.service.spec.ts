@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(NinthBattleService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new NinthBattle(0, 'AAAAAAA');
+      elemDefault = new NinthBattle(0, 'AAAAAAA', false);
     });
 
     describe('Service methods', () => {
@@ -55,6 +55,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
+            resolved: true,
           },
           elemDefault
         );
@@ -72,6 +73,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
+            resolved: true,
           },
           elemDefault
         );

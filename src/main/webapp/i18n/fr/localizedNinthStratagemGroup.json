@@ -17,6 +17,7 @@
         "title": "Localized Ninth Stratagem Group"
       },
       "name": "Name",
+      "language": "Language",
       "stratagemGroup": "Stratagem Group"
     }
   }

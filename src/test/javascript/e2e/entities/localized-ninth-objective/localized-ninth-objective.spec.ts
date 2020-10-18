@@ -53,6 +53,7 @@ describe('LocalizedNinthObjective e2e test', () => {
     await promise.all([
       localizedNinthObjectiveUpdatePage.setNameInput('name'),
       localizedNinthObjectiveUpdatePage.setDescriptionInput('description'),
+      localizedNinthObjectiveUpdatePage.languageSelectLastOption(),
       localizedNinthObjectiveUpdatePage.objectiveSelectLastOption(),
     ]);
 

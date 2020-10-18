@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-ninth-mission-rule"
-      [routerLink]="['/localized-ninth-mission-rule', 'new']"
+      [routerLink]="['/localized-ninth-mission-rule/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedNinthMissionRule.home.createLabel">
@@ -29,6 +29,7 @@
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMissionRule.name">Name</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMissionRule.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMissionRule.language">Language</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthMissionRule.rule">Rule</span></th>
           <th scope="col"></th>
         </tr>
@@ -40,6 +41,7 @@
           </td>
           <td>{{ localizedNinthMissionRule.name }}</td>
           <td>{{ localizedNinthMissionRule.description }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthMissionRule.language }}">{{ localizedNinthMissionRule.language }}</td>
           <td>
             <div *ngIf="localizedNinthMissionRule.rule">
               <a [routerLink]="['/ninth-mission-rule', localizedNinthMissionRule.rule?.id, 'view']">{{

@@ -19,6 +19,12 @@
         <dd>
           <span>{{ localizedNinthDeploymentMap.description }}</span>
         </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.language">Language</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthDeploymentMap.language }}">{{
+            localizedNinthDeploymentMap.language
+          }}</span>
+        </dd>
         <dt><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.deploymentMap">Deployment Map</span></dt>
         <dd>
           <div *ngIf="localizedNinthDeploymentMap.deploymentMap">

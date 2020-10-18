@@ -20,6 +20,7 @@
       "summary": "Summary",
       "description": "Description",
       "keywords": "Keywords",
+      "language": "Language",
       "stratagem": "Stratagem"
     }
   }

@@ -18,6 +18,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="language" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="stratagem_group_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -45,6 +48,7 @@
                   tableName="localized_ninth_stratagem_grp">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="language" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { LocalizedNinthObjectiveService } from 'app/entities/localized-ninth-objective/localized-ninth-objective.service';
 import { ILocalizedNinthObjective, LocalizedNinthObjective } from 'app/shared/model/localized-ninth-objective.model';
+import { Language } from 'app/shared/model/enumerations/language.model';
 
 describe('Service Tests', () => {
   describe('LocalizedNinthObjective Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LocalizedNinthObjectiveService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new LocalizedNinthObjective(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new LocalizedNinthObjective(0, 'AAAAAAA', 'AAAAAAA', Language.EN);
     });
 
     describe('Service methods', () => {
@@ -56,6 +57,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             description: 'BBBBBB',
+            language: 'BBBBBB',
           },
           elemDefault
         );
@@ -74,6 +76,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             description: 'BBBBBB',
+            language: 'BBBBBB',
           },
           elemDefault
         );

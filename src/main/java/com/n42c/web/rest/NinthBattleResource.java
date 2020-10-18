@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class NinthBattleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/ninth-battles")
-    public ResponseEntity<NinthBattle> createNinthBattle(@RequestBody NinthBattle ninthBattle) throws URISyntaxException {
+    public ResponseEntity<NinthBattle> createNinthBattle(@Valid @RequestBody NinthBattle ninthBattle) throws URISyntaxException {
         log.debug("REST request to save NinthBattle : {}", ninthBattle);
         if (ninthBattle.getId() != null) {
             throw new BadRequestAlertException("A new ninthBattle cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class NinthBattleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/ninth-battles")
-    public ResponseEntity<NinthBattle> updateNinthBattle(@RequestBody NinthBattle ninthBattle) throws URISyntaxException {
+    public ResponseEntity<NinthBattle> updateNinthBattle(@Valid @RequestBody NinthBattle ninthBattle) throws URISyntaxException {
         log.debug("REST request to update NinthBattle : {}", ninthBattle);
         if (ninthBattle.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

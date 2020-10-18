@@ -54,6 +54,7 @@ describe('LocalizedNinthStratagemGroup e2e test', () => {
 
     await promise.all([
       localizedNinthStratagemGroupUpdatePage.setNameInput('name'),
+      localizedNinthStratagemGroupUpdatePage.languageSelectLastOption(),
       localizedNinthStratagemGroupUpdatePage.stratagemGroupSelectLastOption(),
     ]);
 

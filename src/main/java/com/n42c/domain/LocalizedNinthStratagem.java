@@ -6,8 +6,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+
+import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthStratagem.
@@ -39,6 +42,11 @@ public class LocalizedNinthStratagem implements Serializable {
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "keywords")
     private String keywords;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", nullable = false)
+    private Language language;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
@@ -105,6 +113,19 @@ public class LocalizedNinthStratagem implements Serializable {
         this.keywords = keywords;
     }
 
+    public Language getLanguage() {
+        return language;
+    }
+
+    public LocalizedNinthStratagem language(Language language) {
+        this.language = language;
+        return this;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
     public NinthStratagem getStratagem() {
         return stratagem;
     }
@@ -144,6 +165,7 @@ public class LocalizedNinthStratagem implements Serializable {
             ", summary='" + getSummary() + "'" +
             ", description='" + getDescription() + "'" +
             ", keywords='" + getKeywords() + "'" +
+            ", language='" + getLanguage() + "'" +
             "}";
     }
 }

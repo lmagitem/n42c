@@ -6,8 +6,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+
+import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthMissionRule.
@@ -31,6 +34,11 @@ public class LocalizedNinthMissionRule implements Serializable {
     @Type(type = "org.hibernate.type.TextType")
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", nullable = false)
+    private Language language;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
@@ -71,6 +79,19 @@ public class LocalizedNinthMissionRule implements Serializable {
         this.description = description;
     }
 
+    public Language getLanguage() {
+        return language;
+    }
+
+    public LocalizedNinthMissionRule language(Language language) {
+        this.language = language;
+        return this;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
     public NinthMissionRule getRule() {
         return rule;
     }
@@ -108,6 +129,7 @@ public class LocalizedNinthMissionRule implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", language='" + getLanguage() + "'" +
             "}";
     }
 }

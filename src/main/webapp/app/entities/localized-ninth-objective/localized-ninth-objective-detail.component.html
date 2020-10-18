@@ -18,6 +18,10 @@
         <dd>
           <span>{{ localizedNinthObjective.description }}</span>
         </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthObjective.language">Language</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthObjective.language }}">{{ localizedNinthObjective.language }}</span>
+        </dd>
         <dt><span jhiTranslate="n42cApp.localizedNinthObjective.objective">Objective</span></dt>
         <dd>
           <div *ngIf="localizedNinthObjective.objective">

@@ -28,6 +28,7 @@
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.language">Language</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.stratagemGroup">Stratagem Group</span></th>
           <th scope="col"></th>
         </tr>
@@ -35,11 +36,14 @@
       <tbody>
         <tr *ngFor="let localizedNinthStratagemGroup of localizedNinthStratagemGroups; trackBy: trackId">
           <td>
-            <a [routerLink]="['/entities', 'localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'view']">{{
+            <a [routerLink]="['/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'view']">{{
               localizedNinthStratagemGroup.id
             }}</a>
           </td>
           <td>{{ localizedNinthStratagemGroup.name }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthStratagemGroup.language }}">
+            {{ localizedNinthStratagemGroup.language }}
+          </td>
           <td>
             <div *ngIf="localizedNinthStratagemGroup.stratagemGroup">
               <a [routerLink]="['/entities', 'ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{

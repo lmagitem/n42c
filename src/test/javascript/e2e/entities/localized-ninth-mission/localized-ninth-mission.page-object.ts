@@ -31,6 +31,7 @@ export class LocalizedNinthMissionUpdatePage {
 
   nameInput = element(by.id('field_name'));
   briefingInput = element(by.id('field_briefing'));
+  languageSelect = element(by.id('field_language'));
 
   missionSelect = element(by.id('field_mission'));
 
@@ -52,6 +53,18 @@ export class LocalizedNinthMissionUpdatePage {
 
   async getBriefingInput(): Promise<string> {
     return await this.briefingInput.getAttribute('value');
+  }
+
+  async setLanguageSelect(language: string): Promise<void> {
+    await this.languageSelect.sendKeys(language);
+  }
+
+  async getLanguageSelect(): Promise<string> {
+    return await this.languageSelect.element(by.css('option:checked')).getText();
+  }
+
+  async languageSelectLastOption(): Promise<void> {
+    await this.languageSelect.all(by.tagName('option')).last().click();
   }
 
   async missionSelectLastOption(): Promise<void> {

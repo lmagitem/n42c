@@ -33,6 +33,7 @@ export class LocalizedNinthStratagemUpdatePage {
   summaryInput = element(by.id('field_summary'));
   descriptionInput = element(by.id('field_description'));
   keywordsInput = element(by.id('field_keywords'));
+  languageSelect = element(by.id('field_language'));
 
   stratagemSelect = element(by.id('field_stratagem'));
 
@@ -70,6 +71,18 @@ export class LocalizedNinthStratagemUpdatePage {
 
   async getKeywordsInput(): Promise<string> {
     return await this.keywordsInput.getAttribute('value');
+  }
+
+  async setLanguageSelect(language: string): Promise<void> {
+    await this.languageSelect.sendKeys(language);
+  }
+
+  async getLanguageSelect(): Promise<string> {
+    return await this.languageSelect.element(by.css('option:checked')).getText();
+  }
+
+  async languageSelectLastOption(): Promise<void> {
+    await this.languageSelect.all(by.tagName('option')).last().click();
   }
 
   async stratagemSelectLastOption(): Promise<void> {

@@ -103,6 +103,7 @@ class LocalizedNinthMissionGatlingTest extends Simulation {
                 "id":null
                 , "name":"SAMPLE_TEXT"
                 , "briefing":null
+                , "language":"EN"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_localizedNinthMission_url"))).exitHereIfFailed
