@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-ninth-objective"
-      [routerLink]="['/localized-ninth-objective/new']"
+      [routerLink]="['/entities/localized-ninth-objective/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedNinthObjective.home.createLabel">
@@ -37,14 +37,16 @@
       <tbody>
         <tr *ngFor="let localizedNinthObjective of localizedNinthObjectives; trackBy: trackId">
           <td>
-            <a [routerLink]="['/localized-ninth-objective', localizedNinthObjective.id, 'view']">{{ localizedNinthObjective.id }}</a>
+            <a [routerLink]="['/entities', 'localized-ninth-objective', localizedNinthObjective.id, 'view']">{{
+              localizedNinthObjective.id
+            }}</a>
           </td>
           <td>{{ localizedNinthObjective.name }}</td>
           <td>{{ localizedNinthObjective.description }}</td>
           <td jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthObjective.language }}">{{ localizedNinthObjective.language }}</td>
           <td>
             <div *ngIf="localizedNinthObjective.objective">
-              <a [routerLink]="['/ninth-objective', localizedNinthObjective.objective?.id, 'view']">{{
+              <a [routerLink]="['/entities', 'ninth-objective', localizedNinthObjective.objective?.id, 'view']">{{
                 localizedNinthObjective.objective?.id
               }}</a>
             </div>
@@ -53,7 +55,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-objective', localizedNinthObjective.id, 'view']"
+                [routerLink]="['/entities', 'localized-ninth-objective', localizedNinthObjective.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -62,7 +64,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-objective', localizedNinthObjective.id, 'edit']"
+                [routerLink]="['/entities', 'localized-ninth-objective', localizedNinthObjective.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

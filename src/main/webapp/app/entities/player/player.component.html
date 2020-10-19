@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-player"
-      [routerLink]="['/entities', 'player', 'new']"
+      [routerLink]="['/entities/player/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.player.home.createLabel">
@@ -25,9 +25,12 @@
   <div class="table-responsive" id="entities" *ngIf="players && players.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.player.appUser">App User</span></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="n42cApp.player.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="appUser.displayedName">
+            <span jhiTranslate="n42cApp.player.appUser">App User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -36,9 +39,10 @@
           <td>
             <a [routerLink]="['/entities', 'player', player.id, 'view']">{{ player.id }}</a>
           </td>
+          <td>{{ player.name }}</td>
           <td>
             <div *ngIf="player.appUser">
-              <a [routerLink]="['/entities', 'app-user', player.appUser?.id, 'view']">{{ player.appUser?.id }}</a>
+              <a [routerLink]="['/entities', 'app-user', player.appUser?.id, 'view']">{{ player.appUser?.displayedName }}</a>
             </div>
           </td>
           <td class="text-right">
@@ -62,5 +66,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="players && players.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

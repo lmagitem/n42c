@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-blog-post"
-      [routerLink]="['/entities', 'blog-post', 'new']"
+      [routerLink]="['/entities/blog-post/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.blogPost.home.createLabel">
@@ -25,28 +25,30 @@
   <div class="table-responsive" id="entities" *ngIf="blogPosts && blogPosts.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
           <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="title"><span jhiTranslate="n42cApp.blogPost.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="published">
             <span jhiTranslate="n42cApp.blogPost.published">Published</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="modified">
             <span jhiTranslate="n42cApp.blogPost.modified">Modified</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="blog.id"><span jhiTranslate="n42cApp.blogPost.blog">Blog</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="blog.name"><span jhiTranslate="n42cApp.blogPost.blog">Blog</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
         <tr *ngFor="let blogPost of blogPosts; trackBy: trackId">
           <td>
             <a [routerLink]="['/entities', 'blog-post', blogPost.id, 'view']">{{ blogPost.id }}</a>
           </td>
+          <td>{{ blogPost.title }}</td>
           <td>{{ blogPost.published | date: 'medium' }}</td>
           <td>{{ blogPost.modified | date: 'medium' }}</td>
           <td>
             <div *ngIf="blogPost.blog">
-              <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.id }}</a>
+              <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.name }}</a>
             </div>
           </td>
           <td class="text-right">
@@ -70,23 +72,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <div *ngIf="blogPosts && blogPosts.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-    </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
   </div>
 </div>

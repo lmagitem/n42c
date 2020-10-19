@@ -1,6 +1,15 @@
 {
   "name": "Shop",
-  "fields": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This shop's name",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
   "relationships": [
     {
       "relationshipType": "one-to-many",

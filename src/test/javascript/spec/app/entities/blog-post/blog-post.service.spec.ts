@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new BlogPost(0, currentDate, currentDate);
+      elemDefault = new BlogPost(0, 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -72,6 +72,7 @@ describe('Service Tests', () => {
       it('should update a BlogPost', () => {
         const returnedFromService = Object.assign(
           {
+            title: 'BBBBBB',
             published: currentDate.format(DATE_TIME_FORMAT),
             modified: currentDate.format(DATE_TIME_FORMAT),
           },
@@ -96,6 +97,7 @@ describe('Service Tests', () => {
       it('should return a list of BlogPost', () => {
         const returnedFromService = Object.assign(
           {
+            title: 'BBBBBB',
             published: currentDate.format(DATE_TIME_FORMAT),
             modified: currentDate.format(DATE_TIME_FORMAT),
           },

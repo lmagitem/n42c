@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-product"
-      [routerLink]="['/entities', 'product', 'new']"
+      [routerLink]="['/entities/product/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.product.home.createLabel">
@@ -25,27 +25,22 @@
   <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.product.authors">Authors</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.product.shop">Shop</span></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="n42cApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="shop.name"><span jhiTranslate="n42cApp.product.shop">Shop</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
         <tr *ngFor="let product of products; trackBy: trackId">
           <td>
             <a [routerLink]="['/entities', 'product', product.id, 'view']">{{ product.id }}</a>
           </td>
-          <td>
-            <span *ngFor="let authors of product.authors; let last = last">
-              <a class="form-control-static" [routerLink]="['/entities', 'app-user', authors?.id, 'view']">{{ authors.id }}</a
-              >{{ last ? '' : ', ' }}
-            </span>
-          </td>
+          <td>{{ product.name }}</td>
           <td>
             <div *ngIf="product.shop">
-              <a [routerLink]="['/entities', 'shop', product.shop?.id, 'view']">{{ product.shop?.id }}</a>
+              <a [routerLink]="['/entities', 'shop', product.shop?.id, 'view']">{{ product.shop?.name }}</a>
             </div>
           </td>
           <td class="text-right">

@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-ninth-army-moment"
-      [routerLink]="['/ninth-army-moment', 'new']"
+      [routerLink]="['/entities', 'ninth-army-moment', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.ninthArmyMoment.home.createLabel">
@@ -48,7 +48,7 @@
       <tbody>
         <tr *ngFor="let ninthArmyMoment of ninthArmyMoments; trackBy: trackId">
           <td>
-            <a [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'view']">{{ ninthArmyMoment.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-army-moment', ninthArmyMoment.id, 'view']">{{ ninthArmyMoment.id }}</a>
           </td>
           <td>{{ ninthArmyMoment.current }}</td>
           <td>{{ ninthArmyMoment.majorVictories }}</td>
@@ -63,13 +63,15 @@
           <td>{{ ninthArmyMoment.notes }}</td>
           <td>
             <span *ngFor="let selectedUnits of ninthArmyMoment.selectedUnits; let last = last">
-              <a class="form-control-static" [routerLink]="['/ninth-army-unit', selectedUnits?.id, 'view']">{{ selectedUnits.id }}</a
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-army-unit', selectedUnits?.id, 'view']">{{
+                selectedUnits.id
+              }}</a
               >{{ last ? '' : ', ' }}
             </span>
           </td>
           <td>
             <span *ngFor="let selectedObjectives of ninthArmyMoment.selectedObjectives; let last = last">
-              <a class="form-control-static" [routerLink]="['/ninth-objective', selectedObjectives?.id, 'view']">{{
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-objective', selectedObjectives?.id, 'view']">{{
                 selectedObjectives.id
               }}</a
               >{{ last ? '' : ', ' }}
@@ -77,22 +79,30 @@
           </td>
           <td>
             <div *ngIf="ninthArmyMoment.battle">
-              <a [routerLink]="['/ninth-battle', ninthArmyMoment.battle?.id, 'view']">{{ ninthArmyMoment.battle?.id }}</a>
+              <a [routerLink]="['/entities', 'ninth-battle', ninthArmyMoment.battle?.id, 'view']">{{ ninthArmyMoment.battle?.id }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="ninthArmyMoment.army">
-              <a [routerLink]="['/ninth-army', ninthArmyMoment.army?.id, 'view']">{{ ninthArmyMoment.army?.id }}</a>
+              <a [routerLink]="['/entities', 'ninth-army', ninthArmyMoment.army?.id, 'view']">{{ ninthArmyMoment.army?.id }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'view']" class="btn btn-info btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'ninth-army-moment', ninthArmyMoment.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'edit']" class="btn btn-primary btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'ninth-army-moment', ninthArmyMoment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

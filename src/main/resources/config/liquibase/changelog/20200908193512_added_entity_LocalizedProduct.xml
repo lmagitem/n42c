@@ -15,6 +15,9 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="name" type="varchar(255)" remarks="This product&apos;s localized name">
+                <constraints nullable="false" />
+            </column>
             <column name="excerpt" type="varchar(255)" remarks="An excerpt of the product to show on the shop.">
                 <constraints nullable="true" />
             </column>
@@ -53,6 +56,7 @@
                   separator=";"
                   tableName="localized_product">
             <column name="id" type="numeric"/>
+            <column name="name" type="string"/>
             <column name="excerpt" type="string"/>
             <column name="picture_url" type="string"/>
             <column name="content" type="clob"/>

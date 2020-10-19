@@ -1,6 +1,15 @@
 {
   "name": "Product",
-  "fields": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This product's name",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
   "relationships": [
     {
       "relationshipType": "one-to-many",
@@ -13,7 +22,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "products",
       "relationshipName": "authors",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": true
     },
     {
@@ -21,14 +30,14 @@
       "otherEntityName": "shop",
       "otherEntityRelationshipName": "products",
       "relationshipName": "shop",
-      "otherEntityField": "id"
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20200908193412",
   "javadoc": "An entry to display in the shop",
   "entityTableName": "product",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "infinite-scroll",
   "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

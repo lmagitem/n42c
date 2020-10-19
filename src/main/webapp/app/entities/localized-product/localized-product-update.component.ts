@@ -22,6 +22,7 @@ export class LocalizedProductUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.required]],
     excerpt: [],
     pictureUrl: [],
     content: [null, [Validators.required]],
@@ -49,6 +50,7 @@ export class LocalizedProductUpdateComponent implements OnInit {
   updateForm(localizedProduct: ILocalizedProduct): void {
     this.editForm.patchValue({
       id: localizedProduct.id,
+      name: localizedProduct.name,
       excerpt: localizedProduct.excerpt,
       pictureUrl: localizedProduct.pictureUrl,
       content: localizedProduct.content,
@@ -91,6 +93,7 @@ export class LocalizedProductUpdateComponent implements OnInit {
     return {
       ...new LocalizedProduct(),
       id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
       excerpt: this.editForm.get(['excerpt'])!.value,
       pictureUrl: this.editForm.get(['pictureUrl'])!.value,
       content: this.editForm.get(['content'])!.value,

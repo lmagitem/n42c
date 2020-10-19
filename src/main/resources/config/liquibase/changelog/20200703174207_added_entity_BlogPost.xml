@@ -15,6 +15,9 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="title" type="varchar(255)" remarks="This post&apos;s title.">
+                <constraints nullable="false" />
+            </column>
             <column name="published" type="datetime" remarks="The date and time at which this post was published.">
                 <constraints nullable="false" />
             </column>
@@ -71,6 +74,7 @@
                   separator=";"
                   tableName="blog_post">
             <column name="id" type="numeric"/>
+            <column name="title" type="string"/>
             <column name="published" type="datetime"/>
             <column name="modified" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

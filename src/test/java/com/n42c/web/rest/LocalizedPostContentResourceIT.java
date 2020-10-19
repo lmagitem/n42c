@@ -33,6 +33,9 @@ import com.n42c.domain.enumeration.Language;
 @WithMockUser
 public class LocalizedPostContentResourceIT {
 
+    private static final String DEFAULT_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_TITLE = "BBBBBBBBBB";
+
     private static final String DEFAULT_EXCERPT = "AAAAAAAAAA";
     private static final String UPDATED_EXCERPT = "BBBBBBBBBB";
 
@@ -61,6 +64,7 @@ public class LocalizedPostContentResourceIT {
      */
     public static LocalizedPostContent createEntity(EntityManager em) {
         LocalizedPostContent localizedPostContent = new LocalizedPostContent()
+            .title(DEFAULT_TITLE)
             .excerpt(DEFAULT_EXCERPT)
             .content(DEFAULT_CONTENT)
             .language(DEFAULT_LANGUAGE);
@@ -74,6 +78,7 @@ public class LocalizedPostContentResourceIT {
      */
     public static LocalizedPostContent createUpdatedEntity(EntityManager em) {
         LocalizedPostContent localizedPostContent = new LocalizedPostContent()
+            .title(UPDATED_TITLE)
             .excerpt(UPDATED_EXCERPT)
             .content(UPDATED_CONTENT)
             .language(UPDATED_LANGUAGE);
@@ -99,6 +104,7 @@ public class LocalizedPostContentResourceIT {
         List<LocalizedPostContent> localizedPostContentList = localizedPostContentRepository.findAll();
         assertThat(localizedPostContentList).hasSize(databaseSizeBeforeCreate + 1);
         LocalizedPostContent testLocalizedPostContent = localizedPostContentList.get(localizedPostContentList.size() - 1);
+        assertThat(testLocalizedPostContent.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testLocalizedPostContent.getExcerpt()).isEqualTo(DEFAULT_EXCERPT);
         assertThat(testLocalizedPostContent.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testLocalizedPostContent.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
@@ -123,6 +129,25 @@ public class LocalizedPostContentResourceIT {
         assertThat(localizedPostContentList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkTitleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedPostContentRepository.findAll().size();
+        // set the field null
+        localizedPostContent.setTitle(null);
+
+        // Create the LocalizedPostContent, which fails.
+
+
+        restLocalizedPostContentMockMvc.perform(post("/api/localized-post-contents").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedPostContent)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedPostContent> localizedPostContentList = localizedPostContentRepository.findAll();
+        assertThat(localizedPostContentList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -154,6 +179,7 @@ public class LocalizedPostContentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedPostContent.getId().intValue())))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT.toString())))
             .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
@@ -170,6 +196,7 @@ public class LocalizedPostContentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedPostContent.getId().intValue()))
+            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
@@ -195,6 +222,7 @@ public class LocalizedPostContentResourceIT {
         // Disconnect from session so that the updates on updatedLocalizedPostContent are not directly saved in db
         em.detach(updatedLocalizedPostContent);
         updatedLocalizedPostContent
+            .title(UPDATED_TITLE)
             .excerpt(UPDATED_EXCERPT)
             .content(UPDATED_CONTENT)
             .language(UPDATED_LANGUAGE);
@@ -208,6 +236,7 @@ public class LocalizedPostContentResourceIT {
         List<LocalizedPostContent> localizedPostContentList = localizedPostContentRepository.findAll();
         assertThat(localizedPostContentList).hasSize(databaseSizeBeforeUpdate);
         LocalizedPostContent testLocalizedPostContent = localizedPostContentList.get(localizedPostContentList.size() - 1);
+        assertThat(testLocalizedPostContent.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testLocalizedPostContent.getExcerpt()).isEqualTo(UPDATED_EXCERPT);
         assertThat(testLocalizedPostContent.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testLocalizedPostContent.getLanguage()).isEqualTo(UPDATED_LANGUAGE);

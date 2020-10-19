@@ -28,7 +28,7 @@
         <dt><span jhiTranslate="n42cApp.localizedNinthMissionRule.rule">Rule</span></dt>
         <dd>
           <div *ngIf="localizedNinthMissionRule.rule">
-            <a [routerLink]="['/ninth-mission-rule', localizedNinthMissionRule.rule?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'ninth-mission-rule', localizedNinthMissionRule.rule?.id, 'view']">{{
               localizedNinthMissionRule.rule?.id
             }}</a>
           </div>
@@ -39,7 +39,11 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/localized-ninth-mission-rule', localizedNinthMissionRule.id, 'edit']" class="btn btn-primary">
+      <button
+        type="button"
+        [routerLink]="['/entities', 'localized-ninth-mission-rule', localizedNinthMissionRule.id, 'edit']"
+        class="btn btn-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

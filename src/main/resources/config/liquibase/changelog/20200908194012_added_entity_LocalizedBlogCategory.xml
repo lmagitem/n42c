@@ -15,7 +15,7 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)" remarks="This category&apos;s name.">
+            <column name="name" type="varchar(255)" remarks="This category&apos;s localized name.">
                 <constraints nullable="false" />
             </column>
             <column name="language" type="varchar(255)" remarks="This category&apos;s language.">

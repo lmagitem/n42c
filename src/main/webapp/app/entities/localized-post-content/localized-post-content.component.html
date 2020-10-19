@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-post-content"
-      [routerLink]="['/localized-post-content', 'new']"
+      [routerLink]="['/entities/localized-post-content/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedPostContent.home.createLabel">
@@ -27,6 +27,7 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedPostContent.title">Title</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedPostContent.excerpt">Excerpt</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedPostContent.content">Content</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.localizedPostContent.language">Language</span></th>
@@ -37,26 +38,31 @@
       <tbody>
         <tr *ngFor="let localizedPostContent of localizedPostContents; trackBy: trackId">
           <td>
-            <a [routerLink]="['/localized-post-content', localizedPostContent.id, 'view']">{{ localizedPostContent.id }}</a>
+            <a [routerLink]="['/entities', 'localized-post-content', localizedPostContent.id, 'view']">{{ localizedPostContent.id }}</a>
           </td>
+          <td>{{ localizedPostContent.title }}</td>
           <td>{{ localizedPostContent.excerpt }}</td>
           <td>{{ localizedPostContent.content }}</td>
           <td jhiTranslate="{{ 'n42cApp.Language.' + localizedPostContent.language }}">{{ localizedPostContent.language }}</td>
           <td>
             <div *ngIf="localizedPostContent.post">
-              <a [routerLink]="['/blog-post', localizedPostContent.post?.id, 'view']">{{ localizedPostContent.post?.id }}</a>
+              <a [routerLink]="['/entities', 'blog-post', localizedPostContent.post?.id, 'view']">{{ localizedPostContent.post?.title }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/localized-post-content', localizedPostContent.id, 'view']" class="btn btn-info btn-sm">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'localized-post-content', localizedPostContent.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
               <button
                 type="submit"
-                [routerLink]="['/localized-post-content', localizedPostContent.id, 'edit']"
+                [routerLink]="['/entities', 'localized-post-content', localizedPostContent.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

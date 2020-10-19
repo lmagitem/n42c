@@ -28,7 +28,7 @@
         "title": "The title of this profile.",
         "summary": "A summary to show on the user profile.",
         "headerBackgroundURI": "The picture to show in the profile header.",
-        "language": "This profile&#39;s language."
+        "language": "This profile's language."
       }
     }
   }

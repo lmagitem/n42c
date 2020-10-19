@@ -1,13 +1,22 @@
 {
   "name": "Player",
-  "fields": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This player's name.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
   "relationships": [
     {
       "relationshipType": "one-to-one",
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "player",
       "relationshipName": "appUser",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": true
     },
     {
@@ -49,7 +58,7 @@
   "javadoc": "Scriptorium's player.",
   "entityTableName": "player",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "pagination",
   "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

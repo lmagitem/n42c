@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-app-user-heading" jhiTranslate="n42cApp.appUser.home.createOrEditLabel">Create or edit a App User</h2>
 
@@ -175,7 +175,7 @@
             <option
               [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
               *ngFor="let userOption of users; trackBy: trackById"
-              >{{ userOption.id }}</option
+              >{{ userOption.login }}</option
             >
           </select>
         </div>
@@ -186,7 +186,7 @@
             <option
               [ngValue]="getSelected(editForm.get('givenFriendships')!.value, appUserOption)"
               *ngFor="let appUserOption of appusers; trackBy: trackById"
-              >{{ appUserOption.id }}</option
+              >{{ appUserOption.displayedName }}</option
             >
           </select>
         </div>
@@ -203,7 +203,7 @@
             <option
               [ngValue]="getSelected(editForm.get('askedFriendRequests')!.value, appUserOption)"
               *ngFor="let appUserOption of appusers; trackBy: trackById"
-              >{{ appUserOption.id }}</option
+              >{{ appUserOption.displayedName }}</option
             >
           </select>
         </div>

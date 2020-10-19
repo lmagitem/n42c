@@ -4,24 +4,28 @@ import com.n42c.domain.Blog;
 import com.n42c.repository.BlogRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
+import com.n42c.web.rest.utils.RestServiceUtils;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -90,33 +94,46 @@ public class BlogResource {
     /**
      * {@code GET  /blogs} : get all the blogs.
      *
+     * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogs in body.
      */
     @GetMapping("/blogs")
-    public List<Blog> getAllBlogs() {
+    public ResponseEntity<List<Blog>> getAllBlogs(Pageable pageable) {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context == null)
-            return getBlogsByCurrentUserOrWriter();
+            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, null));
 
         Authentication authentication = context.getAuthentication();
         if (authentication == null)
-            return getBlogsByCurrentUserOrWriter();
+            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, null));
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         if (authorities == null)
-            return getBlogsByCurrentUserOrWriter();
+            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
 
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             log.debug("REST request to get all Blogs - as Admin");
-            return blogRepository.findAll();
+            return RestServiceUtils.returnPagedListWithHeaders(blogRepository.findAll(pageable));
         } else {
-            return getBlogsByCurrentUserOrWriter();
+            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
         }
     }
 
-    private List<Blog> getBlogsByCurrentUserOrWriter() {
-        log.debug("REST request to get all Blogs - as User");
-        return blogRepository.findByUserIsCurrentUserOrWriter();
+    /**
+     * Gets all blogs belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<Blog> getBlogsByCurrentUserOrWriter(Pageable pageable, Object principal) {
+        if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get all Blogs - as User (with UserDetails)");
+                return blogRepository.getAllByIsCurrentSpringUserOrWriter(pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get all Blogs - as User (with Oidc token)");
+                return blogRepository.getAllByIsCurrentOidcUserOrWriter(pageable);
+            }
+        }
+        log.debug("REST request to get all Blogs - as Anonymous");
+        return blogRepository.getAllByIsWriter(pageable);
     }
 
     /**

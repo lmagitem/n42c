@@ -31,6 +31,14 @@ public class LocalizedProduct implements Serializable {
     private Long id;
 
     /**
+     * This product's localized name
+     */
+    @NotNull
+    @ApiModelProperty(value = "This product's localized name", required = true)
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    /**
      * An excerpt of the product to show on the shop.
      */
     @ApiModelProperty(value = "An excerpt of the product to show on the shop.")
@@ -74,6 +82,19 @@ public class LocalizedProduct implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalizedProduct name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getExcerpt() {
@@ -163,6 +184,7 @@ public class LocalizedProduct implements Serializable {
     public String toString() {
         return "LocalizedProduct{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", excerpt='" + getExcerpt() + "'" +
             ", pictureUrl='" + getPictureUrl() + "'" +
             ", content='" + getContent() + "'" +

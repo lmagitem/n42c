@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-product-heading" jhiTranslate="n42cApp.product.home.createOrEditLabel">Create or edit a Product</h2>
 
@@ -12,12 +12,28 @@
         </div>
 
         <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.product.name"
+            for="field_name"
+            [ngbTooltip]="'n42cApp.product.help.name' | translate"
+            >Name</label
+          >
+          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label jhiTranslate="n42cApp.product.authors" for="field_authors">Authors</label>
           <select class="form-control" id="field_authors" multiple name="authors" formControlName="authors">
             <option
               [ngValue]="getSelected(editForm.get('authors')!.value, appUserOption)"
               *ngFor="let appUserOption of appusers; trackBy: trackById"
-              >{{ appUserOption.id }}</option
+              >{{ appUserOption.displayedName }}</option
             >
           </select>
         </div>
@@ -29,7 +45,7 @@
             <option
               [ngValue]="shopOption.id === editForm.get('shop')!.value?.id ? editForm.get('shop')!.value : shopOption"
               *ngFor="let shopOption of shops; trackBy: trackById"
-              >{{ shopOption.id }}</option
+              >{{ shopOption.name }}</option
             >
           </select>
         </div>

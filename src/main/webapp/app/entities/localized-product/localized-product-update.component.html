@@ -16,6 +16,22 @@
         <div class="form-group">
           <label
             class="form-control-label"
+            jhiTranslate="n42cApp.localizedProduct.name"
+            for="field_name"
+            [ngbTooltip]="'n42cApp.localizedProduct.help.name' | translate"
+            >Name</label
+          >
+          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
             jhiTranslate="n42cApp.localizedProduct.excerpt"
             for="field_excerpt"
             [ngbTooltip]="'n42cApp.localizedProduct.help.excerpt' | translate"
@@ -102,7 +118,7 @@
             <option
               [ngValue]="productOption.id === editForm.get('product')!.value?.id ? editForm.get('product')!.value : productOption"
               *ngFor="let productOption of products; trackBy: trackById"
-              >{{ productOption.id }}</option
+              >{{ productOption.name }}</option
             >
           </select>
         </div>

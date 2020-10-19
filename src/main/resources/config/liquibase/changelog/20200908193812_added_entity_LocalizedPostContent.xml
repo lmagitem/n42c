@@ -15,6 +15,9 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="title" type="varchar(255)" remarks="This post&apos;s localized title.">
+                <constraints nullable="false" />
+            </column>
             <column name="excerpt" type="${clobType}" remarks="An excerpt of the post to show on the blog page.">
                 <constraints nullable="true" />
             </column>
@@ -50,6 +53,7 @@
                   separator=";"
                   tableName="localized_post_content">
             <column name="id" type="numeric"/>
+            <column name="title" type="string"/>
             <column name="excerpt" type="clob"/>
             <column name="content" type="clob"/>
             <column name="language" type="string"/>

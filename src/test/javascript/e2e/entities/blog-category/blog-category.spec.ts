@@ -43,7 +43,9 @@ describe('BlogCategory e2e test', () => {
 
     await blogCategoryComponentsPage.clickOnCreateButton();
 
-    await promise.all([blogCategoryUpdatePage.parentCategorySelectLastOption()]);
+    await promise.all([blogCategoryUpdatePage.setNameInput('name'), blogCategoryUpdatePage.parentCategorySelectLastOption()]);
+
+    expect(await blogCategoryUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
     await blogCategoryUpdatePage.save();
     expect(await blogCategoryUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

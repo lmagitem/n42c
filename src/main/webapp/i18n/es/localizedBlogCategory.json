@@ -20,7 +20,7 @@
       "language": "Language",
       "category": "Category",
       "help": {
-        "name": "This category's name.",
+        "name": "This category's localized name.",
         "language": "This category's language."
       }
     }

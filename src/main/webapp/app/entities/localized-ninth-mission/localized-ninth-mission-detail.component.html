@@ -23,7 +23,9 @@
         <dt><span jhiTranslate="n42cApp.localizedNinthMission.mission">Mission</span></dt>
         <dd>
           <div *ngIf="localizedNinthMission.mission">
-            <a [routerLink]="['/ninth-mission', localizedNinthMission.mission?.id, 'view']">{{ localizedNinthMission.mission?.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-mission', localizedNinthMission.mission?.id, 'view']">{{
+              localizedNinthMission.mission?.id
+            }}</a>
           </div>
         </dd>
       </dl>
@@ -32,7 +34,11 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/localized-ninth-mission', localizedNinthMission.id, 'edit']" class="btn btn-primary">
+      <button
+        type="button"
+        [routerLink]="['/entities', 'localized-ninth-mission', localizedNinthMission.id, 'edit']"
+        class="btn btn-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

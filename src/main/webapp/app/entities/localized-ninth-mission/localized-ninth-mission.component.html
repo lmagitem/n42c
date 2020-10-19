@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-ninth-mission"
-      [routerLink]="['/localized-ninth-mission/new']"
+      [routerLink]="['/entities/localized-ninth-mission/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedNinthMission.home.createLabel">
@@ -37,21 +37,23 @@
       <tbody>
         <tr *ngFor="let localizedNinthMission of localizedNinthMissions; trackBy: trackId">
           <td>
-            <a [routerLink]="['/localized-ninth-mission', localizedNinthMission.id, 'view']">{{ localizedNinthMission.id }}</a>
+            <a [routerLink]="['/entities', 'localized-ninth-mission', localizedNinthMission.id, 'view']">{{ localizedNinthMission.id }}</a>
           </td>
           <td>{{ localizedNinthMission.name }}</td>
           <td>{{ localizedNinthMission.briefing }}</td>
           <td jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthMission.language }}">{{ localizedNinthMission.language }}</td>
           <td>
             <div *ngIf="localizedNinthMission.mission">
-              <a [routerLink]="['/ninth-mission', localizedNinthMission.mission?.id, 'view']">{{ localizedNinthMission.mission?.id }}</a>
+              <a [routerLink]="['/entities', 'ninth-mission', localizedNinthMission.mission?.id, 'view']">{{
+                localizedNinthMission.mission?.id
+              }}</a>
             </div>
           </td>
           <td class="text-right">
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-mission', localizedNinthMission.id, 'view']"
+                [routerLink]="['/entities', 'localized-ninth-mission', localizedNinthMission.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -60,7 +62,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-mission', localizedNinthMission.id, 'edit']"
+                [routerLink]="['/entities', 'localized-ninth-mission', localizedNinthMission.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

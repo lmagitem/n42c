@@ -101,6 +101,7 @@ class LocalizedPostContentGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
+                , "title":"SAMPLE_TEXT"
                 , "excerpt":null
                 , "content":null
                 , "language":"EN"

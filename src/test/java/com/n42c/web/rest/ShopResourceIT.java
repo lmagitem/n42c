@@ -31,6 +31,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ShopResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private ShopRepository shopRepository;
 
@@ -49,7 +52,8 @@ public class ShopResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Shop createEntity(EntityManager em) {
-        Shop shop = new Shop();
+        Shop shop = new Shop()
+            .name(DEFAULT_NAME);
         return shop;
     }
     /**
@@ -59,7 +63,8 @@ public class ShopResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Shop createUpdatedEntity(EntityManager em) {
-        Shop shop = new Shop();
+        Shop shop = new Shop()
+            .name(UPDATED_NAME);
         return shop;
     }
 
@@ -82,6 +87,7 @@ public class ShopResourceIT {
         List<Shop> shopList = shopRepository.findAll();
         assertThat(shopList).hasSize(databaseSizeBeforeCreate + 1);
         Shop testShop = shopList.get(shopList.size() - 1);
+        assertThat(testShop.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -106,6 +112,25 @@ public class ShopResourceIT {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = shopRepository.findAll().size();
+        // set the field null
+        shop.setName(null);
+
+        // Create the Shop, which fails.
+
+
+        restShopMockMvc.perform(post("/api/shops").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(shop)))
+            .andExpect(status().isBadRequest());
+
+        List<Shop> shopList = shopRepository.findAll();
+        assertThat(shopList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllShops() throws Exception {
         // Initialize the database
         shopRepository.saveAndFlush(shop);
@@ -114,7 +139,8 @@ public class ShopResourceIT {
         restShopMockMvc.perform(get("/api/shops?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(shop.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(shop.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -127,7 +153,8 @@ public class ShopResourceIT {
         restShopMockMvc.perform(get("/api/shops/{id}", shop.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(shop.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(shop.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
     @Test
     @Transactional
@@ -149,6 +176,8 @@ public class ShopResourceIT {
         Shop updatedShop = shopRepository.findById(shop.getId()).get();
         // Disconnect from session so that the updates on updatedShop are not directly saved in db
         em.detach(updatedShop);
+        updatedShop
+            .name(UPDATED_NAME);
 
         restShopMockMvc.perform(put("/api/shops").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -159,6 +188,7 @@ public class ShopResourceIT {
         List<Shop> shopList = shopRepository.findAll();
         assertThat(shopList).hasSize(databaseSizeBeforeUpdate);
         Shop testShop = shopList.get(shopList.size() - 1);
+        assertThat(testShop.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

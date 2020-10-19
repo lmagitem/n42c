@@ -2,6 +2,14 @@
   "name": "LocalizedPostContent",
   "fields": [
     {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "This post's localized title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "excerpt",
       "fieldType": "byte[]",
       "javadoc": "An excerpt of the post to show on the blog page.",
@@ -32,7 +40,7 @@
       "otherEntityName": "blogPost",
       "otherEntityRelationshipName": "localizations",
       "relationshipName": "post",
-      "otherEntityField": "id"
+      "otherEntityField": "title"
     }
   ],
   "changelogDate": "20200908193812",

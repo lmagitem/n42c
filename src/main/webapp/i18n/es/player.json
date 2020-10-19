@@ -16,12 +16,16 @@
       "detail": {
         "title": "Player"
       },
+      "name": "Name",
       "appUser": "App User",
       "lists": "Lists",
       "collection": "Collection",
       "stratagemGroups": "Stratagem Groups",
       "authoredCampaigns": "Authored Campaigns",
-      "campaigns": "Campaigns"
+      "campaigns": "Campaigns",
+      "help": {
+        "name": "This player's name."
+      }
     }
   }
 }

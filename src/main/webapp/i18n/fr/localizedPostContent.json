@@ -16,14 +16,16 @@
       "detail": {
         "title": "Localized Post Content"
       },
+      "title": "Title",
       "excerpt": "Excerpt",
       "content": "Content",
       "language": "Language",
       "post": "Post",
       "help": {
+        "title": "This post's localized title.",
         "excerpt": "An excerpt of the post to show on the blog page.",
         "content": "The content of the post.",
-        "language": "This post&#39;s language."
+        "language": "This post's language."
       }
     }
   }

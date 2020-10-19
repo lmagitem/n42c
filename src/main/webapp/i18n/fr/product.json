@@ -16,9 +16,13 @@
       "detail": {
         "title": "Product"
       },
+      "name": "Name",
       "localizations": "Localizations",
       "authors": "Authors",
-      "shop": "Shop"
+      "shop": "Shop",
+      "help": {
+        "name": "This product's name"
+      }
     }
   }
 }

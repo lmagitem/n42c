@@ -27,14 +27,14 @@
       "experiences": "Experiences",
       "profilePart": "Profile Part",
       "help": {
-        "title": "This item&#39;s title.",
-        "subTitle": "This item&#39;s subtitle",
-        "start": "This item&#39;s beginning date.",
-        "end": "This item&#39;s end date.",
-        "locationName": "This item&#39;s location name.",
-        "locationLat": "This item&#39;s location latitude.",
-        "locationLong": "This item&#39;s location longitude.",
-        "content": "This item&#39;s content."
+        "title": "This item's title.",
+        "subTitle": "This item's subtitle",
+        "start": "This item's beginning date.",
+        "end": "This item's end date.",
+        "locationName": "This item's location name.",
+        "locationLat": "This item's location latitude.",
+        "locationLong": "This item's location longitude.",
+        "content": "This item's content."
       }
     }
   }

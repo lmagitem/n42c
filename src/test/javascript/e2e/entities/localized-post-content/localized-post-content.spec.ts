@@ -48,12 +48,14 @@ describe('LocalizedPostContent e2e test', () => {
     await localizedPostContentComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      localizedPostContentUpdatePage.setTitleInput('title'),
       localizedPostContentUpdatePage.setExcerptInput('excerpt'),
       localizedPostContentUpdatePage.setContentInput('content'),
       localizedPostContentUpdatePage.languageSelectLastOption(),
       localizedPostContentUpdatePage.postSelectLastOption(),
     ]);
 
+    expect(await localizedPostContentUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
     expect(await localizedPostContentUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
     expect(await localizedPostContentUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
 

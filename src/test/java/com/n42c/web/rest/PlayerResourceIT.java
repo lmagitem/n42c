@@ -31,6 +31,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class PlayerResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     @Autowired
     private PlayerRepository playerRepository;
 
@@ -49,7 +52,8 @@ public class PlayerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Player createEntity(EntityManager em) {
-        Player player = new Player();
+        Player player = new Player()
+            .name(DEFAULT_NAME);
         return player;
     }
     /**
@@ -59,7 +63,8 @@ public class PlayerResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Player createUpdatedEntity(EntityManager em) {
-        Player player = new Player();
+        Player player = new Player()
+            .name(UPDATED_NAME);
         return player;
     }
 
@@ -82,6 +87,7 @@ public class PlayerResourceIT {
         List<Player> playerList = playerRepository.findAll();
         assertThat(playerList).hasSize(databaseSizeBeforeCreate + 1);
         Player testPlayer = playerList.get(playerList.size() - 1);
+        assertThat(testPlayer.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -106,6 +112,25 @@ public class PlayerResourceIT {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = playerRepository.findAll().size();
+        // set the field null
+        player.setName(null);
+
+        // Create the Player, which fails.
+
+
+        restPlayerMockMvc.perform(post("/api/players").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(player)))
+            .andExpect(status().isBadRequest());
+
+        List<Player> playerList = playerRepository.findAll();
+        assertThat(playerList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPlayers() throws Exception {
         // Initialize the database
         playerRepository.saveAndFlush(player);
@@ -114,7 +139,8 @@ public class PlayerResourceIT {
         restPlayerMockMvc.perform(get("/api/players?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
     
     @Test
@@ -127,7 +153,8 @@ public class PlayerResourceIT {
         restPlayerMockMvc.perform(get("/api/players/{id}", player.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(player.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(player.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
     @Test
     @Transactional
@@ -149,6 +176,8 @@ public class PlayerResourceIT {
         Player updatedPlayer = playerRepository.findById(player.getId()).get();
         // Disconnect from session so that the updates on updatedPlayer are not directly saved in db
         em.detach(updatedPlayer);
+        updatedPlayer
+            .name(UPDATED_NAME);
 
         restPlayerMockMvc.perform(put("/api/players").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -159,6 +188,7 @@ public class PlayerResourceIT {
         List<Player> playerList = playerRepository.findAll();
         assertThat(playerList).hasSize(databaseSizeBeforeUpdate);
         Player testPlayer = playerList.get(playerList.size() - 1);
+        assertThat(testPlayer.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

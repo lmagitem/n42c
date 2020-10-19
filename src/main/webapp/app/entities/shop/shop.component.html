@@ -2,7 +2,7 @@
   <h2 id="page-heading">
     <span jhiTranslate="n42cApp.shop.home.title">Shops</span>
 
-    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-shop" [routerLink]="['/shop', 'new']">
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-shop" [routerLink]="['/entities/shop/new']">
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.shop.home.createLabel">
         Create a new Shop
@@ -23,22 +23,24 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.shop.name">Name</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let shop of shops; trackBy: trackId">
           <td>
-            <a [routerLink]="['/shop', shop.id, 'view']">{{ shop.id }}</a>
+            <a [routerLink]="['/entities', 'shop', shop.id, 'view']">{{ shop.id }}</a>
           </td>
+          <td>{{ shop.name }}</td>
           <td class="text-right">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/shop', shop.id, 'view']" class="btn btn-info btn-sm">
+              <button type="submit" [routerLink]="['/entities', 'shop', shop.id, 'view']" class="btn btn-info btn-sm">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/shop', shop.id, 'edit']" class="btn btn-primary btn-sm">
+              <button type="submit" [routerLink]="['/entities', 'shop', shop.id, 'edit']" class="btn btn-primary btn-sm">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

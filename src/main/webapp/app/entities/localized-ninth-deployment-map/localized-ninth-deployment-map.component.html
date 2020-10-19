@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-localized-ninth-deployment-map"
-      [routerLink]="['/localized-ninth-deployment-map', 'new']"
+      [routerLink]="['/entities', 'localized-ninth-deployment-map', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.localizedNinthDeploymentMap.home.createLabel">
@@ -37,7 +37,7 @@
       <tbody>
         <tr *ngFor="let localizedNinthDeploymentMap of localizedNinthDeploymentMaps; trackBy: trackId">
           <td>
-            <a [routerLink]="['/localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'view']">{{
+            <a [routerLink]="['/entities', 'localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'view']">{{
               localizedNinthDeploymentMap.id
             }}</a>
           </td>
@@ -48,7 +48,7 @@
           </td>
           <td>
             <div *ngIf="localizedNinthDeploymentMap.deploymentMap">
-              <a [routerLink]="['/ninth-deployment-map', localizedNinthDeploymentMap.deploymentMap?.id, 'view']">{{
+              <a [routerLink]="['/entities', 'ninth-deployment-map', localizedNinthDeploymentMap.deploymentMap?.id, 'view']">{{
                 localizedNinthDeploymentMap.deploymentMap?.id
               }}</a>
             </div>
@@ -57,7 +57,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'view']"
+                [routerLink]="['/entities', 'localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -66,7 +66,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'edit']"
+                [routerLink]="['/entities', 'localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

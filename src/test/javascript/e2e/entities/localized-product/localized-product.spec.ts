@@ -44,6 +44,7 @@ describe('LocalizedProduct e2e test', () => {
     await localizedProductComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      localizedProductUpdatePage.setNameInput('name'),
       localizedProductUpdatePage.setExcerptInput('excerpt'),
       localizedProductUpdatePage.setPictureUrlInput('pictureUrl'),
       localizedProductUpdatePage.setContentInput('content'),
@@ -51,6 +52,7 @@ describe('LocalizedProduct e2e test', () => {
       localizedProductUpdatePage.productSelectLastOption(),
     ]);
 
+    expect(await localizedProductUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await localizedProductUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
     expect(await localizedProductUpdatePage.getPictureUrlInput()).to.eq(
       'pictureUrl',

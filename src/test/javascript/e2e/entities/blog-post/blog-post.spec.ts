@@ -41,6 +41,7 @@ describe('BlogPost e2e test', () => {
     await blogPostComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      blogPostUpdatePage.setTitleInput('title'),
       blogPostUpdatePage.setPublishedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       blogPostUpdatePage.setModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
       // blogPostUpdatePage.authorsSelectLastOption(),
@@ -48,6 +49,7 @@ describe('BlogPost e2e test', () => {
       blogPostUpdatePage.blogSelectLastOption(),
     ]);
 
+    expect(await blogPostUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
     expect(await blogPostUpdatePage.getPublishedInput()).to.contain(
       '2001-01-01T02:30',
       'Expected published value to be equals to 2000-12-31'

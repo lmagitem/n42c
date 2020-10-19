@@ -101,6 +101,7 @@ class LocalizedProductGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
+                , "name":"SAMPLE_TEXT"
                 , "excerpt":"SAMPLE_TEXT"
                 , "pictureUrl":"SAMPLE_TEXT"
                 , "content":null

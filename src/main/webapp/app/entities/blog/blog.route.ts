@@ -40,6 +40,7 @@ export const blogRoute: Routes = [
     component: BlogComponent,
     data: {
       authorities: [Authority.USER],
+      defaultSort: 'id,asc',
       pageTitle: 'n42cApp.blog.home.title',
     },
     canActivate: [UserRouteAccessService],

@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-app-user"
-      [routerLink]="['/entities', 'app-user', 'new']"
+      [routerLink]="['/entities/app-user/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.appUser.home.createLabel">
@@ -25,16 +25,28 @@
   <div class="table-responsive" id="entities" *ngIf="appUsers && appUsers.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.userName">User Name</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.displayedName">Displayed Name</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.admin">Admin</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.shopRights">Shop Rights</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.blogRights">Blog Rights</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.profileRights">Profile Rights</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.scriptoriumRights">Scriptorium Rights</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.appUser.user">User</span></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="userName">
+            <span jhiTranslate="n42cApp.appUser.userName">User Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="displayedName">
+            <span jhiTranslate="n42cApp.appUser.displayedName">Displayed Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="admin"><span jhiTranslate="n42cApp.appUser.admin">Admin</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="shopRights">
+            <span jhiTranslate="n42cApp.appUser.shopRights">Shop Rights</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="blogRights">
+            <span jhiTranslate="n42cApp.appUser.blogRights">Blog Rights</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profileRights">
+            <span jhiTranslate="n42cApp.appUser.profileRights">Profile Rights</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="scriptoriumRights">
+            <span jhiTranslate="n42cApp.appUser.scriptoriumRights">Scriptorium Rights</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.login"><span jhiTranslate="n42cApp.appUser.user">User</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"><span jhiTranslate="n42cApp.appUser.givenFriendships">Given Friendships</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.appUser.askedFriendRequests">Asked Friend Requests</span></th>
           <th scope="col"></th>
@@ -53,7 +65,7 @@
           <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
           <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
           <td>
-            {{ appUser.user?.id }}
+            {{ appUser.user?.login }}
           </td>
           <td>
             <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
@@ -92,5 +104,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="appUsers && appUsers.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

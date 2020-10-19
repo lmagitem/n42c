@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LocalizedProductService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new LocalizedProduct(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', Language.EN);
+      elemDefault = new LocalizedProduct(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', Language.EN);
     });
 
     describe('Service methods', () => {
@@ -55,6 +55,7 @@ describe('Service Tests', () => {
       it('should update a LocalizedProduct', () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
             excerpt: 'BBBBBB',
             pictureUrl: 'BBBBBB',
             content: 'BBBBBB',
@@ -75,6 +76,7 @@ describe('Service Tests', () => {
       it('should return a list of LocalizedProduct', () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
             excerpt: 'BBBBBB',
             pictureUrl: 'BBBBBB',
             content: 'BBBBBB',

@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-blog-category"
-      [routerLink]="['/entities', 'blog-category', 'new']"
+      [routerLink]="['/entities/blog-category/new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.blogCategory.home.createLabel">
@@ -27,6 +27,7 @@
       <thead>
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.blogCategory.name">Name</span></th>
           <th scope="col"><span jhiTranslate="n42cApp.blogCategory.parentCategory">Parent Category</span></th>
           <th scope="col"></th>
         </tr>
@@ -36,10 +37,11 @@
           <td>
             <a [routerLink]="['/entities', 'blog-category', blogCategory.id, 'view']">{{ blogCategory.id }}</a>
           </td>
+          <td>{{ blogCategory.name }}</td>
           <td>
             <div *ngIf="blogCategory.parentCategory">
               <a [routerLink]="['/entities', 'blog-category', blogCategory.parentCategory?.id, 'view']">{{
-                blogCategory.parentCategory?.id
+                blogCategory.parentCategory?.name
               }}</a>
             </div>
           </td>

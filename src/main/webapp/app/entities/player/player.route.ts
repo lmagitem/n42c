@@ -40,6 +40,7 @@ export const playerRoute: Routes = [
     component: PlayerComponent,
     data: {
       authorities: [Authority.USER],
+      defaultSort: 'id,asc',
       pageTitle: 'n42cApp.player.home.title',
     },
     canActivate: [UserRouteAccessService],

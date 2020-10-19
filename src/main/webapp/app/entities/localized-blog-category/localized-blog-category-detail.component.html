@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <div *ngIf="localizedBlogCategory">
       <h2><span jhiTranslate="n42cApp.localizedBlogCategory.detail.title">Localized Blog Category</span> {{ localizedBlogCategory.id }}</h2>
 
@@ -30,7 +30,7 @@
         <dd>
           <div *ngIf="localizedBlogCategory.category">
             <a [routerLink]="['/entities', 'blog-category', localizedBlogCategory.category?.id, 'view']">{{
-              localizedBlogCategory.category?.id
+              localizedBlogCategory.category?.name
             }}</a>
           </div>
         </dd>

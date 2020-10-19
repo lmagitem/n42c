@@ -33,6 +33,9 @@ import com.n42c.domain.enumeration.Language;
 @WithMockUser
 public class LocalizedProductResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     private static final String DEFAULT_EXCERPT = "AAAAAAAAAA";
     private static final String UPDATED_EXCERPT = "BBBBBBBBBB";
 
@@ -64,6 +67,7 @@ public class LocalizedProductResourceIT {
      */
     public static LocalizedProduct createEntity(EntityManager em) {
         LocalizedProduct localizedProduct = new LocalizedProduct()
+            .name(DEFAULT_NAME)
             .excerpt(DEFAULT_EXCERPT)
             .pictureUrl(DEFAULT_PICTURE_URL)
             .content(DEFAULT_CONTENT)
@@ -78,6 +82,7 @@ public class LocalizedProductResourceIT {
      */
     public static LocalizedProduct createUpdatedEntity(EntityManager em) {
         LocalizedProduct localizedProduct = new LocalizedProduct()
+            .name(UPDATED_NAME)
             .excerpt(UPDATED_EXCERPT)
             .pictureUrl(UPDATED_PICTURE_URL)
             .content(UPDATED_CONTENT)
@@ -104,6 +109,7 @@ public class LocalizedProductResourceIT {
         List<LocalizedProduct> localizedProductList = localizedProductRepository.findAll();
         assertThat(localizedProductList).hasSize(databaseSizeBeforeCreate + 1);
         LocalizedProduct testLocalizedProduct = localizedProductList.get(localizedProductList.size() - 1);
+        assertThat(testLocalizedProduct.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLocalizedProduct.getExcerpt()).isEqualTo(DEFAULT_EXCERPT);
         assertThat(testLocalizedProduct.getPictureUrl()).isEqualTo(DEFAULT_PICTURE_URL);
         assertThat(testLocalizedProduct.getContent()).isEqualTo(DEFAULT_CONTENT);
@@ -129,6 +135,25 @@ public class LocalizedProductResourceIT {
         assertThat(localizedProductList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedProductRepository.findAll().size();
+        // set the field null
+        localizedProduct.setName(null);
+
+        // Create the LocalizedProduct, which fails.
+
+
+        restLocalizedProductMockMvc.perform(post("/api/localized-products").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedProduct)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedProduct> localizedProductList = localizedProductRepository.findAll();
+        assertThat(localizedProductList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -160,6 +185,7 @@ public class LocalizedProductResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedProduct.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT)))
             .andExpect(jsonPath("$.[*].pictureUrl").value(hasItem(DEFAULT_PICTURE_URL)))
             .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
@@ -177,6 +203,7 @@ public class LocalizedProductResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedProduct.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT))
             .andExpect(jsonPath("$.pictureUrl").value(DEFAULT_PICTURE_URL))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
@@ -203,6 +230,7 @@ public class LocalizedProductResourceIT {
         // Disconnect from session so that the updates on updatedLocalizedProduct are not directly saved in db
         em.detach(updatedLocalizedProduct);
         updatedLocalizedProduct
+            .name(UPDATED_NAME)
             .excerpt(UPDATED_EXCERPT)
             .pictureUrl(UPDATED_PICTURE_URL)
             .content(UPDATED_CONTENT)
@@ -217,6 +245,7 @@ public class LocalizedProductResourceIT {
         List<LocalizedProduct> localizedProductList = localizedProductRepository.findAll();
         assertThat(localizedProductList).hasSize(databaseSizeBeforeUpdate);
         LocalizedProduct testLocalizedProduct = localizedProductList.get(localizedProductList.size() - 1);
+        assertThat(testLocalizedProduct.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLocalizedProduct.getExcerpt()).isEqualTo(UPDATED_EXCERPT);
         assertThat(testLocalizedProduct.getPictureUrl()).isEqualTo(UPDATED_PICTURE_URL);
         assertThat(testLocalizedProduct.getContent()).isEqualTo(UPDATED_CONTENT);

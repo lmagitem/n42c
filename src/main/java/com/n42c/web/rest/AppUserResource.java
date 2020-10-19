@@ -5,10 +5,16 @@ import com.n42c.repository.AppUserRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -85,21 +91,29 @@ public class AppUserResource {
     /**
      * {@code GET  /app-users} : get all the appUsers.
      *
+     * @param pageable the pagination information.
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of appUsers in body.
      */
     @GetMapping("/app-users")
-    public List<AppUser> getAllAppUsers(@RequestParam(required = false) String filter,@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<AppUser>> getAllAppUsers(Pageable pageable, @RequestParam(required = false) String filter, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         if ("player-is-null".equals(filter)) {
             log.debug("REST request to get all AppUsers where player is null");
-            return StreamSupport
+            return new ResponseEntity<>(StreamSupport
                 .stream(appUserRepository.findAll().spliterator(), false)
                 .filter(appUser -> appUser.getPlayer() == null)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()), HttpStatus.OK);
         }
-        log.debug("REST request to get all AppUsers");
-        return appUserRepository.findAllWithEagerRelationships();
+        log.debug("REST request to get a page of AppUsers");
+        Page<AppUser> page;
+        if (eagerload) {
+            page = appUserRepository.findAllWithEagerRelationships(pageable);
+        } else {
+            page = appUserRepository.findAll(pageable);
+        }
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

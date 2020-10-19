@@ -22,6 +22,7 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    title: [null, [Validators.required]],
     excerpt: [],
     content: [null, [Validators.required]],
     language: [null, [Validators.required]],
@@ -48,6 +49,7 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
   updateForm(localizedPostContent: ILocalizedPostContent): void {
     this.editForm.patchValue({
       id: localizedPostContent.id,
+      title: localizedPostContent.title,
       excerpt: localizedPostContent.excerpt,
       content: localizedPostContent.content,
       language: localizedPostContent.language,
@@ -89,6 +91,7 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
     return {
       ...new LocalizedPostContent(),
       id: this.editForm.get(['id'])!.value,
+      title: this.editForm.get(['title'])!.value,
       excerpt: this.editForm.get(['excerpt'])!.value,
       content: this.editForm.get(['content'])!.value,
       language: this.editForm.get(['language'])!.value,

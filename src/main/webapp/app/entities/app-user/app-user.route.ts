@@ -40,6 +40,7 @@ export const appUserRoute: Routes = [
     component: AppUserComponent,
     data: {
       authorities: [Authority.USER],
+      defaultSort: 'id,asc',
       pageTitle: 'n42cApp.appUser.home.title',
     },
     canActivate: [UserRouteAccessService],

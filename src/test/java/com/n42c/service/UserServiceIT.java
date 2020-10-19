@@ -38,6 +38,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 public class UserServiceIT {
 
+    private static final String DEFAULT_ID = "u1ed";
+
     private static final String DEFAULT_LOGIN = "johndoe";
 
     private static final String DEFAULT_EMAIL = "johndoe@localhost";
@@ -63,6 +65,7 @@ public class UserServiceIT {
     @BeforeEach
     public void init() {
         user = new User();
+        user.setId(DEFAULT_ID);
         user.setLogin(DEFAULT_LOGIN);
         user.setActivated(true);
         user.setEmail(DEFAULT_EMAIL);
@@ -72,7 +75,8 @@ public class UserServiceIT {
         user.setLangKey(DEFAULT_LANGKEY);
 
         userDetails = new HashMap<>();
-        userDetails.put("sub", DEFAULT_LOGIN);
+        userDetails.put("sub", DEFAULT_ID);
+        userDetails.put("username", DEFAULT_LOGIN);
         userDetails.put("email", DEFAULT_EMAIL);
         userDetails.put("given_name", DEFAULT_FIRSTNAME);
         userDetails.put("family_name", DEFAULT_LASTNAME);
@@ -101,8 +105,6 @@ public class UserServiceIT {
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
         assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
-        assertThat(userDTO.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-        assertThat(userDTO.getLastName()).isEqualTo(DEFAULT_LASTNAME);
         assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(userDTO.isActivated()).isTrue();
         assertThat(userDTO.getLangKey()).isEqualTo(Constants.DEFAULT_LANGUAGE);
@@ -118,7 +120,7 @@ public class UserServiceIT {
         OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
-        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
     }
 
     @Test

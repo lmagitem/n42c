@@ -3,6 +3,7 @@ import { Language } from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedProduct {
   id?: number;
+  name?: string;
   excerpt?: string;
   pictureUrl?: string;
   content?: any;
@@ -13,6 +14,7 @@ export interface ILocalizedProduct {
 export class LocalizedProduct implements ILocalizedProduct {
   constructor(
     public id?: number,
+    public name?: string,
     public excerpt?: string,
     public pictureUrl?: string,
     public content?: any,

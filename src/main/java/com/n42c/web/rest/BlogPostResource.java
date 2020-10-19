@@ -2,7 +2,6 @@ package com.n42c.web.rest;
 
 import com.n42c.domain.BlogPost;
 import com.n42c.repository.BlogPostRepository;
-import com.n42c.security.SecurityUtils;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
 import com.n42c.web.rest.utils.RestServiceUtils;
@@ -19,6 +18,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -100,28 +102,39 @@ public class BlogPostResource {
     public ResponseEntity<List<BlogPost>> getAllBlogPosts(Pageable pageable) {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable));
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, null));
 
         Authentication authentication = context.getAuthentication();
         if (authentication == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable));
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, null));
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         if (authorities == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable));
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
 
-        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))
-        ) {
+        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             log.debug("REST request to get all Blogs - as Admin");
             return RestServiceUtils.returnPagedListWithHeaders(blogPostRepository.findAll(pageable));
         } else {
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable));
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
         }
     }
 
-    private Page<BlogPost> getPostsByCurrentUserOrWriter(Pageable pageable) {
-        log.debug("REST request to get all Blog Posts - as User");
-        return blogPostRepository.findByUserIsCurrentUserOrWriter(pageable);
+    /**
+     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<BlogPost> getPostsByCurrentUserOrWriter(Pageable pageable, Object principal) {
+        if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get all Blog Posts - as User (with UserDetails)");
+                return blogPostRepository.getAllByIsCurrentSpringUserOrWriter(pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get all Blog Posts - as User (with Oidc token)");
+                return blogPostRepository.getAllByIsCurrentOidcUserOrWriter(pageable);
+            }
+        }
+        log.debug("REST request to get all Blog Posts - as Anonymous");
+        return blogPostRepository.getAllByIsWriter(pageable);
     }
 
     /**

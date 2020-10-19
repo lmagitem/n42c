@@ -2,10 +2,12 @@ package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -26,6 +28,14 @@ public class Player implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+
+    /**
+     * This player's name.
+     */
+    @NotNull
+    @ApiModelProperty(value = "This player's name.", required = true)
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -60,6 +70,19 @@ public class Player implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Player name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public AppUser getAppUser() {
@@ -222,6 +245,7 @@ public class Player implements Serializable {
     public String toString() {
         return "Player{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

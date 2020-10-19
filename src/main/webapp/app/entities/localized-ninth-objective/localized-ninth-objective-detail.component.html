@@ -25,7 +25,7 @@
         <dt><span jhiTranslate="n42cApp.localizedNinthObjective.objective">Objective</span></dt>
         <dd>
           <div *ngIf="localizedNinthObjective.objective">
-            <a [routerLink]="['/ninth-objective', localizedNinthObjective.objective?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'ninth-objective', localizedNinthObjective.objective?.id, 'view']">{{
               localizedNinthObjective.objective?.id
             }}</a>
           </div>
@@ -36,7 +36,11 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/localized-ninth-objective', localizedNinthObjective.id, 'edit']" class="btn btn-primary">
+      <button
+        type="button"
+        [routerLink]="['/entities', 'localized-ninth-objective', localizedNinthObjective.id, 'edit']"
+        class="btn btn-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

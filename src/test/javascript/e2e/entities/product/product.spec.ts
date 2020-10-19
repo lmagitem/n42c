@@ -41,9 +41,12 @@ describe('Product e2e test', () => {
     await productComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      productUpdatePage.setNameInput('name'),
       // productUpdatePage.authorsSelectLastOption(),
       productUpdatePage.shopSelectLastOption(),
     ]);
+
+    expect(await productUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
     await productUpdatePage.save();
     expect(await productUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

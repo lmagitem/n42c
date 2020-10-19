@@ -47,7 +47,7 @@
         <dt><span jhiTranslate="n42cApp.appUserProfile.user">User</span></dt>
         <dd>
           <div *ngIf="appUserProfile.user">
-            <a [routerLink]="['/app-user', appUserProfile.user?.id, 'view']">{{ appUserProfile.user?.id }}</a>
+            <a [routerLink]="['/entities', 'app-user', appUserProfile.user?.id, 'view']">{{ appUserProfile.user?.displayedName }}</a>
           </div>
         </dd>
       </dl>
@@ -56,7 +56,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/app-user-profile', appUserProfile.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities', 'app-user-profile', appUserProfile.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

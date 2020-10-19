@@ -5,14 +5,21 @@ import com.n42c.repository.PlayerRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +54,7 @@ public class PlayerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/players")
-    public ResponseEntity<Player> createPlayer(@RequestBody Player player) throws URISyntaxException {
+    public ResponseEntity<Player> createPlayer(@Valid @RequestBody Player player) throws URISyntaxException {
         log.debug("REST request to save Player : {}", player);
         if (player.getId() != null) {
             throw new BadRequestAlertException("A new player cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +75,7 @@ public class PlayerResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/players")
-    public ResponseEntity<Player> updatePlayer(@RequestBody Player player) throws URISyntaxException {
+    public ResponseEntity<Player> updatePlayer(@Valid @RequestBody Player player) throws URISyntaxException {
         log.debug("REST request to update Player : {}", player);
         if (player.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -82,12 +89,15 @@ public class PlayerResource {
     /**
      * {@code GET  /players} : get all the players.
      *
+     * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of players in body.
      */
     @GetMapping("/players")
-    public List<Player> getAllPlayers() {
-        log.debug("REST request to get all Players");
-        return playerRepository.findAll();
+    public ResponseEntity<List<Player>> getAllPlayers(Pageable pageable) {
+        log.debug("REST request to get a page of Players");
+        Page<Player> page = playerRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

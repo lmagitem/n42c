@@ -16,10 +16,14 @@
       "detail": {
         "title": "Blog Category"
       },
+      "name": "Name",
       "subcategories": "Subcategories",
       "localizations": "Localizations",
       "parentCategory": "Parent Category",
-      "posts": "Posts"
+      "posts": "Posts",
+      "help": {
+        "name": "This category's name."
+      }
     }
   }
 }

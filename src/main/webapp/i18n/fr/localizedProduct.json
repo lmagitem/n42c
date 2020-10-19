@@ -16,16 +16,18 @@
       "detail": {
         "title": "Localized Product"
       },
+      "name": "Name",
       "excerpt": "Excerpt",
       "pictureUrl": "Picture Url",
       "content": "Content",
       "language": "Language",
       "product": "Product",
       "help": {
+        "name": "This product's localized name",
         "excerpt": "An excerpt of the product to show on the shop.",
         "pictureUrl": "The url of a picture representing the item.",
         "content": "The text describing this product.",
-        "language": "This item&#39;s language."
+        "language": "This item's language."
       }
     }
   }

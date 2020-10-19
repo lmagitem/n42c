@@ -27,21 +27,21 @@
         <dt><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></dt>
         <dd>
           <span *ngFor="let authors of ninthCampaign.authors; let last = last">
-            <a [routerLink]="['/player', authors?.id, 'view']">{{ authors.id }}</a
+            <a [routerLink]="['/entities', 'player', authors?.id, 'view']">{{ authors.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthCampaign.participants">Participants</span></dt>
         <dd>
           <span *ngFor="let participants of ninthCampaign.participants; let last = last">
-            <a [routerLink]="['/player', participants?.id, 'view']">{{ participants.id }}</a
+            <a [routerLink]="['/entities', 'player', participants?.id, 'view']">{{ participants.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.ninthCampaign.campaignStratagems">Campaign Stratagems</span></dt>
         <dd>
           <span *ngFor="let campaignStratagems of ninthCampaign.campaignStratagems; let last = last">
-            <a [routerLink]="['/ninth-stratagem-group', campaignStratagems?.id, 'view']">{{ campaignStratagems.id }}</a
+            <a [routerLink]="['/entities', 'ninth-stratagem-group', campaignStratagems?.id, 'view']">{{ campaignStratagems.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
@@ -51,7 +51,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/ninth-campaign', ninthCampaign.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities', 'ninth-campaign', ninthCampaign.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

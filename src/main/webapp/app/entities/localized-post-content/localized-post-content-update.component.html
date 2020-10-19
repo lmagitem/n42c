@@ -16,6 +16,22 @@
         <div class="form-group">
           <label
             class="form-control-label"
+            jhiTranslate="n42cApp.localizedPostContent.title"
+            for="field_title"
+            [ngbTooltip]="'n42cApp.localizedPostContent.help.title' | translate"
+            >Title</label
+          >
+          <input type="text" class="form-control" name="title" id="field_title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
             jhiTranslate="n42cApp.localizedPostContent.excerpt"
             for="field_excerpt"
             [ngbTooltip]="'n42cApp.localizedPostContent.help.excerpt' | translate"
@@ -91,7 +107,7 @@
             <option
               [ngValue]="blogPostOption.id === editForm.get('post')!.value?.id ? editForm.get('post')!.value : blogPostOption"
               *ngFor="let blogPostOption of blogposts; trackBy: trackById"
-              >{{ blogPostOption.id }}</option
+              >{{ blogPostOption.title }}</option
             >
           </select>
         </div>

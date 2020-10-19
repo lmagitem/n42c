@@ -10,6 +10,7 @@ enum Language {
 // !                              Users                                  !
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** AppUsers of the app. */
+@paginate(pagination)
 entity AppUser {
     /** The user account's name. */
     userName String required unique
@@ -35,11 +36,19 @@ enum AppUserRights {
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** A shop to display on the website */
 entity Shop {
+    /** This shop's name */
+    name String required
 }
 /** An entry to display in the shop */
-entity Product {}
+@paginate(infinite-scroll)
+entity Product {
+    /** This product's name */
+    name String required
+}
 /** The Localized content of that product. */
 entity LocalizedProduct {
+    /** This product's localized name */
+    name String required
     /** An excerpt of the product to show on the shop. */
     excerpt String
     /** The url of a picture representing the item. */
@@ -53,13 +62,16 @@ entity LocalizedProduct {
 // !                               Blogs                                 !
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** A specific blog, owned by a user */
+@paginate(pagination)
 entity Blog {
     /** This blog's name. */
     name String required
 }
 /** Blog posts to show on the app. */
-@paginate(pagination)
+@paginate(infinite-scroll)
 entity BlogPost {
+    /** This post's title. */
+    title String required
     /** The date and time at which this post was published. */
 	published Instant required
     /** The last date and time at which this post was modified. */
@@ -67,6 +79,8 @@ entity BlogPost {
 }
 /** The content of a post, in a specific language. */
 entity LocalizedPostContent {
+    /** This post's localized title. */
+    title String required
     /** An excerpt of the post to show on the blog page. */
     excerpt TextBlob
     /** The content of the post. */
@@ -75,10 +89,13 @@ entity LocalizedPostContent {
     language Language required
 }
 /** Categories in which a blog post might be filled. */
-entity BlogCategory
+entity BlogCategory {
+    /** This category's name. */
+    name String required
+}
 /** The localization for this category */
 entity LocalizedBlogCategory {
-    /** This category's name. */
+    /** This category's localized name. */
     name String required
     /** This category's language. */
     language Language required
@@ -203,7 +220,10 @@ enum LevelOfMastery {
 // !                             Scriptorium                             !
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** Scriptorium's player. */
+@paginate(pagination)
 entity Player {
+    /** This player's name. */
+    name String required
 }
 
 entity NinthCampaign {
@@ -465,23 +485,23 @@ enum NinthGamePhase {
 
 relationship OneToOne {
     // General
-    AppUser to User,
+    AppUser{user(login)} to User,
     // 40k
-    Player to AppUser
+    Player{appUser(displayedName)} to AppUser{player(name)}
 }
 
 relationship OneToMany {
     // Shop
-	Shop{products} to Product{shop},
-    Product{localizations} to LocalizedProduct{product},
+	Shop{products(name)} to Product{shop(name)},
+    Product{localizations(name)} to LocalizedProduct{product(name)},
 	// Blog
-	AppUser{blogs} to Blog{author},
-	Blog{posts} to BlogPost{blog},
-    BlogPost{localizations} to LocalizedPostContent{post},
-    BlogCategory{subcategories} to BlogCategory{parentCategory},
-    BlogCategory{localizations} to LocalizedBlogCategory{category},
+	AppUser{blogs} to Blog{author(displayedName)},
+	Blog{posts(title)} to BlogPost{blog(name)},
+    BlogPost{localizations(title)} to LocalizedPostContent{post(title)},
+    BlogCategory{subcategories(name)} to BlogCategory{parentCategory(name)},
+    BlogCategory{localizations(name)} to LocalizedBlogCategory{category(name)},
     // Profile
-    AppUser{profiles} to AppUserProfile{user},
+    AppUser{profiles} to AppUserProfile{user(displayedName)},
     AppUserProfile{profileParts} to ProfilePart{profile},
     ProfilePart{simpleItems} to ProfilePartSimpleItem{profilePart},
     ProfilePart{preciseItems} to ProfilePartPreciseItem{profilePart},
@@ -512,13 +532,13 @@ relationship OneToMany {
 
 relationship ManyToMany {
 	// General
-    AppUser{givenFriendships} to AppUser{receivedFriendships},
-    AppUser{askedFriendRequests} to AppUser{pendingFriendRequests},
+    AppUser{givenFriendships(displayedName)} to AppUser{receivedFriendships(displayedName)},
+    AppUser{askedFriendRequests(displayedName)} to AppUser{pendingFriendRequests(displayedName)},
     // Shop
-	Product{authors} to AppUser{products},
+	Product{authors(displayedName)} to AppUser{products(name)},
     // Blog
-	BlogPost{authors} to AppUser{posts},
-    BlogPost{categories} to BlogCategory{posts},
+	BlogPost{authors(displayedName)} to AppUser{posts(title)},
+    BlogPost{categories(name)} to BlogCategory{posts(title)},
     // Profile
     ProfilePartSkill{linkedSkills} to ProfilePartLinkedExperience{linkedExperiences},
     // 40k

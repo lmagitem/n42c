@@ -1,5 +1,5 @@
-import {IBlogCategory} from 'app/shared/model/blog-category.model';
-import {Language} from 'app/shared/model/enumerations/language.model';
+import { IBlogCategory } from 'app/shared/model/blog-category.model';
+import { Language } from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedBlogCategory {
   id?: number;

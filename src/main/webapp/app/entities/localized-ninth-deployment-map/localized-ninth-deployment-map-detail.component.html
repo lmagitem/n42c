@@ -28,7 +28,7 @@
         <dt><span jhiTranslate="n42cApp.localizedNinthDeploymentMap.deploymentMap">Deployment Map</span></dt>
         <dd>
           <div *ngIf="localizedNinthDeploymentMap.deploymentMap">
-            <a [routerLink]="['/ninth-deployment-map', localizedNinthDeploymentMap.deploymentMap?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'ninth-deployment-map', localizedNinthDeploymentMap.deploymentMap?.id, 'view']">{{
               localizedNinthDeploymentMap.deploymentMap?.id
             }}</a>
           </div>
@@ -41,7 +41,7 @@
 
       <button
         type="button"
-        [routerLink]="['/localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'edit']"
+        [routerLink]="['/entities', 'localized-ninth-deployment-map', localizedNinthDeploymentMap.id, 'edit']"
         class="btn btn-primary"
       >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>

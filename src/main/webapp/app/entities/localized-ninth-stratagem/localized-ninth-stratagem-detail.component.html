@@ -33,7 +33,7 @@
         <dt><span jhiTranslate="n42cApp.localizedNinthStratagem.stratagem">Stratagem</span></dt>
         <dd>
           <div *ngIf="localizedNinthStratagem.stratagem">
-            <a [routerLink]="['/ninth-stratagem', localizedNinthStratagem.stratagem?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'ninth-stratagem', localizedNinthStratagem.stratagem?.id, 'view']">{{
               localizedNinthStratagem.stratagem?.id
             }}</a>
           </div>
@@ -44,7 +44,11 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/localized-ninth-stratagem', localizedNinthStratagem.id, 'edit']" class="btn btn-primary">
+      <button
+        type="button"
+        [routerLink]="['/entities', 'localized-ninth-stratagem', localizedNinthStratagem.id, 'edit']"
+        class="btn btn-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

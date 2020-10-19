@@ -69,7 +69,7 @@
       "otherEntityName": "user",
       "otherEntityRelationshipName": "appUser",
       "relationshipName": "user",
-      "otherEntityField": "id",
+      "otherEntityField": "login",
       "ownerSide": true
     },
     {
@@ -89,7 +89,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "receivedFriendships",
       "relationshipName": "givenFriendships",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": true
     },
     {
@@ -97,7 +97,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "pendingFriendRequests",
       "relationshipName": "askedFriendRequests",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": true
     },
     {
@@ -112,7 +112,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "givenFriendships",
       "relationshipName": "receivedFriendships",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": false
     },
     {
@@ -120,7 +120,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "askedFriendRequests",
       "relationshipName": "pendingFriendRequests",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": false
     },
     {
@@ -128,7 +128,7 @@
       "otherEntityName": "product",
       "otherEntityRelationshipName": "authors",
       "relationshipName": "products",
-      "otherEntityField": "id",
+      "otherEntityField": "name",
       "ownerSide": false
     },
     {
@@ -136,7 +136,7 @@
       "otherEntityName": "blogPost",
       "otherEntityRelationshipName": "authors",
       "relationshipName": "posts",
-      "otherEntityField": "id",
+      "otherEntityField": "title",
       "ownerSide": false
     }
   ],
@@ -144,7 +144,7 @@
   "javadoc": "AppUsers of the app.",
   "entityTableName": "app_user",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "pagination",
   "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

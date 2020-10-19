@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-localized-blog-category-heading" jhiTranslate="n42cApp.localizedBlogCategory.home.createOrEditLabel">
         Create or edit a Localized Blog Category
@@ -78,7 +78,7 @@
                 blogCategoryOption.id === editForm.get('category')!.value?.id ? editForm.get('category')!.value : blogCategoryOption
               "
               *ngFor="let blogCategoryOption of blogcategories; trackBy: trackById"
-              >{{ blogCategoryOption.id }}</option
+              >{{ blogCategoryOption.name }}</option
             >
           </select>
         </div>

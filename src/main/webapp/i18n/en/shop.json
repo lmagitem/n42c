@@ -16,7 +16,11 @@
       "detail": {
         "title": "Shop"
       },
-      "products": "Products"
+      "name": "Name",
+      "products": "Products",
+      "help": {
+        "name": "This shop's name"
+      }
     }
   }
 }

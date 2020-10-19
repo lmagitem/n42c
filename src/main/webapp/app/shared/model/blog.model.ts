@@ -1,5 +1,5 @@
-import {IBlogPost} from 'app/shared/model/blog-post.model';
-import {IAppUser} from 'app/shared/model/app-user.model';
+import { IBlogPost } from 'app/shared/model/blog-post.model';
+import { IAppUser } from 'app/shared/model/app-user.model';
 
 export interface IBlog {
   id?: number;

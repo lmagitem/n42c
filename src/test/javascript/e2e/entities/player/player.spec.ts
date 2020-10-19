@@ -40,7 +40,9 @@ describe('Player e2e test', () => {
 
     await playerComponentsPage.clickOnCreateButton();
 
-    await promise.all([playerUpdatePage.appUserSelectLastOption()]);
+    await promise.all([playerUpdatePage.setNameInput('name'), playerUpdatePage.appUserSelectLastOption()]);
+
+    expect(await playerUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
     await playerUpdatePage.save();
     expect(await playerUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

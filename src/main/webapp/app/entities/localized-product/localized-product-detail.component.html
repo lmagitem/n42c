@@ -9,6 +9,12 @@
 
       <dl class="row-md jh-entity-details">
         <dt>
+          <span jhiTranslate="n42cApp.localizedProduct.name" [ngbTooltip]="'n42cApp.localizedProduct.help.name' | translate">Name</span>
+        </dt>
+        <dd>
+          <span>{{ localizedProduct.name }}</span>
+        </dd>
+        <dt>
           <span jhiTranslate="n42cApp.localizedProduct.excerpt" [ngbTooltip]="'n42cApp.localizedProduct.help.excerpt' | translate"
             >Excerpt</span
           >
@@ -43,7 +49,7 @@
         <dt><span jhiTranslate="n42cApp.localizedProduct.product">Product</span></dt>
         <dd>
           <div *ngIf="localizedProduct.product">
-            <a [routerLink]="['/product', localizedProduct.product?.id, 'view']">{{ localizedProduct.product?.id }}</a>
+            <a [routerLink]="['/entities', 'product', localizedProduct.product?.id, 'view']">{{ localizedProduct.product?.name }}</a>
           </div>
         </dd>
       </dl>
@@ -52,7 +58,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/localized-product', localizedProduct.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities', 'localized-product', localizedProduct.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

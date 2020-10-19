@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <div *ngIf="appUser">
       <h2><span jhiTranslate="n42cApp.appUser.detail.title">App User</span> {{ appUser.id }}</h2>
 
@@ -54,19 +54,19 @@
         </dd>
         <dt><span jhiTranslate="n42cApp.appUser.user">User</span></dt>
         <dd>
-          {{ appUser.user?.id }}
+          {{ appUser.user?.login }}
         </dd>
         <dt><span jhiTranslate="n42cApp.appUser.givenFriendships">Given Friendships</span></dt>
         <dd>
           <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
-            <a [routerLink]="['/entities', 'app-user', givenFriendships?.id, 'view']">{{ givenFriendships.id }}</a
+            <a [routerLink]="['/entities', 'app-user', givenFriendships?.id, 'view']">{{ givenFriendships.displayedName }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span jhiTranslate="n42cApp.appUser.askedFriendRequests">Asked Friend Requests</span></dt>
         <dd>
           <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
-            <a [routerLink]="['/entities', 'app-user', askedFriendRequests?.id, 'view']">{{ askedFriendRequests.id }}</a
+            <a [routerLink]="['/entities', 'app-user', askedFriendRequests?.id, 'view']">{{ askedFriendRequests.displayedName }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>

@@ -37,7 +37,7 @@
       <tbody>
         <tr *ngFor="let ninthBattle of ninthBattles; trackBy: trackId">
           <td>
-            <a [routerLink]="['/ninth-battle', ninthBattle.id, 'view']">{{ ninthBattle.id }}</a>
+            <a [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'view']">{{ ninthBattle.id }}</a>
           </td>
           <td>{{ ninthBattle.name }}</td>
           <td>{{ ninthBattle.resolved }}</td>

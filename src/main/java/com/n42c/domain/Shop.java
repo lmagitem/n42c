@@ -1,10 +1,12 @@
 package com.n42c.domain;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -26,6 +28,14 @@ public class Shop implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    /**
+     * This shop's name
+     */
+    @NotNull
+    @ApiModelProperty(value = "This shop's name", required = true)
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @OneToMany(mappedBy = "shop")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Product> products = new HashSet<>();
@@ -37,6 +47,19 @@ public class Shop implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Shop name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Product> getProducts() {
@@ -86,6 +109,7 @@ public class Shop implements Serializable {
     public String toString() {
         return "Shop{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

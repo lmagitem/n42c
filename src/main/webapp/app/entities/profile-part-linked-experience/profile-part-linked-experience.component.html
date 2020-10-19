@@ -5,7 +5,7 @@
     <button
       id="jh-create-entity"
       class="btn btn-primary float-right jh-create-entity create-profile-part-linked-experience"
-      [routerLink]="['/profile-part-linked-experience', 'new']"
+      [routerLink]="['/entities', 'profile-part-linked-experience', 'new']"
     >
       <fa-icon icon="plus"></fa-icon>
       <span jhiTranslate="n42cApp.profilePartLinkedExperience.home.createLabel">
@@ -38,7 +38,7 @@
       <tbody>
         <tr *ngFor="let profilePartLinkedExperience of profilePartLinkedExperiences; trackBy: trackId">
           <td>
-            <a [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'view']">{{
+            <a [routerLink]="['/entities', 'profile-part-linked-experience', profilePartLinkedExperience.id, 'view']">{{
               profilePartLinkedExperience.id
             }}</a>
           </td>
@@ -48,7 +48,7 @@
           <td>{{ profilePartLinkedExperience.content }}</td>
           <td>
             <div *ngIf="profilePartLinkedExperience.linkedItem">
-              <a [routerLink]="['/profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']">{{
+              <a [routerLink]="['/entities', 'profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']">{{
                 profilePartLinkedExperience.linkedItem?.id
               }}</a>
             </div>
@@ -57,7 +57,7 @@
             <div class="btn-group">
               <button
                 type="submit"
-                [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'view']"
+                [routerLink]="['/entities', 'profile-part-linked-experience', profilePartLinkedExperience.id, 'view']"
                 class="btn btn-info btn-sm"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -66,7 +66,7 @@
 
               <button
                 type="submit"
-                [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'edit']"
+                [routerLink]="['/entities', 'profile-part-linked-experience', profilePartLinkedExperience.id, 'edit']"
                 class="btn btn-primary btn-sm"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>

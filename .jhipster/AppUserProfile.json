@@ -44,7 +44,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "profiles",
       "relationshipName": "user",
-      "otherEntityField": "id"
+      "otherEntityField": "displayedName"
     }
   ],
   "changelogDate": "20200703174407",

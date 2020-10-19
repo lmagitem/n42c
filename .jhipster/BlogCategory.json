@@ -1,6 +1,15 @@
 {
   "name": "BlogCategory",
-  "fields": [],
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This category's name.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
   "relationships": [
     {
       "relationshipType": "one-to-many",
@@ -19,14 +28,14 @@
       "otherEntityName": "blogCategory",
       "otherEntityRelationshipName": "subcategories",
       "relationshipName": "parentCategory",
-      "otherEntityField": "id"
+      "otherEntityField": "name"
     },
     {
       "relationshipType": "many-to-many",
       "otherEntityName": "blogPost",
       "otherEntityRelationshipName": "categories",
       "relationshipName": "posts",
-      "otherEntityField": "id",
+      "otherEntityField": "title",
       "ownerSide": false
     }
   ],

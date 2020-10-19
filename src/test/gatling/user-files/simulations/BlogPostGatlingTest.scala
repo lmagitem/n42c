@@ -101,6 +101,7 @@ class BlogPostGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
+                , "title":"SAMPLE_TEXT"
                 , "published":"2020-01-01T00:00:00.000Z"
                 , "modified":"2020-01-01T00:00:00.000Z"
                 }""")).asJson

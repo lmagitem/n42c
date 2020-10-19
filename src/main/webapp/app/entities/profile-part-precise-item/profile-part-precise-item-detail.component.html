@@ -87,7 +87,7 @@
         <dt><span jhiTranslate="n42cApp.profilePartPreciseItem.profilePart">Profile Part</span></dt>
         <dd>
           <div *ngIf="profilePartPreciseItem.profilePart">
-            <a [routerLink]="['/profile-part', profilePartPreciseItem.profilePart?.id, 'view']">{{
+            <a [routerLink]="['/entities', 'profile-part', profilePartPreciseItem.profilePart?.id, 'view']">{{
               profilePartPreciseItem.profilePart?.id
             }}</a>
           </div>
@@ -98,7 +98,11 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/profile-part-precise-item', profilePartPreciseItem.id, 'edit']" class="btn btn-primary">
+      <button
+        type="button"
+        [routerLink]="['/entities', 'profile-part-precise-item', profilePartPreciseItem.id, 'edit']"
+        class="btn btn-primary"
+      >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>
