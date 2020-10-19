@@ -93,7 +93,7 @@ public class BlogResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogs in body.
      */
     @GetMapping("/blogs")
-    public List<Blog> getAllBlogs(Principal principal) {
+    public List<Blog> getAllBlogs() {
         SecurityContext context = SecurityContextHolder.getContext();
         if (context == null)
             return getBlogsByCurrentUserOrWriter();
