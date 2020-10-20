@@ -1,0 +1,80 @@
+<div>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.appUserProfile.home.title">App User Profiles</span>
+
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-app-user-profile"
+      [routerLink]="['/entities', 'app-user-profile', 'new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.appUserProfile.home.createLabel">
+        Create a new App User Profile
+      </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="appUserProfiles?.length === 0">
+    <span jhiTranslate="n42cApp.appUserProfile.home.notFound">No appUserProfiles found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="appUserProfiles && appUserProfiles.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUserProfile.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUserProfile.title">Title</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUserProfile.summary">Summary</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUserProfile.headerBackgroundURI">Header Background URI</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUserProfile.language">Language</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.appUserProfile.user">User</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appUserProfile of appUserProfiles; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'app-user-profile', appUserProfile.id, 'view']">{{ appUserProfile.id }}</a>
+          </td>
+          <td>{{ appUserProfile.name }}</td>
+          <td>{{ appUserProfile.title }}</td>
+          <td>{{ appUserProfile.summary }}</td>
+          <td>{{ appUserProfile.headerBackgroundURI }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + appUserProfile.language }}">{{ appUserProfile.language }}</td>
+          <td>
+            <div *ngIf="appUserProfile.user">
+              <a [routerLink]="['/entities', 'app-user', appUserProfile.user?.id, 'view']">{{ appUserProfile.user?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/entities', 'app-user-profile', appUserProfile.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'app-user-profile', appUserProfile.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(appUserProfile)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

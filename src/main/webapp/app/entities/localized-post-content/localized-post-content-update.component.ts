@@ -4,9 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { ILocalizedPostContent, LocalizedPostContent } from 'app/shared/model/localized-post-content.model';
 import { LocalizedPostContentService } from './localized-post-content.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IBlogPost } from 'app/shared/model/blog-post.model';
 import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
 
@@ -20,6 +22,7 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    title: [null, [Validators.required]],
     excerpt: [],
     content: [null, [Validators.required]],
     language: [null, [Validators.required]],
@@ -27,6 +30,8 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected localizedPostContentService: LocalizedPostContentService,
     protected blogPostService: BlogPostService,
     protected activatedRoute: ActivatedRoute,
@@ -44,10 +49,27 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
   updateForm(localizedPostContent: ILocalizedPostContent): void {
     this.editForm.patchValue({
       id: localizedPostContent.id,
+      title: localizedPostContent.title,
       excerpt: localizedPostContent.excerpt,
       content: localizedPostContent.content,
       language: localizedPostContent.language,
       post: localizedPostContent.post,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 
@@ -69,6 +91,7 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
     return {
       ...new LocalizedPostContent(),
       id: this.editForm.get(['id'])!.value,
+      title: this.editForm.get(['title'])!.value,
       excerpt: this.editForm.get(['excerpt'])!.value,
       content: this.editForm.get(['content'])!.value,
       language: this.editForm.get(['language'])!.value,

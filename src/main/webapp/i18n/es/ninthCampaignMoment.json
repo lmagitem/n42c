@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "ninthCampaignMoment": {
       "home": {
         "title": "Ninth Campaign Moments",
@@ -22,7 +22,8 @@
       "summary": "Summary",
       "description": "Description",
       "battles": "Battles",
-      "campaign": "Campaign"
+      "campaign": "Campaign",
+      "add": "Add Moment"
     }
   }
 }

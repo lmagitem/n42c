@@ -26,4 +26,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     @Query("select appUser from AppUser appUser left join fetch appUser.givenFriendships left join fetch appUser.askedFriendRequests where appUser.id =:id")
     Optional<AppUser> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select distinct appUser from AppUser appUser where appUser.user.id =:id")
+    Optional<AppUser> findOneByUserId(@Param("id") String id);
 }

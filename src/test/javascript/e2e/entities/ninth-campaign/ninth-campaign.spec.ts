@@ -24,7 +24,7 @@ describe('NinthCampaign e2e test', () => {
     await navBarPage.goToEntity('ninth-campaign');
     ninthCampaignComponentsPage = new NinthCampaignComponentsPage();
     await browser.wait(ec.visibilityOf(ninthCampaignComponentsPage.title), 5000);
-    expect(await ninthCampaignComponentsPage.getTitle()).to.eq('n42CApp.ninthCampaign.home.title');
+    expect(await ninthCampaignComponentsPage.getTitle()).to.eq('n42cApp.ninthCampaign.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthCampaignComponentsPage.entities), ec.visibilityOf(ninthCampaignComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('NinthCampaign e2e test', () => {
   it('should load create NinthCampaign page', async () => {
     await ninthCampaignComponentsPage.clickOnCreateButton();
     ninthCampaignUpdatePage = new NinthCampaignUpdatePage();
-    expect(await ninthCampaignUpdatePage.getPageTitle()).to.eq('n42CApp.ninthCampaign.home.createOrEditLabel');
+    expect(await ninthCampaignUpdatePage.getPageTitle()).to.eq('n42cApp.ninthCampaign.home.createOrEditLabel');
     await ninthCampaignUpdatePage.cancel();
   });
 
@@ -44,12 +44,15 @@ describe('NinthCampaign e2e test', () => {
     await ninthCampaignComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      ninthCampaignUpdatePage.setNameInput('name'),
       ninthCampaignUpdatePage.gameTypeSelectLastOption(),
+      ninthCampaignUpdatePage.setDescriptionInput('description'),
       // ninthCampaignUpdatePage.authorsSelectLastOption(),
       // ninthCampaignUpdatePage.participantsSelectLastOption(),
       // ninthCampaignUpdatePage.campaignStratagemsSelectLastOption(),
     ]);
 
+    expect(await ninthCampaignUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     const selectedUsePowerRating = ninthCampaignUpdatePage.getUsePowerRatingInput();
     if (await selectedUsePowerRating.isSelected()) {
       await ninthCampaignUpdatePage.getUsePowerRatingInput().click();
@@ -58,6 +61,10 @@ describe('NinthCampaign e2e test', () => {
       await ninthCampaignUpdatePage.getUsePowerRatingInput().click();
       expect(await ninthCampaignUpdatePage.getUsePowerRatingInput().isSelected(), 'Expected usePowerRating to be selected').to.be.true;
     }
+    expect(await ninthCampaignUpdatePage.getDescriptionInput()).to.eq(
+      'description',
+      'Expected Description value to be equals to description'
+    );
 
     await ninthCampaignUpdatePage.save();
     expect(await ninthCampaignUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
@@ -70,7 +77,7 @@ describe('NinthCampaign e2e test', () => {
     await ninthCampaignComponentsPage.clickOnLastDeleteButton();
 
     ninthCampaignDeleteDialog = new NinthCampaignDeleteDialog();
-    expect(await ninthCampaignDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthCampaign.delete.question');
+    expect(await ninthCampaignDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthCampaign.delete.question');
     await ninthCampaignDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthCampaignComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

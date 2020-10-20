@@ -16,8 +16,9 @@
     },
     {
       "fieldName": "summary",
-      "fieldType": "String",
-      "javadoc": "A summary to show on the user profile."
+      "fieldType": "byte[]",
+      "javadoc": "A summary to show on the user profile.",
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "headerBackgroundURI",
@@ -43,7 +44,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "profiles",
       "relationshipName": "user",
-      "otherEntityField": "id"
+      "otherEntityField": "displayedName"
     }
   ],
   "changelogDate": "20200703174407",

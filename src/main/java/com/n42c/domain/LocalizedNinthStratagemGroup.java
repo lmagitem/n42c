@@ -5,8 +5,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+
+import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthStratagemGroup.
@@ -25,6 +28,11 @@ public class LocalizedNinthStratagemGroup implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", nullable = false)
+    private Language language;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
@@ -50,6 +58,19 @@ public class LocalizedNinthStratagemGroup implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public LocalizedNinthStratagemGroup language(Language language) {
+        this.language = language;
+        return this;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public NinthStratagemGroup getStratagemGroup() {
@@ -88,6 +109,7 @@ public class LocalizedNinthStratagemGroup implements Serializable {
         return "LocalizedNinthStratagemGroup{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", language='" + getLanguage() + "'" +
             "}";
     }
 }

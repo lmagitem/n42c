@@ -1,73 +1,84 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.localizedProduct.home.title">Localized Products</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.localizedProduct.home.title">Localized Products</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-localized-product" [routerLink]="['/localized-product/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.localizedProduct.home.createLabel">
-            Create a new Localized Product
-            </span>
-        </button>
-    </h2>
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-localized-product"
+      [routerLink]="['/entities/localized-product/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.localizedProduct.home.createLabel">
+        Create a new Localized Product
+      </span>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="localizedProducts?.length === 0">
-        <span jhiTranslate="n42CApp.localizedProduct.home.notFound">No localizedProducts found</span>
-    </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="localizedProducts?.length === 0">
+    <span jhiTranslate="n42cApp.localizedProduct.home.notFound">No localizedProducts found</span>
+  </div>
 
-    <div class="table-responsive" id="entities" *ngIf="localizedProducts && localizedProducts.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedProduct.excerpt">Excerpt</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedProduct.pictureUrl">Picture Url</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedProduct.content">Content</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedProduct.language">Language</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedProduct.product">Product</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let localizedProduct of localizedProducts ;trackBy: trackId">
-                    <td><a [routerLink]="['/localized-product', localizedProduct.id, 'view']">{{ localizedProduct.id }}</a></td>
-                    <td>{{ localizedProduct.excerpt }}</td>
-                    <td>{{ localizedProduct.pictureUrl }}</td>
-                    <td>{{ localizedProduct.content }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.Language.' + localizedProduct.language }}">{{ localizedProduct.language }}</td>
-                    <td>
-                        <div *ngIf="localizedProduct.product">
-                            <a [routerLink]="['/product', localizedProduct.product?.id, 'view']" >{{ localizedProduct.product?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/localized-product', localizedProduct.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
+  <div class="table-responsive" id="entities" *ngIf="localizedProducts && localizedProducts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedProduct.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedProduct.excerpt">Excerpt</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedProduct.pictureUrl">Picture Url</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedProduct.content">Content</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedProduct.language">Language</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedProduct.product">Product</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let localizedProduct of localizedProducts; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'localized-product', localizedProduct.id, 'view']">{{ localizedProduct.id }}</a>
+          </td>
+          <td>{{ localizedProduct.name }}</td>
+          <td>{{ localizedProduct.excerpt }}</td>
+          <td>{{ localizedProduct.pictureUrl }}</td>
+          <td>{{ localizedProduct.content }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + localizedProduct.language }}">{{ localizedProduct.language }}</td>
+          <td>
+            <div *ngIf="localizedProduct.product">
+              <a [routerLink]="['/entities', 'product', localizedProduct.product?.id, 'view']">{{ localizedProduct.product?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'localized-product', localizedProduct.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-                            <button type="submit"
-                                    [routerLink]="['/localized-product', localizedProduct.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'localized-product', localizedProduct.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-                            <button type="submit" (click)="delete(localizedProduct)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(localizedProduct)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

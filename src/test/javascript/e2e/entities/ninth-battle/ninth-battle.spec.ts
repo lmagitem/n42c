@@ -24,7 +24,7 @@ describe('NinthBattle e2e test', () => {
     await navBarPage.goToEntity('ninth-battle');
     ninthBattleComponentsPage = new NinthBattleComponentsPage();
     await browser.wait(ec.visibilityOf(ninthBattleComponentsPage.title), 5000);
-    expect(await ninthBattleComponentsPage.getTitle()).to.eq('n42CApp.ninthBattle.home.title');
+    expect(await ninthBattleComponentsPage.getTitle()).to.eq('n42cApp.ninthBattle.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthBattleComponentsPage.entities), ec.visibilityOf(ninthBattleComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('NinthBattle e2e test', () => {
   it('should load create NinthBattle page', async () => {
     await ninthBattleComponentsPage.clickOnCreateButton();
     ninthBattleUpdatePage = new NinthBattleUpdatePage();
-    expect(await ninthBattleUpdatePage.getPageTitle()).to.eq('n42CApp.ninthBattle.home.createOrEditLabel');
+    expect(await ninthBattleUpdatePage.getPageTitle()).to.eq('n42cApp.ninthBattle.home.createOrEditLabel');
     await ninthBattleUpdatePage.cancel();
   });
 
@@ -50,6 +50,14 @@ describe('NinthBattle e2e test', () => {
     ]);
 
     expect(await ninthBattleUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+    const selectedResolved = ninthBattleUpdatePage.getResolvedInput();
+    if (await selectedResolved.isSelected()) {
+      await ninthBattleUpdatePage.getResolvedInput().click();
+      expect(await ninthBattleUpdatePage.getResolvedInput().isSelected(), 'Expected resolved not to be selected').to.be.false;
+    } else {
+      await ninthBattleUpdatePage.getResolvedInput().click();
+      expect(await ninthBattleUpdatePage.getResolvedInput().isSelected(), 'Expected resolved to be selected').to.be.true;
+    }
 
     await ninthBattleUpdatePage.save();
     expect(await ninthBattleUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
@@ -62,7 +70,7 @@ describe('NinthBattle e2e test', () => {
     await ninthBattleComponentsPage.clickOnLastDeleteButton();
 
     ninthBattleDeleteDialog = new NinthBattleDeleteDialog();
-    expect(await ninthBattleDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthBattle.delete.question');
+    expect(await ninthBattleDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthBattle.delete.question');
     await ninthBattleDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthBattleComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

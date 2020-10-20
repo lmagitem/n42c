@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { N42CSharedModule } from 'app/shared/shared.module';
-import { HOME_ROUTE } from './home.route';
-import { HomeComponent } from './home.component';
+import {N42CSharedModule} from 'app/shared/shared.module';
+import {HOME_ROUTE} from './home.route';
+import {HomeComponent} from './home.component';
 
 @NgModule({
   imports: [N42CSharedModule, RouterModule.forChild([HOME_ROUTE])],

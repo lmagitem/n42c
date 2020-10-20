@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { LocalizedNinthMissionRuleService } from 'app/entities/localized-ninth-mission-rule/localized-ninth-mission-rule.service';
 import { ILocalizedNinthMissionRule, LocalizedNinthMissionRule } from 'app/shared/model/localized-ninth-mission-rule.model';
+import { Language } from 'app/shared/model/enumerations/language.model';
 
 describe('Service Tests', () => {
   describe('LocalizedNinthMissionRule Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LocalizedNinthMissionRuleService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new LocalizedNinthMissionRule(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new LocalizedNinthMissionRule(0, 'AAAAAAA', 'AAAAAAA', Language.EN);
     });
 
     describe('Service methods', () => {
@@ -56,6 +57,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             description: 'BBBBBB',
+            language: 'BBBBBB',
           },
           elemDefault
         );
@@ -74,6 +76,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             description: 'BBBBBB',
+            language: 'BBBBBB',
           },
           elemDefault
         );

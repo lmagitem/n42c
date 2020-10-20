@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "blog": {
       "home": {
         "title": "Blogs",
@@ -20,7 +20,7 @@
       "posts": "Posts",
       "author": "Author",
       "help": {
-        "name": "This blog&#39;s name."
+        "name": "This blog's name."
       }
     }
   }

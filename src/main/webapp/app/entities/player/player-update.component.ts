@@ -21,6 +21,7 @@ export class PlayerUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.required]],
     appUser: [],
   });
 
@@ -62,6 +63,7 @@ export class PlayerUpdateComponent implements OnInit {
   updateForm(player: IPlayer): void {
     this.editForm.patchValue({
       id: player.id,
+      name: player.name,
       appUser: player.appUser,
     });
   }
@@ -84,6 +86,7 @@ export class PlayerUpdateComponent implements OnInit {
     return {
       ...new Player(),
       id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
       appUser: this.editForm.get(['appUser'])!.value,
     };
   }

@@ -18,9 +18,6 @@
             <column name="current" type="boolean">
                 <constraints nullable="false" />
             </column>
-            <column name="since_instant" type="datetime">
-                <constraints nullable="false" />
-            </column>
             <column name="major_victories" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -45,10 +42,10 @@
             <column name="supply_used" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="objectives" type="varchar(255)">
+            <column name="objectives" type="${clobType}">
                 <constraints nullable="true" />
             </column>
-            <column name="notes" type="varchar(255)">
+            <column name="notes" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="battle_id" type="bigint">
@@ -59,7 +56,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="ninth_army_moment" columnName="since_instant" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200908195312-1-relations" author="jhipster">
@@ -104,7 +100,6 @@
                   tableName="ninth_army_moment">
             <column name="id" type="numeric"/>
             <column name="current" type="boolean"/>
-            <column name="since_instant" type="datetime"/>
             <column name="major_victories" type="numeric"/>
             <column name="minor_victories" type="numeric"/>
             <column name="draws" type="numeric"/>
@@ -113,8 +108,8 @@
             <column name="requisition" type="numeric"/>
             <column name="supply_limit" type="numeric"/>
             <column name="supply_used" type="numeric"/>
-            <column name="objectives" type="string"/>
-            <column name="notes" type="string"/>
+            <column name="objectives" type="clob"/>
+            <column name="notes" type="clob"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

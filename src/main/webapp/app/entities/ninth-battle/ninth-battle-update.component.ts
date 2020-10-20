@@ -26,6 +26,7 @@ export class NinthBattleUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
+    resolved: [null, [Validators.required]],
     campaignMoment: [],
     mission: [],
   });
@@ -54,6 +55,7 @@ export class NinthBattleUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: ninthBattle.id,
       name: ninthBattle.name,
+      resolved: ninthBattle.resolved,
       campaignMoment: ninthBattle.campaignMoment,
       mission: ninthBattle.mission,
     });
@@ -78,6 +80,7 @@ export class NinthBattleUpdateComponent implements OnInit {
       ...new NinthBattle(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      resolved: this.editForm.get(['resolved'])!.value,
       campaignMoment: this.editForm.get(['campaignMoment'])!.value,
       mission: this.editForm.get(['mission'])!.value,
     };

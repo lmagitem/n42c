@@ -1,19 +1,23 @@
 {
   "home": {
-    "title": "Bienvenue, Java Hipster !",
-    "subtitle": "Ceci est votre page d'accueil",
+    "title": "N42C",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     },
-    "question": "Si vous avez des questions à propos de JHipster :",
+    "construction": "Ce site est actuellement en construction",
     "link": {
-      "homepage": "Page d'accueil de JHipster",
-      "stackoverflow": "JHipster sur Stack Overflow",
-      "bugtracker": "JHipster bug tracker",
-      "chat": "JHipster public chat room",
-      "follow": "Suivez @jhipster sur Twitter"
+      "looking": "Si vous recherchez mon blog, vous pouvez le trouver ",
+      "oldblog": "en suivant ce lien"
     },
-    "like": "Si vous aimez JHipster, donnez nous une étoile sur",
-    "github": "GitHub "
+    "like": {
+      "find": "Vous pouvez retrouver ce projet sur ",
+      "github": "GitHub",
+      "follow": " ; me suivre sur Twitter : ",
+      "look": " ; jeter un œil à mon ",
+      "instagram": "compte Instagram",
+      "or": " ou ma ",
+      "youtube": "chaîne Youtube",
+      "mail": " ; et me contacter à cette adresse : lucmagitem (arobase) gmail (point) com."
+    }
   }
 }

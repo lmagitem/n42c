@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map, shareReplay} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
-import { SERVER_API_URL } from 'app/app.constants';
-import { ProfileInfo, InfoResponse } from './profile-info.model';
+import {SERVER_API_URL} from 'app/app.constants';
+import {InfoResponse, ProfileInfo} from './profile-info.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {

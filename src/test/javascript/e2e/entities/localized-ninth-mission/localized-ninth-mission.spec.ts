@@ -28,7 +28,7 @@ describe('LocalizedNinthMission e2e test', () => {
     await navBarPage.goToEntity('localized-ninth-mission');
     localizedNinthMissionComponentsPage = new LocalizedNinthMissionComponentsPage();
     await browser.wait(ec.visibilityOf(localizedNinthMissionComponentsPage.title), 5000);
-    expect(await localizedNinthMissionComponentsPage.getTitle()).to.eq('n42CApp.localizedNinthMission.home.title');
+    expect(await localizedNinthMissionComponentsPage.getTitle()).to.eq('n42cApp.localizedNinthMission.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(localizedNinthMissionComponentsPage.entities), ec.visibilityOf(localizedNinthMissionComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('LocalizedNinthMission e2e test', () => {
   it('should load create LocalizedNinthMission page', async () => {
     await localizedNinthMissionComponentsPage.clickOnCreateButton();
     localizedNinthMissionUpdatePage = new LocalizedNinthMissionUpdatePage();
-    expect(await localizedNinthMissionUpdatePage.getPageTitle()).to.eq('n42CApp.localizedNinthMission.home.createOrEditLabel');
+    expect(await localizedNinthMissionUpdatePage.getPageTitle()).to.eq('n42cApp.localizedNinthMission.home.createOrEditLabel');
     await localizedNinthMissionUpdatePage.cancel();
   });
 
@@ -50,6 +50,7 @@ describe('LocalizedNinthMission e2e test', () => {
     await promise.all([
       localizedNinthMissionUpdatePage.setNameInput('name'),
       localizedNinthMissionUpdatePage.setBriefingInput('briefing'),
+      localizedNinthMissionUpdatePage.languageSelectLastOption(),
       localizedNinthMissionUpdatePage.missionSelectLastOption(),
     ]);
 
@@ -70,7 +71,7 @@ describe('LocalizedNinthMission e2e test', () => {
     await localizedNinthMissionComponentsPage.clickOnLastDeleteButton();
 
     localizedNinthMissionDeleteDialog = new LocalizedNinthMissionDeleteDialog();
-    expect(await localizedNinthMissionDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedNinthMission.delete.question');
+    expect(await localizedNinthMissionDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthMission.delete.question');
     await localizedNinthMissionDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedNinthMissionComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

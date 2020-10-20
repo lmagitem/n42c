@@ -30,7 +30,6 @@ export class NinthArmyMomentUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   currentInput = element(by.id('field_current'));
-  sinceInstantInput = element(by.id('field_sinceInstant'));
   majorVictoriesInput = element(by.id('field_majorVictories'));
   minorVictoriesInput = element(by.id('field_minorVictories'));
   drawsInput = element(by.id('field_draws'));
@@ -53,14 +52,6 @@ export class NinthArmyMomentUpdatePage {
 
   getCurrentInput(): ElementFinder {
     return this.currentInput;
-  }
-
-  async setSinceInstantInput(sinceInstant: string): Promise<void> {
-    await this.sinceInstantInput.sendKeys(sinceInstant);
-  }
-
-  async getSinceInstantInput(): Promise<string> {
-    return await this.sinceInstantInput.getAttribute('value');
   }
 
   async setMajorVictoriesInput(majorVictories: string): Promise<void> {

@@ -30,6 +30,7 @@ export class LocalizedNinthStratagemGroupUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   nameInput = element(by.id('field_name'));
+  languageSelect = element(by.id('field_language'));
 
   stratagemGroupSelect = element(by.id('field_stratagemGroup'));
 
@@ -43,6 +44,18 @@ export class LocalizedNinthStratagemGroupUpdatePage {
 
   async getNameInput(): Promise<string> {
     return await this.nameInput.getAttribute('value');
+  }
+
+  async setLanguageSelect(language: string): Promise<void> {
+    await this.languageSelect.sendKeys(language);
+  }
+
+  async getLanguageSelect(): Promise<string> {
+    return await this.languageSelect.element(by.css('option:checked')).getText();
+  }
+
+  async languageSelectLastOption(): Promise<void> {
+    await this.languageSelect.all(by.tagName('option')).last().click();
   }
 
   async stratagemGroupSelectLastOption(): Promise<void> {

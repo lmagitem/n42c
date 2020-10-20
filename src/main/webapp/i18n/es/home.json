@@ -1,19 +1,23 @@
 {
   "home": {
-    "title": "¡Bienvenido, Java Hipster!",
-    "subtitle": "Esta es su página de inicio",
+    "title": "N42C",
     "logged": {
       "message": "Está conectado como \"{{username}}\"."
     },
-    "question": "Si tiene preguntas sobre JHipster:",
+    "construction": "This website is currently under construction",
     "link": {
-      "homepage": "Página de inicio de JHipster",
-      "stackoverflow": "JHipster en Stack Overflow",
-      "bugtracker": "JHipster seguimiento de errores",
-      "chat": "Sala de chat pública de JHipster",
-      "follow": "contacto @jhipster en Twitter"
+      "looking": "If you are looking for my old blog, you can reach it ",
+      "oldblog": "by following this link"
     },
-    "like": "Si te gusta JHipster, danos una estrella en",
-    "github": "GitHub"
+    "like": {
+      "find": "You can find this project on ",
+      "github": "GitHub",
+      "follow": "; follow me on Twitter: ",
+      "look": "; take a look at my ",
+      "instagram": "Instagram account",
+      "or": " or my ",
+      "youtube": "Youtube channel",
+      "mail": "; and email me at: lucmagitem [at] gmail [dot] com."
+    }
   }
 }

@@ -3,7 +3,9 @@ package com.n42c.service;
 import com.n42c.N42CApp;
 import com.n42c.config.Constants;
 import com.n42c.config.TestSecurityConfiguration;
+import com.n42c.domain.AppUser;
 import com.n42c.domain.User;
+import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.repository.UserRepository;
 import com.n42c.security.AuthoritiesConstants;
 import com.n42c.service.dto.UserDTO;
@@ -36,6 +38,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 public class UserServiceIT {
 
+    private static final String DEFAULT_ID = "u1ed";
+
     private static final String DEFAULT_LOGIN = "johndoe";
 
     private static final String DEFAULT_EMAIL = "johndoe@localhost";
@@ -61,6 +65,7 @@ public class UserServiceIT {
     @BeforeEach
     public void init() {
         user = new User();
+        user.setId(DEFAULT_ID);
         user.setLogin(DEFAULT_LOGIN);
         user.setActivated(true);
         user.setEmail(DEFAULT_EMAIL);
@@ -70,7 +75,8 @@ public class UserServiceIT {
         user.setLangKey(DEFAULT_LANGKEY);
 
         userDetails = new HashMap<>();
-        userDetails.put("sub", DEFAULT_LOGIN);
+        userDetails.put("sub", DEFAULT_ID);
+        userDetails.put("username", DEFAULT_LOGIN);
         userDetails.put("email", DEFAULT_EMAIL);
         userDetails.put("given_name", DEFAULT_FIRSTNAME);
         userDetails.put("family_name", DEFAULT_LASTNAME);
@@ -98,9 +104,7 @@ public class UserServiceIT {
         OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
-        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(userDTO.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
-        assertThat(userDTO.getLastName()).isEqualTo(DEFAULT_LASTNAME);
+        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(userDTO.isActivated()).isTrue();
         assertThat(userDTO.getLangKey()).isEqualTo(Constants.DEFAULT_LANGUAGE);
@@ -116,7 +120,7 @@ public class UserServiceIT {
         OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
-        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_EMAIL);
+        assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);
     }
 
     @Test
@@ -162,6 +166,22 @@ public class UserServiceIT {
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
 
         assertThat(userDTO.getLangKey()).isEqualTo("en");
+    }
+
+    @Test
+    @Transactional
+    public void testAppUser() {
+        OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
+        UserDTO userDTO = userService.getUserFromAuthentication(authentication);
+        AppUser appUser = userService.getAppUser(userDTO.getId());
+
+        assertThat(appUser).isNotNull();
+        assertThat(appUser.getUser().getId()).isEqualTo(userDTO.getId());
+        assertThat(appUser.isAdmin()).isFalse();
+        assertThat(appUser.getShopRights()).isEqualByComparingTo(AppUserRights.REA);
+        assertThat(appUser.getBlogRights()).isEqualByComparingTo(AppUserRights.REA);
+        assertThat(appUser.getProfileRights()).isEqualByComparingTo(AppUserRights.REA);
+        assertThat(appUser.getScriptoriumRights()).isEqualByComparingTo(AppUserRights.REA);
     }
 
     private OAuth2AuthenticationToken createMockOAuth2AuthenticationToken(Map<String, Object> userDetails) {

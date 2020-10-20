@@ -32,6 +32,10 @@ export class NinthCampaignService {
     return this.http.get<INinthCampaign[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryMomentsIds(id: number): Observable<HttpResponse<number[]>> {
+    return this.http.get<number[]>(`${this.resourceUrl}/${id}/ninth-campaign-moments`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

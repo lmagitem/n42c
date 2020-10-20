@@ -29,6 +29,7 @@ export class LocalizedPostContentUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
+  titleInput = element(by.id('field_title'));
   excerptInput = element(by.id('field_excerpt'));
   contentInput = element(by.id('field_content'));
   languageSelect = element(by.id('field_language'));
@@ -37,6 +38,14 @@ export class LocalizedPostContentUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
+  }
+
+  async setTitleInput(title: string): Promise<void> {
+    await this.titleInput.sendKeys(title);
+  }
+
+  async getTitleInput(): Promise<string> {
+    return await this.titleInput.getAttribute('value');
   }
 
   async setExcerptInput(excerpt: string): Promise<void> {

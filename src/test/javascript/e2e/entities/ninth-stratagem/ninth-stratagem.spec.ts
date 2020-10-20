@@ -24,7 +24,7 @@ describe('NinthStratagem e2e test', () => {
     await navBarPage.goToEntity('ninth-stratagem');
     ninthStratagemComponentsPage = new NinthStratagemComponentsPage();
     await browser.wait(ec.visibilityOf(ninthStratagemComponentsPage.title), 5000);
-    expect(await ninthStratagemComponentsPage.getTitle()).to.eq('n42CApp.ninthStratagem.home.title');
+    expect(await ninthStratagemComponentsPage.getTitle()).to.eq('n42cApp.ninthStratagem.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthStratagemComponentsPage.entities), ec.visibilityOf(ninthStratagemComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('NinthStratagem e2e test', () => {
   it('should load create NinthStratagem page', async () => {
     await ninthStratagemComponentsPage.clickOnCreateButton();
     ninthStratagemUpdatePage = new NinthStratagemUpdatePage();
-    expect(await ninthStratagemUpdatePage.getPageTitle()).to.eq('n42CApp.ninthStratagem.home.createOrEditLabel');
+    expect(await ninthStratagemUpdatePage.getPageTitle()).to.eq('n42cApp.ninthStratagem.home.createOrEditLabel');
     await ninthStratagemUpdatePage.cancel();
   });
 
@@ -68,7 +68,7 @@ describe('NinthStratagem e2e test', () => {
     await ninthStratagemComponentsPage.clickOnLastDeleteButton();
 
     ninthStratagemDeleteDialog = new NinthStratagemDeleteDialog();
-    expect(await ninthStratagemDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthStratagem.delete.question');
+    expect(await ninthStratagemDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthStratagem.delete.question');
     await ninthStratagemDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthStratagemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

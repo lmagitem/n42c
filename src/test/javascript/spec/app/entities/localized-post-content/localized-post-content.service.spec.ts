@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LocalizedPostContentService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new LocalizedPostContent(0, 'AAAAAAA', 'AAAAAAA', Language.EN);
+      elemDefault = new LocalizedPostContent(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', Language.EN);
     });
 
     describe('Service methods', () => {
@@ -55,6 +55,7 @@ describe('Service Tests', () => {
       it('should update a LocalizedPostContent', () => {
         const returnedFromService = Object.assign(
           {
+            title: 'BBBBBB',
             excerpt: 'BBBBBB',
             content: 'BBBBBB',
             language: 'BBBBBB',
@@ -74,6 +75,7 @@ describe('Service Tests', () => {
       it('should return a list of LocalizedPostContent', () => {
         const returnedFromService = Object.assign(
           {
+            title: 'BBBBBB',
             excerpt: 'BBBBBB',
             content: 'BBBBBB',
             language: 'BBBBBB',

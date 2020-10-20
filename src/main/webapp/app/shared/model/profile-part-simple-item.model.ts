@@ -1,5 +1,5 @@
-import { Moment } from 'moment';
-import { IProfilePart } from 'app/shared/model/profile-part.model';
+import {Moment} from 'moment';
+import {IProfilePart} from 'app/shared/model/profile-part.model';
 
 export interface IProfilePartSimpleItem {
   id?: number;

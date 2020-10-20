@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,17 @@ import com.n42c.domain.enumeration.NinthGameType;
 @WithMockUser
 public class NinthCampaignResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     private static final NinthGameType DEFAULT_GAME_TYPE = NinthGameType.OP;
     private static final NinthGameType UPDATED_GAME_TYPE = NinthGameType.MP;
 
     private static final Boolean DEFAULT_USE_POWER_RATING = false;
     private static final Boolean UPDATED_USE_POWER_RATING = true;
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     @Autowired
     private NinthCampaignRepository ninthCampaignRepository;
@@ -68,8 +75,10 @@ public class NinthCampaignResourceIT {
      */
     public static NinthCampaign createEntity(EntityManager em) {
         NinthCampaign ninthCampaign = new NinthCampaign()
+            .name(DEFAULT_NAME)
             .gameType(DEFAULT_GAME_TYPE)
-            .usePowerRating(DEFAULT_USE_POWER_RATING);
+            .usePowerRating(DEFAULT_USE_POWER_RATING)
+            .description(DEFAULT_DESCRIPTION);
         return ninthCampaign;
     }
     /**
@@ -80,8 +89,10 @@ public class NinthCampaignResourceIT {
      */
     public static NinthCampaign createUpdatedEntity(EntityManager em) {
         NinthCampaign ninthCampaign = new NinthCampaign()
+            .name(UPDATED_NAME)
             .gameType(UPDATED_GAME_TYPE)
-            .usePowerRating(UPDATED_USE_POWER_RATING);
+            .usePowerRating(UPDATED_USE_POWER_RATING)
+            .description(UPDATED_DESCRIPTION);
         return ninthCampaign;
     }
 
@@ -104,8 +115,10 @@ public class NinthCampaignResourceIT {
         List<NinthCampaign> ninthCampaignList = ninthCampaignRepository.findAll();
         assertThat(ninthCampaignList).hasSize(databaseSizeBeforeCreate + 1);
         NinthCampaign testNinthCampaign = ninthCampaignList.get(ninthCampaignList.size() - 1);
+        assertThat(testNinthCampaign.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testNinthCampaign.getGameType()).isEqualTo(DEFAULT_GAME_TYPE);
         assertThat(testNinthCampaign.isUsePowerRating()).isEqualTo(DEFAULT_USE_POWER_RATING);
+        assertThat(testNinthCampaign.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -127,6 +140,25 @@ public class NinthCampaignResourceIT {
         assertThat(ninthCampaignList).hasSize(databaseSizeBeforeCreate);
     }
 
+
+    @Test
+    @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ninthCampaignRepository.findAll().size();
+        // set the field null
+        ninthCampaign.setName(null);
+
+        // Create the NinthCampaign, which fails.
+
+
+        restNinthCampaignMockMvc.perform(post("/api/ninth-campaigns").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(ninthCampaign)))
+            .andExpect(status().isBadRequest());
+
+        List<NinthCampaign> ninthCampaignList = ninthCampaignRepository.findAll();
+        assertThat(ninthCampaignList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -177,8 +209,10 @@ public class NinthCampaignResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ninthCampaign.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].gameType").value(hasItem(DEFAULT_GAME_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].usePowerRating").value(hasItem(DEFAULT_USE_POWER_RATING.booleanValue())));
+            .andExpect(jsonPath("$.[*].usePowerRating").value(hasItem(DEFAULT_USE_POWER_RATING.booleanValue())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -212,8 +246,10 @@ public class NinthCampaignResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(ninthCampaign.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.gameType").value(DEFAULT_GAME_TYPE.toString()))
-            .andExpect(jsonPath("$.usePowerRating").value(DEFAULT_USE_POWER_RATING.booleanValue()));
+            .andExpect(jsonPath("$.usePowerRating").value(DEFAULT_USE_POWER_RATING.booleanValue()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
     @Test
     @Transactional
@@ -236,8 +272,10 @@ public class NinthCampaignResourceIT {
         // Disconnect from session so that the updates on updatedNinthCampaign are not directly saved in db
         em.detach(updatedNinthCampaign);
         updatedNinthCampaign
+            .name(UPDATED_NAME)
             .gameType(UPDATED_GAME_TYPE)
-            .usePowerRating(UPDATED_USE_POWER_RATING);
+            .usePowerRating(UPDATED_USE_POWER_RATING)
+            .description(UPDATED_DESCRIPTION);
 
         restNinthCampaignMockMvc.perform(put("/api/ninth-campaigns").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -248,8 +286,10 @@ public class NinthCampaignResourceIT {
         List<NinthCampaign> ninthCampaignList = ninthCampaignRepository.findAll();
         assertThat(ninthCampaignList).hasSize(databaseSizeBeforeUpdate);
         NinthCampaign testNinthCampaign = ninthCampaignList.get(ninthCampaignList.size() - 1);
+        assertThat(testNinthCampaign.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testNinthCampaign.getGameType()).isEqualTo(UPDATED_GAME_TYPE);
         assertThat(testNinthCampaign.isUsePowerRating()).isEqualTo(UPDATED_USE_POWER_RATING);
+        assertThat(testNinthCampaign.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

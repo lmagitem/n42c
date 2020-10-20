@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "profilePartSkill": {
       "home": {
         "title": "ProfilePartSkills",
@@ -22,9 +22,9 @@
       "linkedSkills": "Linked Skills",
       "skillCategory": "Skill Category",
       "help": {
-        "name": "This skill&#39;s name.",
+        "name": "This skill's name.",
         "index": "The index where this item must be ordered alongside similar ones.",
-        "level": "This skill&#39;s level of mastery."
+        "level": "This skill's level of mastery."
       }
     }
   }

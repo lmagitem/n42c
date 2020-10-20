@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div *ngIf="appUserProfile">
+      <h2><span jhiTranslate="n42cApp.appUserProfile.detail.title">App User Profile</span> {{ appUserProfile.id }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.appUserProfile.name" [ngbTooltip]="'n42cApp.appUserProfile.help.name' | translate">Name</span></dt>
+        <dd>
+          <span>{{ appUserProfile.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUserProfile.title" [ngbTooltip]="'n42cApp.appUserProfile.help.title' | translate">Title</span>
+        </dt>
+        <dd>
+          <span>{{ appUserProfile.title }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUserProfile.summary" [ngbTooltip]="'n42cApp.appUserProfile.help.summary' | translate"
+            >Summary</span
+          >
+        </dt>
+        <dd>
+          <span>{{ appUserProfile.summary }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="n42cApp.appUserProfile.headerBackgroundURI"
+            [ngbTooltip]="'n42cApp.appUserProfile.help.headerBackgroundURI' | translate"
+            >Header Background URI</span
+          >
+        </dt>
+        <dd>
+          <span>{{ appUserProfile.headerBackgroundURI }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.appUserProfile.language" [ngbTooltip]="'n42cApp.appUserProfile.help.language' | translate"
+            >Language</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Language.' + appUserProfile.language }}">{{ appUserProfile.language }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.appUserProfile.user">User</span></dt>
+        <dd>
+          <div *ngIf="appUserProfile.user">
+            <a [routerLink]="['/entities', 'app-user', appUserProfile.user?.id, 'view']">{{ appUserProfile.user?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/entities', 'app-user-profile', appUserProfile.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

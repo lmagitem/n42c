@@ -40,7 +40,8 @@ export const playerRoute: Routes = [
     component: PlayerComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.player.home.title',
+      defaultSort: 'id,asc',
+      pageTitle: 'n42cApp.player.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +53,7 @@ export const playerRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.player.home.title',
+      pageTitle: 'n42cApp.player.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +65,7 @@ export const playerRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.player.home.title',
+      pageTitle: 'n42cApp.player.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +77,7 @@ export const playerRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.player.home.title',
+      pageTitle: 'n42cApp.player.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

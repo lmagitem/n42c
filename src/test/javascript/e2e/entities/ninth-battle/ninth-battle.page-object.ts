@@ -30,6 +30,7 @@ export class NinthBattleUpdatePage {
   cancelButton = element(by.id('cancel-save'));
 
   nameInput = element(by.id('field_name'));
+  resolvedInput = element(by.id('field_resolved'));
 
   campaignMomentSelect = element(by.id('field_campaignMoment'));
   missionSelect = element(by.id('field_mission'));
@@ -44,6 +45,10 @@ export class NinthBattleUpdatePage {
 
   async getNameInput(): Promise<string> {
     return await this.nameInput.getAttribute('value');
+  }
+
+  getResolvedInput(): ElementFinder {
+    return this.resolvedInput;
   }
 
   async campaignMomentSelectLastOption(): Promise<void> {

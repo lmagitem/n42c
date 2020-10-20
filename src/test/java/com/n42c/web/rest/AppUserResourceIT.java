@@ -5,6 +5,7 @@ import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUser;
 import com.n42c.repository.AppUserRepository;
 
+import com.n42c.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -19,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +36,11 @@ import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
+
 /**
  * Integration tests for the {@link AppUserResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
@@ -48,9 +51,6 @@ public class AppUserResourceIT {
 
     private static final String DEFAULT_DISPLAYED_NAME = "AAAAAAAAAA";
     private static final String UPDATED_DISPLAYED_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_ADMIN = false;
     private static final Boolean UPDATED_ADMIN = true;
@@ -67,8 +67,8 @@ public class AppUserResourceIT {
     private static final AppUserRights DEFAULT_SCRIPTORIUM_RIGHTS = AppUserRights.MOD;
     private static final AppUserRights UPDATED_SCRIPTORIUM_RIGHTS = AppUserRights.WRI;
 
-    private static final String DEFAULT_AVATAR_URL = "AAAAAAAAAA";
-    private static final String UPDATED_AVATAR_URL = "BBBBBBBBBB";
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private AppUserRepository appUserRepository;
@@ -86,7 +86,7 @@ public class AppUserResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -94,18 +94,18 @@ public class AppUserResourceIT {
         AppUser appUser = new AppUser()
             .userName(DEFAULT_USER_NAME)
             .displayedName(DEFAULT_DISPLAYED_NAME)
-            .email(DEFAULT_EMAIL)
             .admin(DEFAULT_ADMIN)
             .shopRights(DEFAULT_SHOP_RIGHTS)
             .blogRights(DEFAULT_BLOG_RIGHTS)
             .profileRights(DEFAULT_PROFILE_RIGHTS)
             .scriptoriumRights(DEFAULT_SCRIPTORIUM_RIGHTS)
-            .avatarUrl(DEFAULT_AVATAR_URL);
+            .user(UserResourceIT.createEntity(em));
         return appUser;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -113,19 +113,19 @@ public class AppUserResourceIT {
         AppUser appUser = new AppUser()
             .userName(UPDATED_USER_NAME)
             .displayedName(UPDATED_DISPLAYED_NAME)
-            .email(UPDATED_EMAIL)
             .admin(UPDATED_ADMIN)
             .shopRights(UPDATED_SHOP_RIGHTS)
             .blogRights(UPDATED_BLOG_RIGHTS)
             .profileRights(UPDATED_PROFILE_RIGHTS)
             .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
-            .avatarUrl(UPDATED_AVATAR_URL);
+            .user(UserResourceIT.createEntity(em));
         return appUser;
     }
 
     @BeforeEach
     public void initTest() {
         appUser = createEntity(em);
+        appUser.setUser(userRepository.saveAndFlush(appUser.getUser()));
     }
 
     @Test
@@ -144,13 +144,11 @@ public class AppUserResourceIT {
         AppUser testAppUser = appUserList.get(appUserList.size() - 1);
         assertThat(testAppUser.getUserName()).isEqualTo(DEFAULT_USER_NAME);
         assertThat(testAppUser.getDisplayedName()).isEqualTo(DEFAULT_DISPLAYED_NAME);
-        assertThat(testAppUser.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testAppUser.isAdmin()).isEqualTo(DEFAULT_ADMIN);
         assertThat(testAppUser.getShopRights()).isEqualTo(DEFAULT_SHOP_RIGHTS);
         assertThat(testAppUser.getBlogRights()).isEqualTo(DEFAULT_BLOG_RIGHTS);
         assertThat(testAppUser.getProfileRights()).isEqualTo(DEFAULT_PROFILE_RIGHTS);
         assertThat(testAppUser.getScriptoriumRights()).isEqualTo(DEFAULT_SCRIPTORIUM_RIGHTS);
-        assertThat(testAppUser.getAvatarUrl()).isEqualTo(DEFAULT_AVATAR_URL);
     }
 
     @Test
@@ -179,25 +177,6 @@ public class AppUserResourceIT {
         int databaseSizeBeforeTest = appUserRepository.findAll().size();
         // set the field null
         appUser.setUserName(null);
-
-        // Create the AppUser, which fails.
-
-
-        restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(appUser)))
-            .andExpect(status().isBadRequest());
-
-        List<AppUser> appUserList = appUserRepository.findAll();
-        assertThat(appUserList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkEmailIsRequired() throws Exception {
-        int databaseSizeBeforeTest = appUserRepository.findAll().size();
-        // set the field null
-        appUser.setEmail(null);
 
         // Create the AppUser, which fails.
 
@@ -319,15 +298,13 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(appUser.getId().intValue())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME)))
             .andExpect(jsonPath("$.[*].displayedName").value(hasItem(DEFAULT_DISPLAYED_NAME)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].admin").value(hasItem(DEFAULT_ADMIN.booleanValue())))
             .andExpect(jsonPath("$.[*].shopRights").value(hasItem(DEFAULT_SHOP_RIGHTS.toString())))
             .andExpect(jsonPath("$.[*].blogRights").value(hasItem(DEFAULT_BLOG_RIGHTS.toString())))
             .andExpect(jsonPath("$.[*].profileRights").value(hasItem(DEFAULT_PROFILE_RIGHTS.toString())))
-            .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())))
-            .andExpect(jsonPath("$.[*].avatarUrl").value(hasItem(DEFAULT_AVATAR_URL)));
+            .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllAppUsersWithEagerRelationshipsIsEnabled() throws Exception {
         when(appUserRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
@@ -361,14 +338,13 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.id").value(appUser.getId().intValue()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME))
             .andExpect(jsonPath("$.displayedName").value(DEFAULT_DISPLAYED_NAME))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.admin").value(DEFAULT_ADMIN.booleanValue()))
             .andExpect(jsonPath("$.shopRights").value(DEFAULT_SHOP_RIGHTS.toString()))
             .andExpect(jsonPath("$.blogRights").value(DEFAULT_BLOG_RIGHTS.toString()))
             .andExpect(jsonPath("$.profileRights").value(DEFAULT_PROFILE_RIGHTS.toString()))
-            .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()))
-            .andExpect(jsonPath("$.avatarUrl").value(DEFAULT_AVATAR_URL));
+            .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingAppUser() throws Exception {
@@ -392,13 +368,11 @@ public class AppUserResourceIT {
         updatedAppUser
             .userName(UPDATED_USER_NAME)
             .displayedName(UPDATED_DISPLAYED_NAME)
-            .email(UPDATED_EMAIL)
             .admin(UPDATED_ADMIN)
             .shopRights(UPDATED_SHOP_RIGHTS)
             .blogRights(UPDATED_BLOG_RIGHTS)
             .profileRights(UPDATED_PROFILE_RIGHTS)
-            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
-            .avatarUrl(UPDATED_AVATAR_URL);
+            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS);
 
         restAppUserMockMvc.perform(put("/api/app-users").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -411,13 +385,11 @@ public class AppUserResourceIT {
         AppUser testAppUser = appUserList.get(appUserList.size() - 1);
         assertThat(testAppUser.getUserName()).isEqualTo(UPDATED_USER_NAME);
         assertThat(testAppUser.getDisplayedName()).isEqualTo(UPDATED_DISPLAYED_NAME);
-        assertThat(testAppUser.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testAppUser.isAdmin()).isEqualTo(UPDATED_ADMIN);
         assertThat(testAppUser.getShopRights()).isEqualTo(UPDATED_SHOP_RIGHTS);
         assertThat(testAppUser.getBlogRights()).isEqualTo(UPDATED_BLOG_RIGHTS);
         assertThat(testAppUser.getProfileRights()).isEqualTo(UPDATED_PROFILE_RIGHTS);
         assertThat(testAppUser.getScriptoriumRights()).isEqualTo(UPDATED_SCRIPTORIUM_RIGHTS);
-        assertThat(testAppUser.getAvatarUrl()).isEqualTo(UPDATED_AVATAR_URL);
     }
 
     @Test

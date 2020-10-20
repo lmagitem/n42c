@@ -1,108 +1,108 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="ninthArmyUnitMoment">
-            <h2><span jhiTranslate="n42CApp.ninthArmyUnitMoment.detail.title">Ninth Army Unit Moment</span> {{ ninthArmyUnitMoment.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="ninthArmyUnitMoment">
+      <h2><span jhiTranslate="n42cApp.ninthArmyUnitMoment.detail.title">Ninth Army Unit Moment</span> {{ ninthArmyUnitMoment.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.current">Current</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.current }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.sinceInstant">Since Instant</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.sinceInstant }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.pointsCost">Points Cost</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.pointsCost }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.powerRating">Power Rating</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.powerRating }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.experiencePoints">Experience Points</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.experiencePoints }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.crusadePoints">Crusade Points</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.crusadePoints }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.equipment">Equipment</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.equipment }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.psychicPowers">Psychic Powers</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.psychicPowers }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.warlordTraits">Warlord Traits</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.warlordTraits }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.relics">Relics</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.relics }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.otherUpgrades">Other Upgrades</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.otherUpgrades }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.battlesPlayed">Battles Played</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.battlesPlayed }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.battlesSurvived">Battles Survived</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.battlesSurvived }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.rangedKills">Ranged Kills</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.rangedKills }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.meleeKills">Melee Kills</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.meleeKills }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.psychicKills">Psychic Kills</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.psychicKills }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.crusadeRank">Crusade Rank</span></dt>
-                <dd>
-                    <span jhiTranslate="{{ 'n42CApp.NinthCrusadeRank.' + ninthArmyUnitMoment.crusadeRank }}">{{ ninthArmyUnitMoment.crusadeRank }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.battleHonours">Battle Honours</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.battleHonours }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.battleScars">Battle Scars</span></dt>
-                <dd>
-                    <span>{{ ninthArmyUnitMoment.battleScars }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthArmyUnitMoment.armyUnit">Army Unit</span></dt>
-                <dd>
-                    <div *ngIf="ninthArmyUnitMoment.armyUnit">
-                        <a [routerLink]="['/ninth-army-unit', ninthArmyUnitMoment.armyUnit?.id, 'view']">{{ ninthArmyUnitMoment.armyUnit?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.current">Current</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.current }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.sinceInstant">Since Instant</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.sinceInstant }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.pointsCost">Points Cost</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.pointsCost }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.powerRating">Power Rating</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.powerRating }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.experiencePoints">Experience Points</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.experiencePoints }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.crusadePoints">Crusade Points</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.crusadePoints }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.equipment">Equipment</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.equipment }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.psychicPowers">Psychic Powers</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.psychicPowers }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.warlordTraits">Warlord Traits</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.warlordTraits }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.relics">Relics</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.relics }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.otherUpgrades">Other Upgrades</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.otherUpgrades }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.battlesPlayed">Battles Played</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.battlesPlayed }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.battlesSurvived">Battles Survived</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.battlesSurvived }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.rangedKills">Ranged Kills</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.rangedKills }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.meleeKills">Melee Kills</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.meleeKills }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.psychicKills">Psychic Kills</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.psychicKills }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.crusadeRank">Crusade Rank</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.NinthCrusadeRank.' + ninthArmyUnitMoment.crusadeRank }}">{{
+            ninthArmyUnitMoment.crusadeRank
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.battleHonours">Battle Honours</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.battleHonours }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.battleScars">Battle Scars</span></dt>
+        <dd>
+          <span>{{ ninthArmyUnitMoment.battleScars }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthArmyUnitMoment.armyUnit">Army Unit</span></dt>
+        <dd>
+          <div *ngIf="ninthArmyUnitMoment.armyUnit">
+            <a [routerLink]="['/entities', 'ninth-army-unit', ninthArmyUnitMoment.armyUnit?.id, 'view']">{{
+              ninthArmyUnitMoment.armyUnit?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/ninth-army-unit-moment', ninthArmyUnitMoment.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities', 'ninth-army-unit-moment', ninthArmyUnitMoment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

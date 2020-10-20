@@ -1,9 +1,14 @@
 {
   "global": {
-    "title": "N42c",
+    "title": "N42C",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
+      "blog": "Blog",
+      "profile": "Profile",
+      "shop": "Shop",
+      "campaign": "Campaign Manager",
+      "scriptorium": "Scriptorium",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
@@ -49,6 +54,7 @@
       },
       "account": {
         "main": "Account",
+        "mine": "My Account",
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",
@@ -60,6 +66,7 @@
         "main": "Administration",
         "userManagement": "User management",
         "tracker": "User tracker",
+        "state": "App State",
         "metrics": "Metrics",
         "health": "Health",
         "configuration": "Configuration",
@@ -124,7 +131,8 @@
     "ribbon": {
       "dev": "Development"
     },
-    "item-count": "Showing {{first}} - {{second}} of {{total}} items."
+    "item-count": "Showing {{first}} - {{second}} of {{total}} items.",
+    "adminPanel": "Admin Panel"
   },
   "entity": {
     "action": {
@@ -136,7 +144,9 @@
       "edit": "Edit",
       "open": "Open",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "previous": "Previous",
+      "next": "Next"
     },
     "detail": {
       "field": "Field",
@@ -156,7 +166,12 @@
       "pattern": "This field should follow pattern for {{ pattern }}.",
       "number": "This field should be a number.",
       "datetimelocal": "This field should be a date and time.",
-      "patternLogin": "This field can only contain letters, digits and e-mail addresses."
+      "patternLogin": "This field can only contain letters, digits and e-mail addresses.",
+      "imageUrlInvalid": "No valid picture can be found at this adress."
+    },
+    "bool": {
+      "true": "Yes",
+      "false": "No"
     }
   },
   "error": {
@@ -174,5 +189,8 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": {
+    "love": "Made with love",
+    "by": " by "
+  }
 }

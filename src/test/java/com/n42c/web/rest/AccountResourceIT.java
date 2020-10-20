@@ -21,13 +21,14 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.n42c.web.rest.AccountResourceIT.TEST_USER_LOGIN;
+
 import org.springframework.security.test.context.support.WithMockUser;
+
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -50,6 +51,7 @@ public class AccountResourceIT {
     public void testGetExistingAccount() throws Exception {
         Map<String, Object> userDetails = new HashMap<>();
         userDetails.put("sub", TEST_USER_LOGIN);
+        userDetails.put("username", TEST_USER_LOGIN);
         userDetails.put("email", TEST_USER_EMAIL);
         Collection<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(AuthoritiesConstants.ADMIN));
         OAuth2User user = new DefaultOAuth2User(authorities, userDetails, "sub");
@@ -60,9 +62,12 @@ public class AccountResourceIT {
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.login").value(TEST_USER_EMAIL))
+            .andExpect(jsonPath("$.login").value(TEST_USER_LOGIN))
             .andExpect(jsonPath("$.email").value(TEST_USER_EMAIL))
-            .andExpect(jsonPath("$.authorities").value(AuthoritiesConstants.ADMIN));
+            .andExpect(jsonPath("$.authorities").isArray())
+            .andExpect(jsonPath("$.authorities", hasSize(2)))
+            .andExpect(jsonPath("$.authorities", hasItem(AuthoritiesConstants.ADMIN)))
+            .andExpect(jsonPath("$.authorities", hasItem(AuthoritiesConstants.USER)));
     }
 
     @Test

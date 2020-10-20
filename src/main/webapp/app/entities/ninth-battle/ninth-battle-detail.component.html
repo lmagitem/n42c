@@ -1,42 +1,44 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="ninthBattle">
-            <h2><span jhiTranslate="n42CApp.ninthBattle.detail.title">Ninth Battle</span> {{ ninthBattle.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="ninthBattle">
+      <h2><span jhiTranslate="n42cApp.ninthBattle.detail.title">Ninth Battle</span> {{ ninthBattle.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.ninthBattle.name">Name</span></dt>
-                <dd>
-                    <span>{{ ninthBattle.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthBattle.campaignMoment">Campaign Moment</span></dt>
-                <dd>
-                    <div *ngIf="ninthBattle.campaignMoment">
-                        <a [routerLink]="['/ninth-campaign-moment', ninthBattle.campaignMoment?.id, 'view']">{{ ninthBattle.campaignMoment?.id }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.ninthBattle.mission">Mission</span></dt>
-                <dd>
-                    <div *ngIf="ninthBattle.mission">
-                        <a [routerLink]="['/ninth-mission', ninthBattle.mission?.id, 'view']">{{ ninthBattle.mission?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.ninthBattle.name">Name</span></dt>
+        <dd>
+          <span>{{ ninthBattle.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthBattle.resolved">Resolved</span></dt>
+        <dd>
+          <span>{{ ninthBattle.resolved }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthBattle.campaignMoment">Campaign Moment</span></dt>
+        <dd>
+          <div *ngIf="ninthBattle.campaignMoment">
+            <a [routerLink]="['/entities', 'ninth-campaign-moment', ninthBattle.campaignMoment?.id, 'view']">{{
+              ninthBattle.campaignMoment?.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.ninthBattle.mission">Mission</span></dt>
+        <dd>
+          <div *ngIf="ninthBattle.mission">
+            <a [routerLink]="['/entities', 'ninth-mission', ninthBattle.mission?.id, 'view']">{{ ninthBattle.mission?.id }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/ninth-battle', ninthBattle.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

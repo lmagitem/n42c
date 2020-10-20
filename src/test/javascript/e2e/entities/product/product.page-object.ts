@@ -29,11 +29,21 @@ export class ProductUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
+  nameInput = element(by.id('field_name'));
+
   authorsSelect = element(by.id('field_authors'));
   shopSelect = element(by.id('field_shop'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
+  }
+
+  async setNameInput(name: string): Promise<void> {
+    await this.nameInput.sendKeys(name);
+  }
+
+  async getNameInput(): Promise<string> {
+    return await this.nameInput.getAttribute('value');
   }
 
   async authorsSelectLastOption(): Promise<void> {

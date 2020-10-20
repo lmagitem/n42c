@@ -1,12 +1,17 @@
 {
   "global": {
-    "title": "N42c",
+    "title": "N42C",
     "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=es\">actualice su navegador</a> para mejorar su experiencia.",
     "menu": {
       "home": "Inicio",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
+        "blog": "Blogs",
+        "profile": "Profiles",
+        "shop": "Shop",
+        "campaign": "Campaigns",
+        "scriptorium": "Scriptorium",
         "appUser": "App User",
         "blogPost": "Blog Post",
         "blogCategory": "Blog Category",
@@ -49,6 +54,7 @@
       },
       "account": {
         "main": "Cuenta",
+        "mine": "Mi cuenta",
         "settings": "Ajustes",
         "password": "Contraseña",
         "sessions": "Sesiones",
@@ -60,6 +66,7 @@
         "main": "Administración",
         "userManagement": "Gestión de usuarios",
         "tracker": "Registro de usuarios",
+        "state": "App State",
         "metrics": "Métricas",
         "health": "Salud",
         "configuration": "Configuración",
@@ -124,7 +131,8 @@
     "ribbon": {
       "dev": "Development"
     },
-    "item-count": "Mostrando {{first}} - {{second}} de {{total}} elementos."
+    "item-count": "Mostrando {{first}} - {{second}} de {{total}} elementos.",
+    "adminPanel": "Admin Panel"
   },
   "entity": {
     "action": {
@@ -136,7 +144,9 @@
       "edit": "Editar",
       "open": "Abrir",
       "save": "Guardar",
-      "view": "Vista"
+      "view": "Vista",
+      "previous": "Previous",
+      "next": "Next"
     },
     "detail": {
       "field": "Campo",
@@ -155,7 +165,12 @@
       "maxbytes": "Este campo no puede tener más de {{max}} bytes.",
       "pattern": "Este campo debe seguir el patrón {{pattern}}.",
       "number": "Este campo debe ser un número.",
-      "datetimelocal": "Este campo debe ser una fecha y hora."
+      "datetimelocal": "Este campo debe ser una fecha y hora.",
+      "imageUrlInvalid": "No valid picture can be found at this adress."
+    },
+    "bool": {
+      "true": "Yes",
+      "false": "No"
     }
   },
   "error": {
@@ -173,5 +188,8 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "Pie de página"
+  "footer": {
+    "love": "Hecho con amor",
+    "by": " por "
+  }
 }

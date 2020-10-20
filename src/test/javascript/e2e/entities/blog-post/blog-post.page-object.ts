@@ -29,6 +29,7 @@ export class BlogPostUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
+  titleInput = element(by.id('field_title'));
   publishedInput = element(by.id('field_published'));
   modifiedInput = element(by.id('field_modified'));
 
@@ -38,6 +39,14 @@ export class BlogPostUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
+  }
+
+  async setTitleInput(title: string): Promise<void> {
+    await this.titleInput.sendKeys(title);
+  }
+
+  async getTitleInput(): Promise<string> {
+    return await this.titleInput.getAttribute('value');
   }
 
   async setPublishedInput(published: string): Promise<void> {

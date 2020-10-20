@@ -30,10 +30,10 @@ public class LocalizedBlogCategory implements Serializable {
     private Long id;
 
     /**
-     * This category's name.
+     * This category's localized name.
      */
     @NotNull
-    @ApiModelProperty(value = "This category's name.", required = true)
+    @ApiModelProperty(value = "This category's localized name.", required = true)
     @Column(name = "name", nullable = false)
     private String name;
 

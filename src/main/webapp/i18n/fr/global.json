@@ -1,9 +1,14 @@
 {
   "global": {
-    "title": "N42c",
+    "title": "N42C",
     "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
     "menu": {
       "home": "Accueil",
+      "blog": "Blog",
+      "profile": "Profil",
+      "shop": "Échoppe",
+      "campaign": "Gestionnaire de Campagnes",
+      "scriptorium": "Scriptorium",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
@@ -49,6 +54,7 @@
       },
       "account": {
         "main": "Compte",
+        "mine": "Mon Compte",
         "settings": "Profil",
         "password": "Mot de passe",
         "sessions": "Sessions",
@@ -60,6 +66,7 @@
         "main": "Administration",
         "userManagement": "Gestion des utilisateurs",
         "tracker": "Suivi des utilisateurs",
+        "state": "État de l'application",
         "metrics": "Métriques",
         "health": "Diagnostics",
         "configuration": "Configuration",
@@ -124,7 +131,8 @@
     "ribbon": {
       "dev": "Développement"
     },
-    "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
+    "adminPanel": "Panneau d'administration"
   },
   "entity": {
     "action": {
@@ -136,7 +144,9 @@
       "delete": "Supprimer",
       "open": "Ouvrir",
       "save": "Sauvegarder",
-      "view": "Voir"
+      "view": "Voir",
+      "previous": "Précédent",
+      "next": "Suivant"
     },
     "detail": {
       "field": "Champs",
@@ -156,7 +166,12 @@
       "pattern": "Ce champ doit suivre l'expression régulière {{pattern}}.",
       "number": "Ce champ doit être un nombre.",
       "datetimelocal": "Ce champ doit être une date et une heure.",
-      "patternLogin": "Ce champ ne peut contenir que des lettres, des chiffres ou des adresses e-mail."
+      "patternLogin": "Ce champ ne peut contenir que des lettres, des chiffres ou des adresses e-mail.",
+      "imageUrlInvalid": "Aucune image valide trouvée à cette adresse."
+    },
+    "bool": {
+      "true": "Oui",
+      "false": "Non"
     }
   },
   "error": {
@@ -174,5 +189,8 @@
       "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
     }
   },
-  "footer": "Ceci est votre pied de page"
+  "footer": {
+    "love": "Fait avec amour",
+    "by": " par "
+  }
 }

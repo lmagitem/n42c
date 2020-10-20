@@ -108,7 +108,7 @@ class ProfilePartPreciseItemGatlingTest extends Simulation {
                 , "locationName":"SAMPLE_TEXT"
                 , "locationLat":null
                 , "locationLong":null
-                , "content":"SAMPLE_TEXT"
+                , "content":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_profilePartPreciseItem_url"))).exitHereIfFailed

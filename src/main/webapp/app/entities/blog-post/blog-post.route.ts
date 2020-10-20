@@ -40,8 +40,7 @@ export const blogPostRoute: Routes = [
     component: BlogPostComponent,
     data: {
       authorities: [Authority.USER],
-      defaultSort: 'id,asc',
-      pageTitle: 'n42CApp.blogPost.home.title',
+      pageTitle: 'n42cApp.blogPost.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -53,7 +52,7 @@ export const blogPostRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogPost.home.title',
+      pageTitle: 'n42cApp.blogPost.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -65,7 +64,7 @@ export const blogPostRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogPost.home.title',
+      pageTitle: 'n42cApp.blogPost.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -77,7 +76,7 @@ export const blogPostRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogPost.home.title',
+      pageTitle: 'n42cApp.blogPost.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

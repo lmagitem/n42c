@@ -1,5 +1,5 @@
-import { ILocalizedNinthDeploymentMap } from 'app/shared/model/localized-ninth-deployment-map.model';
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
+import {ILocalizedNinthDeploymentMap} from 'app/shared/model/localized-ninth-deployment-map.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
 
 export interface INinthDeploymentMap {
   id?: number;

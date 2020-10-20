@@ -24,7 +24,7 @@ describe('NinthObjective e2e test', () => {
     await navBarPage.goToEntity('ninth-objective');
     ninthObjectiveComponentsPage = new NinthObjectiveComponentsPage();
     await browser.wait(ec.visibilityOf(ninthObjectiveComponentsPage.title), 5000);
-    expect(await ninthObjectiveComponentsPage.getTitle()).to.eq('n42CApp.ninthObjective.home.title');
+    expect(await ninthObjectiveComponentsPage.getTitle()).to.eq('n42cApp.ninthObjective.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(ninthObjectiveComponentsPage.entities), ec.visibilityOf(ninthObjectiveComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('NinthObjective e2e test', () => {
   it('should load create NinthObjective page', async () => {
     await ninthObjectiveComponentsPage.clickOnCreateButton();
     ninthObjectiveUpdatePage = new NinthObjectiveUpdatePage();
-    expect(await ninthObjectiveUpdatePage.getPageTitle()).to.eq('n42CApp.ninthObjective.home.createOrEditLabel');
+    expect(await ninthObjectiveUpdatePage.getPageTitle()).to.eq('n42cApp.ninthObjective.home.createOrEditLabel');
     await ninthObjectiveUpdatePage.cancel();
   });
 
@@ -68,7 +68,7 @@ describe('NinthObjective e2e test', () => {
     await ninthObjectiveComponentsPage.clickOnLastDeleteButton();
 
     ninthObjectiveDeleteDialog = new NinthObjectiveDeleteDialog();
-    expect(await ninthObjectiveDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthObjective.delete.question');
+    expect(await ninthObjectiveDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthObjective.delete.question');
     await ninthObjectiveDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthObjectiveComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

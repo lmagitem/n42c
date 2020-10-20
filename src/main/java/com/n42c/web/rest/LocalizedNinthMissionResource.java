@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class LocalizedNinthMissionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/localized-ninth-missions")
-    public ResponseEntity<LocalizedNinthMission> createLocalizedNinthMission(@RequestBody LocalizedNinthMission localizedNinthMission) throws URISyntaxException {
+    public ResponseEntity<LocalizedNinthMission> createLocalizedNinthMission(@Valid @RequestBody LocalizedNinthMission localizedNinthMission) throws URISyntaxException {
         log.debug("REST request to save LocalizedNinthMission : {}", localizedNinthMission);
         if (localizedNinthMission.getId() != null) {
             throw new BadRequestAlertException("A new localizedNinthMission cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class LocalizedNinthMissionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/localized-ninth-missions")
-    public ResponseEntity<LocalizedNinthMission> updateLocalizedNinthMission(@RequestBody LocalizedNinthMission localizedNinthMission) throws URISyntaxException {
+    public ResponseEntity<LocalizedNinthMission> updateLocalizedNinthMission(@Valid @RequestBody LocalizedNinthMission localizedNinthMission) throws URISyntaxException {
         log.debug("REST request to update LocalizedNinthMission : {}", localizedNinthMission);
         if (localizedNinthMission.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

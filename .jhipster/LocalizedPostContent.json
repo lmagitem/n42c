@@ -2,14 +2,24 @@
   "name": "LocalizedPostContent",
   "fields": [
     {
-      "fieldName": "excerpt",
+      "fieldName": "title",
       "fieldType": "String",
-      "javadoc": "An excerpt of the post to show on the blog page."
+      "javadoc": "This post's localized title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "excerpt",
+      "fieldType": "byte[]",
+      "javadoc": "An excerpt of the post to show on the blog page.",
+      "fieldTypeBlobContent": "text"
     },
     {
       "fieldName": "content",
-      "fieldType": "String",
+      "fieldType": "byte[]",
       "javadoc": "The content of the post.",
+      "fieldTypeBlobContent": "text",
       "fieldValidateRules": [
         "required"
       ]
@@ -30,7 +40,7 @@
       "otherEntityName": "blogPost",
       "otherEntityRelationshipName": "localizations",
       "relationshipName": "post",
-      "otherEntityField": "id"
+      "otherEntityField": "title"
     }
   ],
   "changelogDate": "20200908193812",

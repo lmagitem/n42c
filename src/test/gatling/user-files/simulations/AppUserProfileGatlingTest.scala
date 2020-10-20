@@ -103,7 +103,7 @@ class AppUserProfileGatlingTest extends Simulation {
                 "id":null
                 , "name":"SAMPLE_TEXT"
                 , "title":"SAMPLE_TEXT"
-                , "summary":"SAMPLE_TEXT"
+                , "summary":null
                 , "headerBackgroundURI":"SAMPLE_TEXT"
                 , "language":"EN"
                 }""")).asJson

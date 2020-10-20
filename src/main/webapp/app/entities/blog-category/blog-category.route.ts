@@ -40,7 +40,7 @@ export const blogCategoryRoute: Routes = [
     component: BlogCategoryComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogCategory.home.title',
+      pageTitle: 'n42cApp.blogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const blogCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogCategory.home.title',
+      pageTitle: 'n42cApp.blogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const blogCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogCategory.home.title',
+      pageTitle: 'n42cApp.blogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const blogCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.blogCategory.home.title',
+      pageTitle: 'n42cApp.blogCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

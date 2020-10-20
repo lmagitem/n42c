@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class ShopResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/shops")
-    public ResponseEntity<Shop> createShop(@RequestBody Shop shop) throws URISyntaxException {
+    public ResponseEntity<Shop> createShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to save Shop : {}", shop);
         if (shop.getId() != null) {
             throw new BadRequestAlertException("A new shop cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class ShopResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/shops")
-    public ResponseEntity<Shop> updateShop(@RequestBody Shop shop) throws URISyntaxException {
+    public ResponseEntity<Shop> updateShop(@Valid @RequestBody Shop shop) throws URISyntaxException {
         log.debug("REST request to update Shop : {}", shop);
         if (shop.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

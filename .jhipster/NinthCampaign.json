@@ -2,6 +2,13 @@
   "name": "NinthCampaign",
   "fields": [
     {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "gameType",
       "fieldType": "NinthGameType",
       "fieldValues": "OP (OpenPlay),MP (MatchedPlay),CR (Crusade),NG (Narrative)",
@@ -15,6 +22,11 @@
       "fieldValidateRules": [
         "required"
       ]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
     }
   ],
   "relationships": [

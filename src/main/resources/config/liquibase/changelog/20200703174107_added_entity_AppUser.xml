@@ -21,9 +21,6 @@
             <column name="displayed_name" type="varchar(255)" remarks="The name shown throughout the app.">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_app_user_displayed_name" />
             </column>
-            <column name="email" type="varchar(255)" remarks="The user email adress.">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_app_user_email" />
-            </column>
             <column name="admin" type="boolean" remarks="Does the user have admin rights?">
                 <constraints nullable="false" />
             </column>
@@ -38,9 +35,6 @@
             </column>
             <column name="scriptorium_rights" type="varchar(255)" remarks="The user rights regarding the Scriptorium.">
                 <constraints nullable="false" />
-            </column>
-            <column name="avatar_url" type="varchar(255)" remarks="The user&apos;s avatar url.">
-                <constraints nullable="true" />
             </column>
             <column name="user_id" type="varchar(100)">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_app_user_user_id" />
@@ -92,13 +86,11 @@
             <column name="id" type="numeric"/>
             <column name="user_name" type="string"/>
             <column name="displayed_name" type="string"/>
-            <column name="email" type="string"/>
             <column name="admin" type="boolean"/>
             <column name="shop_rights" type="string"/>
             <column name="blog_rights" type="string"/>
             <column name="profile_rights" type="string"/>
             <column name="scriptorium_rights" type="string"/>
-            <column name="avatar_url" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

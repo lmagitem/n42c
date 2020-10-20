@@ -17,6 +17,7 @@ export class ShopUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.required]],
   });
 
   constructor(protected shopService: ShopService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -30,6 +31,7 @@ export class ShopUpdateComponent implements OnInit {
   updateForm(shop: IShop): void {
     this.editForm.patchValue({
       id: shop.id,
+      name: shop.name,
     });
   }
 
@@ -51,6 +53,7 @@ export class ShopUpdateComponent implements OnInit {
     return {
       ...new Shop(),
       id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
     };
   }
 

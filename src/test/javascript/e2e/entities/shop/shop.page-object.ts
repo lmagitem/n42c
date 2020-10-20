@@ -29,8 +29,18 @@ export class ShopUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
+  nameInput = element(by.id('field_name'));
+
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
+  }
+
+  async setNameInput(name: string): Promise<void> {
+    await this.nameInput.sendKeys(name);
+  }
+
+  async getNameInput(): Promise<string> {
+    return await this.nameInput.getAttribute('value');
   }
 
   async save(): Promise<void> {

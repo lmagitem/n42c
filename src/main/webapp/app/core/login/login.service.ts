@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Location } from '@angular/common';
+import {Injectable} from '@angular/core';
+import {Location} from '@angular/common';
 
-import { AuthServerProvider } from 'app/core/auth/auth-session.service';
-import { Logout } from './logout.model';
-import { InfoResponse, ProfileInfo } from 'app/layouts/profiles/profile-info.model';
-import { map, shareReplay, filter, first } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
+import {AuthServerProvider} from 'app/core/auth/auth-session.service';
+import {Logout} from './logout.model';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {

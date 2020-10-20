@@ -1,5 +1,5 @@
-import { ILocalizedNinthMissionRule } from 'app/shared/model/localized-ninth-mission-rule.model';
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
+import {ILocalizedNinthMissionRule} from 'app/shared/model/localized-ninth-mission-rule.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
 
 export interface INinthMissionRule {
   id?: number;

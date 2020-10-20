@@ -1,5 +1,6 @@
 package com.n42c.repository;
 
+import com.n42c.domain.Blog;
 import com.n42c.domain.BlogPost;
 
 import org.springframework.data.domain.Page;
@@ -26,4 +27,21 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
     @Query("select blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories where blogPost.id =:id")
     Optional<BlogPost> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
+        "where blogPost.blog.author.user.id = ?#{principal.name}  or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
+        countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.name} " +
+            "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
+    Page<BlogPost> getAllByIsCurrentOidcUserOrWriter(Pageable pageable);
+
+    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
+        "where blogPost.blog.author.user.id = ?#{principal.username}  or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
+        countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.username} " +
+            "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
+    Page<BlogPost> getAllByIsCurrentSpringUserOrWriter(Pageable pageable);
+
+    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
+        "where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
+        countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
+    Page<BlogPost> getAllByIsWriter(Pageable pageable);
 }

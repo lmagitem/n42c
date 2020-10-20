@@ -15,40 +15,40 @@ import java.util.stream.Collectors;
  */
 public class UserDTO {
 
-    private String id;
+    protected String id;
 
+    @Email
     @NotBlank
-    @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 1, max = 50)
-    private String login;
+    @Size(min = 5, max = 254)
+    protected String login;
 
     @Size(max = 50)
-    private String firstName;
+    protected String firstName;
 
     @Size(max = 50)
-    private String lastName;
+    protected String lastName;
 
     @Email
     @Size(min = 5, max = 254)
-    private String email;
+    protected String email;
 
     @Size(max = 256)
-    private String imageUrl;
+    protected String imageUrl;
 
-    private boolean activated = false;
+    protected boolean activated = false;
 
     @Size(min = 2, max = 10)
-    private String langKey;
+    protected String langKey;
 
-    private String createdBy;
+    protected String createdBy;
 
-    private Instant createdDate;
+    protected Instant createdDate;
 
-    private String lastModifiedBy;
+    protected String lastModifiedBy;
 
-    private Instant lastModifiedDate;
+    protected Instant lastModifiedDate;
 
-    private Set<String> authorities;
+    protected Set<String> authorities;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.

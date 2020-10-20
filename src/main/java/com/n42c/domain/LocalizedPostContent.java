@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -30,17 +31,29 @@ public class LocalizedPostContent implements Serializable {
     private Long id;
 
     /**
+     * This post's localized title.
+     */
+    @NotNull
+    @ApiModelProperty(value = "This post's localized title.", required = true)
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    /**
      * An excerpt of the post to show on the blog page.
      */
     @ApiModelProperty(value = "An excerpt of the post to show on the blog page.")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "excerpt")
     private String excerpt;
 
     /**
      * The content of the post.
      */
-    @NotNull
+    
     @ApiModelProperty(value = "The content of the post.", required = true)
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "content", nullable = false)
     private String content;
 
@@ -64,6 +77,19 @@ public class LocalizedPostContent implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public LocalizedPostContent title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getExcerpt() {
@@ -140,6 +166,7 @@ public class LocalizedPostContent implements Serializable {
     public String toString() {
         return "LocalizedPostContent{" +
             "id=" + getId() +
+            ", title='" + getTitle() + "'" +
             ", excerpt='" + getExcerpt() + "'" +
             ", content='" + getContent() + "'" +
             ", language='" + getLanguage() + "'" +

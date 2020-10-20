@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class LocalizedNinthStratagemResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/localized-ninth-stratagems")
-    public ResponseEntity<LocalizedNinthStratagem> createLocalizedNinthStratagem(@RequestBody LocalizedNinthStratagem localizedNinthStratagem) throws URISyntaxException {
+    public ResponseEntity<LocalizedNinthStratagem> createLocalizedNinthStratagem(@Valid @RequestBody LocalizedNinthStratagem localizedNinthStratagem) throws URISyntaxException {
         log.debug("REST request to save LocalizedNinthStratagem : {}", localizedNinthStratagem);
         if (localizedNinthStratagem.getId() != null) {
             throw new BadRequestAlertException("A new localizedNinthStratagem cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class LocalizedNinthStratagemResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/localized-ninth-stratagems")
-    public ResponseEntity<LocalizedNinthStratagem> updateLocalizedNinthStratagem(@RequestBody LocalizedNinthStratagem localizedNinthStratagem) throws URISyntaxException {
+    public ResponseEntity<LocalizedNinthStratagem> updateLocalizedNinthStratagem(@Valid @RequestBody LocalizedNinthStratagem localizedNinthStratagem) throws URISyntaxException {
         log.debug("REST request to update LocalizedNinthStratagem : {}", localizedNinthStratagem);
         if (localizedNinthStratagem.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

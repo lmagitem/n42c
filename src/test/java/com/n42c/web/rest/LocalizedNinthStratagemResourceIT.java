@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedNinthStratagemResource} REST controller.
  */
@@ -42,6 +44,9 @@ public class LocalizedNinthStratagemResourceIT {
 
     private static final String DEFAULT_KEYWORDS = "AAAAAAAAAA";
     private static final String UPDATED_KEYWORDS = "BBBBBBBBBB";
+
+    private static final Language DEFAULT_LANGUAGE = Language.EN;
+    private static final Language UPDATED_LANGUAGE = Language.FR;
 
     @Autowired
     private LocalizedNinthStratagemRepository localizedNinthStratagemRepository;
@@ -65,7 +70,8 @@ public class LocalizedNinthStratagemResourceIT {
             .name(DEFAULT_NAME)
             .summary(DEFAULT_SUMMARY)
             .description(DEFAULT_DESCRIPTION)
-            .keywords(DEFAULT_KEYWORDS);
+            .keywords(DEFAULT_KEYWORDS)
+            .language(DEFAULT_LANGUAGE);
         return localizedNinthStratagem;
     }
     /**
@@ -79,7 +85,8 @@ public class LocalizedNinthStratagemResourceIT {
             .name(UPDATED_NAME)
             .summary(UPDATED_SUMMARY)
             .description(UPDATED_DESCRIPTION)
-            .keywords(UPDATED_KEYWORDS);
+            .keywords(UPDATED_KEYWORDS)
+            .language(UPDATED_LANGUAGE);
         return localizedNinthStratagem;
     }
 
@@ -106,6 +113,7 @@ public class LocalizedNinthStratagemResourceIT {
         assertThat(testLocalizedNinthStratagem.getSummary()).isEqualTo(DEFAULT_SUMMARY);
         assertThat(testLocalizedNinthStratagem.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testLocalizedNinthStratagem.getKeywords()).isEqualTo(DEFAULT_KEYWORDS);
+        assertThat(testLocalizedNinthStratagem.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
     }
 
     @Test
@@ -130,6 +138,25 @@ public class LocalizedNinthStratagemResourceIT {
 
     @Test
     @Transactional
+    public void checkLanguageIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedNinthStratagemRepository.findAll().size();
+        // set the field null
+        localizedNinthStratagem.setLanguage(null);
+
+        // Create the LocalizedNinthStratagem, which fails.
+
+
+        restLocalizedNinthStratagemMockMvc.perform(post("/api/localized-ninth-stratagems").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedNinthStratagem)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedNinthStratagem> localizedNinthStratagemList = localizedNinthStratagemRepository.findAll();
+        assertThat(localizedNinthStratagemList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLocalizedNinthStratagems() throws Exception {
         // Initialize the database
         localizedNinthStratagemRepository.saveAndFlush(localizedNinthStratagem);
@@ -141,8 +168,9 @@ public class LocalizedNinthStratagemResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedNinthStratagem.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].keywords").value(hasItem(DEFAULT_KEYWORDS)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].keywords").value(hasItem(DEFAULT_KEYWORDS.toString())))
+            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
     @Test
@@ -158,8 +186,9 @@ public class LocalizedNinthStratagemResourceIT {
             .andExpect(jsonPath("$.id").value(localizedNinthStratagem.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.keywords").value(DEFAULT_KEYWORDS));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.keywords").value(DEFAULT_KEYWORDS.toString()))
+            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test
     @Transactional
@@ -185,7 +214,8 @@ public class LocalizedNinthStratagemResourceIT {
             .name(UPDATED_NAME)
             .summary(UPDATED_SUMMARY)
             .description(UPDATED_DESCRIPTION)
-            .keywords(UPDATED_KEYWORDS);
+            .keywords(UPDATED_KEYWORDS)
+            .language(UPDATED_LANGUAGE);
 
         restLocalizedNinthStratagemMockMvc.perform(put("/api/localized-ninth-stratagems").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -200,6 +230,7 @@ public class LocalizedNinthStratagemResourceIT {
         assertThat(testLocalizedNinthStratagem.getSummary()).isEqualTo(UPDATED_SUMMARY);
         assertThat(testLocalizedNinthStratagem.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testLocalizedNinthStratagem.getKeywords()).isEqualTo(UPDATED_KEYWORDS);
+        assertThat(testLocalizedNinthStratagem.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
     }
 
     @Test

@@ -4,9 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
 import { NinthCampaignService } from './ninth-campaign.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IPlayer } from 'app/shared/model/player.model';
 import { PlayerService } from 'app/entities/player/player.service';
 import { INinthStratagemGroup } from 'app/shared/model/ninth-stratagem-group.model';
@@ -25,14 +27,18 @@ export class NinthCampaignUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.required]],
     gameType: [null, [Validators.required]],
     usePowerRating: [null, [Validators.required]],
+    description: [],
     authors: [],
     participants: [],
     campaignStratagems: [],
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected ninthCampaignService: NinthCampaignService,
     protected playerService: PlayerService,
     protected ninthStratagemGroupService: NinthStratagemGroupService,
@@ -55,11 +61,29 @@ export class NinthCampaignUpdateComponent implements OnInit {
   updateForm(ninthCampaign: INinthCampaign): void {
     this.editForm.patchValue({
       id: ninthCampaign.id,
+      name: ninthCampaign.name,
       gameType: ninthCampaign.gameType,
       usePowerRating: ninthCampaign.usePowerRating,
+      description: ninthCampaign.description,
       authors: ninthCampaign.authors,
       participants: ninthCampaign.participants,
       campaignStratagems: ninthCampaign.campaignStratagems,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 
@@ -81,8 +105,10 @@ export class NinthCampaignUpdateComponent implements OnInit {
     return {
       ...new NinthCampaign(),
       id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
       gameType: this.editForm.get(['gameType'])!.value,
       usePowerRating: this.editForm.get(['usePowerRating'])!.value,
+      description: this.editForm.get(['description'])!.value,
       authors: this.editForm.get(['authors'])!.value,
       participants: this.editForm.get(['participants'])!.value,
       campaignStratagems: this.editForm.get(['campaignStratagems'])!.value,

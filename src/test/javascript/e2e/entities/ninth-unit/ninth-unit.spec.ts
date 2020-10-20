@@ -24,14 +24,14 @@ describe('NinthUnit e2e test', () => {
     await navBarPage.goToEntity('ninth-unit');
     ninthUnitComponentsPage = new NinthUnitComponentsPage();
     await browser.wait(ec.visibilityOf(ninthUnitComponentsPage.title), 5000);
-    expect(await ninthUnitComponentsPage.getTitle()).to.eq('n42CApp.ninthUnit.home.title');
+    expect(await ninthUnitComponentsPage.getTitle()).to.eq('n42cApp.ninthUnit.home.title');
     await browser.wait(ec.or(ec.visibilityOf(ninthUnitComponentsPage.entities), ec.visibilityOf(ninthUnitComponentsPage.noResult)), 1000);
   });
 
   it('should load create NinthUnit page', async () => {
     await ninthUnitComponentsPage.clickOnCreateButton();
     ninthUnitUpdatePage = new NinthUnitUpdatePage();
-    expect(await ninthUnitUpdatePage.getPageTitle()).to.eq('n42CApp.ninthUnit.home.createOrEditLabel');
+    expect(await ninthUnitUpdatePage.getPageTitle()).to.eq('n42cApp.ninthUnit.home.createOrEditLabel');
     await ninthUnitUpdatePage.cancel();
   });
 
@@ -65,7 +65,7 @@ describe('NinthUnit e2e test', () => {
     await ninthUnitComponentsPage.clickOnLastDeleteButton();
 
     ninthUnitDeleteDialog = new NinthUnitDeleteDialog();
-    expect(await ninthUnitDeleteDialog.getDialogTitle()).to.eq('n42CApp.ninthUnit.delete.question');
+    expect(await ninthUnitDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthUnit.delete.question');
     await ninthUnitDeleteDialog.clickOnConfirmButton();
 
     expect(await ninthUnitComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

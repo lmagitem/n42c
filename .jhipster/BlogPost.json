@@ -2,6 +2,14 @@
   "name": "BlogPost",
   "fields": [
     {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "This post's title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "published",
       "fieldType": "Instant",
       "javadoc": "The date and time at which this post was published.",
@@ -30,7 +38,7 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "posts",
       "relationshipName": "authors",
-      "otherEntityField": "id",
+      "otherEntityField": "displayedName",
       "ownerSide": true
     },
     {
@@ -38,7 +46,7 @@
       "otherEntityName": "blogCategory",
       "otherEntityRelationshipName": "posts",
       "relationshipName": "categories",
-      "otherEntityField": "id",
+      "otherEntityField": "name",
       "ownerSide": true
     },
     {
@@ -46,14 +54,14 @@
       "otherEntityName": "blog",
       "otherEntityRelationshipName": "posts",
       "relationshipName": "blog",
-      "otherEntityField": "id"
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20200703174207",
   "javadoc": "Blog posts to show on the app.",
   "entityTableName": "blog_post",
   "dto": "no",
-  "pagination": "pagination",
+  "pagination": "infinite-scroll",
   "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

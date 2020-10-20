@@ -28,7 +28,7 @@ describe('ProfilePartLinkedExperience e2e test', () => {
     await navBarPage.goToEntity('profile-part-linked-experience');
     profilePartLinkedExperienceComponentsPage = new ProfilePartLinkedExperienceComponentsPage();
     await browser.wait(ec.visibilityOf(profilePartLinkedExperienceComponentsPage.title), 5000);
-    expect(await profilePartLinkedExperienceComponentsPage.getTitle()).to.eq('n42CApp.profilePartLinkedExperience.home.title');
+    expect(await profilePartLinkedExperienceComponentsPage.getTitle()).to.eq('n42cApp.profilePartLinkedExperience.home.title');
     await browser.wait(
       ec.or(
         ec.visibilityOf(profilePartLinkedExperienceComponentsPage.entities),
@@ -41,7 +41,7 @@ describe('ProfilePartLinkedExperience e2e test', () => {
   it('should load create ProfilePartLinkedExperience page', async () => {
     await profilePartLinkedExperienceComponentsPage.clickOnCreateButton();
     profilePartLinkedExperienceUpdatePage = new ProfilePartLinkedExperienceUpdatePage();
-    expect(await profilePartLinkedExperienceUpdatePage.getPageTitle()).to.eq('n42CApp.profilePartLinkedExperience.home.createOrEditLabel');
+    expect(await profilePartLinkedExperienceUpdatePage.getPageTitle()).to.eq('n42cApp.profilePartLinkedExperience.home.createOrEditLabel');
     await profilePartLinkedExperienceUpdatePage.cancel();
   });
 
@@ -86,7 +86,7 @@ describe('ProfilePartLinkedExperience e2e test', () => {
     await profilePartLinkedExperienceComponentsPage.clickOnLastDeleteButton();
 
     profilePartLinkedExperienceDeleteDialog = new ProfilePartLinkedExperienceDeleteDialog();
-    expect(await profilePartLinkedExperienceDeleteDialog.getDialogTitle()).to.eq('n42CApp.profilePartLinkedExperience.delete.question');
+    expect(await profilePartLinkedExperienceDeleteDialog.getDialogTitle()).to.eq('n42cApp.profilePartLinkedExperience.delete.question');
     await profilePartLinkedExperienceDeleteDialog.clickOnConfirmButton();
 
     expect(await profilePartLinkedExperienceComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

@@ -24,14 +24,14 @@ describe('Player e2e test', () => {
     await navBarPage.goToEntity('player');
     playerComponentsPage = new PlayerComponentsPage();
     await browser.wait(ec.visibilityOf(playerComponentsPage.title), 5000);
-    expect(await playerComponentsPage.getTitle()).to.eq('n42CApp.player.home.title');
+    expect(await playerComponentsPage.getTitle()).to.eq('n42cApp.player.home.title');
     await browser.wait(ec.or(ec.visibilityOf(playerComponentsPage.entities), ec.visibilityOf(playerComponentsPage.noResult)), 1000);
   });
 
   it('should load create Player page', async () => {
     await playerComponentsPage.clickOnCreateButton();
     playerUpdatePage = new PlayerUpdatePage();
-    expect(await playerUpdatePage.getPageTitle()).to.eq('n42CApp.player.home.createOrEditLabel');
+    expect(await playerUpdatePage.getPageTitle()).to.eq('n42cApp.player.home.createOrEditLabel');
     await playerUpdatePage.cancel();
   });
 
@@ -40,7 +40,9 @@ describe('Player e2e test', () => {
 
     await playerComponentsPage.clickOnCreateButton();
 
-    await promise.all([playerUpdatePage.appUserSelectLastOption()]);
+    await promise.all([playerUpdatePage.setNameInput('name'), playerUpdatePage.appUserSelectLastOption()]);
+
+    expect(await playerUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
     await playerUpdatePage.save();
     expect(await playerUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
@@ -53,7 +55,7 @@ describe('Player e2e test', () => {
     await playerComponentsPage.clickOnLastDeleteButton();
 
     playerDeleteDialog = new PlayerDeleteDialog();
-    expect(await playerDeleteDialog.getDialogTitle()).to.eq('n42CApp.player.delete.question');
+    expect(await playerDeleteDialog.getDialogTitle()).to.eq('n42cApp.player.delete.question');
     await playerDeleteDialog.clickOnConfirmButton();
 
     expect(await playerComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

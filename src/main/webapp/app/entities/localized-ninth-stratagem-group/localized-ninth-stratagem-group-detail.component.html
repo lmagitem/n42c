@@ -1,36 +1,47 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="localizedNinthStratagemGroup">
-            <h2><span jhiTranslate="n42CApp.localizedNinthStratagemGroup.detail.title">Localized Ninth Stratagem Group</span> {{ localizedNinthStratagemGroup.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="localizedNinthStratagemGroup">
+      <h2>
+        <span jhiTranslate="n42cApp.localizedNinthStratagemGroup.detail.title">Localized Ninth Stratagem Group</span>
+        {{ localizedNinthStratagemGroup.id }}
+      </h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagemGroup.name">Name</span></dt>
-                <dd>
-                    <span>{{ localizedNinthStratagemGroup.name }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.localizedNinthStratagemGroup.stratagemGroup">Stratagem Group</span></dt>
-                <dd>
-                    <div *ngIf="localizedNinthStratagemGroup.stratagemGroup">
-                        <a [routerLink]="['/ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{ localizedNinthStratagemGroup.stratagemGroup?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.name">Name</span></dt>
+        <dd>
+          <span>{{ localizedNinthStratagemGroup.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.language">Language</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedNinthStratagemGroup.language }}">{{
+            localizedNinthStratagemGroup.language
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedNinthStratagemGroup.stratagemGroup">Stratagem Group</span></dt>
+        <dd>
+          <div *ngIf="localizedNinthStratagemGroup.stratagemGroup">
+            <a [routerLink]="['/entities', 'ninth-stratagem-group', localizedNinthStratagemGroup.stratagemGroup?.id, 'view']">{{
+              localizedNinthStratagemGroup.stratagemGroup?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button
+        type="button"
+        [routerLink]="['/entities', 'localized-ninth-stratagem-group', localizedNinthStratagemGroup.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

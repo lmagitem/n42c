@@ -18,6 +18,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="resolved" type="boolean">
+                <constraints nullable="false" />
+            </column>
             <column name="campaign_moment_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -48,6 +51,7 @@
                   tableName="ninth_battle">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="resolved" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

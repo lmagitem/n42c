@@ -40,7 +40,7 @@ export const ninthBattleRoute: Routes = [
     component: NinthBattleComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthBattle.home.title',
+      pageTitle: 'n42cApp.ninthBattle.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const ninthBattleRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthBattle.home.title',
+      pageTitle: 'n42cApp.ninthBattle.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const ninthBattleRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthBattle.home.title',
+      pageTitle: 'n42cApp.ninthBattle.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const ninthBattleRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthBattle.home.title',
+      pageTitle: 'n42cApp.ninthBattle.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

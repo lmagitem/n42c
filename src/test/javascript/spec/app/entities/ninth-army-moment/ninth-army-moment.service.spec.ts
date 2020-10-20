@@ -1,7 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { NinthArmyMomentService } from 'app/entities/ninth-army-moment/ninth-army-moment.service';
 import { INinthArmyMoment, NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
 
@@ -12,7 +10,6 @@ describe('Service Tests', () => {
     let httpMock: HttpTestingController;
     let elemDefault: INinthArmyMoment;
     let expectedResult: INinthArmyMoment | INinthArmyMoment[] | boolean | null;
-    let currentDate: moment.Moment;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -22,19 +19,13 @@ describe('Service Tests', () => {
       injector = getTestBed();
       service = injector.get(NinthArmyMomentService);
       httpMock = injector.get(HttpTestingController);
-      currentDate = moment();
 
-      elemDefault = new NinthArmyMoment(0, false, currentDate, 0, 0, 0, 0, 0, 0, 0, 0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new NinthArmyMoment(0, false, 0, 0, 0, 0, 0, 0, 0, 0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
-        const returnedFromService = Object.assign(
-          {
-            sinceInstant: currentDate.format(DATE_TIME_FORMAT),
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         service.find(123).subscribe(resp => (expectedResult = resp.body));
 
@@ -47,17 +38,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            sinceInstant: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            sinceInstant: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.create(new NinthArmyMoment()).subscribe(resp => (expectedResult = resp.body));
 
@@ -70,7 +55,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             current: true,
-            sinceInstant: currentDate.format(DATE_TIME_FORMAT),
             majorVictories: 1,
             minorVictories: 1,
             draws: 1,
@@ -85,12 +69,7 @@ describe('Service Tests', () => {
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            sinceInstant: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.update(expected).subscribe(resp => (expectedResult = resp.body));
 
@@ -103,7 +82,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             current: true,
-            sinceInstant: currentDate.format(DATE_TIME_FORMAT),
             majorVictories: 1,
             minorVictories: 1,
             draws: 1,
@@ -118,12 +96,7 @@ describe('Service Tests', () => {
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            sinceInstant: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         service.query().subscribe(resp => (expectedResult = resp.body));
 

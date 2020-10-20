@@ -6,9 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { INinthCampaignMoment, NinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
 import { NinthCampaignMomentService } from './ninth-campaign-moment.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
 import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
 
@@ -31,6 +33,8 @@ export class NinthCampaignMomentUpdateComponent implements OnInit {
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected ninthCampaignMomentService: NinthCampaignMomentService,
     protected ninthCampaignService: NinthCampaignService,
     protected activatedRoute: ActivatedRoute,
@@ -59,6 +63,22 @@ export class NinthCampaignMomentUpdateComponent implements OnInit {
       summary: ninthCampaignMoment.summary,
       description: ninthCampaignMoment.description,
       campaign: ninthCampaignMoment.campaign,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 

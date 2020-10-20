@@ -102,7 +102,6 @@ class NinthArmyMomentGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "current":null
-                , "sinceInstant":"2020-01-01T00:00:00.000Z"
                 , "majorVictories":"0"
                 , "minorVictories":"0"
                 , "draws":"0"
@@ -111,8 +110,8 @@ class NinthArmyMomentGatlingTest extends Simulation {
                 , "requisition":"0"
                 , "supplyLimit":"0"
                 , "supplyUsed":"0"
-                , "objectives":"SAMPLE_TEXT"
-                , "notes":"SAMPLE_TEXT"
+                , "objectives":null
+                , "notes":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_ninthArmyMoment_url"))).exitHereIfFailed

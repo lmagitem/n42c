@@ -28,7 +28,7 @@ describe('LocalizedNinthStratagem e2e test', () => {
     await navBarPage.goToEntity('localized-ninth-stratagem');
     localizedNinthStratagemComponentsPage = new LocalizedNinthStratagemComponentsPage();
     await browser.wait(ec.visibilityOf(localizedNinthStratagemComponentsPage.title), 5000);
-    expect(await localizedNinthStratagemComponentsPage.getTitle()).to.eq('n42CApp.localizedNinthStratagem.home.title');
+    expect(await localizedNinthStratagemComponentsPage.getTitle()).to.eq('n42cApp.localizedNinthStratagem.home.title');
     await browser.wait(
       ec.or(
         ec.visibilityOf(localizedNinthStratagemComponentsPage.entities),
@@ -41,7 +41,7 @@ describe('LocalizedNinthStratagem e2e test', () => {
   it('should load create LocalizedNinthStratagem page', async () => {
     await localizedNinthStratagemComponentsPage.clickOnCreateButton();
     localizedNinthStratagemUpdatePage = new LocalizedNinthStratagemUpdatePage();
-    expect(await localizedNinthStratagemUpdatePage.getPageTitle()).to.eq('n42CApp.localizedNinthStratagem.home.createOrEditLabel');
+    expect(await localizedNinthStratagemUpdatePage.getPageTitle()).to.eq('n42cApp.localizedNinthStratagem.home.createOrEditLabel');
     await localizedNinthStratagemUpdatePage.cancel();
   });
 
@@ -55,6 +55,7 @@ describe('LocalizedNinthStratagem e2e test', () => {
       localizedNinthStratagemUpdatePage.setSummaryInput('summary'),
       localizedNinthStratagemUpdatePage.setDescriptionInput('description'),
       localizedNinthStratagemUpdatePage.setKeywordsInput('keywords'),
+      localizedNinthStratagemUpdatePage.languageSelectLastOption(),
       localizedNinthStratagemUpdatePage.stratagemSelectLastOption(),
     ]);
 
@@ -83,7 +84,7 @@ describe('LocalizedNinthStratagem e2e test', () => {
     await localizedNinthStratagemComponentsPage.clickOnLastDeleteButton();
 
     localizedNinthStratagemDeleteDialog = new LocalizedNinthStratagemDeleteDialog();
-    expect(await localizedNinthStratagemDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedNinthStratagem.delete.question');
+    expect(await localizedNinthStratagemDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthStratagem.delete.question');
     await localizedNinthStratagemDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedNinthStratagemComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

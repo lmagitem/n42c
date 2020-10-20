@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -50,6 +51,8 @@ public class AppUserProfile implements Serializable {
      * A summary to show on the user profile.
      */
     @ApiModelProperty(value = "A summary to show on the user profile.")
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "summary")
     private String summary;
 

@@ -1,11 +1,13 @@
 import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
+import { Language } from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedNinthStratagem {
   id?: number;
   name?: string;
   summary?: string;
-  description?: string;
-  keywords?: string;
+  description?: any;
+  keywords?: any;
+  language?: Language;
   stratagem?: INinthStratagem;
 }
 
@@ -14,8 +16,9 @@ export class LocalizedNinthStratagem implements ILocalizedNinthStratagem {
     public id?: number,
     public name?: string,
     public summary?: string,
-    public description?: string,
-    public keywords?: string,
+    public description?: any,
+    public keywords?: any,
+    public language?: Language,
     public stratagem?: INinthStratagem
   ) {}
 }

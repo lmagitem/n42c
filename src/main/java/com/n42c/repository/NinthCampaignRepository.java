@@ -26,4 +26,7 @@ public interface NinthCampaignRepository extends JpaRepository<NinthCampaign, Lo
 
     @Query("select ninthCampaign from NinthCampaign ninthCampaign left join fetch ninthCampaign.authors left join fetch ninthCampaign.participants left join fetch ninthCampaign.campaignStratagems where ninthCampaign.id =:id")
     Optional<NinthCampaign> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select ninthCampaignMoment.id from NinthCampaignMoment ninthCampaignMoment where ninthCampaignMoment.campaign.id =:id order by ninthCampaignMoment.sinceInstant asc")
+    List<Long> findLinkedNinthCampaignMomentsIds(@Param("id") Long id);
 }

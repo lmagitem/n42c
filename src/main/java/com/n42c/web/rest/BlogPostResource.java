@@ -4,24 +4,30 @@ import com.n42c.domain.BlogPost;
 import com.n42c.repository.BlogPostRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
+import com.n42c.web.rest.utils.RestServiceUtils;
 import io.github.jhipster.web.util.HeaderUtil;
-import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,20 +96,45 @@ public class BlogPostResource {
      * {@code GET  /blog-posts} : get all the blogPosts.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogPosts in body.
      */
     @GetMapping("/blog-posts")
-    public ResponseEntity<List<BlogPost>> getAllBlogPosts(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get a page of BlogPosts");
-        Page<BlogPost> page;
-        if (eagerload) {
-            page = blogPostRepository.findAllWithEagerRelationships(pageable);
+    public ResponseEntity<List<BlogPost>> getAllBlogPosts(Pageable pageable) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, null));
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, null));
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        if (authorities == null)
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
+
+        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            log.debug("REST request to get all Blogs - as Admin");
+            return RestServiceUtils.returnPagedListWithHeaders(blogPostRepository.findAll(pageable));
         } else {
-            page = blogPostRepository.findAll(pageable);
+            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
         }
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<BlogPost> getPostsByCurrentUserOrWriter(Pageable pageable, Object principal) {
+        if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get all Blog Posts - as User (with UserDetails)");
+                return blogPostRepository.getAllByIsCurrentSpringUserOrWriter(pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get all Blog Posts - as User (with Oidc token)");
+                return blogPostRepository.getAllByIsCurrentOidcUserOrWriter(pageable);
+            }
+        }
+        log.debug("REST request to get all Blog Posts - as Anonymous");
+        return blogPostRepository.getAllByIsWriter(pageable);
     }
 
     /**

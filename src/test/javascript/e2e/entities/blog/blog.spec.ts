@@ -24,14 +24,14 @@ describe('Blog e2e test', () => {
     await navBarPage.goToEntity('blog');
     blogComponentsPage = new BlogComponentsPage();
     await browser.wait(ec.visibilityOf(blogComponentsPage.title), 5000);
-    expect(await blogComponentsPage.getTitle()).to.eq('n42CApp.blog.home.title');
+    expect(await blogComponentsPage.getTitle()).to.eq('n42cApp.blog.home.title');
     await browser.wait(ec.or(ec.visibilityOf(blogComponentsPage.entities), ec.visibilityOf(blogComponentsPage.noResult)), 1000);
   });
 
   it('should load create Blog page', async () => {
     await blogComponentsPage.clickOnCreateButton();
     blogUpdatePage = new BlogUpdatePage();
-    expect(await blogUpdatePage.getPageTitle()).to.eq('n42CApp.blog.home.createOrEditLabel');
+    expect(await blogUpdatePage.getPageTitle()).to.eq('n42cApp.blog.home.createOrEditLabel');
     await blogUpdatePage.cancel();
   });
 
@@ -55,7 +55,7 @@ describe('Blog e2e test', () => {
     await blogComponentsPage.clickOnLastDeleteButton();
 
     blogDeleteDialog = new BlogDeleteDialog();
-    expect(await blogDeleteDialog.getDialogTitle()).to.eq('n42CApp.blog.delete.question');
+    expect(await blogDeleteDialog.getDialogTitle()).to.eq('n42cApp.blog.delete.question');
     await blogDeleteDialog.clickOnConfirmButton();
 
     expect(await blogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

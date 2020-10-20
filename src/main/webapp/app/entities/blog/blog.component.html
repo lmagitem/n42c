@@ -1,67 +1,84 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.blog.home.title">Blogs</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.blog.home.title">Blogs</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-blog" [routerLink]="['/blog/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.blog.home.createLabel">
-            Create a new Blog
-            </span>
-        </button>
-    </h2>
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-blog" [routerLink]="['/entities/blog/new']">
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.blog.home.createLabel">
+        Create a new Blog
+      </span>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="blogs?.length === 0">
-        <span jhiTranslate="n42CApp.blog.home.notFound">No blogs found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="blogs?.length === 0">
+    <span jhiTranslate="n42cApp.blog.home.notFound">No blogs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="blogs && blogs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="n42cApp.blog.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="author.displayedName">
+            <span jhiTranslate="n42cApp.blog.author">Author</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let blog of blogs; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'blog', blog.id, 'view']">{{ blog.id }}</a>
+          </td>
+          <td>{{ blog.name }}</td>
+          <td>
+            <div *ngIf="blog.author">
+              <a [routerLink]="['/entities', 'app-user', blog.author?.id, 'view']">{{ blog.author?.displayedName }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/entities', 'blog', blog.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/entities', 'blog', blog.id, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(blog)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="blogs && blogs.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="blogs && blogs.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.blog.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.blog.author">Author</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let blog of blogs ;trackBy: trackId">
-                    <td><a [routerLink]="['/blog', blog.id, 'view']">{{ blog.id }}</a></td>
-                    <td>{{ blog.name }}</td>
-                    <td>
-                        <div *ngIf="blog.author">
-                            <a [routerLink]="['/app-user', blog.author?.id, 'view']" >{{ blog.author?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/blog', blog.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-
-                            <button type="submit"
-                                    [routerLink]="['/blog', blog.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
-                            <button type="submit" (click)="delete(blog)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
     </div>
+  </div>
 </div>

@@ -28,7 +28,7 @@ describe('LocalizedPostContent e2e test', () => {
     await navBarPage.goToEntity('localized-post-content');
     localizedPostContentComponentsPage = new LocalizedPostContentComponentsPage();
     await browser.wait(ec.visibilityOf(localizedPostContentComponentsPage.title), 5000);
-    expect(await localizedPostContentComponentsPage.getTitle()).to.eq('n42CApp.localizedPostContent.home.title');
+    expect(await localizedPostContentComponentsPage.getTitle()).to.eq('n42cApp.localizedPostContent.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(localizedPostContentComponentsPage.entities), ec.visibilityOf(localizedPostContentComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('LocalizedPostContent e2e test', () => {
   it('should load create LocalizedPostContent page', async () => {
     await localizedPostContentComponentsPage.clickOnCreateButton();
     localizedPostContentUpdatePage = new LocalizedPostContentUpdatePage();
-    expect(await localizedPostContentUpdatePage.getPageTitle()).to.eq('n42CApp.localizedPostContent.home.createOrEditLabel');
+    expect(await localizedPostContentUpdatePage.getPageTitle()).to.eq('n42cApp.localizedPostContent.home.createOrEditLabel');
     await localizedPostContentUpdatePage.cancel();
   });
 
@@ -48,12 +48,14 @@ describe('LocalizedPostContent e2e test', () => {
     await localizedPostContentComponentsPage.clickOnCreateButton();
 
     await promise.all([
+      localizedPostContentUpdatePage.setTitleInput('title'),
       localizedPostContentUpdatePage.setExcerptInput('excerpt'),
       localizedPostContentUpdatePage.setContentInput('content'),
       localizedPostContentUpdatePage.languageSelectLastOption(),
       localizedPostContentUpdatePage.postSelectLastOption(),
     ]);
 
+    expect(await localizedPostContentUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
     expect(await localizedPostContentUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
     expect(await localizedPostContentUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
 
@@ -71,7 +73,7 @@ describe('LocalizedPostContent e2e test', () => {
     await localizedPostContentComponentsPage.clickOnLastDeleteButton();
 
     localizedPostContentDeleteDialog = new LocalizedPostContentDeleteDialog();
-    expect(await localizedPostContentDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedPostContent.delete.question');
+    expect(await localizedPostContentDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedPostContent.delete.question');
     await localizedPostContentDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedPostContentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

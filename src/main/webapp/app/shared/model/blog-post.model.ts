@@ -6,6 +6,7 @@ import { IBlog } from 'app/shared/model/blog.model';
 
 export interface IBlogPost {
   id?: number;
+  title?: string;
   published?: Moment;
   modified?: Moment;
   localizations?: ILocalizedPostContent[];
@@ -17,6 +18,7 @@ export interface IBlogPost {
 export class BlogPost implements IBlogPost {
   constructor(
     public id?: number,
+    public title?: string,
     public published?: Moment,
     public modified?: Moment,
     public localizations?: ILocalizedPostContent[],

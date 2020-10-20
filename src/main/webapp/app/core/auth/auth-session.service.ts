@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
-import { SERVER_API_URL } from 'app/app.constants';
-import { Logout } from 'app/core/login/logout.model';
+import {SERVER_API_URL} from 'app/app.constants';
+import {Logout} from 'app/core/login/logout.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerProvider {

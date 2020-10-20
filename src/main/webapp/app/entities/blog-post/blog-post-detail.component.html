@@ -1,52 +1,56 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="blogPost">
-            <h2><span jhiTranslate="n42CApp.blogPost.detail.title">Blog Post</span> {{ blogPost.id }}</h2>
+  <div class="col-8">
+    <div *ngIf="blogPost">
+      <h2><span jhiTranslate="n42cApp.blogPost.detail.title">Blog Post</span> {{ blogPost.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.blogPost.published" [ngbTooltip]="'n42CApp.blogPost.help.published' | translate">Published</span></dt>
-                <dd>
-                    <span>{{ blogPost.published }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.blogPost.modified" [ngbTooltip]="'n42CApp.blogPost.help.modified' | translate">Modified</span></dt>
-                <dd>
-                    <span>{{ blogPost.modified }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.blogPost.authors">Authors</span></dt>
-                <dd>
-                    <span *ngFor="let authors of blogPost.authors; let last = last">
-                        <a [routerLink]="['/app-user', authors?.id, 'view']">{{ authors.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.blogPost.categories">Categories</span></dt>
-                <dd>
-                    <span *ngFor="let categories of blogPost.categories; let last = last">
-                        <a [routerLink]="['/blog-category', categories?.id, 'view']">{{ categories.id }}</a>{{ last ? '' : ', ' }}
-                    </span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.blogPost.blog">Blog</span></dt>
-                <dd>
-                    <div *ngIf="blogPost.blog">
-                        <a [routerLink]="['/blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.blogPost.title" [ngbTooltip]="'n42cApp.blogPost.help.title' | translate">Title</span></dt>
+        <dd>
+          <span>{{ blogPost.title }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.blogPost.published" [ngbTooltip]="'n42cApp.blogPost.help.published' | translate">Published</span>
+        </dt>
+        <dd>
+          <span>{{ blogPost.published }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.blogPost.modified" [ngbTooltip]="'n42cApp.blogPost.help.modified' | translate">Modified</span></dt>
+        <dd>
+          <span>{{ blogPost.modified }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.blogPost.authors">Authors</span></dt>
+        <dd>
+          <span *ngFor="let authors of blogPost.authors; let last = last">
+            <a [routerLink]="['/entities', 'app-user', authors?.id, 'view']">{{ authors.displayedName }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.blogPost.categories">Categories</span></dt>
+        <dd>
+          <span *ngFor="let categories of blogPost.categories; let last = last">
+            <a [routerLink]="['/entities', 'blog-category', categories?.id, 'view']">{{ categories.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.blogPost.blog">Blog</span></dt>
+        <dd>
+          <div *ngIf="blogPost.blog">
+            <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.name }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/blog-post', blogPost.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities', 'blog-post', blogPost.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

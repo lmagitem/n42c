@@ -19,9 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +42,6 @@ public class NinthArmyMomentResourceIT {
 
     private static final Boolean DEFAULT_CURRENT = false;
     private static final Boolean UPDATED_CURRENT = true;
-
-    private static final Instant DEFAULT_SINCE_INSTANT = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_SINCE_INSTANT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Integer DEFAULT_MAJOR_VICTORIES = 1;
     private static final Integer UPDATED_MAJOR_VICTORIES = 2;
@@ -100,7 +96,6 @@ public class NinthArmyMomentResourceIT {
     public static NinthArmyMoment createEntity(EntityManager em) {
         NinthArmyMoment ninthArmyMoment = new NinthArmyMoment()
             .current(DEFAULT_CURRENT)
-            .sinceInstant(DEFAULT_SINCE_INSTANT)
             .majorVictories(DEFAULT_MAJOR_VICTORIES)
             .minorVictories(DEFAULT_MINOR_VICTORIES)
             .draws(DEFAULT_DRAWS)
@@ -122,7 +117,6 @@ public class NinthArmyMomentResourceIT {
     public static NinthArmyMoment createUpdatedEntity(EntityManager em) {
         NinthArmyMoment ninthArmyMoment = new NinthArmyMoment()
             .current(UPDATED_CURRENT)
-            .sinceInstant(UPDATED_SINCE_INSTANT)
             .majorVictories(UPDATED_MAJOR_VICTORIES)
             .minorVictories(UPDATED_MINOR_VICTORIES)
             .draws(UPDATED_DRAWS)
@@ -156,7 +150,6 @@ public class NinthArmyMomentResourceIT {
         assertThat(ninthArmyMomentList).hasSize(databaseSizeBeforeCreate + 1);
         NinthArmyMoment testNinthArmyMoment = ninthArmyMomentList.get(ninthArmyMomentList.size() - 1);
         assertThat(testNinthArmyMoment.isCurrent()).isEqualTo(DEFAULT_CURRENT);
-        assertThat(testNinthArmyMoment.getSinceInstant()).isEqualTo(DEFAULT_SINCE_INSTANT);
         assertThat(testNinthArmyMoment.getMajorVictories()).isEqualTo(DEFAULT_MAJOR_VICTORIES);
         assertThat(testNinthArmyMoment.getMinorVictories()).isEqualTo(DEFAULT_MINOR_VICTORIES);
         assertThat(testNinthArmyMoment.getDraws()).isEqualTo(DEFAULT_DRAWS);
@@ -210,25 +203,6 @@ public class NinthArmyMomentResourceIT {
 
     @Test
     @Transactional
-    public void checkSinceInstantIsRequired() throws Exception {
-        int databaseSizeBeforeTest = ninthArmyMomentRepository.findAll().size();
-        // set the field null
-        ninthArmyMoment.setSinceInstant(null);
-
-        // Create the NinthArmyMoment, which fails.
-
-
-        restNinthArmyMomentMockMvc.perform(post("/api/ninth-army-moments").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(ninthArmyMoment)))
-            .andExpect(status().isBadRequest());
-
-        List<NinthArmyMoment> ninthArmyMomentList = ninthArmyMomentRepository.findAll();
-        assertThat(ninthArmyMomentList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllNinthArmyMoments() throws Exception {
         // Initialize the database
         ninthArmyMomentRepository.saveAndFlush(ninthArmyMoment);
@@ -239,7 +213,6 @@ public class NinthArmyMomentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ninthArmyMoment.getId().intValue())))
             .andExpect(jsonPath("$.[*].current").value(hasItem(DEFAULT_CURRENT.booleanValue())))
-            .andExpect(jsonPath("$.[*].sinceInstant").value(hasItem(DEFAULT_SINCE_INSTANT.toString())))
             .andExpect(jsonPath("$.[*].majorVictories").value(hasItem(DEFAULT_MAJOR_VICTORIES)))
             .andExpect(jsonPath("$.[*].minorVictories").value(hasItem(DEFAULT_MINOR_VICTORIES)))
             .andExpect(jsonPath("$.[*].draws").value(hasItem(DEFAULT_DRAWS)))
@@ -248,8 +221,8 @@ public class NinthArmyMomentResourceIT {
             .andExpect(jsonPath("$.[*].requisition").value(hasItem(DEFAULT_REQUISITION)))
             .andExpect(jsonPath("$.[*].supplyLimit").value(hasItem(DEFAULT_SUPPLY_LIMIT)))
             .andExpect(jsonPath("$.[*].supplyUsed").value(hasItem(DEFAULT_SUPPLY_USED)))
-            .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES)))
-            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
+            .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES.toString())))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES.toString())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -284,7 +257,6 @@ public class NinthArmyMomentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(ninthArmyMoment.getId().intValue()))
             .andExpect(jsonPath("$.current").value(DEFAULT_CURRENT.booleanValue()))
-            .andExpect(jsonPath("$.sinceInstant").value(DEFAULT_SINCE_INSTANT.toString()))
             .andExpect(jsonPath("$.majorVictories").value(DEFAULT_MAJOR_VICTORIES))
             .andExpect(jsonPath("$.minorVictories").value(DEFAULT_MINOR_VICTORIES))
             .andExpect(jsonPath("$.draws").value(DEFAULT_DRAWS))
@@ -293,8 +265,8 @@ public class NinthArmyMomentResourceIT {
             .andExpect(jsonPath("$.requisition").value(DEFAULT_REQUISITION))
             .andExpect(jsonPath("$.supplyLimit").value(DEFAULT_SUPPLY_LIMIT))
             .andExpect(jsonPath("$.supplyUsed").value(DEFAULT_SUPPLY_USED))
-            .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES))
-            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
+            .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES.toString()))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES.toString()));
     }
     @Test
     @Transactional
@@ -318,7 +290,6 @@ public class NinthArmyMomentResourceIT {
         em.detach(updatedNinthArmyMoment);
         updatedNinthArmyMoment
             .current(UPDATED_CURRENT)
-            .sinceInstant(UPDATED_SINCE_INSTANT)
             .majorVictories(UPDATED_MAJOR_VICTORIES)
             .minorVictories(UPDATED_MINOR_VICTORIES)
             .draws(UPDATED_DRAWS)
@@ -340,7 +311,6 @@ public class NinthArmyMomentResourceIT {
         assertThat(ninthArmyMomentList).hasSize(databaseSizeBeforeUpdate);
         NinthArmyMoment testNinthArmyMoment = ninthArmyMomentList.get(ninthArmyMomentList.size() - 1);
         assertThat(testNinthArmyMoment.isCurrent()).isEqualTo(UPDATED_CURRENT);
-        assertThat(testNinthArmyMoment.getSinceInstant()).isEqualTo(UPDATED_SINCE_INSTANT);
         assertThat(testNinthArmyMoment.getMajorVictories()).isEqualTo(UPDATED_MAJOR_VICTORIES);
         assertThat(testNinthArmyMoment.getMinorVictories()).isEqualTo(UPDATED_MINOR_VICTORIES);
         assertThat(testNinthArmyMoment.getDraws()).isEqualTo(UPDATED_DRAWS);

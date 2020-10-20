@@ -1,7 +1,7 @@
-import { ILocalizedNinthObjective } from 'app/shared/model/localized-ninth-objective.model';
-import { INinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
-import { NinthObjectiveType } from 'app/shared/model/enumerations/ninth-objective-type.model';
+import {ILocalizedNinthObjective} from 'app/shared/model/localized-ninth-objective.model';
+import {INinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
+import {NinthObjectiveType} from 'app/shared/model/enumerations/ninth-objective-type.model';
 
 export interface INinthObjective {
   id?: number;

@@ -1,48 +1,70 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="profilePartSimpleItem">
-            <h2><span jhiTranslate="n42CApp.profilePartSimpleItem.detail.title">Profile Part Simple Item</span> {{ profilePartSimpleItem.id }}</h2>
+  <div class="col-12">
+    <div *ngIf="profilePartSimpleItem">
+      <h2>
+        <span jhiTranslate="n42cApp.profilePartSimpleItem.detail.title">Profile Part Simple Item</span> {{ profilePartSimpleItem.id }}
+      </h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.profilePartSimpleItem.title" [ngbTooltip]="'n42CApp.profilePartSimpleItem.help.title' | translate">Title</span></dt>
-                <dd>
-                    <span>{{ profilePartSimpleItem.title }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartSimpleItem.subTitle" [ngbTooltip]="'n42CApp.profilePartSimpleItem.help.subTitle' | translate">Sub Title</span></dt>
-                <dd>
-                    <span>{{ profilePartSimpleItem.subTitle }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartSimpleItem.date" [ngbTooltip]="'n42CApp.profilePartSimpleItem.help.date' | translate">Date</span></dt>
-                <dd>
-                    <span>{{ profilePartSimpleItem.date }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartSimpleItem.content" [ngbTooltip]="'n42CApp.profilePartSimpleItem.help.content' | translate">Content</span></dt>
-                <dd>
-                    <span>{{ profilePartSimpleItem.content }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42CApp.profilePartSimpleItem.profilePart">Profile Part</span></dt>
-                <dd>
-                    <div *ngIf="profilePartSimpleItem.profilePart">
-                        <a [routerLink]="['/profile-part', profilePartSimpleItem.profilePart?.id, 'view']">{{ profilePartSimpleItem.profilePart?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt>
+          <span jhiTranslate="n42cApp.profilePartSimpleItem.title" [ngbTooltip]="'n42cApp.profilePartSimpleItem.help.title' | translate"
+            >Title</span
+          >
+        </dt>
+        <dd>
+          <span>{{ profilePartSimpleItem.title }}</span>
+        </dd>
+        <dt>
+          <span
+            jhiTranslate="n42cApp.profilePartSimpleItem.subTitle"
+            [ngbTooltip]="'n42cApp.profilePartSimpleItem.help.subTitle' | translate"
+            >Sub Title</span
+          >
+        </dt>
+        <dd>
+          <span>{{ profilePartSimpleItem.subTitle }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.profilePartSimpleItem.date" [ngbTooltip]="'n42cApp.profilePartSimpleItem.help.date' | translate"
+            >Date</span
+          >
+        </dt>
+        <dd>
+          <span>{{ profilePartSimpleItem.date }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.profilePartSimpleItem.content" [ngbTooltip]="'n42cApp.profilePartSimpleItem.help.content' | translate"
+            >Content</span
+          >
+        </dt>
+        <dd>
+          <span>{{ profilePartSimpleItem.content }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.profilePartSimpleItem.profilePart">Profile Part</span></dt>
+        <dd>
+          <div *ngIf="profilePartSimpleItem.profilePart">
+            <a [routerLink]="['/entities', 'profile-part', profilePartSimpleItem.profilePart?.id, 'view']">{{
+              profilePartSimpleItem.profilePart?.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/profile-part-simple-item', profilePartSimpleItem.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button
+        type="button"
+        [routerLink]="['/entities', 'profile-part-simple-item', profilePartSimpleItem.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

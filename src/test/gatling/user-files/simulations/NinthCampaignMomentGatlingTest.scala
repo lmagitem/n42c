@@ -104,8 +104,8 @@ class NinthCampaignMomentGatlingTest extends Simulation {
                 , "current":null
                 , "sinceInstant":"2020-01-01T00:00:00.000Z"
                 , "name":"SAMPLE_TEXT"
-                , "summary":"SAMPLE_TEXT"
-                , "description":"SAMPLE_TEXT"
+                , "summary":null
+                , "description":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_ninthCampaignMoment_url"))).exitHereIfFailed

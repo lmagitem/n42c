@@ -104,7 +104,7 @@ class ProfilePartLinkedExperienceGatlingTest extends Simulation {
                 , "title":"SAMPLE_TEXT"
                 , "subTitle":"SAMPLE_TEXT"
                 , "date":"2020-01-01T00:00:00.000Z"
-                , "content":"SAMPLE_TEXT"
+                , "content":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_profilePartLinkedExperience_url"))).exitHereIfFailed

@@ -24,7 +24,7 @@ describe('ProfilePart e2e test', () => {
     await navBarPage.goToEntity('profile-part');
     profilePartComponentsPage = new ProfilePartComponentsPage();
     await browser.wait(ec.visibilityOf(profilePartComponentsPage.title), 5000);
-    expect(await profilePartComponentsPage.getTitle()).to.eq('n42CApp.profilePart.home.title');
+    expect(await profilePartComponentsPage.getTitle()).to.eq('n42cApp.profilePart.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(profilePartComponentsPage.entities), ec.visibilityOf(profilePartComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('ProfilePart e2e test', () => {
   it('should load create ProfilePart page', async () => {
     await profilePartComponentsPage.clickOnCreateButton();
     profilePartUpdatePage = new ProfilePartUpdatePage();
-    expect(await profilePartUpdatePage.getPageTitle()).to.eq('n42CApp.profilePart.home.createOrEditLabel');
+    expect(await profilePartUpdatePage.getPageTitle()).to.eq('n42cApp.profilePart.home.createOrEditLabel');
     await profilePartUpdatePage.cancel();
   });
 
@@ -65,7 +65,7 @@ describe('ProfilePart e2e test', () => {
     await profilePartComponentsPage.clickOnLastDeleteButton();
 
     profilePartDeleteDialog = new ProfilePartDeleteDialog();
-    expect(await profilePartDeleteDialog.getDialogTitle()).to.eq('n42CApp.profilePart.delete.question');
+    expect(await profilePartDeleteDialog.getDialogTitle()).to.eq('n42cApp.profilePart.delete.question');
     await profilePartDeleteDialog.clickOnConfirmButton();
 
     expect(await profilePartComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

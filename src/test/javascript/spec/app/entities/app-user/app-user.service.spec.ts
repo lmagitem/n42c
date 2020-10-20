@@ -21,18 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(AppUserService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new AppUser(
-        0,
-        'AAAAAAA',
-        'AAAAAAA',
-        'AAAAAAA',
-        false,
-        AppUserRights.MOD,
-        AppUserRights.MOD,
-        AppUserRights.MOD,
-        AppUserRights.MOD,
-        'AAAAAAA'
-      );
+      elemDefault = new AppUser(0, 'AAAAAAA', 'AAAAAAA', false, AppUserRights.MOD, AppUserRights.MOD, AppUserRights.MOD, AppUserRights.MOD);
     });
 
     describe('Service methods', () => {
@@ -68,13 +57,11 @@ describe('Service Tests', () => {
           {
             userName: 'BBBBBB',
             displayedName: 'BBBBBB',
-            email: 'BBBBBB',
             admin: true,
             shopRights: 'BBBBBB',
             blogRights: 'BBBBBB',
             profileRights: 'BBBBBB',
             scriptoriumRights: 'BBBBBB',
-            avatarUrl: 'BBBBBB',
           },
           elemDefault
         );
@@ -93,13 +80,11 @@ describe('Service Tests', () => {
           {
             userName: 'BBBBBB',
             displayedName: 'BBBBBB',
-            email: 'BBBBBB',
             admin: true,
             shopRights: 'BBBBBB',
             blogRights: 'BBBBBB',
             profileRights: 'BBBBBB',
             scriptoriumRights: 'BBBBBB',
-            avatarUrl: 'BBBBBB',
           },
           elemDefault
         );

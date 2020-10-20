@@ -3,10 +3,14 @@ package com.n42c.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
+
+import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthObjective.
@@ -26,8 +30,15 @@ public class LocalizedNinthObjective implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", nullable = false)
+    private Language language;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
@@ -68,6 +79,19 @@ public class LocalizedNinthObjective implements Serializable {
         this.description = description;
     }
 
+    public Language getLanguage() {
+        return language;
+    }
+
+    public LocalizedNinthObjective language(Language language) {
+        this.language = language;
+        return this;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
     public NinthObjective getObjective() {
         return objective;
     }
@@ -105,6 +129,7 @@ public class LocalizedNinthObjective implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", language='" + getLanguage() + "'" +
             "}";
     }
 }

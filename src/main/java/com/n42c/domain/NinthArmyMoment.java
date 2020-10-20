@@ -3,12 +3,12 @@ package com.n42c.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,10 +30,6 @@ public class NinthArmyMoment implements Serializable {
     @NotNull
     @Column(name = "current", nullable = false)
     private Boolean current;
-
-    @NotNull
-    @Column(name = "since_instant", nullable = false)
-    private Instant sinceInstant;
 
     @Column(name = "major_victories")
     private Integer majorVictories;
@@ -59,9 +55,13 @@ public class NinthArmyMoment implements Serializable {
     @Column(name = "supply_used")
     private Integer supplyUsed;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "objectives")
     private String objectives;
 
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "notes")
     private String notes;
 
@@ -107,19 +107,6 @@ public class NinthArmyMoment implements Serializable {
 
     public void setCurrent(Boolean current) {
         this.current = current;
-    }
-
-    public Instant getSinceInstant() {
-        return sinceInstant;
-    }
-
-    public NinthArmyMoment sinceInstant(Instant sinceInstant) {
-        this.sinceInstant = sinceInstant;
-        return this;
-    }
-
-    public void setSinceInstant(Instant sinceInstant) {
-        this.sinceInstant = sinceInstant;
     }
 
     public Integer getMajorVictories() {
@@ -351,7 +338,6 @@ public class NinthArmyMoment implements Serializable {
         return "NinthArmyMoment{" +
             "id=" + getId() +
             ", current='" + isCurrent() + "'" +
-            ", sinceInstant='" + getSinceInstant() + "'" +
             ", majorVictories=" + getMajorVictories() +
             ", minorVictories=" + getMinorVictories() +
             ", draws=" + getDraws() +

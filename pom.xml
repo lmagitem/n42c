@@ -5,7 +5,7 @@
 
     <groupId>com.n42c</groupId>
     <artifactId>n42c</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
     <name>N42C</name>
 
@@ -20,7 +20,6 @@
     <!-- jhipster-needle-distribution-management -->
 
     <properties>
-        <!-- Build properties -->
         <maven.version>3.3.9</maven.version>
         <java.version>1.8</java.version>
         <node.version>v12.16.1</node.version>
@@ -35,9 +34,9 @@
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
         <!-- These remain empty unless the corresponding profile is active -->
-        <profile.no-liquibase />
-        <profile.swagger />
-        <profile.tls />
+        <profile.no-liquibase/>
+        <profile.swagger/>
+        <profile.tls/>
 
         <!-- Dependency versions -->
         <jhipster-dependencies.version>3.8.0</jhipster-dependencies.version>
@@ -625,7 +624,9 @@
                     <version>${liquibase.version}</version>
                     <configuration>
                         <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
-                        <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+                        <diffChangeLogFile>
+                            ${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml
+                        </diffChangeLogFile>
                         <driver>org.h2.Driver</driver>
                         <url>jdbc:h2:file:${project.build.directory}/h2db/db/n42c</url>
                         <defaultSchemaName></defaultSchemaName>
@@ -635,7 +636,9 @@
                         <verbose>true</verbose>
                         <logging>debug</logging>
                         <contexts>!test</contexts>
-                        <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token</diffExcludeObjects>
+                        <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details,
+                            oauth_client_token, oauth_code, oauth_refresh_token
+                        </diffExcludeObjects>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -698,7 +701,7 @@
                             <id>enforce-dependencyConvergence</id>
                             <configuration>
                                 <rules>
-                                    <DependencyConvergence />
+                                    <DependencyConvergence/>
                                 </rules>
                                 <fail>false</fail>
                             </configuration>
@@ -710,11 +713,15 @@
                     <configuration>
                         <rules>
                             <requireMavenVersion>
-                                <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+                                <message>You are running an older version of Maven. JHipster requires at least Maven
+                                    ${maven.version}
+                                </message>
                                 <version>[${maven.version},)</version>
                             </requireMavenVersion>
                             <requireJavaVersion>
-                                <message>You are running an incompatible version of Java. JHipster supports JDK 8 to 14.</message>
+                                <message>You are running an incompatible version of Java. JHipster supports JDK 8 to
+                                    14.
+                                </message>
                                 <version>[1.8,15)</version>
                             </requireJavaVersion>
                         </rules>
@@ -1029,7 +1036,8 @@
             </build>
             <properties>
                 <!-- default Spring profiles -->
-                <spring.profiles.active>prod${profile.swagger}${profile.tls}${profile.no-liquibase}</spring.profiles.active>
+                <spring.profiles.active>prod${profile.swagger}${profile.tls}${profile.no-liquibase}
+                </spring.profiles.active>
             </properties>
         </profile>
         <profile>

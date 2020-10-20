@@ -40,7 +40,7 @@ export const ninthCampaignMomentRoute: Routes = [
     component: NinthCampaignMomentComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthCampaignMoment.home.title',
+      pageTitle: 'n42cApp.ninthCampaignMoment.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const ninthCampaignMomentRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthCampaignMoment.home.title',
+      pageTitle: 'n42cApp.ninthCampaignMoment.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const ninthCampaignMomentRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthCampaignMoment.home.title',
+      pageTitle: 'n42cApp.ninthCampaignMoment.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const ninthCampaignMomentRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthCampaignMoment.home.title',
+      pageTitle: 'n42cApp.ninthCampaignMoment.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

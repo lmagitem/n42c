@@ -32,6 +32,7 @@ export class BlogPostUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    title: [null, [Validators.required]],
     published: [null, [Validators.required]],
     modified: [null, [Validators.required]],
     authors: [],
@@ -69,6 +70,7 @@ export class BlogPostUpdateComponent implements OnInit {
   updateForm(blogPost: IBlogPost): void {
     this.editForm.patchValue({
       id: blogPost.id,
+      title: blogPost.title,
       published: blogPost.published ? blogPost.published.format(DATE_TIME_FORMAT) : null,
       modified: blogPost.modified ? blogPost.modified.format(DATE_TIME_FORMAT) : null,
       authors: blogPost.authors,
@@ -95,6 +97,7 @@ export class BlogPostUpdateComponent implements OnInit {
     return {
       ...new BlogPost(),
       id: this.editForm.get(['id'])!.value,
+      title: this.editForm.get(['title'])!.value,
       published: this.editForm.get(['published'])!.value ? moment(this.editForm.get(['published'])!.value, DATE_TIME_FORMAT) : undefined,
       modified: this.editForm.get(['modified'])!.value ? moment(this.editForm.get(['modified'])!.value, DATE_TIME_FORMAT) : undefined,
       authors: this.editForm.get(['authors'])!.value,

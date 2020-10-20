@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "localizedNinthStratagemGroup": {
       "home": {
         "title": "LocalizedNinthStratagemGroups",
@@ -17,6 +17,7 @@
         "title": "Localized Ninth Stratagem Group"
       },
       "name": "Name",
+      "language": "Language",
       "stratagemGroup": "Stratagem Group"
     }
   }

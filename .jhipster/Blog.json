@@ -22,14 +22,14 @@
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "blogs",
       "relationshipName": "author",
-      "otherEntityField": "id"
+      "otherEntityField": "displayedName"
     }
   ],
   "changelogDate": "20200908193612",
   "javadoc": "A specific blog, owned by a user",
   "entityTableName": "blog",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "pagination",
   "service": "no",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

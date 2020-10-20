@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "localizedBlogCategory": {
       "home": {
         "title": "Localized Blog Categories",
@@ -20,8 +20,8 @@
       "language": "Language",
       "category": "Category",
       "help": {
-        "name": "This category&#39;s name.",
-        "language": "This category&#39;s language."
+        "name": "This category's localized name.",
+        "language": "This category's language."
       }
     }
   }

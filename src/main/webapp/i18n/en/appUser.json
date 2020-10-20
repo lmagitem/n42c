@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "appUser": {
       "home": {
         "title": "App Users",
@@ -18,33 +18,35 @@
       },
       "userName": "User Name",
       "displayedName": "Displayed Name",
-      "email": "Email",
       "admin": "Admin",
       "shopRights": "Shop Rights",
       "blogRights": "Blog Rights",
       "profileRights": "Profile Rights",
       "scriptoriumRights": "Scriptorium Rights",
-      "avatarUrl": "Avatar Url",
       "user": "User",
       "blogs": "Blogs",
       "profiles": "Profiles",
       "givenFriendships": "Given Friendships",
       "askedFriendRequests": "Asked Friend Requests",
       "player": "Player",
+      "imageUrl": "Avatar URL",
       "receivedFriendships": "Received Friendships",
       "pendingFriendRequests": "Pending Friend Requests",
       "products": "Products",
       "posts": "Posts",
       "help": {
-        "userName": "The user account&#39;s name.",
+        "id": "L'identifiant de cet utilisateur dans l'application.",
+        "userId": "L'identifiant sécurisé de cet utilisateur.",
+        "userName": "The user account's name.",
         "displayedName": "The name shown throughout the app.",
-        "email": "The user email adress.",
         "admin": "Does the user have admin rights?",
         "shopRights": "The user rights regarding the shop.",
         "blogRights": "The user rights regarding blog writing.",
         "profileRights": "The user rights regarding its profile.",
         "scriptoriumRights": "The user rights regarding the Scriptorium.",
-        "avatarUrl": "The user&#39;s avatar url."
+        "givenFriendships": "The user's list of friends in the app.",
+        "askedFriendRequests": "The user's not yet answered friend requests.",
+        "imageUrl": "The URL used to display this user's avatar."
       }
     }
   }

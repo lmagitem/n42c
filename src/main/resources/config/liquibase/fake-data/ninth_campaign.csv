@@ -1,11 +1,11 @@
-id;game_type;use_power_rating
-1;MP;true
-2;NG;true
-3;CR;false
-4;MP;false
-5;CR;true
-6;OP;true
-7;OP;false
-8;MP;false
-9;OP;true
-10;NG;true
+id;name;game_type;use_power_rating;description
+1;solid state Alaska Poland;MP;true;../fake-data/blob/hipster.txt
+2;Engineer Fish Finland;MP;false;../fake-data/blob/hipster.txt
+3;indexing iterate;NG;true;../fake-data/blob/hipster.txt
+4;AI;NG;false;../fake-data/blob/hipster.txt
+5;SMS markets;OP;false;../fake-data/blob/hipster.txt
+6;Chicken Quality Central;NG;true;../fake-data/blob/hipster.txt
+7;Rubber Rest;CR;false;../fake-data/blob/hipster.txt
+8;Unbranded Rubber Cheese;OP;false;../fake-data/blob/hipster.txt
+9;Tanzania Car;MP;false;../fake-data/blob/hipster.txt
+10;Garden programming;CR;false;../fake-data/blob/hipster.txt

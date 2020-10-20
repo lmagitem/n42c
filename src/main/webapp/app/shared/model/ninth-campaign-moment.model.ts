@@ -7,8 +7,8 @@ export interface INinthCampaignMoment {
   current?: boolean;
   sinceInstant?: Moment;
   name?: string;
-  summary?: string;
-  description?: string;
+  summary?: any;
+  description?: any;
   battles?: INinthBattle[];
   campaign?: INinthCampaign;
 }
@@ -19,8 +19,8 @@ export class NinthCampaignMoment implements INinthCampaignMoment {
     public current?: boolean,
     public sinceInstant?: Moment,
     public name?: string,
-    public summary?: string,
-    public description?: string,
+    public summary?: any,
+    public description?: any,
     public battles?: INinthBattle[],
     public campaign?: INinthCampaign
   ) {

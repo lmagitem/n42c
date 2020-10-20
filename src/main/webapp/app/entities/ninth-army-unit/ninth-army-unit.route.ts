@@ -40,7 +40,7 @@ export const ninthArmyUnitRoute: Routes = [
     component: NinthArmyUnitComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthArmyUnit.home.title',
+      pageTitle: 'n42cApp.ninthArmyUnit.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const ninthArmyUnitRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthArmyUnit.home.title',
+      pageTitle: 'n42cApp.ninthArmyUnit.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const ninthArmyUnitRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthArmyUnit.home.title',
+      pageTitle: 'n42cApp.ninthArmyUnit.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const ninthArmyUnitRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.ninthArmyUnit.home.title',
+      pageTitle: 'n42cApp.ninthArmyUnit.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

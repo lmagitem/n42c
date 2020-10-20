@@ -4,9 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { ILocalizedNinthMission, LocalizedNinthMission } from 'app/shared/model/localized-ninth-mission.model';
 import { LocalizedNinthMissionService } from './localized-ninth-mission.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { INinthMission } from 'app/shared/model/ninth-mission.model';
 import { NinthMissionService } from 'app/entities/ninth-mission/ninth-mission.service';
 
@@ -22,10 +24,13 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
     id: [],
     name: [],
     briefing: [],
+    language: [null, [Validators.required]],
     mission: [],
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected localizedNinthMissionService: LocalizedNinthMissionService,
     protected ninthMissionService: NinthMissionService,
     protected activatedRoute: ActivatedRoute,
@@ -45,7 +50,24 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
       id: localizedNinthMission.id,
       name: localizedNinthMission.name,
       briefing: localizedNinthMission.briefing,
+      language: localizedNinthMission.language,
       mission: localizedNinthMission.mission,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 
@@ -69,6 +91,7 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       briefing: this.editForm.get(['briefing'])!.value,
+      language: this.editForm.get(['language'])!.value,
       mission: this.editForm.get(['mission'])!.value,
     };
   }

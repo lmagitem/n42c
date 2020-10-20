@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class LocalizedNinthStratagemGroupResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/localized-ninth-stratagem-groups")
-    public ResponseEntity<LocalizedNinthStratagemGroup> createLocalizedNinthStratagemGroup(@RequestBody LocalizedNinthStratagemGroup localizedNinthStratagemGroup) throws URISyntaxException {
+    public ResponseEntity<LocalizedNinthStratagemGroup> createLocalizedNinthStratagemGroup(@Valid @RequestBody LocalizedNinthStratagemGroup localizedNinthStratagemGroup) throws URISyntaxException {
         log.debug("REST request to save LocalizedNinthStratagemGroup : {}", localizedNinthStratagemGroup);
         if (localizedNinthStratagemGroup.getId() != null) {
             throw new BadRequestAlertException("A new localizedNinthStratagemGroup cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class LocalizedNinthStratagemGroupResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/localized-ninth-stratagem-groups")
-    public ResponseEntity<LocalizedNinthStratagemGroup> updateLocalizedNinthStratagemGroup(@RequestBody LocalizedNinthStratagemGroup localizedNinthStratagemGroup) throws URISyntaxException {
+    public ResponseEntity<LocalizedNinthStratagemGroup> updateLocalizedNinthStratagemGroup(@Valid @RequestBody LocalizedNinthStratagemGroup localizedNinthStratagemGroup) throws URISyntaxException {
         log.debug("REST request to update LocalizedNinthStratagemGroup : {}", localizedNinthStratagemGroup);
         if (localizedNinthStratagemGroup.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

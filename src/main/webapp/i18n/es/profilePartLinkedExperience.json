@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "profilePartLinkedExperience": {
       "home": {
         "title": "Profile Part Linked Experiences",
@@ -23,10 +23,10 @@
       "linkedItem": "Linked Item",
       "linkedExperiences": "Linked Experiences",
       "help": {
-        "title": "This experience&#39;s title.",
-        "subTitle": "This experience&#39;s subtitle",
-        "date": "This experience&#39;s date.",
-        "content": "This experience&#39;s content."
+        "title": "This experience's title.",
+        "subTitle": "This experience's subtitle",
+        "date": "This experience's date.",
+        "content": "This experience's content."
       }
     }
   }

@@ -2,6 +2,14 @@
   "name": "LocalizedProduct",
   "fields": [
     {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This product's localized name",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
       "fieldName": "excerpt",
       "fieldType": "String",
       "javadoc": "An excerpt of the product to show on the shop."
@@ -13,8 +21,9 @@
     },
     {
       "fieldName": "content",
-      "fieldType": "String",
+      "fieldType": "byte[]",
       "javadoc": "The text describing this product.",
+      "fieldTypeBlobContent": "text",
       "fieldValidateRules": [
         "required"
       ]
@@ -35,7 +44,7 @@
       "otherEntityName": "product",
       "otherEntityRelationshipName": "localizations",
       "relationshipName": "product",
-      "otherEntityField": "id"
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20200908193512",

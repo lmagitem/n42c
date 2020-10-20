@@ -31,6 +31,14 @@ public class BlogPost implements Serializable {
     private Long id;
 
     /**
+     * This post's title.
+     */
+    @NotNull
+    @ApiModelProperty(value = "This post's title.", required = true)
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    /**
      * The date and time at which this post was published.
      */
     @NotNull
@@ -75,6 +83,19 @@ public class BlogPost implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public BlogPost title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Instant getPublished() {
@@ -213,6 +234,7 @@ public class BlogPost implements Serializable {
     public String toString() {
         return "BlogPost{" +
             "id=" + getId() +
+            ", title='" + getTitle() + "'" +
             ", published='" + getPublished() + "'" +
             ", modified='" + getModified() + "'" +
             "}";

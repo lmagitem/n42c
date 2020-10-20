@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { JhiLanguageService } from 'ng-jhipster';
-import { SessionStorageService } from 'ngx-webstorage';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {JhiLanguageService} from 'ng-jhipster';
+import {SessionStorageService} from 'ngx-webstorage';
 
-import { VERSION } from 'app/app.constants';
-import { LANGUAGES } from 'app/core/language/language.constants';
-import { AccountService } from 'app/core/auth/account.service';
-import { LoginService } from 'app/core/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
+import {VERSION} from 'app/app.constants';
+import {LANGUAGES} from 'app/core/language/language.constants';
+import {AccountService} from 'app/core/auth/account.service';
+import {LoginService} from 'app/core/login/login.service';
+import {ProfileService} from 'app/layouts/profiles/profile.service';
 
 @Component({
   selector: 'jhi-navbar',

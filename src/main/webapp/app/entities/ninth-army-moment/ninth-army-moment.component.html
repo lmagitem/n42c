@@ -1,107 +1,120 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.ninthArmyMoment.home.title">Ninth Army Moments</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.ninthArmyMoment.home.title">Ninth Army Moments</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ninth-army-moment" [routerLink]="['/ninth-army-moment/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.ninthArmyMoment.home.createLabel">
-            Create a new Ninth Army Moment
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-ninth-army-moment"
+      [routerLink]="['/entities', 'ninth-army-moment', 'new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.ninthArmyMoment.home.createLabel">
+        Create a new Ninth Army Moment
+      </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ninthArmyMoments?.length === 0">
+    <span jhiTranslate="n42cApp.ninthArmyMoment.home.notFound">No ninthArmyMoments found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="ninthArmyMoments && ninthArmyMoments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.current">Current</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.majorVictories">Major Victories</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.minorVictories">Minor Victories</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.draws">Draws</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.minorDefeats">Minor Defeats</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.majorDefeats">Major Defeats</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.requisition">Requisition</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.supplyLimit">Supply Limit</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.supplyUsed">Supply Used</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.objectives">Objectives</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.notes">Notes</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.selectedUnits">Selected Units</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.selectedObjectives">Selected Objectives</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.battle">Battle</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthArmyMoment.army">Army</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ninthArmyMoment of ninthArmyMoments; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'ninth-army-moment', ninthArmyMoment.id, 'view']">{{ ninthArmyMoment.id }}</a>
+          </td>
+          <td>{{ ninthArmyMoment.current }}</td>
+          <td>{{ ninthArmyMoment.majorVictories }}</td>
+          <td>{{ ninthArmyMoment.minorVictories }}</td>
+          <td>{{ ninthArmyMoment.draws }}</td>
+          <td>{{ ninthArmyMoment.minorDefeats }}</td>
+          <td>{{ ninthArmyMoment.majorDefeats }}</td>
+          <td>{{ ninthArmyMoment.requisition }}</td>
+          <td>{{ ninthArmyMoment.supplyLimit }}</td>
+          <td>{{ ninthArmyMoment.supplyUsed }}</td>
+          <td>{{ ninthArmyMoment.objectives }}</td>
+          <td>{{ ninthArmyMoment.notes }}</td>
+          <td>
+            <span *ngFor="let selectedUnits of ninthArmyMoment.selectedUnits; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-army-unit', selectedUnits?.id, 'view']">{{
+                selectedUnits.id
+              }}</a
+              >{{ last ? '' : ', ' }}
             </span>
-        </button>
-    </h2>
+          </td>
+          <td>
+            <span *ngFor="let selectedObjectives of ninthArmyMoment.selectedObjectives; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-objective', selectedObjectives?.id, 'view']">{{
+                selectedObjectives.id
+              }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <div *ngIf="ninthArmyMoment.battle">
+              <a [routerLink]="['/entities', 'ninth-battle', ninthArmyMoment.battle?.id, 'view']">{{ ninthArmyMoment.battle?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="ninthArmyMoment.army">
+              <a [routerLink]="['/entities', 'ninth-army', ninthArmyMoment.army?.id, 'view']">{{ ninthArmyMoment.army?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'ninth-army-moment', ninthArmyMoment.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-    <jhi-alert-error></jhi-alert-error>
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'ninth-army-moment', ninthArmyMoment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-    <jhi-alert></jhi-alert>
-
-    <div class="alert alert-warning" id="no-result" *ngIf="ninthArmyMoments?.length === 0">
-        <span jhiTranslate="n42CApp.ninthArmyMoment.home.notFound">No ninthArmyMoments found</span>
-    </div>
-
-    <div class="table-responsive" id="entities" *ngIf="ninthArmyMoments && ninthArmyMoments.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.current">Current</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.sinceInstant">Since Instant</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.majorVictories">Major Victories</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.minorVictories">Minor Victories</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.draws">Draws</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.minorDefeats">Minor Defeats</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.majorDefeats">Major Defeats</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.requisition">Requisition</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.supplyLimit">Supply Limit</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.supplyUsed">Supply Used</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.objectives">Objectives</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.notes">Notes</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.selectedUnits">Selected Units</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.selectedObjectives">Selected Objectives</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.battle">Battle</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.ninthArmyMoment.army">Army</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let ninthArmyMoment of ninthArmyMoments ;trackBy: trackId">
-                    <td><a [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'view']">{{ ninthArmyMoment.id }}</a></td>
-                    <td>{{ ninthArmyMoment.current }}</td>
-                    <td>{{ ninthArmyMoment.sinceInstant | date:'medium' }}</td>
-                    <td>{{ ninthArmyMoment.majorVictories }}</td>
-                    <td>{{ ninthArmyMoment.minorVictories }}</td>
-                    <td>{{ ninthArmyMoment.draws }}</td>
-                    <td>{{ ninthArmyMoment.minorDefeats }}</td>
-                    <td>{{ ninthArmyMoment.majorDefeats }}</td>
-                    <td>{{ ninthArmyMoment.requisition }}</td>
-                    <td>{{ ninthArmyMoment.supplyLimit }}</td>
-                    <td>{{ ninthArmyMoment.supplyUsed }}</td>
-                    <td>{{ ninthArmyMoment.objectives }}</td>
-                    <td>{{ ninthArmyMoment.notes }}</td>
-                    <td>
-                        <span *ngFor="let selectedUnits of ninthArmyMoment.selectedUnits; let last = last">
-                            <a class="form-control-static" [routerLink]="['/ninth-army-unit', selectedUnits?.id, 'view']">{{ selectedUnits.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
-                    <td>
-                        <span *ngFor="let selectedObjectives of ninthArmyMoment.selectedObjectives; let last = last">
-                            <a class="form-control-static" [routerLink]="['/ninth-objective', selectedObjectives?.id, 'view']">{{ selectedObjectives.id }}</a>{{ last ? '' : ', ' }}
-                        </span>
-                    </td>
-                    <td>
-                        <div *ngIf="ninthArmyMoment.battle">
-                            <a [routerLink]="['/ninth-battle', ninthArmyMoment.battle?.id, 'view']" >{{ ninthArmyMoment.battle?.id }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="ninthArmyMoment.army">
-                            <a [routerLink]="['/ninth-army', ninthArmyMoment.army?.id, 'view']" >{{ ninthArmyMoment.army?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
-
-                            <button type="submit"
-                                    [routerLink]="['/ninth-army-moment', ninthArmyMoment.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
-
-                            <button type="submit" (click)="delete(ninthArmyMoment)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(ninthArmyMoment)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -4,6 +4,13 @@
     {
       "fieldName": "name",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "resolved",
+      "fieldType": "Boolean",
+      "fieldValidateRules": [
+        "required"
+      ]
     }
   ],
   "relationships": [

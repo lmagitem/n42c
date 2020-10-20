@@ -4,7 +4,7 @@
     {
       "fieldName": "name",
       "fieldType": "String",
-      "javadoc": "This category's name.",
+      "javadoc": "This category's localized name.",
       "fieldValidateRules": [
         "required"
       ]
@@ -25,7 +25,7 @@
       "otherEntityName": "blogCategory",
       "otherEntityRelationshipName": "localizations",
       "relationshipName": "category",
-      "otherEntityField": "id"
+      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20200908194012",

@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "blogPost": {
       "home": {
         "title": "Blog Posts",
@@ -16,6 +16,7 @@
       "detail": {
         "title": "Blog Post"
       },
+      "title": "Title",
       "published": "Published",
       "modified": "Modified",
       "localizations": "Localizations",
@@ -23,6 +24,7 @@
       "categories": "Categories",
       "blog": "Blog",
       "help": {
+        "title": "This post's title.",
         "published": "The date and time at which this post was published.",
         "modified": "The last date and time at which this post was modified."
       }

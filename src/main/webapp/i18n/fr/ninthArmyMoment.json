@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "ninthArmyMoment": {
       "home": {
         "title": "NinthArmyMoments",
@@ -17,7 +17,6 @@
         "title": "Ninth Army Moment"
       },
       "current": "Current",
-      "sinceInstant": "Since Instant",
       "majorVictories": "Major Victories",
       "minorVictories": "Minor Victories",
       "draws": "Draws",

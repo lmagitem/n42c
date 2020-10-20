@@ -31,13 +31,11 @@ export class AppUserUpdatePage {
 
   userNameInput = element(by.id('field_userName'));
   displayedNameInput = element(by.id('field_displayedName'));
-  emailInput = element(by.id('field_email'));
   adminInput = element(by.id('field_admin'));
   shopRightsSelect = element(by.id('field_shopRights'));
   blogRightsSelect = element(by.id('field_blogRights'));
   profileRightsSelect = element(by.id('field_profileRights'));
   scriptoriumRightsSelect = element(by.id('field_scriptoriumRights'));
-  avatarUrlInput = element(by.id('field_avatarUrl'));
 
   userSelect = element(by.id('field_user'));
   givenFriendshipsSelect = element(by.id('field_givenFriendships'));
@@ -61,14 +59,6 @@ export class AppUserUpdatePage {
 
   async getDisplayedNameInput(): Promise<string> {
     return await this.displayedNameInput.getAttribute('value');
-  }
-
-  async setEmailInput(email: string): Promise<void> {
-    await this.emailInput.sendKeys(email);
-  }
-
-  async getEmailInput(): Promise<string> {
-    return await this.emailInput.getAttribute('value');
   }
 
   getAdminInput(): ElementFinder {
@@ -121,14 +111,6 @@ export class AppUserUpdatePage {
 
   async scriptoriumRightsSelectLastOption(): Promise<void> {
     await this.scriptoriumRightsSelect.all(by.tagName('option')).last().click();
-  }
-
-  async setAvatarUrlInput(avatarUrl: string): Promise<void> {
-    await this.avatarUrlInput.sendKeys(avatarUrl);
-  }
-
-  async getAvatarUrlInput(): Promise<string> {
-    return await this.avatarUrlInput.getAttribute('value');
   }
 
   async userSelectLastOption(): Promise<void> {

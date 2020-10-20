@@ -18,6 +18,7 @@ export class BlogCategoryUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.required]],
     parentCategory: [],
   });
 
@@ -34,6 +35,7 @@ export class BlogCategoryUpdateComponent implements OnInit {
   updateForm(blogCategory: IBlogCategory): void {
     this.editForm.patchValue({
       id: blogCategory.id,
+      name: blogCategory.name,
       parentCategory: blogCategory.parentCategory,
     });
   }
@@ -56,6 +58,7 @@ export class BlogCategoryUpdateComponent implements OnInit {
     return {
       ...new BlogCategory(),
       id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
       parentCategory: this.editForm.get(['parentCategory'])!.value,
     };
   }

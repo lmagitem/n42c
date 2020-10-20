@@ -1,73 +1,86 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.profilePartLinkedExperience.home.title">Profile Part Linked Experiences</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.profilePartLinkedExperience.home.title">Profile Part Linked Experiences</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-profile-part-linked-experience" [routerLink]="['/profile-part-linked-experience/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.profilePartLinkedExperience.home.createLabel">
-            Create a new Profile Part Linked Experience
-            </span>
-        </button>
-    </h2>
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-profile-part-linked-experience"
+      [routerLink]="['/entities', 'profile-part-linked-experience', 'new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.profilePartLinkedExperience.home.createLabel">
+        Create a new Profile Part Linked Experience
+      </span>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="profilePartLinkedExperiences?.length === 0">
-        <span jhiTranslate="n42CApp.profilePartLinkedExperience.home.notFound">No profilePartLinkedExperiences found</span>
-    </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="profilePartLinkedExperiences?.length === 0">
+    <span jhiTranslate="n42cApp.profilePartLinkedExperience.home.notFound">No profilePartLinkedExperiences found</span>
+  </div>
 
-    <div class="table-responsive" id="entities" *ngIf="profilePartLinkedExperiences && profilePartLinkedExperiences.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartLinkedExperience.title">Title</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartLinkedExperience.subTitle">Sub Title</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartLinkedExperience.date">Date</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartLinkedExperience.content">Content</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.profilePartLinkedExperience.linkedItem">Linked Item</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let profilePartLinkedExperience of profilePartLinkedExperiences ;trackBy: trackId">
-                    <td><a [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'view']">{{ profilePartLinkedExperience.id }}</a></td>
-                    <td>{{ profilePartLinkedExperience.title }}</td>
-                    <td>{{ profilePartLinkedExperience.subTitle }}</td>
-                    <td>{{ profilePartLinkedExperience.date | date:'medium' }}</td>
-                    <td>{{ profilePartLinkedExperience.content }}</td>
-                    <td>
-                        <div *ngIf="profilePartLinkedExperience.linkedItem">
-                            <a [routerLink]="['/profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']" >{{ profilePartLinkedExperience.linkedItem?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
+  <div class="table-responsive" id="entities" *ngIf="profilePartLinkedExperiences && profilePartLinkedExperiences.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartLinkedExperience.title">Title</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartLinkedExperience.subTitle">Sub Title</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartLinkedExperience.date">Date</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartLinkedExperience.content">Content</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.profilePartLinkedExperience.linkedItem">Linked Item</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let profilePartLinkedExperience of profilePartLinkedExperiences; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'profile-part-linked-experience', profilePartLinkedExperience.id, 'view']">{{
+              profilePartLinkedExperience.id
+            }}</a>
+          </td>
+          <td>{{ profilePartLinkedExperience.title }}</td>
+          <td>{{ profilePartLinkedExperience.subTitle }}</td>
+          <td>{{ profilePartLinkedExperience.date | date: 'medium' }}</td>
+          <td>{{ profilePartLinkedExperience.content }}</td>
+          <td>
+            <div *ngIf="profilePartLinkedExperience.linkedItem">
+              <a [routerLink]="['/entities', 'profile-part-precise-item', profilePartLinkedExperience.linkedItem?.id, 'view']">{{
+                profilePartLinkedExperience.linkedItem?.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'profile-part-linked-experience', profilePartLinkedExperience.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-                            <button type="submit"
-                                    [routerLink]="['/profile-part-linked-experience', profilePartLinkedExperience.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'profile-part-linked-experience', profilePartLinkedExperience.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-                            <button type="submit" (click)="delete(profilePartLinkedExperience)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(profilePartLinkedExperience)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

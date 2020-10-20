@@ -40,7 +40,7 @@ export const profilePartSkillCategoryRoute: Routes = [
     component: ProfilePartSkillCategoryComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.profilePartSkillCategory.home.title',
+      pageTitle: 'n42cApp.profilePartSkillCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +52,7 @@ export const profilePartSkillCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.profilePartSkillCategory.home.title',
+      pageTitle: 'n42cApp.profilePartSkillCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +64,7 @@ export const profilePartSkillCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.profilePartSkillCategory.home.title',
+      pageTitle: 'n42cApp.profilePartSkillCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +76,7 @@ export const profilePartSkillCategoryRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.profilePartSkillCategory.home.title',
+      pageTitle: 'n42cApp.profilePartSkillCategory.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

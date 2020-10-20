@@ -34,6 +34,9 @@ public class NinthBattleResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_RESOLVED = false;
+    private static final Boolean UPDATED_RESOLVED = true;
+
     @Autowired
     private NinthBattleRepository ninthBattleRepository;
 
@@ -53,7 +56,8 @@ public class NinthBattleResourceIT {
      */
     public static NinthBattle createEntity(EntityManager em) {
         NinthBattle ninthBattle = new NinthBattle()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .resolved(DEFAULT_RESOLVED);
         return ninthBattle;
     }
     /**
@@ -64,7 +68,8 @@ public class NinthBattleResourceIT {
      */
     public static NinthBattle createUpdatedEntity(EntityManager em) {
         NinthBattle ninthBattle = new NinthBattle()
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .resolved(UPDATED_RESOLVED);
         return ninthBattle;
     }
 
@@ -88,6 +93,7 @@ public class NinthBattleResourceIT {
         assertThat(ninthBattleList).hasSize(databaseSizeBeforeCreate + 1);
         NinthBattle testNinthBattle = ninthBattleList.get(ninthBattleList.size() - 1);
         assertThat(testNinthBattle.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testNinthBattle.isResolved()).isEqualTo(DEFAULT_RESOLVED);
     }
 
     @Test
@@ -112,6 +118,25 @@ public class NinthBattleResourceIT {
 
     @Test
     @Transactional
+    public void checkResolvedIsRequired() throws Exception {
+        int databaseSizeBeforeTest = ninthBattleRepository.findAll().size();
+        // set the field null
+        ninthBattle.setResolved(null);
+
+        // Create the NinthBattle, which fails.
+
+
+        restNinthBattleMockMvc.perform(post("/api/ninth-battles").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(ninthBattle)))
+            .andExpect(status().isBadRequest());
+
+        List<NinthBattle> ninthBattleList = ninthBattleRepository.findAll();
+        assertThat(ninthBattleList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllNinthBattles() throws Exception {
         // Initialize the database
         ninthBattleRepository.saveAndFlush(ninthBattle);
@@ -121,7 +146,8 @@ public class NinthBattleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ninthBattle.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].resolved").value(hasItem(DEFAULT_RESOLVED.booleanValue())));
     }
     
     @Test
@@ -135,7 +161,8 @@ public class NinthBattleResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(ninthBattle.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.resolved").value(DEFAULT_RESOLVED.booleanValue()));
     }
     @Test
     @Transactional
@@ -158,7 +185,8 @@ public class NinthBattleResourceIT {
         // Disconnect from session so that the updates on updatedNinthBattle are not directly saved in db
         em.detach(updatedNinthBattle);
         updatedNinthBattle
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .resolved(UPDATED_RESOLVED);
 
         restNinthBattleMockMvc.perform(put("/api/ninth-battles").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -170,6 +198,7 @@ public class NinthBattleResourceIT {
         assertThat(ninthBattleList).hasSize(databaseSizeBeforeUpdate);
         NinthBattle testNinthBattle = ninthBattleList.get(ninthBattleList.size() - 1);
         assertThat(testNinthBattle.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testNinthBattle.isResolved()).isEqualTo(UPDATED_RESOLVED);
     }
 
     @Test

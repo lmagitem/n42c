@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
@@ -18,6 +18,7 @@ export class NinthCampaignComponent implements OnInit, OnDestroy {
 
   constructor(
     protected ninthCampaignService: NinthCampaignService,
+    protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
   ) {}
@@ -40,6 +41,14 @@ export class NinthCampaignComponent implements OnInit, OnDestroy {
   trackId(index: number, item: INinthCampaign): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType = '', base64String: string): void {
+    return this.dataUtils.openFile(contentType, base64String);
   }
 
   registerChangeInNinthCampaigns(): void {

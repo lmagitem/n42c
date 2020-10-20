@@ -21,6 +21,7 @@ export class LocalizedNinthStratagemGroupUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
+    language: [null, [Validators.required]],
     stratagemGroup: [],
   });
 
@@ -45,6 +46,7 @@ export class LocalizedNinthStratagemGroupUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: localizedNinthStratagemGroup.id,
       name: localizedNinthStratagemGroup.name,
+      language: localizedNinthStratagemGroup.language,
       stratagemGroup: localizedNinthStratagemGroup.stratagemGroup,
     });
   }
@@ -68,6 +70,7 @@ export class LocalizedNinthStratagemGroupUpdateComponent implements OnInit {
       ...new LocalizedNinthStratagemGroup(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      language: this.editForm.get(['language'])!.value,
       stratagemGroup: this.editForm.get(['stratagemGroup'])!.value,
     };
   }

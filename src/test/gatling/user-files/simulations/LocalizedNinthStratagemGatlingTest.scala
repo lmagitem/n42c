@@ -103,8 +103,9 @@ class LocalizedNinthStratagemGatlingTest extends Simulation {
                 "id":null
                 , "name":"SAMPLE_TEXT"
                 , "summary":"SAMPLE_TEXT"
-                , "description":"SAMPLE_TEXT"
-                , "keywords":"SAMPLE_TEXT"
+                , "description":null
+                , "keywords":null
+                , "language":"EN"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_localizedNinthStratagem_url"))).exitHereIfFailed

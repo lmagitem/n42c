@@ -24,7 +24,7 @@ describe('BlogCategory e2e test', () => {
     await navBarPage.goToEntity('blog-category');
     blogCategoryComponentsPage = new BlogCategoryComponentsPage();
     await browser.wait(ec.visibilityOf(blogCategoryComponentsPage.title), 5000);
-    expect(await blogCategoryComponentsPage.getTitle()).to.eq('n42CApp.blogCategory.home.title');
+    expect(await blogCategoryComponentsPage.getTitle()).to.eq('n42cApp.blogCategory.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(blogCategoryComponentsPage.entities), ec.visibilityOf(blogCategoryComponentsPage.noResult)),
       1000
@@ -34,7 +34,7 @@ describe('BlogCategory e2e test', () => {
   it('should load create BlogCategory page', async () => {
     await blogCategoryComponentsPage.clickOnCreateButton();
     blogCategoryUpdatePage = new BlogCategoryUpdatePage();
-    expect(await blogCategoryUpdatePage.getPageTitle()).to.eq('n42CApp.blogCategory.home.createOrEditLabel');
+    expect(await blogCategoryUpdatePage.getPageTitle()).to.eq('n42cApp.blogCategory.home.createOrEditLabel');
     await blogCategoryUpdatePage.cancel();
   });
 
@@ -43,7 +43,9 @@ describe('BlogCategory e2e test', () => {
 
     await blogCategoryComponentsPage.clickOnCreateButton();
 
-    await promise.all([blogCategoryUpdatePage.parentCategorySelectLastOption()]);
+    await promise.all([blogCategoryUpdatePage.setNameInput('name'), blogCategoryUpdatePage.parentCategorySelectLastOption()]);
+
+    expect(await blogCategoryUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
     await blogCategoryUpdatePage.save();
     expect(await blogCategoryUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
@@ -56,7 +58,7 @@ describe('BlogCategory e2e test', () => {
     await blogCategoryComponentsPage.clickOnLastDeleteButton();
 
     blogCategoryDeleteDialog = new BlogCategoryDeleteDialog();
-    expect(await blogCategoryDeleteDialog.getDialogTitle()).to.eq('n42CApp.blogCategory.delete.question');
+    expect(await blogCategoryDeleteDialog.getDialogTitle()).to.eq('n42cApp.blogCategory.delete.question');
     await blogCategoryDeleteDialog.clickOnConfirmButton();
 
     expect(await blogCategoryComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

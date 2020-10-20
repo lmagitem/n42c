@@ -40,7 +40,8 @@ export const appUserRoute: Routes = [
     component: AppUserComponent,
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.appUser.home.title',
+      defaultSort: 'id,asc',
+      pageTitle: 'n42cApp.appUser.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -52,7 +53,7 @@ export const appUserRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.appUser.home.title',
+      pageTitle: 'n42cApp.appUser.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -64,7 +65,7 @@ export const appUserRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.appUser.home.title',
+      pageTitle: 'n42cApp.appUser.home.title',
     },
     canActivate: [UserRouteAccessService],
   },
@@ -76,7 +77,7 @@ export const appUserRoute: Routes = [
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'n42CApp.appUser.home.title',
+      pageTitle: 'n42cApp.appUser.home.title',
     },
     canActivate: [UserRouteAccessService],
   },

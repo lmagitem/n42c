@@ -1,32 +1,32 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="player">
-            <h2><span jhiTranslate="n42CApp.player.detail.title">Player</span> {{ player.id }}</h2>
+  <div class="col-8">
+    <div *ngIf="player">
+      <h2><span jhiTranslate="n42cApp.player.detail.title">Player</span> {{ player.id }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="n42CApp.player.appUser">App User</span></dt>
-                <dd>
-                    <div *ngIf="player.appUser">
-                        <a [routerLink]="['/app-user', player.appUser?.id, 'view']">{{ player.appUser?.id }}</a>
-                    </div>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="n42cApp.player.name" [ngbTooltip]="'n42cApp.player.help.name' | translate">Name</span></dt>
+        <dd>
+          <span>{{ player.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.player.appUser">App User</span></dt>
+        <dd>
+          <div *ngIf="player.appUser">
+            <a [routerLink]="['/entities', 'app-user', player.appUser?.id, 'view']">{{ player.appUser?.displayedName }}</a>
+          </div>
+        </dd>
+      </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
 
-            <button type="button"
-                    [routerLink]="['/player', player.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+      <button type="button" [routerLink]="['/entities', 'player', player.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
     </div>
+  </div>
 </div>

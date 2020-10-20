@@ -28,7 +28,7 @@ describe('LocalizedBlogCategory e2e test', () => {
     await navBarPage.goToEntity('localized-blog-category');
     localizedBlogCategoryComponentsPage = new LocalizedBlogCategoryComponentsPage();
     await browser.wait(ec.visibilityOf(localizedBlogCategoryComponentsPage.title), 5000);
-    expect(await localizedBlogCategoryComponentsPage.getTitle()).to.eq('n42CApp.localizedBlogCategory.home.title');
+    expect(await localizedBlogCategoryComponentsPage.getTitle()).to.eq('n42cApp.localizedBlogCategory.home.title');
     await browser.wait(
       ec.or(ec.visibilityOf(localizedBlogCategoryComponentsPage.entities), ec.visibilityOf(localizedBlogCategoryComponentsPage.noResult)),
       1000
@@ -38,7 +38,7 @@ describe('LocalizedBlogCategory e2e test', () => {
   it('should load create LocalizedBlogCategory page', async () => {
     await localizedBlogCategoryComponentsPage.clickOnCreateButton();
     localizedBlogCategoryUpdatePage = new LocalizedBlogCategoryUpdatePage();
-    expect(await localizedBlogCategoryUpdatePage.getPageTitle()).to.eq('n42CApp.localizedBlogCategory.home.createOrEditLabel');
+    expect(await localizedBlogCategoryUpdatePage.getPageTitle()).to.eq('n42cApp.localizedBlogCategory.home.createOrEditLabel');
     await localizedBlogCategoryUpdatePage.cancel();
   });
 
@@ -69,7 +69,7 @@ describe('LocalizedBlogCategory e2e test', () => {
     await localizedBlogCategoryComponentsPage.clickOnLastDeleteButton();
 
     localizedBlogCategoryDeleteDialog = new LocalizedBlogCategoryDeleteDialog();
-    expect(await localizedBlogCategoryDeleteDialog.getDialogTitle()).to.eq('n42CApp.localizedBlogCategory.delete.question');
+    expect(await localizedBlogCategoryDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedBlogCategory.delete.question');
     await localizedBlogCategoryDeleteDialog.clickOnConfirmButton();
 
     expect(await localizedBlogCategoryComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);

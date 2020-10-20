@@ -1,11 +1,11 @@
-id;name
-1;Cordoba Oro
-2;Bacon Brook
-3;Flat
-4;Orchestrator
-5;framework Clothing Dynamic
-6;Soft discrete granular
-7;Home
-8;Concrete
-9;capability Ramp
-10;Sleek Metrics
+id;name;resolved
+1;Cordoba Oro;false
+2;indexing;false
+3;Flat;false
+4;Auto Loan Account framework Clothing;true
+5;bypassing;true
+6;executive;false
+7;Home;false
+8;Grass-roots;false
+9;Ramp;false
+10;Vista;true

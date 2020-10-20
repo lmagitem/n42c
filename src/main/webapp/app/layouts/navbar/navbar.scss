@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/functions';
-@import '~bootswatch/dist/solar/variables';
 @import '~bootstrap/scss/variables';
+@import '../../../content/scss/global.scss';
 
 /* ==========================================================================
 Navbar
@@ -16,13 +16,29 @@ Navbar
   width: 1.75em;
 }
 
+::ng-deep .dropdown-menu {
+  background-color: $color-dark;
+}
+
+::ng-deep .dropdown-item:focus,
+::ng-deep .dropdown-item:active,
+::ng-deep .dropdown-item:hover,
+::ng-deep .dropdown-item.active,
+::ng-deep .dropdown-item.active:focus,
+::ng-deep .dropdown-item.active:active,
+::ng-deep .dropdown-item.active:hover {
+  background: fixed;
+  background-color: $color-desaturated-brown;
+  color: $color-off-white !important;
+
+  a {
+    color: $color-off-white !important;
+  }
+}
+
 .navbar {
   padding: 0.2rem 1rem;
-  .dropdown-item.active,
-  .dropdown-item.active:focus,
-  .dropdown-item.active:hover {
-    background-color: $dark;
-  }
+  background-color: $color-black;
 
   ul.navbar-nav {
     .nav-item {
@@ -36,7 +52,7 @@ Navbar
 
   .navbar-toggler {
     &:hover {
-      color: $navbar-dark-hover-color;
+      color: $orange;
     }
   }
 }
@@ -45,10 +61,11 @@ Navbar
 Logo styles
 ========================================================================== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 34px;
+  width: 116px;
+  margin-right: 6px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/logo-n42c.png') no-repeat center center;
   background-size: contain;
 }

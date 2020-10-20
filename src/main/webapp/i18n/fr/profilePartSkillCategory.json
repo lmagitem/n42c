@@ -1,5 +1,5 @@
 {
-  "n42CApp": {
+  "n42cApp": {
     "profilePartSkillCategory": {
       "home": {
         "title": "ProfilePartSkillCategories",
@@ -21,7 +21,7 @@
       "skills": "Skills",
       "profilePart": "Profile Part",
       "help": {
-        "name": "This category&#39;s title.",
+        "name": "This category's title.",
         "index": "The index where this item must be ordered alongside similar ones."
       }
     }

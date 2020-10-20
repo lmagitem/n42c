@@ -1,0 +1,314 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="row">
+      <div *ngIf="selectedCampaignId !== -1" class="col-12">
+        <div class="flex-container">
+          <h2 id="campaign-name" class="flex-item">{{ editForm.get('name')?.value }}</h2>
+          <div class="flex-item">
+            <button type="button" id="previous-entity-moment" class="btn btn-secondary" (click)="previous()">
+              <fa-icon icon="chevron-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.previous">Previous</span>
+            </button>
+            <button
+              type="button"
+              id="edit-entity-moment"
+              class="btn btn-primary"
+              (click)="editMoment()"
+              *ngIf="!isEditingMoment && selectedMomentId !== -1"
+            >
+              <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+            <button type="button" id="new-entity-moment" class="btn btn-success" (click)="createMoment()">
+              <fa-icon icon="plus"></fa-icon>&nbsp;<span jhiTranslate="n42cApp.ninthCampaignMoment.add">New</span>
+            </button>
+            <button type="button" id="next-entity-moment" class="btn btn-secondary" (click)="next()">
+              <fa-icon icon="chevron-right"></fa-icon>&nbsp;<span jhiTranslate="entity.action.next">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <h2
+        *ngIf="selectedCampaignId === -1"
+        id="jhi-campaign-heading"
+        class="col-12"
+        jhiTranslate="n42cApp.ninthCampaign.home.createOrEditLabel"
+      >
+        Create or edit a Ninth Campaign
+      </h2>
+
+      <div [class]="selectedCampaignId !== -1 ? 'col-12 col-md-3' : 'col-12'">
+        <form
+          class="card"
+          name="editForm"
+          role="form"
+          novalidate
+          (ngSubmit)="save()"
+          [formGroup]="editForm"
+          aria-labelledby="campaign-name"
+        >
+          <div class="card-body">
+            <h3 class="card-title">Général</h3>
+            <div class="row">
+              <div class="col-12">
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                  <label for="id-campaign" jhiTranslate="global.field.id" [ngbTooltip]="'n42cApp.ninthCampaign.help.id' | translate"
+                    >ID</label
+                  >
+                  <input
+                    *ngIf="isEditing"
+                    type="text"
+                    class="form-control"
+                    id="id-campaign"
+                    name="id-campaign"
+                    formControlName="id"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.id' | translate"
+                    readonly
+                  />
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.id' | translate">
+                    {{ editForm.get('id')?.value }}
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="n42cApp.ninthCampaign.name"
+                    for="field_name-campaign"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.name' | translate"
+                    >Name</label
+                  >
+                  <input
+                    *ngIf="isEditing"
+                    type="text"
+                    class="form-control"
+                    name="name-campaign"
+                    id="field_name-campaign"
+                    formControlName="name"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.name' | translate"
+                  />
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.name' | translate">
+                    {{ editForm.get('name')?.value }}
+                  </p>
+                  <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('name')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="n42cApp.ninthCampaign.gameType"
+                    for="field_gameType"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.gameType' | translate"
+                    >Game Type</label
+                  >
+                  <select
+                    *ngIf="isEditing"
+                    class="form-control"
+                    name="gameType"
+                    formControlName="gameType"
+                    id="field_gameType"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.gameType' | translate"
+                  >
+                    <option value="OP">{{ 'n42cApp.NinthGameType.OP' | translate }}</option>
+                    <option value="MP">{{ 'n42cApp.NinthGameType.MP' | translate }}</option>
+                    <option value="CR">{{ 'n42cApp.NinthGameType.CR' | translate }}</option>
+                    <option value="NG">{{ 'n42cApp.NinthGameType.NG' | translate }}</option>
+                  </select>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.gameType' | translate">
+                    {{ getGameTypeTranslationPath(editForm.get('gameType')?.value) | translate }}
+                  </p>
+                  <div *ngIf="editForm.get('gameType')!.invalid && (editForm.get('gameType')!.dirty || editForm.get('gameType')!.touched)">
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('gameType')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="n42cApp.ninthCampaign.usePowerRating"
+                    for="field_usePowerRating"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.usePowerRating' | translate"
+                    >Use Power Rating</label
+                  >
+                  <input
+                    *ngIf="isEditing"
+                    type="checkbox"
+                    class="form-control"
+                    name="usePowerRating"
+                    id="field_usePowerRating"
+                    formControlName="usePowerRating"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.usePowerRating' | translate"
+                  />
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.usePowerRating' | translate">
+                    {{ 'entity.bool.' + editForm.get('usePowerRating')?.value | translate }}
+                  </p>
+                  <div
+                    *ngIf="
+                      editForm.get('usePowerRating')!.invalid &&
+                      (editForm.get('usePowerRating')!.dirty || editForm.get('usePowerRating')!.touched)
+                    "
+                  >
+                    <small
+                      class="form-text text-danger"
+                      *ngIf="editForm.get('usePowerRating')?.errors?.required"
+                      jhiTranslate="entity.validation.required"
+                    >
+                      This field is required.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    jhiTranslate="n42cApp.ninthCampaign.authors"
+                    for="field_authors"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.authors' | translate"
+                    >Authors</label
+                  >
+                  <select
+                    *ngIf="isEditing"
+                    class="form-control"
+                    id="field_authors"
+                    multiple
+                    name="authors"
+                    formControlName="authors"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.authors' | translate"
+                  >
+                    <option
+                      [ngValue]="getSelected(editForm.get('authors')!.value, playerOption)"
+                      *ngFor="let playerOption of players; trackBy: trackById"
+                      >{{ !!playerOption.appUser ? playerOption.appUser.displayedName : playerOption.id }}</option
+                    >
+                  </select>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.authors' | translate">
+                    <span *ngFor="let author of editForm.get('authors')?.value; let isLast = last">{{
+                      (!!author.appUser ? author.appUser.displayedName : author.id) + (isLast ? '' : ', ')
+                    }}</span>
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    jhiTranslate="n42cApp.ninthCampaign.participants"
+                    for="field_participants"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.participants' | translate"
+                    >Participants</label
+                  >
+                  <select
+                    *ngIf="isEditing"
+                    class="form-control"
+                    id="field_participants"
+                    multiple
+                    name="participants"
+                    formControlName="participants"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.participants' | translate"
+                  >
+                    <option
+                      [ngValue]="getSelected(editForm.get('participants')!.value, playerOption)"
+                      *ngFor="let playerOption of players; trackBy: trackById"
+                      >{{ !!playerOption.appUser ? playerOption.appUser.displayedName : playerOption.id }}</option
+                    >
+                  </select>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.participants' | translate">
+                    <span *ngFor="let participant of editForm.get('participants')?.value; let isLast = last">{{
+                      (!!participant.appUser ? participant.appUser.displayedName : participant.id) + (isLast ? '' : ', ')
+                    }}</span>
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    jhiTranslate="n42cApp.ninthCampaign.campaignStratagems"
+                    for="field_campaignStratagems"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.campaignStratagems' | translate"
+                    >Campaign Stratagems</label
+                  >
+                  <select
+                    *ngIf="isEditing"
+                    class="form-control"
+                    id="field_campaignStratagems"
+                    multiple
+                    name="campaignStratagems"
+                    formControlName="campaignStratagems"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.campaignStratagems' | translate"
+                  >
+                    <option
+                      [ngValue]="getSelected(editForm.get('campaignStratagems')!.value, ninthStratagemGroupOption)"
+                      *ngFor="let ninthStratagemGroupOption of ninthstratagemgroups; trackBy: trackById"
+                      >{{ ninthStratagemGroupOption.id }}</option
+                    >
+                  </select>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.campaignStratagems' | translate">
+                    <span *ngFor="let ninthStratagemGroup of editForm.get('campaignStratagems')?.value; let isLast = last">{{
+                      ninthStratagemGroup.id + (isLast ? '' : ', ')
+                    }}</span>
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="n42cApp.ninthCampaign.description"
+                    for="field_description-campaign"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.description' | translate"
+                    >Description</label
+                  >
+                  <textarea
+                    *ngIf="isEditing"
+                    class="form-control"
+                    name="description-campaign"
+                    id="field_description-campaign"
+                    formControlName="description"
+                    rows="5"
+                    [ngbTooltip]="'n42cApp.ninthCampaign.help.description' | translate"
+                  ></textarea>
+                  <p *ngIf="!isEditing" class="p-control" [ngbTooltip]="'n42cApp.ninthCampaign.help.description' | translate">
+                    {{ editForm.get('description')?.value }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <button *ngIf="!isEditing" type="button" id="edit-entity-campaign" class="btn btn-primary" (click)="edit()">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button *ngIf="isEditing" type="button" id="cancel-save-campaign" class="btn btn-secondary" (click)="cancel()">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+              </button>
+
+              <button
+                *ngIf="isEditing"
+                type="submit"
+                id="save-entity-campaign"
+                [disabled]="editForm.invalid || isSaving"
+                class="btn btn-primary"
+              >
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="selectedCampaignId !== -1" class="col-12 col-md-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

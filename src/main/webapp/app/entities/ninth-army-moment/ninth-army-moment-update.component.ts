@@ -4,11 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { INinthArmyMoment, NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
 import { NinthArmyMomentService } from './ninth-army-moment.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
 import { NinthArmyUnitService } from 'app/entities/ninth-army-unit/ninth-army-unit.service';
 import { INinthObjective } from 'app/shared/model/ninth-objective.model';
@@ -36,7 +36,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     current: [null, [Validators.required]],
-    sinceInstant: [null, [Validators.required]],
     majorVictories: [],
     minorVictories: [],
     draws: [],
@@ -54,6 +53,8 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected ninthArmyMomentService: NinthArmyMomentService,
     protected ninthArmyUnitService: NinthArmyUnitService,
     protected ninthObjectiveService: NinthObjectiveService,
@@ -65,11 +66,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ ninthArmyMoment }) => {
-      if (!ninthArmyMoment.id) {
-        const today = moment().startOf('day');
-        ninthArmyMoment.sinceInstant = today;
-      }
-
       this.updateForm(ninthArmyMoment);
 
       this.ninthArmyUnitService.query().subscribe((res: HttpResponse<INinthArmyUnit[]>) => (this.nintharmyunits = res.body || []));
@@ -86,7 +82,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: ninthArmyMoment.id,
       current: ninthArmyMoment.current,
-      sinceInstant: ninthArmyMoment.sinceInstant ? ninthArmyMoment.sinceInstant.format(DATE_TIME_FORMAT) : null,
       majorVictories: ninthArmyMoment.majorVictories,
       minorVictories: ninthArmyMoment.minorVictories,
       draws: ninthArmyMoment.draws,
@@ -101,6 +96,22 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
       selectedObjectives: ninthArmyMoment.selectedObjectives,
       battle: ninthArmyMoment.battle,
       army: ninthArmyMoment.army,
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: any, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('n42cApp.error', { ...err, key: 'error.file.' + err.key })
+      );
     });
   }
 
@@ -123,9 +134,6 @@ export class NinthArmyMomentUpdateComponent implements OnInit {
       ...new NinthArmyMoment(),
       id: this.editForm.get(['id'])!.value,
       current: this.editForm.get(['current'])!.value,
-      sinceInstant: this.editForm.get(['sinceInstant'])!.value
-        ? moment(this.editForm.get(['sinceInstant'])!.value, DATE_TIME_FORMAT)
-        : undefined,
       majorVictories: this.editForm.get(['majorVictories'])!.value,
       minorVictories: this.editForm.get(['minorVictories'])!.value,
       draws: this.editForm.get(['draws'])!.value,

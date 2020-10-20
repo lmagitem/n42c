@@ -102,7 +102,8 @@ class LocalizedNinthDeploymentMapGatlingTest extends Simulation {
             .body(StringBody("""{
                 "id":null
                 , "name":"SAMPLE_TEXT"
-                , "description":"SAMPLE_TEXT"
+                , "description":null
+                , "language":"EN"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_localizedNinthDeploymentMap_url"))).exitHereIfFailed

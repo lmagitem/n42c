@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.ninthCampaign.home.title">Ninth Campaigns</span>
+
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-campaign" [routerLink]="['/campaign', 'new']">
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.ninthCampaign.home.createLabel">
+        Create a new Ninth Campaign
+      </span>
+    </button>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ninthCampaigns?.length === 0">
+    <span jhiTranslate="n42cApp.ninthCampaign.home.notFound">No ninthCampaigns found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="ninthCampaigns && ninthCampaigns.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.usePowerRating">Use Power Rating</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.participants">Participants</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.ninthCampaign.campaignStratagems">Campaign Stratagems</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ninthCampaign of ninthCampaigns; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/campaign', ninthCampaign.id]">{{ ninthCampaign.id }}</a>
+          </td>
+          <td>{{ ninthCampaign.name }}</td>
+          <td jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthCampaign.gameType }}">{{ ninthCampaign.gameType }}</td>
+          <td>{{ ninthCampaign.usePowerRating }}</td>
+          <td>
+            <span *ngFor="let author of ninthCampaign.authors; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities', 'player', author?.id, 'view']">{{
+                !!author.appUser ? author.appUser.displayedName : author.id
+              }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let participant of ninthCampaign.participants; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities', 'player', participant?.id, 'view']">{{
+                !!participant.appUser ? participant.appUser.displayedName : participant.id
+              }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let campaignStratagems of ninthCampaign.campaignStratagems; let last = last">
+              <a class="form-control-static" [routerLink]="['/entities', 'ninth-stratagem-group', campaignStratagems?.id, 'view']">{{
+                !!campaignStratagems.localizations && campaignStratagems.localizations.length > 0
+                  ? campaignStratagems.localizations[0].name
+                  : campaignStratagems.id
+              }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/campaign', ninthCampaign.id]" class="btn btn-info btn-sm">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" (click)="delete(ninthCampaign)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

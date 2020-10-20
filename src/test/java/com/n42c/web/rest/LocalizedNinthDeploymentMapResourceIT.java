@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedNinthDeploymentMapResource} REST controller.
  */
@@ -36,6 +38,9 @@ public class LocalizedNinthDeploymentMapResourceIT {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final Language DEFAULT_LANGUAGE = Language.EN;
+    private static final Language UPDATED_LANGUAGE = Language.FR;
 
     @Autowired
     private LocalizedNinthDeploymentMapRepository localizedNinthDeploymentMapRepository;
@@ -57,7 +62,8 @@ public class LocalizedNinthDeploymentMapResourceIT {
     public static LocalizedNinthDeploymentMap createEntity(EntityManager em) {
         LocalizedNinthDeploymentMap localizedNinthDeploymentMap = new LocalizedNinthDeploymentMap()
             .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .language(DEFAULT_LANGUAGE);
         return localizedNinthDeploymentMap;
     }
     /**
@@ -69,7 +75,8 @@ public class LocalizedNinthDeploymentMapResourceIT {
     public static LocalizedNinthDeploymentMap createUpdatedEntity(EntityManager em) {
         LocalizedNinthDeploymentMap localizedNinthDeploymentMap = new LocalizedNinthDeploymentMap()
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .language(UPDATED_LANGUAGE);
         return localizedNinthDeploymentMap;
     }
 
@@ -94,6 +101,7 @@ public class LocalizedNinthDeploymentMapResourceIT {
         LocalizedNinthDeploymentMap testLocalizedNinthDeploymentMap = localizedNinthDeploymentMapList.get(localizedNinthDeploymentMapList.size() - 1);
         assertThat(testLocalizedNinthDeploymentMap.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testLocalizedNinthDeploymentMap.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testLocalizedNinthDeploymentMap.getLanguage()).isEqualTo(DEFAULT_LANGUAGE);
     }
 
     @Test
@@ -118,6 +126,25 @@ public class LocalizedNinthDeploymentMapResourceIT {
 
     @Test
     @Transactional
+    public void checkLanguageIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localizedNinthDeploymentMapRepository.findAll().size();
+        // set the field null
+        localizedNinthDeploymentMap.setLanguage(null);
+
+        // Create the LocalizedNinthDeploymentMap, which fails.
+
+
+        restLocalizedNinthDeploymentMapMockMvc.perform(post("/api/localized-ninth-deployment-maps").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(localizedNinthDeploymentMap)))
+            .andExpect(status().isBadRequest());
+
+        List<LocalizedNinthDeploymentMap> localizedNinthDeploymentMapList = localizedNinthDeploymentMapRepository.findAll();
+        assertThat(localizedNinthDeploymentMapList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLocalizedNinthDeploymentMaps() throws Exception {
         // Initialize the database
         localizedNinthDeploymentMapRepository.saveAndFlush(localizedNinthDeploymentMap);
@@ -128,7 +155,8 @@ public class LocalizedNinthDeploymentMapResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedNinthDeploymentMap.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
     
     @Test
@@ -143,7 +171,8 @@ public class LocalizedNinthDeploymentMapResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedNinthDeploymentMap.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
     @Test
     @Transactional
@@ -167,7 +196,8 @@ public class LocalizedNinthDeploymentMapResourceIT {
         em.detach(updatedLocalizedNinthDeploymentMap);
         updatedLocalizedNinthDeploymentMap
             .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .language(UPDATED_LANGUAGE);
 
         restLocalizedNinthDeploymentMapMockMvc.perform(put("/api/localized-ninth-deployment-maps").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -180,6 +210,7 @@ public class LocalizedNinthDeploymentMapResourceIT {
         LocalizedNinthDeploymentMap testLocalizedNinthDeploymentMap = localizedNinthDeploymentMapList.get(localizedNinthDeploymentMapList.size() - 1);
         assertThat(testLocalizedNinthDeploymentMap.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testLocalizedNinthDeploymentMap.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testLocalizedNinthDeploymentMap.getLanguage()).isEqualTo(UPDATED_LANGUAGE);
     }
 
     @Test

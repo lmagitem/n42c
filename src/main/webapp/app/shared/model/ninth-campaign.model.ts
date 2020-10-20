@@ -5,8 +5,10 @@ import { NinthGameType } from 'app/shared/model/enumerations/ninth-game-type.mod
 
 export interface INinthCampaign {
   id?: number;
+  name?: string;
   gameType?: NinthGameType;
   usePowerRating?: boolean;
+  description?: any;
   events?: INinthCampaignMoment[];
   authors?: IPlayer[];
   participants?: IPlayer[];
@@ -16,8 +18,10 @@ export interface INinthCampaign {
 export class NinthCampaign implements INinthCampaign {
   constructor(
     public id?: number,
+    public name?: string,
     public gameType?: NinthGameType,
     public usePowerRating?: boolean,
+    public description?: any,
     public events?: INinthCampaignMoment[],
     public authors?: IPlayer[],
     public participants?: IPlayer[],

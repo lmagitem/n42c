@@ -1,69 +1,80 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42CApp.localizedBlogCategory.home.title">Localized Blog Categories</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.localizedBlogCategory.home.title">Localized Blog Categories</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-localized-blog-category" [routerLink]="['/localized-blog-category/new']">
-            <fa-icon icon="plus"></fa-icon>
-            <span  jhiTranslate="n42CApp.localizedBlogCategory.home.createLabel">
-            Create a new Localized Blog Category
-            </span>
-        </button>
-    </h2>
+    <button
+      id="jh-create-entity"
+      class="btn btn-primary float-right jh-create-entity create-localized-blog-category"
+      [routerLink]="['/entities/localized-blog-category/new']"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.localizedBlogCategory.home.createLabel">
+        Create a new Localized Blog Category
+      </span>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div class="alert alert-warning" id="no-result" *ngIf="localizedBlogCategories?.length === 0">
-        <span jhiTranslate="n42CApp.localizedBlogCategory.home.notFound">No localizedBlogCategories found</span>
-    </div>
+  <div class="alert alert-warning" id="no-result" *ngIf="localizedBlogCategories?.length === 0">
+    <span jhiTranslate="n42cApp.localizedBlogCategory.home.notFound">No localizedBlogCategories found</span>
+  </div>
 
-    <div class="table-responsive" id="entities" *ngIf="localizedBlogCategories && localizedBlogCategories.length > 0">
-        <table class="table table-striped" aria-describedby="page-heading">
-            <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedBlogCategory.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedBlogCategory.language">Language</span></th>
-                    <th scope="col" ><span jhiTranslate="n42CApp.localizedBlogCategory.category">Category</span></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let localizedBlogCategory of localizedBlogCategories ;trackBy: trackId">
-                    <td><a [routerLink]="['/localized-blog-category', localizedBlogCategory.id, 'view']">{{ localizedBlogCategory.id }}</a></td>
-                    <td>{{ localizedBlogCategory.name }}</td>
-                    <td jhiTranslate="{{ 'n42CApp.Language.' + localizedBlogCategory.language }}">{{ localizedBlogCategory.language }}</td>
-                    <td>
-                        <div *ngIf="localizedBlogCategory.category">
-                            <a [routerLink]="['/blog-category', localizedBlogCategory.category?.id, 'view']" >{{ localizedBlogCategory.category?.id }}</a>
-                        </div>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <button type="submit"
-                                    [routerLink]="['/localized-blog-category', localizedBlogCategory.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                <fa-icon icon="eye"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                            </button>
+  <div class="table-responsive" id="entities" *ngIf="localizedBlogCategories && localizedBlogCategories.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedBlogCategory.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedBlogCategory.language">Language</span></th>
+          <th scope="col"><span jhiTranslate="n42cApp.localizedBlogCategory.category">Category</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let localizedBlogCategory of localizedBlogCategories; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'localized-blog-category', localizedBlogCategory.id, 'view']">{{ localizedBlogCategory.id }}</a>
+          </td>
+          <td>{{ localizedBlogCategory.name }}</td>
+          <td jhiTranslate="{{ 'n42cApp.Language.' + localizedBlogCategory.language }}">{{ localizedBlogCategory.language }}</td>
+          <td>
+            <div *ngIf="localizedBlogCategory.category">
+              <a [routerLink]="['/entities', 'blog-category', localizedBlogCategory.category?.id, 'view']">{{
+                localizedBlogCategory.category?.name
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'localized-blog-category', localizedBlogCategory.id, 'view']"
+                class="btn btn-info btn-sm"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-                            <button type="submit"
-                                    [routerLink]="['/localized-blog-category', localizedBlogCategory.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+              <button
+                type="submit"
+                [routerLink]="['/entities', 'localized-blog-category', localizedBlogCategory.id, 'edit']"
+                class="btn btn-primary btn-sm"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-                            <button type="submit" (click)="delete(localizedBlogCategory)"
-                                    class="btn btn-danger btn-sm">
-                                <fa-icon icon="times"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+              <button type="submit" (click)="delete(localizedBlogCategory)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
