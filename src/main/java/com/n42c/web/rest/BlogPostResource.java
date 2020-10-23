@@ -20,7 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -127,14 +126,14 @@ public class BlogPostResource {
         if (principal != null) {
             if (principal instanceof UserDetails) {
                 log.debug("REST request to get all Blog Posts - as User (with UserDetails)");
-                return blogPostRepository.getAllByIsCurrentSpringUserOrWriter(pageable);
+                return blogPostRepository.findByIsCurrentSpringUserOrWriter(pageable);
             } else if (principal instanceof DefaultOidcUser) {
                 log.debug("REST request to get all Blog Posts - as User (with Oidc token)");
-                return blogPostRepository.getAllByIsCurrentOidcUserOrWriter(pageable);
+                return blogPostRepository.findByIsCurrentOidcUserOrWriter(pageable);
             }
         }
         log.debug("REST request to get all Blog Posts - as Anonymous");
-        return blogPostRepository.getAllByIsWriter(pageable);
+        return blogPostRepository.findByIsWriter(pageable);
     }
 
     /**

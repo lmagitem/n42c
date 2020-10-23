@@ -19,15 +19,15 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
         "or blog.author.blogRights = 'WRI' or blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blog) from Blog blog where blog.author.user.id = ?#{principal.name} " +
             "or blog.author.blogRights = 'WRI' or blog.author.blogRights = 'MOD'")
-    Page<Blog> getAllByIsCurrentOidcUserOrWriter(Pageable pageable);
+    Page<Blog> findByIsCurrentOidcUserOrWriter(Pageable pageable);
 
     @Query(value = "select distinct blog from Blog blog where blog.author.user.id = ?#{principal.username} " +
         "or blog.author.blogRights = 'WRI' or blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blog) from Blog blog where blog.author.user.id = ?#{principal.username} " +
             "or blog.author.blogRights = 'WRI' or blog.author.blogRights = 'MOD'")
-    Page<Blog> getAllByIsCurrentSpringUserOrWriter(Pageable pageable);
+    Page<Blog> findByIsCurrentSpringUserOrWriter(Pageable pageable);
 
     @Query(value = "select distinct blog from Blog blog where blog.author.blogRights = 'WRI' or blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blog) from Blog blog where blog.author.blogRights = 'WRI' or blog.author.blogRights = 'MOD'")
-    Page<Blog> getAllByIsWriter(Pageable pageable);
+    Page<Blog> findByIsWriter(Pageable pageable);
 }

@@ -126,14 +126,14 @@ public class BlogResource {
         if (principal != null) {
             if (principal instanceof UserDetails) {
                 log.debug("REST request to get all Blogs - as User (with UserDetails)");
-                return blogRepository.getAllByIsCurrentSpringUserOrWriter(pageable);
+                return blogRepository.findByIsCurrentSpringUserOrWriter(pageable);
             } else if (principal instanceof DefaultOidcUser) {
                 log.debug("REST request to get all Blogs - as User (with Oidc token)");
-                return blogRepository.getAllByIsCurrentOidcUserOrWriter(pageable);
+                return blogRepository.findByIsCurrentOidcUserOrWriter(pageable);
             }
         }
         log.debug("REST request to get all Blogs - as Anonymous");
-        return blogRepository.getAllByIsWriter(pageable);
+        return blogRepository.findByIsWriter(pageable);
     }
 
     /**

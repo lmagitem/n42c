@@ -1,5 +1,6 @@
 package com.n42c.web.rest;
 
+import com.n42c.domain.BlogPost;
 import com.n42c.domain.LocalizedPostContent;
 import com.n42c.repository.LocalizedPostContentRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
@@ -9,13 +10,23 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,6 +100,51 @@ public class LocalizedPostContentResource {
     public List<LocalizedPostContent> getAllLocalizedPostContents() {
         log.debug("REST request to get all LocalizedPostContents");
         return localizedPostContentRepository.findAll();
+    }
+
+    /**
+     * {@code GET  /localized-post-contents/for} : get localizations for the Blog Posts which ids are given in parameter.
+     *
+     * @param ids the ids of the Blog Posts for which to return localizations.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogPosts in body.
+     */
+    @GetMapping("/localized-post-contents/for")
+    public List<LocalizedPostContent> getLocalizedPostContentsFor(@RequestParam() List<Long> ids) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return getAllowedLocalizedPosts(ids, null);
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return getAllowedLocalizedPosts(ids, null);
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        if (authorities == null)
+            return getAllowedLocalizedPosts(ids, authentication.getPrincipal());
+
+        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            log.debug("REST request to get localizations for given Blog Post ids - as Admin");
+            return localizedPostContentRepository.findByBlogPostIds(ids);
+        } else {
+            return getAllowedLocalizedPosts(ids, authentication.getPrincipal());
+        }
+    }
+
+    /**
+     * Gets all localized post contents belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private List<LocalizedPostContent> getAllowedLocalizedPosts(List<Long> ids, Object principal) {
+        if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get localizations for given Blog Post ids - as User (with UserDetails)");
+                return localizedPostContentRepository.findByBlogPostIdsAndIsCurrentSpringUserOrWriter(ids);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get localizations for given Blog Post ids - as User (with Oidc token)");
+                return localizedPostContentRepository.findByBlogPostIdsAndIsCurrentOidcUserOrWriter(ids);
+            }
+        }
+        log.debug("REST request to get localizations for given Blog Post ids - as Anonymous");
+        return localizedPostContentRepository.findByBlogPostIdsAndIsWriter(ids);
     }
 
     /**

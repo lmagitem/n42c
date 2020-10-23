@@ -186,6 +186,7 @@
             <option
               [ngValue]="getSelected(editForm.get('givenFriendships')!.value, appUserOption)"
               *ngFor="let appUserOption of appusers; trackBy: trackById"
+              [disabled]="appUserOption.id === editForm.get('id')?.value"
               >{{ appUserOption.displayedName }}</option
             >
           </select>
@@ -203,6 +204,7 @@
             <option
               [ngValue]="getSelected(editForm.get('askedFriendRequests')!.value, appUserOption)"
               *ngFor="let appUserOption of appusers; trackBy: trackById"
+              [disabled]="appUserOption.id === editForm.get('id')?.value"
               >{{ appUserOption.displayedName }}</option
             >
           </select>

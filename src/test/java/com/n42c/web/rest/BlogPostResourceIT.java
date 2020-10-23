@@ -238,26 +238,6 @@ public class BlogPostResourceIT {
             .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
     }
 
-    @SuppressWarnings({"unchecked"})
-    public void getAllBlogPostsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restBlogPostMockMvc.perform(get("/api/blog-posts?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(blogPostRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public void getAllBlogPostsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restBlogPostMockMvc.perform(get("/api/blog-posts?eagerload=true"))
-            .andExpect(status().isOk());
-
-        verify(blogPostRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
     @Test
     @Transactional
     public void getBlogPost() throws Exception {

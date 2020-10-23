@@ -9,7 +9,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
       {
         path: '',
         canActivate: [UserRouteAccessService],
-        loadChildren: () => import('./blog-list/blog.module').then(m => m.BlogModule),
+        loadChildren: () => import('./blog.module').then(m => m.BlogModule),
       },
     ]),
   ],
