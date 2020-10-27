@@ -4,7 +4,7 @@
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** Languages used in the app. */
 enum Language {
-    EN (English), FR (French), ES (Spanish), GE (German), RU (Russian), AR (Arabic), CH (Mandarin), PR (Portuguese), IT (Italian), PO (Polish), DU (Dutch), GR (Greek), SW (Swedish), TU (Turkish), RO (Romanian), JP (Japanese), KO (Korean), HU (Hungarian), DA (Danish)
+    EN (English), FR (French), AR (Arabic), ZH (Chinese), DA (Danish), NL (Dutch), FI (Finnish), DE (German), EL (Greek), HU (Hungarian), IS (Icelandic), ID (Indonesian), GA (Irish), IT (Italian), JA (Japanese), KO (Korean), FA (Persian), PL (Polish), PT (Portuguese), RO (Romanian), RU (Russian), SR (Serbian), ES (Spanish), SV (Swedish), TR (Turkish)
 }
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !                              Users                                  !
@@ -66,6 +66,13 @@ entity LocalizedProduct {
 entity Blog {
     /** This blog's name. */
     name String required
+}
+/** The content of a blog, in a specific language. */
+entity LocalizedBlog {
+    /** This blog's localized title. */
+    name String required
+    /** This blog's language. */
+    language Language required
 }
 /** Blog posts to show on the app. */
 @paginate(infinite-scroll)
@@ -497,6 +504,7 @@ relationship OneToMany {
 	// Blog
 	AppUser{blogs} to Blog{author(displayedName)},
 	Blog{posts(title)} to BlogPost{blog(name)},
+    Blog{localizations(name)} to LocalizedBlog{blog(name)},
     BlogPost{localizations(title)} to LocalizedPostContent{post(title)},
     BlogCategory{subcategories(name)} to BlogCategory{parentCategory(name)},
     BlogCategory{localizations(name)} to LocalizedBlogCategory{category(name)},

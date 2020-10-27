@@ -1,0 +1,28 @@
+{
+  "n42cApp": {
+    "localizedBlog": {
+      "home": {
+        "title": "Localized Blogs",
+        "createLabel": "Create a new Localized Blog",
+        "createOrEditLabel": "Create or edit a Localized Blog",
+        "notFound": "No Localized Blogs found"
+      },
+      "created": "A new Localized Blog is created with identifier {{ param }}",
+      "updated": "A Localized Blog is updated with identifier {{ param }}",
+      "deleted": "A Localized Blog is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Blog {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Blog"
+      },
+      "name": "Name",
+      "language": "Language",
+      "blog": "Blog",
+      "help": {
+        "name": "This blog's localized title.",
+        "language": "This blog's language."
+      }
+    }
+  }
+}

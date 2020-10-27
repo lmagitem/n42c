@@ -41,6 +41,10 @@ public class Blog implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<BlogPost> posts = new HashSet<>();
 
+    @OneToMany(mappedBy = "blog")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<LocalizedBlog> localizations = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties(value = "blogs", allowSetters = true)
     private AppUser author;
@@ -90,6 +94,31 @@ public class Blog implements Serializable {
 
     public void setPosts(Set<BlogPost> blogPosts) {
         this.posts = blogPosts;
+    }
+
+    public Set<LocalizedBlog> getLocalizations() {
+        return localizations;
+    }
+
+    public Blog localizations(Set<LocalizedBlog> localizedBlogs) {
+        this.localizations = localizedBlogs;
+        return this;
+    }
+
+    public Blog addLocalizations(LocalizedBlog localizedBlog) {
+        this.localizations.add(localizedBlog);
+        localizedBlog.setBlog(this);
+        return this;
+    }
+
+    public Blog removeLocalizations(LocalizedBlog localizedBlog) {
+        this.localizations.remove(localizedBlog);
+        localizedBlog.setBlog(null);
+        return this;
+    }
+
+    public void setLocalizations(Set<LocalizedBlog> localizedBlogs) {
+        this.localizations = localizedBlogs;
     }
 
     public AppUser getAuthor() {

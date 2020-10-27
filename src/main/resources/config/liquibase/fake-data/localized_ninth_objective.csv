@@ -1,11 +1,11 @@
 id;name;description;language
-1;Profit-focused;../fake-data/blob/hipster.txt;JP
-2;granular morph compress;../fake-data/blob/hipster.txt;PR
-3;Kroon;../fake-data/blob/hipster.txt;DU
-4;Borders SAS driver;../fake-data/blob/hipster.txt;PO
-5;Advanced;../fake-data/blob/hipster.txt;GE
-6;Sausages;../fake-data/blob/hipster.txt;KO
-7;wireless;../fake-data/blob/hipster.txt;IT
-8;Executive Indiana;../fake-data/blob/hipster.txt;PO
-9;Oklahoma;../fake-data/blob/hipster.txt;HU
-10;black frame;../fake-data/blob/hipster.txt;TU
+1;Profit-focused;../fake-data/blob/hipster.txt;RU
+2;granular morph compress;../fake-data/blob/hipster.txt;HU
+3;Kroon;../fake-data/blob/hipster.txt;IT
+4;Borders SAS driver;../fake-data/blob/hipster.txt;GA
+5;Advanced;../fake-data/blob/hipster.txt;DA
+6;Sausages;../fake-data/blob/hipster.txt;SR
+7;wireless;../fake-data/blob/hipster.txt;ID
+8;Executive Indiana;../fake-data/blob/hipster.txt;GA
+9;Oklahoma;../fake-data/blob/hipster.txt;SV
+10;black frame;../fake-data/blob/hipster.txt;PT

@@ -18,6 +18,7 @@
       },
       "name": "Name",
       "posts": "Posts",
+      "localizations": "Localizations",
       "author": "Author",
       "help": {
         "name": "This blog's name."

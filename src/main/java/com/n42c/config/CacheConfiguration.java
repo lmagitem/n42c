@@ -160,6 +160,8 @@ public class CacheConfiguration {
             createCache(cm, com.n42c.domain.NinthObjective.class.getName() + ".allowedAsPrimaries");
             createCache(cm, com.n42c.domain.NinthObjective.class.getName() + ".allowedAsSecondaries");
             createCache(cm, com.n42c.domain.LocalizedNinthObjective.class.getName());
+            createCache(cm, com.n42c.domain.LocalizedBlog.class.getName());
+            createCache(cm, com.n42c.domain.Blog.class.getName() + ".localizations");
             // jhipster-needle-ehcache-add-entry
         };
     }
