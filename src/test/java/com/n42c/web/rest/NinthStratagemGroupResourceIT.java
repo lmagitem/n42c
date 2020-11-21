@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthStratagemGroup;
+import com.n42c.domain.Player;
 import com.n42c.repository.NinthStratagemGroupRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +55,16 @@ public class NinthStratagemGroupResourceIT {
     public static NinthStratagemGroup createEntity(EntityManager em) {
         NinthStratagemGroup ninthStratagemGroup = new NinthStratagemGroup()
             .shareable(DEFAULT_SHAREABLE);
+        // Add required entity
+        Player player;
+        if (TestUtil.findAll(em, Player.class).isEmpty()) {
+            player = PlayerResourceIT.createEntity(em);
+            em.persist(player);
+            em.flush();
+        } else {
+            player = TestUtil.findAll(em, Player.class).get(0);
+        }
+        ninthStratagemGroup.setAuthor(player);
         return ninthStratagemGroup;
     }
     /**
@@ -65,6 +76,16 @@ public class NinthStratagemGroupResourceIT {
     public static NinthStratagemGroup createUpdatedEntity(EntityManager em) {
         NinthStratagemGroup ninthStratagemGroup = new NinthStratagemGroup()
             .shareable(UPDATED_SHAREABLE);
+        // Add required entity
+        Player player;
+        if (TestUtil.findAll(em, Player.class).isEmpty()) {
+            player = PlayerResourceIT.createUpdatedEntity(em);
+            em.persist(player);
+            em.flush();
+        } else {
+            player = TestUtil.findAll(em, Player.class).get(0);
+        }
+        ninthStratagemGroup.setAuthor(player);
         return ninthStratagemGroup;
     }
 

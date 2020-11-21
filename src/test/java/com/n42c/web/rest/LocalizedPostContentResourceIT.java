@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedPostContent;
+import com.n42c.domain.BlogPost;
 import com.n42c.repository.LocalizedPostContentRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -68,6 +69,16 @@ public class LocalizedPostContentResourceIT {
             .excerpt(DEFAULT_EXCERPT)
             .content(DEFAULT_CONTENT)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        BlogPost blogPost;
+        if (TestUtil.findAll(em, BlogPost.class).isEmpty()) {
+            blogPost = BlogPostResourceIT.createEntity(em);
+            em.persist(blogPost);
+            em.flush();
+        } else {
+            blogPost = TestUtil.findAll(em, BlogPost.class).get(0);
+        }
+        localizedPostContent.setPost(blogPost);
         return localizedPostContent;
     }
     /**
@@ -82,6 +93,16 @@ public class LocalizedPostContentResourceIT {
             .excerpt(UPDATED_EXCERPT)
             .content(UPDATED_CONTENT)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        BlogPost blogPost;
+        if (TestUtil.findAll(em, BlogPost.class).isEmpty()) {
+            blogPost = BlogPostResourceIT.createUpdatedEntity(em);
+            em.persist(blogPost);
+            em.flush();
+        } else {
+            blogPost = TestUtil.findAll(em, BlogPost.class).get(0);
+        }
+        localizedPostContent.setPost(blogPost);
         return localizedPostContent;
     }
 

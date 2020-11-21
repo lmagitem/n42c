@@ -43,6 +43,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "player",
       "otherEntityRelationshipName": "lists",
+      "relationshipValidateRules": "required",
       "relationshipName": "author",
       "otherEntityField": "id"
     }

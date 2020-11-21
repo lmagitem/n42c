@@ -22,7 +22,7 @@ export class PlayerUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
-    appUser: [],
+    appUser: [null, Validators.required],
   });
 
   constructor(

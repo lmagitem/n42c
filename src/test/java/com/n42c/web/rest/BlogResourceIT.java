@@ -2,14 +2,10 @@ package com.n42c.web.rest;
 
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
-import com.n42c.domain.AppUser;
 import com.n42c.domain.Blog;
-import com.n42c.domain.User;
-import com.n42c.repository.AppUserRepository;
+import com.n42c.domain.AppUser;
 import com.n42c.repository.BlogRepository;
 
-import com.n42c.repository.UserRepository;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -33,19 +27,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link BlogResource} REST controller.
  */
-@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
 @AutoConfigureMockMvc
-@WithMockUser(username = "6ee76992-36a9-41e2-bd4e-4c5e79bf38be")
+@WithMockUser
 public class BlogResourceIT {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AppUserRepository appUserRepository;
 
     @Autowired
     private BlogRepository blogRepository;
@@ -60,35 +48,50 @@ public class BlogResourceIT {
 
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Blog createEntity(EntityManager em) {
         Blog blog = new Blog()
             .name(DEFAULT_NAME);
-        blog.setAuthor(AppUserResourceIT.createEntity(em));
+        // Add required entity
+        AppUser appUser;
+        if (TestUtil.findAll(em, AppUser.class).isEmpty()) {
+            appUser = AppUserResourceIT.createEntity(em);
+            em.persist(appUser);
+            em.flush();
+        } else {
+            appUser = TestUtil.findAll(em, AppUser.class).get(0);
+        }
+        blog.setAuthor(appUser);
         return blog;
     }
-
     /**
      * Create an updated entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
     public static Blog createUpdatedEntity(EntityManager em) {
         Blog blog = new Blog()
             .name(UPDATED_NAME);
-        blog.setAuthor(AppUserResourceIT.createEntity(em));
+        // Add required entity
+        AppUser appUser;
+        if (TestUtil.findAll(em, AppUser.class).isEmpty()) {
+            appUser = AppUserResourceIT.createUpdatedEntity(em);
+            em.persist(appUser);
+            em.flush();
+        } else {
+            appUser = TestUtil.findAll(em, AppUser.class).get(0);
+        }
+        blog.setAuthor(appUser);
         return blog;
     }
 
     @BeforeEach
     public void initTest() {
         blog = createEntity(em);
-        blog.getAuthor().setUser(userRepository.saveAndFlush(blog.getAuthor().getUser()));
-        blog.setAuthor(appUserRepository.saveAndFlush(blog.getAuthor()));
     }
 
     @Test
@@ -136,6 +139,8 @@ public class BlogResourceIT {
         blog.setName(null);
 
         // Create the Blog, which fails.
+
+
         restBlogMockMvc.perform(post("/api/blogs").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(blog)))
@@ -158,7 +163,7 @@ public class BlogResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(blog.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-
+    
     @Test
     @Transactional
     public void getBlog() throws Exception {
@@ -172,7 +177,6 @@ public class BlogResourceIT {
             .andExpect(jsonPath("$.id").value(blog.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
-
     @Test
     @Transactional
     public void getNonExistingBlog() throws Exception {

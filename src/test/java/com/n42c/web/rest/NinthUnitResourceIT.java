@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthUnit;
+import com.n42c.domain.Player;
 import com.n42c.repository.NinthUnitRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -77,6 +78,16 @@ public class NinthUnitResourceIT {
             .subfaction(DEFAULT_SUBFACTION)
             .battlefieldRole(DEFAULT_BATTLEFIELD_ROLE)
             .keywords(DEFAULT_KEYWORDS);
+        // Add required entity
+        Player player;
+        if (TestUtil.findAll(em, Player.class).isEmpty()) {
+            player = PlayerResourceIT.createEntity(em);
+            em.persist(player);
+            em.flush();
+        } else {
+            player = TestUtil.findAll(em, Player.class).get(0);
+        }
+        ninthUnit.setOwner(player);
         return ninthUnit;
     }
     /**
@@ -93,6 +104,16 @@ public class NinthUnitResourceIT {
             .subfaction(UPDATED_SUBFACTION)
             .battlefieldRole(UPDATED_BATTLEFIELD_ROLE)
             .keywords(UPDATED_KEYWORDS);
+        // Add required entity
+        Player player;
+        if (TestUtil.findAll(em, Player.class).isEmpty()) {
+            player = PlayerResourceIT.createUpdatedEntity(em);
+            em.persist(player);
+            em.flush();
+        } else {
+            player = TestUtil.findAll(em, Player.class).get(0);
+        }
+        ninthUnit.setOwner(player);
         return ninthUnit;
     }
 

@@ -27,7 +27,7 @@ export class LocalizedProductUpdateComponent implements OnInit {
     pictureUrl: [],
     content: [null, [Validators.required]],
     language: [null, [Validators.required]],
-    product: [],
+    product: [null, Validators.required],
   });
 
   constructor(

@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUserProfile;
+import com.n42c.domain.AppUser;
 import com.n42c.repository.AppUserProfileRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -72,6 +73,16 @@ public class AppUserProfileResourceIT {
             .summary(DEFAULT_SUMMARY)
             .headerBackgroundURI(DEFAULT_HEADER_BACKGROUND_URI)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        AppUser appUser;
+        if (TestUtil.findAll(em, AppUser.class).isEmpty()) {
+            appUser = AppUserResourceIT.createEntity(em);
+            em.persist(appUser);
+            em.flush();
+        } else {
+            appUser = TestUtil.findAll(em, AppUser.class).get(0);
+        }
+        appUserProfile.setUser(appUser);
         return appUserProfile;
     }
     /**
@@ -87,6 +98,16 @@ public class AppUserProfileResourceIT {
             .summary(UPDATED_SUMMARY)
             .headerBackgroundURI(UPDATED_HEADER_BACKGROUND_URI)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        AppUser appUser;
+        if (TestUtil.findAll(em, AppUser.class).isEmpty()) {
+            appUser = AppUserResourceIT.createUpdatedEntity(em);
+            em.persist(appUser);
+            em.flush();
+        } else {
+            appUser = TestUtil.findAll(em, AppUser.class).get(0);
+        }
+        appUserProfile.setUser(appUser);
         return appUserProfile;
     }
 

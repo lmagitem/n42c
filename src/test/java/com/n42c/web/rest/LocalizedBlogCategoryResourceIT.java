@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedBlogCategory;
+import com.n42c.domain.BlogCategory;
 import com.n42c.repository.LocalizedBlogCategoryRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -59,6 +60,16 @@ public class LocalizedBlogCategoryResourceIT {
         LocalizedBlogCategory localizedBlogCategory = new LocalizedBlogCategory()
             .name(DEFAULT_NAME)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        BlogCategory blogCategory;
+        if (TestUtil.findAll(em, BlogCategory.class).isEmpty()) {
+            blogCategory = BlogCategoryResourceIT.createEntity(em);
+            em.persist(blogCategory);
+            em.flush();
+        } else {
+            blogCategory = TestUtil.findAll(em, BlogCategory.class).get(0);
+        }
+        localizedBlogCategory.setCategory(blogCategory);
         return localizedBlogCategory;
     }
     /**
@@ -71,6 +82,16 @@ public class LocalizedBlogCategoryResourceIT {
         LocalizedBlogCategory localizedBlogCategory = new LocalizedBlogCategory()
             .name(UPDATED_NAME)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        BlogCategory blogCategory;
+        if (TestUtil.findAll(em, BlogCategory.class).isEmpty()) {
+            blogCategory = BlogCategoryResourceIT.createUpdatedEntity(em);
+            em.persist(blogCategory);
+            em.flush();
+        } else {
+            blogCategory = TestUtil.findAll(em, BlogCategory.class).get(0);
+        }
+        localizedBlogCategory.setCategory(blogCategory);
         return localizedBlogCategory;
     }
 

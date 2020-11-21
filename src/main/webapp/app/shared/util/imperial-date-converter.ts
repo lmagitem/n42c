@@ -2,6 +2,7 @@ import * as moment from 'moment';
 
 /** Adds starting zeros in a string. */
 const zeroPad = (num: number, places: number) => String(num).padStart(places, '0');
+
 export class ImperialDateConverter {
   /** For a given date, returns a string containing the date converted in the Imperial Dating system. */
   public static convertToImperial(instant: Date, check?: number): string {

@@ -27,7 +27,7 @@ export class LocalizedNinthStratagemUpdateComponent implements OnInit {
     description: [],
     keywords: [],
     language: [null, [Validators.required]],
-    stratagem: [],
+    stratagem: [null, Validators.required],
   });
 
   constructor(

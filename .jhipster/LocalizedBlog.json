@@ -1,0 +1,44 @@
+{
+  "name": "LocalizedBlog",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "javadoc": "This blog's localized title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This blog's language.",
+      "fieldValues": "EN (English),FR (French),AR (Arabic),ZH (Chinese),DA (Danish),NL (Dutch),FI (Finnish),DE (German),EL (Greek),HU (Hungarian),IS (Icelandic),ID (Indonesian),GA (Irish),IT (Italian),JA (Japanese),KO (Korean),FA (Persian),PL (Polish),PT (Portuguese),RO (Romanian),RU (Russian),SR (Serbian),ES (Spanish),SV (Swedish),TR (Turkish)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blog",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
+      "relationshipName": "blog",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20201027063413",
+  "javadoc": "The content of a blog, in a specific language.",
+  "entityTableName": "localized_blog",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

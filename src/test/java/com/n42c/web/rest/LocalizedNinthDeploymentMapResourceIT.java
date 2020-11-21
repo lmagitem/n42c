@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthDeploymentMap;
+import com.n42c.domain.NinthDeploymentMap;
 import com.n42c.repository.LocalizedNinthDeploymentMapRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -64,6 +65,16 @@ public class LocalizedNinthDeploymentMapResourceIT {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        NinthDeploymentMap ninthDeploymentMap;
+        if (TestUtil.findAll(em, NinthDeploymentMap.class).isEmpty()) {
+            ninthDeploymentMap = NinthDeploymentMapResourceIT.createEntity(em);
+            em.persist(ninthDeploymentMap);
+            em.flush();
+        } else {
+            ninthDeploymentMap = TestUtil.findAll(em, NinthDeploymentMap.class).get(0);
+        }
+        localizedNinthDeploymentMap.setDeploymentMap(ninthDeploymentMap);
         return localizedNinthDeploymentMap;
     }
     /**
@@ -77,6 +88,16 @@ public class LocalizedNinthDeploymentMapResourceIT {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        NinthDeploymentMap ninthDeploymentMap;
+        if (TestUtil.findAll(em, NinthDeploymentMap.class).isEmpty()) {
+            ninthDeploymentMap = NinthDeploymentMapResourceIT.createUpdatedEntity(em);
+            em.persist(ninthDeploymentMap);
+            em.flush();
+        } else {
+            ninthDeploymentMap = TestUtil.findAll(em, NinthDeploymentMap.class).get(0);
+        }
+        localizedNinthDeploymentMap.setDeploymentMap(ninthDeploymentMap);
         return localizedNinthDeploymentMap;
     }
 

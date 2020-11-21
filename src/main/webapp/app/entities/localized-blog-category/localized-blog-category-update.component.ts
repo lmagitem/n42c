@@ -22,7 +22,7 @@ export class LocalizedBlogCategoryUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     language: [null, [Validators.required]],
-    category: [],
+    category: [null, Validators.required],
   });
 
   constructor(

@@ -34,7 +34,8 @@ public class LocalizedNinthStratagemGroup implements Serializable {
     @Column(name = "language", nullable = false)
     private Language language;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
     private NinthStratagemGroup stratagemGroup;
 

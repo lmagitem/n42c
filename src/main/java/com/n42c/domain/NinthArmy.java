@@ -54,7 +54,8 @@ public class NinthArmy implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<NinthArmyMoment> moments = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "lists", allowSetters = true)
     private Player author;
 

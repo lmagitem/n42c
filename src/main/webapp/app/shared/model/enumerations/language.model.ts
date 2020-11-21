@@ -3,37 +3,49 @@ export const enum Language {
 
   FR = 'French',
 
-  ES = 'Spanish',
-
-  GE = 'German',
-
-  RU = 'Russian',
-
   AR = 'Arabic',
 
-  CH = 'Mandarin',
+  ZH = 'Chinese',
 
-  PR = 'Portuguese',
+  DA = 'Danish',
 
-  IT = 'Italian',
+  NL = 'Dutch',
 
-  PO = 'Polish',
+  FI = 'Finnish',
 
-  DU = 'Dutch',
+  DE = 'German',
 
-  GR = 'Greek',
-
-  SW = 'Swedish',
-
-  TU = 'Turkish',
-
-  RO = 'Romanian',
-
-  JP = 'Japanese',
-
-  KO = 'Korean',
+  EL = 'Greek',
 
   HU = 'Hungarian',
 
-  DA = 'Danish',
+  IS = 'Icelandic',
+
+  ID = 'Indonesian',
+
+  GA = 'Irish',
+
+  IT = 'Italian',
+
+  JA = 'Japanese',
+
+  KO = 'Korean',
+
+  FA = 'Persian',
+
+  PL = 'Polish',
+
+  PT = 'Portuguese',
+
+  RO = 'Romanian',
+
+  RU = 'Russian',
+
+  SR = 'Serbian',
+
+  ES = 'Spanish',
+
+  SV = 'Swedish',
+
+  TR = 'Turkish',
 }

@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { LocalizedProductComponentsPage, LocalizedProductDeleteDialog, LocalizedProductUpdatePage } from './localized-product.page-object';
+import {
+  LocalizedProductComponentsPage,
+  /* LocalizedProductDeleteDialog, */
+  LocalizedProductUpdatePage,
+} from './localized-product.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('LocalizedProduct e2e test', () => {
   let signInPage: SignInPage;
   let localizedProductComponentsPage: LocalizedProductComponentsPage;
   let localizedProductUpdatePage: LocalizedProductUpdatePage;
-  let localizedProductDeleteDialog: LocalizedProductDeleteDialog;
+  /* let localizedProductDeleteDialog: LocalizedProductDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -38,47 +42,42 @@ describe('LocalizedProduct e2e test', () => {
     await localizedProductUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedProducts', async () => {
-    const nbButtonsBeforeCreate = await localizedProductComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedProducts', async () => {
+        const nbButtonsBeforeCreate = await localizedProductComponentsPage.countDeleteButtons();
 
-    await localizedProductComponentsPage.clickOnCreateButton();
+        await localizedProductComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedProductUpdatePage.setNameInput('name'),
-      localizedProductUpdatePage.setExcerptInput('excerpt'),
-      localizedProductUpdatePage.setPictureUrlInput('pictureUrl'),
-      localizedProductUpdatePage.setContentInput('content'),
-      localizedProductUpdatePage.languageSelectLastOption(),
-      localizedProductUpdatePage.productSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedProductUpdatePage.setNameInput('name'),
+            localizedProductUpdatePage.setExcerptInput('excerpt'),
+            localizedProductUpdatePage.setPictureUrlInput('pictureUrl'),
+            localizedProductUpdatePage.setContentInput('content'),
+            localizedProductUpdatePage.languageSelectLastOption(),
+            localizedProductUpdatePage.productSelectLastOption(),
+        ]);
 
-    expect(await localizedProductUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    expect(await localizedProductUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
-    expect(await localizedProductUpdatePage.getPictureUrlInput()).to.eq(
-      'pictureUrl',
-      'Expected PictureUrl value to be equals to pictureUrl'
-    );
-    expect(await localizedProductUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
+        expect(await localizedProductUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await localizedProductUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
+        expect(await localizedProductUpdatePage.getPictureUrlInput()).to.eq('pictureUrl', 'Expected PictureUrl value to be equals to pictureUrl');
+        expect(await localizedProductUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
 
-    await localizedProductUpdatePage.save();
-    expect(await localizedProductUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedProductUpdatePage.save();
+        expect(await localizedProductUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedProductComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await localizedProductComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedProduct', async () => {
-    const nbButtonsBeforeDelete = await localizedProductComponentsPage.countDeleteButtons();
-    await localizedProductComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedProduct', async () => {
+        const nbButtonsBeforeDelete = await localizedProductComponentsPage.countDeleteButtons();
+        await localizedProductComponentsPage.clickOnLastDeleteButton();
 
-    localizedProductDeleteDialog = new LocalizedProductDeleteDialog();
-    expect(await localizedProductDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedProduct.delete.question');
-    await localizedProductDeleteDialog.clickOnConfirmButton();
+        localizedProductDeleteDialog = new LocalizedProductDeleteDialog();
+        expect(await localizedProductDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedProduct.delete.question');
+        await localizedProductDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedProductComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedProductComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

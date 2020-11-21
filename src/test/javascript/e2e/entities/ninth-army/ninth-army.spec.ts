@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { NinthArmyComponentsPage, NinthArmyDeleteDialog, NinthArmyUpdatePage } from './ninth-army.page-object';
+import {
+  NinthArmyComponentsPage,
+  /* NinthArmyDeleteDialog, */
+  NinthArmyUpdatePage,
+} from './ninth-army.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('NinthArmy e2e test', () => {
   let signInPage: SignInPage;
   let ninthArmyComponentsPage: NinthArmyComponentsPage;
   let ninthArmyUpdatePage: NinthArmyUpdatePage;
-  let ninthArmyDeleteDialog: NinthArmyDeleteDialog;
+  /* let ninthArmyDeleteDialog: NinthArmyDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -35,44 +39,45 @@ describe('NinthArmy e2e test', () => {
     await ninthArmyUpdatePage.cancel();
   });
 
-  it('should create and save NinthArmies', async () => {
-    const nbButtonsBeforeCreate = await ninthArmyComponentsPage.countDeleteButtons();
+  /* it('should create and save NinthArmies', async () => {
+        const nbButtonsBeforeCreate = await ninthArmyComponentsPage.countDeleteButtons();
 
-    await ninthArmyComponentsPage.clickOnCreateButton();
+        await ninthArmyComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      ninthArmyUpdatePage.setNameInput('name'),
-      ninthArmyUpdatePage.factionSelectLastOption(),
-      ninthArmyUpdatePage.subfactionSelectLastOption(),
-      ninthArmyUpdatePage.authorSelectLastOption(),
-    ]);
+        await promise.all([
+            ninthArmyUpdatePage.setNameInput('name'),
+            ninthArmyUpdatePage.factionSelectLastOption(),
+            ninthArmyUpdatePage.subfactionSelectLastOption(),
+            ninthArmyUpdatePage.authorSelectLastOption(),
+        ]);
 
-    expect(await ninthArmyUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    const selectedCrusade = ninthArmyUpdatePage.getCrusadeInput();
-    if (await selectedCrusade.isSelected()) {
-      await ninthArmyUpdatePage.getCrusadeInput().click();
-      expect(await ninthArmyUpdatePage.getCrusadeInput().isSelected(), 'Expected crusade not to be selected').to.be.false;
-    } else {
-      await ninthArmyUpdatePage.getCrusadeInput().click();
-      expect(await ninthArmyUpdatePage.getCrusadeInput().isSelected(), 'Expected crusade to be selected').to.be.true;
-    }
+        expect(await ninthArmyUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        const selectedCrusade = ninthArmyUpdatePage.getCrusadeInput();
+        if (await selectedCrusade.isSelected()) {
+            await ninthArmyUpdatePage.getCrusadeInput().click();
+            expect(await ninthArmyUpdatePage.getCrusadeInput().isSelected(), 'Expected crusade not to be selected').to.be.false;
+        } else {
+            await ninthArmyUpdatePage.getCrusadeInput().click();
+            expect(await ninthArmyUpdatePage.getCrusadeInput().isSelected(), 'Expected crusade to be selected').to.be.true;
+        }
 
-    await ninthArmyUpdatePage.save();
-    expect(await ninthArmyUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await ninthArmyUpdatePage.save();
+        expect(await ninthArmyUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await ninthArmyComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await ninthArmyComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last NinthArmy', async () => {
-    const nbButtonsBeforeDelete = await ninthArmyComponentsPage.countDeleteButtons();
-    await ninthArmyComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last NinthArmy', async () => {
+        const nbButtonsBeforeDelete = await ninthArmyComponentsPage.countDeleteButtons();
+        await ninthArmyComponentsPage.clickOnLastDeleteButton();
 
-    ninthArmyDeleteDialog = new NinthArmyDeleteDialog();
-    expect(await ninthArmyDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthArmy.delete.question');
-    await ninthArmyDeleteDialog.clickOnConfirmButton();
+        ninthArmyDeleteDialog = new NinthArmyDeleteDialog();
+        expect(await ninthArmyDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.ninthArmy.delete.question');
+        await ninthArmyDeleteDialog.clickOnConfirmButton();
 
-    expect(await ninthArmyComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await ninthArmyComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

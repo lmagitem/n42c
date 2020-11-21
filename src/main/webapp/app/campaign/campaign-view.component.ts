@@ -10,9 +10,9 @@ import { INinthStratagemGroup } from 'app/shared/model/ninth-stratagem-group.mod
 import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
 import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
 import { NinthGameType } from 'app/shared/model/enumerations/ninth-game-type.model';
-import { TranslationUtils } from 'app/shared/util/translation-utils';
+import { EnumTranslationUtils } from 'app/shared/util/enum-translation-utils';
 import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
-import { CampaignService } from '../campaign.service';
+import { CampaignService } from './campaign.service';
 
 type SelectableEntity = IPlayer | INinthStratagemGroup;
 
@@ -95,7 +95,7 @@ export class CampaignViewComponent implements OnInit {
   }
 
   getGameTypeTranslationPath(type: NinthGameType | string): string {
-    return TranslationUtils.getGameTypeTranslationPath(type);
+    return EnumTranslationUtils.getGameTypeTranslationPath(type);
   }
 
   previousState(): void {

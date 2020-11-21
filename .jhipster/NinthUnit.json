@@ -49,6 +49,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "player",
       "otherEntityRelationshipName": "collection",
+      "relationshipValidateRules": "required",
       "relationshipName": "owner",
       "otherEntityField": "id"
     }

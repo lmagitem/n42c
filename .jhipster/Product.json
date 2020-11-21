@@ -29,6 +29,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "shop",
       "otherEntityRelationshipName": "products",
+      "relationshipValidateRules": "required",
       "relationshipName": "shop",
       "otherEntityField": "name"
     }

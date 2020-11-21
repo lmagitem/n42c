@@ -3,7 +3,7 @@ import { StateService } from './state.service';
 import { Observable } from 'rxjs';
 import { Account } from 'app/core/user/account.model';
 import { first } from 'rxjs/operators';
-import { CampaignService } from 'app/campaign/campaign/campaign.service';
+import { CampaignService } from 'app/campaign/campaign.service';
 
 @Component({
   selector: 'jhi-state',

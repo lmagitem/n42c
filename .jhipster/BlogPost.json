@@ -12,10 +12,7 @@
     {
       "fieldName": "published",
       "fieldType": "Instant",
-      "javadoc": "The date and time at which this post was published.",
-      "fieldValidateRules": [
-        "required"
-      ]
+      "javadoc": "The date and time at which this post was published."
     },
     {
       "fieldName": "modified",
@@ -53,6 +50,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "blog",
       "otherEntityRelationshipName": "posts",
+      "relationshipValidateRules": "required",
       "relationshipName": "blog",
       "otherEntityField": "name"
     }

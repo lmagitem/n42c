@@ -37,7 +37,8 @@ public class Player implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(optional = false)
+    @NotNull
     @JoinColumn(unique = true)
     private AppUser appUser;
 

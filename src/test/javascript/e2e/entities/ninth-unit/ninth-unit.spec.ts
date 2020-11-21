@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { NinthUnitComponentsPage, NinthUnitDeleteDialog, NinthUnitUpdatePage } from './ninth-unit.page-object';
+import {
+  NinthUnitComponentsPage,
+  /* NinthUnitDeleteDialog, */
+  NinthUnitUpdatePage,
+} from './ninth-unit.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('NinthUnit e2e test', () => {
   let signInPage: SignInPage;
   let ninthUnitComponentsPage: NinthUnitComponentsPage;
   let ninthUnitUpdatePage: NinthUnitUpdatePage;
-  let ninthUnitDeleteDialog: NinthUnitDeleteDialog;
+  /* let ninthUnitDeleteDialog: NinthUnitDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -35,41 +39,42 @@ describe('NinthUnit e2e test', () => {
     await ninthUnitUpdatePage.cancel();
   });
 
-  it('should create and save NinthUnits', async () => {
-    const nbButtonsBeforeCreate = await ninthUnitComponentsPage.countDeleteButtons();
+  /* it('should create and save NinthUnits', async () => {
+        const nbButtonsBeforeCreate = await ninthUnitComponentsPage.countDeleteButtons();
 
-    await ninthUnitComponentsPage.clickOnCreateButton();
+        await ninthUnitComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      ninthUnitUpdatePage.setNameInput('name'),
-      ninthUnitUpdatePage.setDatasheetInput('datasheet'),
-      ninthUnitUpdatePage.factionSelectLastOption(),
-      ninthUnitUpdatePage.subfactionSelectLastOption(),
-      ninthUnitUpdatePage.battlefieldRoleSelectLastOption(),
-      ninthUnitUpdatePage.setKeywordsInput('keywords'),
-      ninthUnitUpdatePage.ownerSelectLastOption(),
-    ]);
+        await promise.all([
+            ninthUnitUpdatePage.setNameInput('name'),
+            ninthUnitUpdatePage.setDatasheetInput('datasheet'),
+            ninthUnitUpdatePage.factionSelectLastOption(),
+            ninthUnitUpdatePage.subfactionSelectLastOption(),
+            ninthUnitUpdatePage.battlefieldRoleSelectLastOption(),
+            ninthUnitUpdatePage.setKeywordsInput('keywords'),
+            ninthUnitUpdatePage.ownerSelectLastOption(),
+        ]);
 
-    expect(await ninthUnitUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    expect(await ninthUnitUpdatePage.getDatasheetInput()).to.eq('datasheet', 'Expected Datasheet value to be equals to datasheet');
-    expect(await ninthUnitUpdatePage.getKeywordsInput()).to.eq('keywords', 'Expected Keywords value to be equals to keywords');
+        expect(await ninthUnitUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await ninthUnitUpdatePage.getDatasheetInput()).to.eq('datasheet', 'Expected Datasheet value to be equals to datasheet');
+        expect(await ninthUnitUpdatePage.getKeywordsInput()).to.eq('keywords', 'Expected Keywords value to be equals to keywords');
 
-    await ninthUnitUpdatePage.save();
-    expect(await ninthUnitUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await ninthUnitUpdatePage.save();
+        expect(await ninthUnitUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await ninthUnitComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await ninthUnitComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last NinthUnit', async () => {
-    const nbButtonsBeforeDelete = await ninthUnitComponentsPage.countDeleteButtons();
-    await ninthUnitComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last NinthUnit', async () => {
+        const nbButtonsBeforeDelete = await ninthUnitComponentsPage.countDeleteButtons();
+        await ninthUnitComponentsPage.clickOnLastDeleteButton();
 
-    ninthUnitDeleteDialog = new NinthUnitDeleteDialog();
-    expect(await ninthUnitDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthUnit.delete.question');
-    await ninthUnitDeleteDialog.clickOnConfirmButton();
+        ninthUnitDeleteDialog = new NinthUnitDeleteDialog();
+        expect(await ninthUnitDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.ninthUnit.delete.question');
+        await ninthUnitDeleteDialog.clickOnConfirmButton();
 
-    expect(await ninthUnitComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await ninthUnitComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

@@ -11,9 +11,9 @@ import { BlogService } from 'app/entities/blog/blog.service';
 
 @Component({
   selector: 'jhi-blog-update',
-  templateUrl: './blog-update.component.html',
+  templateUrl: './blog.component.html',
 })
-export class BlogUpdateComponent implements OnInit {
+export class BlogComponent implements OnInit {
   isSaving = false;
   appusers: IAppUser[] = [];
 

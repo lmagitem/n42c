@@ -26,7 +26,7 @@ export class LocalizedPostContentUpdateComponent implements OnInit {
     excerpt: [],
     content: [null, [Validators.required]],
     language: [null, [Validators.required]],
-    post: [],
+    post: [null, Validators.required],
   });
 
   constructor(

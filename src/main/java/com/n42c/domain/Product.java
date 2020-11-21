@@ -48,7 +48,8 @@ public class Product implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
     private Set<AppUser> authors = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "products", allowSetters = true)
     private Shop shop;
 

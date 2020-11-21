@@ -25,7 +25,7 @@ export class LocalizedNinthMissionUpdateComponent implements OnInit {
     name: [],
     briefing: [],
     language: [null, [Validators.required]],
-    mission: [],
+    mission: [null, Validators.required],
   });
 
   constructor(

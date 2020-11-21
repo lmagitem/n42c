@@ -18,9 +18,16 @@
       "relationshipName": "posts"
     },
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "localizedBlog",
+      "otherEntityRelationshipName": "blog",
+      "relationshipName": "localizations"
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "blogs",
+      "relationshipValidateRules": "required",
       "relationshipName": "author",
       "otherEntityField": "displayedName"
     }

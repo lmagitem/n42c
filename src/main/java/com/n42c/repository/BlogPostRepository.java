@@ -28,20 +28,34 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
     @Query("select blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories where blogPost.id =:id")
     Optional<BlogPost> findOneWithEagerRelationships(@Param("id") Long id);
 
-    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
-        "where blogPost.blog.author.user.id = ?#{principal.name}  or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
+    @Query(value = "select distinct blogPost from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.name} " +
+        "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.name} " +
             "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
-    Page<BlogPost> getAllByIsCurrentOidcUserOrWriter(Pageable pageable);
+    Page<BlogPost> findByIsCurrentOidcUserOrWriter(Pageable pageable);
 
-    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
-        "where blogPost.blog.author.user.id = ?#{principal.username}  or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
+    @Query(value = "select distinct blogPost from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.username} " +
+        "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.username} " +
             "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
-    Page<BlogPost> getAllByIsCurrentSpringUserOrWriter(Pageable pageable);
+    Page<BlogPost> findByIsCurrentSpringUserOrWriter(Pageable pageable);
 
-    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
-        "where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
+    @Query(value = "select distinct blogPost from BlogPost blogPost where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
-    Page<BlogPost> getAllByIsWriter(Pageable pageable);
+    Page<BlogPost> findByIsWriter(Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIds(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.user.id = ?#{principal.name} " +
+        "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIdsAndIsCurrentOidcUserOrWriter(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.user.id = ?#{principal.username} " +
+        "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIdsAndIsCurrentSpringUserOrWriter(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.blogRights = 'WRI' " +
+        "or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIdsAndIsWriter(@Param("ids") List<Long> ids, Pageable pageable);
 }

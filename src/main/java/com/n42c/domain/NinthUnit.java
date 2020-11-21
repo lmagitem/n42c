@@ -62,7 +62,8 @@ public class NinthUnit implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<NinthUnitMoment> moments = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "collections", allowSetters = true)
     private Player owner;
 

@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , protractor, promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { BlogPostComponentsPage, BlogPostDeleteDialog, BlogPostUpdatePage } from './blog-post.page-object';
+import {
+  BlogPostComponentsPage,
+  /* BlogPostDeleteDialog, */
+  BlogPostUpdatePage,
+} from './blog-post.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('BlogPost e2e test', () => {
   let signInPage: SignInPage;
   let blogPostComponentsPage: BlogPostComponentsPage;
   let blogPostUpdatePage: BlogPostUpdatePage;
-  let blogPostDeleteDialog: BlogPostDeleteDialog;
+  /* let blogPostDeleteDialog: BlogPostDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -35,46 +39,41 @@ describe('BlogPost e2e test', () => {
     await blogPostUpdatePage.cancel();
   });
 
-  it('should create and save BlogPosts', async () => {
-    const nbButtonsBeforeCreate = await blogPostComponentsPage.countDeleteButtons();
+  /* it('should create and save BlogPosts', async () => {
+        const nbButtonsBeforeCreate = await blogPostComponentsPage.countDeleteButtons();
 
-    await blogPostComponentsPage.clickOnCreateButton();
+        await blogPostComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      blogPostUpdatePage.setTitleInput('title'),
-      blogPostUpdatePage.setPublishedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      blogPostUpdatePage.setModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      // blogPostUpdatePage.authorsSelectLastOption(),
-      // blogPostUpdatePage.categoriesSelectLastOption(),
-      blogPostUpdatePage.blogSelectLastOption(),
-    ]);
+        await promise.all([
+            blogPostUpdatePage.setTitleInput('title'),
+            blogPostUpdatePage.setPublishedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            blogPostUpdatePage.setModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            // blogPostUpdatePage.authorsSelectLastOption(),
+            // blogPostUpdatePage.categoriesSelectLastOption(),
+            blogPostUpdatePage.blogSelectLastOption(),
+        ]);
 
-    expect(await blogPostUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
-    expect(await blogPostUpdatePage.getPublishedInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected published value to be equals to 2000-12-31'
-    );
-    expect(await blogPostUpdatePage.getModifiedInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected modified value to be equals to 2000-12-31'
-    );
+        expect(await blogPostUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
+        expect(await blogPostUpdatePage.getPublishedInput()).to.contain('2001-01-01T02:30', 'Expected published value to be equals to 2000-12-31');
+        expect(await blogPostUpdatePage.getModifiedInput()).to.contain('2001-01-01T02:30', 'Expected modified value to be equals to 2000-12-31');
 
-    await blogPostUpdatePage.save();
-    expect(await blogPostUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await blogPostUpdatePage.save();
+        expect(await blogPostUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await blogPostComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await blogPostComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last BlogPost', async () => {
-    const nbButtonsBeforeDelete = await blogPostComponentsPage.countDeleteButtons();
-    await blogPostComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last BlogPost', async () => {
+        const nbButtonsBeforeDelete = await blogPostComponentsPage.countDeleteButtons();
+        await blogPostComponentsPage.clickOnLastDeleteButton();
 
-    blogPostDeleteDialog = new BlogPostDeleteDialog();
-    expect(await blogPostDeleteDialog.getDialogTitle()).to.eq('n42cApp.blogPost.delete.question');
-    await blogPostDeleteDialog.clickOnConfirmButton();
+        blogPostDeleteDialog = new BlogPostDeleteDialog();
+        expect(await blogPostDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.blogPost.delete.question');
+        await blogPostDeleteDialog.clickOnConfirmButton();
 
-    expect(await blogPostComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await blogPostComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

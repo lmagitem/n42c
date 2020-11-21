@@ -91,7 +91,8 @@ public class AppUser implements Serializable {
     @Column(name = "scriptorium_rights", nullable = false)
     private AppUserRights scriptoriumRights;
 
-    @OneToOne
+    @OneToOne(optional = false)
+    @NotNull
     @JoinColumn(unique = true)
     private User user;
 

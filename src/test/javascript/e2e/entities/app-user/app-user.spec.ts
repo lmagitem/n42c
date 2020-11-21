@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { AppUserComponentsPage, AppUserDeleteDialog, AppUserUpdatePage } from './app-user.page-object';
+import {
+  AppUserComponentsPage,
+  /* AppUserDeleteDialog, */
+  AppUserUpdatePage,
+} from './app-user.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('AppUser e2e test', () => {
   let signInPage: SignInPage;
   let appUserComponentsPage: AppUserComponentsPage;
   let appUserUpdatePage: AppUserUpdatePage;
-  let appUserDeleteDialog: AppUserDeleteDialog;
+  /* let appUserDeleteDialog: AppUserDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -35,53 +39,51 @@ describe('AppUser e2e test', () => {
     await appUserUpdatePage.cancel();
   });
 
-  it('should create and save AppUsers', async () => {
-    const nbButtonsBeforeCreate = await appUserComponentsPage.countDeleteButtons();
+  /* it('should create and save AppUsers', async () => {
+        const nbButtonsBeforeCreate = await appUserComponentsPage.countDeleteButtons();
 
-    await appUserComponentsPage.clickOnCreateButton();
+        await appUserComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      appUserUpdatePage.setUserNameInput('userName'),
-      appUserUpdatePage.setDisplayedNameInput('displayedName'),
-      appUserUpdatePage.shopRightsSelectLastOption(),
-      appUserUpdatePage.blogRightsSelectLastOption(),
-      appUserUpdatePage.profileRightsSelectLastOption(),
-      appUserUpdatePage.scriptoriumRightsSelectLastOption(),
-      appUserUpdatePage.userSelectLastOption(),
-      // appUserUpdatePage.givenFriendshipsSelectLastOption(),
-      // appUserUpdatePage.askedFriendRequestsSelectLastOption(),
-    ]);
+        await promise.all([
+            appUserUpdatePage.setUserNameInput('userName'),
+            appUserUpdatePage.setDisplayedNameInput('displayedName'),
+            appUserUpdatePage.shopRightsSelectLastOption(),
+            appUserUpdatePage.blogRightsSelectLastOption(),
+            appUserUpdatePage.profileRightsSelectLastOption(),
+            appUserUpdatePage.scriptoriumRightsSelectLastOption(),
+            appUserUpdatePage.userSelectLastOption(),
+            // appUserUpdatePage.givenFriendshipsSelectLastOption(),
+            // appUserUpdatePage.askedFriendRequestsSelectLastOption(),
+        ]);
 
-    expect(await appUserUpdatePage.getUserNameInput()).to.eq('userName', 'Expected UserName value to be equals to userName');
-    expect(await appUserUpdatePage.getDisplayedNameInput()).to.eq(
-      'displayedName',
-      'Expected DisplayedName value to be equals to displayedName'
-    );
-    const selectedAdmin = appUserUpdatePage.getAdminInput();
-    if (await selectedAdmin.isSelected()) {
-      await appUserUpdatePage.getAdminInput().click();
-      expect(await appUserUpdatePage.getAdminInput().isSelected(), 'Expected admin not to be selected').to.be.false;
-    } else {
-      await appUserUpdatePage.getAdminInput().click();
-      expect(await appUserUpdatePage.getAdminInput().isSelected(), 'Expected admin to be selected').to.be.true;
-    }
+        expect(await appUserUpdatePage.getUserNameInput()).to.eq('userName', 'Expected UserName value to be equals to userName');
+        expect(await appUserUpdatePage.getDisplayedNameInput()).to.eq('displayedName', 'Expected DisplayedName value to be equals to displayedName');
+        const selectedAdmin = appUserUpdatePage.getAdminInput();
+        if (await selectedAdmin.isSelected()) {
+            await appUserUpdatePage.getAdminInput().click();
+            expect(await appUserUpdatePage.getAdminInput().isSelected(), 'Expected admin not to be selected').to.be.false;
+        } else {
+            await appUserUpdatePage.getAdminInput().click();
+            expect(await appUserUpdatePage.getAdminInput().isSelected(), 'Expected admin to be selected').to.be.true;
+        }
 
-    await appUserUpdatePage.save();
-    expect(await appUserUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await appUserUpdatePage.save();
+        expect(await appUserUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await appUserComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await appUserComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last AppUser', async () => {
-    const nbButtonsBeforeDelete = await appUserComponentsPage.countDeleteButtons();
-    await appUserComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last AppUser', async () => {
+        const nbButtonsBeforeDelete = await appUserComponentsPage.countDeleteButtons();
+        await appUserComponentsPage.clickOnLastDeleteButton();
 
-    appUserDeleteDialog = new AppUserDeleteDialog();
-    expect(await appUserDeleteDialog.getDialogTitle()).to.eq('n42cApp.appUser.delete.question');
-    await appUserDeleteDialog.clickOnConfirmButton();
+        appUserDeleteDialog = new AppUserDeleteDialog();
+        expect(await appUserDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.appUser.delete.question');
+        await appUserDeleteDialog.clickOnConfirmButton();
 
-    expect(await appUserComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await appUserComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

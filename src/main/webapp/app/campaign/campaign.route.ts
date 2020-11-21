@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { CampaignViewComponent } from './campaign-view/campaign-view.component';
-import { CampaignListComponent } from './campaign-list/campaign-list.component';
+import { CampaignViewComponent } from './campaign-view.component';
+import { CampaignListComponent } from './campaign-list.component';
 import { CampaignService } from './campaign.service';
 
 @Injectable({ providedIn: 'root' })

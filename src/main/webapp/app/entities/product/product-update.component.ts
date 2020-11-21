@@ -27,7 +27,7 @@ export class ProductUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     authors: [],
-    shop: [],
+    shop: [null, Validators.required],
   });
 
   constructor(

@@ -71,23 +71,29 @@
           <select class="form-control" name="language" formControlName="language" id="field_language">
             <option value="EN">{{ 'n42cApp.Language.EN' | translate }}</option>
             <option value="FR">{{ 'n42cApp.Language.FR' | translate }}</option>
-            <option value="ES">{{ 'n42cApp.Language.ES' | translate }}</option>
-            <option value="GE">{{ 'n42cApp.Language.GE' | translate }}</option>
-            <option value="RU">{{ 'n42cApp.Language.RU' | translate }}</option>
             <option value="AR">{{ 'n42cApp.Language.AR' | translate }}</option>
-            <option value="CH">{{ 'n42cApp.Language.CH' | translate }}</option>
-            <option value="PR">{{ 'n42cApp.Language.PR' | translate }}</option>
-            <option value="IT">{{ 'n42cApp.Language.IT' | translate }}</option>
-            <option value="PO">{{ 'n42cApp.Language.PO' | translate }}</option>
-            <option value="DU">{{ 'n42cApp.Language.DU' | translate }}</option>
-            <option value="GR">{{ 'n42cApp.Language.GR' | translate }}</option>
-            <option value="SW">{{ 'n42cApp.Language.SW' | translate }}</option>
-            <option value="TU">{{ 'n42cApp.Language.TU' | translate }}</option>
-            <option value="RO">{{ 'n42cApp.Language.RO' | translate }}</option>
-            <option value="JP">{{ 'n42cApp.Language.JP' | translate }}</option>
-            <option value="KO">{{ 'n42cApp.Language.KO' | translate }}</option>
-            <option value="HU">{{ 'n42cApp.Language.HU' | translate }}</option>
+            <option value="ZH">{{ 'n42cApp.Language.ZH' | translate }}</option>
             <option value="DA">{{ 'n42cApp.Language.DA' | translate }}</option>
+            <option value="NL">{{ 'n42cApp.Language.NL' | translate }}</option>
+            <option value="FI">{{ 'n42cApp.Language.FI' | translate }}</option>
+            <option value="DE">{{ 'n42cApp.Language.DE' | translate }}</option>
+            <option value="EL">{{ 'n42cApp.Language.EL' | translate }}</option>
+            <option value="HU">{{ 'n42cApp.Language.HU' | translate }}</option>
+            <option value="IS">{{ 'n42cApp.Language.IS' | translate }}</option>
+            <option value="ID">{{ 'n42cApp.Language.ID' | translate }}</option>
+            <option value="GA">{{ 'n42cApp.Language.GA' | translate }}</option>
+            <option value="IT">{{ 'n42cApp.Language.IT' | translate }}</option>
+            <option value="JA">{{ 'n42cApp.Language.JA' | translate }}</option>
+            <option value="KO">{{ 'n42cApp.Language.KO' | translate }}</option>
+            <option value="FA">{{ 'n42cApp.Language.FA' | translate }}</option>
+            <option value="PL">{{ 'n42cApp.Language.PL' | translate }}</option>
+            <option value="PT">{{ 'n42cApp.Language.PT' | translate }}</option>
+            <option value="RO">{{ 'n42cApp.Language.RO' | translate }}</option>
+            <option value="RU">{{ 'n42cApp.Language.RU' | translate }}</option>
+            <option value="SR">{{ 'n42cApp.Language.SR' | translate }}</option>
+            <option value="ES">{{ 'n42cApp.Language.ES' | translate }}</option>
+            <option value="SV">{{ 'n42cApp.Language.SV' | translate }}</option>
+            <option value="TR">{{ 'n42cApp.Language.TR' | translate }}</option>
           </select>
           <div *ngIf="editForm.get('language')!.invalid && (editForm.get('language')!.dirty || editForm.get('language')!.touched)">
             <small
@@ -103,13 +109,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedPostContent.post" for="field_post">Post</label>
           <select class="form-control" id="field_post" name="post" formControlName="post">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('post')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="blogPostOption.id === editForm.get('post')!.value?.id ? editForm.get('post')!.value : blogPostOption"
               *ngFor="let blogPostOption of blogposts; trackBy: trackById"
               >{{ blogPostOption.title }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('post')!.invalid && (editForm.get('post')!.dirty || editForm.get('post')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('post')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

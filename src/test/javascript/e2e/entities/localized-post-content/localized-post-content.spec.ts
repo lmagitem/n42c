@@ -1,9 +1,9 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
   LocalizedPostContentComponentsPage,
-  LocalizedPostContentDeleteDialog,
+  /* LocalizedPostContentDeleteDialog, */
   LocalizedPostContentUpdatePage,
 } from './localized-post-content.page-object';
 
@@ -14,7 +14,7 @@ describe('LocalizedPostContent e2e test', () => {
   let signInPage: SignInPage;
   let localizedPostContentComponentsPage: LocalizedPostContentComponentsPage;
   let localizedPostContentUpdatePage: LocalizedPostContentUpdatePage;
-  let localizedPostContentDeleteDialog: LocalizedPostContentDeleteDialog;
+  /* let localizedPostContentDeleteDialog: LocalizedPostContentDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -42,42 +42,40 @@ describe('LocalizedPostContent e2e test', () => {
     await localizedPostContentUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedPostContents', async () => {
-    const nbButtonsBeforeCreate = await localizedPostContentComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedPostContents', async () => {
+        const nbButtonsBeforeCreate = await localizedPostContentComponentsPage.countDeleteButtons();
 
-    await localizedPostContentComponentsPage.clickOnCreateButton();
+        await localizedPostContentComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedPostContentUpdatePage.setTitleInput('title'),
-      localizedPostContentUpdatePage.setExcerptInput('excerpt'),
-      localizedPostContentUpdatePage.setContentInput('content'),
-      localizedPostContentUpdatePage.languageSelectLastOption(),
-      localizedPostContentUpdatePage.postSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedPostContentUpdatePage.setTitleInput('title'),
+            localizedPostContentUpdatePage.setExcerptInput('excerpt'),
+            localizedPostContentUpdatePage.setContentInput('content'),
+            localizedPostContentUpdatePage.languageSelectLastOption(),
+            localizedPostContentUpdatePage.postSelectLastOption(),
+        ]);
 
-    expect(await localizedPostContentUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
-    expect(await localizedPostContentUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
-    expect(await localizedPostContentUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
+        expect(await localizedPostContentUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
+        expect(await localizedPostContentUpdatePage.getExcerptInput()).to.eq('excerpt', 'Expected Excerpt value to be equals to excerpt');
+        expect(await localizedPostContentUpdatePage.getContentInput()).to.eq('content', 'Expected Content value to be equals to content');
 
-    await localizedPostContentUpdatePage.save();
-    expect(await localizedPostContentUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedPostContentUpdatePage.save();
+        expect(await localizedPostContentUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedPostContentComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await localizedPostContentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedPostContent', async () => {
-    const nbButtonsBeforeDelete = await localizedPostContentComponentsPage.countDeleteButtons();
-    await localizedPostContentComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedPostContent', async () => {
+        const nbButtonsBeforeDelete = await localizedPostContentComponentsPage.countDeleteButtons();
+        await localizedPostContentComponentsPage.clickOnLastDeleteButton();
 
-    localizedPostContentDeleteDialog = new LocalizedPostContentDeleteDialog();
-    expect(await localizedPostContentDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedPostContent.delete.question');
-    await localizedPostContentDeleteDialog.clickOnConfirmButton();
+        localizedPostContentDeleteDialog = new LocalizedPostContentDeleteDialog();
+        expect(await localizedPostContentDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedPostContent.delete.question');
+        await localizedPostContentDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedPostContentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedPostContentComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

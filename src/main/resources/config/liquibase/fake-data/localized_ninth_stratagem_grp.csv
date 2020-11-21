@@ -1,11 +1,11 @@
-id;name;language
-1;Developer Danish Krone;JP
-2;Towels Green black;SW
-3;Colorado demand-driven;JP
-4;SDD best-of-breed Computer;CH
-5;Baby panel complexity;PR
-6;panel generate AI;PR
-7;integrate Tugrik definition;RO
-8;Decentralized;RU
-9;Pants;EN
-10;Unbranded Soft Pizza Markets;RU
+id;name;language;stratagem_group_id
+1;Developer Danish Krone;RU;1
+2;Towels Green black;FA;2
+3;Colorado demand-driven;SR;3
+4;SDD best-of-breed Computer;EL;4
+5;Baby panel complexity;HU;5
+6;panel generate AI;HU;6
+7;integrate Tugrik definition;PT;7
+8;Decentralized;FI;8
+9;Pants;EN;9
+10;Unbranded Soft Pizza Markets;NL;10

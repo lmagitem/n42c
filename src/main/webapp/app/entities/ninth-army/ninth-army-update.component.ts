@@ -24,7 +24,7 @@ export class NinthArmyUpdateComponent implements OnInit {
     crusade: [null, [Validators.required]],
     faction: [],
     subfaction: [],
-    author: [],
+    author: [null, Validators.required],
   });
 
   constructor(

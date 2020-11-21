@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { N42CSharedModule } from 'app/shared/shared.module';
+import { BlogListComponent } from './blog-list.component';
 import { BlogComponent } from './blog.component';
-import { BlogDetailComponent } from './blog-detail.component';
-import { BlogUpdateComponent } from './blog-update.component';
 import { BlogDeleteDialogComponent } from './blog-delete-dialog.component';
 import { blogRoute } from './blog.route';
 
 @NgModule({
   imports: [N42CSharedModule, RouterModule.forChild(blogRoute)],
-  declarations: [BlogComponent, BlogDetailComponent, BlogUpdateComponent, BlogDeleteDialogComponent],
+  declarations: [BlogListComponent, BlogComponent, BlogDeleteDialogComponent],
   entryComponents: [BlogDeleteDialogComponent],
 })
 export class BlogModule {}

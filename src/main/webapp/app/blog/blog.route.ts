@@ -6,10 +6,10 @@ import { flatMap } from 'rxjs/operators';
 import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IBlog, Blog } from 'app/shared/model/blog.model';
+import { BlogListComponent } from './blog-list.component';
 import { BlogComponent } from './blog.component';
-import { BlogDetailComponent } from './blog-detail.component';
-import { BlogUpdateComponent } from './blog-update.component';
 import { BlogService } from 'app/entities/blog/blog.service';
+import { BlogPostListComponent } from './blog-post/blog-post-list.component';
 
 @Injectable({ providedIn: 'root' })
 export class BlogResolve implements Resolve<IBlog> {
@@ -35,17 +35,26 @@ export class BlogResolve implements Resolve<IBlog> {
 
 export const blogRoute: Routes = [
   {
-    path: '',
+    path: '', // Shows most recent entries from all authorized blogs
+    component: BlogPostListComponent,
+    data: {
+      defaultSort: 'id,asc',
+      pageTitle: 'n42cApp.blog.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'list', // Shows the list of all blogs
+    component: BlogListComponent,
+    data: {
+      defaultSort: 'id,asc',
+      pageTitle: 'n42cApp.blog.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'new', // Create a new blog
     component: BlogComponent,
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'n42cApp.blog.home.title',
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/view',
-    component: BlogDetailComponent,
     resolve: {
       blog: BlogResolve,
     },
@@ -56,25 +65,22 @@ export const blogRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'new',
-    component: BlogUpdateComponent,
-    resolve: {
-      blog: BlogResolve,
-    },
-    data: {
-      authorities: [Authority.USER],
-      pageTitle: 'n42cApp.blog.home.title',
-    },
-    canActivate: [UserRouteAccessService],
+    path: ':id', // Redirects to the post entries of that blog
+    redirectTo: '/blog/:id/post',
+    pathMatch: 'full',
   },
   {
-    path: ':id/edit',
-    component: BlogUpdateComponent,
+    path: ':id/post', // The post entries of that blog
+    canActivate: [UserRouteAccessService],
+    loadChildren: () => import('./blog-post/blog-post.module').then(m => m.BlogPostModule),
+  },
+  {
+    path: ':id/edit', // Edit an existing blog
+    component: BlogComponent,
     resolve: {
       blog: BlogResolve,
     },
     data: {
-      authorities: [Authority.USER],
       pageTitle: 'n42cApp.blog.home.title',
     },
     canActivate: [UserRouteAccessService],

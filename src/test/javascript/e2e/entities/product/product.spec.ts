@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { ProductComponentsPage, ProductDeleteDialog, ProductUpdatePage } from './product.page-object';
+import {
+  ProductComponentsPage,
+  /* ProductDeleteDialog, */
+  ProductUpdatePage,
+} from './product.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('Product e2e test', () => {
   let signInPage: SignInPage;
   let productComponentsPage: ProductComponentsPage;
   let productUpdatePage: ProductUpdatePage;
-  let productDeleteDialog: ProductDeleteDialog;
+  /* let productDeleteDialog: ProductDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -35,35 +39,36 @@ describe('Product e2e test', () => {
     await productUpdatePage.cancel();
   });
 
-  it('should create and save Products', async () => {
-    const nbButtonsBeforeCreate = await productComponentsPage.countDeleteButtons();
+  /* it('should create and save Products', async () => {
+        const nbButtonsBeforeCreate = await productComponentsPage.countDeleteButtons();
 
-    await productComponentsPage.clickOnCreateButton();
+        await productComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      productUpdatePage.setNameInput('name'),
-      // productUpdatePage.authorsSelectLastOption(),
-      productUpdatePage.shopSelectLastOption(),
-    ]);
+        await promise.all([
+            productUpdatePage.setNameInput('name'),
+            // productUpdatePage.authorsSelectLastOption(),
+            productUpdatePage.shopSelectLastOption(),
+        ]);
 
-    expect(await productUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await productUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
-    await productUpdatePage.save();
-    expect(await productUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await productUpdatePage.save();
+        expect(await productUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await productComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await productComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last Product', async () => {
-    const nbButtonsBeforeDelete = await productComponentsPage.countDeleteButtons();
-    await productComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last Product', async () => {
+        const nbButtonsBeforeDelete = await productComponentsPage.countDeleteButtons();
+        await productComponentsPage.clickOnLastDeleteButton();
 
-    productDeleteDialog = new ProductDeleteDialog();
-    expect(await productDeleteDialog.getDialogTitle()).to.eq('n42cApp.product.delete.question');
-    await productDeleteDialog.clickOnConfirmButton();
+        productDeleteDialog = new ProductDeleteDialog();
+        expect(await productDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.product.delete.question');
+        await productDeleteDialog.clickOnConfirmButton();
 
-    expect(await productComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await productComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { filter, first, map } from 'rxjs/operators';
 import { SubSink } from 'subsink';
 import { AppUserRights } from 'app/shared/model/enumerations/app-user-rights.model';
-import { TranslationUtils } from 'app/shared/util/translation-utils';
+import { EnumTranslationUtils } from 'app/shared/util/enum-translation-utils';
 
 type SelectableEntity = IUser | IAppUser;
 
@@ -103,7 +103,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   getRightsTranslationPath(rights: AppUserRights | string): string {
-    return TranslationUtils.getRightsTranslationPath(rights);
+    return EnumTranslationUtils.getRightsTranslationPath(rights);
   }
 
   previousState(): void {

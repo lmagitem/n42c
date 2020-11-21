@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-localized-blog-heading" jhiTranslate="n42cApp.localizedBlog.home.createOrEditLabel">Create or edit a Localized Blog</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!editForm.get('id')!.value">
+          <label for="id" jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.localizedBlog.name"
+            for="field_name"
+            [ngbTooltip]="'n42cApp.localizedBlog.help.name' | translate"
+            >Name</label
+          >
+          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="n42cApp.localizedBlog.language"
+            for="field_language"
+            [ngbTooltip]="'n42cApp.localizedBlog.help.language' | translate"
+            >Language</label
+          >
+          <select class="form-control" name="language" formControlName="language" id="field_language">
+            <option value="EN">{{ 'n42cApp.Language.EN' | translate }}</option>
+            <option value="FR">{{ 'n42cApp.Language.FR' | translate }}</option>
+            <option value="AR">{{ 'n42cApp.Language.AR' | translate }}</option>
+            <option value="ZH">{{ 'n42cApp.Language.ZH' | translate }}</option>
+            <option value="DA">{{ 'n42cApp.Language.DA' | translate }}</option>
+            <option value="NL">{{ 'n42cApp.Language.NL' | translate }}</option>
+            <option value="FI">{{ 'n42cApp.Language.FI' | translate }}</option>
+            <option value="DE">{{ 'n42cApp.Language.DE' | translate }}</option>
+            <option value="EL">{{ 'n42cApp.Language.EL' | translate }}</option>
+            <option value="HU">{{ 'n42cApp.Language.HU' | translate }}</option>
+            <option value="IS">{{ 'n42cApp.Language.IS' | translate }}</option>
+            <option value="ID">{{ 'n42cApp.Language.ID' | translate }}</option>
+            <option value="GA">{{ 'n42cApp.Language.GA' | translate }}</option>
+            <option value="IT">{{ 'n42cApp.Language.IT' | translate }}</option>
+            <option value="JA">{{ 'n42cApp.Language.JA' | translate }}</option>
+            <option value="KO">{{ 'n42cApp.Language.KO' | translate }}</option>
+            <option value="FA">{{ 'n42cApp.Language.FA' | translate }}</option>
+            <option value="PL">{{ 'n42cApp.Language.PL' | translate }}</option>
+            <option value="PT">{{ 'n42cApp.Language.PT' | translate }}</option>
+            <option value="RO">{{ 'n42cApp.Language.RO' | translate }}</option>
+            <option value="RU">{{ 'n42cApp.Language.RU' | translate }}</option>
+            <option value="SR">{{ 'n42cApp.Language.SR' | translate }}</option>
+            <option value="ES">{{ 'n42cApp.Language.ES' | translate }}</option>
+            <option value="SV">{{ 'n42cApp.Language.SV' | translate }}</option>
+            <option value="TR">{{ 'n42cApp.Language.TR' | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('language')!.invalid && (editForm.get('language')!.dirty || editForm.get('language')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('language')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="n42cApp.localizedBlog.blog" for="field_blog">Blog</label>
+          <select class="form-control" id="field_blog" name="blog" formControlName="blog">
+            <option *ngIf="!editForm.get('blog')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="blogOption.id === editForm.get('blog')!.value?.id ? editForm.get('blog')!.value : blogOption"
+              *ngFor="let blogOption of blogs; trackBy: trackById"
+              >{{ blogOption.name }}</option
+            >
+          </select>
+        </div>
+        <div *ngIf="editForm.get('blog')!.invalid && (editForm.get('blog')!.dirty || editForm.get('blog')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('blog')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

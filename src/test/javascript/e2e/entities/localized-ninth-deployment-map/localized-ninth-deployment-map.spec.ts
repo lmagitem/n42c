@@ -1,9 +1,9 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
   LocalizedNinthDeploymentMapComponentsPage,
-  LocalizedNinthDeploymentMapDeleteDialog,
+  /* LocalizedNinthDeploymentMapDeleteDialog, */
   LocalizedNinthDeploymentMapUpdatePage,
 } from './localized-ninth-deployment-map.page-object';
 
@@ -14,7 +14,7 @@ describe('LocalizedNinthDeploymentMap e2e test', () => {
   let signInPage: SignInPage;
   let localizedNinthDeploymentMapComponentsPage: LocalizedNinthDeploymentMapComponentsPage;
   let localizedNinthDeploymentMapUpdatePage: LocalizedNinthDeploymentMapUpdatePage;
-  let localizedNinthDeploymentMapDeleteDialog: LocalizedNinthDeploymentMapDeleteDialog;
+  /* let localizedNinthDeploymentMapDeleteDialog: LocalizedNinthDeploymentMapDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -45,43 +45,38 @@ describe('LocalizedNinthDeploymentMap e2e test', () => {
     await localizedNinthDeploymentMapUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedNinthDeploymentMaps', async () => {
-    const nbButtonsBeforeCreate = await localizedNinthDeploymentMapComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedNinthDeploymentMaps', async () => {
+        const nbButtonsBeforeCreate = await localizedNinthDeploymentMapComponentsPage.countDeleteButtons();
 
-    await localizedNinthDeploymentMapComponentsPage.clickOnCreateButton();
+        await localizedNinthDeploymentMapComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedNinthDeploymentMapUpdatePage.setNameInput('name'),
-      localizedNinthDeploymentMapUpdatePage.setDescriptionInput('description'),
-      localizedNinthDeploymentMapUpdatePage.languageSelectLastOption(),
-      localizedNinthDeploymentMapUpdatePage.deploymentMapSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedNinthDeploymentMapUpdatePage.setNameInput('name'),
+            localizedNinthDeploymentMapUpdatePage.setDescriptionInput('description'),
+            localizedNinthDeploymentMapUpdatePage.languageSelectLastOption(),
+            localizedNinthDeploymentMapUpdatePage.deploymentMapSelectLastOption(),
+        ]);
 
-    expect(await localizedNinthDeploymentMapUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    expect(await localizedNinthDeploymentMapUpdatePage.getDescriptionInput()).to.eq(
-      'description',
-      'Expected Description value to be equals to description'
-    );
+        expect(await localizedNinthDeploymentMapUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await localizedNinthDeploymentMapUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
 
-    await localizedNinthDeploymentMapUpdatePage.save();
-    expect(await localizedNinthDeploymentMapUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedNinthDeploymentMapUpdatePage.save();
+        expect(await localizedNinthDeploymentMapUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedNinthDeploymentMapComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await localizedNinthDeploymentMapComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedNinthDeploymentMap', async () => {
-    const nbButtonsBeforeDelete = await localizedNinthDeploymentMapComponentsPage.countDeleteButtons();
-    await localizedNinthDeploymentMapComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedNinthDeploymentMap', async () => {
+        const nbButtonsBeforeDelete = await localizedNinthDeploymentMapComponentsPage.countDeleteButtons();
+        await localizedNinthDeploymentMapComponentsPage.clickOnLastDeleteButton();
 
-    localizedNinthDeploymentMapDeleteDialog = new LocalizedNinthDeploymentMapDeleteDialog();
-    expect(await localizedNinthDeploymentMapDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthDeploymentMap.delete.question');
-    await localizedNinthDeploymentMapDeleteDialog.clickOnConfirmButton();
+        localizedNinthDeploymentMapDeleteDialog = new LocalizedNinthDeploymentMapDeleteDialog();
+        expect(await localizedNinthDeploymentMapDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedNinthDeploymentMap.delete.question');
+        await localizedNinthDeploymentMapDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedNinthDeploymentMapComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedNinthDeploymentMapComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

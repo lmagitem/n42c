@@ -3,9 +3,9 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUser;
+import com.n42c.domain.User;
 import com.n42c.repository.AppUserRepository;
 
-import com.n42c.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -20,7 +20,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,10 @@ import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.domain.enumeration.AppUserRights;
-
 /**
  * Integration tests for the {@link AppUserResource} REST controller.
  */
-@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
@@ -68,9 +66,6 @@ public class AppUserResourceIT {
     private static final AppUserRights UPDATED_SCRIPTORIUM_RIGHTS = AppUserRights.WRI;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private AppUserRepository appUserRepository;
 
     @Mock
@@ -86,7 +81,7 @@ public class AppUserResourceIT {
 
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -98,14 +93,17 @@ public class AppUserResourceIT {
             .shopRights(DEFAULT_SHOP_RIGHTS)
             .blogRights(DEFAULT_BLOG_RIGHTS)
             .profileRights(DEFAULT_PROFILE_RIGHTS)
-            .scriptoriumRights(DEFAULT_SCRIPTORIUM_RIGHTS)
-            .user(UserResourceIT.createEntity(em));
+            .scriptoriumRights(DEFAULT_SCRIPTORIUM_RIGHTS);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        appUser.setUser(user);
         return appUser;
     }
-
     /**
      * Create an updated entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -117,15 +115,18 @@ public class AppUserResourceIT {
             .shopRights(UPDATED_SHOP_RIGHTS)
             .blogRights(UPDATED_BLOG_RIGHTS)
             .profileRights(UPDATED_PROFILE_RIGHTS)
-            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
-            .user(UserResourceIT.createEntity(em));
+            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS);
+        // Add required entity
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        appUser.setUser(user);
         return appUser;
     }
 
     @BeforeEach
     public void initTest() {
         appUser = createEntity(em);
-        appUser.setUser(userRepository.saveAndFlush(appUser.getUser()));
     }
 
     @Test
@@ -304,7 +305,7 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.[*].profileRights").value(hasItem(DEFAULT_PROFILE_RIGHTS.toString())))
             .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())));
     }
-
+    
     @SuppressWarnings({"unchecked"})
     public void getAllAppUsersWithEagerRelationshipsIsEnabled() throws Exception {
         when(appUserRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
@@ -344,7 +345,6 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.profileRights").value(DEFAULT_PROFILE_RIGHTS.toString()))
             .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingAppUser() throws Exception {

@@ -41,13 +41,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.product.shop" for="field_shop">Shop</label>
           <select class="form-control" id="field_shop" name="shop" formControlName="shop">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('shop')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="shopOption.id === editForm.get('shop')!.value?.id ? editForm.get('shop')!.value : shopOption"
               *ngFor="let shopOption of shops; trackBy: trackById"
               >{{ shopOption.name }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('shop')!.invalid && (editForm.get('shop')!.dirty || editForm.get('shop')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('shop')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

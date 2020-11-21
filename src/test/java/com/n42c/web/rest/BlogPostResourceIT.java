@@ -3,14 +3,9 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.BlogPost;
-import com.n42c.repository.AppUserRepository;
+import com.n42c.domain.Blog;
 import com.n42c.repository.BlogPostRepository;
 
-import com.n42c.repository.BlogRepository;
-import com.n42c.repository.UserRepository;
-import com.n42c.security.AuthoritiesConstants;
-import com.nimbusds.jwt.JWT;
-import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -22,23 +17,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -50,10 +36,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link BlogPostResource} REST controller.
  */
-@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
-@WithMockUser(username = "6ee76992-36a9-41e2-bd4e-4c5e79bf38be")
+@WithMockUser
 public class BlogPostResourceIT {
 
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
@@ -64,15 +50,6 @@ public class BlogPostResourceIT {
 
     private static final Instant DEFAULT_MODIFIED = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AppUserRepository appUserRepository;
-
-    @Autowired
-    private BlogRepository blogRepository;
 
     @Autowired
     private BlogPostRepository blogPostRepository;
@@ -90,7 +67,7 @@ public class BlogPostResourceIT {
 
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -99,13 +76,21 @@ public class BlogPostResourceIT {
             .title(DEFAULT_TITLE)
             .published(DEFAULT_PUBLISHED)
             .modified(DEFAULT_MODIFIED);
-        blogPost.setBlog(BlogResourceIT.createEntity(em));
+        // Add required entity
+        Blog blog;
+        if (TestUtil.findAll(em, Blog.class).isEmpty()) {
+            blog = BlogResourceIT.createEntity(em);
+            em.persist(blog);
+            em.flush();
+        } else {
+            blog = TestUtil.findAll(em, Blog.class).get(0);
+        }
+        blogPost.setBlog(blog);
         return blogPost;
     }
-
     /**
      * Create an updated entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -114,16 +99,22 @@ public class BlogPostResourceIT {
             .title(UPDATED_TITLE)
             .published(UPDATED_PUBLISHED)
             .modified(UPDATED_MODIFIED);
-        blogPost.setBlog(BlogResourceIT.createEntity(em));
+        // Add required entity
+        Blog blog;
+        if (TestUtil.findAll(em, Blog.class).isEmpty()) {
+            blog = BlogResourceIT.createUpdatedEntity(em);
+            em.persist(blog);
+            em.flush();
+        } else {
+            blog = TestUtil.findAll(em, Blog.class).get(0);
+        }
+        blogPost.setBlog(blog);
         return blogPost;
     }
 
     @BeforeEach
     public void initTest() {
         blogPost = createEntity(em);
-        blogPost.getBlog().getAuthor().setUser(userRepository.saveAndFlush(blogPost.getBlog().getAuthor().getUser()));
-        blogPost.getBlog().setAuthor(appUserRepository.saveAndFlush(blogPost.getBlog().getAuthor()));
-        blogPost.setBlog(blogRepository.saveAndFlush(blogPost.getBlog()));
     }
 
     @Test
@@ -186,25 +177,6 @@ public class BlogPostResourceIT {
 
     @Test
     @Transactional
-    public void checkPublishedIsRequired() throws Exception {
-        int databaseSizeBeforeTest = blogPostRepository.findAll().size();
-        // set the field null
-        blogPost.setPublished(null);
-
-        // Create the BlogPost, which fails.
-
-
-        restBlogPostMockMvc.perform(post("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogPost)))
-            .andExpect(status().isBadRequest());
-
-        List<BlogPost> blogPostList = blogPostRepository.findAll();
-        assertThat(blogPostList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkModifiedIsRequired() throws Exception {
         int databaseSizeBeforeTest = blogPostRepository.findAll().size();
         // set the field null
@@ -237,7 +209,7 @@ public class BlogPostResourceIT {
             .andExpect(jsonPath("$.[*].published").value(hasItem(DEFAULT_PUBLISHED.toString())))
             .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
     }
-
+    
     @SuppressWarnings({"unchecked"})
     public void getAllBlogPostsWithEagerRelationshipsIsEnabled() throws Exception {
         when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
@@ -273,7 +245,6 @@ public class BlogPostResourceIT {
             .andExpect(jsonPath("$.published").value(DEFAULT_PUBLISHED.toString()))
             .andExpect(jsonPath("$.modified").value(DEFAULT_MODIFIED.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingBlogPost() throws Exception {

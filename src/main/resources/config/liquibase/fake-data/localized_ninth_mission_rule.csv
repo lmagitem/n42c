@@ -1,11 +1,11 @@
-id;name;description;language
-1;Ghana distributed;../fake-data/blob/hipster.txt;CH
-2;Bacon e-services interfaces;../fake-data/blob/hipster.txt;RO
-3;value-added multi-byte;../fake-data/blob/hipster.txt;PO
-4;e-services web services 24/7;../fake-data/blob/hipster.txt;HU
-5;Toys;../fake-data/blob/hipster.txt;AR
-6;cutting-edge mindshare whiteboard;../fake-data/blob/hipster.txt;GR
-7;withdrawal override Awesome Frozen Fish;../fake-data/blob/hipster.txt;TU
-8;Iowa Supervisor;../fake-data/blob/hipster.txt;RO
-9;Mountain maximized application;../fake-data/blob/hipster.txt;CH
-10;Interactions Oregon Garden;../fake-data/blob/hipster.txt;IT
+id;name;description;language;rule_id
+1;Ghana distributed;../fake-data/blob/hipster.txt;EL;1
+2;Bacon e-services interfaces;../fake-data/blob/hipster.txt;RO;2
+3;value-added multi-byte;../fake-data/blob/hipster.txt;ID;3
+4;e-services web services 24/7;../fake-data/blob/hipster.txt;SV;4
+5;Toys;../fake-data/blob/hipster.txt;DE;5
+6;cutting-edge mindshare whiteboard;../fake-data/blob/hipster.txt;JA;6
+7;withdrawal override Awesome Frozen Fish;../fake-data/blob/hipster.txt;PT;7
+8;Iowa Supervisor;../fake-data/blob/hipster.txt;PT;8
+9;Mountain maximized application;../fake-data/blob/hipster.txt;EL;9
+10;Interactions Oregon Garden;../fake-data/blob/hipster.txt;ID;10

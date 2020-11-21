@@ -4,7 +4,7 @@
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /** Languages used in the app. */
 enum Language {
-    EN (English), FR (French), ES (Spanish), GE (German), RU (Russian), AR (Arabic), CH (Mandarin), PR (Portuguese), IT (Italian), PO (Polish), DU (Dutch), GR (Greek), SW (Swedish), TU (Turkish), RO (Romanian), JP (Japanese), KO (Korean), HU (Hungarian), DA (Danish)
+    EN (English), FR (French), AR (Arabic), ZH (Chinese), DA (Danish), NL (Dutch), FI (Finnish), DE (German), EL (Greek), HU (Hungarian), IS (Icelandic), ID (Indonesian), GA (Irish), IT (Italian), JA (Japanese), KO (Korean), FA (Persian), PL (Polish), PT (Portuguese), RO (Romanian), RU (Russian), SR (Serbian), ES (Spanish), SV (Swedish), TR (Turkish)
 }
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !                              Users                                  !
@@ -67,13 +67,20 @@ entity Blog {
     /** This blog's name. */
     name String required
 }
+/** The content of a blog, in a specific language. */
+entity LocalizedBlog {
+    /** This blog's localized title. */
+    name String required
+    /** This blog's language. */
+    language Language required
+}
 /** Blog posts to show on the app. */
 @paginate(infinite-scroll)
 entity BlogPost {
     /** This post's title. */
     title String required
     /** The date and time at which this post was published. */
-	published Instant required
+	published Instant
     /** The last date and time at which this post was modified. */
 	modified Instant required
 }
@@ -485,23 +492,24 @@ enum NinthGamePhase {
 
 relationship OneToOne {
     // General
-    AppUser{user(login)} to User,
+    AppUser{user(login) required} to User,
     // 40k
-    Player{appUser(displayedName)} to AppUser{player(name)}
+    Player{appUser(displayedName) required} to AppUser{player(name)}
 }
 
 relationship OneToMany {
     // Shop
-	Shop{products(name)} to Product{shop(name)},
-    Product{localizations(name)} to LocalizedProduct{product(name)},
+	Shop{products(name)} to Product{shop(name) required},
+    Product{localizations(name)} to LocalizedProduct{product(name) required},
 	// Blog
-	AppUser{blogs} to Blog{author(displayedName)},
-	Blog{posts(title)} to BlogPost{blog(name)},
-    BlogPost{localizations(title)} to LocalizedPostContent{post(title)},
+	AppUser{blogs} to Blog{author(displayedName) required},
+	Blog{posts(title)} to BlogPost{blog(name) required},
+    Blog{localizations(name)} to LocalizedBlog{blog(name) required},
+    BlogPost{localizations(title)} to LocalizedPostContent{post(title) required},
     BlogCategory{subcategories(name)} to BlogCategory{parentCategory(name)},
-    BlogCategory{localizations(name)} to LocalizedBlogCategory{category(name)},
+    BlogCategory{localizations(name)} to LocalizedBlogCategory{category(name) required},
     // Profile
-    AppUser{profiles} to AppUserProfile{user(displayedName)},
+    AppUser{profiles} to AppUserProfile{user(displayedName) required},
     AppUserProfile{profileParts} to ProfilePart{profile},
     ProfilePart{simpleItems} to ProfilePartSimpleItem{profilePart},
     ProfilePart{preciseItems} to ProfilePartPreciseItem{profilePart},
@@ -509,9 +517,9 @@ relationship OneToMany {
     ProfilePart{skillCategories} to ProfilePartSkillCategory{profilePart},
     ProfilePartSkillCategory{skills} to ProfilePartSkill{skillCategory},
     // 40k
-	Player{lists} to NinthArmy{author},
-	Player{collection} to NinthUnit{owner},
-    Player{stratagemGroups} to NinthStratagemGroup{author},
+	Player{lists} to NinthArmy{author required},
+	Player{collection} to NinthUnit{owner required},
+    Player{stratagemGroups} to NinthStratagemGroup{author required},
 	NinthBattle{armies} to NinthArmyMoment{battle},
 	NinthArmy{units} to NinthArmyUnit{army},
 	NinthArmy{moments} to NinthArmyMoment{army},
@@ -520,14 +528,14 @@ relationship OneToMany {
 	NinthUnit{moments} to NinthUnitMoment{unit},
     NinthCampaign{events} to NinthCampaignMoment{campaign},
     NinthCampaignMoment{battles} to NinthBattle{campaignMoment},
-    NinthStratagemGroup{localizations} to LocalizedNinthStratagemGroup{stratagemGroup},
+    NinthStratagemGroup{localizations} to LocalizedNinthStratagemGroup{stratagemGroup required},
     NinthStratagemGroup{stratagems} to NinthStratagem{group},
 	NinthMission{battles} to NinthBattle{mission},
-    NinthMission{localizations} to LocalizedNinthMission{mission},
-    NinthMissionRule{localizations} to LocalizedNinthMissionRule{rule},
-    NinthStratagem{localizations} to LocalizedNinthStratagem{stratagem},
-    NinthObjective{localizations} to LocalizedNinthObjective{objective},
-    NinthDeploymentMap{localizations} to LocalizedNinthDeploymentMap{deploymentMap}
+    NinthMission{localizations} to LocalizedNinthMission{mission required},
+    NinthMissionRule{localizations} to LocalizedNinthMissionRule{rule required},
+    NinthStratagem{localizations} to LocalizedNinthStratagem{stratagem required},
+    NinthObjective{localizations} to LocalizedNinthObjective{objective required},
+    NinthDeploymentMap{localizations} to LocalizedNinthDeploymentMap{deploymentMap required}
 }
 
 relationship ManyToMany {

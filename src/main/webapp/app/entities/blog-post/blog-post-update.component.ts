@@ -33,11 +33,11 @@ export class BlogPostUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     title: [null, [Validators.required]],
-    published: [null, [Validators.required]],
+    published: [],
     modified: [null, [Validators.required]],
     authors: [],
     categories: [],
-    blog: [],
+    blog: [null, Validators.required],
   });
 
   constructor(

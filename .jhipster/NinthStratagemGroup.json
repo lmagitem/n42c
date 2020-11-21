@@ -23,6 +23,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "player",
       "otherEntityRelationshipName": "stratagemGroups",
+      "relationshipValidateRules": "required",
       "relationshipName": "author",
       "otherEntityField": "id"
     },
