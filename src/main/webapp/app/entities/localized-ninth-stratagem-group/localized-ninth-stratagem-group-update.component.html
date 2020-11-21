@@ -65,7 +65,7 @@
             >Stratagem Group</label
           >
           <select class="form-control" id="field_stratagemGroup" name="stratagemGroup" formControlName="stratagemGroup">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('stratagemGroup')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
                 ninthStratagemGroupOption.id === editForm.get('stratagemGroup')!.value?.id
@@ -76,6 +76,19 @@
               >{{ ninthStratagemGroupOption.id }}</option
             >
           </select>
+        </div>
+        <div
+          *ngIf="
+            editForm.get('stratagemGroup')!.invalid && (editForm.get('stratagemGroup')!.dirty || editForm.get('stratagemGroup')!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('stratagemGroup')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
         </div>
       </div>
 

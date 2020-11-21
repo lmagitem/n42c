@@ -68,7 +68,7 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedNinthMissionRule.rule" for="field_rule">Rule</label>
           <select class="form-control" id="field_rule" name="rule" formControlName="rule">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('rule')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
                 ninthMissionRuleOption.id === editForm.get('rule')!.value?.id ? editForm.get('rule')!.value : ninthMissionRuleOption
@@ -77,6 +77,11 @@
               >{{ ninthMissionRuleOption.id }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('rule')!.invalid && (editForm.get('rule')!.dirty || editForm.get('rule')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('rule')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

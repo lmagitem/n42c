@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedProduct;
+import com.n42c.domain.Product;
 import com.n42c.repository.LocalizedProductRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -72,6 +73,16 @@ public class LocalizedProductResourceIT {
             .pictureUrl(DEFAULT_PICTURE_URL)
             .content(DEFAULT_CONTENT)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        Product product;
+        if (TestUtil.findAll(em, Product.class).isEmpty()) {
+            product = ProductResourceIT.createEntity(em);
+            em.persist(product);
+            em.flush();
+        } else {
+            product = TestUtil.findAll(em, Product.class).get(0);
+        }
+        localizedProduct.setProduct(product);
         return localizedProduct;
     }
     /**
@@ -87,6 +98,16 @@ public class LocalizedProductResourceIT {
             .pictureUrl(UPDATED_PICTURE_URL)
             .content(UPDATED_CONTENT)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        Product product;
+        if (TestUtil.findAll(em, Product.class).isEmpty()) {
+            product = ProductResourceIT.createUpdatedEntity(em);
+            em.persist(product);
+            em.flush();
+        } else {
+            product = TestUtil.findAll(em, Product.class).get(0);
+        }
+        localizedProduct.setProduct(product);
         return localizedProduct;
     }
 

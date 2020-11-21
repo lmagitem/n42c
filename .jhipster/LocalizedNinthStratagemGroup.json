@@ -19,6 +19,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "ninthStratagemGroup",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "stratagemGroup",
       "otherEntityField": "id"
     }

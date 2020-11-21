@@ -21,7 +21,7 @@ export class NinthStratagemGroupUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     shareable: [],
-    author: [],
+    author: [null, Validators.required],
   });
 
   constructor(

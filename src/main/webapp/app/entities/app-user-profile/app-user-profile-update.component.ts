@@ -27,7 +27,7 @@ export class AppUserProfileUpdateComponent implements OnInit {
     summary: [],
     headerBackgroundURI: [],
     language: [],
-    user: [],
+    user: [null, Validators.required],
   });
 
   constructor(

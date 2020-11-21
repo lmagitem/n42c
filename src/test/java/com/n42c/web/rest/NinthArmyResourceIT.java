@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthArmy;
+import com.n42c.domain.Player;
 import com.n42c.repository.NinthArmyRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -68,6 +69,16 @@ public class NinthArmyResourceIT {
             .crusade(DEFAULT_CRUSADE)
             .faction(DEFAULT_FACTION)
             .subfaction(DEFAULT_SUBFACTION);
+        // Add required entity
+        Player player;
+        if (TestUtil.findAll(em, Player.class).isEmpty()) {
+            player = PlayerResourceIT.createEntity(em);
+            em.persist(player);
+            em.flush();
+        } else {
+            player = TestUtil.findAll(em, Player.class).get(0);
+        }
+        ninthArmy.setAuthor(player);
         return ninthArmy;
     }
     /**
@@ -82,6 +93,16 @@ public class NinthArmyResourceIT {
             .crusade(UPDATED_CRUSADE)
             .faction(UPDATED_FACTION)
             .subfaction(UPDATED_SUBFACTION);
+        // Add required entity
+        Player player;
+        if (TestUtil.findAll(em, Player.class).isEmpty()) {
+            player = PlayerResourceIT.createUpdatedEntity(em);
+            em.persist(player);
+            em.flush();
+        } else {
+            player = TestUtil.findAll(em, Player.class).get(0);
+        }
+        ninthArmy.setAuthor(player);
         return ninthArmy;
     }
 

@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthObjective;
+import com.n42c.domain.NinthObjective;
 import com.n42c.repository.LocalizedNinthObjectiveRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -64,6 +65,16 @@ public class LocalizedNinthObjectiveResourceIT {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        NinthObjective ninthObjective;
+        if (TestUtil.findAll(em, NinthObjective.class).isEmpty()) {
+            ninthObjective = NinthObjectiveResourceIT.createEntity(em);
+            em.persist(ninthObjective);
+            em.flush();
+        } else {
+            ninthObjective = TestUtil.findAll(em, NinthObjective.class).get(0);
+        }
+        localizedNinthObjective.setObjective(ninthObjective);
         return localizedNinthObjective;
     }
     /**
@@ -77,6 +88,16 @@ public class LocalizedNinthObjectiveResourceIT {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        NinthObjective ninthObjective;
+        if (TestUtil.findAll(em, NinthObjective.class).isEmpty()) {
+            ninthObjective = NinthObjectiveResourceIT.createUpdatedEntity(em);
+            em.persist(ninthObjective);
+            em.flush();
+        } else {
+            ninthObjective = TestUtil.findAll(em, NinthObjective.class).get(0);
+        }
+        localizedNinthObjective.setObjective(ninthObjective);
         return localizedNinthObjective;
     }
 

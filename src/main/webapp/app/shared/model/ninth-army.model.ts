@@ -1,8 +1,8 @@
-import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
-import {INinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
-import {IPlayer} from 'app/shared/model/player.model';
-import {Faction} from 'app/shared/model/enumerations/faction.model';
-import {SubFaction} from 'app/shared/model/enumerations/sub-faction.model';
+import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
+import { INinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
+import { IPlayer } from 'app/shared/model/player.model';
+import { Faction } from 'app/shared/model/enumerations/faction.model';
+import { SubFaction } from 'app/shared/model/enumerations/sub-faction.model';
 
 export interface INinthArmy {
   id?: number;

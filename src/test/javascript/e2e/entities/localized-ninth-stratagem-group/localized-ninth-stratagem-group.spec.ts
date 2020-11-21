@@ -1,9 +1,9 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
   LocalizedNinthStratagemGroupComponentsPage,
-  LocalizedNinthStratagemGroupDeleteDialog,
+  /* LocalizedNinthStratagemGroupDeleteDialog, */
   LocalizedNinthStratagemGroupUpdatePage,
 } from './localized-ninth-stratagem-group.page-object';
 
@@ -14,7 +14,7 @@ describe('LocalizedNinthStratagemGroup e2e test', () => {
   let signInPage: SignInPage;
   let localizedNinthStratagemGroupComponentsPage: LocalizedNinthStratagemGroupComponentsPage;
   let localizedNinthStratagemGroupUpdatePage: LocalizedNinthStratagemGroupUpdatePage;
-  let localizedNinthStratagemGroupDeleteDialog: LocalizedNinthStratagemGroupDeleteDialog;
+  /* let localizedNinthStratagemGroupDeleteDialog: LocalizedNinthStratagemGroupDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -47,38 +47,36 @@ describe('LocalizedNinthStratagemGroup e2e test', () => {
     await localizedNinthStratagemGroupUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedNinthStratagemGroups', async () => {
-    const nbButtonsBeforeCreate = await localizedNinthStratagemGroupComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedNinthStratagemGroups', async () => {
+        const nbButtonsBeforeCreate = await localizedNinthStratagemGroupComponentsPage.countDeleteButtons();
 
-    await localizedNinthStratagemGroupComponentsPage.clickOnCreateButton();
+        await localizedNinthStratagemGroupComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedNinthStratagemGroupUpdatePage.setNameInput('name'),
-      localizedNinthStratagemGroupUpdatePage.languageSelectLastOption(),
-      localizedNinthStratagemGroupUpdatePage.stratagemGroupSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedNinthStratagemGroupUpdatePage.setNameInput('name'),
+            localizedNinthStratagemGroupUpdatePage.languageSelectLastOption(),
+            localizedNinthStratagemGroupUpdatePage.stratagemGroupSelectLastOption(),
+        ]);
 
-    expect(await localizedNinthStratagemGroupUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await localizedNinthStratagemGroupUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
-    await localizedNinthStratagemGroupUpdatePage.save();
-    expect(await localizedNinthStratagemGroupUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedNinthStratagemGroupUpdatePage.save();
+        expect(await localizedNinthStratagemGroupUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedNinthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await localizedNinthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedNinthStratagemGroup', async () => {
-    const nbButtonsBeforeDelete = await localizedNinthStratagemGroupComponentsPage.countDeleteButtons();
-    await localizedNinthStratagemGroupComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedNinthStratagemGroup', async () => {
+        const nbButtonsBeforeDelete = await localizedNinthStratagemGroupComponentsPage.countDeleteButtons();
+        await localizedNinthStratagemGroupComponentsPage.clickOnLastDeleteButton();
 
-    localizedNinthStratagemGroupDeleteDialog = new LocalizedNinthStratagemGroupDeleteDialog();
-    expect(await localizedNinthStratagemGroupDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthStratagemGroup.delete.question');
-    await localizedNinthStratagemGroupDeleteDialog.clickOnConfirmButton();
+        localizedNinthStratagemGroupDeleteDialog = new LocalizedNinthStratagemGroupDeleteDialog();
+        expect(await localizedNinthStratagemGroupDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedNinthStratagemGroup.delete.question');
+        await localizedNinthStratagemGroupDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedNinthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedNinthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

@@ -25,7 +25,7 @@ export class LocalizedNinthObjectiveUpdateComponent implements OnInit {
     name: [],
     description: [],
     language: [null, [Validators.required]],
-    objective: [],
+    objective: [null, Validators.required],
   });
 
   constructor(

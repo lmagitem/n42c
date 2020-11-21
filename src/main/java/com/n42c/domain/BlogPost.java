@@ -41,9 +41,8 @@ public class BlogPost implements Serializable {
     /**
      * The date and time at which this post was published.
      */
-    @NotNull
-    @ApiModelProperty(value = "The date and time at which this post was published.", required = true)
-    @Column(name = "published", nullable = false)
+    @ApiModelProperty(value = "The date and time at which this post was published.")
+    @Column(name = "published")
     private Instant published;
 
     /**
@@ -72,7 +71,8 @@ public class BlogPost implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<BlogCategory> categories = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private Blog blog;
 

@@ -1,9 +1,9 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
   LocalizedNinthObjectiveComponentsPage,
-  LocalizedNinthObjectiveDeleteDialog,
+  /* LocalizedNinthObjectiveDeleteDialog, */
   LocalizedNinthObjectiveUpdatePage,
 } from './localized-ninth-objective.page-object';
 
@@ -14,7 +14,7 @@ describe('LocalizedNinthObjective e2e test', () => {
   let signInPage: SignInPage;
   let localizedNinthObjectiveComponentsPage: LocalizedNinthObjectiveComponentsPage;
   let localizedNinthObjectiveUpdatePage: LocalizedNinthObjectiveUpdatePage;
-  let localizedNinthObjectiveDeleteDialog: LocalizedNinthObjectiveDeleteDialog;
+  /* let localizedNinthObjectiveDeleteDialog: LocalizedNinthObjectiveDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -45,43 +45,38 @@ describe('LocalizedNinthObjective e2e test', () => {
     await localizedNinthObjectiveUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedNinthObjectives', async () => {
-    const nbButtonsBeforeCreate = await localizedNinthObjectiveComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedNinthObjectives', async () => {
+        const nbButtonsBeforeCreate = await localizedNinthObjectiveComponentsPage.countDeleteButtons();
 
-    await localizedNinthObjectiveComponentsPage.clickOnCreateButton();
+        await localizedNinthObjectiveComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedNinthObjectiveUpdatePage.setNameInput('name'),
-      localizedNinthObjectiveUpdatePage.setDescriptionInput('description'),
-      localizedNinthObjectiveUpdatePage.languageSelectLastOption(),
-      localizedNinthObjectiveUpdatePage.objectiveSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedNinthObjectiveUpdatePage.setNameInput('name'),
+            localizedNinthObjectiveUpdatePage.setDescriptionInput('description'),
+            localizedNinthObjectiveUpdatePage.languageSelectLastOption(),
+            localizedNinthObjectiveUpdatePage.objectiveSelectLastOption(),
+        ]);
 
-    expect(await localizedNinthObjectiveUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    expect(await localizedNinthObjectiveUpdatePage.getDescriptionInput()).to.eq(
-      'description',
-      'Expected Description value to be equals to description'
-    );
+        expect(await localizedNinthObjectiveUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await localizedNinthObjectiveUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
 
-    await localizedNinthObjectiveUpdatePage.save();
-    expect(await localizedNinthObjectiveUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedNinthObjectiveUpdatePage.save();
+        expect(await localizedNinthObjectiveUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedNinthObjectiveComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await localizedNinthObjectiveComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedNinthObjective', async () => {
-    const nbButtonsBeforeDelete = await localizedNinthObjectiveComponentsPage.countDeleteButtons();
-    await localizedNinthObjectiveComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedNinthObjective', async () => {
+        const nbButtonsBeforeDelete = await localizedNinthObjectiveComponentsPage.countDeleteButtons();
+        await localizedNinthObjectiveComponentsPage.clickOnLastDeleteButton();
 
-    localizedNinthObjectiveDeleteDialog = new LocalizedNinthObjectiveDeleteDialog();
-    expect(await localizedNinthObjectiveDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthObjective.delete.question');
-    await localizedNinthObjectiveDeleteDialog.clickOnConfirmButton();
+        localizedNinthObjectiveDeleteDialog = new LocalizedNinthObjectiveDeleteDialog();
+        expect(await localizedNinthObjectiveDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedNinthObjective.delete.question');
+        await localizedNinthObjectiveDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedNinthObjectiveComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedNinthObjectiveComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

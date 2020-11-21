@@ -25,7 +25,7 @@ export class LocalizedNinthMissionRuleUpdateComponent implements OnInit {
     name: [],
     description: [],
     language: [null, [Validators.required]],
-    rule: [],
+    rule: [null, Validators.required],
   });
 
   constructor(

@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthMission;
+import com.n42c.domain.NinthMission;
 import com.n42c.repository.LocalizedNinthMissionRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -64,6 +65,16 @@ public class LocalizedNinthMissionResourceIT {
             .name(DEFAULT_NAME)
             .briefing(DEFAULT_BRIEFING)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        NinthMission ninthMission;
+        if (TestUtil.findAll(em, NinthMission.class).isEmpty()) {
+            ninthMission = NinthMissionResourceIT.createEntity(em);
+            em.persist(ninthMission);
+            em.flush();
+        } else {
+            ninthMission = TestUtil.findAll(em, NinthMission.class).get(0);
+        }
+        localizedNinthMission.setMission(ninthMission);
         return localizedNinthMission;
     }
     /**
@@ -77,6 +88,16 @@ public class LocalizedNinthMissionResourceIT {
             .name(UPDATED_NAME)
             .briefing(UPDATED_BRIEFING)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        NinthMission ninthMission;
+        if (TestUtil.findAll(em, NinthMission.class).isEmpty()) {
+            ninthMission = NinthMissionResourceIT.createUpdatedEntity(em);
+            em.persist(ninthMission);
+            em.flush();
+        } else {
+            ninthMission = TestUtil.findAll(em, NinthMission.class).get(0);
+        }
+        localizedNinthMission.setMission(ninthMission);
         return localizedNinthMission;
     }
 

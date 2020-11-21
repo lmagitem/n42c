@@ -24,6 +24,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "blog",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "blog",
       "otherEntityField": "name"
     }

@@ -30,7 +30,7 @@ export class AppUserUpdateComponent implements OnInit {
     blogRights: [null, [Validators.required]],
     profileRights: [null, [Validators.required]],
     scriptoriumRights: [null, [Validators.required]],
-    user: [],
+    user: [null, Validators.required],
     givenFriendships: [],
     askedFriendRequests: [],
   });

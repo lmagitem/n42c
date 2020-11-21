@@ -66,13 +66,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedNinthMission.mission" for="field_mission">Mission</label>
           <select class="form-control" id="field_mission" name="mission" formControlName="mission">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('mission')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="ninthMissionOption.id === editForm.get('mission')!.value?.id ? editForm.get('mission')!.value : ninthMissionOption"
               *ngFor="let ninthMissionOption of ninthmissions; trackBy: trackById"
               >{{ ninthMissionOption.id }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('mission')!.invalid && (editForm.get('mission')!.dirty || editForm.get('mission')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('mission')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

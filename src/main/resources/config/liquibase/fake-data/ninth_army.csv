@@ -1,11 +1,11 @@
-id;name;crusade;faction;subfaction
-1;integrated;false;NA;GU
-2;Associate Handmade Investment Account;false;NE;SO
-3;deposit;false;NE;IN
-4;flexibility bypassing Investment Account;false;TA;SQ
-5;Kiribati;false;OR;YN
-6;Personal Loan Account ADP;false;EL;ME
-7;approach Investment Account Crescent;false;EL;DG
-8;vortals;true;NA;CE
-9;Optimization;false;NE;DA
-10;backing up;true;OR;CK
+id;name;crusade;faction;subfaction;author_id
+1;integrated;false;NA;GU;1
+2;Associate Handmade Investment Account;false;NE;SO;2
+3;deposit;false;NE;IN;3
+4;flexibility bypassing Investment Account;false;TA;SQ;4
+5;Kiribati;false;OR;YN;5
+6;Personal Loan Account ADP;false;EL;ME;6
+7;approach Investment Account Crescent;false;EL;DG;7
+8;vortals;true;NA;CE;8
+9;Optimization;false;NE;DA;9
+10;backing up;true;OR;CK;10

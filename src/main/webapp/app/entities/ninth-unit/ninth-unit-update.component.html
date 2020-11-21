@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-12">
+  <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-ninth-unit-heading" jhiTranslate="n42cApp.ninthUnit.home.createOrEditLabel">Create or edit a Ninth Unit</h2>
 
@@ -106,13 +106,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.owner" for="field_owner">Owner</label>
           <select class="form-control" id="field_owner" name="owner" formControlName="owner">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('owner')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="playerOption.id === editForm.get('owner')!.value?.id ? editForm.get('owner')!.value : playerOption"
               *ngFor="let playerOption of players; trackBy: trackById"
               >{{ playerOption.id }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('owner')!.invalid && (editForm.get('owner')!.dirty || editForm.get('owner')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('owner')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

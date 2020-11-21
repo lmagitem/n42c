@@ -33,6 +33,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "ninthStratagem",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "stratagem",
       "otherEntityField": "id"
     }

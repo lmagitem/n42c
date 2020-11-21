@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.Product;
+import com.n42c.domain.Shop;
 import com.n42c.repository.ProductRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -65,6 +66,16 @@ public class ProductResourceIT {
     public static Product createEntity(EntityManager em) {
         Product product = new Product()
             .name(DEFAULT_NAME);
+        // Add required entity
+        Shop shop;
+        if (TestUtil.findAll(em, Shop.class).isEmpty()) {
+            shop = ShopResourceIT.createEntity(em);
+            em.persist(shop);
+            em.flush();
+        } else {
+            shop = TestUtil.findAll(em, Shop.class).get(0);
+        }
+        product.setShop(shop);
         return product;
     }
     /**
@@ -76,6 +87,16 @@ public class ProductResourceIT {
     public static Product createUpdatedEntity(EntityManager em) {
         Product product = new Product()
             .name(UPDATED_NAME);
+        // Add required entity
+        Shop shop;
+        if (TestUtil.findAll(em, Shop.class).isEmpty()) {
+            shop = ShopResourceIT.createUpdatedEntity(em);
+            em.persist(shop);
+            em.flush();
+        } else {
+            shop = TestUtil.findAll(em, Shop.class).get(0);
+        }
+        product.setShop(shop);
         return product;
     }
 

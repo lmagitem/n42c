@@ -72,7 +72,7 @@
             >Deployment Map</label
           >
           <select class="form-control" id="field_deploymentMap" name="deploymentMap" formControlName="deploymentMap">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('deploymentMap')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
                 ninthDeploymentMapOption.id === editForm.get('deploymentMap')!.value?.id
@@ -83,6 +83,17 @@
               >{{ ninthDeploymentMapOption.id }}</option
             >
           </select>
+        </div>
+        <div
+          *ngIf="editForm.get('deploymentMap')!.invalid && (editForm.get('deploymentMap')!.dirty || editForm.get('deploymentMap')!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('deploymentMap')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
         </div>
       </div>
 

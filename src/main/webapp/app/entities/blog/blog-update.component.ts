@@ -21,7 +21,7 @@ export class BlogUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
-    author: [],
+    author: [null, Validators.required],
   });
 
   constructor(

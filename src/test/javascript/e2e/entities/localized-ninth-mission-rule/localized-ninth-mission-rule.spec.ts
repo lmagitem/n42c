@@ -1,9 +1,9 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
   LocalizedNinthMissionRuleComponentsPage,
-  LocalizedNinthMissionRuleDeleteDialog,
+  /* LocalizedNinthMissionRuleDeleteDialog, */
   LocalizedNinthMissionRuleUpdatePage,
 } from './localized-ninth-mission-rule.page-object';
 
@@ -14,7 +14,7 @@ describe('LocalizedNinthMissionRule e2e test', () => {
   let signInPage: SignInPage;
   let localizedNinthMissionRuleComponentsPage: LocalizedNinthMissionRuleComponentsPage;
   let localizedNinthMissionRuleUpdatePage: LocalizedNinthMissionRuleUpdatePage;
-  let localizedNinthMissionRuleDeleteDialog: LocalizedNinthMissionRuleDeleteDialog;
+  /* let localizedNinthMissionRuleDeleteDialog: LocalizedNinthMissionRuleDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -45,43 +45,38 @@ describe('LocalizedNinthMissionRule e2e test', () => {
     await localizedNinthMissionRuleUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedNinthMissionRules', async () => {
-    const nbButtonsBeforeCreate = await localizedNinthMissionRuleComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedNinthMissionRules', async () => {
+        const nbButtonsBeforeCreate = await localizedNinthMissionRuleComponentsPage.countDeleteButtons();
 
-    await localizedNinthMissionRuleComponentsPage.clickOnCreateButton();
+        await localizedNinthMissionRuleComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedNinthMissionRuleUpdatePage.setNameInput('name'),
-      localizedNinthMissionRuleUpdatePage.setDescriptionInput('description'),
-      localizedNinthMissionRuleUpdatePage.languageSelectLastOption(),
-      localizedNinthMissionRuleUpdatePage.ruleSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedNinthMissionRuleUpdatePage.setNameInput('name'),
+            localizedNinthMissionRuleUpdatePage.setDescriptionInput('description'),
+            localizedNinthMissionRuleUpdatePage.languageSelectLastOption(),
+            localizedNinthMissionRuleUpdatePage.ruleSelectLastOption(),
+        ]);
 
-    expect(await localizedNinthMissionRuleUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    expect(await localizedNinthMissionRuleUpdatePage.getDescriptionInput()).to.eq(
-      'description',
-      'Expected Description value to be equals to description'
-    );
+        expect(await localizedNinthMissionRuleUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await localizedNinthMissionRuleUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
 
-    await localizedNinthMissionRuleUpdatePage.save();
-    expect(await localizedNinthMissionRuleUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedNinthMissionRuleUpdatePage.save();
+        expect(await localizedNinthMissionRuleUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedNinthMissionRuleComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await localizedNinthMissionRuleComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedNinthMissionRule', async () => {
-    const nbButtonsBeforeDelete = await localizedNinthMissionRuleComponentsPage.countDeleteButtons();
-    await localizedNinthMissionRuleComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedNinthMissionRule', async () => {
+        const nbButtonsBeforeDelete = await localizedNinthMissionRuleComponentsPage.countDeleteButtons();
+        await localizedNinthMissionRuleComponentsPage.clickOnLastDeleteButton();
 
-    localizedNinthMissionRuleDeleteDialog = new LocalizedNinthMissionRuleDeleteDialog();
-    expect(await localizedNinthMissionRuleDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedNinthMissionRule.delete.question');
-    await localizedNinthMissionRuleDeleteDialog.clickOnConfirmButton();
+        localizedNinthMissionRuleDeleteDialog = new LocalizedNinthMissionRuleDeleteDialog();
+        expect(await localizedNinthMissionRuleDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedNinthMissionRule.delete.question');
+        await localizedNinthMissionRuleDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedNinthMissionRuleComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedNinthMissionRuleComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

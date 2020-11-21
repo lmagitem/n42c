@@ -22,7 +22,7 @@ export class LocalizedNinthStratagemGroupUpdateComponent implements OnInit {
     id: [],
     name: [],
     language: [null, [Validators.required]],
-    stratagemGroup: [],
+    stratagemGroup: [null, Validators.required],
   });
 
   constructor(

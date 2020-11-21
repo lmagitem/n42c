@@ -26,7 +26,7 @@ export class NinthUnitUpdateComponent implements OnInit {
     subfaction: [],
     battlefieldRole: [],
     keywords: [],
-    owner: [],
+    owner: [null, Validators.required],
   });
 
   constructor(

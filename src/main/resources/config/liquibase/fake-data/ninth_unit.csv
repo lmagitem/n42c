@@ -1,11 +1,11 @@
-id;name;datasheet;faction;subfaction;battlefield_role;keywords
-1;virtual challenge;Fresh solid state Expanded;OT;SQ;FA;Cotton
-2;Cordoba Oro Rustic Rubber Pants;withdrawal;CH;KR;FA;Montana deposit synthesize
-3;bandwidth incubate;content Intelligent Frozen Towels Streamlined;CH;GK;TR;haptic payment
-4;throughput overriding;Berkshire disintermediate Marketing;IM;DE;HQ;firewall firewall Senior
-5;reboot Liberia;Analyst support Avon;NA;SW;FL;Chicken Directives
-6;Tools;generating;OR;BA;LW;Music Unbranded
-7;Corporate Borders program;Kroon mindshare content;TA;OR;HS;input
-8;Books Points;Chief Corporate;NE;GK;HQ;Applications overriding
-9;Surinam Dollar;schemas logistical Keyboard;OT;GU;FO;discrete Vision-oriented
-10;Ball drive web-enabled;Home Loan Account;EL;HA;EL;Branding Agent Team-oriented
+id;name;datasheet;faction;subfaction;battlefield_role;keywords;owner_id
+1;virtual challenge;Fresh solid state Expanded;OT;SQ;FA;Cotton;1
+2;Cordoba Oro Rustic Rubber Pants;withdrawal;CH;KR;FA;Montana deposit synthesize;2
+3;bandwidth incubate;content Intelligent Frozen Towels Streamlined;CH;GK;TR;haptic payment;3
+4;throughput overriding;Berkshire disintermediate Marketing;IM;DE;HQ;firewall firewall Senior;4
+5;reboot Liberia;Analyst support Avon;NA;SW;FL;Chicken Directives;5
+6;Tools;generating;OR;BA;LW;Music Unbranded;6
+7;Corporate Borders program;Kroon mindshare content;TA;OR;HS;input;7
+8;Books Points;Chief Corporate;NE;GK;HQ;Applications overriding;8
+9;Surinam Dollar;schemas logistical Keyboard;OT;GU;FO;discrete Vision-oriented;9
+10;Ball drive web-enabled;Home Loan Account;EL;HA;EL;Branding Agent Team-oriented;10

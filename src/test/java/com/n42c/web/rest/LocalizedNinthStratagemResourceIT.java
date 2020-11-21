@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthStratagem;
+import com.n42c.domain.NinthStratagem;
 import com.n42c.repository.LocalizedNinthStratagemRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -72,6 +73,16 @@ public class LocalizedNinthStratagemResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .keywords(DEFAULT_KEYWORDS)
             .language(DEFAULT_LANGUAGE);
+        // Add required entity
+        NinthStratagem ninthStratagem;
+        if (TestUtil.findAll(em, NinthStratagem.class).isEmpty()) {
+            ninthStratagem = NinthStratagemResourceIT.createEntity(em);
+            em.persist(ninthStratagem);
+            em.flush();
+        } else {
+            ninthStratagem = TestUtil.findAll(em, NinthStratagem.class).get(0);
+        }
+        localizedNinthStratagem.setStratagem(ninthStratagem);
         return localizedNinthStratagem;
     }
     /**
@@ -87,6 +98,16 @@ public class LocalizedNinthStratagemResourceIT {
             .description(UPDATED_DESCRIPTION)
             .keywords(UPDATED_KEYWORDS)
             .language(UPDATED_LANGUAGE);
+        // Add required entity
+        NinthStratagem ninthStratagem;
+        if (TestUtil.findAll(em, NinthStratagem.class).isEmpty()) {
+            ninthStratagem = NinthStratagemResourceIT.createUpdatedEntity(em);
+            em.persist(ninthStratagem);
+            em.flush();
+        } else {
+            ninthStratagem = TestUtil.findAll(em, NinthStratagem.class).get(0);
+        }
+        localizedNinthStratagem.setStratagem(ninthStratagem);
         return localizedNinthStratagem;
     }
 

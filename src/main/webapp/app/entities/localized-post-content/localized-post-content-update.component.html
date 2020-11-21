@@ -109,13 +109,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedPostContent.post" for="field_post">Post</label>
           <select class="form-control" id="field_post" name="post" formControlName="post">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('post')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="blogPostOption.id === editForm.get('post')!.value?.id ? editForm.get('post')!.value : blogPostOption"
               *ngFor="let blogPostOption of blogposts; trackBy: trackById"
               >{{ blogPostOption.title }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('post')!.invalid && (editForm.get('post')!.dirty || editForm.get('post')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('post')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

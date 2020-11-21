@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { LocalizedBlogComponentsPage, LocalizedBlogDeleteDialog, LocalizedBlogUpdatePage } from './localized-blog.page-object';
+import {
+  LocalizedBlogComponentsPage,
+  /* LocalizedBlogDeleteDialog, */
+  LocalizedBlogUpdatePage,
+} from './localized-blog.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('LocalizedBlog e2e test', () => {
   let signInPage: SignInPage;
   let localizedBlogComponentsPage: LocalizedBlogComponentsPage;
   let localizedBlogUpdatePage: LocalizedBlogUpdatePage;
-  let localizedBlogDeleteDialog: LocalizedBlogDeleteDialog;
+  /* let localizedBlogDeleteDialog: LocalizedBlogDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -38,35 +42,36 @@ describe('LocalizedBlog e2e test', () => {
     await localizedBlogUpdatePage.cancel();
   });
 
-  it('should create and save LocalizedBlogs', async () => {
-    const nbButtonsBeforeCreate = await localizedBlogComponentsPage.countDeleteButtons();
+  /* it('should create and save LocalizedBlogs', async () => {
+        const nbButtonsBeforeCreate = await localizedBlogComponentsPage.countDeleteButtons();
 
-    await localizedBlogComponentsPage.clickOnCreateButton();
+        await localizedBlogComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      localizedBlogUpdatePage.setNameInput('name'),
-      localizedBlogUpdatePage.languageSelectLastOption(),
-      localizedBlogUpdatePage.blogSelectLastOption(),
-    ]);
+        await promise.all([
+            localizedBlogUpdatePage.setNameInput('name'),
+            localizedBlogUpdatePage.languageSelectLastOption(),
+            localizedBlogUpdatePage.blogSelectLastOption(),
+        ]);
 
-    expect(await localizedBlogUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await localizedBlogUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
-    await localizedBlogUpdatePage.save();
-    expect(await localizedBlogUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await localizedBlogUpdatePage.save();
+        expect(await localizedBlogUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await localizedBlogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await localizedBlogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last LocalizedBlog', async () => {
-    const nbButtonsBeforeDelete = await localizedBlogComponentsPage.countDeleteButtons();
-    await localizedBlogComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last LocalizedBlog', async () => {
+        const nbButtonsBeforeDelete = await localizedBlogComponentsPage.countDeleteButtons();
+        await localizedBlogComponentsPage.clickOnLastDeleteButton();
 
-    localizedBlogDeleteDialog = new LocalizedBlogDeleteDialog();
-    expect(await localizedBlogDeleteDialog.getDialogTitle()).to.eq('n42cApp.localizedBlog.delete.question');
-    await localizedBlogDeleteDialog.clickOnConfirmButton();
+        localizedBlogDeleteDialog = new LocalizedBlogDeleteDialog();
+        expect(await localizedBlogDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.localizedBlog.delete.question');
+        await localizedBlogDeleteDialog.clickOnConfirmButton();
 
-    expect(await localizedBlogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await localizedBlogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

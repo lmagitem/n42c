@@ -68,7 +68,7 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedNinthObjective.objective" for="field_objective">Objective</label>
           <select class="form-control" id="field_objective" name="objective" formControlName="objective">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('objective')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
                 ninthObjectiveOption.id === editForm.get('objective')!.value?.id ? editForm.get('objective')!.value : ninthObjectiveOption
@@ -77,6 +77,15 @@
               >{{ ninthObjectiveOption.id }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('objective')!.invalid && (editForm.get('objective')!.dirty || editForm.get('objective')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('objective')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
         </div>
       </div>
 

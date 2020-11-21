@@ -45,22 +45,6 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          <div *ngIf="editForm.get('published')!.invalid && (editForm.get('published')!.dirty || editForm.get('published')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('published')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('published')?.errors?.ZonedDateTimelocal"
-              jhiTranslate="entity.validation.ZonedDateTimelocal"
-            >
-              This field should be a date and time.
-            </small>
-          </div>
         </div>
 
         <div class="form-group">
@@ -124,13 +108,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.blogPost.blog" for="field_blog">Blog</label>
           <select class="form-control" id="field_blog" name="blog" formControlName="blog">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('blog')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="blogOption.id === editForm.get('blog')!.value?.id ? editForm.get('blog')!.value : blogOption"
               *ngFor="let blogOption of blogs; trackBy: trackById"
               >{{ blogOption.name }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('blog')!.invalid && (editForm.get('blog')!.dirty || editForm.get('blog')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('blog')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

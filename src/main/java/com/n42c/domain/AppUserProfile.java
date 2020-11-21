@@ -75,7 +75,8 @@ public class AppUserProfile implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<ProfilePart> profileParts = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "profiles", allowSetters = true)
     private AppUser user;
 

@@ -24,6 +24,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "ninthObjective",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "objective",
       "otherEntityField": "id"
     }

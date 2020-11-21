@@ -78,7 +78,7 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.localizedNinthStratagem.stratagem" for="field_stratagem">Stratagem</label>
           <select class="form-control" id="field_stratagem" name="stratagem" formControlName="stratagem">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('stratagem')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="
                 ninthStratagemOption.id === editForm.get('stratagem')!.value?.id ? editForm.get('stratagem')!.value : ninthStratagemOption
@@ -87,6 +87,15 @@
               >{{ ninthStratagemOption.id }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('stratagem')!.invalid && (editForm.get('stratagem')!.dirty || editForm.get('stratagem')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('stratagem')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
         </div>
       </div>
 

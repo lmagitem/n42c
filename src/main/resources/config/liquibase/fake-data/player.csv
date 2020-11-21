@@ -1,11 +1,11 @@
-id;name
-1;Massachusetts Investment Account France
-2;Refined
-3;Solutions engage frictionless
-4;online relationships Self-enabling
-5;Clothing XML Electronics
-6;Lock Money Market Account Burundi Franc
-7;Rustic auxiliary
-8;Soap
-9;hard drive
-10;Home Loan Account
+id;name;app_user_id
+1;Massachusetts Investment Account France;1
+2;Refined;2
+3;Solutions engage frictionless;3
+4;online relationships Self-enabling;4
+5;Clothing XML Electronics;5
+6;Lock Money Market Account Burundi Franc;6
+7;Rustic auxiliary;7
+8;Soap;8
+9;hard drive;9
+10;Home Loan Account;10

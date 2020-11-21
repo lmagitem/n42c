@@ -27,6 +27,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "blogs",
+      "relationshipValidateRules": "required",
       "relationshipName": "author",
       "otherEntityField": "displayedName"
     }

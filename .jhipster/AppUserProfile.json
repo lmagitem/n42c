@@ -43,6 +43,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "appUser",
       "otherEntityRelationshipName": "profiles",
+      "relationshipValidateRules": "required",
       "relationshipName": "user",
       "otherEntityField": "displayedName"
     }

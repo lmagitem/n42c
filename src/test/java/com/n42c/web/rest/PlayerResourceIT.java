@@ -3,6 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.Player;
+import com.n42c.domain.AppUser;
 import com.n42c.repository.PlayerRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +55,16 @@ public class PlayerResourceIT {
     public static Player createEntity(EntityManager em) {
         Player player = new Player()
             .name(DEFAULT_NAME);
+        // Add required entity
+        AppUser appUser;
+        if (TestUtil.findAll(em, AppUser.class).isEmpty()) {
+            appUser = AppUserResourceIT.createEntity(em);
+            em.persist(appUser);
+            em.flush();
+        } else {
+            appUser = TestUtil.findAll(em, AppUser.class).get(0);
+        }
+        player.setAppUser(appUser);
         return player;
     }
     /**
@@ -65,6 +76,16 @@ public class PlayerResourceIT {
     public static Player createUpdatedEntity(EntityManager em) {
         Player player = new Player()
             .name(UPDATED_NAME);
+        // Add required entity
+        AppUser appUser;
+        if (TestUtil.findAll(em, AppUser.class).isEmpty()) {
+            appUser = AppUserResourceIT.createUpdatedEntity(em);
+            em.persist(appUser);
+            em.flush();
+        } else {
+            appUser = TestUtil.findAll(em, AppUser.class).get(0);
+        }
+        player.setAppUser(appUser);
         return player;
     }
 

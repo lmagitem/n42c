@@ -39,6 +39,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "blogPost",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "post",
       "otherEntityField": "title"
     }

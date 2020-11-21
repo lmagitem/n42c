@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { BlogComponentsPage, BlogDeleteDialog, BlogUpdatePage } from './blog.page-object';
+import {
+  BlogComponentsPage,
+  /* BlogDeleteDialog, */
+  BlogUpdatePage,
+} from './blog.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('Blog e2e test', () => {
   let signInPage: SignInPage;
   let blogComponentsPage: BlogComponentsPage;
   let blogUpdatePage: BlogUpdatePage;
-  let blogDeleteDialog: BlogDeleteDialog;
+  /* let blogDeleteDialog: BlogDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -35,31 +39,35 @@ describe('Blog e2e test', () => {
     await blogUpdatePage.cancel();
   });
 
-  it('should create and save Blogs', async () => {
-    const nbButtonsBeforeCreate = await blogComponentsPage.countDeleteButtons();
+  /* it('should create and save Blogs', async () => {
+        const nbButtonsBeforeCreate = await blogComponentsPage.countDeleteButtons();
 
-    await blogComponentsPage.clickOnCreateButton();
+        await blogComponentsPage.clickOnCreateButton();
 
-    await promise.all([blogUpdatePage.setNameInput('name'), blogUpdatePage.authorSelectLastOption()]);
+        await promise.all([
+            blogUpdatePage.setNameInput('name'),
+            blogUpdatePage.authorSelectLastOption(),
+        ]);
 
-    expect(await blogUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await blogUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
 
-    await blogUpdatePage.save();
-    expect(await blogUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await blogUpdatePage.save();
+        expect(await blogUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await blogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
+        expect(await blogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last Blog', async () => {
-    const nbButtonsBeforeDelete = await blogComponentsPage.countDeleteButtons();
-    await blogComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last Blog', async () => {
+        const nbButtonsBeforeDelete = await blogComponentsPage.countDeleteButtons();
+        await blogComponentsPage.clickOnLastDeleteButton();
 
-    blogDeleteDialog = new BlogDeleteDialog();
-    expect(await blogDeleteDialog.getDialogTitle()).to.eq('n42cApp.blog.delete.question');
-    await blogDeleteDialog.clickOnConfirmButton();
+        blogDeleteDialog = new BlogDeleteDialog();
+        expect(await blogDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.blog.delete.question');
+        await blogDeleteDialog.clickOnConfirmButton();
 
-    expect(await blogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await blogComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

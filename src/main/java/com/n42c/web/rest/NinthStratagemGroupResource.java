@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class NinthStratagemGroupResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/ninth-stratagem-groups")
-    public ResponseEntity<NinthStratagemGroup> createNinthStratagemGroup(@RequestBody NinthStratagemGroup ninthStratagemGroup) throws URISyntaxException {
+    public ResponseEntity<NinthStratagemGroup> createNinthStratagemGroup(@Valid @RequestBody NinthStratagemGroup ninthStratagemGroup) throws URISyntaxException {
         log.debug("REST request to save NinthStratagemGroup : {}", ninthStratagemGroup);
         if (ninthStratagemGroup.getId() != null) {
             throw new BadRequestAlertException("A new ninthStratagemGroup cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class NinthStratagemGroupResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/ninth-stratagem-groups")
-    public ResponseEntity<NinthStratagemGroup> updateNinthStratagemGroup(@RequestBody NinthStratagemGroup ninthStratagemGroup) throws URISyntaxException {
+    public ResponseEntity<NinthStratagemGroup> updateNinthStratagemGroup(@Valid @RequestBody NinthStratagemGroup ninthStratagemGroup) throws URISyntaxException {
         log.debug("REST request to update NinthStratagemGroup : {}", ninthStratagemGroup);
         if (ninthStratagemGroup.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

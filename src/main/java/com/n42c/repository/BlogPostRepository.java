@@ -18,6 +18,10 @@ import java.util.Optional;
 @Repository
 public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
+    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories",
+        countQuery = "select count(distinct blogPost) from BlogPost blogPost")
+    Page<BlogPost> findAllWithEagerRelationships(Pageable pageable);
+
     @Query("select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories")
     List<BlogPost> findAllWithEagerRelationships();
 

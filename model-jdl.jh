@@ -80,7 +80,7 @@ entity BlogPost {
     /** This post's title. */
     title String required
     /** The date and time at which this post was published. */
-	published Instant required
+	published Instant
     /** The last date and time at which this post was modified. */
 	modified Instant required
 }

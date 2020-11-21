@@ -1,11 +1,11 @@
-id;user_name;displayed_name;admin;shop_rights;blog_rights;profile_rights;scriptorium_rights
-1;Officer Kuwait;Strategist integrated Small Frozen Fish;false;WRI;WRI;MOD;REA
-2;Wooden Knolls;6th generation SMTP incubate;false;MOD;MOD;REA;WRI
-3;Junction infomediaries redundant;Refined Tools silver;false;WRI;WRI;REA;MOD
-4;Bike Personal Loan Account;Baby Wyoming;false;REA;REA;REA;REA
-5;User-friendly Progressive parse;cross-platform Hawaii SDD;false;REA;MOD;REA;WRI
-6;red Generic Frozen Shirt;enable deposit;false;MOD;WRI;REA;REA
-7;Money Market Account;transmit navigate;false;REA;WRI;WRI;REA
-8;card fuchsia;Bedfordshire;false;WRI;REA;REA;MOD
-9;teal Chips Computer;generating;false;MOD;REA;WRI;WRI
-10;solution emulation;Avon;false;WRI;REA;REA;REA
+id;user_name;displayed_name;admin;shop_rights;blog_rights;profile_rights;scriptorium_rights;user_id
+1;Officer Kuwait;Strategist integrated Small Frozen Fish;false;WRI;WRI;MOD;REA;2
+2;Sleek;compress Refined Metal Shirt;true;WRI;MOD;MOD;MOD;2
+3;Junction infomediaries redundant;Refined Tools silver;false;WRI;WRI;REA;MOD;2
+4;Polarised;synergies Naira Manager;true;WRI;REA;WRI;MOD;2
+5;User-friendly Progressive parse;cross-platform Hawaii SDD;false;REA;MOD;REA;WRI;1
+6;Movies;Administrator 24/365;false;REA;REA;WRI;REA;2
+7;overriding;maximized knowledge user transmit;true;MOD;WRI;WRI;REA;2
+8;conglomeration HTTP Bedfordshire;Creative;true;REA;REA;MOD;MOD;1
+9;Maine Seamless Gloves;transmitting silver;true;WRI;WRI;MOD;WRI;1
+10;New Mexico orchid;transparent Granite;true;REA;WRI;REA;MOD;1

@@ -30,13 +30,18 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="n42cApp.player.appUser" for="field_appUser">App User</label>
           <select class="form-control" id="field_appUser" name="appUser" formControlName="appUser">
-            <option [ngValue]="null"></option>
+            <option *ngIf="!editForm.get('appUser')!.value" [ngValue]="null" selected></option>
             <option
               [ngValue]="appUserOption.id === editForm.get('appUser')!.value?.id ? editForm.get('appUser')!.value : appUserOption"
               *ngFor="let appUserOption of appusers; trackBy: trackById"
               >{{ appUserOption.displayedName }}</option
             >
           </select>
+        </div>
+        <div *ngIf="editForm.get('appUser')!.invalid && (editForm.get('appUser')!.dirty || editForm.get('appUser')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('appUser')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
         </div>
       </div>
 

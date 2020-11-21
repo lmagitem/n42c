@@ -43,6 +43,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "product",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "product",
       "otherEntityField": "name"
     }

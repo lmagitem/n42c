@@ -1,9 +1,9 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import {
   NinthStratagemGroupComponentsPage,
-  NinthStratagemGroupDeleteDialog,
+  /* NinthStratagemGroupDeleteDialog, */
   NinthStratagemGroupUpdatePage,
 } from './ninth-stratagem-group.page-object';
 
@@ -14,7 +14,7 @@ describe('NinthStratagemGroup e2e test', () => {
   let signInPage: SignInPage;
   let ninthStratagemGroupComponentsPage: NinthStratagemGroupComponentsPage;
   let ninthStratagemGroupUpdatePage: NinthStratagemGroupUpdatePage;
-  let ninthStratagemGroupDeleteDialog: NinthStratagemGroupDeleteDialog;
+  /* let ninthStratagemGroupDeleteDialog: NinthStratagemGroupDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -42,41 +42,41 @@ describe('NinthStratagemGroup e2e test', () => {
     await ninthStratagemGroupUpdatePage.cancel();
   });
 
-  it('should create and save NinthStratagemGroups', async () => {
-    const nbButtonsBeforeCreate = await ninthStratagemGroupComponentsPage.countDeleteButtons();
+  /* it('should create and save NinthStratagemGroups', async () => {
+        const nbButtonsBeforeCreate = await ninthStratagemGroupComponentsPage.countDeleteButtons();
 
-    await ninthStratagemGroupComponentsPage.clickOnCreateButton();
+        await ninthStratagemGroupComponentsPage.clickOnCreateButton();
 
-    await promise.all([ninthStratagemGroupUpdatePage.authorSelectLastOption()]);
+        await promise.all([
+            ninthStratagemGroupUpdatePage.authorSelectLastOption(),
+        ]);
 
-    const selectedShareable = ninthStratagemGroupUpdatePage.getShareableInput();
-    if (await selectedShareable.isSelected()) {
-      await ninthStratagemGroupUpdatePage.getShareableInput().click();
-      expect(await ninthStratagemGroupUpdatePage.getShareableInput().isSelected(), 'Expected shareable not to be selected').to.be.false;
-    } else {
-      await ninthStratagemGroupUpdatePage.getShareableInput().click();
-      expect(await ninthStratagemGroupUpdatePage.getShareableInput().isSelected(), 'Expected shareable to be selected').to.be.true;
-    }
+        const selectedShareable = ninthStratagemGroupUpdatePage.getShareableInput();
+        if (await selectedShareable.isSelected()) {
+            await ninthStratagemGroupUpdatePage.getShareableInput().click();
+            expect(await ninthStratagemGroupUpdatePage.getShareableInput().isSelected(), 'Expected shareable not to be selected').to.be.false;
+        } else {
+            await ninthStratagemGroupUpdatePage.getShareableInput().click();
+            expect(await ninthStratagemGroupUpdatePage.getShareableInput().isSelected(), 'Expected shareable to be selected').to.be.true;
+        }
 
-    await ninthStratagemGroupUpdatePage.save();
-    expect(await ninthStratagemGroupUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await ninthStratagemGroupUpdatePage.save();
+        expect(await ninthStratagemGroupUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await ninthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await ninthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last NinthStratagemGroup', async () => {
-    const nbButtonsBeforeDelete = await ninthStratagemGroupComponentsPage.countDeleteButtons();
-    await ninthStratagemGroupComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last NinthStratagemGroup', async () => {
+        const nbButtonsBeforeDelete = await ninthStratagemGroupComponentsPage.countDeleteButtons();
+        await ninthStratagemGroupComponentsPage.clickOnLastDeleteButton();
 
-    ninthStratagemGroupDeleteDialog = new NinthStratagemGroupDeleteDialog();
-    expect(await ninthStratagemGroupDeleteDialog.getDialogTitle()).to.eq('n42cApp.ninthStratagemGroup.delete.question');
-    await ninthStratagemGroupDeleteDialog.clickOnConfirmButton();
+        ninthStratagemGroupDeleteDialog = new NinthStratagemGroupDeleteDialog();
+        expect(await ninthStratagemGroupDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.ninthStratagemGroup.delete.question');
+        await ninthStratagemGroupDeleteDialog.clickOnConfirmButton();
 
-    expect(await ninthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await ninthStratagemGroupComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

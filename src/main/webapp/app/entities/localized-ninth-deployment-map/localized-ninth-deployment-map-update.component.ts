@@ -25,7 +25,7 @@ export class LocalizedNinthDeploymentMapUpdateComponent implements OnInit {
     name: [],
     description: [],
     language: [null, [Validators.required]],
-    deploymentMap: [],
+    deploymentMap: [null, Validators.required],
   });
 
   constructor(

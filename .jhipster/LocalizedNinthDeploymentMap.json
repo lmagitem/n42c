@@ -24,6 +24,7 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "ninthDeploymentMap",
       "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
       "relationshipName": "deploymentMap",
       "otherEntityField": "id"
     }

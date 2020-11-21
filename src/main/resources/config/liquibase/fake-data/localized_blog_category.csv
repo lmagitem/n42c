@@ -1,11 +1,11 @@
-id;name;language
-1;Virtual;GA
-2;Program Vision-oriented;KO
-3;Pizza Bedfordshire HDD;JA
-4;compelling RAM system engine;FI
-5;Eritrea Iran;PL
-6;Factors lavender;ZH
-7;value-added input Avon;EN
-8;relationships back-end;HU
-9;Liaison;FI
-10;invoice open-source Mississippi;EN
+id;name;language;category_id
+1;Virtual;GA;1
+2;Program Vision-oriented;KO;2
+3;Pizza Bedfordshire HDD;JA;3
+4;compelling RAM system engine;FI;4
+5;Eritrea Iran;PL;5
+6;Factors lavender;ZH;6
+7;value-added input Avon;EN;7
+8;relationships back-end;HU;8
+9;Liaison;FI;9
+10;invoice open-source Mississippi;EN;10

@@ -1,7 +1,11 @@
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec /* , promise */ } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { AppUserProfileComponentsPage, AppUserProfileDeleteDialog, AppUserProfileUpdatePage } from './app-user-profile.page-object';
+import {
+  AppUserProfileComponentsPage,
+  /* AppUserProfileDeleteDialog, */
+  AppUserProfileUpdatePage,
+} from './app-user-profile.page-object';
 
 const expect = chai.expect;
 
@@ -10,7 +14,7 @@ describe('AppUserProfile e2e test', () => {
   let signInPage: SignInPage;
   let appUserProfileComponentsPage: AppUserProfileComponentsPage;
   let appUserProfileUpdatePage: AppUserProfileUpdatePage;
-  let appUserProfileDeleteDialog: AppUserProfileDeleteDialog;
+  /* let appUserProfileDeleteDialog: AppUserProfileDeleteDialog; */
 
   before(async () => {
     await browser.get('/');
@@ -38,47 +42,42 @@ describe('AppUserProfile e2e test', () => {
     await appUserProfileUpdatePage.cancel();
   });
 
-  it('should create and save AppUserProfiles', async () => {
-    const nbButtonsBeforeCreate = await appUserProfileComponentsPage.countDeleteButtons();
+  /* it('should create and save AppUserProfiles', async () => {
+        const nbButtonsBeforeCreate = await appUserProfileComponentsPage.countDeleteButtons();
 
-    await appUserProfileComponentsPage.clickOnCreateButton();
+        await appUserProfileComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      appUserProfileUpdatePage.setNameInput('name'),
-      appUserProfileUpdatePage.setTitleInput('title'),
-      appUserProfileUpdatePage.setSummaryInput('summary'),
-      appUserProfileUpdatePage.setHeaderBackgroundURIInput('headerBackgroundURI'),
-      appUserProfileUpdatePage.languageSelectLastOption(),
-      appUserProfileUpdatePage.userSelectLastOption(),
-    ]);
+        await promise.all([
+            appUserProfileUpdatePage.setNameInput('name'),
+            appUserProfileUpdatePage.setTitleInput('title'),
+            appUserProfileUpdatePage.setSummaryInput('summary'),
+            appUserProfileUpdatePage.setHeaderBackgroundURIInput('headerBackgroundURI'),
+            appUserProfileUpdatePage.languageSelectLastOption(),
+            appUserProfileUpdatePage.userSelectLastOption(),
+        ]);
 
-    expect(await appUserProfileUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    expect(await appUserProfileUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
-    expect(await appUserProfileUpdatePage.getSummaryInput()).to.eq('summary', 'Expected Summary value to be equals to summary');
-    expect(await appUserProfileUpdatePage.getHeaderBackgroundURIInput()).to.eq(
-      'headerBackgroundURI',
-      'Expected HeaderBackgroundURI value to be equals to headerBackgroundURI'
-    );
+        expect(await appUserProfileUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
+        expect(await appUserProfileUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
+        expect(await appUserProfileUpdatePage.getSummaryInput()).to.eq('summary', 'Expected Summary value to be equals to summary');
+        expect(await appUserProfileUpdatePage.getHeaderBackgroundURIInput()).to.eq('headerBackgroundURI', 'Expected HeaderBackgroundURI value to be equals to headerBackgroundURI');
 
-    await appUserProfileUpdatePage.save();
-    expect(await appUserProfileUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+        await appUserProfileUpdatePage.save();
+        expect(await appUserProfileUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 
-    expect(await appUserProfileComponentsPage.countDeleteButtons()).to.eq(
-      nbButtonsBeforeCreate + 1,
-      'Expected one more entry in the table'
-    );
-  });
+        expect(await appUserProfileComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
+    }); */
 
-  it('should delete last AppUserProfile', async () => {
-    const nbButtonsBeforeDelete = await appUserProfileComponentsPage.countDeleteButtons();
-    await appUserProfileComponentsPage.clickOnLastDeleteButton();
+  /* it('should delete last AppUserProfile', async () => {
+        const nbButtonsBeforeDelete = await appUserProfileComponentsPage.countDeleteButtons();
+        await appUserProfileComponentsPage.clickOnLastDeleteButton();
 
-    appUserProfileDeleteDialog = new AppUserProfileDeleteDialog();
-    expect(await appUserProfileDeleteDialog.getDialogTitle()).to.eq('n42cApp.appUserProfile.delete.question');
-    await appUserProfileDeleteDialog.clickOnConfirmButton();
+        appUserProfileDeleteDialog = new AppUserProfileDeleteDialog();
+        expect(await appUserProfileDeleteDialog.getDialogTitle())
+            .to.eq('n42cApp.appUserProfile.delete.question');
+        await appUserProfileDeleteDialog.clickOnConfirmButton();
 
-    expect(await appUserProfileComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
+        expect(await appUserProfileComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

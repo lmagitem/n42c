@@ -45,7 +45,8 @@ public class Blog implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<LocalizedBlog> localizations = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "blogs", allowSetters = true)
     private AppUser author;
 
