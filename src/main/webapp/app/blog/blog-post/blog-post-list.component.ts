@@ -9,6 +9,8 @@ import { BlogPostDeleteDialogComponent } from './blog-post-delete-dialog.compone
 import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
 import { LocalizedPostContentService } from 'app/entities/localized-post-content/localized-post-content.service';
 import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/localization-utils';
+import { ActivatedRoute } from '@angular/router';
+import { IBlog } from 'app/shared/model/blog.model';
 
 @Component({
   selector: 'jhi-blog-post',
@@ -16,6 +18,7 @@ import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/local
 })
 export class BlogPostListComponent implements OnInit, OnDestroy {
   blogPosts: IBlogPost[];
+  blog: IBlog | null = null;
   eventSubscriber?: Subscription;
   itemsPerPage: number;
   links: any;
@@ -29,7 +32,8 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
-    protected languageService: JhiLanguageService
+    protected languageService: JhiLanguageService,
+    protected activatedRoute: ActivatedRoute
   ) {
     this.blogPosts = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -41,40 +45,63 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     this.ascending = true;
   }
 
-  loadAll(): void {
-    this.blogPostService
-      .query({
-        page: this.page,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe((res: HttpResponse<IBlogPost[]>) => {
-        this.paginateBlogPosts(
-          LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
-          res.headers
-        );
-        LocalizationUtils.refreshLocalizations(
-          this.blogPosts as IItemWithLocalizations[],
-          (ids: any[]) => this.localizedPostService.queryFor(ids),
-          'post'
-        );
-      });
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(({ blog }) => {
+      this.blog = blog;
+      this.loadAll(blog?.id || undefined);
+    });
+    this.registerChangeInBlogPosts();
+  }
+
+  loadAll(id: number | undefined): void {
+    if (id !== undefined && id !== null) {
+      this.blogPostService
+        .queryFor([id], {
+          page: this.page,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe((res: HttpResponse<IBlogPost[]>) => {
+          this.paginateBlogPosts(
+            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
+            res.headers
+          );
+          LocalizationUtils.refreshLocalizations(
+            this.blogPosts as IItemWithLocalizations[],
+            (ids: any[]) => this.localizedPostService.queryFor(ids),
+            'post'
+          );
+        });
+    } else {
+      this.blogPostService
+        .query({
+          page: this.page,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe((res: HttpResponse<IBlogPost[]>) => {
+          this.paginateBlogPosts(
+            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
+            res.headers
+          );
+          LocalizationUtils.refreshLocalizations(
+            this.blogPosts as IItemWithLocalizations[],
+            (ids: any[]) => this.localizedPostService.queryFor(ids),
+            'post'
+          );
+        });
+    }
   }
 
   reset(): void {
     this.page = 0;
     this.blogPosts = [];
-    this.loadAll();
+    this.loadAll(this.blog?.id || undefined);
   }
 
   loadPage(page: number): void {
     this.page = page;
-    this.loadAll();
-  }
-
-  ngOnInit(): void {
-    this.loadAll();
-    this.registerChangeInBlogPosts();
+    this.loadAll(this.blog?.id || undefined);
   }
 
   ngOnDestroy(): void {
@@ -83,8 +110,13 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getLocalizedExcerpt(item: IBlogPost): string {
-    return LocalizationUtils.getLocalizedField(item as IItemWithLocalizations, 'excerpt', this.languageService.getCurrentLanguage());
+  getLocalizedField(item: IBlogPost | IBlog | null, field: string, alternateField?: string): string {
+    return LocalizationUtils.getLocalizedField(
+      item as IItemWithLocalizations,
+      field,
+      alternateField,
+      this.languageService.getCurrentLanguage()
+    );
   }
 
   trackId(index: number, item: IBlogPost): number {

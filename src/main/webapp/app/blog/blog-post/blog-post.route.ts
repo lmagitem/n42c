@@ -10,13 +10,14 @@ import { BlogPostListComponent } from './blog-post-list.component';
 import { BlogPostComponent } from './blog-post.component';
 import { BlogPostUpdateComponent } from './blog-post-update.component';
 import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
+import { BlogResolve } from '../blog.route';
 
 @Injectable({ providedIn: 'root' })
 export class BlogPostResolve implements Resolve<IBlogPost> {
   constructor(private service: BlogPostService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<IBlogPost> | Observable<never> {
-    const id = route.params['id'];
+    const id = route.params['idPost'];
     if (id) {
       return this.service.find(id).pipe(
         flatMap((blogPost: HttpResponse<BlogPost>) => {
@@ -36,6 +37,9 @@ export class BlogPostResolve implements Resolve<IBlogPost> {
 export const blogPostRoute: Routes = [
   {
     path: '',
+    resolve: {
+      blog: BlogResolve,
+    },
     component: BlogPostListComponent,
     data: {
       authorities: [Authority.USER],
@@ -44,7 +48,7 @@ export const blogPostRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/view',
+    path: ':idPost',
     component: BlogPostComponent,
     resolve: {
       blogPost: BlogPostResolve,
@@ -67,7 +71,7 @@ export const blogPostRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id/edit',
+    path: ':idPost/edit',
     component: BlogPostUpdateComponent,
     resolve: {
       blogPost: BlogPostResolve,

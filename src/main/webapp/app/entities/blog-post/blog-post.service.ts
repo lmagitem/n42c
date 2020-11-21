@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IBlogPost } from 'app/shared/model/blog-post.model';
@@ -41,6 +40,15 @@ export class BlogPostService {
     const options = createRequestOption(req);
     return this.http
       .get<IBlogPost[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  queryFor(ids: any[], req?: any): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IBlogPost[]>(this.resourceUrl + '/for', {
+        params: (req !== undefined && req !== null ? createRequestOption(req) : new HttpParams()).append('ids', ids.join(', ')),
+        observe: 'response',
+      })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

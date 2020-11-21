@@ -106,7 +106,7 @@ public class LocalizedPostContentResource {
      * {@code GET  /localized-post-contents/for} : get localizations for the Blog Posts which ids are given in parameter.
      *
      * @param ids the ids of the Blog Posts for which to return localizations.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogPosts in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of localizedPostContents in body.
      */
     @GetMapping("/localized-post-contents/for")
     public List<LocalizedPostContent> getLocalizedPostContentsFor(@RequestParam() List<Long> ids) {

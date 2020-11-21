@@ -39,4 +39,19 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
     @Query(value = "select distinct blogPost from BlogPost blogPost where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'",
         countQuery = "select count(distinct blogPost) from BlogPost blogPost where blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD'")
     Page<BlogPost> findByIsWriter(Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIds(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.user.id = ?#{principal.name} " +
+        "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIdsAndIsCurrentOidcUserOrWriter(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.user.id = ?#{principal.username} " +
+        "or blogPost.blog.author.blogRights = 'WRI' or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIdsAndIsCurrentSpringUserOrWriter(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.blogRights = 'WRI' " +
+        "or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
+    Page<BlogPost> findByBlogIdsAndIsWriter(@Param("ids") List<Long> ids, Pageable pageable);
 }

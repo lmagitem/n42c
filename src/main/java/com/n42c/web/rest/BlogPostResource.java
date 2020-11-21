@@ -1,6 +1,7 @@
 package com.n42c.web.rest;
 
 import com.n42c.domain.BlogPost;
+import com.n42c.domain.LocalizedPostContent;
 import com.n42c.repository.BlogPostRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
@@ -134,6 +135,51 @@ public class BlogPostResource {
         }
         log.debug("REST request to get all Blog Posts - as Anonymous");
         return blogPostRepository.findByIsWriter(pageable);
+    }
+
+    /**
+     * {@code GET  /blog-posts/for} : get posts for the blogs which ids are given in parameter.
+     *
+     * @param ids the ids of the blogs for which to return posts.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of blogPosts in body.
+     */
+    @GetMapping("/blog-posts/for")
+    public ResponseEntity<List<BlogPost>> getBlogPostsFor(@RequestParam() List<Long> ids, Pageable pageable) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null)
+            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, null, pageable));
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null)
+            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, null, pageable));
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        if (authorities == null)
+            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable));
+
+        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            log.debug("REST request to get posts for given Blog ids - as Admin");
+            return RestServiceUtils.returnPagedListWithHeaders(blogPostRepository.findByBlogIds(ids, pageable));
+        } else {
+            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable));
+        }
+    }
+
+    /**
+     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<BlogPost> getAllowedBlogPosts(List<Long> ids, Object principal, Pageable pageable) {
+        if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get posts for given Blog ids - as User (with UserDetails)");
+                return blogPostRepository.findByBlogIdsAndIsCurrentSpringUserOrWriter(ids, pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get posts for given Blog ids - as User (with Oidc token)");
+                return blogPostRepository.findByBlogIdsAndIsCurrentOidcUserOrWriter(ids, pageable);
+            }
+        }
+        log.debug("REST request to get posts for given Blog ids - as Anonymous");
+        return blogPostRepository.findByBlogIdsAndIsWriter(ids, pageable);
     }
 
     /**

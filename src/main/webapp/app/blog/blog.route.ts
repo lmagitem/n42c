@@ -9,6 +9,7 @@ import { IBlog, Blog } from 'app/shared/model/blog.model';
 import { BlogListComponent } from './blog-list.component';
 import { BlogComponent } from './blog.component';
 import { BlogService } from 'app/entities/blog/blog.service';
+import { BlogPostListComponent } from './blog-post/blog-post-list.component';
 
 @Injectable({ providedIn: 'root' })
 export class BlogResolve implements Resolve<IBlog> {
@@ -34,7 +35,16 @@ export class BlogResolve implements Resolve<IBlog> {
 
 export const blogRoute: Routes = [
   {
-    path: '',
+    path: '', // Shows most recent entries from all authorized blogs
+    component: BlogPostListComponent,
+    data: {
+      defaultSort: 'id,asc',
+      pageTitle: 'n42cApp.blog.home.title',
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'list', // Shows the list of all blogs
     component: BlogListComponent,
     data: {
       defaultSort: 'id,asc',
@@ -43,16 +53,7 @@ export const blogRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: 'list',
-    component: BlogListComponent,
-    data: {
-      defaultSort: 'id,asc',
-      pageTitle: 'n42cApp.blog.home.title',
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: 'new',
+    path: 'new', // Create a new blog
     component: BlogComponent,
     resolve: {
       blog: BlogResolve,
@@ -64,7 +65,17 @@ export const blogRoute: Routes = [
     canActivate: [UserRouteAccessService],
   },
   {
-    path: ':id',
+    path: ':id', // Redirects to the post entries of that blog
+    redirectTo: '/blog/:id/post',
+    pathMatch: 'full',
+  },
+  {
+    path: ':id/post', // The post entries of that blog
+    canActivate: [UserRouteAccessService],
+    loadChildren: () => import('./blog-post/blog-post.module').then(m => m.BlogPostModule),
+  },
+  {
+    path: ':id/edit', // Edit an existing blog
     component: BlogComponent,
     resolve: {
       blog: BlogResolve,
@@ -73,10 +84,5 @@ export const blogRoute: Routes = [
       pageTitle: 'n42cApp.blog.home.title',
     },
     canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':id/post',
-    canActivate: [UserRouteAccessService],
-    loadChildren: () => import('./blog-post/blog-post.module').then(m => m.BlogPostModule),
   },
 ];

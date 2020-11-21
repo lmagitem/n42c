@@ -20,15 +20,17 @@ public interface LocalizedPostContentRepository extends JpaRepository<LocalizedP
     @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.id in :ids")
     List<LocalizedPostContent> findByBlogPostIds(@Param("ids") List<Long> ids);
 
-    @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.blog.author.user.id = ?#{principal.name} " +
-        "or localizedPost.post.blog.author.blogRights = 'WRI' or localizedPost.post.blog.author.blogRights = 'MOD'")
+    @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.id in :ids " +
+        "and (localizedPost.post.blog.author.user.id = ?#{principal.name} or localizedPost.post.blog.author.blogRights = 'WRI' " +
+        "or localizedPost.post.blog.author.blogRights = 'MOD')")
     List<LocalizedPostContent> findByBlogPostIdsAndIsCurrentOidcUserOrWriter(@Param("ids") List<Long> ids);
 
-    @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.blog.author.user.id = ?#{principal.username} " +
-        "or localizedPost.post.blog.author.blogRights = 'WRI' or localizedPost.post.blog.author.blogRights = 'MOD'")
+    @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.id in :ids " +
+        "and (localizedPost.post.blog.author.user.id = ?#{principal.username} or localizedPost.post.blog.author.blogRights = 'WRI' " +
+        "or localizedPost.post.blog.author.blogRights = 'MOD')")
     List<LocalizedPostContent> findByBlogPostIdsAndIsCurrentSpringUserOrWriter(@Param("ids") List<Long> ids);
 
-    @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.blog.author.blogRights = 'WRI' " +
-        "or localizedPost.post.blog.author.blogRights = 'MOD'")
+    @Query("select localizedPost from LocalizedPostContent localizedPost where localizedPost.post.id in :ids " +
+        "and (localizedPost.post.blog.author.blogRights = 'WRI' or localizedPost.post.blog.author.blogRights = 'MOD')")
     List<LocalizedPostContent> findByBlogPostIdsAndIsWriter(@Param("ids") List<Long> ids);
 }

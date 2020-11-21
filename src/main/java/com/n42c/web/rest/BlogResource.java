@@ -1,6 +1,7 @@
 package com.n42c.web.rest;
 
 import com.n42c.domain.Blog;
+import com.n42c.domain.LocalizedPostContent;
 import com.n42c.repository.BlogRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
