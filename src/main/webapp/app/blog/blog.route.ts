@@ -38,7 +38,6 @@ export const blogRoute: Routes = [
     path: '', // Shows most recent entries from all authorized blogs
     component: BlogPostListComponent,
     data: {
-      defaultSort: 'id,asc',
       pageTitle: 'n42cApp.blog.home.title',
     },
     canActivate: [UserRouteAccessService],

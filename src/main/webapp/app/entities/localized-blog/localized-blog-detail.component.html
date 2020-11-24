@@ -23,7 +23,7 @@
         <dt><span jhiTranslate="n42cApp.localizedBlog.blog">Blog</span></dt>
         <dd>
           <div *ngIf="localizedBlog.blog">
-            <a [routerLink]="['/blog', localizedBlog.blog?.id, 'view']">{{ localizedBlog.blog?.name }}</a>
+            <a [routerLink]="['/entities', 'blog', localizedBlog.blog?.id, 'view']">{{ localizedBlog.blog?.name }}</a>
           </div>
         </dd>
       </dl>
@@ -32,7 +32,7 @@
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button type="button" [routerLink]="['/localized-blog', localizedBlog.id, 'edit']" class="btn btn-primary">
+      <button type="button" [routerLink]="['/entities', 'localized-blog', localizedBlog.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>

@@ -41,8 +41,8 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     this.links = {
       last: 0,
     };
-    this.predicate = 'id';
-    this.ascending = true;
+    this.predicate = 'published';
+    this.ascending = false;
   }
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
         })
         .subscribe((res: HttpResponse<IBlogPost[]>) => {
           this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
+            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
             res.headers
           );
           LocalizationUtils.refreshLocalizations(

@@ -67,6 +67,10 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./blog/blog.module').then(m => m.N42CBlogModule),
       },
       {
+        path: 'localized-blog',
+        loadChildren: () => import('./localized-blog/localized-blog.module').then(m => m.N42CLocalizedBlogModule),
+      },
+      {
         path: 'localized-post-content',
         loadChildren: () => import('./localized-post-content/localized-post-content.module').then(m => m.N42CLocalizedPostContentModule),
       },
