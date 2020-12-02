@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { INinthUnitMoment } from 'app/shared/model/ninth-unit-moment.model';
@@ -15,12 +15,16 @@ import { NinthUnitMomentDeleteDialogComponent } from './ninth-unit-moment-delete
 export class NinthUnitMomentComponent implements OnInit, OnDestroy {
   ninthUnitMoments?: INinthUnitMoment[];
   eventSubscriber?: Subscription;
+  locale: string;
 
   constructor(
     protected ninthUnitMomentService: NinthUnitMomentService,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
-  ) {}
+    protected modalService: NgbModal,
+    protected languageService: JhiLanguageService
+  ) {
+    this.locale = this.languageService.getCurrentLanguage();
+  }
 
   loadAll(): void {
     this.ninthUnitMomentService.query().subscribe((res: HttpResponse<INinthUnitMoment[]>) => (this.ninthUnitMoments = res.body || []));

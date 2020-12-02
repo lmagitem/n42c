@@ -44,8 +44,8 @@
             <a [routerLink]="['/entities', 'blog-post', blogPost.id, 'view']">{{ blogPost.id }}</a>
           </td>
           <td>{{ blogPost.title }}</td>
-          <td>{{ blogPost.published | date: 'medium' }}</td>
-          <td>{{ blogPost.modified | date: 'medium' }}</td>
+          <td>{{ blogPost.published | date: 'medium':undefined:locale }}</td>
+          <td>{{ blogPost.modified | date: 'medium':undefined:locale }}</td>
           <td>
             <div *ngIf="blogPost.blog">
               <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.name }}</a>

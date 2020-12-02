@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { INinthArmyUnitMoment } from 'app/shared/model/ninth-army-unit-moment.model';
 import { NinthArmyUnitMomentService } from './ninth-army-unit-moment.service';
 import { NinthArmyUnitMomentDeleteDialogComponent } from './ninth-army-unit-moment-delete-dialog.component';
@@ -15,12 +14,16 @@ import { NinthArmyUnitMomentDeleteDialogComponent } from './ninth-army-unit-mome
 export class NinthArmyUnitMomentComponent implements OnInit, OnDestroy {
   ninthArmyUnitMoments?: INinthArmyUnitMoment[];
   eventSubscriber?: Subscription;
+  locale: string;
 
   constructor(
     protected ninthArmyUnitMomentService: NinthArmyUnitMomentService,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
-  ) {}
+    protected modalService: NgbModal,
+    protected languageService: JhiLanguageService
+  ) {
+    this.locale = this.languageService.getCurrentLanguage();
+  }
 
   loadAll(): void {
     this.ninthArmyUnitMomentService

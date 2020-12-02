@@ -44,7 +44,7 @@
           </td>
           <td>{{ profilePartLinkedExperience.title }}</td>
           <td>{{ profilePartLinkedExperience.subTitle }}</td>
-          <td>{{ profilePartLinkedExperience.date | date: 'medium' }}</td>
+          <td>{{ profilePartLinkedExperience.date | date: 'medium':undefined:locale }}</td>
           <td>{{ profilePartLinkedExperience.content }}</td>
           <td>
             <div *ngIf="profilePartLinkedExperience.linkedItem">

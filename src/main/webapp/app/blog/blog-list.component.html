@@ -35,7 +35,7 @@
           <td>
             <a [routerLink]="['/blog', blog.id, 'post']">{{ blog.id }}</a>
           </td>
-          <td>{{ blog.name }}</td>
+          <td>{{ getLocalizedField(blog, 'name') }}</td>
           <td>
             <div *ngIf="blog.author">
               <a [routerLink]="['/entities', 'app-user', blog.author?.id, 'view']">{{ blog.author?.displayedName }}</a>

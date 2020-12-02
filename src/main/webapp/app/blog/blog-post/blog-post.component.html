@@ -1,48 +1,31 @@
 <div class="row justify-content-center">
   <div class="col-12">
-    <div *ngIf="blogPost">
-      <h2><span jhiTranslate="n42cApp.blogPost.detail.title">Blog Post</span>{{ blogPost.title }}</h2>
+    <article *ngIf="blogPost">
+      <h1>{{ blogPost.title }}</h1>
 
       <hr />
 
       <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="n42cApp.blogPost.title" [ngbTooltip]="'n42cApp.blogPost.help.title' | translate">Title</span></dt>
-        <dd>
-          <span>{{ blogPost.title }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="n42cApp.blogPost.published" [ngbTooltip]="'n42cApp.blogPost.help.published' | translate">Published</span>
-        </dt>
-        <dd>
-          <span>{{ blogPost.published }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.blogPost.modified" [ngbTooltip]="'n42cApp.blogPost.help.modified' | translate">Modified</span></dt>
-        <dd>
-          <span>{{ blogPost.modified }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.blogPost.authors">Authors</span></dt>
-        <dd>
-          <span *ngFor="let authors of blogPost.authors; let last = last">
-            <a [routerLink]="['/entities', 'app-user', authors?.id, 'view']">{{ authors.displayedName }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.blogPost.categories">Categories</span></dt>
-        <dd>
-          <span *ngFor="let categories of blogPost.categories; let last = last">
-            <a [routerLink]="['/entities', 'blog-category', categories?.id, 'view']">{{ categories.name }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.blogPost.blog">Blog</span></dt>
-        <dd>
-          <div *ngIf="blogPost.blog">
-            <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.name }}</a>
-          </div>
-        </dd>
-      </dl>
+      <small
+        >Posted in <a [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ getLocalizedField(blogPost.blog, 'name') }}</a
+        >, {{ blogPost.published | date: 'medium':undefined:locale }} by {{ arrayToString(blogPost.authors, 'displayedName') }}. Last
+        modification: {{ blogPost.modified | date: 'medium':undefined:locale }}</small
+      >
+
+      <small
+        ><span jhiTranslate="n42cApp.blogPost.categories">Categories</span>
+        <span *ngFor="let categories of blogPost.categories; let last = last">
+          <a [routerLink]="['/entities', 'blog-category', categories?.id, 'view']">{{ categories.name }}</a
+          >{{ last ? '' : ', ' }}
+        </span>
+      </small>
+
+      <hr />
+
+      <div [innerHTML]="getLocalizedField(blogPost, 'content')"></div>
+
+      <hr />
 
       <button type="submit" (click)="previousState()" class="btn btn-info">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
@@ -51,6 +34,6 @@
       <button type="button" [routerLink]="['/entities', 'blog-post', blogPost.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
-    </div>
+    </article>
   </div>
 </div>

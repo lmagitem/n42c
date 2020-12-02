@@ -60,21 +60,27 @@ public class BlogPost implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "blog_post_authors",
-               joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
     private Set<AppUser> authors = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "blog_post_categories",
-               joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<BlogCategory> categories = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private Blog blog;
+
+    public BlogPost() {}
+
+    public BlogPost(Long id) {
+        this.id = id;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {

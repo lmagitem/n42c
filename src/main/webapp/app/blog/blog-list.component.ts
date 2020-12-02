@@ -2,12 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IBlog } from 'app/shared/model/blog.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { BlogDeleteDialogComponent } from './blog-delete-dialog.component';
 import { BlogService } from 'app/entities/blog/blog.service';
+import { LocalizationUtils, IItemWithLocalizations } from 'app/shared/util/localization-utils';
+import { LocalizedBlogService } from 'app/entities/localized-blog/localized-blog.service';
 
 @Component({
   selector: 'jhi-blog',
@@ -25,9 +27,11 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   constructor(
     protected blogService: BlogService,
+    protected localizedBlogService: LocalizedBlogService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
+    protected languageService: JhiLanguageService,
     protected modalService: NgbModal
   ) {}
 
@@ -72,6 +76,15 @@ export class BlogListComponent implements OnInit, OnDestroy {
     }
   }
 
+  getLocalizedField(item: IBlog | null, field: string, alternateField?: string): string {
+    return LocalizationUtils.getLocalizedField(
+      item as IItemWithLocalizations,
+      field,
+      alternateField,
+      this.languageService.getCurrentLanguage()
+    );
+  }
+
   trackId(index: number, item: IBlog): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
@@ -106,8 +119,14 @@ export class BlogListComponent implements OnInit, OnDestroy {
         },
       });
     }
-    this.blogs = data || [];
+    this.blogs = LocalizationUtils.withPlaceholderLocalizations(data as IItemWithLocalizations[], ['name']) || [];
     this.ngbPaginationPage = this.page;
+
+    LocalizationUtils.refreshLocalizations(
+      this.blogs as IItemWithLocalizations[],
+      (ids: any[]) => this.localizedBlogService.queryFor(ids),
+      'blog'
+    );
   }
 
   protected onError(): void {

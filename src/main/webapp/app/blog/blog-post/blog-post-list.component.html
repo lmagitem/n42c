@@ -24,13 +24,13 @@
 
   <div class="table-responsive" *ngIf="blogPosts && blogPosts.length > 0">
     <div infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-      <div *ngFor="let blogPost of blogPosts; trackBy: trackId">
+      <article *ngFor="let blogPost of blogPosts; trackBy: trackId">
         <a [routerLink]="['/blog', blogPost.blog?.id, 'post', blogPost.id]">
           <h2>{{ getLocalizedField(blogPost, 'title') }}</h2>
         </a>
         <small
-          >Posted in <a [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ blogPost.blog?.name }}</a
-          >, {{ blogPost.published | date: 'medium' }} by {{ blogPost.blog?.author?.displayedName }}</small
+          >Posted in <a [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ getLocalizedField(blogPost.blog, 'name') }}</a
+          >, {{ blogPost.published | date: 'medium':undefined:locale }} by {{ arrayToString(blogPost.authors, 'displayedName') }}.</small
         >
         <div [innerHTML]="getLocalizedField(blogPost, 'excerpt', 'content')"></div>
         <div class="btn-group mb-2 mt-1">
@@ -43,7 +43,7 @@
             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
           </button>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 

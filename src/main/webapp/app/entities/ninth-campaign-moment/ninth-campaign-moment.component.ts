@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiDataUtils, JhiLanguageService } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
 import { NinthCampaignMomentService } from './ninth-campaign-moment.service';
 import { NinthCampaignMomentDeleteDialogComponent } from './ninth-campaign-moment-delete-dialog.component';
@@ -15,13 +14,17 @@ import { NinthCampaignMomentDeleteDialogComponent } from './ninth-campaign-momen
 export class NinthCampaignMomentComponent implements OnInit, OnDestroy {
   ninthCampaignMoments?: INinthCampaignMoment[];
   eventSubscriber?: Subscription;
+  locale: string;
 
   constructor(
     protected ninthCampaignMomentService: NinthCampaignMomentService,
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
-  ) {}
+    protected modalService: NgbModal,
+    protected languageService: JhiLanguageService
+  ) {
+    this.locale = this.languageService.getCurrentLanguage();
+  }
 
   loadAll(): void {
     this.ninthCampaignMomentService

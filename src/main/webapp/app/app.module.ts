@@ -13,6 +13,31 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import localeEs from '@angular/common/locales/es';
+import localeDe from '@angular/common/locales/de';
+import localeRu from '@angular/common/locales/ru';
+import localeJa from '@angular/common/locales/ja';
+import localeEl from '@angular/common/locales/el';
+import localeKo from '@angular/common/locales/ko';
+import localeZh from '@angular/common/locales/zh';
+import localeAr from '@angular/common/locales/ar';
+import localeSv from '@angular/common/locales/sv';
+import localePl from '@angular/common/locales/pl';
+
+// To enable locale usage
+registerLocaleData(localeFr, 'fr');
+registerLocaleData(localeEs, 'es');
+registerLocaleData(localeDe, 'de');
+registerLocaleData(localeRu, 'ru');
+registerLocaleData(localeJa, 'ja');
+registerLocaleData(localeEl, 'el');
+registerLocaleData(localeKo, 'ko');
+registerLocaleData(localeZh, 'zh');
+registerLocaleData(localeAr, 'ar');
+registerLocaleData(localeSv, 'sv');
+registerLocaleData(localePl, 'pl');
 
 @NgModule({
   imports: [

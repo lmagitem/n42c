@@ -51,6 +51,15 @@ public class LocalizedBlog implements Serializable {
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
     private Blog blog;
 
+    public LocalizedBlog() {}
+
+    public LocalizedBlog(Long id, @NotNull String name, @NotNull Language language, @NotNull Blog blog) {
+        this.id = id;
+        this.name = name;
+        this.language = language;
+        this.blog = blog;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

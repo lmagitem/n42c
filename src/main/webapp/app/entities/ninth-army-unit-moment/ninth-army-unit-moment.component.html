@@ -56,7 +56,7 @@
             <a [routerLink]="['/entities', 'ninth-army-unit-moment', ninthArmyUnitMoment.id, 'view']">{{ ninthArmyUnitMoment.id }}</a>
           </td>
           <td>{{ ninthArmyUnitMoment.current }}</td>
-          <td>{{ ninthArmyUnitMoment.sinceInstant | date: 'medium' }}</td>
+          <td>{{ ninthArmyUnitMoment.sinceInstant | date: 'medium':undefined:locale }}</td>
           <td>{{ ninthArmyUnitMoment.pointsCost }}</td>
           <td>{{ ninthArmyUnitMoment.powerRating }}</td>
           <td>{{ ninthArmyUnitMoment.experiencePoints }}</td>

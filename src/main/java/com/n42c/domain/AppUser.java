@@ -11,9 +11,11 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.n42c.domain.enumeration.AppUserRights;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * AppUsers of the app.
@@ -141,6 +143,14 @@ public class AppUser implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnore
     private Set<BlogPost> posts = new HashSet<>();
+
+    public AppUser() {
+    }
+
+    public AppUser(Long id, String displayedName) {
+        this.id = id;
+        this.displayedName = displayedName;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -468,6 +478,21 @@ public class AppUser implements Serializable {
         this.posts = blogPosts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    /**
+     * Removes sensitive informations from the instance.
+     */
+    public void clearSensitiveInfos(EntityManager entityManager) {
+        if (entityManager != null) {
+            entityManager.detach(this);
+            this.setUser(new User());
+            this.setAskedFriendRequests(new LinkedHashSet<>());
+            this.setGivenFriendships(new LinkedHashSet<>());
+            this.setBlogs(new LinkedHashSet<>());
+            this.setProfiles(new LinkedHashSet<>());
+            this.setProducts(new LinkedHashSet<>());
+        }
+    }
 
     @Override
     public boolean equals(Object o) {

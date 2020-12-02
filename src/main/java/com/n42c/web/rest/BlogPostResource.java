@@ -1,22 +1,24 @@
 package com.n42c.web.rest;
 
-import com.n42c.domain.BlogPost;
-import com.n42c.domain.LocalizedPostContent;
+import com.n42c.domain.*;
+import com.n42c.repository.AppUserRepository;
 import com.n42c.repository.BlogPostRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
 import com.n42c.web.rest.utils.RestServiceUtils;
+import com.nimbusds.oauth2.sdk.util.CollectionUtils;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,12 +26,13 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing {@link com.n42c.domain.BlogPost}.
@@ -45,6 +48,9 @@ public class BlogPostResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
+    @Autowired
+    private EntityManager entityManager;
 
     private final BlogPostRepository blogPostRepository;
 
@@ -100,41 +106,19 @@ public class BlogPostResource {
      */
     @GetMapping("/blog-posts")
     public ResponseEntity<List<BlogPost>> getAllBlogPosts(Pageable pageable) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        if (context == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, null));
+        Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
+        Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
-        Authentication authentication = context.getAuthentication();
-        if (authentication == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, null));
-
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        if (authorities == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
-
-        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            log.debug("REST request to get all Blogs - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(blogPostRepository.findAll(pageable));
+        if (authentication == null) {
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getPostsByCurrentUserOrWriter(pageable, null)));
+        } else if (authorities == null) {
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal())));
+        } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            log.debug("REST request to get all Blog Posts - as Admin");
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(blogPostRepository.findAll(pageable)));
         } else {
-            return RestServiceUtils.returnPagedListWithHeaders(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal())));
         }
-    }
-
-    /**
-     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
-     */
-    private Page<BlogPost> getPostsByCurrentUserOrWriter(Pageable pageable, Object principal) {
-        if (principal != null) {
-            if (principal instanceof UserDetails) {
-                log.debug("REST request to get all Blog Posts - as User (with UserDetails)");
-                return blogPostRepository.findByIsCurrentSpringUserOrWriter(pageable);
-            } else if (principal instanceof DefaultOidcUser) {
-                log.debug("REST request to get all Blog Posts - as User (with Oidc token)");
-                return blogPostRepository.findByIsCurrentOidcUserOrWriter(pageable);
-            }
-        }
-        log.debug("REST request to get all Blog Posts - as Anonymous");
-        return blogPostRepository.findByIsWriter(pageable);
     }
 
     /**
@@ -145,41 +129,19 @@ public class BlogPostResource {
      */
     @GetMapping("/blog-posts/for")
     public ResponseEntity<List<BlogPost>> getBlogPostsFor(@RequestParam() List<Long> ids, Pageable pageable) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        if (context == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, null, pageable));
+        Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
+        Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
-        Authentication authentication = context.getAuthentication();
-        if (authentication == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, null, pageable));
-
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        if (authorities == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable));
-
-        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            log.debug("REST request to get posts for given Blog ids - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(blogPostRepository.findByBlogIds(ids, pageable));
+        if (authentication == null) {
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getAllowedBlogPosts(ids, null, pageable)));
+        } else if (authorities == null) {
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable)));
+        } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) && CollectionUtils.isNotEmpty(ids)) {
+            log.debug("REST request to get Posts for given Blog ids - as Admin");
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(blogPostRepository.findByBlogIds(ids, pageable)));
         } else {
-            return RestServiceUtils.returnPagedListWithHeaders(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable)));
         }
-    }
-
-    /**
-     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
-     */
-    private Page<BlogPost> getAllowedBlogPosts(List<Long> ids, Object principal, Pageable pageable) {
-        if (principal != null) {
-            if (principal instanceof UserDetails) {
-                log.debug("REST request to get posts for given Blog ids - as User (with UserDetails)");
-                return blogPostRepository.findByBlogIdsAndIsCurrentSpringUserOrWriter(ids, pageable);
-            } else if (principal instanceof DefaultOidcUser) {
-                log.debug("REST request to get posts for given Blog ids - as User (with Oidc token)");
-                return blogPostRepository.findByBlogIdsAndIsCurrentOidcUserOrWriter(ids, pageable);
-            }
-        }
-        log.debug("REST request to get posts for given Blog ids - as Anonymous");
-        return blogPostRepository.findByBlogIdsAndIsWriter(ids, pageable);
     }
 
     /**
@@ -206,5 +168,101 @@ public class BlogPostResource {
         log.debug("REST request to delete BlogPost : {}", id);
         blogPostRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<BlogPost> getPostsByCurrentUserOrWriter(Pageable pageable, Object principal) {
+        if (pageable == null) {
+            return null;
+        } else if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get all Blog Posts - as User (with UserDetails)");
+                return blogPostRepository.findByIsCurrentSpringUserOrWriter(pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get all Blog Posts - as User (with Oidc token)");
+                return blogPostRepository.findByIsCurrentOidcUserOrWriter(pageable);
+            }
+        }
+        log.debug("REST request to get all Blog Posts - as Anonymous");
+        return blogPostRepository.findByIsWriter(pageable);
+    }
+
+    /**
+     * Gets all blog posts belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<BlogPost> getAllowedBlogPosts(List<Long> ids, Object principal, Pageable pageable) {
+        if (CollectionUtils.isEmpty(ids) || pageable == null) {
+            return null;
+        } else if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get Posts for given Blog ids - as User (with UserDetails)");
+                return blogPostRepository.findByBlogIdsAndIsCurrentSpringUserOrWriter(ids, pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get Posts for given Blog ids - as User (with Oidc token)");
+                return blogPostRepository.findByBlogIdsAndIsCurrentOidcUserOrWriter(ids, pageable);
+            }
+        }
+        log.debug("REST request to get Posts for given Blog ids - as Anonymous");
+        return blogPostRepository.findByBlogIdsAndIsWriter(ids, pageable);
+    }
+
+    /**
+     * @return The given paged result, enriched by adding the necessary infos (and nothing more) about the blog posts authors.
+     */
+    private Page<BlogPost> addAuthorNamesToPosts(Page<BlogPost> page) {
+        if (page == null)
+            return null;
+
+        List<Long> postsIds = new LinkedList<>();
+        List<BlogPost> posts = page.getContent();
+        posts.forEach(post -> postsIds.add(post.getId()));
+
+        if (CollectionUtils.isEmpty(postsIds))
+            return page;
+
+        // Get a list of pairings between post ids and id + name of their authors, enrich the page with it
+        log.debug("Adding the necessary AppUser infos to the result");
+        List<AuthorToPostLinkView> authorsByPost = blogPostRepository.findPairingsBetweenBlogPostIdsAndLightweightAppUsers(postsIds);
+
+        log.debug(String.valueOf(postsIds));
+        log.debug("authorsByPost");
+        authorsByPost.forEach(pair -> {
+                log.debug(String.valueOf(pair.getPostId()) + " - " + pair.getAppUserId() + " - " + pair.getAppUserDisplayedName());
+            }
+        );
+
+        posts.forEach(
+            post -> {
+                // Remove unnecessary infos about the blog author as well
+                Blog blog = post.getBlog();
+                if (blog.getAuthor() != null) {
+                    blog.setAuthor(new AppUser(blog.getAuthor().getId(), blog.getAuthor().getDisplayedName()));
+                }
+                post.setBlog(blog);
+
+                // Put in the users infos
+                authorsByPost.forEach(pair -> {
+                        if (post.getId().equals(pair.getPostId())) {
+                            if (post.getAuthors() == null)
+                                post.setAuthors(new HashSet<>());
+                            post.getAuthors().add(new AppUser(pair.getAppUserId(), pair.getAppUserDisplayedName()));
+                        }
+                    }
+                );
+
+                // And clear the unwanted infos in case they were filled in cache
+                post.getAuthors().forEach(appUser -> appUser.clearSensitiveInfos(entityManager));
+            }
+        );
+
+        log.debug("posts");
+        posts.forEach(post -> {
+                post.getAuthors().forEach(author -> log.debug(author.toString()));
+            }
+        );
+
+        return page;
     }
 }

@@ -1,21 +1,37 @@
 package com.n42c.web.rest;
 
+import com.n42c.domain.AppUser;
+import com.n42c.domain.Blog;
 import com.n42c.domain.LocalizedBlog;
+import com.n42c.domain.LocalizedPostContent;
 import com.n42c.repository.LocalizedBlogRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
+import com.n42c.web.rest.utils.RestServiceUtils;
+import com.nimbusds.oauth2.sdk.util.CollectionUtils;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +104,30 @@ public class LocalizedBlogResource {
     @GetMapping("/localized-blogs")
     public List<LocalizedBlog> getAllLocalizedBlogs() {
         log.debug("REST request to get all LocalizedBlogs");
-        return localizedBlogRepository.findAll();
+        return restrictSentUserData(localizedBlogRepository.findAll());
+    }
+
+    /**
+     * {@code GET  /localized-blogs/for} : get localizations for the Blogs which ids are given in parameter.
+     *
+     * @param ids the ids of the Blogs for which to return localizations.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of localizedPostContents in body.
+     */
+    @GetMapping("/localized-blogs/for")
+    public List<LocalizedBlog> getLocalizedPostContentsFor(@RequestParam() List<Long> ids) {
+        Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
+        Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
+
+        if (authentication == null) {
+            return restrictSentUserData(getAllowedLocalizedPosts(ids, null));
+        } else if (authorities == null) {
+            return restrictSentUserData(getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
+        } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) && CollectionUtils.isNotEmpty(ids)) {
+            log.debug("REST request to get localizations for given Blog ids - as Admin");
+            return restrictSentUserData(localizedBlogRepository.findByBlogIds(ids));
+        } else {
+            return restrictSentUserData(getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
+        }
     }
 
     /**
@@ -115,5 +154,40 @@ public class LocalizedBlogResource {
         log.debug("REST request to delete LocalizedBlog : {}", id);
         localizedBlogRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * Gets all localized blogs belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private List<LocalizedBlog> getAllowedLocalizedPosts(List<Long> ids, Object principal) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return new LinkedList<>();
+        } else if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get localizations for given Blog ids - as User (with UserDetails)");
+                return localizedBlogRepository.findByBlogIdsAndIsCurrentSpringUserOrWriter(ids);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get localizations for given Blog ids - as User (with Oidc token)");
+                return localizedBlogRepository.findByBlogIdsAndIsCurrentOidcUserOrWriter(ids);
+            }
+        }
+        log.debug("REST request to get localizations for given Blog ids - as Anonymous");
+        return localizedBlogRepository.findByBlogIdsAndIsWriter(ids);
+    }
+
+    /**
+     * @return The given result trimmed of all non-necessary infos about the users.
+     */
+    private List<LocalizedBlog> restrictSentUserData(List<LocalizedBlog> localizations) {
+        if (CollectionUtils.isEmpty(localizations))
+            return new LinkedList<>();
+
+        localizations.forEach(localizedBlog -> {
+            if (localizedBlog.getBlog() != null) {
+                localizedBlog.setBlog(new Blog(localizedBlog.getBlog().getId()));
+            }
+        });
+
+        return localizations;
     }
 }

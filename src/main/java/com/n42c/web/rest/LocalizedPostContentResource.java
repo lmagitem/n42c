@@ -1,10 +1,14 @@
 package com.n42c.web.rest;
 
+import com.n42c.domain.Blog;
 import com.n42c.domain.BlogPost;
+import com.n42c.domain.LocalizedBlog;
 import com.n42c.domain.LocalizedPostContent;
 import com.n42c.repository.LocalizedPostContentRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
 
+import com.n42c.web.rest.utils.RestServiceUtils;
+import com.nimbusds.oauth2.sdk.util.CollectionUtils;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,6 +31,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,7 +104,7 @@ public class LocalizedPostContentResource {
     @GetMapping("/localized-post-contents")
     public List<LocalizedPostContent> getAllLocalizedPostContents() {
         log.debug("REST request to get all LocalizedPostContents");
-        return localizedPostContentRepository.findAll();
+        return restrictSentUserData(localizedPostContentRepository.findAll());
     }
 
     /**
@@ -110,41 +115,19 @@ public class LocalizedPostContentResource {
      */
     @GetMapping("/localized-post-contents/for")
     public List<LocalizedPostContent> getLocalizedPostContentsFor(@RequestParam() List<Long> ids) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        if (context == null)
-            return getAllowedLocalizedPosts(ids, null);
+        Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
+        Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
-        Authentication authentication = context.getAuthentication();
-        if (authentication == null)
-            return getAllowedLocalizedPosts(ids, null);
-
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        if (authorities == null)
-            return getAllowedLocalizedPosts(ids, authentication.getPrincipal());
-
-        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+        if (authentication == null) {
+            return restrictSentUserData(getAllowedLocalizedPosts(ids, null));
+        } else if (authorities == null) {
+            return restrictSentUserData(getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
+        } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) && CollectionUtils.isNotEmpty(ids)) {
             log.debug("REST request to get localizations for given Blog Post ids - as Admin");
-            return localizedPostContentRepository.findByBlogPostIds(ids);
+            return restrictSentUserData(localizedPostContentRepository.findByBlogPostIds(ids));
         } else {
-            return getAllowedLocalizedPosts(ids, authentication.getPrincipal());
+            return restrictSentUserData(getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
         }
-    }
-
-    /**
-     * Gets all localized post contents belonging to the current user, or anyone that has Writer rights or more.
-     */
-    private List<LocalizedPostContent> getAllowedLocalizedPosts(List<Long> ids, Object principal) {
-        if (principal != null) {
-            if (principal instanceof UserDetails) {
-                log.debug("REST request to get localizations for given Blog Post ids - as User (with UserDetails)");
-                return localizedPostContentRepository.findByBlogPostIdsAndIsCurrentSpringUserOrWriter(ids);
-            } else if (principal instanceof DefaultOidcUser) {
-                log.debug("REST request to get localizations for given Blog Post ids - as User (with Oidc token)");
-                return localizedPostContentRepository.findByBlogPostIdsAndIsCurrentOidcUserOrWriter(ids);
-            }
-        }
-        log.debug("REST request to get localizations for given Blog Post ids - as Anonymous");
-        return localizedPostContentRepository.findByBlogPostIdsAndIsWriter(ids);
     }
 
     /**
@@ -171,5 +154,40 @@ public class LocalizedPostContentResource {
         log.debug("REST request to delete LocalizedPostContent : {}", id);
         localizedPostContentRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * Gets all localized post contents belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private List<LocalizedPostContent> getAllowedLocalizedPosts(List<Long> ids, Object principal) {
+        if (CollectionUtils.isEmpty(ids)) {
+            return new LinkedList<>();
+        } else if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get localizations for given Blog Post ids - as User (with UserDetails)");
+                return localizedPostContentRepository.findByBlogPostIdsAndIsCurrentSpringUserOrWriter(ids);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get localizations for given Blog Post ids - as User (with Oidc token)");
+                return localizedPostContentRepository.findByBlogPostIdsAndIsCurrentOidcUserOrWriter(ids);
+            }
+        }
+        log.debug("REST request to get localizations for given Blog Post ids - as Anonymous");
+        return localizedPostContentRepository.findByBlogPostIdsAndIsWriter(ids);
+    }
+
+    /**
+     * @return The given result trimmed of all non-necessary infos about the users.
+     */
+    private List<LocalizedPostContent> restrictSentUserData(List<LocalizedPostContent> localizations) {
+        if (CollectionUtils.isEmpty(localizations))
+            return new LinkedList<>();
+
+        localizations.forEach(localizedBlogPost -> {
+            if (localizedBlogPost.getPost() != null) {
+                localizedBlogPost.setPost(new BlogPost(localizedBlogPost.getPost().getId()));
+            }
+        });
+
+        return localizations;
     }
 }

@@ -11,6 +11,7 @@ import { LocalizedPostContentService } from 'app/entities/localized-post-content
 import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/localization-utils';
 import { ActivatedRoute } from '@angular/router';
 import { IBlog } from 'app/shared/model/blog.model';
+import { ArrayUtils } from 'app/shared/util/arrays-utils';
 
 @Component({
   selector: 'jhi-blog-post',
@@ -25,6 +26,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  locale: string;
 
   constructor(
     protected blogPostService: BlogPostService,
@@ -43,6 +45,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     };
     this.predicate = 'published';
     this.ascending = false;
+    this.locale = this.languageService.getCurrentLanguage();
   }
 
   ngOnInit(): void {
@@ -81,7 +84,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
         })
         .subscribe((res: HttpResponse<IBlogPost[]>) => {
           this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
+            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
             res.headers
           );
           LocalizationUtils.refreshLocalizations(
@@ -110,7 +113,11 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getLocalizedField(item: IBlogPost | IBlog | null, field: string, alternateField?: string): string {
+  arrayToString(array: any, field: string): string {
+    return ArrayUtils.toStringUsingField(array, field);
+  }
+
+  getLocalizedField(item: IBlogPost | IBlog | null | undefined, field: string, alternateField?: string): string {
     return LocalizationUtils.getLocalizedField(
       item as IItemWithLocalizations,
       field,

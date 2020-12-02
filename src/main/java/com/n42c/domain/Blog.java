@@ -50,6 +50,12 @@ public class Blog implements Serializable {
     @JsonIgnoreProperties(value = "blogs", allowSetters = true)
     private AppUser author;
 
+    public Blog() {}
+
+    public Blog(Long id) {
+        this.id = id;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

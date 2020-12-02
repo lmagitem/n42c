@@ -40,7 +40,7 @@
             <a [routerLink]="['/entities', 'ninth-unit-moment', ninthUnitMoment.id, 'view']">{{ ninthUnitMoment.id }}</a>
           </td>
           <td>{{ ninthUnitMoment.current }}</td>
-          <td>{{ ninthUnitMoment.sinceInstant | date: 'medium' }}</td>
+          <td>{{ ninthUnitMoment.sinceInstant | date: 'medium':undefined:locale }}</td>
           <td>{{ ninthUnitMoment.pictureUrl }}</td>
           <td>
             <div *ngIf="ninthUnitMoment.unit">

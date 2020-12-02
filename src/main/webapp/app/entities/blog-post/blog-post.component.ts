@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { JhiEventManager, JhiLanguageService, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IBlogPost } from 'app/shared/model/blog-post.model';
@@ -22,12 +22,14 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  locale: string;
 
   constructor(
     protected blogPostService: BlogPostService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks
+    protected parseLinks: JhiParseLinks,
+    protected languageService: JhiLanguageService
   ) {
     this.blogPosts = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -37,6 +39,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
     };
     this.predicate = 'id';
     this.ascending = true;
+    this.locale = this.languageService.getCurrentLanguage();
   }
 
   loadAll(): void {
