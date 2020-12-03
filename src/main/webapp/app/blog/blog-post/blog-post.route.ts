@@ -42,10 +42,8 @@ export const blogPostRoute: Routes = [
     },
     component: BlogPostListComponent,
     data: {
-      authorities: [Authority.USER],
       pageTitle: 'n42cApp.blogPost.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: ':idPost',
@@ -56,7 +54,6 @@ export const blogPostRoute: Routes = [
     data: {
       pageTitle: 'n42cApp.blogPost.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',

@@ -150,7 +150,23 @@ public class BlogResourceIT {
         assertThat(blogList).hasSize(databaseSizeBeforeTest);
     }
 
-    @Test
+  @Test
+  @Transactional
+  @WithAnonymousUser
+  public void getAllBlogsAsAnon() throws Exception {
+    // Initialize the database
+    blogRepository.saveAndFlush(blog);
+
+    // Get all the blogList
+    restBlogMockMvc
+      .perform(get("/api/blogs?sort=id,desc"))
+      .andExpect(status().isOk())
+      .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+      .andExpect(jsonPath("$.[*].id").value(hasItem(blog.getId().intValue())))
+      .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+  }
+
+  @Test
     @Transactional
     public void getAllBlogs() throws Exception {
         // Initialize the database

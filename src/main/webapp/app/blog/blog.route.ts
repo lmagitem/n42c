@@ -40,7 +40,6 @@ export const blogRoute: Routes = [
     data: {
       pageTitle: 'n42cApp.blog.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: 'list', // Shows the list of all blogs
@@ -49,7 +48,6 @@ export const blogRoute: Routes = [
       defaultSort: 'id,asc',
       pageTitle: 'n42cApp.blog.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new', // Create a new blog
@@ -70,7 +68,6 @@ export const blogRoute: Routes = [
   },
   {
     path: ':id/post', // The post entries of that blog
-    canActivate: [UserRouteAccessService],
     loadChildren: () => import('./blog-post/blog-post.module').then(m => m.BlogPostModule),
   },
   {
@@ -80,6 +77,7 @@ export const blogRoute: Routes = [
       blog: BlogResolve,
     },
     data: {
+      authorities: [Authority.USER],
       pageTitle: 'n42cApp.blog.home.title',
     },
     canActivate: [UserRouteAccessService],
