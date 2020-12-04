@@ -1,17 +1,15 @@
 package com.n42c.domain;
 
+import com.n42c.domain.enumeration.NinthGameType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.NinthGameType;
 
 /**
  * A NinthCampaign.
@@ -53,22 +51,22 @@ public class NinthCampaign implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_campaign_authors",
-               joinColumns = @JoinColumn(name = "ninth_campaign_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_campaign_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
     private Set<Player> authors = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_campaign_participants",
-               joinColumns = @JoinColumn(name = "ninth_campaign_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "participants_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_campaign_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "participants_id", referencedColumnName = "id"))
     private Set<Player> participants = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_campaign_campaign_stratagems",
-               joinColumns = @JoinColumn(name = "ninth_campaign_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "campaign_stratagems_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_campaign_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "campaign_stratagems_id", referencedColumnName = "id"))
     private Set<NinthStratagemGroup> campaignStratagems = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -84,26 +82,26 @@ public class NinthCampaign implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public NinthCampaign name(String name) {
         this.name = name;
         return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public NinthGameType getGameType() {
         return gameType;
     }
 
+    public void setGameType(NinthGameType gameType) {
+        this.gameType = gameType;
+    }
+
     public NinthCampaign gameType(NinthGameType gameType) {
         this.gameType = gameType;
         return this;
-    }
-
-    public void setGameType(NinthGameType gameType) {
-        this.gameType = gameType;
     }
 
     public Boolean isUsePowerRating() {
@@ -123,17 +121,21 @@ public class NinthCampaign implements Serializable {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public NinthCampaign description(String description) {
         this.description = description;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Set<NinthCampaignMoment> getEvents() {
         return events;
+    }
+
+    public void setEvents(Set<NinthCampaignMoment> ninthCampaignMoments) {
+        this.events = ninthCampaignMoments;
     }
 
     public NinthCampaign events(Set<NinthCampaignMoment> ninthCampaignMoments) {
@@ -153,12 +155,12 @@ public class NinthCampaign implements Serializable {
         return this;
     }
 
-    public void setEvents(Set<NinthCampaignMoment> ninthCampaignMoments) {
-        this.events = ninthCampaignMoments;
-    }
-
     public Set<Player> getAuthors() {
         return authors;
+    }
+
+    public void setAuthors(Set<Player> players) {
+        this.authors = players;
     }
 
     public NinthCampaign authors(Set<Player> players) {
@@ -178,12 +180,12 @@ public class NinthCampaign implements Serializable {
         return this;
     }
 
-    public void setAuthors(Set<Player> players) {
-        this.authors = players;
-    }
-
     public Set<Player> getParticipants() {
         return participants;
+    }
+
+    public void setParticipants(Set<Player> players) {
+        this.participants = players;
     }
 
     public NinthCampaign participants(Set<Player> players) {
@@ -203,12 +205,12 @@ public class NinthCampaign implements Serializable {
         return this;
     }
 
-    public void setParticipants(Set<Player> players) {
-        this.participants = players;
-    }
-
     public Set<NinthStratagemGroup> getCampaignStratagems() {
         return campaignStratagems;
+    }
+
+    public void setCampaignStratagems(Set<NinthStratagemGroup> ninthStratagemGroups) {
+        this.campaignStratagems = ninthStratagemGroups;
     }
 
     public NinthCampaign campaignStratagems(Set<NinthStratagemGroup> ninthStratagemGroups) {
@@ -226,10 +228,6 @@ public class NinthCampaign implements Serializable {
         this.campaignStratagems.remove(ninthStratagemGroup);
         ninthStratagemGroup.getCampaigns().remove(this);
         return this;
-    }
-
-    public void setCampaignStratagems(Set<NinthStratagemGroup> ninthStratagemGroups) {
-        this.campaignStratagems = ninthStratagemGroups;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

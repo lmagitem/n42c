@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IAppUser } from 'app/shared/model/app-user.model';
+import {IAppUser} from 'app/shared/model/app-user.model';
 
 @Component({
   selector: 'jhi-app-user-detail',
@@ -10,10 +10,11 @@ import { IAppUser } from 'app/shared/model/app-user.model';
 export class AppUserDetailComponent implements OnInit {
   appUser: IAppUser | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ appUser }) => (this.appUser = appUser));
+    this.activatedRoute.data.subscribe(({appUser}) => (this.appUser = appUser));
   }
 
   previousState(): void {

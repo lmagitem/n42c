@@ -8,8 +8,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -68,17 +67,21 @@ public class BlogCategory implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public BlogCategory name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Set<BlogCategory> getSubcategories() {
         return subcategories;
+    }
+
+    public void setSubcategories(Set<BlogCategory> blogCategories) {
+        this.subcategories = blogCategories;
     }
 
     public BlogCategory subcategories(Set<BlogCategory> blogCategories) {
@@ -98,12 +101,12 @@ public class BlogCategory implements Serializable {
         return this;
     }
 
-    public void setSubcategories(Set<BlogCategory> blogCategories) {
-        this.subcategories = blogCategories;
-    }
-
     public Set<LocalizedBlogCategory> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedBlogCategory> localizedBlogCategories) {
+        this.localizations = localizedBlogCategories;
     }
 
     public BlogCategory localizations(Set<LocalizedBlogCategory> localizedBlogCategories) {
@@ -123,12 +126,12 @@ public class BlogCategory implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedBlogCategory> localizedBlogCategories) {
-        this.localizations = localizedBlogCategories;
-    }
-
     public BlogCategory getParentCategory() {
         return parentCategory;
+    }
+
+    public void setParentCategory(BlogCategory blogCategory) {
+        this.parentCategory = blogCategory;
     }
 
     public BlogCategory parentCategory(BlogCategory blogCategory) {
@@ -136,12 +139,12 @@ public class BlogCategory implements Serializable {
         return this;
     }
 
-    public void setParentCategory(BlogCategory blogCategory) {
-        this.parentCategory = blogCategory;
-    }
-
     public Set<BlogPost> getPosts() {
         return posts;
+    }
+
+    public void setPosts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
     }
 
     public BlogCategory posts(Set<BlogPost> blogPosts) {
@@ -159,10 +162,6 @@ public class BlogCategory implements Serializable {
         this.posts.remove(blogPost);
         blogPost.getCategories().remove(this);
         return this;
-    }
-
-    public void setPosts(Set<BlogPost> blogPosts) {
-        this.posts = blogPosts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

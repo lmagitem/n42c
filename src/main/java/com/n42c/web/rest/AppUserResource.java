@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.AppUser;
 import com.n42c.repository.AppUserRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -14,10 +13,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -35,14 +34,11 @@ import java.util.stream.StreamSupport;
 @Transactional
 public class AppUserResource {
 
-    private final Logger log = LoggerFactory.getLogger(AppUserResource.class);
-
     private static final String ENTITY_NAME = "appUser";
-
+    private final Logger log = LoggerFactory.getLogger(AppUserResource.class);
+    private final AppUserRepository appUserRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final AppUserRepository appUserRepository;
 
     public AppUserResource(AppUserRepository appUserRepository) {
         this.appUserRepository = appUserRepository;
@@ -91,9 +87,9 @@ public class AppUserResource {
     /**
      * {@code GET  /app-users} : get all the appUsers.
      *
-     * @param pageable the pagination information.
+     * @param pageable  the pagination information.
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @param filter the filter of the request.
+     * @param filter    the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of appUsers in body.
      */
     @GetMapping("/app-users")

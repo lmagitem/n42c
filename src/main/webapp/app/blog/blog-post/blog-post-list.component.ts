@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiLanguageService, JhiParseLinks } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { BlogPostDeleteDialogComponent } from './blog-post-delete-dialog.component';
-import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
-import { LocalizedPostContentService } from 'app/entities/localized-post-content/localized-post-content.service';
-import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/localization-utils';
-import { ActivatedRoute } from '@angular/router';
-import { IBlog } from 'app/shared/model/blog.model';
-import { ArrayUtils } from 'app/shared/util/arrays-utils';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager, JhiLanguageService, JhiParseLinks} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
+import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
+import {BlogPostDeleteDialogComponent} from './blog-post-delete-dialog.component';
+import {BlogPostService} from 'app/entities/blog-post/blog-post.service';
+import {LocalizedPostContentService} from 'app/entities/localized-post-content/localized-post-content.service';
+import {IItemWithLocalizations, LocalizationUtils} from 'app/shared/util/localization-utils';
+import {ActivatedRoute} from '@angular/router';
+import {IBlog} from 'app/shared/model/blog.model';
+import {ArrayUtils} from 'app/shared/util/arrays-utils';
 
 @Component({
   selector: 'jhi-blog-post',
@@ -49,7 +49,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ blog }) => {
+    this.activatedRoute.data.subscribe(({blog}) => {
       this.blog = blog;
       this.loadAll(blog?.id || undefined);
     });
@@ -136,7 +136,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   delete(blogPost: IBlogPost): void {
-    const modalRef = this.modalService.open(BlogPostDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(BlogPostDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.blogPost = blogPost;
   }
 

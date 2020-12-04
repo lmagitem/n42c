@@ -10,4 +10,5 @@ import {configurationRoute} from './configuration.route';
   imports: [N42CSharedModule, RouterModule.forChild([configurationRoute])],
   declarations: [ConfigurationComponent],
 })
-export class ConfigurationModule {}
+export class ConfigurationModule {
+}

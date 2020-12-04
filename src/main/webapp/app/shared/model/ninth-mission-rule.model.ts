@@ -8,5 +8,6 @@ export interface INinthMissionRule {
 }
 
 export class NinthMissionRule implements INinthMissionRule {
-  constructor(public id?: number, public localizations?: ILocalizedNinthMissionRule[], public missions?: INinthMission[]) {}
+  constructor(public id?: number, public localizations?: ILocalizedNinthMissionRule[], public missions?: INinthMission[]) {
+  }
 }

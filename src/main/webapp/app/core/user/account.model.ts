@@ -1,4 +1,4 @@
-import { AppUser } from 'app/shared/model/app-user.model';
+import {AppUser} from 'app/shared/model/app-user.model';
 
 export class Account {
   constructor(
@@ -10,5 +10,6 @@ export class Account {
     public langKey: string,
     public imageUrl: string,
     public appUser: AppUser
-  ) {}
+  ) {
+  }
 }

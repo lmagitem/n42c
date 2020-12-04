@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IProfilePart, ProfilePart } from 'app/shared/model/profile-part.model';
-import { ProfilePartService } from './profile-part.service';
-import { ProfilePartComponent } from './profile-part.component';
-import { ProfilePartDetailComponent } from './profile-part-detail.component';
-import { ProfilePartUpdateComponent } from './profile-part-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {IProfilePart, ProfilePart} from 'app/shared/model/profile-part.model';
+import {ProfilePartService} from './profile-part.service';
+import {ProfilePartComponent} from './profile-part.component';
+import {ProfilePartDetailComponent} from './profile-part-detail.component';
+import {ProfilePartUpdateComponent} from './profile-part-update.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ProfilePartResolve implements Resolve<IProfilePart> {
-  constructor(private service: ProfilePartService, private router: Router) {}
+  constructor(private service: ProfilePartService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<IProfilePart> | Observable<never> {
     const id = route.params['id'];

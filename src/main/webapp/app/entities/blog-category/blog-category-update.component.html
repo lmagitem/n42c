@@ -1,60 +1,66 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-blog-category-heading" jhiTranslate="n42cApp.blogCategory.home.createOrEditLabel">Create or edit a Blog Category</h2>
+    <div class="col-8">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <h2 id="jhi-blog-category-heading" jhiTranslate="n42cApp.blogCategory.home.createOrEditLabel">Create or edit
+                a Blog Category</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" [hidden]="!editForm.get('id')!.value">
-          <label for="id" jhiTranslate="global.field.id">ID</label>
-          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-        </div>
+                <div [hidden]="!editForm.get('id')!.value" class="form-group">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input class="form-control" formControlName="id" id="id" name="id" readonly type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label
-            class="form-control-label"
-            jhiTranslate="n42cApp.blogCategory.name"
-            for="field_name"
-            [ngbTooltip]="'n42cApp.blogCategory.help.name' | translate"
-            >Name</label
-          >
-          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label
+                        [ngbTooltip]="'n42cApp.blogCategory.help.name' | translate"
+                        class="form-control-label"
+                        for="field_name"
+                        jhiTranslate="n42cApp.blogCategory.name"
+                    >Name</label
+                    >
+                    <input class="form-control" formControlName="name" id="field_name" name="name" type="text"/>
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small *ngIf="editForm.get('name')?.errors?.required" class="form-text text-danger"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.blogCategory.parentCategory" for="field_parentCategory"
-            >Parent Category</label
-          >
-          <select class="form-control" id="field_parentCategory" name="parentCategory" formControlName="parentCategory">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="
+                <div class="form-group">
+                    <label class="form-control-label" for="field_parentCategory"
+                           jhiTranslate="n42cApp.blogCategory.parentCategory"
+                    >Parent Category</label
+                    >
+                    <select class="form-control" formControlName="parentCategory" id="field_parentCategory"
+                            name="parentCategory">
+                        <option [ngValue]="null"></option>
+                        <option
+                            *ngFor="let blogCategoryOption of blogcategories; trackBy: trackById"
+                            [ngValue]="
                 blogCategoryOption.id === editForm.get('parentCategory')!.value?.id
                   ? editForm.get('parentCategory')!.value
                   : blogCategoryOption
               "
-              *ngFor="let blogCategoryOption of blogcategories; trackBy: trackById"
-              >{{ blogCategoryOption.name }}</option
-            >
-          </select>
-        </div>
-      </div>
+                        >{{ blogCategoryOption.name }}</option
+                        >
+                    </select>
+                </div>
+            </div>
 
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
+            <div>
+                <button (click)="previousState()" class="btn btn-secondary" id="cancel-save" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
 
-        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+                <button [disabled]="editForm.invalid || isSaving" class="btn btn-primary" id="save-entity"
+                        type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

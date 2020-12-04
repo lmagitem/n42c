@@ -12,7 +12,8 @@ import {Account} from 'app/core/user/account.model';
 export class HomeComponent implements OnInit {
   account: Account | null = null;
 
-  constructor(private accountService: AccountService, private loginService: LoginService) {}
+  constructor(private accountService: AccountService, private loginService: LoginService) {
+  }
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => (this.account = account));

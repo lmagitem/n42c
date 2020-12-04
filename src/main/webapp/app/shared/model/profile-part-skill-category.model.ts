@@ -16,5 +16,6 @@ export class ProfilePartSkillCategory implements IProfilePartSkillCategory {
     public index?: number,
     public skills?: IProfilePartSkill[],
     public profilePart?: IProfilePart
-  ) {}
+  ) {
+  }
 }

@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager, JhiParseLinks} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IProduct } from 'app/shared/model/product.model';
+import {IProduct} from 'app/shared/model/product.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { ProductService } from './product.service';
-import { ProductDeleteDialogComponent } from './product-delete-dialog.component';
+import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
+import {ProductService} from './product.service';
+import {ProductDeleteDialogComponent} from './product-delete-dialog.component';
 
 @Component({
   selector: 'jhi-product',
@@ -81,7 +81,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   delete(product: IProduct): void {
-    const modalRef = this.modalService.open(ProductDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(ProductDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.product = product;
   }
 

@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.LocalizedNinthStratagemGroup;
 import com.n42c.repository.LocalizedNinthStratagemGroupRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,14 +26,11 @@ import java.util.Optional;
 @Transactional
 public class LocalizedNinthStratagemGroupResource {
 
-    private final Logger log = LoggerFactory.getLogger(LocalizedNinthStratagemGroupResource.class);
-
     private static final String ENTITY_NAME = "localizedNinthStratagemGroup";
-
+    private final Logger log = LoggerFactory.getLogger(LocalizedNinthStratagemGroupResource.class);
+    private final LocalizedNinthStratagemGroupRepository localizedNinthStratagemGroupRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LocalizedNinthStratagemGroupRepository localizedNinthStratagemGroupRepository;
 
     public LocalizedNinthStratagemGroupResource(LocalizedNinthStratagemGroupRepository localizedNinthStratagemGroupRepository) {
         this.localizedNinthStratagemGroupRepository = localizedNinthStratagemGroupRepository;

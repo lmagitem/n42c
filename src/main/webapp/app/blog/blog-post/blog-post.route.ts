@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IBlogPost, BlogPost } from 'app/shared/model/blog-post.model';
-import { BlogPostListComponent } from './blog-post-list.component';
-import { BlogPostComponent } from './blog-post.component';
-import { BlogPostUpdateComponent } from './blog-post-update.component';
-import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
-import { BlogResolve } from '../blog.route';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {BlogPost, IBlogPost} from 'app/shared/model/blog-post.model';
+import {BlogPostListComponent} from './blog-post-list.component';
+import {BlogPostComponent} from './blog-post.component';
+import {BlogPostUpdateComponent} from './blog-post-update.component';
+import {BlogPostService} from 'app/entities/blog-post/blog-post.service';
+import {BlogResolve} from '../blog.route';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class BlogPostResolve implements Resolve<IBlogPost> {
-  constructor(private service: BlogPostService, private router: Router) {}
+  constructor(private service: BlogPostService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<IBlogPost> | Observable<never> {
     const id = route.params['idPost'];

@@ -4,8 +4,10 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthUnit;
 import com.n42c.domain.Player;
+import com.n42c.domain.enumeration.Faction;
+import com.n42c.domain.enumeration.NinthBattlefieldRole;
+import com.n42c.domain.enumeration.SubFaction;
 import com.n42c.repository.NinthUnitRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -24,13 +27,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Faction;
-import com.n42c.domain.enumeration.SubFaction;
-import com.n42c.domain.enumeration.NinthBattlefieldRole;
 /**
  * Integration tests for the {@link NinthUnitResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthUnitResourceIT {
@@ -66,7 +66,7 @@ public class NinthUnitResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -90,9 +90,10 @@ public class NinthUnitResourceIT {
         ninthUnit.setOwner(player);
         return ninthUnit;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -201,7 +202,7 @@ public class NinthUnitResourceIT {
             .andExpect(jsonPath("$.[*].battlefieldRole").value(hasItem(DEFAULT_BATTLEFIELD_ROLE.toString())))
             .andExpect(jsonPath("$.[*].keywords").value(hasItem(DEFAULT_KEYWORDS)));
     }
-    
+
     @Test
     @Transactional
     public void getNinthUnit() throws Exception {
@@ -220,6 +221,7 @@ public class NinthUnitResourceIT {
             .andExpect(jsonPath("$.battlefieldRole").value(DEFAULT_BATTLEFIELD_ROLE.toString()))
             .andExpect(jsonPath("$.keywords").value(DEFAULT_KEYWORDS));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthUnit() throws Exception {

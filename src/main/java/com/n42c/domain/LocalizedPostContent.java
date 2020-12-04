@@ -1,6 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -8,11 +9,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * The content of a post, in a specific language.
@@ -50,7 +48,7 @@ public class LocalizedPostContent implements Serializable {
     /**
      * The content of the post.
      */
-    
+
     @ApiModelProperty(value = "The content of the post.", required = true)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
@@ -84,17 +82,21 @@ public class LocalizedPostContent implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public LocalizedPostContent title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getExcerpt() {
         return excerpt;
+    }
+
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
     }
 
     public LocalizedPostContent excerpt(String excerpt) {
@@ -102,12 +104,12 @@ public class LocalizedPostContent implements Serializable {
         return this;
     }
 
-    public void setExcerpt(String excerpt) {
-        this.excerpt = excerpt;
-    }
-
     public String getContent() {
         return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public LocalizedPostContent content(String content) {
@@ -115,12 +117,12 @@ public class LocalizedPostContent implements Serializable {
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedPostContent language(Language language) {
@@ -128,21 +130,17 @@ public class LocalizedPostContent implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public BlogPost getPost() {
         return post;
+    }
+
+    public void setPost(BlogPost blogPost) {
+        this.post = blogPost;
     }
 
     public LocalizedPostContent post(BlogPost blogPost) {
         this.post = blogPost;
         return this;
-    }
-
-    public void setPost(BlogPost blogPost) {
-        this.post = blogPost;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

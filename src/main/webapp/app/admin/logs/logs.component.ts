@@ -13,7 +13,8 @@ export class LogsComponent implements OnInit {
   orderProp = 'name';
   reverse = false;
 
-  constructor(private logsService: LogsService) {}
+  constructor(private logsService: LogsService) {
+  }
 
   ngOnInit(): void {
     this.findAndExtractLoggers();

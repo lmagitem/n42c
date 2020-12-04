@@ -4,11 +4,8 @@ import com.n42c.config.Constants;
 import com.n42c.security.AuthoritiesConstants;
 import com.n42c.service.UserService;
 import com.n42c.service.dto.UserDTO;
-
-import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,10 +15,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * REST controller for managing users.
@@ -52,11 +52,9 @@ import java.util.*;
 public class UserResource {
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
-
+    private final UserService userService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final UserService userService;
 
     public UserResource(UserService userService) {
         this.userService = userService;
@@ -77,6 +75,7 @@ public class UserResource {
 
     /**
      * Gets a list of all roles.
+     *
      * @return a string list of all roles.
      */
     @GetMapping("/users/authorities")

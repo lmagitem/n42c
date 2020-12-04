@@ -4,37 +4,35 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthArmyMoment;
 import com.n42c.repository.NinthArmyMomentRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
+
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link NinthArmyMomentResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
@@ -89,7 +87,7 @@ public class NinthArmyMomentResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -108,9 +106,10 @@ public class NinthArmyMomentResourceIT {
             .notes(DEFAULT_NOTES);
         return ninthArmyMoment;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -221,10 +220,10 @@ public class NinthArmyMomentResourceIT {
             .andExpect(jsonPath("$.[*].requisition").value(hasItem(DEFAULT_REQUISITION)))
             .andExpect(jsonPath("$.[*].supplyLimit").value(hasItem(DEFAULT_SUPPLY_LIMIT)))
             .andExpect(jsonPath("$.[*].supplyUsed").value(hasItem(DEFAULT_SUPPLY_USED)))
-            .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES.toString())))
-            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES.toString())));
+            .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES)))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllNinthArmyMomentsWithEagerRelationshipsIsEnabled() throws Exception {
         when(ninthArmyMomentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
@@ -265,9 +264,10 @@ public class NinthArmyMomentResourceIT {
             .andExpect(jsonPath("$.requisition").value(DEFAULT_REQUISITION))
             .andExpect(jsonPath("$.supplyLimit").value(DEFAULT_SUPPLY_LIMIT))
             .andExpect(jsonPath("$.supplyUsed").value(DEFAULT_SUPPLY_USED))
-            .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES.toString()))
-            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES.toString()));
+            .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthArmyMoment() throws Exception {

@@ -1,15 +1,13 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.Language;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthStratagemGroup.
@@ -52,17 +50,21 @@ public class LocalizedNinthStratagemGroup implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalizedNinthStratagemGroup name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedNinthStratagemGroup language(Language language) {
@@ -70,21 +72,17 @@ public class LocalizedNinthStratagemGroup implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public NinthStratagemGroup getStratagemGroup() {
         return stratagemGroup;
+    }
+
+    public void setStratagemGroup(NinthStratagemGroup ninthStratagemGroup) {
+        this.stratagemGroup = ninthStratagemGroup;
     }
 
     public LocalizedNinthStratagemGroup stratagemGroup(NinthStratagemGroup ninthStratagemGroup) {
         this.stratagemGroup = ninthStratagemGroup;
         return this;
-    }
-
-    public void setStratagemGroup(NinthStratagemGroup ninthStratagemGroup) {
-        this.stratagemGroup = ninthStratagemGroup;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

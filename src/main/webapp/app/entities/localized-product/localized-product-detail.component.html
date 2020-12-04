@@ -1,66 +1,75 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <div *ngIf="localizedProduct">
-      <h2><span jhiTranslate="n42cApp.localizedProduct.detail.title">Localized Product</span> {{ localizedProduct.id }}</h2>
+    <div class="col-8">
+        <div *ngIf="localizedProduct">
+            <h2><span
+                jhiTranslate="n42cApp.localizedProduct.detail.title">Localized Product</span> {{ localizedProduct.id }}
+            </h2>
 
-      <hr />
+            <hr/>
 
-      <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt>
-          <span jhiTranslate="n42cApp.localizedProduct.name" [ngbTooltip]="'n42cApp.localizedProduct.help.name' | translate">Name</span>
-        </dt>
-        <dd>
-          <span>{{ localizedProduct.name }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="n42cApp.localizedProduct.excerpt" [ngbTooltip]="'n42cApp.localizedProduct.help.excerpt' | translate"
-            >Excerpt</span
+            <dl class="row-md jh-entity-details">
+                <dt>
+                    <span [ngbTooltip]="'n42cApp.localizedProduct.help.name' | translate"
+                          jhiTranslate="n42cApp.localizedProduct.name">Name</span>
+                </dt>
+                <dd>
+                    <span>{{ localizedProduct.name }}</span>
+                </dd>
+                <dt>
+          <span [ngbTooltip]="'n42cApp.localizedProduct.help.excerpt' | translate"
+                jhiTranslate="n42cApp.localizedProduct.excerpt"
+          >Excerpt</span
           >
-        </dt>
-        <dd>
-          <span>{{ localizedProduct.excerpt }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="n42cApp.localizedProduct.pictureUrl" [ngbTooltip]="'n42cApp.localizedProduct.help.pictureUrl' | translate"
-            >Picture Url</span
+                </dt>
+                <dd>
+                    <span>{{ localizedProduct.excerpt }}</span>
+                </dd>
+                <dt>
+          <span [ngbTooltip]="'n42cApp.localizedProduct.help.pictureUrl' | translate"
+                jhiTranslate="n42cApp.localizedProduct.pictureUrl"
+          >Picture Url</span
           >
-        </dt>
-        <dd>
-          <span>{{ localizedProduct.pictureUrl }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="n42cApp.localizedProduct.content" [ngbTooltip]="'n42cApp.localizedProduct.help.content' | translate"
-            >Content</span
+                </dt>
+                <dd>
+                    <span>{{ localizedProduct.pictureUrl }}</span>
+                </dd>
+                <dt>
+          <span [ngbTooltip]="'n42cApp.localizedProduct.help.content' | translate"
+                jhiTranslate="n42cApp.localizedProduct.content"
+          >Content</span
           >
-        </dt>
-        <dd>
-          <span>{{ localizedProduct.content }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="n42cApp.localizedProduct.language" [ngbTooltip]="'n42cApp.localizedProduct.help.language' | translate"
-            >Language</span
+                </dt>
+                <dd>
+                    <span>{{ localizedProduct.content }}</span>
+                </dd>
+                <dt>
+          <span [ngbTooltip]="'n42cApp.localizedProduct.help.language' | translate"
+                jhiTranslate="n42cApp.localizedProduct.language"
+          >Language</span
           >
-        </dt>
-        <dd>
-          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedProduct.language }}">{{ localizedProduct.language }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.localizedProduct.product">Product</span></dt>
-        <dd>
-          <div *ngIf="localizedProduct.product">
-            <a [routerLink]="['/entities', 'product', localizedProduct.product?.id, 'view']">{{ localizedProduct.product?.name }}</a>
-          </div>
-        </dd>
-      </dl>
+                </dt>
+                <dd>
+                    <span
+                        jhiTranslate="{{ 'n42cApp.Language.' + localizedProduct.language }}">{{ localizedProduct.language }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.localizedProduct.product">Product</span></dt>
+                <dd>
+                    <div *ngIf="localizedProduct.product">
+                        <a [routerLink]="['/entities', 'product', localizedProduct.product?.id, 'view']">{{ localizedProduct.product?.name }}</a>
+                    </div>
+                </dd>
+            </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+            <button (click)="previousState()" class="btn btn-info" type="submit">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
-      <button type="button" [routerLink]="['/entities', 'localized-product', localizedProduct.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+            <button [routerLink]="['/entities', 'localized-product', localizedProduct.id, 'edit']" class="btn btn-primary"
+                    type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
     </div>
-  </div>
 </div>

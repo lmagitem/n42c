@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { CampaignMomentComponent } from './campaign-moment.component';
-import { CampaignService } from '../campaign.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, Routes} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
+import {CampaignMomentComponent} from './campaign-moment.component';
+import {CampaignService} from '../campaign.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CampaignMomentResolve implements Resolve<INinthCampaignMoment> {
-  constructor(private campaignService: CampaignService) {}
+  constructor(private campaignService: CampaignService) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthCampaignMoment> | Observable<never> {
     const param = route.params['idMoment'];

@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.ProfilePartSkill;
 import com.n42c.repository.ProfilePartSkillRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,14 +26,11 @@ import java.util.Optional;
 @Transactional
 public class ProfilePartSkillResource {
 
-    private final Logger log = LoggerFactory.getLogger(ProfilePartSkillResource.class);
-
     private static final String ENTITY_NAME = "profilePartSkill";
-
+    private final Logger log = LoggerFactory.getLogger(ProfilePartSkillResource.class);
+    private final ProfilePartSkillRepository profilePartSkillRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final ProfilePartSkillRepository profilePartSkillRepository;
 
     public ProfilePartSkillResource(ProfilePartSkillRepository profilePartSkillRepository) {
         this.profilePartSkillRepository = profilePartSkillRepository;

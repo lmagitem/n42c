@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthMission, NinthMission } from 'app/shared/model/ninth-mission.model';
-import { NinthMissionService } from './ninth-mission.service';
-import { INinthStratagemGroup } from 'app/shared/model/ninth-stratagem-group.model';
-import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
-import { NinthObjectiveService } from 'app/entities/ninth-objective/ninth-objective.service';
-import { INinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
-import { NinthMissionRuleService } from 'app/entities/ninth-mission-rule/ninth-mission-rule.service';
+import {INinthMission, NinthMission} from 'app/shared/model/ninth-mission.model';
+import {NinthMissionService} from './ninth-mission.service';
+import {INinthStratagemGroup} from 'app/shared/model/ninth-stratagem-group.model';
+import {NinthStratagemGroupService} from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
+import {NinthObjectiveService} from 'app/entities/ninth-objective/ninth-objective.service';
+import {INinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
+import {NinthMissionRuleService} from 'app/entities/ninth-mission-rule/ninth-mission-rule.service';
 
 type SelectableEntity = INinthStratagemGroup | INinthObjective | INinthMissionRule;
 
@@ -44,10 +44,11 @@ export class NinthMissionUpdateComponent implements OnInit {
     protected ninthMissionRuleService: NinthMissionRuleService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthMission }) => {
+    this.activatedRoute.data.subscribe(({ninthMission}) => {
       this.updateForm(ninthMission);
 
       this.ninthStratagemGroupService
@@ -87,18 +88,19 @@ export class NinthMissionUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): INinthMission {
-    return {
-      ...new NinthMission(),
-      id: this.editForm.get(['id'])!.value,
-      gameType: this.editForm.get(['gameType'])!.value,
-      gameSize: this.editForm.get(['gameSize'])!.value,
-      shareable: this.editForm.get(['shareable'])!.value,
-      missionStratagems: this.editForm.get(['missionStratagems'])!.value,
-      primaryObjectives: this.editForm.get(['primaryObjectives'])!.value,
-      allowedSecondaries: this.editForm.get(['allowedSecondaries'])!.value,
-      rules: this.editForm.get(['rules'])!.value,
-    };
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: SelectableEntity[], option: SelectableEntity): SelectableEntity {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<INinthMission>>): void {
@@ -117,18 +119,17 @@ export class NinthMissionUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: SelectableEntity[], option: SelectableEntity): SelectableEntity {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
+  private createFromForm(): INinthMission {
+    return {
+      ...new NinthMission(),
+      id: this.editForm.get(['id'])!.value,
+      gameType: this.editForm.get(['gameType'])!.value,
+      gameSize: this.editForm.get(['gameSize'])!.value,
+      shareable: this.editForm.get(['shareable'])!.value,
+      missionStratagems: this.editForm.get(['missionStratagems'])!.value,
+      primaryObjectives: this.editForm.get(['primaryObjectives'])!.value,
+      allowedSecondaries: this.editForm.get(['allowedSecondaries'])!.value,
+      rules: this.editForm.get(['rules'])!.value,
+    };
   }
 }

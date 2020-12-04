@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthBattle, NinthBattle } from 'app/shared/model/ninth-battle.model';
-import { NinthBattleService } from './ninth-battle.service';
-import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
-import { NinthMissionService } from 'app/entities/ninth-mission/ninth-mission.service';
+import {INinthBattle, NinthBattle} from 'app/shared/model/ninth-battle.model';
+import {NinthBattleService} from './ninth-battle.service';
+import {INinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
+import {NinthCampaignMomentService} from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
+import {NinthMissionService} from 'app/entities/ninth-mission/ninth-mission.service';
 
 type SelectableEntity = INinthCampaignMoment | INinthMission;
 
@@ -37,10 +37,11 @@ export class NinthBattleUpdateComponent implements OnInit {
     protected ninthMissionService: NinthMissionService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthBattle }) => {
+    this.activatedRoute.data.subscribe(({ninthBattle}) => {
       this.updateForm(ninthBattle);
 
       this.ninthCampaignMomentService
@@ -75,15 +76,8 @@ export class NinthBattleUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): INinthBattle {
-    return {
-      ...new NinthBattle(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      resolved: this.editForm.get(['resolved'])!.value,
-      campaignMoment: this.editForm.get(['campaignMoment'])!.value,
-      mission: this.editForm.get(['mission'])!.value,
-    };
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<INinthBattle>>): void {
@@ -102,7 +96,14 @@ export class NinthBattleUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
+  private createFromForm(): INinthBattle {
+    return {
+      ...new NinthBattle(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      resolved: this.editForm.get(['resolved'])!.value,
+      campaignMoment: this.editForm.get(['campaignMoment'])!.value,
+      mission: this.editForm.get(['mission'])!.value,
+    };
   }
 }

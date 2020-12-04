@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
-import { NinthMissionService } from './ninth-mission.service';
-import { NinthMissionDeleteDialogComponent } from './ninth-mission-delete-dialog.component';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
+import {NinthMissionService} from './ninth-mission.service';
+import {NinthMissionDeleteDialogComponent} from './ninth-mission-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-mission',
@@ -20,7 +20,8 @@ export class NinthMissionComponent implements OnInit, OnDestroy {
     protected ninthMissionService: NinthMissionService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   loadAll(): void {
     this.ninthMissionService.query().subscribe((res: HttpResponse<INinthMission[]>) => (this.ninthMissions = res.body || []));
@@ -47,7 +48,7 @@ export class NinthMissionComponent implements OnInit, OnDestroy {
   }
 
   delete(ninthMission: INinthMission): void {
-    const modalRef = this.modalService.open(NinthMissionDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(NinthMissionDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.ninthMission = ninthMission;
   }
 }

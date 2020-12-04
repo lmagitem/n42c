@@ -1,9 +1,9 @@
-import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
-import { INinthUnitMoment } from 'app/shared/model/ninth-unit-moment.model';
-import { IPlayer } from 'app/shared/model/player.model';
-import { Faction } from 'app/shared/model/enumerations/faction.model';
-import { SubFaction } from 'app/shared/model/enumerations/sub-faction.model';
-import { NinthBattlefieldRole } from 'app/shared/model/enumerations/ninth-battlefield-role.model';
+import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
+import {INinthUnitMoment} from 'app/shared/model/ninth-unit-moment.model';
+import {IPlayer} from 'app/shared/model/player.model';
+import {Faction} from 'app/shared/model/enumerations/faction.model';
+import {SubFaction} from 'app/shared/model/enumerations/sub-faction.model';
+import {NinthBattlefieldRole} from 'app/shared/model/enumerations/ninth-battlefield-role.model';
 
 export interface INinthUnit {
   id?: number;
@@ -30,5 +30,6 @@ export class NinthUnit implements INinthUnit {
     public selections?: INinthArmyUnit[],
     public moments?: INinthUnitMoment[],
     public owner?: IPlayer
-  ) {}
+  ) {
+  }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IBlogCategory } from 'app/shared/model/blog-category.model';
+import {IBlogCategory} from 'app/shared/model/blog-category.model';
 
 @Component({
   selector: 'jhi-blog-category-detail',
@@ -10,10 +10,11 @@ import { IBlogCategory } from 'app/shared/model/blog-category.model';
 export class BlogCategoryDetailComponent implements OnInit {
   blogCategory: IBlogCategory | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ blogCategory }) => (this.blogCategory = blogCategory));
+    this.activatedRoute.data.subscribe(({blogCategory}) => (this.blogCategory = blogCategory));
   }
 
   previousState(): void {

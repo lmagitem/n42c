@@ -11,9 +11,10 @@ export interface AuditsQuery extends Pagination {
   toDate: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuditsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   query(req: AuditsQuery): Observable<HttpResponse<Audit[]>> {
     const params: HttpParams = createRequestOption(req);

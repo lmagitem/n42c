@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthBattle } from 'app/shared/model/ninth-battle.model';
-import { NinthBattleService } from './ninth-battle.service';
-import { NinthBattleDeleteDialogComponent } from './ninth-battle-delete-dialog.component';
+import {INinthBattle} from 'app/shared/model/ninth-battle.model';
+import {NinthBattleService} from './ninth-battle.service';
+import {NinthBattleDeleteDialogComponent} from './ninth-battle-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-battle',
@@ -20,7 +20,8 @@ export class NinthBattleComponent implements OnInit, OnDestroy {
     protected ninthBattleService: NinthBattleService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   loadAll(): void {
     this.ninthBattleService.query().subscribe((res: HttpResponse<INinthBattle[]>) => (this.ninthBattles = res.body || []));
@@ -47,7 +48,7 @@ export class NinthBattleComponent implements OnInit, OnDestroy {
   }
 
   delete(ninthBattle: INinthBattle): void {
-    const modalRef = this.modalService.open(NinthBattleDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(NinthBattleDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.ninthBattle = ninthBattle;
   }
 }

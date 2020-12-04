@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
-import { AppUserProfileService } from 'app/entities/app-user-profile/app-user-profile.service';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
+import {AppUserProfileService} from 'app/entities/app-user-profile/app-user-profile.service';
 
 @Component({
   templateUrl: './app-user-profile-delete-dialog.component.html',
@@ -14,7 +14,8 @@ export class AppUserProfileDeleteDialogComponent {
     protected appUserProfileService: AppUserProfileService,
     public activeModal: NgbActiveModal,
     protected eventManager: JhiEventManager
-  ) {}
+  ) {
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Resolve, ActivatedRouteSnapshot, Routes, Router} from '@angular/router';
+import {Observable, of, EMPTY} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignService } from './ninth-campaign.service';
-import { NinthCampaignComponent } from './ninth-campaign.component';
-import { NinthCampaignDetailComponent } from './ninth-campaign-detail.component';
-import { NinthCampaignUpdateComponent } from './ninth-campaign-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthCampaign, NinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {NinthCampaignService} from './ninth-campaign.service';
+import {NinthCampaignComponent} from './ninth-campaign.component';
+import {NinthCampaignDetailComponent} from './ninth-campaign-detail.component';
+import {NinthCampaignUpdateComponent} from './ninth-campaign-update.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class NinthCampaignResolve implements Resolve<INinthCampaign> {
-  constructor(private service: NinthCampaignService, private router: Router) {}
+  constructor(private service: NinthCampaignService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthCampaign> | Observable<never> {
     const id = route.params['id'];

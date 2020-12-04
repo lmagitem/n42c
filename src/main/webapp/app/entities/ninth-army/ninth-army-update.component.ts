@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthArmy, NinthArmy } from 'app/shared/model/ninth-army.model';
-import { NinthArmyService } from './ninth-army.service';
-import { IPlayer } from 'app/shared/model/player.model';
-import { PlayerService } from 'app/entities/player/player.service';
+import {INinthArmy, NinthArmy} from 'app/shared/model/ninth-army.model';
+import {NinthArmyService} from './ninth-army.service';
+import {IPlayer} from 'app/shared/model/player.model';
+import {PlayerService} from 'app/entities/player/player.service';
 
 @Component({
   selector: 'jhi-ninth-army-update',
@@ -32,10 +32,11 @@ export class NinthArmyUpdateComponent implements OnInit {
     protected playerService: PlayerService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthArmy }) => {
+    this.activatedRoute.data.subscribe(({ninthArmy}) => {
       this.updateForm(ninthArmy);
 
       this.playerService.query().subscribe((res: HttpResponse<IPlayer[]>) => (this.players = res.body || []));
@@ -67,16 +68,8 @@ export class NinthArmyUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): INinthArmy {
-    return {
-      ...new NinthArmy(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      crusade: this.editForm.get(['crusade'])!.value,
-      faction: this.editForm.get(['faction'])!.value,
-      subfaction: this.editForm.get(['subfaction'])!.value,
-      author: this.editForm.get(['author'])!.value,
-    };
+  trackById(index: number, item: IPlayer): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<INinthArmy>>): void {
@@ -95,7 +88,15 @@ export class NinthArmyUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IPlayer): any {
-    return item.id;
+  private createFromForm(): INinthArmy {
+    return {
+      ...new NinthArmy(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      crusade: this.editForm.get(['crusade'])!.value,
+      faction: this.editForm.get(['faction'])!.value,
+      subfaction: this.editForm.get(['subfaction'])!.value,
+      author: this.editForm.get(['author'])!.value,
+    };
   }
 }

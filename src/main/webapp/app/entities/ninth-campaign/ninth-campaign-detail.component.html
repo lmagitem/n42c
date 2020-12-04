@@ -1,59 +1,62 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <div *ngIf="ninthCampaign">
-      <h2><span jhiTranslate="n42cApp.ninthCampaign.detail.title">Ninth Campaign</span> {{ ninthCampaign.id }}</h2>
+    <div class="col-8">
+        <div *ngIf="ninthCampaign">
+            <h2><span jhiTranslate="n42cApp.ninthCampaign.detail.title">Ninth Campaign</span> {{ ninthCampaign.id }}
+            </h2>
 
-      <hr />
+            <hr/>
 
-      <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.name">Name</span></dt>
-        <dd>
-          <span>{{ ninthCampaign.name }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</span></dt>
-        <dd>
-          <span jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthCampaign.gameType }}">{{ ninthCampaign.gameType }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.usePowerRating">Use Power Rating</span></dt>
-        <dd>
-          <span>{{ ninthCampaign.usePowerRating }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.description">Description</span></dt>
-        <dd>
-          <span>{{ ninthCampaign.description }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></dt>
-        <dd>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.name">Name</span></dt>
+                <dd>
+                    <span>{{ ninthCampaign.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</span></dt>
+                <dd>
+                    <span
+                        jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthCampaign.gameType }}">{{ ninthCampaign.gameType }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.usePowerRating">Use Power Rating</span></dt>
+                <dd>
+                    <span>{{ ninthCampaign.usePowerRating }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.description">Description</span></dt>
+                <dd>
+                    <span>{{ ninthCampaign.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.authors">Authors</span></dt>
+                <dd>
           <span *ngFor="let authors of ninthCampaign.authors; let last = last">
             <a [routerLink]="['/entities', 'player', authors?.id, 'view']">{{ authors.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.participants">Participants</span></dt>
-        <dd>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.participants">Participants</span></dt>
+                <dd>
           <span *ngFor="let participants of ninthCampaign.participants; let last = last">
             <a [routerLink]="['/entities', 'player', participants?.id, 'view']">{{ participants.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthCampaign.campaignStratagems">Campaign Stratagems</span></dt>
-        <dd>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthCampaign.campaignStratagems">Campaign Stratagems</span></dt>
+                <dd>
           <span *ngFor="let campaignStratagems of ninthCampaign.campaignStratagems; let last = last">
             <a [routerLink]="['/entities', 'ninth-stratagem-group', campaignStratagems?.id, 'view']">{{ campaignStratagems.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-      </dl>
+                </dd>
+            </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+            <button (click)="previousState()" class="btn btn-info" type="submit">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
-      <button type="button" [routerLink]="['/entities', 'ninth-campaign', ninthCampaign.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+            <button [routerLink]="['/entities', 'ninth-campaign', ninthCampaign.id, 'edit']" class="btn btn-primary"
+                    type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
     </div>
-  </div>
 </div>

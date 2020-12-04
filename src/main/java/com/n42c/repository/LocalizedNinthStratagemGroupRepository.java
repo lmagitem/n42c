@@ -1,8 +1,7 @@
 package com.n42c.repository;
 
 import com.n42c.domain.LocalizedNinthStratagemGroup;
-
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**

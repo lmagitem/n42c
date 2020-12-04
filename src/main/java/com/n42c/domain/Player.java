@@ -7,8 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -77,17 +76,21 @@ public class Player implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Player name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public AppUser getAppUser() {
         return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Player appUser(AppUser appUser) {
@@ -95,12 +98,12 @@ public class Player implements Serializable {
         return this;
     }
 
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
-
     public Set<NinthArmy> getLists() {
         return lists;
+    }
+
+    public void setLists(Set<NinthArmy> ninthArmies) {
+        this.lists = ninthArmies;
     }
 
     public Player lists(Set<NinthArmy> ninthArmies) {
@@ -120,12 +123,12 @@ public class Player implements Serializable {
         return this;
     }
 
-    public void setLists(Set<NinthArmy> ninthArmies) {
-        this.lists = ninthArmies;
-    }
-
     public Set<NinthUnit> getCollections() {
         return collections;
+    }
+
+    public void setCollections(Set<NinthUnit> ninthUnits) {
+        this.collections = ninthUnits;
     }
 
     public Player collections(Set<NinthUnit> ninthUnits) {
@@ -145,12 +148,12 @@ public class Player implements Serializable {
         return this;
     }
 
-    public void setCollections(Set<NinthUnit> ninthUnits) {
-        this.collections = ninthUnits;
-    }
-
     public Set<NinthStratagemGroup> getStratagemGroups() {
         return stratagemGroups;
+    }
+
+    public void setStratagemGroups(Set<NinthStratagemGroup> ninthStratagemGroups) {
+        this.stratagemGroups = ninthStratagemGroups;
     }
 
     public Player stratagemGroups(Set<NinthStratagemGroup> ninthStratagemGroups) {
@@ -170,12 +173,12 @@ public class Player implements Serializable {
         return this;
     }
 
-    public void setStratagemGroups(Set<NinthStratagemGroup> ninthStratagemGroups) {
-        this.stratagemGroups = ninthStratagemGroups;
-    }
-
     public Set<NinthCampaign> getAuthoredCampaigns() {
         return authoredCampaigns;
+    }
+
+    public void setAuthoredCampaigns(Set<NinthCampaign> ninthCampaigns) {
+        this.authoredCampaigns = ninthCampaigns;
     }
 
     public Player authoredCampaigns(Set<NinthCampaign> ninthCampaigns) {
@@ -195,12 +198,12 @@ public class Player implements Serializable {
         return this;
     }
 
-    public void setAuthoredCampaigns(Set<NinthCampaign> ninthCampaigns) {
-        this.authoredCampaigns = ninthCampaigns;
-    }
-
     public Set<NinthCampaign> getCampaigns() {
         return campaigns;
+    }
+
+    public void setCampaigns(Set<NinthCampaign> ninthCampaigns) {
+        this.campaigns = ninthCampaigns;
     }
 
     public Player campaigns(Set<NinthCampaign> ninthCampaigns) {
@@ -218,10 +221,6 @@ public class Player implements Serializable {
         this.campaigns.remove(ninthCampaign);
         ninthCampaign.getParticipants().remove(this);
         return this;
-    }
-
-    public void setCampaigns(Set<NinthCampaign> ninthCampaigns) {
-        this.campaigns = ninthCampaigns;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

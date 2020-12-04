@@ -10,4 +10,5 @@ import {stateRoute} from './state.route';
   imports: [N42CSharedModule, RouterModule.forChild([stateRoute])],
   declarations: [StateComponent],
 })
-export class StateModule {}
+export class StateModule {
+}

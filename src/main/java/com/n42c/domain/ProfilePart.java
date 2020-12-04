@@ -1,21 +1,18 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.ProfilePartOrderType;
+import com.n42c.domain.enumeration.ProfilePartType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.ProfilePartType;
-
-import com.n42c.domain.enumeration.ProfilePartOrderType;
 
 /**
  * A category in which to display the content of a profile.
@@ -95,17 +92,21 @@ public class ProfilePart implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public ProfilePart title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public ProfilePartType getType() {
         return type;
+    }
+
+    public void setType(ProfilePartType type) {
+        this.type = type;
     }
 
     public ProfilePart type(ProfilePartType type) {
@@ -113,12 +114,12 @@ public class ProfilePart implements Serializable {
         return this;
     }
 
-    public void setType(ProfilePartType type) {
-        this.type = type;
-    }
-
     public Integer getIndex() {
         return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     public ProfilePart index(Integer index) {
@@ -126,12 +127,12 @@ public class ProfilePart implements Serializable {
         return this;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
     public ProfilePartOrderType getOrder() {
         return order;
+    }
+
+    public void setOrder(ProfilePartOrderType order) {
+        this.order = order;
     }
 
     public ProfilePart order(ProfilePartOrderType order) {
@@ -139,12 +140,12 @@ public class ProfilePart implements Serializable {
         return this;
     }
 
-    public void setOrder(ProfilePartOrderType order) {
-        this.order = order;
-    }
-
     public Set<ProfilePartSimpleItem> getSimpleItems() {
         return simpleItems;
+    }
+
+    public void setSimpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
+        this.simpleItems = profilePartSimpleItems;
     }
 
     public ProfilePart simpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
@@ -164,12 +165,12 @@ public class ProfilePart implements Serializable {
         return this;
     }
 
-    public void setSimpleItems(Set<ProfilePartSimpleItem> profilePartSimpleItems) {
-        this.simpleItems = profilePartSimpleItems;
-    }
-
     public Set<ProfilePartPreciseItem> getPreciseItems() {
         return preciseItems;
+    }
+
+    public void setPreciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
+        this.preciseItems = profilePartPreciseItems;
     }
 
     public ProfilePart preciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
@@ -189,12 +190,12 @@ public class ProfilePart implements Serializable {
         return this;
     }
 
-    public void setPreciseItems(Set<ProfilePartPreciseItem> profilePartPreciseItems) {
-        this.preciseItems = profilePartPreciseItems;
-    }
-
     public Set<ProfilePartSkillCategory> getSkillCategories() {
         return skillCategories;
+    }
+
+    public void setSkillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
+        this.skillCategories = profilePartSkillCategories;
     }
 
     public ProfilePart skillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
@@ -214,21 +215,17 @@ public class ProfilePart implements Serializable {
         return this;
     }
 
-    public void setSkillCategories(Set<ProfilePartSkillCategory> profilePartSkillCategories) {
-        this.skillCategories = profilePartSkillCategories;
-    }
-
     public AppUserProfile getProfile() {
         return profile;
+    }
+
+    public void setProfile(AppUserProfile appUserProfile) {
+        this.profile = appUserProfile;
     }
 
     public ProfilePart profile(AppUserProfile appUserProfile) {
         this.profile = appUserProfile;
         return this;
-    }
-
-    public void setProfile(AppUserProfile appUserProfile) {
-        this.profile = appUserProfile;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

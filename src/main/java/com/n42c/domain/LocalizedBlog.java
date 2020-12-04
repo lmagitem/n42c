@@ -1,17 +1,15 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * The content of a blog, in a specific language.
@@ -51,7 +49,8 @@ public class LocalizedBlog implements Serializable {
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
     private Blog blog;
 
-    public LocalizedBlog() {}
+    public LocalizedBlog() {
+    }
 
     public LocalizedBlog(Long id, @NotNull String name, @NotNull Language language, @NotNull Blog blog) {
         this.id = id;
@@ -73,17 +72,21 @@ public class LocalizedBlog implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalizedBlog name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedBlog language(Language language) {
@@ -91,21 +94,17 @@ public class LocalizedBlog implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public Blog getBlog() {
         return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 
     public LocalizedBlog blog(Blog blog) {
         this.blog = blog;
         return this;
-    }
-
-    public void setBlog(Blog blog) {
-        this.blog = blog;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -1,16 +1,14 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.Language;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthObjective.
@@ -58,17 +56,21 @@ public class LocalizedNinthObjective implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalizedNinthObjective name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalizedNinthObjective description(String description) {
@@ -76,12 +78,12 @@ public class LocalizedNinthObjective implements Serializable {
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedNinthObjective language(Language language) {
@@ -89,21 +91,17 @@ public class LocalizedNinthObjective implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public NinthObjective getObjective() {
         return objective;
+    }
+
+    public void setObjective(NinthObjective ninthObjective) {
+        this.objective = ninthObjective;
     }
 
     public LocalizedNinthObjective objective(NinthObjective ninthObjective) {
         this.objective = ninthObjective;
         return this;
-    }
-
-    public void setObjective(NinthObjective ninthObjective) {
-        this.objective = ninthObjective;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

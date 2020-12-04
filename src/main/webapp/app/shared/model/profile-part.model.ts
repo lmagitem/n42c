@@ -28,5 +28,6 @@ export class ProfilePart implements IProfilePart {
     public preciseItems?: IProfilePartPreciseItem[],
     public skillCategories?: IProfilePartSkillCategory[],
     public profile?: IAppUserProfile
-  ) {}
+  ) {
+  }
 }

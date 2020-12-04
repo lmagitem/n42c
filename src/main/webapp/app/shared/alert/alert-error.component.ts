@@ -1,20 +1,21 @@
-import { Component, OnDestroy } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
-import { JhiAlert, JhiAlertService, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
+import {JhiAlert, JhiAlertService, JhiEventManager, JhiEventWithContent} from 'ng-jhipster';
+import {Subscription} from 'rxjs';
 
-import { AlertError } from './alert-error.model';
+import {AlertError} from './alert-error.model';
 
 @Component({
   selector: 'jhi-alert-error',
-  template: ` <div class="alerts" role="alert">
-    <div *ngFor="let alert of alerts" [ngClass]="setClasses(alert)">
-      <ngb-alert *ngIf="alert && alert.type && alert.msg" [type]="alert.type" (close)="close(alert)">
-        <pre [innerHTML]="alert.msg"></pre>
-      </ngb-alert>
-    </div>
-  </div>`,
+  template: `
+    <div class="alerts" role="alert">
+      <div *ngFor="let alert of alerts" [ngClass]="setClasses(alert)">
+        <ngb-alert *ngIf="alert && alert.type && alert.msg" [type]="alert.type" (close)="close(alert)">
+          <pre [innerHTML]="alert.msg"></pre>
+        </ngb-alert>
+      </div>
+    </div>`,
 })
 export class AlertErrorComponent implements OnDestroy {
   alerts: JhiAlert[] = [];
@@ -48,7 +49,7 @@ export class AlertErrorComponent implements OnDestroy {
           });
           if (errorHeader) {
             const entityName = translateService.instant('global.menu.entities.' + entityKey);
-            this.addErrorAlert(errorHeader, errorHeader, { entityName });
+            this.addErrorAlert(errorHeader, errorHeader, {entityName});
           } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.fieldErrors) {
             const fieldErrors = httpErrorResponse.error.fieldErrors;
             for (const fieldError of fieldErrors) {
@@ -58,7 +59,7 @@ export class AlertErrorComponent implements OnDestroy {
               // convert 'something[14].other[4].id' to 'something[].other[].id' so translations can be written to it
               const convertedField = fieldError.field.replace(/\[\d*\]/g, '[]');
               const fieldName = translateService.instant('n42cApp.' + fieldError.objectName + '.' + convertedField);
-              this.addErrorAlert('Error on field "' + fieldName + '"', 'error.' + fieldError.message, { fieldName });
+              this.addErrorAlert('Error on field "' + fieldName + '"', 'error.' + fieldError.message, {fieldName});
             }
           } else if (httpErrorResponse.error !== '' && httpErrorResponse.error.message) {
             this.addErrorAlert(httpErrorResponse.error.message, httpErrorResponse.error.message, httpErrorResponse.error.params);
@@ -83,9 +84,9 @@ export class AlertErrorComponent implements OnDestroy {
   }
 
   setClasses(alert: JhiAlert): { [key: string]: boolean } {
-    const classes = { 'jhi-toast': Boolean(alert.toast) };
+    const classes = {'jhi-toast': Boolean(alert.toast)};
     if (alert.position) {
-      return { ...classes, [alert.position]: true };
+      return {...classes, [alert.position]: true};
     }
     return classes;
   }

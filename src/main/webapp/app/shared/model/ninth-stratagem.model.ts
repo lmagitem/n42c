@@ -26,5 +26,6 @@ export class NinthStratagem implements INinthStratagem {
     public phase?: NinthGamePhase,
     public localizations?: ILocalizedNinthStratagem[],
     public group?: INinthStratagemGroup
-  ) {}
+  ) {
+  }
 }

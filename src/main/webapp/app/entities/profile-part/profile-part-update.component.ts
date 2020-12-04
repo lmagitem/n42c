@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IProfilePart, ProfilePart } from 'app/shared/model/profile-part.model';
-import { ProfilePartService } from './profile-part.service';
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
-import { AppUserProfileService } from 'app/entities/app-user-profile/app-user-profile.service';
+import {IProfilePart, ProfilePart} from 'app/shared/model/profile-part.model';
+import {ProfilePartService} from './profile-part.service';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
+import {AppUserProfileService} from 'app/entities/app-user-profile/app-user-profile.service';
 
 @Component({
   selector: 'jhi-profile-part-update',
@@ -32,10 +32,11 @@ export class ProfilePartUpdateComponent implements OnInit {
     protected appUserProfileService: AppUserProfileService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ profilePart }) => {
+    this.activatedRoute.data.subscribe(({profilePart}) => {
       this.updateForm(profilePart);
 
       this.appUserProfileService.query().subscribe((res: HttpResponse<IAppUserProfile[]>) => (this.appuserprofiles = res.body || []));
@@ -67,16 +68,8 @@ export class ProfilePartUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IProfilePart {
-    return {
-      ...new ProfilePart(),
-      id: this.editForm.get(['id'])!.value,
-      title: this.editForm.get(['title'])!.value,
-      type: this.editForm.get(['type'])!.value,
-      index: this.editForm.get(['index'])!.value,
-      order: this.editForm.get(['order'])!.value,
-      profile: this.editForm.get(['profile'])!.value,
-    };
+  trackById(index: number, item: IAppUserProfile): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProfilePart>>): void {
@@ -95,7 +88,15 @@ export class ProfilePartUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IAppUserProfile): any {
-    return item.id;
+  private createFromForm(): IProfilePart {
+    return {
+      ...new ProfilePart(),
+      id: this.editForm.get(['id'])!.value,
+      title: this.editForm.get(['title'])!.value,
+      type: this.editForm.get(['type'])!.value,
+      index: this.editForm.get(['index'])!.value,
+      order: this.editForm.get(['order'])!.value,
+      profile: this.editForm.get(['profile'])!.value,
+    };
   }
 }

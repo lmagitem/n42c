@@ -11,5 +11,6 @@ export interface LoggersResponse {
 }
 
 export class Log {
-  constructor(public name: string, public level: Level) {}
+  constructor(public name: string, public level: Level) {
+  }
 }

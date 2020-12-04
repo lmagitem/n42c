@@ -7,8 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -76,7 +75,8 @@ public class BlogPost implements Serializable {
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private Blog blog;
 
-    public BlogPost() {}
+    public BlogPost() {
+    }
 
     public BlogPost(Long id) {
         this.id = id;
@@ -95,17 +95,21 @@ public class BlogPost implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public BlogPost title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Instant getPublished() {
         return published;
+    }
+
+    public void setPublished(Instant published) {
+        this.published = published;
     }
 
     public BlogPost published(Instant published) {
@@ -113,12 +117,12 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setPublished(Instant published) {
-        this.published = published;
-    }
-
     public Instant getModified() {
         return modified;
+    }
+
+    public void setModified(Instant modified) {
+        this.modified = modified;
     }
 
     public BlogPost modified(Instant modified) {
@@ -126,12 +130,12 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setModified(Instant modified) {
-        this.modified = modified;
-    }
-
     public Set<LocalizedPostContent> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedPostContent> localizedPostContents) {
+        this.localizations = localizedPostContents;
     }
 
     public BlogPost localizations(Set<LocalizedPostContent> localizedPostContents) {
@@ -151,12 +155,12 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedPostContent> localizedPostContents) {
-        this.localizations = localizedPostContents;
-    }
-
     public Set<AppUser> getAuthors() {
         return authors;
+    }
+
+    public void setAuthors(Set<AppUser> appUsers) {
+        this.authors = appUsers;
     }
 
     public BlogPost authors(Set<AppUser> appUsers) {
@@ -176,12 +180,12 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setAuthors(Set<AppUser> appUsers) {
-        this.authors = appUsers;
-    }
-
     public Set<BlogCategory> getCategories() {
         return categories;
+    }
+
+    public void setCategories(Set<BlogCategory> blogCategories) {
+        this.categories = blogCategories;
     }
 
     public BlogPost categories(Set<BlogCategory> blogCategories) {
@@ -201,21 +205,17 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setCategories(Set<BlogCategory> blogCategories) {
-        this.categories = blogCategories;
-    }
-
     public Blog getBlog() {
         return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 
     public BlogPost blog(Blog blog) {
         this.blog = blog;
         return this;
-    }
-
-    public void setBlog(Blog blog) {
-        this.blog = blog;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

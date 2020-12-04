@@ -1,38 +1,43 @@
 <div class="row">
-  <div class="col-md-12">
-    <div [ngSwitch]="isAuthenticated()">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-          >You are logged in as user "{{ account.login }} ".</span
+    <div class="col-md-12">
+        <div [ngSwitch]="isAuthenticated()">
+            <div *ngSwitchCase="true" class="alert alert-success">
+        <span *ngIf="account" [translateValues]="{ username: account.login }" id="home-logged-message"
+              jhiTranslate="home.logged.message"
+        >You are logged in as user "{{ account.login }} ".</span
         >
-      </div>
-    </div>
+            </div>
+        </div>
 
-    <p style="font-size: 5em; text-align: center;">🛠</p>
-    <p style="font-size: 3em; text-align: center;">
-      <span jhiTranslate="home.construction">This website is currently under construction</span>
-    </p>
+        <p style="font-size: 5em; text-align: center;">🛠</p>
+        <p style="font-size: 3em; text-align: center;">
+            <span jhiTranslate="home.construction">This website is currently under construction</span>
+        </p>
 
-    <p style="font-size: 2em; text-align: center;">
+        <p style="font-size: 2em; text-align: center;">
       <span jhiTranslate="home.link.looking">If you are looking for my old blog, you can reach it at </span
-      ><a href="https://n42c.net/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.oldblog">by following this link</a
-      ><span>.</span>
-    </p>
+      ><a href="https://n42c.net/" jhiTranslate="home.link.oldblog" rel="noopener noreferrer" target="_blank">by
+            following this link</a
+        ><span>.</span>
+        </p>
 
-    <p>
-      <span jhiTranslate="home.like.find">You can find this project on </span>
-      <a href="https://github.com/lmagitem/n42c" target="_blank" rel="noopener noreferrer" jhiTranslate="home.like.github">GitHub</a>
-      <span jhiTranslate="home.like.follow">; follow me on Twitter: </span>
-      <a href="https://twitter.com/LucMagitem" target="_blank" rel="noopener noreferrer">@LucMagitem</a>
-      <span jhiTranslate="home.like.look">; take a look at my </span>
-      <a href="https://www.instagram.com/lucmagitem/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.like.instagram"
-        >Instagram account</a
-      >
-      <span jhiTranslate="home.like.or"> or my </span>
-      <a href="http://www.youtube.com/user/LukeMagitem" target="_blank" rel="noopener noreferrer" jhiTranslate="home.like.youtube"
-        >Youtube channel</a
-      >
-      <span jhiTranslate="home.like.mail">; and email me at: lucmagitem [at] gmail [dot] com.</span>
-    </p>
-  </div>
+        <p>
+            <span jhiTranslate="home.like.find">You can find this project on </span>
+            <a href="https://github.com/lmagitem/n42c" jhiTranslate="home.like.github" rel="noopener noreferrer"
+               target="_blank">GitHub</a>
+            <span jhiTranslate="home.like.follow">; follow me on Twitter: </span>
+            <a href="https://twitter.com/LucMagitem" rel="noopener noreferrer" target="_blank">@LucMagitem</a>
+            <span jhiTranslate="home.like.look">; take a look at my </span>
+            <a href="https://www.instagram.com/lucmagitem/" jhiTranslate="home.like.instagram" rel="noopener noreferrer"
+               target="_blank"
+            >Instagram account</a
+            >
+            <span jhiTranslate="home.like.or"> or my </span>
+            <a href="http://www.youtube.com/user/LukeMagitem" jhiTranslate="home.like.youtube" rel="noopener noreferrer"
+               target="_blank"
+            >Youtube channel</a
+            >
+            <span jhiTranslate="home.like.mail">; and email me at: lucmagitem [at] gmail [dot] com.</span>
+        </p>
+    </div>
 </div>

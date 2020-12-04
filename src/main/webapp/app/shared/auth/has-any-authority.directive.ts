@@ -21,7 +21,8 @@ export class HasAnyAuthorityDirective implements OnDestroy {
   private authorities: string[] = [];
   private authenticationSubscription?: Subscription;
 
-  constructor(private accountService: AccountService, private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef) {}
+  constructor(private accountService: AccountService, private templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef) {
+  }
 
   @Input()
   set jhiHasAnyAuthority(value: string | string[]) {

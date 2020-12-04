@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IBlog, Blog } from 'app/shared/model/blog.model';
-import { BlogService } from './blog.service';
-import { IAppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from 'app/entities/app-user/app-user.service';
+import {Blog, IBlog} from 'app/shared/model/blog.model';
+import {BlogService} from './blog.service';
+import {IAppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from 'app/entities/app-user/app-user.service';
 
 @Component({
   selector: 'jhi-blog-update',
@@ -29,10 +29,11 @@ export class BlogUpdateComponent implements OnInit {
     protected appUserService: AppUserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ blog }) => {
+    this.activatedRoute.data.subscribe(({blog}) => {
       this.updateForm(blog);
 
       this.appUserService.query().subscribe((res: HttpResponse<IAppUser[]>) => (this.appusers = res.body || []));
@@ -61,13 +62,8 @@ export class BlogUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IBlog {
-    return {
-      ...new Blog(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      author: this.editForm.get(['author'])!.value,
-    };
+  trackById(index: number, item: IAppUser): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBlog>>): void {
@@ -86,7 +82,12 @@ export class BlogUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IAppUser): any {
-    return item.id;
+  private createFromForm(): IBlog {
+    return {
+      ...new Blog(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      author: this.editForm.get(['author'])!.value,
+    };
   }
 }

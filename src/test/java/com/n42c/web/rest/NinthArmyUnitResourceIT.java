@@ -4,7 +4,6 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthArmyUnit;
 import com.n42c.repository.NinthArmyUnitRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link NinthArmyUnitResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthArmyUnitResourceIT {
@@ -47,7 +47,7 @@ public class NinthArmyUnitResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -56,9 +56,10 @@ public class NinthArmyUnitResourceIT {
             .selectableKeywords(DEFAULT_SELECTABLE_KEYWORDS);
         return ninthArmyUnit;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -123,7 +124,7 @@ public class NinthArmyUnitResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(ninthArmyUnit.getId().intValue())))
             .andExpect(jsonPath("$.[*].selectableKeywords").value(hasItem(DEFAULT_SELECTABLE_KEYWORDS)));
     }
-    
+
     @Test
     @Transactional
     public void getNinthArmyUnit() throws Exception {
@@ -137,6 +138,7 @@ public class NinthArmyUnitResourceIT {
             .andExpect(jsonPath("$.id").value(ninthArmyUnit.getId().intValue()))
             .andExpect(jsonPath("$.selectableKeywords").value(DEFAULT_SELECTABLE_KEYWORDS));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthArmyUnit() throws Exception {

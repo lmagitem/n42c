@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { IBlog } from 'app/shared/model/blog.model';
-import { ArrayUtils } from 'app/shared/util/arrays-utils';
-import { LocalizationUtils, IItemWithLocalizations } from 'app/shared/util/localization-utils';
-import { JhiLanguageService } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
+import {IBlog} from 'app/shared/model/blog.model';
+import {ArrayUtils} from 'app/shared/util/arrays-utils';
+import {IItemWithLocalizations, LocalizationUtils} from 'app/shared/util/localization-utils';
+import {JhiLanguageService} from 'ng-jhipster';
 
 @Component({
   selector: 'jhi-blog-post-detail',
@@ -19,7 +19,7 @@ export class BlogPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ blogPost }) => (this.blogPost = blogPost));
+    this.activatedRoute.data.subscribe(({blogPost}) => (this.blogPost = blogPost));
     /* eslint-disable no-console */
     console.log(this.blogPost);
     /* eslint-enable no-console */

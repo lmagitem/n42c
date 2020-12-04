@@ -1,7 +1,6 @@
 package com.n42c.repository;
 
 import com.n42c.N42CApp;
-
 import com.n42c.config.Constants;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.config.audit.AuditEventConverter;
@@ -23,8 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.n42c.repository.CustomAuditEventRepository.EVENT_DATA_COLUMN_MAX_LENGTH;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration tests for {@link CustomAuditEventRepository}.

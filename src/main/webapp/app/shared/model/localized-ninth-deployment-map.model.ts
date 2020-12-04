@@ -1,5 +1,5 @@
-import { INinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {INinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedNinthDeploymentMap {
   id?: number;
@@ -16,5 +16,6 @@ export class LocalizedNinthDeploymentMap implements ILocalizedNinthDeploymentMap
     public description?: any,
     public language?: Language,
     public deploymentMap?: INinthDeploymentMap
-  ) {}
+  ) {
+  }
 }

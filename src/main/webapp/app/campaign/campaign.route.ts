@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { CampaignViewComponent } from './campaign-view.component';
-import { CampaignListComponent } from './campaign-list.component';
-import { CampaignService } from './campaign.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, Routes} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {CampaignViewComponent} from './campaign-view.component';
+import {CampaignListComponent} from './campaign-list.component';
+import {CampaignService} from './campaign.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CampaignResolve implements Resolve<INinthCampaign> {
-  constructor(private campaignService: CampaignService) {}
+  constructor(private campaignService: CampaignService) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthCampaign> | Observable<never> {
     this.campaignService.enableRerouting(true);

@@ -1,78 +1,80 @@
 <div>
-  <h2 id="page-heading">
-    <span jhiTranslate="n42cApp.ninthBattle.home.title">Ninth Battles</span>
+    <h2 id="page-heading">
+        <span jhiTranslate="n42cApp.ninthBattle.home.title">Ninth Battles</span>
 
-    <button
-      id="jh-create-entity"
-      class="btn btn-primary float-right jh-create-entity create-ninth-battle"
-      [routerLink]="['/entities', 'ninth-battle', 'new']"
-    >
-      <fa-icon icon="plus"></fa-icon>
-      <span jhiTranslate="n42cApp.ninthBattle.home.createLabel">
+        <button
+            [routerLink]="['/entities', 'ninth-battle', 'new']"
+            class="btn btn-primary float-right jh-create-entity create-ninth-battle"
+            id="jh-create-entity"
+        >
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="n42cApp.ninthBattle.home.createLabel">
         Create a new Ninth Battle
       </span>
-    </button>
-  </h2>
+        </button>
+    </h2>
 
-  <jhi-alert-error></jhi-alert-error>
+    <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
+    <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="ninthBattles?.length === 0">
-    <span jhiTranslate="n42cApp.ninthBattle.home.notFound">No ninthBattles found</span>
-  </div>
+    <div *ngIf="ninthBattles?.length === 0" class="alert alert-warning" id="no-result">
+        <span jhiTranslate="n42cApp.ninthBattle.home.notFound">No ninthBattles found</span>
+    </div>
 
-  <div class="table-responsive" id="entities" *ngIf="ninthBattles && ninthBattles.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.name">Name</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.resolved">Resolved</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.campaignMoment">Campaign Moment</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.mission">Mission</span></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ninthBattle of ninthBattles; trackBy: trackId">
-          <td>
-            <a [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'view']">{{ ninthBattle.id }}</a>
-          </td>
-          <td>{{ ninthBattle.name }}</td>
-          <td>{{ ninthBattle.resolved }}</td>
-          <td>
-            <div *ngIf="ninthBattle.campaignMoment">
-              <a [routerLink]="['/entities', 'ninth-campaign-moment', ninthBattle.campaignMoment?.id, 'view']">{{
-                ninthBattle.campaignMoment?.id
-              }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="ninthBattle.mission">
-              <a [routerLink]="['/entities', 'ninth-mission', ninthBattle.mission?.id, 'view']">{{ ninthBattle.mission?.id }}</a>
-            </div>
-          </td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'view']" class="btn btn-info btn-sm">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+    <div *ngIf="ninthBattles && ninthBattles.length > 0" class="table-responsive" id="entities">
+        <table aria-describedby="page-heading" class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+                <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.name">Name</span></th>
+                <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.resolved">Resolved</span></th>
+                <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.campaignMoment">Campaign Moment</span></th>
+                <th scope="col"><span jhiTranslate="n42cApp.ninthBattle.mission">Mission</span></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ninthBattle of ninthBattles; trackBy: trackId">
+                <td>
+                    <a [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'view']">{{ ninthBattle.id }}</a>
+                </td>
+                <td>{{ ninthBattle.name }}</td>
+                <td>{{ ninthBattle.resolved }}</td>
+                <td>
+                    <div *ngIf="ninthBattle.campaignMoment">
+                        <a [routerLink]="['/entities', 'ninth-campaign-moment', ninthBattle.campaignMoment?.id, 'view']">{{
+                            ninthBattle.campaignMoment?.id
+                            }}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="ninthBattle.mission">
+                        <a [routerLink]="['/entities', 'ninth-mission', ninthBattle.mission?.id, 'view']">{{ ninthBattle.mission?.id }}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'view']" class="btn btn-info btn-sm"
+                                type="submit">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
 
-              <button type="submit" [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'edit']" class="btn btn-primary btn-sm">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                        <button [routerLink]="['/entities', 'ninth-battle', ninthBattle.id, 'edit']" class="btn btn-primary btn-sm"
+                                type="submit">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
 
-              <button type="submit" (click)="delete(ninthBattle)" class="btn btn-danger btn-sm">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                        <button (click)="delete(ninthBattle)" class="btn btn-danger btn-sm" type="submit">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

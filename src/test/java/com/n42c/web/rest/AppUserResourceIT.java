@@ -4,41 +4,37 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUser;
 import com.n42c.domain.User;
+import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.repository.AppUserRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.AppUserRights;
-import com.n42c.domain.enumeration.AppUserRights;
-import com.n42c.domain.enumeration.AppUserRights;
-import com.n42c.domain.enumeration.AppUserRights;
 /**
  * Integration tests for the {@link AppUserResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
@@ -81,7 +77,7 @@ public class AppUserResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -101,9 +97,10 @@ public class AppUserResourceIT {
         appUser.setUser(user);
         return appUser;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -305,7 +302,7 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.[*].profileRights").value(hasItem(DEFAULT_PROFILE_RIGHTS.toString())))
             .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllAppUsersWithEagerRelationshipsIsEnabled() throws Exception {
         when(appUserRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
@@ -345,6 +342,7 @@ public class AppUserResourceIT {
             .andExpect(jsonPath("$.profileRights").value(DEFAULT_PROFILE_RIGHTS.toString()))
             .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingAppUser() throws Exception {

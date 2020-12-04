@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { IAppUserProfile, AppUserProfile } from 'app/shared/model/app-user-profile.model';
-import { IAppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from 'app/entities/app-user/app-user.service';
-import { AppUserProfileService } from 'app/entities/app-user-profile/app-user-profile.service';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {AppUserProfile, IAppUserProfile} from 'app/shared/model/app-user-profile.model';
+import {IAppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from 'app/entities/app-user/app-user.service';
+import {AppUserProfileService} from 'app/entities/app-user-profile/app-user-profile.service';
 
 @Component({
   selector: 'jhi-app-user-profile-update',
@@ -32,10 +32,11 @@ export class AppUserProfileUpdateComponent implements OnInit {
     protected appUserService: AppUserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ appUserProfile }) => {
+    this.activatedRoute.data.subscribe(({appUserProfile}) => {
       this.updateForm(appUserProfile);
 
       this.appUserService.query().subscribe((res: HttpResponse<IAppUser[]>) => (this.appusers = res.body || []));
@@ -68,17 +69,8 @@ export class AppUserProfileUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IAppUserProfile {
-    return {
-      ...new AppUserProfile(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      title: this.editForm.get(['title'])!.value,
-      summary: this.editForm.get(['summary'])!.value,
-      headerBackgroundURI: this.editForm.get(['headerBackgroundURI'])!.value,
-      language: this.editForm.get(['language'])!.value,
-      user: this.editForm.get(['user'])!.value,
-    };
+  trackById(index: number, item: IAppUser): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IAppUserProfile>>): void {
@@ -97,7 +89,16 @@ export class AppUserProfileUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IAppUser): any {
-    return item.id;
+  private createFromForm(): IAppUserProfile {
+    return {
+      ...new AppUserProfile(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      title: this.editForm.get(['title'])!.value,
+      summary: this.editForm.get(['summary'])!.value,
+      headerBackgroundURI: this.editForm.get(['headerBackgroundURI'])!.value,
+      language: this.editForm.get(['language'])!.value,
+      user: this.editForm.get(['user'])!.value,
+    };
   }
 }

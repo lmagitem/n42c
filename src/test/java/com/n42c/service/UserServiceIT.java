@@ -9,7 +9,6 @@ import com.n42c.domain.enumeration.AppUserRights;
 import com.n42c.repository.UserRepository;
 import com.n42c.security.AuthoritiesConstants;
 import com.n42c.service.dto.UserDTO;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

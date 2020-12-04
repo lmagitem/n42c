@@ -1,53 +1,59 @@
 <div>
-  <h1 id="page-heading" *ngIf="blog !== undefined || blog !== null">
-    <span>{{ getLocalizedField(blog, 'title') }}</span>
+    <h1 *ngIf="blog !== undefined || blog !== null" id="page-heading">
+        <span>{{ getLocalizedField(blog, 'title') }}</span>
 
-    <button
-      id="jh-create-entity"
-      class="btn btn-primary float-right jh-create-entity create-blog-post"
-      *ngIf="blog !== undefined && blog !== null"
-      [routerLink]="['/blog', blog?.id, 'post', 'new']"
-    >
-      <fa-icon icon="plus"></fa-icon>
-      <span jhiTranslate="n42cApp.blogPost.home.createLabel">
+        <button
+            *ngIf="blog !== undefined && blog !== null"
+            [routerLink]="['/blog', blog?.id, 'post', 'new']"
+            class="btn btn-primary float-right jh-create-entity create-blog-post"
+            id="jh-create-entity"
+        >
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="n42cApp.blogPost.home.createLabel">
         Create a new Blog Post
       </span>
-    </button>
-  </h1>
-  <h1 id="page-heading" *ngIf="blog === undefined || blog === null">
-    <span jhiTranslate="n42cApp.blogPost.home.title">Recent entries</span>
-  </h1>
+        </button>
+    </h1>
+    <h1 *ngIf="blog === undefined || blog === null" id="page-heading">
+        <span jhiTranslate="n42cApp.blogPost.home.title">Recent entries</span>
+    </h1>
 
-  <jhi-alert-error></jhi-alert-error>
+    <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
+    <jhi-alert></jhi-alert>
 
-  <div class="table-responsive" *ngIf="blogPosts && blogPosts.length > 0">
-    <div infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-      <article *ngFor="let blogPost of blogPosts; trackBy: trackId">
-        <a [routerLink]="['/blog', blogPost.blog?.id, 'post', blogPost.id]">
-          <h2>{{ getLocalizedField(blogPost, 'title') }}</h2>
-        </a>
-        <small
-          >Posted in <a [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ getLocalizedField(blogPost.blog, 'name') }}</a
-          >, {{ blogPost.published | date: 'medium':undefined:locale }} by {{ arrayToString(blogPost.authors, 'displayedName') }}.</small
-        >
-        <div [innerHTML]="getLocalizedField(blogPost, 'excerpt', 'content')"></div>
-        <div class="btn-group mb-2 mt-1">
-          <button type="submit" [routerLink]="['/blog', blogPost.blog?.id, 'post', blogPost.id, 'edit']" class="btn btn-primary btn-sm">
-            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-          </button>
-          <button type="submit" (click)="delete(blogPost)" class="btn btn-danger btn-sm">
-            <fa-icon icon="times"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-          </button>
+    <div *ngIf="blogPosts && blogPosts.length > 0" class="table-responsive">
+        <div (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+             [infiniteScrollDistance]="0"
+             infinite-scroll>
+            <article *ngFor="let blogPost of blogPosts; trackBy: trackId">
+                <a [routerLink]="['/blog', blogPost.blog?.id, 'post', blogPost.id]">
+                    <h2>{{ getLocalizedField(blogPost, 'title') }}</h2>
+                </a>
+                <small
+                >Posted in <a
+                    [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ getLocalizedField(blogPost.blog, 'name') }}</a
+                >, {{ blogPost.published | date: 'medium':undefined:locale }}
+                    by {{ arrayToString(blogPost.authors, 'displayedName') }}.</small
+                >
+                <div [innerHTML]="getLocalizedField(blogPost, 'excerpt', 'content')"></div>
+                <div class="btn-group mb-2 mt-1">
+                    <button [routerLink]="['/blog', blogPost.blog?.id, 'post', blogPost.id, 'edit']"
+                            class="btn btn-primary btn-sm"
+                            type="submit">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                    <button (click)="delete(blogPost)" class="btn btn-danger btn-sm" type="submit">
+                        <fa-icon icon="times"></fa-icon>
+                        <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                    </button>
+                </div>
+            </article>
         </div>
-      </article>
     </div>
-  </div>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="blogPosts?.length === 0">
-    <span jhiTranslate="n42cApp.blogPost.home.notFound">No blogPosts found</span>
-  </div>
+    <div *ngIf="blogPosts?.length === 0" class="alert alert-warning" id="no-result">
+        <span jhiTranslate="n42cApp.blogPost.home.notFound">No blogPosts found</span>
+    </div>
 </div>

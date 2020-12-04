@@ -5,8 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -58,13 +57,13 @@ public class NinthBattle implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public NinthBattle name(String name) {
         this.name = name;
         return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Boolean isResolved() {
@@ -84,6 +83,10 @@ public class NinthBattle implements Serializable {
         return armies;
     }
 
+    public void setArmies(Set<NinthArmyMoment> ninthArmyMoments) {
+        this.armies = ninthArmyMoments;
+    }
+
     public NinthBattle armies(Set<NinthArmyMoment> ninthArmyMoments) {
         this.armies = ninthArmyMoments;
         return this;
@@ -101,12 +104,12 @@ public class NinthBattle implements Serializable {
         return this;
     }
 
-    public void setArmies(Set<NinthArmyMoment> ninthArmyMoments) {
-        this.armies = ninthArmyMoments;
-    }
-
     public NinthCampaignMoment getCampaignMoment() {
         return campaignMoment;
+    }
+
+    public void setCampaignMoment(NinthCampaignMoment ninthCampaignMoment) {
+        this.campaignMoment = ninthCampaignMoment;
     }
 
     public NinthBattle campaignMoment(NinthCampaignMoment ninthCampaignMoment) {
@@ -114,21 +117,17 @@ public class NinthBattle implements Serializable {
         return this;
     }
 
-    public void setCampaignMoment(NinthCampaignMoment ninthCampaignMoment) {
-        this.campaignMoment = ninthCampaignMoment;
-    }
-
     public NinthMission getMission() {
         return mission;
+    }
+
+    public void setMission(NinthMission ninthMission) {
+        this.mission = ninthMission;
     }
 
     public NinthBattle mission(NinthMission ninthMission) {
         this.mission = ninthMission;
         return this;
-    }
-
-    public void setMission(NinthMission ninthMission) {
-        this.mission = ninthMission;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

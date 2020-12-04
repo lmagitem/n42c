@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IAppUser, AppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from './app-user.service';
-import { AppUserComponent } from './app-user.component';
-import { AppUserDetailComponent } from './app-user-detail.component';
-import { AppUserUpdateComponent } from './app-user-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {AppUser, IAppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from './app-user.service';
+import {AppUserComponent} from './app-user.component';
+import {AppUserDetailComponent} from './app-user-detail.component';
+import {AppUserUpdateComponent} from './app-user-update.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AppUserResolve implements Resolve<IAppUser> {
-  constructor(private service: AppUserService, private router: Router) {}
+  constructor(private service: AppUserService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<IAppUser> | Observable<never> {
     const id = route.params['id'];

@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { IProduct } from 'app/shared/model/product.model';
-import { ProductService } from './product.service';
+import {IProduct} from 'app/shared/model/product.model';
+import {ProductService} from './product.service';
 
 @Component({
   templateUrl: './product-delete-dialog.component.html',
@@ -11,7 +11,8 @@ import { ProductService } from './product.service';
 export class ProductDeleteDialogComponent {
   product?: IProduct;
 
-  constructor(protected productService: ProductService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+  constructor(protected productService: ProductService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

@@ -1,5 +1,5 @@
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedNinthObjective {
   id?: number;
@@ -16,5 +16,6 @@ export class LocalizedNinthObjective implements ILocalizedNinthObjective {
     public description?: any,
     public language?: Language,
     public objective?: INinthObjective
-  ) {}
+  ) {
+  }
 }

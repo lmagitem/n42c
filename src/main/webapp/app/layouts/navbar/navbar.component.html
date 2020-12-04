@@ -1,878 +1,899 @@
 <nav class="navbar navbar-dark navbar-expand-md">
-  <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-    <span class="logo-img"></span> <span class="navbar-version" *jhiHasAnyAuthority="'ROLE_ADMIN'">{{ version }}</span>
-  </a>
-  <a
-    class="navbar-toggler d-lg-none"
-    href="javascript:void(0);"
-    data-toggle="collapse"
-    data-target="#navbarResponsive"
-    aria-controls="navbarResponsive"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-    (click)="toggleNavbar()"
-  >
-    <fa-icon icon="bars"></fa-icon>
-  </a>
-  <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+    <a (click)="collapseNavbar()" class="navbar-brand logo" routerLink="/">
+        <span class="logo-img"></span> <span *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                             class="navbar-version">{{ version }}</span>
+    </a>
+    <a
+        (click)="toggleNavbar()"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        class="navbar-toggler d-lg-none"
+        data-target="#navbarResponsive"
+        data-toggle="collapse"
+        href="javascript:void(0);"
+    >
+        <fa-icon icon="bars"></fa-icon>
+    </a>
+    <div [ngSwitch]="isAuthenticated()" [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse collapse"
+         id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li [routerLinkActiveOptions]="{ exact: true }" class="nav-item" routerLinkActive="active">
+                <a (click)="collapseNavbar()" class="nav-link" routerLink="/">
           <span>
             <fa-icon icon="home"></fa-icon>
             <span jhiTranslate="global.menu.home">Home</span>
           </span>
-        </a>
-      </li>
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" routerLink="blog" (click)="collapseNavbar()">
+                </a>
+            </li>
+            <li [routerLinkActiveOptions]="{ exact: true }" class="nav-item" routerLinkActive="active">
+                <a (click)="collapseNavbar()" class="nav-link" routerLink="blog">
           <span>
             <fa-icon icon="pencil-alt"></fa-icon>
             <span jhiTranslate="global.menu.blog">Blog</span>
           </span>
-        </a>
-      </li>
-      <!--
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" routerLink="profile" (click)="collapseNavbar()">
-            <span>
-              <fa-icon icon="id-card"></fa-icon>
-              <span jhiTranslate="global.menu.profile">Profile</span>
-            </span>
-          </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *jhiHasAnyAuthority="'ROLE_ADMIN'">
-          <a class="nav-link" routerLink="shop" (click)="collapseNavbar()">
-            <span>
-              <fa-icon icon="shopping-basket"></fa-icon>
-              <span jhiTranslate="global.menu.shop">Shop</span>
-            </span>
-          </a>
-        </li>
-      -->
-      <li
-        class="nav-item"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        *jhiHasAnyAuthority="['ROLE_PLAYER', 'ROLE_ADMIN']"
-      >
-        <a class="nav-link" routerLink="campaign" (click)="collapseNavbar()">
+                </a>
+            </li>
+            <!--
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="nav-link" routerLink="profile" (click)="collapseNavbar()">
+                  <span>
+                    <fa-icon icon="id-card"></fa-icon>
+                    <span jhiTranslate="global.menu.profile">Profile</span>
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                <a class="nav-link" routerLink="shop" (click)="collapseNavbar()">
+                  <span>
+                    <fa-icon icon="shopping-basket"></fa-icon>
+                    <span jhiTranslate="global.menu.shop">Shop</span>
+                  </span>
+                </a>
+              </li>
+            -->
+            <li
+                *jhiHasAnyAuthority="['ROLE_PLAYER', 'ROLE_ADMIN']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="nav-item"
+                routerLinkActive="active"
+            >
+                <a (click)="collapseNavbar()" class="nav-link" routerLink="campaign">
           <span>
             <fa-icon icon="rocket"></fa-icon>
             <span jhiTranslate="global.menu.campaign">Campaign</span>
           </span>
-        </a>
-      </li>
-      <!--
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *jhiHasAnyAuthority="'ROLE_USER'">
-          <a class="nav-link" routerLink="scriptorium" (click)="collapseNavbar()">
-            <span>
-              <fa-icon icon="compass"></fa-icon>
-              <span jhiTranslate="global.menu.scriptorium">Scriptorium</span>
-            </span>
-          </a>
-        </li>
-      -->
-      <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-      <li
-        *jhiHasAnyAuthority="'ROLE_ADMIN'"
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                </a>
+            </li>
+            <!--
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *jhiHasAnyAuthority="'ROLE_USER'">
+                <a class="nav-link" routerLink="scriptorium" (click)="collapseNavbar()">
+                  <span>
+                    <fa-icon icon="compass"></fa-icon>
+                    <span jhiTranslate="global.menu.scriptorium">Scriptorium</span>
+                  </span>
+                </a>
+              </li>
+            -->
+            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+            <li
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="nav-item dropdown pointer"
+                display="dynamic"
+                ngbDropdown
+                routerLinkActive="active"
+            >
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="entity-menu" ngbDropdownToggle>
           <span>
             <fa-icon icon="th-list"></fa-icon>
             <span jhiTranslate="global.menu.entities.main">
               Entities
             </span>
           </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/app-user"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
+                </a>
+                <ul aria-labelledby="entity-menu" class="dropdown-menu" ngbDropdownMenu>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/app-user"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.appUser">App User</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/shop"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.shop">Shop</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/product"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.product">Product</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-product"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedProduct">Localized Product</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/blog"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.blog">Blog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-blog"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedBlog">Localized Blog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/blog-post"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.blogPost">Blog Post</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-post-content"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedPostContent">Localized Post Content</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/blog-category"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.blogCategory">Blog Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-blog-category"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedBlogCategory">Localized Blog Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/app-user-profile"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.appUserProfile">App User Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/profile-part"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.profilePart">Profile Part</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/profile-part-simple-item"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.profilePartSimpleItem">Profile Part Simple Item</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/profile-part-precise-item"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.profilePartPreciseItem">Profile Part Precise Item</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/profile-part-linked-experience"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.profilePartLinkedExperience">Profile Part Linked Experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/profile-part-skill-category"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.profilePartSkillCategory">Profile Part Skill Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/profile-part-skill"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.profilePartSkill">Profile Part Skill</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/player"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.player">Player</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-campaign"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthCampaign">Ninth Campaign</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-campaign-moment"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthCampaignMoment">Ninth Campaign Moment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-battle"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthBattle">Ninth Battle</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-army"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthArmy">Ninth Army</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-army-moment"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthArmyMoment">Ninth Army Moment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-army-unit"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthArmyUnit">Ninth Army Unit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-army-unit-moment"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthArmyUnitMoment">Ninth Army Unit Moment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-unit"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthUnit">Ninth Unit</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-unit-moment"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthUnitMoment">Ninth Unit Moment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-mission"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthMission">Ninth Mission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-ninth-mission"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedNinthMission">Localized Ninth Mission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-deployment-map"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthDeploymentMap">Ninth Deployment Map</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-ninth-deployment-map"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthDeploymentMap">Localized Ninth Deployment Map</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-mission-rule"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthMissionRule">Ninth Mission Rule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-ninth-mission-rule"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthMissionRule">Localized Ninth Mission Rule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-stratagem-group"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthStratagemGroup">Ninth Stratagem Group</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-ninth-stratagem-group"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthStratagemGroup">Localized Ninth Stratagem Group</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-stratagem"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthStratagem">Ninth Stratagem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-ninth-stratagem"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedNinthStratagem">Localized Ninth Stratagem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/ninth-objective"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthObjective">Ninth Objective</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="entities/localized-ninth-objective"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedNinthObjective">Localized Ninth Objective</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="ninth-campaign"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthCampaign">Ninth Campaign</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-product"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedProduct">Localized Product</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-post-content"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedPostContent">Localized Post Content</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="app-user-profile"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.appUserProfile">App User Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="profile-part-precise-item"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.profilePartPreciseItem">Profile Part Precise Item</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="profile-part-linked-experience"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.profilePartLinkedExperience">Profile Part Linked Experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="ninth-campaign-moment"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthCampaignMoment">Ninth Campaign Moment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="ninth-army-moment"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthArmyMoment">Ninth Army Moment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-ninth-mission"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedNinthMission">Localized Ninth Mission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-ninth-deployment-map"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthDeploymentMap">Localized Ninth Deployment Map</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-ninth-mission-rule"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthMissionRule">Localized Ninth Mission Rule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-ninth-stratagem"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedNinthStratagem">Localized Ninth Stratagem</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-ninth-objective"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span
+                                jhiTranslate="global.menu.entities.localizedNinthObjective">Localized Ninth Objective</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="ninth-battle"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.ninthBattle">Ninth Battle</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="localized-ninth-stratagem-group"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localizedNinthStratagemGroup">Localized Ninth Stratagem Group</span>
+                        </a>
+                    </li>
+                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                </ul>
+            </li>
+            <li
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="nav-item dropdown pointer"
+                display="dynamic"
+                ngbDropdown
+                routerLinkActive="active"
             >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.appUser">App User</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/shop"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.shop">Shop</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/product"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.product">Product</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-product"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedProduct">Localized Product</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/blog"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.blog">Blog</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-blog"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedBlog">Localized Blog</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/blog-post"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.blogPost">Blog Post</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-post-content"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedPostContent">Localized Post Content</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/blog-category"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.blogCategory">Blog Category</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-blog-category"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedBlogCategory">Localized Blog Category</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/app-user-profile"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.appUserProfile">App User Profile</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/profile-part"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePart">Profile Part</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/profile-part-simple-item"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartSimpleItem">Profile Part Simple Item</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/profile-part-precise-item"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartPreciseItem">Profile Part Precise Item</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/profile-part-linked-experience"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartLinkedExperience">Profile Part Linked Experience</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/profile-part-skill-category"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartSkillCategory">Profile Part Skill Category</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/profile-part-skill"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartSkill">Profile Part Skill</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/player"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.player">Player</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-campaign"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthCampaign">Ninth Campaign</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-campaign-moment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthCampaignMoment">Ninth Campaign Moment</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-battle"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthBattle">Ninth Battle</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-army"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthArmy">Ninth Army</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-army-moment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthArmyMoment">Ninth Army Moment</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-army-unit"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthArmyUnit">Ninth Army Unit</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-army-unit-moment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthArmyUnitMoment">Ninth Army Unit Moment</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-unit"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthUnit">Ninth Unit</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-unit-moment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthUnitMoment">Ninth Unit Moment</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-mission"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthMission">Ninth Mission</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-ninth-mission"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthMission">Localized Ninth Mission</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-deployment-map"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthDeploymentMap">Ninth Deployment Map</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-ninth-deployment-map"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthDeploymentMap">Localized Ninth Deployment Map</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-mission-rule"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthMissionRule">Ninth Mission Rule</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-ninth-mission-rule"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthMissionRule">Localized Ninth Mission Rule</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-stratagem-group"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthStratagemGroup">Ninth Stratagem Group</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-ninth-stratagem-group"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthStratagemGroup">Localized Ninth Stratagem Group</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-stratagem"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthStratagem">Ninth Stratagem</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-ninth-stratagem"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthStratagem">Localized Ninth Stratagem</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/ninth-objective"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthObjective">Ninth Objective</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="entities/localized-ninth-objective"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthObjective">Localized Ninth Objective</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="ninth-campaign"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthCampaign">Ninth Campaign</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-product"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedProduct">Localized Product</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-post-content"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedPostContent">Localized Post Content</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="app-user-profile"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.appUserProfile">App User Profile</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="profile-part-precise-item"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartPreciseItem">Profile Part Precise Item</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="profile-part-linked-experience"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.profilePartLinkedExperience">Profile Part Linked Experience</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="ninth-campaign-moment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthCampaignMoment">Ninth Campaign Moment</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="ninth-army-moment"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthArmyMoment">Ninth Army Moment</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-ninth-mission"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthMission">Localized Ninth Mission</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-ninth-deployment-map"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthDeploymentMap">Localized Ninth Deployment Map</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-ninth-mission-rule"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthMissionRule">Localized Ninth Mission Rule</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-ninth-stratagem"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthStratagem">Localized Ninth Stratagem</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-ninth-objective"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthObjective">Localized Ninth Objective</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="ninth-battle"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.ninthBattle">Ninth Battle</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="localized-ninth-stratagem-group"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.entities.localizedNinthStratagemGroup">Localized Ninth Stratagem Group</span>
-            </a>
-          </li>
-          <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-        </ul>
-      </li>
-      <li
-        *jhiHasAnyAuthority="'ROLE_ADMIN'"
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="admin-menu" ngbDropdownToggle>
           <span>
             <fa-icon icon="user-plus"></fa-icon>
             <span jhiTranslate="global.menu.admin.main">Administration</span>
           </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
-          <li>
-            <a class="dropdown-item" routerLink="admin/state" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="cubes" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.state">App State</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.health">Health</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="hdd" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="admin/audits" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="bell" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.audits">Audits</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.logs">Logs</span>
-            </a>
-          </li>
-          <li *ngIf="swaggerEnabled">
-            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
-              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.apidocs">API</span>
-            </a>
-          </li>
-          <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-          <li *ngIf="!inProduction">
-            <a class="dropdown-item" href="./h2-console" target="_tab" (click)="collapseNavbar()">
-              <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.admin.database">Database</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
+                </a>
+                <ul aria-labelledby="admin-menu" class="dropdown-menu" ngbDropdownMenu>
+                    <li>
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/state"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="cubes"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.state">App State</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/metrics"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="tachometer-alt"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/health"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="heart"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.health">Health</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/configuration"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="hdd"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/audits"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="bell"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.audits">Audits</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/logs"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="tasks"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.logs">Logs</span>
+                        </a>
+                    </li>
+                    <li *ngIf="swaggerEnabled">
+                        <a (click)="collapseNavbar()" class="dropdown-item" routerLink="admin/docs"
+                           routerLinkActive="active">
+                            <fa-icon [fixedWidth]="true" icon="book"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.apidocs">API</span>
+                        </a>
+                    </li>
+                    <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                    <li *ngIf="!inProduction">
+                        <a (click)="collapseNavbar()" class="dropdown-item" href="./h2-console" target="_tab">
+                            <fa-icon [fixedWidth]="true" icon="database"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.database">Database</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li *ngIf="languages && languages.length > 1" class="nav-item dropdown pointer" display="dynamic"
+                ngbDropdown>
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="languagesnavBarDropdown"
+                   ngbDropdownToggle>
           <span>
             <fa-icon icon="flag"></fa-icon>
             <span jhiTranslate="global.menu.language">Language</span>
           </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
-          <li *ngFor="let language of languages">
-            <a
-              class="dropdown-item"
-              [jhiActiveMenu]="language"
-              href="javascript:void(0);"
-              (click)="changeLanguage(language); collapseNavbar()"
-              >{{ language | findLanguageFromKey }}</a
+                </a>
+                <ul aria-labelledby="languagesnavBarDropdown" class="dropdown-menu" ngbDropdownMenu>
+                    <li *ngFor="let language of languages">
+                        <a
+                            (click)="changeLanguage(language); collapseNavbar()"
+                            [jhiActiveMenu]="language"
+                            class="dropdown-item"
+                            href="javascript:void(0);"
+                        >{{ language | findLanguageFromKey }}</a
+                        >
+                    </li>
+                </ul>
+            </li>
+            <li
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="nav-item dropdown pointer"
+                display="dynamic"
+                ngbDropdown
+                routerLinkActive="active"
             >
-          </li>
-        </ul>
-      </li>
-      <li
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="account-menu" ngbDropdownToggle>
           <span *ngIf="!getImageUrl()">
             <fa-icon icon="user"></fa-icon>
             <span jhiTranslate="global.menu.account.main">
               Account
             </span>
           </span>
-          <span *ngIf="getImageUrl()">
-            <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar" />
+                    <span *ngIf="getImageUrl()">
+            <img [src]="getImageUrl()" alt="Avatar" class="profile-image rounded-circle"/>
           </span>
-        </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-          <li></li>
-          <li *ngSwitchCase="true">
-            <a
-              class="dropdown-item"
-              routerLink="user/account"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.account.mine">My Account</span>
-            </a>
-          </li>
-          <li *ngSwitchCase="true">
-            <a class="dropdown-item" (click)="logout()" id="logout">
-              <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.account.logout">Sign out</span>
-            </a>
-          </li>
-          <li *ngSwitchCase="false">
-            <a class="dropdown-item" (click)="login()" id="login">
-              <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-              <span jhiTranslate="global.menu.account.login">Sign in</span>
-            </a>
-          </li>
+                </a>
+                <ul aria-labelledby="account-menu" class="dropdown-menu" ngbDropdownMenu>
+                    <li></li>
+                    <li *ngSwitchCase="true">
+                        <a
+                            (click)="collapseNavbar()"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            class="dropdown-item"
+                            routerLink="user/account"
+                            routerLinkActive="active"
+                        >
+                            <fa-icon [fixedWidth]="true" icon="asterisk"></fa-icon>
+                            <span jhiTranslate="global.menu.account.mine">My Account</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="true">
+                        <a (click)="logout()" class="dropdown-item" id="logout">
+                            <fa-icon [fixedWidth]="true" icon="sign-out-alt"></fa-icon>
+                            <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="false">
+                        <a (click)="login()" class="dropdown-item" id="login">
+                            <fa-icon [fixedWidth]="true" icon="sign-in-alt"></fa-icon>
+                            <span jhiTranslate="global.menu.account.login">Sign in</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
-  </div>
+    </div>
 </nav>

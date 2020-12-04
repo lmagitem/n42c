@@ -1,6 +1,6 @@
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { ILocalizedBlog } from 'app/shared/model/localized-blog.model';
-import { IAppUser } from 'app/shared/model/app-user.model';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
+import {ILocalizedBlog} from 'app/shared/model/localized-blog.model';
+import {IAppUser} from 'app/shared/model/app-user.model';
 
 export interface IBlog {
   id?: number;
@@ -17,5 +17,6 @@ export class Blog implements IBlog {
     public posts?: IBlogPost[],
     public localizations?: ILocalizedBlog[],
     public author?: IAppUser
-  ) {}
+  ) {
+  }
 }

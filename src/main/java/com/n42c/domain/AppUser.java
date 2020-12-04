@@ -1,21 +1,18 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.n42c.domain.enumeration.AppUserRights;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.AppUserRights;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * AppUsers of the app.
@@ -44,7 +41,7 @@ public class AppUser implements Serializable {
     /**
      * The name shown throughout the app.
      */
-    
+
     @ApiModelProperty(value = "The name shown throughout the app.")
     @Column(name = "displayed_name", unique = true)
     private String displayedName;
@@ -109,15 +106,15 @@ public class AppUser implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "app_user_given_friendships",
-               joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
     private Set<AppUser> givenFriendships = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "app_user_asked_friend_requests",
-               joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
     private Set<AppUser> askedFriendRequests = new HashSet<>();
 
     @OneToOne(mappedBy = "appUser")
@@ -165,26 +162,26 @@ public class AppUser implements Serializable {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public AppUser userName(String userName) {
         this.userName = userName;
         return this;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getDisplayedName() {
         return displayedName;
     }
 
+    public void setDisplayedName(String displayedName) {
+        this.displayedName = displayedName;
+    }
+
     public AppUser displayedName(String displayedName) {
         this.displayedName = displayedName;
         return this;
-    }
-
-    public void setDisplayedName(String displayedName) {
-        this.displayedName = displayedName;
     }
 
     public Boolean isAdmin() {
@@ -204,17 +201,21 @@ public class AppUser implements Serializable {
         return shopRights;
     }
 
+    public void setShopRights(AppUserRights shopRights) {
+        this.shopRights = shopRights;
+    }
+
     public AppUser shopRights(AppUserRights shopRights) {
         this.shopRights = shopRights;
         return this;
     }
 
-    public void setShopRights(AppUserRights shopRights) {
-        this.shopRights = shopRights;
-    }
-
     public AppUserRights getBlogRights() {
         return blogRights;
+    }
+
+    public void setBlogRights(AppUserRights blogRights) {
+        this.blogRights = blogRights;
     }
 
     public AppUser blogRights(AppUserRights blogRights) {
@@ -222,12 +223,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setBlogRights(AppUserRights blogRights) {
-        this.blogRights = blogRights;
-    }
-
     public AppUserRights getProfileRights() {
         return profileRights;
+    }
+
+    public void setProfileRights(AppUserRights profileRights) {
+        this.profileRights = profileRights;
     }
 
     public AppUser profileRights(AppUserRights profileRights) {
@@ -235,12 +236,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setProfileRights(AppUserRights profileRights) {
-        this.profileRights = profileRights;
-    }
-
     public AppUserRights getScriptoriumRights() {
         return scriptoriumRights;
+    }
+
+    public void setScriptoriumRights(AppUserRights scriptoriumRights) {
+        this.scriptoriumRights = scriptoriumRights;
     }
 
     public AppUser scriptoriumRights(AppUserRights scriptoriumRights) {
@@ -248,12 +249,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setScriptoriumRights(AppUserRights scriptoriumRights) {
-        this.scriptoriumRights = scriptoriumRights;
-    }
-
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public AppUser user(User user) {
@@ -261,12 +262,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Set<Blog> getBlogs() {
         return blogs;
+    }
+
+    public void setBlogs(Set<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     public AppUser blogs(Set<Blog> blogs) {
@@ -286,12 +287,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setBlogs(Set<Blog> blogs) {
-        this.blogs = blogs;
-    }
-
     public Set<AppUserProfile> getProfiles() {
         return profiles;
+    }
+
+    public void setProfiles(Set<AppUserProfile> appUserProfiles) {
+        this.profiles = appUserProfiles;
     }
 
     public AppUser profiles(Set<AppUserProfile> appUserProfiles) {
@@ -311,12 +312,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setProfiles(Set<AppUserProfile> appUserProfiles) {
-        this.profiles = appUserProfiles;
-    }
-
     public Set<AppUser> getGivenFriendships() {
         return givenFriendships;
+    }
+
+    public void setGivenFriendships(Set<AppUser> appUsers) {
+        this.givenFriendships = appUsers;
     }
 
     public AppUser givenFriendships(Set<AppUser> appUsers) {
@@ -336,12 +337,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setGivenFriendships(Set<AppUser> appUsers) {
-        this.givenFriendships = appUsers;
-    }
-
     public Set<AppUser> getAskedFriendRequests() {
         return askedFriendRequests;
+    }
+
+    public void setAskedFriendRequests(Set<AppUser> appUsers) {
+        this.askedFriendRequests = appUsers;
     }
 
     public AppUser askedFriendRequests(Set<AppUser> appUsers) {
@@ -361,12 +362,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setAskedFriendRequests(Set<AppUser> appUsers) {
-        this.askedFriendRequests = appUsers;
-    }
-
     public Player getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public AppUser player(Player player) {
@@ -374,12 +375,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Set<AppUser> getReceivedFriendships() {
         return receivedFriendships;
+    }
+
+    public void setReceivedFriendships(Set<AppUser> appUsers) {
+        this.receivedFriendships = appUsers;
     }
 
     public AppUser receivedFriendships(Set<AppUser> appUsers) {
@@ -399,12 +400,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setReceivedFriendships(Set<AppUser> appUsers) {
-        this.receivedFriendships = appUsers;
-    }
-
     public Set<AppUser> getPendingFriendRequests() {
         return pendingFriendRequests;
+    }
+
+    public void setPendingFriendRequests(Set<AppUser> appUsers) {
+        this.pendingFriendRequests = appUsers;
     }
 
     public AppUser pendingFriendRequests(Set<AppUser> appUsers) {
@@ -424,12 +425,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setPendingFriendRequests(Set<AppUser> appUsers) {
-        this.pendingFriendRequests = appUsers;
-    }
-
     public Set<Product> getProducts() {
         return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public AppUser products(Set<Product> products) {
@@ -449,12 +450,12 @@ public class AppUser implements Serializable {
         return this;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
     public Set<BlogPost> getPosts() {
         return posts;
+    }
+
+    public void setPosts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
     }
 
     public AppUser posts(Set<BlogPost> blogPosts) {
@@ -472,10 +473,6 @@ public class AppUser implements Serializable {
         this.posts.remove(blogPost);
         blogPost.getAuthors().remove(this);
         return this;
-    }
-
-    public void setPosts(Set<BlogPost> blogPosts) {
-        this.posts = blogPosts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

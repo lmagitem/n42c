@@ -1,70 +1,72 @@
 <div>
-  <h2 id="page-heading">
-    <span jhiTranslate="n42cApp.blogCategory.home.title">Blog Categories</span>
+    <h2 id="page-heading">
+        <span jhiTranslate="n42cApp.blogCategory.home.title">Blog Categories</span>
 
-    <button
-      id="jh-create-entity"
-      class="btn btn-primary float-right jh-create-entity create-blog-category"
-      [routerLink]="['/entities/blog-category/new']"
-    >
-      <fa-icon icon="plus"></fa-icon>
-      <span jhiTranslate="n42cApp.blogCategory.home.createLabel">
+        <button
+            [routerLink]="['/entities/blog-category/new']"
+            class="btn btn-primary float-right jh-create-entity create-blog-category"
+            id="jh-create-entity"
+        >
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="n42cApp.blogCategory.home.createLabel">
         Create a new Blog Category
       </span>
-    </button>
-  </h2>
+        </button>
+    </h2>
 
-  <jhi-alert-error></jhi-alert-error>
+    <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
+    <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="blogCategories?.length === 0">
-    <span jhiTranslate="n42cApp.blogCategory.home.notFound">No blogCategories found</span>
-  </div>
+    <div *ngIf="blogCategories?.length === 0" class="alert alert-warning" id="no-result">
+        <span jhiTranslate="n42cApp.blogCategory.home.notFound">No blogCategories found</span>
+    </div>
 
-  <div class="table-responsive" id="entities" *ngIf="blogCategories && blogCategories.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.blogCategory.name">Name</span></th>
-          <th scope="col"><span jhiTranslate="n42cApp.blogCategory.parentCategory">Parent Category</span></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let blogCategory of blogCategories; trackBy: trackId">
-          <td>
-            <a [routerLink]="['/entities', 'blog-category', blogCategory.id, 'view']">{{ blogCategory.id }}</a>
-          </td>
-          <td>{{ blogCategory.name }}</td>
-          <td>
-            <div *ngIf="blogCategory.parentCategory">
-              <a [routerLink]="['/entities', 'blog-category', blogCategory.parentCategory?.id, 'view']">{{
-                blogCategory.parentCategory?.name
-              }}</a>
-            </div>
-          </td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/entities', 'blog-category', blogCategory.id, 'view']" class="btn btn-info btn-sm">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+    <div *ngIf="blogCategories && blogCategories.length > 0" class="table-responsive" id="entities">
+        <table aria-describedby="page-heading" class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+                <th scope="col"><span jhiTranslate="n42cApp.blogCategory.name">Name</span></th>
+                <th scope="col"><span jhiTranslate="n42cApp.blogCategory.parentCategory">Parent Category</span></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let blogCategory of blogCategories; trackBy: trackId">
+                <td>
+                    <a [routerLink]="['/entities', 'blog-category', blogCategory.id, 'view']">{{ blogCategory.id }}</a>
+                </td>
+                <td>{{ blogCategory.name }}</td>
+                <td>
+                    <div *ngIf="blogCategory.parentCategory">
+                        <a [routerLink]="['/entities', 'blog-category', blogCategory.parentCategory?.id, 'view']">{{
+                            blogCategory.parentCategory?.name
+                            }}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button [routerLink]="['/entities', 'blog-category', blogCategory.id, 'view']" class="btn btn-info btn-sm"
+                                type="submit">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
 
-              <button type="submit" [routerLink]="['/entities', 'blog-category', blogCategory.id, 'edit']" class="btn btn-primary btn-sm">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                        <button [routerLink]="['/entities', 'blog-category', blogCategory.id, 'edit']" class="btn btn-primary btn-sm"
+                                type="submit">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
 
-              <button type="submit" (click)="delete(blogCategory)" class="btn btn-danger btn-sm">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                        <button (click)="delete(blogCategory)" class="btn btn-danger btn-sm" type="submit">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

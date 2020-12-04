@@ -1,21 +1,17 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.Faction;
+import com.n42c.domain.enumeration.NinthBattlefieldRole;
+import com.n42c.domain.enumeration.SubFaction;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.Faction;
-
-import com.n42c.domain.enumeration.SubFaction;
-
-import com.n42c.domain.enumeration.NinthBattlefieldRole;
 
 /**
  * A NinthUnit.
@@ -80,17 +76,21 @@ public class NinthUnit implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public NinthUnit name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDatasheet() {
         return datasheet;
+    }
+
+    public void setDatasheet(String datasheet) {
+        this.datasheet = datasheet;
     }
 
     public NinthUnit datasheet(String datasheet) {
@@ -98,12 +98,12 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setDatasheet(String datasheet) {
-        this.datasheet = datasheet;
-    }
-
     public Faction getFaction() {
         return faction;
+    }
+
+    public void setFaction(Faction faction) {
+        this.faction = faction;
     }
 
     public NinthUnit faction(Faction faction) {
@@ -111,12 +111,12 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setFaction(Faction faction) {
-        this.faction = faction;
-    }
-
     public SubFaction getSubfaction() {
         return subfaction;
+    }
+
+    public void setSubfaction(SubFaction subfaction) {
+        this.subfaction = subfaction;
     }
 
     public NinthUnit subfaction(SubFaction subfaction) {
@@ -124,12 +124,12 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setSubfaction(SubFaction subfaction) {
-        this.subfaction = subfaction;
-    }
-
     public NinthBattlefieldRole getBattlefieldRole() {
         return battlefieldRole;
+    }
+
+    public void setBattlefieldRole(NinthBattlefieldRole battlefieldRole) {
+        this.battlefieldRole = battlefieldRole;
     }
 
     public NinthUnit battlefieldRole(NinthBattlefieldRole battlefieldRole) {
@@ -137,12 +137,12 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setBattlefieldRole(NinthBattlefieldRole battlefieldRole) {
-        this.battlefieldRole = battlefieldRole;
-    }
-
     public String getKeywords() {
         return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
     public NinthUnit keywords(String keywords) {
@@ -150,12 +150,12 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
-    }
-
     public Set<NinthArmyUnit> getSelections() {
         return selections;
+    }
+
+    public void setSelections(Set<NinthArmyUnit> ninthArmyUnits) {
+        this.selections = ninthArmyUnits;
     }
 
     public NinthUnit selections(Set<NinthArmyUnit> ninthArmyUnits) {
@@ -175,12 +175,12 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setSelections(Set<NinthArmyUnit> ninthArmyUnits) {
-        this.selections = ninthArmyUnits;
-    }
-
     public Set<NinthUnitMoment> getMoments() {
         return moments;
+    }
+
+    public void setMoments(Set<NinthUnitMoment> ninthUnitMoments) {
+        this.moments = ninthUnitMoments;
     }
 
     public NinthUnit moments(Set<NinthUnitMoment> ninthUnitMoments) {
@@ -200,21 +200,17 @@ public class NinthUnit implements Serializable {
         return this;
     }
 
-    public void setMoments(Set<NinthUnitMoment> ninthUnitMoments) {
-        this.moments = ninthUnitMoments;
-    }
-
     public Player getOwner() {
         return owner;
+    }
+
+    public void setOwner(Player player) {
+        this.owner = player;
     }
 
     public NinthUnit owner(Player player) {
         this.owner = player;
         return this;
-    }
-
-    public void setOwner(Player player) {
-        this.owner = player;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

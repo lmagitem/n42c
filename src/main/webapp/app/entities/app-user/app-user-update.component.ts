@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { IAppUser, AppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from './app-user.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
-import { AccountService } from 'app/core/auth/account.service';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {AppUser, IAppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from './app-user.service';
+import {IUser} from 'app/core/user/user.model';
+import {UserService} from 'app/core/user/user.service';
+import {AccountService} from 'app/core/auth/account.service';
 
 type SelectableEntity = IUser | IAppUser;
 
@@ -41,10 +41,11 @@ export class AppUserUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private accountService: AccountService,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ appUser }) => {
+    this.activatedRoute.data.subscribe(({appUser}) => {
       this.updateForm(appUser);
 
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
@@ -83,21 +84,19 @@ export class AppUserUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IAppUser {
-    return {
-      ...new AppUser(),
-      id: this.editForm.get(['id'])!.value,
-      userName: this.editForm.get(['userName'])!.value,
-      displayedName: this.editForm.get(['displayedName'])!.value,
-      admin: this.editForm.get(['admin'])!.value,
-      shopRights: this.editForm.get(['shopRights'])!.value,
-      blogRights: this.editForm.get(['blogRights'])!.value,
-      profileRights: this.editForm.get(['profileRights'])!.value,
-      scriptoriumRights: this.editForm.get(['scriptoriumRights'])!.value,
-      user: this.editForm.get(['user'])!.value,
-      givenFriendships: this.editForm.get(['givenFriendships'])!.value,
-      askedFriendRequests: this.editForm.get(['askedFriendRequests'])!.value,
-    };
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IAppUser>>): void {
@@ -119,18 +118,20 @@ export class AppUserUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
+  private createFromForm(): IAppUser {
+    return {
+      ...new AppUser(),
+      id: this.editForm.get(['id'])!.value,
+      userName: this.editForm.get(['userName'])!.value,
+      displayedName: this.editForm.get(['displayedName'])!.value,
+      admin: this.editForm.get(['admin'])!.value,
+      shopRights: this.editForm.get(['shopRights'])!.value,
+      blogRights: this.editForm.get(['blogRights'])!.value,
+      profileRights: this.editForm.get(['profileRights'])!.value,
+      scriptoriumRights: this.editForm.get(['scriptoriumRights'])!.value,
+      user: this.editForm.get(['user'])!.value,
+      givenFriendships: this.editForm.get(['givenFriendships'])!.value,
+      askedFriendRequests: this.editForm.get(['askedFriendRequests'])!.value,
+    };
   }
 }

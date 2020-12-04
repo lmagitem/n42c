@@ -1,13 +1,10 @@
 package com.n42c.config;
 
-import com.n42c.security.*;
+import com.n42c.security.AuthoritiesConstants;
 import com.n42c.security.SecurityUtils;
 import com.n42c.security.oauth2.AudienceValidator;
 import com.n42c.security.oauth2.JwtGrantedAuthorityConverter;
 import io.github.jhipster.config.JHipsterProperties;
-
-import java.util.*;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -32,17 +29,18 @@ import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWrite
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Import(SecurityProblemSupport.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
-
-    @Value("${spring.security.oauth2.client.provider.oidc.issuer-uri}")
-    private String issuerUri;
-
     private final JHipsterProperties jHipsterProperties;
     private final SecurityProblemSupport problemSupport;
+    @Value("${spring.security.oauth2.client.provider.oidc.issuer-uri}")
+    private String issuerUri;
 
     public SecurityConfiguration(CorsFilter corsFilter, JHipsterProperties jHipsterProperties, SecurityProblemSupport problemSupport) {
         this.corsFilter = corsFilter;

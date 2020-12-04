@@ -4,8 +4,8 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthMission;
 import com.n42c.domain.NinthMission;
+import com.n42c.domain.enumeration.Language;
 import com.n42c.repository.LocalizedNinthMissionRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -25,11 +25,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedNinthMissionResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class LocalizedNinthMissionResourceIT {
@@ -56,7 +55,7 @@ public class LocalizedNinthMissionResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -77,9 +76,10 @@ public class LocalizedNinthMissionResourceIT {
         localizedNinthMission.setMission(ninthMission);
         return localizedNinthMission;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -176,10 +176,10 @@ public class LocalizedNinthMissionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedNinthMission.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].briefing").value(hasItem(DEFAULT_BRIEFING.toString())))
+            .andExpect(jsonPath("$.[*].briefing").value(hasItem(DEFAULT_BRIEFING)))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getLocalizedNinthMission() throws Exception {
@@ -192,9 +192,10 @@ public class LocalizedNinthMissionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedNinthMission.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.briefing").value(DEFAULT_BRIEFING.toString()))
+            .andExpect(jsonPath("$.briefing").value(DEFAULT_BRIEFING))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingLocalizedNinthMission() throws Exception {

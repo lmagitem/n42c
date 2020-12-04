@@ -10,7 +10,8 @@ import {HealthDetails, HealthKey} from './health.service';
 export class HealthModalComponent {
   health?: { key: HealthKey; value: HealthDetails };
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) {
+  }
 
   readableValue(value: any): string {
     if (this.health && this.health.key === 'diskSpace') {

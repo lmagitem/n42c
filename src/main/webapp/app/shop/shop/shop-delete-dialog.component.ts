@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
-import { IShop } from 'app/shared/model/shop.model';
-import { ShopService } from 'app/entities/shop/shop.service';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
+import {IShop} from 'app/shared/model/shop.model';
+import {ShopService} from 'app/entities/shop/shop.service';
 
 @Component({
   templateUrl: './shop-delete-dialog.component.html',
@@ -10,7 +10,8 @@ import { ShopService } from 'app/entities/shop/shop.service';
 export class ShopDeleteDialogComponent {
   shop?: IShop;
 
-  constructor(protected shopService: ShopService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+  constructor(protected shopService: ShopService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

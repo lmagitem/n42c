@@ -9,4 +9,5 @@ import {HomeComponent} from './home.component';
   imports: [N42CSharedModule, RouterModule.forChild([HOME_ROUTE])],
   declarations: [HomeComponent],
 })
-export class N42CHomeModule {}
+export class N42CHomeModule {
+}

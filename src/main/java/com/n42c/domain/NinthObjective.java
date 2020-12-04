@@ -1,16 +1,14 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.n42c.domain.enumeration.NinthObjectiveType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.NinthObjectiveType;
 
 /**
  * A NinthObjective.
@@ -79,17 +77,21 @@ public class NinthObjective implements Serializable {
         return type;
     }
 
+    public void setType(NinthObjectiveType type) {
+        this.type = type;
+    }
+
     public NinthObjective type(NinthObjectiveType type) {
         this.type = type;
         return this;
     }
 
-    public void setType(NinthObjectiveType type) {
-        this.type = type;
-    }
-
     public Set<LocalizedNinthObjective> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedNinthObjective> localizedNinthObjectives) {
+        this.localizations = localizedNinthObjectives;
     }
 
     public NinthObjective localizations(Set<LocalizedNinthObjective> localizedNinthObjectives) {
@@ -109,12 +111,12 @@ public class NinthObjective implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedNinthObjective> localizedNinthObjectives) {
-        this.localizations = localizedNinthObjectives;
-    }
-
     public Set<NinthArmyMoment> getSelections() {
         return selections;
+    }
+
+    public void setSelections(Set<NinthArmyMoment> ninthArmyMoments) {
+        this.selections = ninthArmyMoments;
     }
 
     public NinthObjective selections(Set<NinthArmyMoment> ninthArmyMoments) {
@@ -134,12 +136,12 @@ public class NinthObjective implements Serializable {
         return this;
     }
 
-    public void setSelections(Set<NinthArmyMoment> ninthArmyMoments) {
-        this.selections = ninthArmyMoments;
-    }
-
     public Set<NinthMission> getAllowedAsPrimaries() {
         return allowedAsPrimaries;
+    }
+
+    public void setAllowedAsPrimaries(Set<NinthMission> ninthMissions) {
+        this.allowedAsPrimaries = ninthMissions;
     }
 
     public NinthObjective allowedAsPrimaries(Set<NinthMission> ninthMissions) {
@@ -159,12 +161,12 @@ public class NinthObjective implements Serializable {
         return this;
     }
 
-    public void setAllowedAsPrimaries(Set<NinthMission> ninthMissions) {
-        this.allowedAsPrimaries = ninthMissions;
-    }
-
     public Set<NinthMission> getAllowedAsSecondaries() {
         return allowedAsSecondaries;
+    }
+
+    public void setAllowedAsSecondaries(Set<NinthMission> ninthMissions) {
+        this.allowedAsSecondaries = ninthMissions;
     }
 
     public NinthObjective allowedAsSecondaries(Set<NinthMission> ninthMissions) {
@@ -182,10 +184,6 @@ public class NinthObjective implements Serializable {
         this.allowedAsSecondaries.remove(ninthMission);
         ninthMission.getAllowedSecondaries().remove(this);
         return this;
-    }
-
-    public void setAllowedAsSecondaries(Set<NinthMission> ninthMissions) {
-        this.allowedAsSecondaries = ninthMissions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

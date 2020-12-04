@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.NinthUnitMoment;
 import com.n42c.repository.NinthUnitMomentRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,14 +26,11 @@ import java.util.Optional;
 @Transactional
 public class NinthUnitMomentResource {
 
-    private final Logger log = LoggerFactory.getLogger(NinthUnitMomentResource.class);
-
     private static final String ENTITY_NAME = "ninthUnitMoment";
-
+    private final Logger log = LoggerFactory.getLogger(NinthUnitMomentResource.class);
+    private final NinthUnitMomentRepository ninthUnitMomentRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final NinthUnitMomentRepository ninthUnitMomentRepository;
 
     public NinthUnitMomentResource(NinthUnitMomentRepository ninthUnitMomentRepository) {
         this.ninthUnitMomentRepository = ninthUnitMomentRepository;

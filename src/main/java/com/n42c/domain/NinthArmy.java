@@ -1,19 +1,16 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumeration.Faction;
+import com.n42c.domain.enumeration.SubFaction;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.Faction;
-
-import com.n42c.domain.enumeration.SubFaction;
 
 /**
  * A NinthArmy.
@@ -72,13 +69,13 @@ public class NinthArmy implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public NinthArmy name(String name) {
         this.name = name;
         return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Boolean isCrusade() {
@@ -98,17 +95,21 @@ public class NinthArmy implements Serializable {
         return faction;
     }
 
+    public void setFaction(Faction faction) {
+        this.faction = faction;
+    }
+
     public NinthArmy faction(Faction faction) {
         this.faction = faction;
         return this;
     }
 
-    public void setFaction(Faction faction) {
-        this.faction = faction;
-    }
-
     public SubFaction getSubfaction() {
         return subfaction;
+    }
+
+    public void setSubfaction(SubFaction subfaction) {
+        this.subfaction = subfaction;
     }
 
     public NinthArmy subfaction(SubFaction subfaction) {
@@ -116,12 +117,12 @@ public class NinthArmy implements Serializable {
         return this;
     }
 
-    public void setSubfaction(SubFaction subfaction) {
-        this.subfaction = subfaction;
-    }
-
     public Set<NinthArmyUnit> getUnits() {
         return units;
+    }
+
+    public void setUnits(Set<NinthArmyUnit> ninthArmyUnits) {
+        this.units = ninthArmyUnits;
     }
 
     public NinthArmy units(Set<NinthArmyUnit> ninthArmyUnits) {
@@ -141,12 +142,12 @@ public class NinthArmy implements Serializable {
         return this;
     }
 
-    public void setUnits(Set<NinthArmyUnit> ninthArmyUnits) {
-        this.units = ninthArmyUnits;
-    }
-
     public Set<NinthArmyMoment> getMoments() {
         return moments;
+    }
+
+    public void setMoments(Set<NinthArmyMoment> ninthArmyMoments) {
+        this.moments = ninthArmyMoments;
     }
 
     public NinthArmy moments(Set<NinthArmyMoment> ninthArmyMoments) {
@@ -166,21 +167,17 @@ public class NinthArmy implements Serializable {
         return this;
     }
 
-    public void setMoments(Set<NinthArmyMoment> ninthArmyMoments) {
-        this.moments = ninthArmyMoments;
-    }
-
     public Player getAuthor() {
         return author;
+    }
+
+    public void setAuthor(Player player) {
+        this.author = player;
     }
 
     public NinthArmy author(Player player) {
         this.author = player;
         return this;
-    }
-
-    public void setAuthor(Player player) {
-        this.author = player;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

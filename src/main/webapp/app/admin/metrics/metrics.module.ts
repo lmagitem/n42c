@@ -10,4 +10,5 @@ import {metricsRoute} from './metrics.route';
   imports: [N42CSharedModule, RouterModule.forChild([metricsRoute])],
   declarations: [MetricsComponent],
 })
-export class MetricsModule {}
+export class MetricsModule {
+}

@@ -12,7 +12,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
 import java.util.concurrent.TimeUnit;
 
-import static com.n42c.config.StaticResourcesWebConfiguration.*;
+import static com.n42c.config.StaticResourcesWebConfiguration.RESOURCE_LOCATIONS;
+import static com.n42c.config.StaticResourcesWebConfiguration.RESOURCE_PATHS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 

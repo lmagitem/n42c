@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthBattle, NinthBattle } from 'app/shared/model/ninth-battle.model';
-import { NinthBattleService } from './ninth-battle.service';
-import { NinthBattleComponent } from './ninth-battle.component';
-import { NinthBattleDetailComponent } from './ninth-battle-detail.component';
-import { NinthBattleUpdateComponent } from './ninth-battle-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthBattle, NinthBattle} from 'app/shared/model/ninth-battle.model';
+import {NinthBattleService} from './ninth-battle.service';
+import {NinthBattleComponent} from './ninth-battle.component';
+import {NinthBattleDetailComponent} from './ninth-battle-detail.component';
+import {NinthBattleUpdateComponent} from './ninth-battle-update.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class NinthBattleResolve implements Resolve<INinthBattle> {
-  constructor(private service: NinthBattleService, private router: Router) {}
+  constructor(private service: NinthBattleService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthBattle> | Observable<never> {
     const id = route.params['id'];

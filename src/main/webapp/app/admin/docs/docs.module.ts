@@ -10,4 +10,5 @@ import {docsRoute} from './docs.route';
   imports: [N42CSharedModule, RouterModule.forChild([docsRoute])],
   declarations: [DocsComponent],
 })
-export class DocsModule {}
+export class DocsModule {
+}

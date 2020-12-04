@@ -6,8 +6,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,17 +52,21 @@ public class Shop implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Shop name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Set<Product> getProducts() {
         return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public Shop products(Set<Product> products) {
@@ -81,10 +84,6 @@ public class Shop implements Serializable {
         this.products.remove(product);
         product.setShop(null);
         return this;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

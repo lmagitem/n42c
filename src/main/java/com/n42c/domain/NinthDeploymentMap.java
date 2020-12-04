@@ -4,7 +4,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,8 +36,8 @@ public class NinthDeploymentMap implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_deployment_map_used_in_missions",
-               joinColumns = @JoinColumn(name = "ninth_deployment_map_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "used_in_missions_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_deployment_map_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "used_in_missions_id", referencedColumnName = "id"))
     private Set<NinthMission> usedInMissions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -54,13 +53,13 @@ public class NinthDeploymentMap implements Serializable {
         return url;
     }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public NinthDeploymentMap url(String url) {
         this.url = url;
         return this;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public Boolean isShareable() {
@@ -80,6 +79,10 @@ public class NinthDeploymentMap implements Serializable {
         return localizations;
     }
 
+    public void setLocalizations(Set<LocalizedNinthDeploymentMap> localizedNinthDeploymentMaps) {
+        this.localizations = localizedNinthDeploymentMaps;
+    }
+
     public NinthDeploymentMap localizations(Set<LocalizedNinthDeploymentMap> localizedNinthDeploymentMaps) {
         this.localizations = localizedNinthDeploymentMaps;
         return this;
@@ -97,12 +100,12 @@ public class NinthDeploymentMap implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedNinthDeploymentMap> localizedNinthDeploymentMaps) {
-        this.localizations = localizedNinthDeploymentMaps;
-    }
-
     public Set<NinthMission> getUsedInMissions() {
         return usedInMissions;
+    }
+
+    public void setUsedInMissions(Set<NinthMission> ninthMissions) {
+        this.usedInMissions = ninthMissions;
     }
 
     public NinthDeploymentMap usedInMissions(Set<NinthMission> ninthMissions) {
@@ -120,10 +123,6 @@ public class NinthDeploymentMap implements Serializable {
         this.usedInMissions.remove(ninthMission);
         ninthMission.getMissionDeployments().remove(this);
         return this;
-    }
-
-    public void setUsedInMissions(Set<NinthMission> ninthMissions) {
-        this.usedInMissions = ninthMissions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

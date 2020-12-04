@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthMission, NinthMission } from 'app/shared/model/ninth-mission.model';
-import { NinthMissionService } from './ninth-mission.service';
-import { NinthMissionComponent } from './ninth-mission.component';
-import { NinthMissionDetailComponent } from './ninth-mission-detail.component';
-import { NinthMissionUpdateComponent } from './ninth-mission-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthMission, NinthMission} from 'app/shared/model/ninth-mission.model';
+import {NinthMissionService} from './ninth-mission.service';
+import {NinthMissionComponent} from './ninth-mission.component';
+import {NinthMissionDetailComponent} from './ninth-mission-detail.component';
+import {NinthMissionUpdateComponent} from './ninth-mission-update.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class NinthMissionResolve implements Resolve<INinthMission> {
-  constructor(private service: NinthMissionService, private router: Router) {}
+  constructor(private service: NinthMissionService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<INinthMission> | Observable<never> {
     const id = route.params['id'];

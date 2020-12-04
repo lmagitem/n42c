@@ -11,8 +11,6 @@ import com.n42c.repository.UserRepository;
 import com.n42c.security.AuthoritiesConstants;
 import com.n42c.security.SecurityUtils;
 import com.n42c.service.dto.UserDTO;
-
-import com.n42c.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -53,6 +51,45 @@ public class UserService {
         this.cacheManager = cacheManager;
     }
 
+    private static User getUser(Map<String, Object> details) {
+        User user = new User();
+        // handle resource server JWT, where sub claim is email and uid is ID
+        if (details.get("uid") != null) {
+            user.setId((String) details.get("uid"));
+        } else {
+            user.setId((String) details.get("sub"));
+        }
+        if (details.get("username") != null) {
+            user.setLogin((String) details.get("username"));
+        }
+        if (details.get("email_verified") != null) {
+            user.setActivated((Boolean) details.get("email_verified"));
+        }
+        if (details.get("email") != null) {
+            user.setEmail(((String) details.get("email")).toLowerCase());
+        }
+        if (details.get("langKey") != null) {
+            user.setLangKey((String) details.get("langKey"));
+        } else if (details.get("locale") != null) {
+            // trim off country code if it exists
+            String locale = (String) details.get("locale");
+            if (locale.contains("_")) {
+                locale = locale.substring(0, locale.indexOf('_'));
+            } else if (locale.contains("-")) {
+                locale = locale.substring(0, locale.indexOf('-'));
+            }
+            user.setLangKey(locale.toLowerCase());
+        } else {
+            // set langKey to default if not specified by IdP
+            user.setLangKey(Constants.DEFAULT_LANGUAGE);
+        }
+        if (details.get("picture") != null) {
+            user.setImageUrl((String) details.get("picture"));
+        }
+        user.setActivated(true);
+        return user;
+    }
+
     /**
      * Update basic information (first name, last name, email, language) for the current user.
      *
@@ -78,7 +115,6 @@ public class UserService {
             });
     }
 
-
     @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
@@ -88,7 +124,6 @@ public class UserService {
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);
     }
-
 
     /**
      * Gets a list of all the authorities.
@@ -196,45 +231,6 @@ public class UserService {
             }
         }
         return appUser;
-    }
-
-    private static User getUser(Map<String, Object> details) {
-        User user = new User();
-        // handle resource server JWT, where sub claim is email and uid is ID
-        if (details.get("uid") != null) {
-            user.setId((String) details.get("uid"));
-        } else {
-            user.setId((String) details.get("sub"));
-        }
-        if (details.get("username") != null) {
-            user.setLogin((String) details.get("username"));
-        }
-        if (details.get("email_verified") != null) {
-            user.setActivated((Boolean) details.get("email_verified"));
-        }
-        if (details.get("email") != null) {
-            user.setEmail(((String) details.get("email")).toLowerCase());
-        }
-        if (details.get("langKey") != null) {
-            user.setLangKey((String) details.get("langKey"));
-        } else if (details.get("locale") != null) {
-            // trim off country code if it exists
-            String locale = (String) details.get("locale");
-            if (locale.contains("_")) {
-                locale = locale.substring(0, locale.indexOf('_'));
-            } else if (locale.contains("-")) {
-                locale = locale.substring(0, locale.indexOf('-'));
-            }
-            user.setLangKey(locale.toLowerCase());
-        } else {
-            // set langKey to default if not specified by IdP
-            user.setLangKey(Constants.DEFAULT_LANGUAGE);
-        }
-        if (details.get("picture") != null) {
-            user.setImageUrl((String) details.get("picture"));
-        }
-        user.setActivated(true);
-        return user;
     }
 
     private void clearUserCaches(User user) {

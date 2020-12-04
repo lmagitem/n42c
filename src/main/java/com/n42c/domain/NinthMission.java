@@ -1,18 +1,15 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.n42c.domain.enumeration.NinthGameSize;
+import com.n42c.domain.enumeration.NinthGameType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.NinthGameType;
-
-import com.n42c.domain.enumeration.NinthGameSize;
 
 /**
  * A NinthMission.
@@ -51,29 +48,29 @@ public class NinthMission implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_mission_mission_stratagems",
-               joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "mission_stratagems_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "mission_stratagems_id", referencedColumnName = "id"))
     private Set<NinthStratagemGroup> missionStratagems = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_mission_primary_objectives",
-               joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "primary_objectives_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "primary_objectives_id", referencedColumnName = "id"))
     private Set<NinthObjective> primaryObjectives = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_mission_allowed_secondaries",
-               joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "allowed_secondaries_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "allowed_secondaries_id", referencedColumnName = "id"))
     private Set<NinthObjective> allowedSecondaries = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_mission_rules",
-               joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "rules_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_mission_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "rules_id", referencedColumnName = "id"))
     private Set<NinthMissionRule> rules = new HashSet<>();
 
     @ManyToMany(mappedBy = "usedInMissions")
@@ -94,26 +91,26 @@ public class NinthMission implements Serializable {
         return gameType;
     }
 
+    public void setGameType(NinthGameType gameType) {
+        this.gameType = gameType;
+    }
+
     public NinthMission gameType(NinthGameType gameType) {
         this.gameType = gameType;
         return this;
-    }
-
-    public void setGameType(NinthGameType gameType) {
-        this.gameType = gameType;
     }
 
     public NinthGameSize getGameSize() {
         return gameSize;
     }
 
+    public void setGameSize(NinthGameSize gameSize) {
+        this.gameSize = gameSize;
+    }
+
     public NinthMission gameSize(NinthGameSize gameSize) {
         this.gameSize = gameSize;
         return this;
-    }
-
-    public void setGameSize(NinthGameSize gameSize) {
-        this.gameSize = gameSize;
     }
 
     public Boolean isShareable() {
@@ -133,6 +130,10 @@ public class NinthMission implements Serializable {
         return battles;
     }
 
+    public void setBattles(Set<NinthBattle> ninthBattles) {
+        this.battles = ninthBattles;
+    }
+
     public NinthMission battles(Set<NinthBattle> ninthBattles) {
         this.battles = ninthBattles;
         return this;
@@ -150,12 +151,12 @@ public class NinthMission implements Serializable {
         return this;
     }
 
-    public void setBattles(Set<NinthBattle> ninthBattles) {
-        this.battles = ninthBattles;
-    }
-
     public Set<LocalizedNinthMission> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedNinthMission> localizedNinthMissions) {
+        this.localizations = localizedNinthMissions;
     }
 
     public NinthMission localizations(Set<LocalizedNinthMission> localizedNinthMissions) {
@@ -175,12 +176,12 @@ public class NinthMission implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedNinthMission> localizedNinthMissions) {
-        this.localizations = localizedNinthMissions;
-    }
-
     public Set<NinthStratagemGroup> getMissionStratagems() {
         return missionStratagems;
+    }
+
+    public void setMissionStratagems(Set<NinthStratagemGroup> ninthStratagemGroups) {
+        this.missionStratagems = ninthStratagemGroups;
     }
 
     public NinthMission missionStratagems(Set<NinthStratagemGroup> ninthStratagemGroups) {
@@ -200,12 +201,12 @@ public class NinthMission implements Serializable {
         return this;
     }
 
-    public void setMissionStratagems(Set<NinthStratagemGroup> ninthStratagemGroups) {
-        this.missionStratagems = ninthStratagemGroups;
-    }
-
     public Set<NinthObjective> getPrimaryObjectives() {
         return primaryObjectives;
+    }
+
+    public void setPrimaryObjectives(Set<NinthObjective> ninthObjectives) {
+        this.primaryObjectives = ninthObjectives;
     }
 
     public NinthMission primaryObjectives(Set<NinthObjective> ninthObjectives) {
@@ -225,12 +226,12 @@ public class NinthMission implements Serializable {
         return this;
     }
 
-    public void setPrimaryObjectives(Set<NinthObjective> ninthObjectives) {
-        this.primaryObjectives = ninthObjectives;
-    }
-
     public Set<NinthObjective> getAllowedSecondaries() {
         return allowedSecondaries;
+    }
+
+    public void setAllowedSecondaries(Set<NinthObjective> ninthObjectives) {
+        this.allowedSecondaries = ninthObjectives;
     }
 
     public NinthMission allowedSecondaries(Set<NinthObjective> ninthObjectives) {
@@ -250,12 +251,12 @@ public class NinthMission implements Serializable {
         return this;
     }
 
-    public void setAllowedSecondaries(Set<NinthObjective> ninthObjectives) {
-        this.allowedSecondaries = ninthObjectives;
-    }
-
     public Set<NinthMissionRule> getRules() {
         return rules;
+    }
+
+    public void setRules(Set<NinthMissionRule> ninthMissionRules) {
+        this.rules = ninthMissionRules;
     }
 
     public NinthMission rules(Set<NinthMissionRule> ninthMissionRules) {
@@ -275,12 +276,12 @@ public class NinthMission implements Serializable {
         return this;
     }
 
-    public void setRules(Set<NinthMissionRule> ninthMissionRules) {
-        this.rules = ninthMissionRules;
-    }
-
     public Set<NinthDeploymentMap> getMissionDeployments() {
         return missionDeployments;
+    }
+
+    public void setMissionDeployments(Set<NinthDeploymentMap> ninthDeploymentMaps) {
+        this.missionDeployments = ninthDeploymentMaps;
     }
 
     public NinthMission missionDeployments(Set<NinthDeploymentMap> ninthDeploymentMaps) {
@@ -298,10 +299,6 @@ public class NinthMission implements Serializable {
         this.missionDeployments.remove(ninthDeploymentMap);
         ninthDeploymentMap.getUsedInMissions().remove(this);
         return this;
-    }
-
-    public void setMissionDeployments(Set<NinthDeploymentMap> ninthDeploymentMaps) {
-        this.missionDeployments = ninthDeploymentMaps;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

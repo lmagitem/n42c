@@ -6,8 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -68,15 +67,15 @@ public class NinthArmyMoment implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_army_moment_selected_units",
-               joinColumns = @JoinColumn(name = "ninth_army_moment_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "selected_units_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_army_moment_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "selected_units_id", referencedColumnName = "id"))
     private Set<NinthArmyUnit> selectedUnits = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "ninth_army_moment_selected_objectives",
-               joinColumns = @JoinColumn(name = "ninth_army_moment_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "selected_objectives_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "ninth_army_moment_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "selected_objectives_id", referencedColumnName = "id"))
     private Set<NinthObjective> selectedObjectives = new HashSet<>();
 
     @ManyToOne
@@ -113,17 +112,21 @@ public class NinthArmyMoment implements Serializable {
         return majorVictories;
     }
 
+    public void setMajorVictories(Integer majorVictories) {
+        this.majorVictories = majorVictories;
+    }
+
     public NinthArmyMoment majorVictories(Integer majorVictories) {
         this.majorVictories = majorVictories;
         return this;
     }
 
-    public void setMajorVictories(Integer majorVictories) {
-        this.majorVictories = majorVictories;
-    }
-
     public Integer getMinorVictories() {
         return minorVictories;
+    }
+
+    public void setMinorVictories(Integer minorVictories) {
+        this.minorVictories = minorVictories;
     }
 
     public NinthArmyMoment minorVictories(Integer minorVictories) {
@@ -131,12 +134,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setMinorVictories(Integer minorVictories) {
-        this.minorVictories = minorVictories;
-    }
-
     public Integer getDraws() {
         return draws;
+    }
+
+    public void setDraws(Integer draws) {
+        this.draws = draws;
     }
 
     public NinthArmyMoment draws(Integer draws) {
@@ -144,12 +147,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setDraws(Integer draws) {
-        this.draws = draws;
-    }
-
     public Integer getMinorDefeats() {
         return minorDefeats;
+    }
+
+    public void setMinorDefeats(Integer minorDefeats) {
+        this.minorDefeats = minorDefeats;
     }
 
     public NinthArmyMoment minorDefeats(Integer minorDefeats) {
@@ -157,12 +160,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setMinorDefeats(Integer minorDefeats) {
-        this.minorDefeats = minorDefeats;
-    }
-
     public Integer getMajorDefeats() {
         return majorDefeats;
+    }
+
+    public void setMajorDefeats(Integer majorDefeats) {
+        this.majorDefeats = majorDefeats;
     }
 
     public NinthArmyMoment majorDefeats(Integer majorDefeats) {
@@ -170,12 +173,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setMajorDefeats(Integer majorDefeats) {
-        this.majorDefeats = majorDefeats;
-    }
-
     public Integer getRequisition() {
         return requisition;
+    }
+
+    public void setRequisition(Integer requisition) {
+        this.requisition = requisition;
     }
 
     public NinthArmyMoment requisition(Integer requisition) {
@@ -183,12 +186,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setRequisition(Integer requisition) {
-        this.requisition = requisition;
-    }
-
     public Integer getSupplyLimit() {
         return supplyLimit;
+    }
+
+    public void setSupplyLimit(Integer supplyLimit) {
+        this.supplyLimit = supplyLimit;
     }
 
     public NinthArmyMoment supplyLimit(Integer supplyLimit) {
@@ -196,12 +199,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setSupplyLimit(Integer supplyLimit) {
-        this.supplyLimit = supplyLimit;
-    }
-
     public Integer getSupplyUsed() {
         return supplyUsed;
+    }
+
+    public void setSupplyUsed(Integer supplyUsed) {
+        this.supplyUsed = supplyUsed;
     }
 
     public NinthArmyMoment supplyUsed(Integer supplyUsed) {
@@ -209,12 +212,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setSupplyUsed(Integer supplyUsed) {
-        this.supplyUsed = supplyUsed;
-    }
-
     public String getObjectives() {
         return objectives;
+    }
+
+    public void setObjectives(String objectives) {
+        this.objectives = objectives;
     }
 
     public NinthArmyMoment objectives(String objectives) {
@@ -222,12 +225,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setObjectives(String objectives) {
-        this.objectives = objectives;
-    }
-
     public String getNotes() {
         return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public NinthArmyMoment notes(String notes) {
@@ -235,12 +238,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
     public Set<NinthArmyUnit> getSelectedUnits() {
         return selectedUnits;
+    }
+
+    public void setSelectedUnits(Set<NinthArmyUnit> ninthArmyUnits) {
+        this.selectedUnits = ninthArmyUnits;
     }
 
     public NinthArmyMoment selectedUnits(Set<NinthArmyUnit> ninthArmyUnits) {
@@ -260,12 +263,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setSelectedUnits(Set<NinthArmyUnit> ninthArmyUnits) {
-        this.selectedUnits = ninthArmyUnits;
-    }
-
     public Set<NinthObjective> getSelectedObjectives() {
         return selectedObjectives;
+    }
+
+    public void setSelectedObjectives(Set<NinthObjective> ninthObjectives) {
+        this.selectedObjectives = ninthObjectives;
     }
 
     public NinthArmyMoment selectedObjectives(Set<NinthObjective> ninthObjectives) {
@@ -285,12 +288,12 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setSelectedObjectives(Set<NinthObjective> ninthObjectives) {
-        this.selectedObjectives = ninthObjectives;
-    }
-
     public NinthBattle getBattle() {
         return battle;
+    }
+
+    public void setBattle(NinthBattle ninthBattle) {
+        this.battle = ninthBattle;
     }
 
     public NinthArmyMoment battle(NinthBattle ninthBattle) {
@@ -298,21 +301,17 @@ public class NinthArmyMoment implements Serializable {
         return this;
     }
 
-    public void setBattle(NinthBattle ninthBattle) {
-        this.battle = ninthBattle;
-    }
-
     public NinthArmy getArmy() {
         return army;
+    }
+
+    public void setArmy(NinthArmy ninthArmy) {
+        this.army = ninthArmy;
     }
 
     public NinthArmyMoment army(NinthArmy ninthArmy) {
         this.army = ninthArmy;
         return this;
-    }
-
-    public void setArmy(NinthArmy ninthArmy) {
-        this.army = ninthArmy;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

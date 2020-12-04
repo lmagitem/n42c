@@ -16,17 +16,16 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
-import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.Collection;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Collection;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +34,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public final class TestUtil {
 
+    final static String ID_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" +
+        ".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsIm" +
+        "p0aSI6ImQzNWRmMTRkLTA5ZjYtNDhmZi04YTkzLTdjNmYwMzM5MzE1OSIsImlhdCI6MTU0M" +
+        "Tk3MTU4MywiZXhwIjoxNTQxOTc1MTgzfQ.QaQOarmV8xEUYV7yvWzX3cUE_4W1luMcWCwpr" +
+        "oqqUrg";
     private static final ObjectMapper mapper = createObjectMapper();
+
+    private TestUtil() {
+    }
 
     private static ObjectMapper createObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
@@ -72,6 +79,70 @@ public final class TestUtil {
     }
 
     /**
+     * Creates a matcher that matches when the examined string represents the same instant as the reference datetime.
+     *
+     * @param date the reference datetime against which the examined string is checked.
+     */
+    public static ZonedDateTimeMatcher sameInstant(ZonedDateTime date) {
+        return new ZonedDateTimeMatcher(date);
+    }
+
+    /**
+     * Verifies the equals/hashcode contract on the domain object.
+     */
+    public static <T> void equalsVerifier(Class<T> clazz) throws Exception {
+        T domainObject1 = clazz.getConstructor().newInstance();
+        assertThat(domainObject1.toString()).isNotNull();
+        assertThat(domainObject1).isEqualTo(domainObject1);
+        assertThat(domainObject1.hashCode()).isEqualTo(domainObject1.hashCode());
+        // Test with an instance of another class
+        Object testOtherObject = new Object();
+        assertThat(domainObject1).isNotEqualTo(testOtherObject);
+        assertThat(domainObject1).isNotEqualTo(null);
+        // Test with an instance of the same class
+        T domainObject2 = clazz.getConstructor().newInstance();
+        assertThat(domainObject1).isNotEqualTo(domainObject2);
+        // HashCodes are equals because the objects are not persisted yet
+        assertThat(domainObject1.hashCode()).isEqualTo(domainObject2.hashCode());
+    }
+
+    /**
+     * Create a {@link FormattingConversionService} which use ISO date format, instead of the localized one.
+     *
+     * @return the {@link FormattingConversionService}.
+     */
+    public static FormattingConversionService createFormattingConversionService() {
+        DefaultFormattingConversionService dfcs = new DefaultFormattingConversionService();
+        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
+        registrar.setUseIsoFormat(true);
+        registrar.registerFormatters(dfcs);
+        return dfcs;
+    }
+
+    /**
+     * Makes a an executes a query to the EntityManager finding all stored objects.
+     *
+     * @param <T>  The type of objects to be searched
+     * @param em   The instance of the EntityManager
+     * @param clss The class type to be searched
+     * @return A list of all found objects
+     */
+    public static <T> List<T> findAll(EntityManager em, Class<T> clss) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T> cq = cb.createQuery(clss);
+        Root<T> rootEntry = cq.from(clss);
+        CriteriaQuery<T> all = cq.select(rootEntry);
+        TypedQuery<T> allQuery = em.createQuery(all);
+        return allQuery.getResultList();
+    }
+
+    public static OAuth2AuthenticationToken authenticationToken(OidcIdToken idToken) {
+        Collection<GrantedAuthority> authorities = SecurityUtils.extractAuthorityFromClaims(idToken.getClaims());
+        OidcUser user = new DefaultOidcUser(authorities, idToken);
+        return new OAuth2AuthenticationToken(user, authorities, "oidc");
+    }
+
+    /**
      * A matcher that tests that the examined string represents the same instant as the reference datetime.
      */
     public static class ZonedDateTimeMatcher extends TypeSafeDiagnosingMatcher<String> {
@@ -103,74 +174,4 @@ public final class TestUtil {
             description.appendText("a String representing the same Instant as ").appendValue(date);
         }
     }
-
-    /**
-     * Creates a matcher that matches when the examined string represents the same instant as the reference datetime.
-     *
-     * @param date the reference datetime against which the examined string is checked.
-     */
-    public static ZonedDateTimeMatcher sameInstant(ZonedDateTime date) {
-        return new ZonedDateTimeMatcher(date);
-    }
-
-    /**
-     * Verifies the equals/hashcode contract on the domain object.
-     */
-    public static <T> void equalsVerifier(Class<T> clazz) throws Exception {
-        T domainObject1 = clazz.getConstructor().newInstance();
-        assertThat(domainObject1.toString()).isNotNull();
-        assertThat(domainObject1).isEqualTo(domainObject1);
-        assertThat(domainObject1.hashCode()).isEqualTo(domainObject1.hashCode());
-        // Test with an instance of another class
-        Object testOtherObject = new Object();
-        assertThat(domainObject1).isNotEqualTo(testOtherObject);
-        assertThat(domainObject1).isNotEqualTo(null);
-        // Test with an instance of the same class
-        T domainObject2 = clazz.getConstructor().newInstance();
-        assertThat(domainObject1).isNotEqualTo(domainObject2);
-        // HashCodes are equals because the objects are not persisted yet
-        assertThat(domainObject1.hashCode()).isEqualTo(domainObject2.hashCode());
-    }
-
-    /**
-     * Create a {@link FormattingConversionService} which use ISO date format, instead of the localized one.
-     * @return the {@link FormattingConversionService}.
-     */
-    public static FormattingConversionService createFormattingConversionService() {
-        DefaultFormattingConversionService dfcs = new DefaultFormattingConversionService ();
-        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
-        registrar.setUseIsoFormat(true);
-        registrar.registerFormatters(dfcs);
-        return dfcs;
-    }
-
-    /**
-     * Makes a an executes a query to the EntityManager finding all stored objects.
-     * @param <T> The type of objects to be searched
-     * @param em The instance of the EntityManager
-     * @param clss The class type to be searched
-     * @return A list of all found objects
-     */
-    public static <T> List<T> findAll(EntityManager em, Class<T> clss) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<T> cq = cb.createQuery(clss);
-        Root<T> rootEntry = cq.from(clss);
-        CriteriaQuery<T> all = cq.select(rootEntry);
-        TypedQuery<T> allQuery = em.createQuery(all);
-        return allQuery.getResultList();
-    }
-
-    final static String ID_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" +
-        ".eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsIm" +
-        "p0aSI6ImQzNWRmMTRkLTA5ZjYtNDhmZi04YTkzLTdjNmYwMzM5MzE1OSIsImlhdCI6MTU0M" +
-        "Tk3MTU4MywiZXhwIjoxNTQxOTc1MTgzfQ.QaQOarmV8xEUYV7yvWzX3cUE_4W1luMcWCwpr" +
-        "oqqUrg";
-
-    public static OAuth2AuthenticationToken authenticationToken(OidcIdToken idToken) {
-        Collection<GrantedAuthority> authorities = SecurityUtils.extractAuthorityFromClaims(idToken.getClaims());
-        OidcUser user = new DefaultOidcUser(authorities, idToken);
-        return new OAuth2AuthenticationToken(user, authorities, "oidc");
-    }
-
-    private TestUtil() {}
 }

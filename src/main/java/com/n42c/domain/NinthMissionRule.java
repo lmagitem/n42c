@@ -5,7 +5,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,6 +46,10 @@ public class NinthMissionRule implements Serializable {
         return localizations;
     }
 
+    public void setLocalizations(Set<LocalizedNinthMissionRule> localizedNinthMissionRules) {
+        this.localizations = localizedNinthMissionRules;
+    }
+
     public NinthMissionRule localizations(Set<LocalizedNinthMissionRule> localizedNinthMissionRules) {
         this.localizations = localizedNinthMissionRules;
         return this;
@@ -64,12 +67,12 @@ public class NinthMissionRule implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedNinthMissionRule> localizedNinthMissionRules) {
-        this.localizations = localizedNinthMissionRules;
-    }
-
     public Set<NinthMission> getMissions() {
         return missions;
+    }
+
+    public void setMissions(Set<NinthMission> ninthMissions) {
+        this.missions = ninthMissions;
     }
 
     public NinthMissionRule missions(Set<NinthMission> ninthMissions) {
@@ -87,10 +90,6 @@ public class NinthMissionRule implements Serializable {
         this.missions.remove(ninthMission);
         ninthMission.getRules().remove(this);
         return this;
-    }
-
-    public void setMissions(Set<NinthMission> ninthMissions) {
-        this.missions = ninthMissions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

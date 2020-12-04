@@ -1,6 +1,6 @@
-import { IProfilePart } from 'app/shared/model/profile-part.model';
-import { IAppUser } from 'app/shared/model/app-user.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {IProfilePart} from 'app/shared/model/profile-part.model';
+import {IAppUser} from 'app/shared/model/app-user.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface IAppUserProfile {
   id?: number;
@@ -23,5 +23,6 @@ export class AppUserProfile implements IAppUserProfile {
     public language?: Language,
     public profileParts?: IProfilePart[],
     public user?: IAppUser
-  ) {}
+  ) {
+  }
 }

@@ -3,8 +3,8 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthObjective;
+import com.n42c.domain.enumeration.NinthObjectiveType;
 import com.n42c.repository.NinthObjectiveRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -23,11 +24,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.NinthObjectiveType;
 /**
  * Integration tests for the {@link NinthObjectiveResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthObjectiveResourceIT {
@@ -51,7 +51,7 @@ public class NinthObjectiveResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -61,9 +61,10 @@ public class NinthObjectiveResourceIT {
             .type(DEFAULT_TYPE);
         return ninthObjective;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -131,7 +132,7 @@ public class NinthObjectiveResourceIT {
             .andExpect(jsonPath("$.[*].shareable").value(hasItem(DEFAULT_SHAREABLE.booleanValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getNinthObjective() throws Exception {
@@ -146,6 +147,7 @@ public class NinthObjectiveResourceIT {
             .andExpect(jsonPath("$.shareable").value(DEFAULT_SHAREABLE.booleanValue()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthObjective() throws Exception {

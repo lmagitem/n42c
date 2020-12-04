@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IBlogCategory, BlogCategory } from 'app/shared/model/blog-category.model';
-import { BlogCategoryService } from './blog-category.service';
+import {BlogCategory, IBlogCategory} from 'app/shared/model/blog-category.model';
+import {BlogCategoryService} from './blog-category.service';
 
 @Component({
   selector: 'jhi-blog-category-update',
@@ -22,10 +22,11 @@ export class BlogCategoryUpdateComponent implements OnInit {
     parentCategory: [],
   });
 
-  constructor(protected blogCategoryService: BlogCategoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected blogCategoryService: BlogCategoryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ blogCategory }) => {
+    this.activatedRoute.data.subscribe(({blogCategory}) => {
       this.updateForm(blogCategory);
 
       this.blogCategoryService.query().subscribe((res: HttpResponse<IBlogCategory[]>) => (this.blogcategories = res.body || []));
@@ -54,13 +55,8 @@ export class BlogCategoryUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IBlogCategory {
-    return {
-      ...new BlogCategory(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      parentCategory: this.editForm.get(['parentCategory'])!.value,
-    };
+  trackById(index: number, item: IBlogCategory): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBlogCategory>>): void {
@@ -79,7 +75,12 @@ export class BlogCategoryUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IBlogCategory): any {
-    return item.id;
+  private createFromForm(): IBlogCategory {
+    return {
+      ...new BlogCategory(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      parentCategory: this.editForm.get(['parentCategory'])!.value,
+    };
   }
 }

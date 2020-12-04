@@ -1,7 +1,7 @@
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PLACEHOLDER_CONTENT, PLACEHOLDER_NAME } from '../constants/localization.constants';
-import { ArrayUtils } from './arrays-utils';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {PLACEHOLDER_CONTENT, PLACEHOLDER_NAME} from '../constants/localization.constants';
+import {ArrayUtils} from './arrays-utils';
 
 export interface IItemWithLocalizations {
   id: any;

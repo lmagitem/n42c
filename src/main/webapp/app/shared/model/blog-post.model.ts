@@ -1,8 +1,8 @@
-import { Moment } from 'moment';
-import { ILocalizedPostContent } from 'app/shared/model/localized-post-content.model';
-import { IAppUser } from 'app/shared/model/app-user.model';
-import { IBlogCategory } from 'app/shared/model/blog-category.model';
-import { IBlog } from 'app/shared/model/blog.model';
+import {Moment} from 'moment';
+import {ILocalizedPostContent} from 'app/shared/model/localized-post-content.model';
+import {IAppUser} from 'app/shared/model/app-user.model';
+import {IBlogCategory} from 'app/shared/model/blog-category.model';
+import {IBlog} from 'app/shared/model/blog.model';
 
 export interface IBlogPost {
   id?: number;
@@ -25,5 +25,6 @@ export class BlogPost implements IBlogPost {
     public authors?: IAppUser[],
     public categories?: IBlogCategory[],
     public blog?: IBlog
-  ) {}
+  ) {
+  }
 }

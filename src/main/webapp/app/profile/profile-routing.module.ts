@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
 
 @NgModule({
   imports: [
@@ -14,4 +14,5 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
     ]),
   ],
 })
-export class ProfileRoutingModule {}
+export class ProfileRoutingModule {
+}
