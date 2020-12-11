@@ -1,4 +1,4 @@
-package com.n42c.domain.enumeration;
+package com.n42c.domain.enumerations;
 
 /**
  * The ProfilePartOrderType enumeration.
