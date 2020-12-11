@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IProfilePartSkill } from 'app/shared/model/profile-part-skill.model';
+import {IProfilePartSkill} from 'app/shared/model/profile-part-skill.model';
 
 @Component({
   selector: 'jhi-profile-part-skill-detail',

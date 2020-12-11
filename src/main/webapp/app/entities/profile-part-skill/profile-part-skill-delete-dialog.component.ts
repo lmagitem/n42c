@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { IProfilePartSkill } from 'app/shared/model/profile-part-skill.model';
-import { ProfilePartSkillService } from './profile-part-skill.service';
+import {IProfilePartSkill} from 'app/shared/model/profile-part-skill.model';
+import {ProfilePartSkillService} from './profile-part-skill.service';
 
 @Component({
   templateUrl: './profile-part-skill-delete-dialog.component.html',

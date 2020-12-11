@@ -1,8 +1,8 @@
 {
   "n42cApp": {
-    "localizedPostContent": {
+    "localizedBlogPost": {
       "home": {
-        "title": "LocalizedPostContents",
+        "title": "LocalizedBlogPosts",
         "createLabel": "Créer un nouveau Localized Post Content",
         "createOrEditLabel": "Créer ou éditer un Localized Post Content",
         "notFound": "Aucun Localized Post Content trouvé"

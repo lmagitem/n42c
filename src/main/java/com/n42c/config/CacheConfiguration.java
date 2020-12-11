@@ -1,5 +1,6 @@
 package com.n42c.config;
 
+import com.n42c.domain.LocalizedBlogPost;
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.config.cache.PrefixedKeyGenerator;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
@@ -90,7 +91,7 @@ public class CacheConfiguration {
             createCache(cm, com.n42c.domain.BlogPost.class.getName() + ".localizations");
             createCache(cm, com.n42c.domain.BlogPost.class.getName() + ".authors");
             createCache(cm, com.n42c.domain.BlogPost.class.getName() + ".categories");
-            createCache(cm, com.n42c.domain.LocalizedPostContent.class.getName());
+            createCache(cm, LocalizedBlogPost.class.getName());
             createCache(cm, com.n42c.domain.BlogCategory.class.getName() + ".subcategories");
             createCache(cm, com.n42c.domain.BlogCategory.class.getName() + ".localizations");
             createCache(cm, com.n42c.domain.BlogCategory.class.getName() + ".posts");

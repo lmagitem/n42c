@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiDataUtils, JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
-import { AppUserProfileService } from './app-user-profile.service';
-import { AppUserProfileDeleteDialogComponent } from './app-user-profile-delete-dialog.component';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
+import {AppUserProfileService} from './app-user-profile.service';
+import {AppUserProfileDeleteDialogComponent} from './app-user-profile-delete-dialog.component';
 
 @Component({
   selector: 'jhi-app-user-profile',

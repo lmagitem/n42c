@@ -23,9 +23,14 @@ export class LocalizationUtils {
     let result = '';
 
     if (item !== undefined && item !== null && item.localizations !== undefined && item.localizations !== null) {
-      // If the placeholder is found, returns it
+      // If the placeholder is found and the field isn't a header one, returns it
       if (item.localizations.length === 1 && item.localizations[0][fieldToLocalize] === PLACEHOLDER_NAME) {
-        return PLACEHOLDER_CONTENT;
+        if (fieldToLocalize !== 'title' && fieldToLocalize !== 'name') {
+          return PLACEHOLDER_CONTENT;
+        } else {
+          // If it's a header one, simply use the value of the item itself
+          return item[fieldToLocalize] !== undefined && item[fieldToLocalize] !== null ? item[fieldToLocalize] : '...';
+        }
       }
 
       // Try to retreive the localization for the currently selected language, or the english localization, or any localization

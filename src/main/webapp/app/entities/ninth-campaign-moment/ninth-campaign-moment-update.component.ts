@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
+import {JhiDataUtils, JhiEventManager, JhiEventWithContent, JhiFileLoadError} from 'ng-jhipster';
 
-import { INinthCampaignMoment, NinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { NinthCampaignMomentService } from './ninth-campaign-moment.service';
-import { AlertError } from 'app/shared/alert/alert-error.model';
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
+import {INinthCampaignMoment, NinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
+import {NinthCampaignMomentService} from './ninth-campaign-moment.service';
+import {AlertError} from 'app/shared/alert/alert-error.model';
+import {INinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {NinthCampaignService} from 'app/entities/ninth-campaign/ninth-campaign.service';
 
 @Component({
   selector: 'jhi-ninth-campaign-moment-update',

@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {JhiDataUtils, JhiEventManager, JhiEventWithContent, JhiFileLoadError} from 'ng-jhipster';
 
-import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignService } from './ninth-campaign.service';
-import { AlertError } from 'app/shared/alert/alert-error.model';
-import { IPlayer } from 'app/shared/model/player.model';
-import { PlayerService } from 'app/entities/player/player.service';
-import { INinthStratagemGroup } from 'app/shared/model/ninth-stratagem-group.model';
-import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
+import {INinthCampaign, NinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {NinthCampaignService} from './ninth-campaign.service';
+import {AlertError} from 'app/shared/alert/alert-error.model';
+import {IPlayer} from 'app/shared/model/player.model';
+import {PlayerService} from 'app/entities/player/player.service';
+import {INinthStratagemGroup} from 'app/shared/model/ninth-stratagem-group.model';
+import {NinthStratagemGroupService} from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
 
 type SelectableEntity = IPlayer | INinthStratagemGroup;
 

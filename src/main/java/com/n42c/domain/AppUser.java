@@ -1,7 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumerations.AppUserRights;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -11,7 +11,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -36,6 +35,7 @@ public class AppUser implements Serializable {
     @NotNull
     @ApiModelProperty(value = "The user account's name.", required = true)
     @Column(name = "user_name", nullable = false, unique = true)
+    @JsonIgnore
     private String userName;
 
     /**
@@ -108,6 +108,7 @@ public class AppUser implements Serializable {
     @JoinTable(name = "app_user_given_friendships",
         joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
+    @JsonIgnore
     private Set<AppUser> givenFriendships = new HashSet<>();
 
     @ManyToMany
@@ -115,6 +116,7 @@ public class AppUser implements Serializable {
     @JoinTable(name = "app_user_asked_friend_requests",
         joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
+    @JsonIgnore
     private Set<AppUser> askedFriendRequests = new HashSet<>();
 
     @OneToOne(mappedBy = "appUser")
@@ -147,6 +149,17 @@ public class AppUser implements Serializable {
     public AppUser(Long id, String displayedName) {
         this.id = id;
         this.displayedName = displayedName;
+    }
+
+    public AppUser(Long id, @NotNull String userName, String displayedName, @NotNull Boolean admin, @NotNull AppUserRights shopRights, @NotNull AppUserRights blogRights, @NotNull AppUserRights profileRights, @NotNull AppUserRights scriptoriumRights) {
+        this.id = id;
+        this.userName = userName;
+        this.displayedName = displayedName;
+        this.admin = admin;
+        this.shopRights = shopRights;
+        this.blogRights = blogRights;
+        this.profileRights = profileRights;
+        this.scriptoriumRights = scriptoriumRights;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -475,21 +488,6 @@ public class AppUser implements Serializable {
         return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
-    /**
-     * Removes sensitive informations from the instance.
-     */
-    public void clearSensitiveInfos(EntityManager entityManager) {
-        if (entityManager != null) {
-            entityManager.detach(this);
-            this.setUser(new User());
-            this.setAskedFriendRequests(new LinkedHashSet<>());
-            this.setGivenFriendships(new LinkedHashSet<>());
-            this.setBlogs(new LinkedHashSet<>());
-            this.setProfiles(new LinkedHashSet<>());
-            this.setProducts(new LinkedHashSet<>());
-        }
-    }
 
     @Override
     public boolean equals(Object o) {

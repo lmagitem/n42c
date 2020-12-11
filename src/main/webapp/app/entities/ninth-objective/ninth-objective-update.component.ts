@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthObjective, NinthObjective } from 'app/shared/model/ninth-objective.model';
-import { NinthObjectiveService } from './ninth-objective.service';
+import {INinthObjective, NinthObjective} from 'app/shared/model/ninth-objective.model';
+import {NinthObjectiveService} from './ninth-objective.service';
 
 @Component({
   selector: 'jhi-ninth-objective-update',

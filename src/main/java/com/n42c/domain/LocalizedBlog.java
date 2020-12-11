@@ -1,7 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.n42c.domain.enumeration.Language;
+import com.n42c.domain.enumerations.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -52,11 +52,10 @@ public class LocalizedBlog implements Serializable {
     public LocalizedBlog() {
     }
 
-    public LocalizedBlog(Long id, @NotNull String name, @NotNull Language language, @NotNull Blog blog) {
+    public LocalizedBlog(Long id, @NotNull String name, @NotNull Language language) {
         this.id = id;
         this.name = name;
         this.language = language;
-        this.blog = blog;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

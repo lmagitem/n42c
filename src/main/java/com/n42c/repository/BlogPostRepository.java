@@ -1,7 +1,7 @@
 package com.n42c.repository;
 
-import com.n42c.domain.AuthorToPostLinkView;
 import com.n42c.domain.BlogPost;
+import com.n42c.domain.views.AuthorToPostLinkView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

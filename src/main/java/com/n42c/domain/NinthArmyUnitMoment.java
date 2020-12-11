@@ -1,7 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.n42c.domain.enumeration.NinthCrusadeRank;
+import com.n42c.domain.enumerations.NinthCrusadeRank;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

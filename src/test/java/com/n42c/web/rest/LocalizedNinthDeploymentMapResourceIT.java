@@ -4,7 +4,7 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthDeploymentMap;
 import com.n42c.domain.NinthDeploymentMap;
-import com.n42c.domain.enumeration.Language;
+import com.n42c.domain.enumerations.Language;
 import com.n42c.repository.LocalizedNinthDeploymentMapRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

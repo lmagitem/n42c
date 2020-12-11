@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { NinthCampaignMomentService } from './ninth-campaign-moment.service';
+import {INinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
+import {NinthCampaignMomentService} from './ninth-campaign-moment.service';
 
 @Component({
   templateUrl: './ninth-campaign-moment-delete-dialog.component.html',

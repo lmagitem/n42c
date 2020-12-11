@@ -1,6 +1,6 @@
 package com.n42c.domain;
 
-import com.n42c.domain.enumeration.NinthGameType;
+import com.n42c.domain.enumerations.NinthGameType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;

@@ -3,7 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthCampaign;
-import com.n42c.domain.enumeration.NinthGameType;
+import com.n42c.domain.enumerations.NinthGameType;
 import com.n42c.repository.NinthCampaignRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

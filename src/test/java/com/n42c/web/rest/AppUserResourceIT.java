@@ -4,7 +4,7 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUser;
 import com.n42c.domain.User;
-import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumerations.AppUserRights;
 import com.n42c.repository.AppUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

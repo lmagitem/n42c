@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
+import {INinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
 
 @Component({
   selector: 'jhi-ninth-deployment-map-detail',

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IProfilePartSkill, ProfilePartSkill } from 'app/shared/model/profile-part-skill.model';
-import { ProfilePartSkillService } from './profile-part-skill.service';
-import { IProfilePartLinkedExperience } from 'app/shared/model/profile-part-linked-experience.model';
-import { ProfilePartLinkedExperienceService } from 'app/entities/profile-part-linked-experience/profile-part-linked-experience.service';
-import { IProfilePartSkillCategory } from 'app/shared/model/profile-part-skill-category.model';
-import { ProfilePartSkillCategoryService } from 'app/entities/profile-part-skill-category/profile-part-skill-category.service';
+import {IProfilePartSkill, ProfilePartSkill} from 'app/shared/model/profile-part-skill.model';
+import {ProfilePartSkillService} from './profile-part-skill.service';
+import {IProfilePartLinkedExperience} from 'app/shared/model/profile-part-linked-experience.model';
+import {ProfilePartLinkedExperienceService} from 'app/entities/profile-part-linked-experience/profile-part-linked-experience.service';
+import {IProfilePartSkillCategory} from 'app/shared/model/profile-part-skill-category.model';
+import {ProfilePartSkillCategoryService} from 'app/entities/profile-part-skill-category/profile-part-skill-category.service';
 
 type SelectableEntity = IProfilePartLinkedExperience | IProfilePartSkillCategory;
 

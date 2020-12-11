@@ -1,6 +1,5 @@
 package com.n42c.web.rest;
 
-import com.n42c.domain.AppUser;
 import com.n42c.domain.Blog;
 import com.n42c.repository.BlogRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -23,6 +21,7 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,18 +39,21 @@ public class BlogResource {
     private static final String ENTITY_NAME = "blog";
     private final Logger log = LoggerFactory.getLogger(BlogResource.class);
     private final BlogRepository blogRepository;
+    private final EntityManager entityManager;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    public BlogResource(BlogRepository blogRepository) {
+    public BlogResource(BlogRepository blogRepository, EntityManager entityManager) {
         this.blogRepository = blogRepository;
+        this.entityManager = entityManager;
     }
 
     /**
      * {@code POST  /blogs} : Create a new blog.
      *
      * @param blog the blog to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new blog, or with status {@code 400 (Bad Request)} if the blog has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new blog, or with status {@code 400 (Bad Request)} if the blog has
+     * already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/blogs")
@@ -62,18 +64,17 @@ public class BlogResource {
         }
         Blog result = blogRepository.save(blog);
         return ResponseEntity
-            .created(new URI("/api/blogs/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/blogs/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /blogs} : Updates an existing blog.
      *
      * @param blog the blog to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated blog,
-     * or with status {@code 400 (Bad Request)} if the blog is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the blog couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated blog, or with status {@code 400 (Bad Request)} if the blog is
+     * not valid, or with status {@code 500 (Internal Server Error)} if the blog couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/blogs")
@@ -84,9 +85,9 @@ public class BlogResource {
         }
         Blog result = blogRepository.save(blog);
         return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blog.getId().toString()))
-            .body(result);
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blog.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -101,18 +102,17 @@ public class BlogResource {
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
         if (authentication == null) {
-            return RestServiceUtils.returnPagedListWithHeaders(restrictSentUserData(getBlogsByCurrentUserOrWriter(pageable, null)));
+            return RestServiceUtils.returnPagedListWithHeaders((getBlogsByCurrentUserOrWriter(pageable, null)));
         } else if (authorities == null) {
             return RestServiceUtils.returnPagedListWithHeaders(
-                restrictSentUserData(getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
-            );
+                    (getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
+                                                              );
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             log.debug("REST request to get all Blogs - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(restrictSentUserData(blogRepository.findAll(pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders((blogRepository.findAll(pageable)));
         } else {
             return RestServiceUtils.returnPagedListWithHeaders(
-                restrictSentUserData(getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
-            );
+                    (getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal())));
         }
     }
 
@@ -140,9 +140,9 @@ public class BlogResource {
         log.debug("REST request to delete Blog : {}", id);
         blogRepository.deleteById(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 
     /**
@@ -162,23 +162,5 @@ public class BlogResource {
         }
         log.debug("REST request to get all Blogs - as Anonymous");
         return blogRepository.findByIsWriter(pageable);
-    }
-
-    /**
-     * @return The given paged result trimmed of all non-necessary infos about the users.
-     */
-    private Page<Blog> restrictSentUserData(Page<Blog> page) {
-        if (page == null) return null;
-
-        List<Blog> blogs = page.getContent();
-        blogs.forEach(
-            blog -> {
-                if (blog.getAuthor() != null) {
-                    blog.setAuthor(new AppUser(blog.getAuthor().getId(), blog.getAuthor().getDisplayedName()));
-                }
-            }
-        );
-
-        return new PageImpl<>(blogs, page.getPageable(), page.getTotalElements());
     }
 }

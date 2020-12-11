@@ -1,7 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.n42c.domain.enumeration.NinthObjectiveType;
+import com.n42c.domain.enumerations.NinthObjectiveType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

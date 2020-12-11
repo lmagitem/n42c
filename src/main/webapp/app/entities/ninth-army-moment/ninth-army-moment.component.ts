@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiDataUtils, JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
-import { NinthArmyMomentService } from './ninth-army-moment.service';
-import { NinthArmyMomentDeleteDialogComponent } from './ninth-army-moment-delete-dialog.component';
+import {INinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
+import {NinthArmyMomentService} from './ninth-army-moment.service';
+import {NinthArmyMomentDeleteDialogComponent} from './ninth-army-moment-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-army-moment',

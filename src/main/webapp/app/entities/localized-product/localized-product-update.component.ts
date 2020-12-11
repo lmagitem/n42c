@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {JhiDataUtils, JhiEventManager, JhiEventWithContent, JhiFileLoadError} from 'ng-jhipster';
 
-import { ILocalizedProduct, LocalizedProduct } from 'app/shared/model/localized-product.model';
-import { LocalizedProductService } from './localized-product.service';
-import { AlertError } from 'app/shared/alert/alert-error.model';
-import { IProduct } from 'app/shared/model/product.model';
-import { ProductService } from 'app/entities/product/product.service';
+import {ILocalizedProduct, LocalizedProduct} from 'app/shared/model/localized-product.model';
+import {LocalizedProductService} from './localized-product.service';
+import {AlertError} from 'app/shared/alert/alert-error.model';
+import {IProduct} from 'app/shared/model/product.model';
+import {ProductService} from 'app/entities/product/product.service';
 
 @Component({
   selector: 'jhi-localized-product-update',

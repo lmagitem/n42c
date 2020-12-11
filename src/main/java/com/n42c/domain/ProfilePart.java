@@ -1,8 +1,8 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.n42c.domain.enumeration.ProfilePartOrderType;
-import com.n42c.domain.enumeration.ProfilePartType;
+import com.n42c.domain.enumerations.ProfilePartOrderType;
+import com.n42c.domain.enumerations.ProfilePartType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;

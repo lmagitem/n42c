@@ -127,9 +127,9 @@
         </createTable>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599594726176-59">
-        <createTable tableName="localized_post_content">
+        <createTable tableName="localized_blog_post">
             <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_post_contentPK"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_blog_postPK"/>
             </column>
             <column name="content" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -646,7 +646,7 @@
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="app_user_profile" constraintName="FK855x86e308aum6gsppo0mw5h8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599594726176-125">
-        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="localized_post_content" constraintName="FK8exxcw5cltitxehvyj810gh41" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_post" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="localized_blog_post" constraintName="FK8exxcw5cltitxehvyj810gh41" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_post" validate="true"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599594726176-126">
         <addForeignKeyConstraint baseColumnNames="selected_units_id" baseTableName="ninth_army_moment_selected_units" constraintName="FK8odka3pnxnlj8arqyuv9nn927" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army_unit" validate="true"/>

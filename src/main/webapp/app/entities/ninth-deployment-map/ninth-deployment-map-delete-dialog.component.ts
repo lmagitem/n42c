@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { INinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
-import { NinthDeploymentMapService } from './ninth-deployment-map.service';
+import {INinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
+import {NinthDeploymentMapService} from './ninth-deployment-map.service';
 
 @Component({
   templateUrl: './ninth-deployment-map-delete-dialog.component.html',

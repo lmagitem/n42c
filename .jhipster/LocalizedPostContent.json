@@ -1,5 +1,5 @@
 {
-  "name": "LocalizedPostContent",
+  "name": "LocalizedBlogPost",
   "fields": [
     {
       "fieldName": "title",
@@ -46,7 +46,7 @@
   ],
   "changelogDate": "20200908193812",
   "javadoc": "The content of a post, in a specific language.",
-  "entityTableName": "localized_post_content",
+  "entityTableName": "localized_blog_post",
   "dto": "no",
   "pagination": "no",
   "service": "no",

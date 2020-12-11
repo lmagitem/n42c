@@ -3,7 +3,7 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthObjective;
-import com.n42c.domain.enumeration.NinthObjectiveType;
+import com.n42c.domain.enumerations.NinthObjectiveType;
 import com.n42c.repository.NinthObjectiveRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

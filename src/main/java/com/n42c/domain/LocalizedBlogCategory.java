@@ -1,7 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.n42c.domain.enumeration.Language;
+import com.n42c.domain.enumerations.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -48,6 +48,15 @@ public class LocalizedBlogCategory implements Serializable {
     @NotNull
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
     private BlogCategory category;
+
+    public LocalizedBlogCategory() {
+    }
+
+    public LocalizedBlogCategory(Long id, @NotNull String name, @NotNull Language language) {
+        this.id = id;
+        this.name = name;
+        this.language = language;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -96,7 +105,7 @@ public class LocalizedBlogCategory implements Serializable {
         this.category = blogCategory;
         return this;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthStratagem, NinthStratagem } from 'app/shared/model/ninth-stratagem.model';
-import { NinthStratagemService } from './ninth-stratagem.service';
-import { INinthStratagemGroup } from 'app/shared/model/ninth-stratagem-group.model';
-import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
+import {INinthStratagem, NinthStratagem} from 'app/shared/model/ninth-stratagem.model';
+import {NinthStratagemService} from './ninth-stratagem.service';
+import {INinthStratagemGroup} from 'app/shared/model/ninth-stratagem-group.model';
+import {NinthStratagemGroupService} from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
 
 @Component({
   selector: 'jhi-ninth-stratagem-update',

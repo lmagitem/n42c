@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
-import { NinthDeploymentMapService } from './ninth-deployment-map.service';
-import { NinthDeploymentMapDeleteDialogComponent } from './ninth-deployment-map-delete-dialog.component';
+import {INinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
+import {NinthDeploymentMapService} from './ninth-deployment-map.service';
+import {NinthDeploymentMapDeleteDialogComponent} from './ninth-deployment-map-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-deployment-map',

@@ -56,6 +56,11 @@ public class Blog implements Serializable {
         this.id = id;
     }
 
+    public Blog(Long id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -162,8 +167,8 @@ public class Blog implements Serializable {
     @Override
     public String toString() {
         return "Blog{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
+               "id=" + getId() +
+               ", name='" + getName() + "'" +
+               "}";
     }
 }

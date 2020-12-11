@@ -1,6 +1,5 @@
 package com.n42c.web.rest;
 
-import com.n42c.domain.Blog;
 import com.n42c.domain.LocalizedBlog;
 import com.n42c.repository.LocalizedBlogRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
@@ -50,7 +49,8 @@ public class LocalizedBlogResource {
      * {@code POST  /localized-blogs} : Create a new localizedBlog.
      *
      * @param localizedBlog the localizedBlog to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new localizedBlog, or with status {@code 400 (Bad Request)} if the localizedBlog has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new localizedBlog, or with status {@code 400 (Bad Request)} if the
+     * localizedBlog has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/localized-blogs")
@@ -61,18 +61,17 @@ public class LocalizedBlogResource {
         }
         LocalizedBlog result = localizedBlogRepository.save(localizedBlog);
         return ResponseEntity
-            .created(new URI("/api/localized-blogs/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .created(new URI("/api/localized-blogs/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /localized-blogs} : Updates an existing localizedBlog.
      *
      * @param localizedBlog the localizedBlog to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated localizedBlog,
-     * or with status {@code 400 (Bad Request)} if the localizedBlog is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the localizedBlog couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated localizedBlog, or with status {@code 400 (Bad Request)} if the
+     * localizedBlog is not valid, or with status {@code 500 (Internal Server Error)} if the localizedBlog couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/localized-blogs")
@@ -83,9 +82,9 @@ public class LocalizedBlogResource {
         }
         LocalizedBlog result = localizedBlogRepository.save(localizedBlog);
         return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, localizedBlog.getId().toString()))
-            .body(result);
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, localizedBlog.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -96,29 +95,29 @@ public class LocalizedBlogResource {
     @GetMapping("/localized-blogs")
     public List<LocalizedBlog> getAllLocalizedBlogs() {
         log.debug("REST request to get all LocalizedBlogs");
-        return restrictSentUserData(localizedBlogRepository.findAll());
+        return (localizedBlogRepository.findAll());
     }
 
     /**
      * {@code GET  /localized-blogs/for} : get localizations for the Blogs which ids are given in parameter.
      *
      * @param ids the ids of the Blogs for which to return localizations.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of localizedPostContents in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of localizedBlogPosts in body.
      */
     @GetMapping("/localized-blogs/for")
-    public List<LocalizedBlog> getLocalizedPostContentsFor(@RequestParam List<Long> ids) {
+    public List<LocalizedBlog> getLocalizedBlogPostsFor(@RequestParam List<Long> ids) {
         Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
         if (authentication == null) {
-            return restrictSentUserData(getAllowedLocalizedPosts(ids, null));
+            return (getAllowedLocalizedPosts(ids, null));
         } else if (authorities == null) {
-            return restrictSentUserData(getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
+            return (getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) && CollectionUtils.isNotEmpty(ids)) {
             log.debug("REST request to get localizations for given Blog ids - as Admin");
-            return restrictSentUserData(localizedBlogRepository.findByBlogIds(ids));
+            return (localizedBlogRepository.findByBlogIds(ids));
         } else {
-            return restrictSentUserData(getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
+            return (getAllowedLocalizedPosts(ids, authentication.getPrincipal()));
         }
     }
 
@@ -146,9 +145,9 @@ public class LocalizedBlogResource {
         log.debug("REST request to delete LocalizedBlog : {}", id);
         localizedBlogRepository.deleteById(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 
     /**
@@ -168,22 +167,5 @@ public class LocalizedBlogResource {
         }
         log.debug("REST request to get localizations for given Blog ids - as Anonymous");
         return localizedBlogRepository.findByBlogIdsAndIsWriter(ids);
-    }
-
-    /**
-     * @return The given result trimmed of all non-necessary infos about the users.
-     */
-    private List<LocalizedBlog> restrictSentUserData(List<LocalizedBlog> localizations) {
-        if (CollectionUtils.isEmpty(localizations)) return new LinkedList<>();
-
-        localizations.forEach(
-            localizedBlog -> {
-                if (localizedBlog.getBlog() != null) {
-                    localizedBlog.setBlog(new Blog(localizedBlog.getBlog().getId()));
-                }
-            }
-        );
-
-        return localizations;
     }
 }

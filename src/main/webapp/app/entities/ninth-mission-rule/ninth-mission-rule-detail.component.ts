@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
+import {INinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
 
 @Component({
   selector: 'jhi-ninth-mission-rule-detail',

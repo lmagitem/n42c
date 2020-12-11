@@ -7,7 +7,7 @@ import {IBlogPost} from 'app/shared/model/blog-post.model';
 import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
 import {BlogPostDeleteDialogComponent} from './blog-post-delete-dialog.component';
 import {BlogPostService} from 'app/entities/blog-post/blog-post.service';
-import {LocalizedPostContentService} from 'app/entities/localized-post-content/localized-post-content.service';
+import {LocalizedBlogPostService} from 'app/entities/localized-blog-post/localized-blog-post.service';
 import {IItemWithLocalizations, LocalizationUtils} from 'app/shared/util/localization-utils';
 import {ActivatedRoute} from '@angular/router';
 import {IBlog} from 'app/shared/model/blog.model';
@@ -30,7 +30,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
 
   constructor(
     protected blogPostService: BlogPostService,
-    protected localizedPostService: LocalizedPostContentService,
+    protected localizedPostService: LocalizedBlogPostService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,

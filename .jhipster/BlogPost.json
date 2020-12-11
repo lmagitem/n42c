@@ -26,7 +26,7 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "localizedPostContent",
+      "otherEntityName": "localizedBlogPost",
       "otherEntityRelationshipName": "post",
       "relationshipName": "localizations"
     },

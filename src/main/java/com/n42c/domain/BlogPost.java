@@ -54,7 +54,7 @@ public class BlogPost implements Serializable {
 
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<LocalizedPostContent> localizations = new HashSet<>();
+    private Set<LocalizedBlogPost> localizations = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -80,6 +80,12 @@ public class BlogPost implements Serializable {
 
     public BlogPost(Long id) {
         this.id = id;
+    }
+
+    public BlogPost(Long id, @NotNull String title, Instant published) {
+        this.id = id;
+        this.title = title;
+        this.published = published;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -130,28 +136,28 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public Set<LocalizedPostContent> getLocalizations() {
+    public Set<LocalizedBlogPost> getLocalizations() {
         return localizations;
     }
 
-    public void setLocalizations(Set<LocalizedPostContent> localizedPostContents) {
-        this.localizations = localizedPostContents;
+    public void setLocalizations(Set<LocalizedBlogPost> localizedBlogPosts) {
+        this.localizations = localizedBlogPosts;
     }
 
-    public BlogPost localizations(Set<LocalizedPostContent> localizedPostContents) {
-        this.localizations = localizedPostContents;
+    public BlogPost localizations(Set<LocalizedBlogPost> localizedBlogPosts) {
+        this.localizations = localizedBlogPosts;
         return this;
     }
 
-    public BlogPost addLocalizations(LocalizedPostContent localizedPostContent) {
-        this.localizations.add(localizedPostContent);
-        localizedPostContent.setPost(this);
+    public BlogPost addLocalizations(LocalizedBlogPost localizedBlogPost) {
+        this.localizations.add(localizedBlogPost);
+        localizedBlogPost.setPost(this);
         return this;
     }
 
-    public BlogPost removeLocalizations(LocalizedPostContent localizedPostContent) {
-        this.localizations.remove(localizedPostContent);
-        localizedPostContent.setPost(null);
+    public BlogPost removeLocalizations(LocalizedBlogPost localizedBlogPost) {
+        this.localizations.remove(localizedBlogPost);
+        localizedBlogPost.setPost(null);
         return this;
     }
 

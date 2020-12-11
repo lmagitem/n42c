@@ -4,7 +4,7 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.LocalizedNinthStratagem;
 import com.n42c.domain.NinthStratagem;
-import com.n42c.domain.enumeration.Language;
+import com.n42c.domain.enumerations.Language;
 import com.n42c.repository.LocalizedNinthStratagemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

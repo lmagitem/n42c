@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils, JhiLanguageService } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { NinthCampaignMomentService } from './ninth-campaign-moment.service';
-import { NinthCampaignMomentDeleteDialogComponent } from './ninth-campaign-moment-delete-dialog.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiDataUtils, JhiEventManager, JhiLanguageService} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {INinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
+import {NinthCampaignMomentService} from './ninth-campaign-moment.service';
+import {NinthCampaignMomentDeleteDialogComponent} from './ninth-campaign-moment-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-campaign-moment',

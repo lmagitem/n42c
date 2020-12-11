@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
-import { NinthStratagemService } from './ninth-stratagem.service';
-import { NinthStratagemDeleteDialogComponent } from './ninth-stratagem-delete-dialog.component';
+import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
+import {NinthStratagemService} from './ninth-stratagem.service';
+import {NinthStratagemDeleteDialogComponent} from './ninth-stratagem-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-stratagem',

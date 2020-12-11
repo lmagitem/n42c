@@ -5,7 +5,7 @@ import com.n42c.config.Constants;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUser;
 import com.n42c.domain.User;
-import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumerations.AppUserRights;
 import com.n42c.repository.UserRepository;
 import com.n42c.security.AuthoritiesConstants;
 import com.n42c.service.dto.UserDTO;

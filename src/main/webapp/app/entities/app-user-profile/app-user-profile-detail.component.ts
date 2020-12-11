@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {JhiDataUtils} from 'ng-jhipster';
 
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
 
 @Component({
   selector: 'jhi-app-user-profile-detail',

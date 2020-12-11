@@ -1,8 +1,8 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.n42c.domain.enumeration.NinthGameSize;
-import com.n42c.domain.enumeration.NinthGameType;
+import com.n42c.domain.enumerations.NinthGameSize;
+import com.n42c.domain.enumerations.NinthGameType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

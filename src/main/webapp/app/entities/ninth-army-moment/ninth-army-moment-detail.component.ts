@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {JhiDataUtils} from 'ng-jhipster';
 
-import { INinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
+import {INinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
 
 @Component({
   selector: 'jhi-ninth-army-moment-detail',

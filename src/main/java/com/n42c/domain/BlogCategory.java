@@ -54,6 +54,14 @@ public class BlogCategory implements Serializable {
     @JsonIgnore
     private Set<BlogPost> posts = new HashSet<>();
 
+    public BlogCategory() {
+    }
+
+    public BlogCategory(Long id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

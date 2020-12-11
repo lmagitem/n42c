@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {JhiDataUtils} from 'ng-jhipster';
 
-import { INinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
+import {INinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
 
 @Component({
   selector: 'jhi-ninth-campaign-moment-detail',

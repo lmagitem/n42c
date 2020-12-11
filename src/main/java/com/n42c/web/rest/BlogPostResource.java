@@ -1,10 +1,9 @@
 package com.n42c.web.rest;
 
 import com.n42c.domain.AppUser;
-import com.n42c.domain.AuthorToPostLinkView;
-import com.n42c.domain.Blog;
 import com.n42c.domain.BlogPost;
-import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumerations.AppUserRights;
+import com.n42c.domain.views.AuthorToPostLinkView;
 import com.n42c.repository.AppUserRepository;
 import com.n42c.repository.BlogPostRepository;
 import com.n42c.security.SecurityUtils;
@@ -15,7 +14,6 @@ import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,46 +43,46 @@ import java.util.*;
 public class BlogPostResource {
     private static final String ENTITY_NAME = "blogPost";
     private final Logger log = LoggerFactory.getLogger(BlogPostResource.class);
-    private final BlogPostRepository blogPostRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-    @Autowired
-    private EntityManager entityManager;
-    @Autowired
-    private AppUserRepository appUserRepository;
+    private final BlogPostRepository blogPostRepository;
+    private final EntityManager entityManager;
+    private final AppUserRepository appUserRepository;
 
-    public BlogPostResource(BlogPostRepository blogPostRepository) {
+    public BlogPostResource(BlogPostRepository blogPostRepository,
+                            EntityManager entityManager,
+                            AppUserRepository appUserRepository) {
         this.blogPostRepository = blogPostRepository;
+        this.entityManager = entityManager;
+        this.appUserRepository = appUserRepository;
     }
 
     /**
      * {@code POST  /blog-posts} : Create a new blogPost.
      *
      * @param blogPost the blogPost to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new blogPost,
-     * with status {@code 400 (Bad Request)} if the blogPost has already an ID, or with status {@code 403 (Forbidden)}
-     * if the user doesn't have the rights to execute this actions.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new blogPost, with status {@code 400 (Bad Request)} if the
+     * blogPost has already an ID, or with status {@code 403 (Forbidden)} if the user doesn't have the rights to execute this actions.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/blog-posts")
     public ResponseEntity<BlogPost> createBlogPost(@Valid @RequestBody BlogPost blogPost) throws URISyntaxException {
-        if (blogPost.getId() != null)
-            throw new BadRequestAlertException("A new blogPost cannot already have an ID", ENTITY_NAME, "idexists");
+        if (blogPost.getId() != null) { throw new BadRequestAlertException("A new blogPost cannot already have an ID", ENTITY_NAME, "idexists"); }
 
         Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
         AppUser appUser = appUserRepository.findOneByUserId(SecurityUtils.getCurrentUserLogin().orElse("")).orElse(null);
 
         if (
-            authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+                authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
                 (appUser != null && (AppUserRights.WRI.equals(appUser.getBlogRights()) || AppUserRights.MOD.equals(appUser.getBlogRights())))
         ) {
             log.debug("REST request to save BlogPost : {}", blogPost);
             BlogPost result = blogPostRepository.save(blogPost);
             return ResponseEntity
-                .created(new URI("/api/blog-posts/" + result.getId()))
-                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                .body(result);
+                    .created(new URI("/api/blog-posts/" + result.getId()))
+                    .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                    .body(result);
         }
 
         log.debug("Access was denied to save BlogPost : {}", blogPost);
@@ -95,9 +93,8 @@ public class BlogPostResource {
      * {@code PUT  /blog-posts} : Updates an existing blogPost.
      *
      * @param blogPost the blogPost to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated blogPost,
-     * or with status {@code 400 (Bad Request)} if the blogPost is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the blogPost couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated blogPost, or with status {@code 400 (Bad Request)} if the
+     * blogPost is not valid, or with status {@code 500 (Internal Server Error)} if the blogPost couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/blog-posts")
@@ -109,21 +106,21 @@ public class BlogPostResource {
         AppUser appUser = appUserRepository.findOneByUserId(SecurityUtils.getCurrentUserLogin().orElse("")).orElse(null);
 
         if (
-            authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+                authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
                 appUser != null &&
-                    (AppUserRights.WRI.equals(appUser.getBlogRights()) || AppUserRights.MOD.equals(appUser.getBlogRights()))
+                (AppUserRights.WRI.equals(appUser.getBlogRights()) || AppUserRights.MOD.equals(appUser.getBlogRights()))
         ) {
             BlogPost old = blogPostRepository.findOneWithEagerRelationships(blogPost.getId()).orElse(null);
             if (
-                authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+                    authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
                     (old != null && appUser != null && old.getAuthors().stream().anyMatch(author -> author.getId().equals(appUser.getId())))
             ) {
                 log.debug("REST request to update BlogPost : {}", blogPost);
                 BlogPost result = blogPostRepository.save(blogPost);
                 return ResponseEntity
-                    .ok()
-                    .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blogPost.getId().toString()))
-                    .body(result);
+                        .ok()
+                        .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blogPost.getId().toString()))
+                        .body(result);
             }
         }
 
@@ -143,18 +140,18 @@ public class BlogPostResource {
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
         if (authentication == null) {
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getPostsByCurrentUserOrWriter(pageable, null)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(getPostsByCurrentUserOrWriter(pageable, null)));
         } else if (authorities == null) {
             return RestServiceUtils.returnPagedListWithHeaders(
-                addAuthorNamesToPosts(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
-            );
+                    addAuthorsAndRemoveSensitiveData(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
+                                                              );
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             log.debug("REST request to get all Blog Posts - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(blogPostRepository.findAll(pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(blogPostRepository.findAll(pageable)));
         } else {
             return RestServiceUtils.returnPagedListWithHeaders(
-                addAuthorNamesToPosts(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
-            );
+                    addAuthorsAndRemoveSensitiveData(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
+                                                              );
         }
     }
 
@@ -170,18 +167,18 @@ public class BlogPostResource {
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
         if (authentication == null) {
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(getAllowedBlogPosts(ids, null, pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(getAllowedBlogPosts(ids, null, pageable)));
         } else if (authorities == null) {
             return RestServiceUtils.returnPagedListWithHeaders(
-                addAuthorNamesToPosts(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable))
-            );
+                    addAuthorsAndRemoveSensitiveData(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable))
+                                                              );
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) && CollectionUtils.isNotEmpty(ids)) {
             log.debug("REST request to get Posts for given Blog ids - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorNamesToPosts(blogPostRepository.findByBlogIds(ids, pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(blogPostRepository.findByBlogIds(ids, pageable)));
         } else {
             return RestServiceUtils.returnPagedListWithHeaders(
-                addAuthorNamesToPosts(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable))
-            );
+                    addAuthorsAndRemoveSensitiveData(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable))
+                                                              );
         }
     }
 
@@ -193,9 +190,24 @@ public class BlogPostResource {
      */
     @GetMapping("/blog-posts/{id}")
     public ResponseEntity<BlogPost> getBlogPost(@PathVariable Long id) {
-        log.debug("REST request to get BlogPost : {}", id);
-        Optional<BlogPost> blogPost = blogPostRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(blogPost);
+        Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
+        Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
+        AppUser appUser = appUserRepository.findOneByUserId(SecurityUtils.getCurrentUserLogin().orElse("")).orElse(null);
+
+        if (
+                authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+                (appUser != null && (AppUserRights.WRI.equals(appUser.getBlogRights()) || AppUserRights.MOD.equals(appUser.getBlogRights())))
+        ) {
+            log.debug("REST request to get BlogPost : {}", id);
+            Optional<BlogPost> blogPost = blogPostRepository.findOneWithEagerRelationships(id);
+            return ResponseUtil.wrapOrNotFound(blogPost);
+        }
+
+        log.debug("Access was denied to get BlogPost : {}", id);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
+
+        ///// Vider les appUsers de l'objet
     }
 
     /**
@@ -209,9 +221,9 @@ public class BlogPostResource {
         log.debug("REST request to delete BlogPost : {}", id);
         blogPostRepository.deleteById(id);
         return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 
     /**
@@ -255,57 +267,25 @@ public class BlogPostResource {
     /**
      * @return The given paged result, enriched by adding the necessary infos (and nothing more) about the blog posts authors.
      */
-    private Page<BlogPost> addAuthorNamesToPosts(Page<BlogPost> page) {
-        if (page == null) return null;
+    private Page<BlogPost> addAuthorsAndRemoveSensitiveData(Page<BlogPost> page) {
+        if (page == null) { return null; }
 
         List<Long> postsIds = new LinkedList<>();
         List<BlogPost> posts = page.getContent();
         posts.forEach(post -> postsIds.add(post.getId()));
 
-        if (CollectionUtils.isEmpty(postsIds)) return page;
+        if (CollectionUtils.isEmpty(postsIds)) { return page; }
 
-        // Get a list of pairings between post ids and id + name of their authors, enrich the page with it
-        log.debug("Adding the necessary AppUser infos to the result");
+        // Get a list of pairings between post ids and id + name of their authors, enrich the posts with it
         List<AuthorToPostLinkView> authorsByPost = blogPostRepository.findPairingsBetweenBlogPostIdsAndLightweightAppUsers(postsIds);
-
-        log.debug(String.valueOf(postsIds));
-        log.debug("authorsByPost");
-        authorsByPost.forEach(
-            pair -> {
-                log.debug(pair.getPostId() + " - " + pair.getAppUserId() + " - " + pair.getAppUserDisplayedName());
-            }
-        );
-
         posts.forEach(
-            post -> {
-                // Remove unnecessary infos about the blog author as well
-                Blog blog = post.getBlog();
-                if (blog.getAuthor() != null) {
-                    blog.setAuthor(new AppUser(blog.getAuthor().getId(), blog.getAuthor().getDisplayedName()));
-                }
-                post.setBlog(blog);
-
-                // Put in the users infos
-                authorsByPost.forEach(
-                    pair -> {
-                        if (post.getId().equals(pair.getPostId())) {
-                            if (post.getAuthors() == null) post.setAuthors(new HashSet<>());
-                            post.getAuthors().add(new AppUser(pair.getAppUserId(), pair.getAppUserDisplayedName()));
-                        }
-                    }
-                );
-
-                // And clear the unwanted infos in case they were filled in cache
-                post.getAuthors().forEach(appUser -> appUser.clearSensitiveInfos(entityManager));
-            }
-        );
-
-        log.debug("posts");
-        posts.forEach(
-            post -> {
-                post.getAuthors().forEach(author -> log.debug(author.toString()));
-            }
-        );
+                post -> authorsByPost.forEach(
+                        pair -> {
+                            if (post.getId().equals(pair.getPostId())) {
+                                if (post.getAuthors() == null) { post.setAuthors(new HashSet<>()); }
+                                post.getAuthors().add(new AppUser(pair.getAppUserId(), pair.getAppUserDisplayedName()));
+                            }
+                        }));
 
         return page;
     }

@@ -7,11 +7,11 @@ import {CookieService} from 'ngx-cookie-service';
 import {MissingTranslationHandler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {
-  JhiConfigService,
-  JhiLanguageService,
-  missingTranslationHandler,
-  NgJhipsterModule,
-  translatePartialLoader
+    JhiConfigService,
+    JhiLanguageService,
+    missingTranslationHandler,
+    NgJhipsterModule,
+    translatePartialLoader
 } from 'ng-jhipster';
 import locale from '@angular/common/locales/en';
 import * as moment from 'moment';

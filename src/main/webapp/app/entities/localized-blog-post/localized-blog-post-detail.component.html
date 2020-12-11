@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="localizedBlogPost">
+      <h2><span jhiTranslate="n42cApp.localizedBlogPost.detail.title">Localized Post Content</span> {{ localizedBlogPost.id }}</h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <dl class="row-md jh-entity-details">
+        <dt>
+          <span jhiTranslate="n42cApp.localizedBlogPost.title" [ngbTooltip]="'n42cApp.localizedBlogPost.help.title' | translate"
+            >Title</span
+          >
+        </dt>
+        <dd>
+          <span>{{ localizedBlogPost.title }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.localizedBlogPost.excerpt" [ngbTooltip]="'n42cApp.localizedBlogPost.help.excerpt' | translate"
+            >Excerpt</span
+          >
+        </dt>
+        <dd>
+          <span>{{ localizedBlogPost.excerpt }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.localizedBlogPost.content" [ngbTooltip]="'n42cApp.localizedBlogPost.help.content' | translate"
+            >Content</span
+          >
+        </dt>
+        <dd>
+          <span>{{ localizedBlogPost.content }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.localizedBlogPost.language" [ngbTooltip]="'n42cApp.localizedBlogPost.help.language' | translate"
+            >Language</span
+          >
+        </dt>
+        <dd>
+          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedBlogPost.language }}">{{ localizedBlogPost.language }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.localizedBlogPost.post">Post</span></dt>
+        <dd>
+          <div *ngIf="localizedBlogPost.post">
+            <a [routerLink]="['/entities', 'blog-post', localizedBlogPost.post?.id, 'view']">{{ localizedBlogPost.post?.title }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/entities', 'localized-blog-post', localizedBlogPost.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

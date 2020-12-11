@@ -1,10 +1,10 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.n42c.domain.enumeration.Faction;
-import com.n42c.domain.enumeration.NinthGamePhase;
-import com.n42c.domain.enumeration.NinthGameTurn;
-import com.n42c.domain.enumeration.SubFaction;
+import com.n42c.domain.enumerations.Faction;
+import com.n42c.domain.enumerations.NinthGamePhase;
+import com.n42c.domain.enumerations.NinthGameTurn;
+import com.n42c.domain.enumerations.SubFaction;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

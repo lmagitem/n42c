@@ -1,22 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {JhiDataUtils, JhiEventManager, JhiEventWithContent, JhiFileLoadError} from 'ng-jhipster';
 
-import { INinthArmyMoment, NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
-import { NinthArmyMomentService } from './ninth-army-moment.service';
-import { AlertError } from 'app/shared/alert/alert-error.model';
-import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
-import { NinthArmyUnitService } from 'app/entities/ninth-army-unit/ninth-army-unit.service';
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
-import { NinthObjectiveService } from 'app/entities/ninth-objective/ninth-objective.service';
-import { INinthBattle } from 'app/shared/model/ninth-battle.model';
-import { NinthBattleService } from 'app/entities/ninth-battle/ninth-battle.service';
-import { INinthArmy } from 'app/shared/model/ninth-army.model';
-import { NinthArmyService } from 'app/entities/ninth-army/ninth-army.service';
+import {INinthArmyMoment, NinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
+import {NinthArmyMomentService} from './ninth-army-moment.service';
+import {AlertError} from 'app/shared/alert/alert-error.model';
+import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
+import {NinthArmyUnitService} from 'app/entities/ninth-army-unit/ninth-army-unit.service';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
+import {NinthObjectiveService} from 'app/entities/ninth-objective/ninth-objective.service';
+import {INinthBattle} from 'app/shared/model/ninth-battle.model';
+import {NinthBattleService} from 'app/entities/ninth-battle/ninth-battle.service';
+import {INinthArmy} from 'app/shared/model/ninth-army.model';
+import {NinthArmyService} from 'app/entities/ninth-army/ninth-army.service';
 
 type SelectableEntity = INinthArmyUnit | INinthObjective | INinthBattle | INinthArmy;
 

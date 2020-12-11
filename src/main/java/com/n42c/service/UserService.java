@@ -4,7 +4,7 @@ import com.n42c.config.Constants;
 import com.n42c.domain.AppUser;
 import com.n42c.domain.Authority;
 import com.n42c.domain.User;
-import com.n42c.domain.enumeration.AppUserRights;
+import com.n42c.domain.enumerations.AppUserRights;
 import com.n42c.repository.AppUserRepository;
 import com.n42c.repository.AuthorityRepository;
 import com.n42c.repository.UserRepository;

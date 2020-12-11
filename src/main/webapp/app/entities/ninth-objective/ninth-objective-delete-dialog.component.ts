@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
-import { NinthObjectiveService } from './ninth-objective.service';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
+import {NinthObjectiveService} from './ninth-objective.service';
 
 @Component({
   templateUrl: './ninth-objective-delete-dialog.component.html',

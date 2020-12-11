@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IProfilePartSkill } from 'app/shared/model/profile-part-skill.model';
-import { ProfilePartSkillService } from './profile-part-skill.service';
-import { ProfilePartSkillDeleteDialogComponent } from './profile-part-skill-delete-dialog.component';
+import {IProfilePartSkill} from 'app/shared/model/profile-part-skill.model';
+import {ProfilePartSkillService} from './profile-part-skill.service';
+import {ProfilePartSkillDeleteDialogComponent} from './profile-part-skill-delete-dialog.component';
 
 @Component({
   selector: 'jhi-profile-part-skill',

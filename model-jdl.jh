@@ -85,7 +85,7 @@ entity BlogPost {
 	modified Instant required
 }
 /** The content of a post, in a specific language. */
-entity LocalizedPostContent {
+entity LocalizedBlogPost {
     /** This post's localized title. */
     title String required
     /** An excerpt of the post to show on the blog page. */
@@ -505,7 +505,7 @@ relationship OneToMany {
 	AppUser{blogs} to Blog{author(displayedName) required},
 	Blog{posts(title)} to BlogPost{blog(name) required},
     Blog{localizations(name)} to LocalizedBlog{blog(name) required},
-    BlogPost{localizations(title)} to LocalizedPostContent{post(title) required},
+    BlogPost{localizations(title)} to LocalizedBlogPost{post(title) required},
     BlogCategory{subcategories(name)} to BlogCategory{parentCategory(name)},
     BlogCategory{localizations(name)} to LocalizedBlogCategory{category(name) required},
     // Profile
