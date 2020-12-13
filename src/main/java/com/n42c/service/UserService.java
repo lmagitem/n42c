@@ -17,6 +17,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -101,18 +102,18 @@ public class UserService {
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         SecurityUtils.getCurrentUserLogin()
-            .flatMap(userRepository::findOneByLogin)
-            .ifPresent(user -> {
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                if (email != null) {
-                    user.setEmail(email.toLowerCase());
-                }
-                user.setLangKey(langKey);
-                user.setImageUrl(imageUrl);
-                this.clearUserCaches(user);
-                log.debug("Changed Information for User: {}", user);
-            });
+                     .flatMap(userRepository::findOneByLogin)
+                     .ifPresent(user -> {
+                         user.setFirstName(firstName);
+                         user.setLastName(lastName);
+                         if (email != null) {
+                             user.setEmail(email.toLowerCase());
+                         }
+                         user.setLangKey(langKey);
+                         user.setImageUrl(imageUrl);
+                         this.clearUserCaches(user);
+                         log.debug("Changed Information for User: {}", user);
+                     });
     }
 
     @Transactional(readOnly = true)
@@ -145,7 +146,7 @@ public class UserService {
         // save authorities in to sync user roles/groups between IdP and JHipster's local database
         Collection<String> dbAuthorities = getAuthorities();
         Collection<String> userAuthorities =
-            user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList());
+                user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList());
         for (String authority : userAuthorities) {
             if (!dbAuthorities.contains(authority)) {
                 log.debug("Saving authority '{}' in local database", authority);
@@ -164,13 +165,13 @@ public class UserService {
                 if (idpModifiedDate.isAfter(dbModifiedDate)) {
                     log.debug("Updating user '{}' in local database", user.getLogin());
                     updateUser(user.getFirstName(), user.getLastName(), user.getEmail(),
-                        user.getLangKey(), user.getImageUrl());
+                               user.getLangKey(), user.getImageUrl());
                 }
                 // no last updated info, blindly update
             } else {
                 log.debug("Updating user '{}' in local database", user.getLogin());
                 updateUser(user.getFirstName(), user.getLastName(), user.getEmail(),
-                    user.getLangKey(), user.getImageUrl());
+                           user.getLangKey(), user.getImageUrl());
             }
         } else {
             log.debug("Saving user '{}' in local database", user.getLogin());
@@ -182,8 +183,7 @@ public class UserService {
     }
 
     /**
-     * Returns the user from an OAuth 2.0 login or resource server with JWT.
-     * Synchronizes the user in the local repository.
+     * Returns the user from an OAuth 2.0 login or resource server with JWT. Synchronizes the user in the local repository.
      *
      * @param authToken the authentication token.
      * @return the user from the authentication.
@@ -195,18 +195,25 @@ public class UserService {
             attributes = ((OAuth2AuthenticationToken) authToken).getPrincipal().getAttributes();
         } else if (authToken instanceof JwtAuthenticationToken) {
             attributes = ((JwtAuthenticationToken) authToken).getTokenAttributes();
+        } else if (authToken instanceof UsernamePasswordAuthenticationToken) {
+            Object principal = authToken.getPrincipal();
+            attributes = new HashMap<String, Object>() {{
+                put("uid", ((org.springframework.security.core.userdetails.User) principal).getUsername());
+                put("username", ((org.springframework.security.core.userdetails.User) principal).getUsername());
+                put("password", ((org.springframework.security.core.userdetails.User) principal).getPassword());
+            }};
         } else {
             throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT! Instead we got: " + authToken.getClass().getName());
         }
         User user = getUser(attributes);
         user.setAuthorities(authToken.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .map(authority -> {
-                Authority auth = new Authority();
-                auth.setName(authority);
-                return auth;
-            })
-            .collect(Collectors.toSet()));
+                                     .map(GrantedAuthority::getAuthority)
+                                     .map(authority -> {
+                                         Authority auth = new Authority();
+                                         auth.setName(authority);
+                                         return auth;
+                                     })
+                                     .collect(Collectors.toSet()));
 
         return new UserDTO(syncUserWithIdP(attributes, user));
     }

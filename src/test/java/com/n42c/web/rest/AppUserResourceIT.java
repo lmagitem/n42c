@@ -1,12 +1,12 @@
 package com.n42c.web.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.AppUser;
 import com.n42c.domain.User;
 import com.n42c.domain.enumerations.AppUserRights;
 import com.n42c.repository.AppUserRepository;
+import com.n42c.utils.UserDetailsServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -133,6 +133,7 @@ public class AppUserResourceIT {
 
     @Test
     @Transactional
+    @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void createAppUser() throws Exception {
         int databaseSizeBeforeCreate = appUserRepository.findAll().size();
         TestUtil.setAnnotationUsage(false);
@@ -358,6 +359,7 @@ public class AppUserResourceIT {
 
     @Test
     @Transactional
+    @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void updateAppUser() throws Exception {
         TestUtil.setAnnotationUsage(false);
 
