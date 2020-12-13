@@ -1,6 +1,6 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -55,12 +55,12 @@ public class Player implements Serializable {
 
     @ManyToMany(mappedBy = "authors")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthCampaign> authoredCampaigns = new HashSet<>();
 
     @ManyToMany(mappedBy = "participants")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthCampaign> campaigns = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

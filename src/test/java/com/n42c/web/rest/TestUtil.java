@@ -1,6 +1,7 @@
 package com.n42c.web.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -142,9 +143,16 @@ public final class TestUtil {
         return new OAuth2AuthenticationToken(user, authorities, "oidc");
     }
 
-    /**
-     * A matcher that tests that the examined string represents the same instant as the reference datetime.
-     */
+    /** Enables or disables taking into account the entities' Jackson annotations when mapping to/from JSON. */
+    public static void setAnnotationUsage(boolean doUse) {
+        if (doUse) {
+            mapper.enable(MapperFeature.USE_ANNOTATIONS);
+        } else {
+            mapper.disable(MapperFeature.USE_ANNOTATIONS);
+        }
+    }
+
+    /** A matcher that tests that the examined string represents the same instant as the reference datetime. */
     public static class ZonedDateTimeMatcher extends TypeSafeDiagnosingMatcher<String> {
 
         private final ZonedDateTime date;

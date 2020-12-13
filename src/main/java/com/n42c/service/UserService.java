@@ -196,7 +196,7 @@ public class UserService {
         } else if (authToken instanceof JwtAuthenticationToken) {
             attributes = ((JwtAuthenticationToken) authToken).getTokenAttributes();
         } else {
-            throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT!");
+            throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT! Instead we got: " + authToken.getClass().getName());
         }
         User user = getUser(attributes);
         user.setAuthorities(authToken.getAuthorities().stream()

@@ -1,6 +1,6 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.n42c.domain.enumerations.NinthObjectiveType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -38,17 +38,17 @@ public class NinthObjective implements Serializable {
 
     @ManyToMany(mappedBy = "selectedObjectives")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthArmyMoment> selections = new HashSet<>();
 
     @ManyToMany(mappedBy = "primaryObjectives")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthMission> allowedAsPrimaries = new HashSet<>();
 
     @ManyToMany(mappedBy = "allowedSecondaries")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthMission> allowedAsSecondaries = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

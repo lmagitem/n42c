@@ -140,18 +140,16 @@ public class BlogPostResource {
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
         if (authentication == null) {
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(getPostsByCurrentUserOrWriter(pageable, null)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthors(getPostsByCurrentUserOrWriter(pageable, null)));
         } else if (authorities == null) {
             return RestServiceUtils.returnPagedListWithHeaders(
-                    addAuthorsAndRemoveSensitiveData(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
-                                                              );
+                    addAuthors(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal())));
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             log.debug("REST request to get all Blog Posts - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(blogPostRepository.findAll(pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthors(blogPostRepository.findAll(pageable)));
         } else {
             return RestServiceUtils.returnPagedListWithHeaders(
-                    addAuthorsAndRemoveSensitiveData(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
-                                                              );
+                    addAuthors(getPostsByCurrentUserOrWriter(pageable, authentication.getPrincipal())));
         }
     }
 
@@ -167,18 +165,16 @@ public class BlogPostResource {
         Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
         if (authentication == null) {
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(getAllowedBlogPosts(ids, null, pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthors(getAllowedBlogPosts(ids, null, pageable)));
         } else if (authorities == null) {
             return RestServiceUtils.returnPagedListWithHeaders(
-                    addAuthorsAndRemoveSensitiveData(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable))
-                                                              );
+                    addAuthors(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable)));
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN")) && CollectionUtils.isNotEmpty(ids)) {
             log.debug("REST request to get Posts for given Blog ids - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(addAuthorsAndRemoveSensitiveData(blogPostRepository.findByBlogIds(ids, pageable)));
+            return RestServiceUtils.returnPagedListWithHeaders(addAuthors(blogPostRepository.findByBlogIds(ids, pageable)));
         } else {
             return RestServiceUtils.returnPagedListWithHeaders(
-                    addAuthorsAndRemoveSensitiveData(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable))
-                                                              );
+                    addAuthors(getAllowedBlogPosts(ids, authentication.getPrincipal(), pageable)));
         }
     }
 
@@ -205,9 +201,6 @@ public class BlogPostResource {
 
         log.debug("Access was denied to get BlogPost : {}", id);
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-
-
-        ///// Vider les appUsers de l'objet
     }
 
     /**
@@ -267,7 +260,7 @@ public class BlogPostResource {
     /**
      * @return The given paged result, enriched by adding the necessary infos (and nothing more) about the blog posts authors.
      */
-    private Page<BlogPost> addAuthorsAndRemoveSensitiveData(Page<BlogPost> page) {
+    private Page<BlogPost> addAuthors(Page<BlogPost> page) {
         if (page == null) { return null; }
 
         List<Long> postsIds = new LinkedList<>();

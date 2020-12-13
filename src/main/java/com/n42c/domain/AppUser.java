@@ -1,6 +1,6 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.n42c.domain.enumerations.AppUserRights;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -35,7 +35,7 @@ public class AppUser implements Serializable {
     @NotNull
     @ApiModelProperty(value = "The user account's name.", required = true)
     @Column(name = "user_name", nullable = false, unique = true)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String userName;
 
     /**
@@ -108,7 +108,7 @@ public class AppUser implements Serializable {
     @JoinTable(name = "app_user_given_friendships",
         joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AppUser> givenFriendships = new HashSet<>();
 
     @ManyToMany
@@ -116,31 +116,31 @@ public class AppUser implements Serializable {
     @JoinTable(name = "app_user_asked_friend_requests",
         joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AppUser> askedFriendRequests = new HashSet<>();
 
     @OneToOne(mappedBy = "appUser")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Player player;
 
     @ManyToMany(mappedBy = "givenFriendships")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AppUser> receivedFriendships = new HashSet<>();
 
     @ManyToMany(mappedBy = "askedFriendRequests")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AppUser> pendingFriendRequests = new HashSet<>();
 
     @ManyToMany(mappedBy = "authors")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Product> products = new HashSet<>();
 
     @ManyToMany(mappedBy = "authors")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<BlogPost> posts = new HashSet<>();
 
     public AppUser() {

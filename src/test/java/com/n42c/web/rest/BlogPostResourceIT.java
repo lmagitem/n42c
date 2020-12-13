@@ -5,6 +5,7 @@ import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.Blog;
 import com.n42c.domain.BlogPost;
 import com.n42c.repository.BlogPostRepository;
+import com.n42c.utils.UserDetailsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -67,14 +68,13 @@ public class BlogPostResourceIT {
     /**
      * Create an entity for this test.
      * <p>
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
+     * This is a static method, as tests for other entities might also need it, if they test an entity which requires the current entity.
      */
     public static BlogPost createEntity(EntityManager em) {
         BlogPost blogPost = new BlogPost()
-            .title(DEFAULT_TITLE)
-            .published(DEFAULT_PUBLISHED)
-            .modified(DEFAULT_MODIFIED);
+                .title(DEFAULT_TITLE)
+                .published(DEFAULT_PUBLISHED)
+                .modified(DEFAULT_MODIFIED);
         // Add required entity
         Blog blog;
         if (TestUtil.findAll(em, Blog.class).isEmpty()) {
@@ -85,20 +85,20 @@ public class BlogPostResourceIT {
             blog = TestUtil.findAll(em, Blog.class).get(0);
         }
         blogPost.setBlog(blog);
+        blogPost.addAuthors(blog.getAuthor());
         return blogPost;
     }
 
     /**
      * Create an updated entity for this test.
      * <p>
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
+     * This is a static method, as tests for other entities might also need it, if they test an entity which requires the current entity.
      */
     public static BlogPost createUpdatedEntity(EntityManager em) {
         BlogPost blogPost = new BlogPost()
-            .title(UPDATED_TITLE)
-            .published(UPDATED_PUBLISHED)
-            .modified(UPDATED_MODIFIED);
+                .title(UPDATED_TITLE)
+                .published(UPDATED_PUBLISHED)
+                .modified(UPDATED_MODIFIED);
         // Add required entity
         Blog blog;
         if (TestUtil.findAll(em, Blog.class).isEmpty()) {
@@ -109,6 +109,7 @@ public class BlogPostResourceIT {
             blog = TestUtil.findAll(em, Blog.class).get(0);
         }
         blogPost.setBlog(blog);
+        blogPost.addAuthors(blog.getAuthor());
         return blogPost;
     }
 
@@ -119,13 +120,14 @@ public class BlogPostResourceIT {
 
     @Test
     @Transactional
+    @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void createBlogPost() throws Exception {
         int databaseSizeBeforeCreate = blogPostRepository.findAll().size();
         // Create the BlogPost
         restBlogPostMockMvc.perform(post("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogPost)))
-            .andExpect(status().isCreated());
+                                                           .contentType(MediaType.APPLICATION_JSON)
+                                                           .content(TestUtil.convertObjectToJsonBytes(blogPost)))
+                           .andExpect(status().isCreated());
 
         // Validate the BlogPost in the database
         List<BlogPost> blogPostList = blogPostRepository.findAll();
@@ -146,9 +148,9 @@ public class BlogPostResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restBlogPostMockMvc.perform(post("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogPost)))
-            .andExpect(status().isBadRequest());
+                                                           .contentType(MediaType.APPLICATION_JSON)
+                                                           .content(TestUtil.convertObjectToJsonBytes(blogPost)))
+                           .andExpect(status().isBadRequest());
 
         // Validate the BlogPost in the database
         List<BlogPost> blogPostList = blogPostRepository.findAll();
@@ -167,9 +169,9 @@ public class BlogPostResourceIT {
 
 
         restBlogPostMockMvc.perform(post("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogPost)))
-            .andExpect(status().isBadRequest());
+                                                           .contentType(MediaType.APPLICATION_JSON)
+                                                           .content(TestUtil.convertObjectToJsonBytes(blogPost)))
+                           .andExpect(status().isBadRequest());
 
         List<BlogPost> blogPostList = blogPostRepository.findAll();
         assertThat(blogPostList).hasSize(databaseSizeBeforeTest);
@@ -186,9 +188,9 @@ public class BlogPostResourceIT {
 
 
         restBlogPostMockMvc.perform(post("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogPost)))
-            .andExpect(status().isBadRequest());
+                                                           .contentType(MediaType.APPLICATION_JSON)
+                                                           .content(TestUtil.convertObjectToJsonBytes(blogPost)))
+                           .andExpect(status().isBadRequest());
 
         List<BlogPost> blogPostList = blogPostRepository.findAll();
         assertThat(blogPostList).hasSize(databaseSizeBeforeTest);
@@ -202,12 +204,12 @@ public class BlogPostResourceIT {
 
         // Get all the blogPostList
         restBlogPostMockMvc.perform(get("/api/blog-posts?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(blogPost.getId().intValue())))
-            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].published").value(hasItem(DEFAULT_PUBLISHED.toString())))
-            .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
+                           .andExpect(status().isOk())
+                           .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                           .andExpect(jsonPath("$.[*].id").value(hasItem(blogPost.getId().intValue())))
+                           .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
+                           .andExpect(jsonPath("$.[*].published").value(hasItem(DEFAULT_PUBLISHED.toString())))
+                           .andExpect(jsonPath("$.[*].modified").value(hasItem(DEFAULT_MODIFIED.toString())));
     }
 
     @SuppressWarnings({"unchecked"})
@@ -215,7 +217,7 @@ public class BlogPostResourceIT {
         when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restBlogPostMockMvc.perform(get("/api/blog-posts?eagerload=true"))
-            .andExpect(status().isOk());
+                           .andExpect(status().isOk());
 
         verify(blogPostRepositoryMock, times(1)).findAllWithEagerRelationships(any());
     }
@@ -225,37 +227,40 @@ public class BlogPostResourceIT {
         when(blogPostRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restBlogPostMockMvc.perform(get("/api/blog-posts?eagerload=true"))
-            .andExpect(status().isOk());
+                           .andExpect(status().isOk());
 
         verify(blogPostRepositoryMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test
     @Transactional
+    @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void getBlogPost() throws Exception {
         // Initialize the database
         blogPostRepository.saveAndFlush(blogPost);
 
         // Get the blogPost
         restBlogPostMockMvc.perform(get("/api/blog-posts/{id}", blogPost.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(blogPost.getId().intValue()))
-            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.published").value(DEFAULT_PUBLISHED.toString()))
-            .andExpect(jsonPath("$.modified").value(DEFAULT_MODIFIED.toString()));
+                           .andExpect(status().isOk())
+                           .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                           .andExpect(jsonPath("$.id").value(blogPost.getId().intValue()))
+                           .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
+                           .andExpect(jsonPath("$.published").value(DEFAULT_PUBLISHED.toString()))
+                           .andExpect(jsonPath("$.modified").value(DEFAULT_MODIFIED.toString()));
     }
 
     @Test
     @Transactional
+    @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void getNonExistingBlogPost() throws Exception {
         // Get the blogPost
         restBlogPostMockMvc.perform(get("/api/blog-posts/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+                           .andExpect(status().isNotFound());
     }
 
     @Test
     @Transactional
+    @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void updateBlogPost() throws Exception {
         // Initialize the database
         blogPostRepository.saveAndFlush(blogPost);
@@ -267,14 +272,14 @@ public class BlogPostResourceIT {
         // Disconnect from session so that the updates on updatedBlogPost are not directly saved in db
         em.detach(updatedBlogPost);
         updatedBlogPost
-            .title(UPDATED_TITLE)
-            .published(UPDATED_PUBLISHED)
-            .modified(UPDATED_MODIFIED);
+                .title(UPDATED_TITLE)
+                .published(UPDATED_PUBLISHED)
+                .modified(UPDATED_MODIFIED);
 
         restBlogPostMockMvc.perform(put("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedBlogPost)))
-            .andExpect(status().isOk());
+                                                          .contentType(MediaType.APPLICATION_JSON)
+                                                          .content(TestUtil.convertObjectToJsonBytes(updatedBlogPost)))
+                           .andExpect(status().isOk());
 
         // Validate the BlogPost in the database
         List<BlogPost> blogPostList = blogPostRepository.findAll();
@@ -292,9 +297,9 @@ public class BlogPostResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restBlogPostMockMvc.perform(put("/api/blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(blogPost)))
-            .andExpect(status().isBadRequest());
+                                                          .contentType(MediaType.APPLICATION_JSON)
+                                                          .content(TestUtil.convertObjectToJsonBytes(blogPost)))
+                           .andExpect(status().isBadRequest());
 
         // Validate the BlogPost in the database
         List<BlogPost> blogPostList = blogPostRepository.findAll();
@@ -311,8 +316,8 @@ public class BlogPostResourceIT {
 
         // Delete the blogPost
         restBlogPostMockMvc.perform(delete("/api/blog-posts/{id}", blogPost.getId()).with(csrf())
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+                                                                                    .accept(MediaType.APPLICATION_JSON))
+                           .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
         List<BlogPost> blogPostList = blogPostRepository.findAll();

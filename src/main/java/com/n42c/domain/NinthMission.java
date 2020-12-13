@@ -1,6 +1,6 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.n42c.domain.enumerations.NinthGameSize;
 import com.n42c.domain.enumerations.NinthGameType;
 import org.hibernate.annotations.Cache;
@@ -75,7 +75,7 @@ public class NinthMission implements Serializable {
 
     @ManyToMany(mappedBy = "usedInMissions")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthDeploymentMap> missionDeployments = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
