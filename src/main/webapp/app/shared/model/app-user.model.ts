@@ -15,6 +15,7 @@ export interface IAppUser {
   blogRights?: AppUserRights;
   profileRights?: AppUserRights;
   scriptoriumRights?: AppUserRights;
+  imageUrl?: string;
   user?: IUser;
   blogs?: IBlog[];
   profiles?: IAppUserProfile[];
@@ -37,6 +38,7 @@ export class AppUser implements IAppUser {
     public blogRights?: AppUserRights,
     public profileRights?: AppUserRights,
     public scriptoriumRights?: AppUserRights,
+    public imageUrl?: string,
     public user?: IUser,
     public blogs?: IBlog[],
     public profiles?: IAppUserProfile[],

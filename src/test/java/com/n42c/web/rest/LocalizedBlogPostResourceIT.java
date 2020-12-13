@@ -2,10 +2,10 @@ package com.n42c.web.rest;
 
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
-import com.n42c.domain.BlogPost;
 import com.n42c.domain.LocalizedBlogPost;
-import com.n42c.domain.enumerations.Language;
+import com.n42c.domain.BlogPost;
 import com.n42c.repository.LocalizedBlogPostRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -25,10 +25,11 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedBlogPostResource} REST controller.
  */
-@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
 @AutoConfigureMockMvc
 @WithMockUser
 public class LocalizedBlogPostResourceIT {
@@ -58,7 +59,7 @@ public class LocalizedBlogPostResourceIT {
 
     /**
      * Create an entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -80,10 +81,9 @@ public class LocalizedBlogPostResourceIT {
         localizedBlogPost.setPost(blogPost);
         return localizedBlogPost;
     }
-
     /**
      * Create an updated entity for this test.
-     * <p>
+     *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -201,11 +201,11 @@ public class LocalizedBlogPostResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(localizedBlogPost.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
+            .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
-
+    
     @Test
     @Transactional
     public void getLocalizedBlogPost() throws Exception {
@@ -218,11 +218,10 @@ public class LocalizedBlogPostResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(localizedBlogPost.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
+            .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT.toString()))
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingLocalizedBlogPost() throws Exception {

@@ -36,6 +36,7 @@ export class AppUserUpdatePage {
   blogRightsSelect = element(by.id('field_blogRights'));
   profileRightsSelect = element(by.id('field_profileRights'));
   scriptoriumRightsSelect = element(by.id('field_scriptoriumRights'));
+  imageUrlInput = element(by.id('field_imageUrl'));
 
   userSelect = element(by.id('field_user'));
   givenFriendshipsSelect = element(by.id('field_givenFriendships'));
@@ -111,6 +112,14 @@ export class AppUserUpdatePage {
 
   async scriptoriumRightsSelectLastOption(): Promise<void> {
     await this.scriptoriumRightsSelect.all(by.tagName('option')).last().click();
+  }
+
+  async setImageUrlInput(imageUrl: string): Promise<void> {
+    await this.imageUrlInput.sendKeys(imageUrl);
+  }
+
+  async getImageUrlInput(): Promise<string> {
+    return await this.imageUrlInput.getAttribute('value');
   }
 
   async userSelectLastOption(): Promise<void> {

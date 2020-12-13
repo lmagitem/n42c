@@ -51,6 +51,7 @@ describe('AppUser e2e test', () => {
             appUserUpdatePage.blogRightsSelectLastOption(),
             appUserUpdatePage.profileRightsSelectLastOption(),
             appUserUpdatePage.scriptoriumRightsSelectLastOption(),
+            appUserUpdatePage.setImageUrlInput('imageUrl'),
             appUserUpdatePage.userSelectLastOption(),
             // appUserUpdatePage.givenFriendshipsSelectLastOption(),
             // appUserUpdatePage.askedFriendRequestsSelectLastOption(),
@@ -66,6 +67,7 @@ describe('AppUser e2e test', () => {
             await appUserUpdatePage.getAdminInput().click();
             expect(await appUserUpdatePage.getAdminInput().isSelected(), 'Expected admin to be selected').to.be.true;
         }
+        expect(await appUserUpdatePage.getImageUrlInput()).to.eq('imageUrl', 'Expected ImageUrl value to be equals to imageUrl');
 
         await appUserUpdatePage.save();
         expect(await appUserUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

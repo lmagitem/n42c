@@ -1,0 +1,32 @@
+{
+  "n42cApp": {
+    "localizedBlogPost": {
+      "home": {
+        "title": "Localized Blog Posts",
+        "createLabel": "Create a new Localized Blog Post",
+        "createOrEditLabel": "Create or edit a Localized Blog Post",
+        "notFound": "No Localized Blog Posts found"
+      },
+      "created": "A new Localized Blog Post is created with identifier {{ param }}",
+      "updated": "A Localized Blog Post is updated with identifier {{ param }}",
+      "deleted": "A Localized Blog Post is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Localized Blog Post {{ id }}?"
+      },
+      "detail": {
+        "title": "Localized Blog Post"
+      },
+      "title": "Title",
+      "excerpt": "Excerpt",
+      "content": "Content",
+      "language": "Language",
+      "post": "Post",
+      "help": {
+        "title": "This post&#39;s localized title.",
+        "excerpt": "An excerpt of the post to show on the blog page.",
+        "content": "The content of the post.",
+        "language": "This post&#39;s language."
+      }
+    }
+  }
+}

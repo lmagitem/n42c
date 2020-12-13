@@ -63,6 +63,9 @@ public class AppUserResourceIT {
     private static final AppUserRights DEFAULT_SCRIPTORIUM_RIGHTS = AppUserRights.WRI;
     private static final AppUserRights UPDATED_SCRIPTORIUM_RIGHTS = AppUserRights.MOD;
 
+    private static final String DEFAULT_IMAGE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_URL = "BBBBBBBBBB";
+
     @Autowired
     private AppUserRepository appUserRepository;
 
@@ -90,7 +93,8 @@ public class AppUserResourceIT {
                 .shopRights(DEFAULT_SHOP_RIGHTS)
                 .blogRights(DEFAULT_BLOG_RIGHTS)
                 .profileRights(DEFAULT_PROFILE_RIGHTS)
-                .scriptoriumRights(DEFAULT_SCRIPTORIUM_RIGHTS);
+            .scriptoriumRights(DEFAULT_SCRIPTORIUM_RIGHTS)
+            .imageUrl(DEFAULT_IMAGE_URL);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -112,7 +116,8 @@ public class AppUserResourceIT {
                 .shopRights(UPDATED_SHOP_RIGHTS)
                 .blogRights(UPDATED_BLOG_RIGHTS)
                 .profileRights(UPDATED_PROFILE_RIGHTS)
-                .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS);
+            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
+            .imageUrl(UPDATED_IMAGE_URL);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -158,6 +163,7 @@ public class AppUserResourceIT {
         assertThat(testAppUser.getBlogRights()).isEqualTo(DEFAULT_BLOG_RIGHTS);
         assertThat(testAppUser.getProfileRights()).isEqualTo(DEFAULT_PROFILE_RIGHTS);
         assertThat(testAppUser.getScriptoriumRights()).isEqualTo(DEFAULT_SCRIPTORIUM_RIGHTS);
+        assertThat(testAppUser.getImageUrl()).isEqualTo(DEFAULT_IMAGE_URL);
     }
 
     @Test
@@ -187,10 +193,13 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setUserName(null);
 
+        // Create the AppUser, which fails.
+
+
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-                                                         .contentType(MediaType.APPLICATION_JSON)
-                                                         .content(TestUtil.convertObjectToJsonBytes(appUser)))
-                          .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
 
         List<AppUser> appUserList = appUserRepository.findAll();
         assertThat(appUserList).hasSize(databaseSizeBeforeTest);
@@ -203,10 +212,13 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setAdmin(null);
 
+        // Create the AppUser, which fails.
+
+
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-                                                         .contentType(MediaType.APPLICATION_JSON)
-                                                         .content(TestUtil.convertObjectToJsonBytes(appUser)))
-                          .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
 
         List<AppUser> appUserList = appUserRepository.findAll();
         assertThat(appUserList).hasSize(databaseSizeBeforeTest);
@@ -219,10 +231,13 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setShopRights(null);
 
+        // Create the AppUser, which fails.
+
+
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-                                                         .contentType(MediaType.APPLICATION_JSON)
-                                                         .content(TestUtil.convertObjectToJsonBytes(appUser)))
-                          .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
 
         List<AppUser> appUserList = appUserRepository.findAll();
         assertThat(appUserList).hasSize(databaseSizeBeforeTest);
@@ -235,10 +250,13 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setBlogRights(null);
 
+        // Create the AppUser, which fails.
+
+
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-                                                         .contentType(MediaType.APPLICATION_JSON)
-                                                         .content(TestUtil.convertObjectToJsonBytes(appUser)))
-                          .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
 
         List<AppUser> appUserList = appUserRepository.findAll();
         assertThat(appUserList).hasSize(databaseSizeBeforeTest);
@@ -251,10 +269,13 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setProfileRights(null);
 
+        // Create the AppUser, which fails.
+
+
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-                                                         .contentType(MediaType.APPLICATION_JSON)
-                                                         .content(TestUtil.convertObjectToJsonBytes(appUser)))
-                          .andExpect(status().isBadRequest());
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .andExpect(status().isBadRequest());
 
         List<AppUser> appUserList = appUserRepository.findAll();
         assertThat(appUserList).hasSize(databaseSizeBeforeTest);
@@ -267,9 +288,12 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setScriptoriumRights(null);
 
+        // Create the AppUser, which fails.
+
+
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
-                                                         .contentType(MediaType.APPLICATION_JSON)
-                                                         .content(TestUtil.convertObjectToJsonBytes(appUser)))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(appUser)))
                           .andExpect(status().isBadRequest());
 
         List<AppUser> appUserList = appUserRepository.findAll();
@@ -292,7 +316,8 @@ public class AppUserResourceIT {
                           .andExpect(jsonPath("$.[*].shopRights").value(hasItem(DEFAULT_SHOP_RIGHTS.toString())))
                           .andExpect(jsonPath("$.[*].blogRights").value(hasItem(DEFAULT_BLOG_RIGHTS.toString())))
                           .andExpect(jsonPath("$.[*].profileRights").value(hasItem(DEFAULT_PROFILE_RIGHTS.toString())))
-                          .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())));
+            .andExpect(jsonPath("$.[*].scriptoriumRights").value(hasItem(DEFAULT_SCRIPTORIUM_RIGHTS.toString())))
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)));
     }
 
     @SuppressWarnings({"unchecked"})
@@ -331,7 +356,8 @@ public class AppUserResourceIT {
                           .andExpect(jsonPath("$.shopRights").value(DEFAULT_SHOP_RIGHTS.toString()))
                           .andExpect(jsonPath("$.blogRights").value(DEFAULT_BLOG_RIGHTS.toString()))
                           .andExpect(jsonPath("$.profileRights").value(DEFAULT_PROFILE_RIGHTS.toString()))
-                          .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()));
+            .andExpect(jsonPath("$.scriptoriumRights").value(DEFAULT_SCRIPTORIUM_RIGHTS.toString()))
+            .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL));
     }
 
     @Test
@@ -366,7 +392,8 @@ public class AppUserResourceIT {
                 .shopRights(UPDATED_SHOP_RIGHTS)
                 .blogRights(UPDATED_BLOG_RIGHTS)
                 .profileRights(UPDATED_PROFILE_RIGHTS)
-                .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS);
+            .scriptoriumRights(UPDATED_SCRIPTORIUM_RIGHTS)
+            .imageUrl(UPDATED_IMAGE_URL);
 
         restAppUserMockMvc.perform(put("/api/app-users").with(csrf())
                                                         .contentType(MediaType.APPLICATION_JSON)
@@ -383,6 +410,7 @@ public class AppUserResourceIT {
         assertThat(testAppUser.getBlogRights()).isEqualTo(UPDATED_BLOG_RIGHTS);
         assertThat(testAppUser.getProfileRights()).isEqualTo(UPDATED_PROFILE_RIGHTS);
         assertThat(testAppUser.getScriptoriumRights()).isEqualTo(UPDATED_SCRIPTORIUM_RIGHTS);
+        assertThat(testAppUser.getImageUrl()).isEqualTo(UPDATED_IMAGE_URL);
     }
 
     @Test

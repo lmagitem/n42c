@@ -164,6 +164,7 @@ public class CacheConfiguration {
             createCache(cm, com.n42c.domain.LocalizedNinthObjective.class.getName());
             createCache(cm, com.n42c.domain.LocalizedBlog.class.getName());
             createCache(cm, com.n42c.domain.Blog.class.getName() + ".localizations");
+            createCache(cm, com.n42c.domain.LocalizedBlogPost.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

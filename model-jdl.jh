@@ -26,6 +26,7 @@ entity AppUser {
     profileRights AppUserRights required
     /** The user rights regarding the Scriptorium. */
     scriptoriumRights AppUserRights required
+    /** The user's avatar in the app. */
     imageUrl String
 }
 /** AppUser rights. */

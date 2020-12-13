@@ -47,21 +47,10 @@
                 <th jhiSortBy="blogRights" scope="col">
                     <span jhiTranslate="n42cApp.appUser.blogRights">Blog Rights</span>
                     <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="profileRights" scope="col">
-                    <span jhiTranslate="n42cApp.appUser.profileRights">Profile Rights</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="scriptoriumRights" scope="col">
-                    <span jhiTranslate="n42cApp.appUser.scriptoriumRights">Scriptorium Rights</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="user.login" scope="col"><span jhiTranslate="n42cApp.appUser.user">User</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th scope="col"><span jhiTranslate="n42cApp.appUser.givenFriendships">Given Friendships</span></th>
-                <th scope="col"><span jhiTranslate="n42cApp.appUser.askedFriendRequests">Asked Friend Requests</span>
-                </th>
+          </th>
+          <th scope="col" jhiSortBy="imageUrl">
+            <span jhiTranslate="n42cApp.appUser.imageUrl">Image Url</span> <fa-icon icon="sort"></fa-icon>
+          </th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -77,6 +66,7 @@
                 <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</td>
                 <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
                 <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
+          <td>{{ appUser.imageUrl }}</td>
                 <td>
                     {{ appUser.user?.login }}
                 </td>

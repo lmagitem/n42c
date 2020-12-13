@@ -265,9 +265,17 @@ public class AppUser implements Serializable {
         this.scriptoriumRights = scriptoriumRights;
     }
 
-    public AppUser scriptoriumRights(AppUserRights scriptoriumRights) {
-        this.scriptoriumRights = scriptoriumRights;
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public AppUser imageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public User getUser() {
@@ -525,6 +533,7 @@ public class AppUser implements Serializable {
             ", blogRights='" + getBlogRights() + "'" +
             ", profileRights='" + getProfileRights() + "'" +
             ", scriptoriumRights='" + getScriptoriumRights() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
             "}";
     }
 }

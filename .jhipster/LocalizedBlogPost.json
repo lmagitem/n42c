@@ -1,0 +1,59 @@
+{
+  "name": "LocalizedBlogPost",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "javadoc": "This post's localized title.",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "excerpt",
+      "fieldType": "byte[]",
+      "javadoc": "An excerpt of the post to show on the blog page.",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "javadoc": "The content of the post.",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "javadoc": "This post's language.",
+      "fieldValues": "EN (English),FR (French),AR (Arabic),ZH (Chinese),DA (Danish),NL (Dutch),FI (Finnish),DE (German),EL (Greek),HU (Hungarian),IS (Icelandic),ID (Indonesian),GA (Irish),IT (Italian),JA (Japanese),KO (Korean),FA (Persian),PL (Polish),PT (Portuguese),RO (Romanian),RU (Russian),SR (Serbian),ES (Spanish),SV (Swedish),TR (Turkish)",
+      "fieldValidateRules": [
+        "required"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blogPost",
+      "otherEntityRelationshipName": "localizations",
+      "relationshipValidateRules": "required",
+      "relationshipName": "post",
+      "otherEntityField": "title"
+    }
+  ],
+  "changelogDate": "20201213134337",
+  "javadoc": "The content of a post, in a specific language.",
+  "entityTableName": "localized_blog_post",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
