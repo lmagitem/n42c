@@ -136,7 +136,10 @@ public class AppUserResourceIT {
     @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void createAppUser() throws Exception {
         int databaseSizeBeforeCreate = appUserRepository.findAll().size();
+
         TestUtil.setAnnotationUsage(false);
+        em.remove(appUser);
+        appUser = createEntity(em);
 
         // Create the AppUser
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
@@ -184,9 +187,6 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setUserName(null);
 
-        // Create the AppUser, which fails.
-
-
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
                                                          .contentType(MediaType.APPLICATION_JSON)
                                                          .content(TestUtil.convertObjectToJsonBytes(appUser)))
@@ -202,9 +202,6 @@ public class AppUserResourceIT {
         int databaseSizeBeforeTest = appUserRepository.findAll().size();
         // set the field null
         appUser.setAdmin(null);
-
-        // Create the AppUser, which fails.
-
 
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
                                                          .contentType(MediaType.APPLICATION_JSON)
@@ -222,9 +219,6 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setShopRights(null);
 
-        // Create the AppUser, which fails.
-
-
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
                                                          .contentType(MediaType.APPLICATION_JSON)
                                                          .content(TestUtil.convertObjectToJsonBytes(appUser)))
@@ -240,9 +234,6 @@ public class AppUserResourceIT {
         int databaseSizeBeforeTest = appUserRepository.findAll().size();
         // set the field null
         appUser.setBlogRights(null);
-
-        // Create the AppUser, which fails.
-
 
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
                                                          .contentType(MediaType.APPLICATION_JSON)
@@ -260,9 +251,6 @@ public class AppUserResourceIT {
         // set the field null
         appUser.setProfileRights(null);
 
-        // Create the AppUser, which fails.
-
-
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
                                                          .contentType(MediaType.APPLICATION_JSON)
                                                          .content(TestUtil.convertObjectToJsonBytes(appUser)))
@@ -278,9 +266,6 @@ public class AppUserResourceIT {
         int databaseSizeBeforeTest = appUserRepository.findAll().size();
         // set the field null
         appUser.setScriptoriumRights(null);
-
-        // Create the AppUser, which fails.
-
 
         restAppUserMockMvc.perform(post("/api/app-users").with(csrf())
                                                          .contentType(MediaType.APPLICATION_JSON)
@@ -362,6 +347,8 @@ public class AppUserResourceIT {
     @WithMockUser(username = UserDetailsServiceImpl.DEFAULT_LOGIN)
     public void updateAppUser() throws Exception {
         TestUtil.setAnnotationUsage(false);
+        em.remove(appUser);
+        appUser = createEntity(em);
 
         // Initialize the database
         appUserRepository.saveAndFlush(appUser);

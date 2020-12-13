@@ -35,16 +35,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String login;
 
-    @Size(max = 50)
-    @Column(name = "first_name", length = 50)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String firstName;
-
-    @Size(max = 50)
-    @Column(name = "last_name", length = 50)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String lastName;
-
     @Email
     @Size(min = 5, max = 254)
     @Column(length = 254, unique = true)
@@ -61,10 +51,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String langKey;
 
-    @Size(max = 256)
-    @Column(name = "image_url", length = 256)
-    private String imageUrl;
-
     @ManyToMany
     @JoinTable(
             name = "jhi_user_authority",
@@ -77,9 +63,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public User() {
     }
 
-    public User(String id, @Size(max = 256) String imageUrl) {
+    public User(String id) {
         this.id = id;
-        this.imageUrl = imageUrl;
     }
 
     public String getId() {
@@ -99,36 +84,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.login = StringUtils.lowerCase(login, Locale.ENGLISH);
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public boolean getActivated() {
@@ -176,10 +137,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "User{" +
                "login='" + login + '\'' +
-               ", firstName='" + firstName + '\'' +
-               ", lastName='" + lastName + '\'' +
                ", email='" + email + '\'' +
-               ", imageUrl='" + imageUrl + '\'' +
                ", activated='" + activated + '\'' +
                ", langKey='" + langKey + '\'' +
                "}";

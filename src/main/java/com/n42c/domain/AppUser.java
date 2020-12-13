@@ -1,5 +1,6 @@
 package com.n42c.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.n42c.domain.enumerations.AppUserRights;
 import io.swagger.annotations.ApiModel;
@@ -8,7 +9,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -90,8 +93,13 @@ public class AppUser implements Serializable {
     @Column(name = "scriptorium_rights", nullable = false)
     private AppUserRights scriptoriumRights;
 
+    @Size(max = 256)
+    @Column(name = "image_url", length = 256)
+    private String imageUrl;
+
     @OneToOne(optional = false)
     @NotNull
+    @JsonIgnore
     @JoinColumn(unique = true)
     private User user;
 

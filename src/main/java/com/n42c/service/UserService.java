@@ -195,13 +195,6 @@ public class UserService {
             attributes = ((OAuth2AuthenticationToken) authToken).getPrincipal().getAttributes();
         } else if (authToken instanceof JwtAuthenticationToken) {
             attributes = ((JwtAuthenticationToken) authToken).getTokenAttributes();
-        } else if (authToken instanceof UsernamePasswordAuthenticationToken) {
-            Object principal = authToken.getPrincipal();
-            attributes = new HashMap<String, Object>() {{
-                put("uid", ((org.springframework.security.core.userdetails.User) principal).getUsername());
-                put("username", ((org.springframework.security.core.userdetails.User) principal).getUsername());
-                put("password", ((org.springframework.security.core.userdetails.User) principal).getPassword());
-            }};
         } else {
             throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT! Instead we got: " + authToken.getClass().getName());
         }
