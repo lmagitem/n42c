@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IPlayer } from 'app/shared/model/player.model';
+import {IPlayer} from 'app/shared/model/player.model';
 
 @Component({
   selector: 'jhi-player-detail',
@@ -10,10 +10,11 @@ import { IPlayer } from 'app/shared/model/player.model';
 export class PlayerDetailComponent implements OnInit {
   player: IPlayer | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ player }) => (this.player = player));
+    this.activatedRoute.data.subscribe(({player}) => (this.player = player));
   }
 
   previousState(): void {

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
 
 @Component({
   selector: 'jhi-ninth-mission-detail',
@@ -10,10 +10,11 @@ import { INinthMission } from 'app/shared/model/ninth-mission.model';
 export class NinthMissionDetailComponent implements OnInit {
   ninthMission: INinthMission | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthMission }) => (this.ninthMission = ninthMission));
+    this.activatedRoute.data.subscribe(({ninthMission}) => (this.ninthMission = ninthMission));
   }
 
   previousState(): void {

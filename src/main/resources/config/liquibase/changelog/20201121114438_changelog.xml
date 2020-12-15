@@ -41,7 +41,7 @@
         <setTableRemarks tableName="localized_blog_category"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-8">
-        <setTableRemarks tableName="localized_post_content"/>
+        <setTableRemarks tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-9">
         <setTableRemarks tableName="localized_product"/>
@@ -83,7 +83,7 @@
         <setColumnRemarks columnName="blog_rights" tableName="app_user"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-22">
-        <setColumnRemarks columnName="content" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="content" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-23">
         <setColumnRemarks columnName="content" tableName="localized_product"/>
@@ -107,7 +107,7 @@
         <setColumnRemarks columnName="displayed_name" tableName="app_user"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-30">
-        <setColumnRemarks columnName="excerpt" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="excerpt" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-31">
         <setColumnRemarks columnName="excerpt" tableName="localized_product"/>
@@ -137,7 +137,7 @@
         <setColumnRemarks columnName="language" tableName="localized_blog_category"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-40">
-        <setColumnRemarks columnName="language" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="language" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-41">
         <setColumnRemarks columnName="language" tableName="localized_product"/>
@@ -224,7 +224,7 @@
         <setColumnRemarks columnName="title" tableName="blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-69">
-        <setColumnRemarks columnName="title" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="title" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1605959088453-70">
         <setColumnRemarks columnName="title" tableName="profile_part"/>

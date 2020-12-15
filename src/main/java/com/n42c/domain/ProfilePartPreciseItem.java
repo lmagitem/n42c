@@ -8,8 +8,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -112,17 +111,21 @@ public class ProfilePartPreciseItem implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public ProfilePartPreciseItem title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getSubTitle() {
         return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public ProfilePartPreciseItem subTitle(String subTitle) {
@@ -130,12 +133,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
     public Instant getStart() {
         return start;
+    }
+
+    public void setStart(Instant start) {
+        this.start = start;
     }
 
     public ProfilePartPreciseItem start(Instant start) {
@@ -143,12 +146,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setStart(Instant start) {
-        this.start = start;
-    }
-
     public Instant getEnd() {
         return end;
+    }
+
+    public void setEnd(Instant end) {
+        this.end = end;
     }
 
     public ProfilePartPreciseItem end(Instant end) {
@@ -156,12 +159,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setEnd(Instant end) {
-        this.end = end;
-    }
-
     public String getLocationName() {
         return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
     public ProfilePartPreciseItem locationName(String locationName) {
@@ -169,12 +172,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
-    }
-
     public Double getLocationLat() {
         return locationLat;
+    }
+
+    public void setLocationLat(Double locationLat) {
+        this.locationLat = locationLat;
     }
 
     public ProfilePartPreciseItem locationLat(Double locationLat) {
@@ -182,12 +185,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setLocationLat(Double locationLat) {
-        this.locationLat = locationLat;
-    }
-
     public Double getLocationLong() {
         return locationLong;
+    }
+
+    public void setLocationLong(Double locationLong) {
+        this.locationLong = locationLong;
     }
 
     public ProfilePartPreciseItem locationLong(Double locationLong) {
@@ -195,12 +198,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setLocationLong(Double locationLong) {
-        this.locationLong = locationLong;
-    }
-
     public String getContent() {
         return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public ProfilePartPreciseItem content(String content) {
@@ -208,12 +211,12 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Set<ProfilePartLinkedExperience> getExperiences() {
         return experiences;
+    }
+
+    public void setExperiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
+        this.experiences = profilePartLinkedExperiences;
     }
 
     public ProfilePartPreciseItem experiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
@@ -233,21 +236,17 @@ public class ProfilePartPreciseItem implements Serializable {
         return this;
     }
 
-    public void setExperiences(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
-        this.experiences = profilePartLinkedExperiences;
-    }
-
     public ProfilePart getProfilePart() {
         return profilePart;
+    }
+
+    public void setProfilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
     }
 
     public ProfilePartPreciseItem profilePart(ProfilePart profilePart) {
         this.profilePart = profilePart;
         return this;
-    }
-
-    public void setProfilePart(ProfilePart profilePart) {
-        this.profilePart = profilePart;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

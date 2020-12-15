@@ -7,8 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -65,17 +64,21 @@ public class ProfilePartSkillCategory implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ProfilePartSkillCategory name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Integer getIndex() {
         return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     public ProfilePartSkillCategory index(Integer index) {
@@ -83,12 +86,12 @@ public class ProfilePartSkillCategory implements Serializable {
         return this;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
     public Set<ProfilePartSkill> getSkills() {
         return skills;
+    }
+
+    public void setSkills(Set<ProfilePartSkill> profilePartSkills) {
+        this.skills = profilePartSkills;
     }
 
     public ProfilePartSkillCategory skills(Set<ProfilePartSkill> profilePartSkills) {
@@ -108,21 +111,17 @@ public class ProfilePartSkillCategory implements Serializable {
         return this;
     }
 
-    public void setSkills(Set<ProfilePartSkill> profilePartSkills) {
-        this.skills = profilePartSkills;
-    }
-
     public ProfilePart getProfilePart() {
         return profilePart;
+    }
+
+    public void setProfilePart(ProfilePart profilePart) {
+        this.profilePart = profilePart;
     }
 
     public ProfilePartSkillCategory profilePart(ProfilePart profilePart) {
         this.profilePart = profilePart;
         return this;
-    }
-
-    public void setProfilePart(ProfilePart profilePart) {
-        this.profilePart = profilePart;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

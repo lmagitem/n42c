@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { IPlayer } from 'app/shared/model/player.model';
-import { PlayerService } from './player.service';
+import {IPlayer} from 'app/shared/model/player.model';
+import {PlayerService} from './player.service';
 
 @Component({
   templateUrl: './player-delete-dialog.component.html',
@@ -11,7 +11,8 @@ import { PlayerService } from './player.service';
 export class PlayerDeleteDialogComponent {
   player?: IPlayer;
 
-  constructor(protected playerService: PlayerService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+  constructor(protected playerService: PlayerService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

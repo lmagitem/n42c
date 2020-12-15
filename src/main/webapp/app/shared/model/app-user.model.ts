@@ -1,10 +1,10 @@
-import { IUser } from 'app/core/user/user.model';
-import { IBlog } from 'app/shared/model/blog.model';
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
-import { IPlayer } from 'app/shared/model/player.model';
-import { IProduct } from 'app/shared/model/product.model';
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { AppUserRights } from 'app/shared/model/enumerations/app-user-rights.model';
+import {IUser} from 'app/core/user/user.model';
+import {IBlog} from 'app/shared/model/blog.model';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
+import {IPlayer} from 'app/shared/model/player.model';
+import {IProduct} from 'app/shared/model/product.model';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
+import {AppUserRights} from 'app/shared/model/enumerations/app-user-rights.model';
 
 export interface IAppUser {
   id?: number;
@@ -15,6 +15,7 @@ export interface IAppUser {
   blogRights?: AppUserRights;
   profileRights?: AppUserRights;
   scriptoriumRights?: AppUserRights;
+  imageUrl?: string;
   user?: IUser;
   blogs?: IBlog[];
   profiles?: IAppUserProfile[];
@@ -37,6 +38,7 @@ export class AppUser implements IAppUser {
     public blogRights?: AppUserRights,
     public profileRights?: AppUserRights,
     public scriptoriumRights?: AppUserRights,
+    public imageUrl?: string,
     public user?: IUser,
     public blogs?: IBlog[],
     public profiles?: IAppUserProfile[],

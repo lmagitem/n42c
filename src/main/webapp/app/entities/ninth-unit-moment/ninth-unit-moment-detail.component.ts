@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthUnitMoment } from 'app/shared/model/ninth-unit-moment.model';
+import {INinthUnitMoment} from 'app/shared/model/ninth-unit-moment.model';
 
 @Component({
   selector: 'jhi-ninth-unit-moment-detail',

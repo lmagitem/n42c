@@ -1,7 +1,7 @@
-import { HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PLACEHOLDER_CONTENT, PLACEHOLDER_NAME } from '../constants/localization.constants';
-import { ArrayUtils } from './arrays-utils';
+import {HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {PLACEHOLDER_CONTENT, PLACEHOLDER_NAME} from '../constants/localization.constants';
+import {ArrayUtils} from './arrays-utils';
 
 export interface IItemWithLocalizations {
   id: any;
@@ -23,20 +23,28 @@ export class LocalizationUtils {
     let result = '';
 
     if (item !== undefined && item !== null && item.localizations !== undefined && item.localizations !== null) {
+      // If the placeholder is found and the field isn't a header one, returns it
+      if (item.localizations.length === 1 && item.localizations[0][fieldToLocalize] === PLACEHOLDER_NAME) {
+        if (fieldToLocalize !== 'title' && fieldToLocalize !== 'name') {
+          return PLACEHOLDER_CONTENT;
+        } else {
+          // If it's a header one, simply use the value of the item itself
+          return item[fieldToLocalize] !== undefined && item[fieldToLocalize] !== null ? item[fieldToLocalize] : '...';
+        }
+      }
+
       // Try to retreive the localization for the currently selected language, or the english localization, or any localization
       let localization = item.localizations.find(l => l['language']?.toLowerCase() === currentLanguage);
-      if (localization !== undefined) {
+      if (localization === undefined) {
         localization = item.localizations.find(l => l['language']?.toLowerCase() === 'en');
       }
-      if (localization !== undefined) {
+      if (localization === undefined) {
         localization = item.localizations.length > 0 ? item.localizations[0] : undefined;
       }
 
-      // If something was found, returns it, else if a placeholder is found, returns that instead
+      // If something was found, returns it
       if (localization !== undefined) {
         result = localization[fieldToLocalize];
-      } else if (item.localizations.length === 1 && item.localizations[0][fieldToLocalize] === PLACEHOLDER_NAME) {
-        result = PLACEHOLDER_CONTENT;
       }
     }
 

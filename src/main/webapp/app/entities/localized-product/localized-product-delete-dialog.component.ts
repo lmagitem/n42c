@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ILocalizedProduct } from 'app/shared/model/localized-product.model';
-import { LocalizedProductService } from './localized-product.service';
+import {ILocalizedProduct} from 'app/shared/model/localized-product.model';
+import {LocalizedProductService} from './localized-product.service';
 
 @Component({
   templateUrl: './localized-product-delete-dialog.component.html',

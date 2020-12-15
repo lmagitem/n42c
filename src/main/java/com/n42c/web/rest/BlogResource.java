@@ -1,10 +1,8 @@
 package com.n42c.web.rest;
 
 import com.n42c.domain.Blog;
-import com.n42c.domain.LocalizedPostContent;
 import com.n42c.repository.BlogRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import com.n42c.web.rest.utils.RestServiceUtils;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,17 +11,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -38,25 +36,24 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class BlogResource {
-
-    private final Logger log = LoggerFactory.getLogger(BlogResource.class);
-
     private static final String ENTITY_NAME = "blog";
-
+    private final Logger log = LoggerFactory.getLogger(BlogResource.class);
+    private final BlogRepository blogRepository;
+    private final EntityManager entityManager;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final BlogRepository blogRepository;
-
-    public BlogResource(BlogRepository blogRepository) {
+    public BlogResource(BlogRepository blogRepository, EntityManager entityManager) {
         this.blogRepository = blogRepository;
+        this.entityManager = entityManager;
     }
 
     /**
      * {@code POST  /blogs} : Create a new blog.
      *
      * @param blog the blog to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new blog, or with status {@code 400 (Bad Request)} if the blog has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new blog, or with status {@code 400 (Bad Request)} if the blog has
+     * already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/blogs")
@@ -66,18 +63,18 @@ public class BlogResource {
             throw new BadRequestAlertException("A new blog cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Blog result = blogRepository.save(blog);
-        return ResponseEntity.created(new URI("/api/blogs/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/blogs/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /blogs} : Updates an existing blog.
      *
      * @param blog the blog to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated blog,
-     * or with status {@code 400 (Bad Request)} if the blog is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the blog couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated blog, or with status {@code 400 (Bad Request)} if the blog is
+     * not valid, or with status {@code 500 (Internal Server Error)} if the blog couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/blogs")
@@ -87,9 +84,10 @@ public class BlogResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Blog result = blogRepository.save(blog);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blog.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blog.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -100,41 +98,22 @@ public class BlogResource {
      */
     @GetMapping("/blogs")
     public ResponseEntity<List<Blog>> getAllBlogs(Pageable pageable) {
-        SecurityContext context = SecurityContextHolder.getContext();
-        if (context == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, null));
+        Authentication authentication = RestServiceUtils.getAuthentication(SecurityContextHolder.getContext());
+        Collection<? extends GrantedAuthority> authorities = RestServiceUtils.getAuthorities(authentication);
 
-        Authentication authentication = context.getAuthentication();
-        if (authentication == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, null));
-
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        if (authorities == null)
-            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
-
-        if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+        if (authentication == null) {
+            return RestServiceUtils.returnPagedListWithHeaders((getBlogsByCurrentUserOrWriter(pageable, null)));
+        } else if (authorities == null) {
+            return RestServiceUtils.returnPagedListWithHeaders(
+                    (getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()))
+                                                              );
+        } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             log.debug("REST request to get all Blogs - as Admin");
-            return RestServiceUtils.returnPagedListWithHeaders(blogRepository.findAll(pageable));
+            return RestServiceUtils.returnPagedListWithHeaders((blogRepository.findAll(pageable)));
         } else {
-            return RestServiceUtils.returnPagedListWithHeaders(getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal()));
+            return RestServiceUtils.returnPagedListWithHeaders(
+                    (getBlogsByCurrentUserOrWriter(pageable, authentication.getPrincipal())));
         }
-    }
-
-    /**
-     * Gets all blogs belonging to the current user, or anyone that has Writer rights or more.
-     */
-    private Page<Blog> getBlogsByCurrentUserOrWriter(Pageable pageable, Object principal) {
-        if (principal != null) {
-            if (principal instanceof UserDetails) {
-                log.debug("REST request to get all Blogs - as User (with UserDetails)");
-                return blogRepository.findByIsCurrentSpringUserOrWriter(pageable);
-            } else if (principal instanceof DefaultOidcUser) {
-                log.debug("REST request to get all Blogs - as User (with Oidc token)");
-                return blogRepository.findByIsCurrentOidcUserOrWriter(pageable);
-            }
-        }
-        log.debug("REST request to get all Blogs - as Anonymous");
-        return blogRepository.findByIsWriter(pageable);
     }
 
     /**
@@ -160,6 +139,28 @@ public class BlogResource {
     public ResponseEntity<Void> deleteBlog(@PathVariable Long id) {
         log.debug("REST request to delete Blog : {}", id);
         blogRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+                .noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
+    }
+
+    /**
+     * Gets all blogs belonging to the current user, or anyone that has Writer rights or more.
+     */
+    private Page<Blog> getBlogsByCurrentUserOrWriter(Pageable pageable, Object principal) {
+        if (pageable == null) {
+            return null;
+        } else if (principal != null) {
+            if (principal instanceof UserDetails) {
+                log.debug("REST request to get all Blogs - as User (with UserDetails)");
+                return blogRepository.findByIsCurrentSpringUserOrWriter(pageable);
+            } else if (principal instanceof DefaultOidcUser) {
+                log.debug("REST request to get all Blogs - as User (with Oidc token)");
+                return blogRepository.findByIsCurrentOidcUserOrWriter(pageable);
+            }
+        }
+        log.debug("REST request to get all Blogs - as Anonymous");
+        return blogRepository.findByIsWriter(pageable);
     }
 }

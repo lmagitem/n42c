@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthArmy } from 'app/shared/model/ninth-army.model';
-import { NinthArmyService } from './ninth-army.service';
-import { NinthArmyDeleteDialogComponent } from './ninth-army-delete-dialog.component';
+import {INinthArmy} from 'app/shared/model/ninth-army.model';
+import {NinthArmyService} from './ninth-army.service';
+import {NinthArmyDeleteDialogComponent} from './ninth-army-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-army',
@@ -16,7 +16,8 @@ export class NinthArmyComponent implements OnInit, OnDestroy {
   ninthArmies?: INinthArmy[];
   eventSubscriber?: Subscription;
 
-  constructor(protected ninthArmyService: NinthArmyService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(protected ninthArmyService: NinthArmyService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {
+  }
 
   loadAll(): void {
     this.ninthArmyService.query().subscribe((res: HttpResponse<INinthArmy[]>) => (this.ninthArmies = res.body || []));
@@ -43,7 +44,7 @@ export class NinthArmyComponent implements OnInit, OnDestroy {
   }
 
   delete(ninthArmy: INinthArmy): void {
-    const modalRef = this.modalService.open(NinthArmyDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(NinthArmyDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.ninthArmy = ninthArmy;
   }
 }

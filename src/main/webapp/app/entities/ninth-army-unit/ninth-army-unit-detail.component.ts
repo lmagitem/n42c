@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
+import {INinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
 
 @Component({
   selector: 'jhi-ninth-army-unit-detail',

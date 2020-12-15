@@ -1,6 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -8,11 +9,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * The Localized content of that product.
@@ -55,7 +53,7 @@ public class LocalizedProduct implements Serializable {
     /**
      * The text describing this product.
      */
-    
+
     @ApiModelProperty(value = "The text describing this product.", required = true)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
@@ -89,17 +87,21 @@ public class LocalizedProduct implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalizedProduct name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getExcerpt() {
         return excerpt;
+    }
+
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
     }
 
     public LocalizedProduct excerpt(String excerpt) {
@@ -107,12 +109,12 @@ public class LocalizedProduct implements Serializable {
         return this;
     }
 
-    public void setExcerpt(String excerpt) {
-        this.excerpt = excerpt;
-    }
-
     public String getPictureUrl() {
         return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public LocalizedProduct pictureUrl(String pictureUrl) {
@@ -120,12 +122,12 @@ public class LocalizedProduct implements Serializable {
         return this;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
     public String getContent() {
         return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public LocalizedProduct content(String content) {
@@ -133,12 +135,12 @@ public class LocalizedProduct implements Serializable {
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedProduct language(Language language) {
@@ -146,21 +148,17 @@ public class LocalizedProduct implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public Product getProduct() {
         return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public LocalizedProduct product(Product product) {
         this.product = product;
         return this;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

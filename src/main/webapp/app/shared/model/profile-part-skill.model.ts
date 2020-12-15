@@ -19,5 +19,6 @@ export class ProfilePartSkill implements IProfilePartSkill {
     public level?: LevelOfMastery,
     public linkedSkills?: IProfilePartLinkedExperience[],
     public skillCategory?: IProfilePartSkillCategory
-  ) {}
+  ) {
+  }
 }

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthDeploymentMap, NinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
-import { NinthDeploymentMapService } from './ninth-deployment-map.service';
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
-import { NinthMissionService } from 'app/entities/ninth-mission/ninth-mission.service';
+import {INinthDeploymentMap, NinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
+import {NinthDeploymentMapService} from './ninth-deployment-map.service';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
+import {NinthMissionService} from 'app/entities/ninth-mission/ninth-mission.service';
 
 @Component({
   selector: 'jhi-ninth-deployment-map-update',

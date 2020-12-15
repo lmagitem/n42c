@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiDataUtils, JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignService } from './ninth-campaign.service';
-import { NinthCampaignDeleteDialogComponent } from './ninth-campaign-delete-dialog.component';
+import {INinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {NinthCampaignService} from './ninth-campaign.service';
+import {NinthCampaignDeleteDialogComponent} from './ninth-campaign-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-campaign',

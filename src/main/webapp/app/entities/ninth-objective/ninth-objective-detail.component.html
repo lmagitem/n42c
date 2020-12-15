@@ -1,30 +1,33 @@
 <div class="row justify-content-center">
-  <div class="col-12">
-    <div *ngIf="ninthObjective">
-      <h2><span jhiTranslate="n42cApp.ninthObjective.detail.title">Ninth Objective</span> {{ ninthObjective.id }}</h2>
+    <div class="col-12">
+        <div *ngIf="ninthObjective">
+            <h2><span jhiTranslate="n42cApp.ninthObjective.detail.title">Ninth Objective</span> {{ ninthObjective.id }}
+            </h2>
 
-      <hr />
+            <hr/>
 
-      <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="n42cApp.ninthObjective.shareable">Shareable</span></dt>
-        <dd>
-          <span>{{ ninthObjective.shareable }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthObjective.type">Type</span></dt>
-        <dd>
-          <span jhiTranslate="{{ 'n42cApp.NinthObjectiveType.' + ninthObjective.type }}">{{ ninthObjective.type }}</span>
-        </dd>
-      </dl>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42cApp.ninthObjective.shareable">Shareable</span></dt>
+                <dd>
+                    <span>{{ ninthObjective.shareable }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthObjective.type">Type</span></dt>
+                <dd>
+                    <span
+                        jhiTranslate="{{ 'n42cApp.NinthObjectiveType.' + ninthObjective.type }}">{{ ninthObjective.type }}</span>
+                </dd>
+            </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+            <button (click)="previousState()" class="btn btn-info" type="submit">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
-      <button type="button" [routerLink]="['/entities', 'ninth-objective', ninthObjective.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+            <button [routerLink]="['/entities', 'ninth-objective', ninthObjective.id, 'edit']" class="btn btn-primary"
+                    type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
     </div>
-  </div>
 </div>

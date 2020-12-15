@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthUnit } from 'app/shared/model/ninth-unit.model';
-import { NinthUnitService } from './ninth-unit.service';
-import { NinthUnitDeleteDialogComponent } from './ninth-unit-delete-dialog.component';
+import {INinthUnit} from 'app/shared/model/ninth-unit.model';
+import {NinthUnitService} from './ninth-unit.service';
+import {NinthUnitDeleteDialogComponent} from './ninth-unit-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-unit',
@@ -16,7 +16,8 @@ export class NinthUnitComponent implements OnInit, OnDestroy {
   ninthUnits?: INinthUnit[];
   eventSubscriber?: Subscription;
 
-  constructor(protected ninthUnitService: NinthUnitService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(protected ninthUnitService: NinthUnitService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {
+  }
 
   loadAll(): void {
     this.ninthUnitService.query().subscribe((res: HttpResponse<INinthUnit[]>) => (this.ninthUnits = res.body || []));
@@ -43,7 +44,7 @@ export class NinthUnitComponent implements OnInit, OnDestroy {
   }
 
   delete(ninthUnit: INinthUnit): void {
-    const modalRef = this.modalService.open(NinthUnitDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(NinthUnitDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.ninthUnit = ninthUnit;
   }
 }

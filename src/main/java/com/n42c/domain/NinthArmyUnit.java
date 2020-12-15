@@ -1,12 +1,11 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +42,7 @@ public class NinthArmyUnit implements Serializable {
 
     @ManyToMany(mappedBy = "selectedUnits")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthArmyMoment> selections = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -59,17 +58,21 @@ public class NinthArmyUnit implements Serializable {
         return selectableKeywords;
     }
 
+    public void setSelectableKeywords(String selectableKeywords) {
+        this.selectableKeywords = selectableKeywords;
+    }
+
     public NinthArmyUnit selectableKeywords(String selectableKeywords) {
         this.selectableKeywords = selectableKeywords;
         return this;
     }
 
-    public void setSelectableKeywords(String selectableKeywords) {
-        this.selectableKeywords = selectableKeywords;
-    }
-
     public Set<NinthArmyUnitMoment> getMoments() {
         return moments;
+    }
+
+    public void setMoments(Set<NinthArmyUnitMoment> ninthArmyUnitMoments) {
+        this.moments = ninthArmyUnitMoments;
     }
 
     public NinthArmyUnit moments(Set<NinthArmyUnitMoment> ninthArmyUnitMoments) {
@@ -89,12 +92,12 @@ public class NinthArmyUnit implements Serializable {
         return this;
     }
 
-    public void setMoments(Set<NinthArmyUnitMoment> ninthArmyUnitMoments) {
-        this.moments = ninthArmyUnitMoments;
-    }
-
     public NinthArmy getArmy() {
         return army;
+    }
+
+    public void setArmy(NinthArmy ninthArmy) {
+        this.army = ninthArmy;
     }
 
     public NinthArmyUnit army(NinthArmy ninthArmy) {
@@ -102,12 +105,12 @@ public class NinthArmyUnit implements Serializable {
         return this;
     }
 
-    public void setArmy(NinthArmy ninthArmy) {
-        this.army = ninthArmy;
-    }
-
     public NinthUnit getUnit() {
         return unit;
+    }
+
+    public void setUnit(NinthUnit ninthUnit) {
+        this.unit = ninthUnit;
     }
 
     public NinthArmyUnit unit(NinthUnit ninthUnit) {
@@ -115,12 +118,12 @@ public class NinthArmyUnit implements Serializable {
         return this;
     }
 
-    public void setUnit(NinthUnit ninthUnit) {
-        this.unit = ninthUnit;
-    }
-
     public Set<NinthArmyMoment> getSelections() {
         return selections;
+    }
+
+    public void setSelections(Set<NinthArmyMoment> ninthArmyMoments) {
+        this.selections = ninthArmyMoments;
     }
 
     public NinthArmyUnit selections(Set<NinthArmyMoment> ninthArmyMoments) {
@@ -138,10 +141,6 @@ public class NinthArmyUnit implements Serializable {
         this.selections.remove(ninthArmyMoment);
         ninthArmyMoment.getSelectedUnits().remove(this);
         return this;
-    }
-
-    public void setSelections(Set<NinthArmyMoment> ninthArmyMoments) {
-        this.selections = ninthArmyMoments;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

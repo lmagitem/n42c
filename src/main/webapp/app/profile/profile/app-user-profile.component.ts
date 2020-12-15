@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
-import { AppUserProfileDeleteDialogComponent } from './app-user-profile-delete-dialog.component';
-import { AppUserProfileService } from 'app/entities/app-user-profile/app-user-profile.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
+import {AppUserProfileDeleteDialogComponent} from './app-user-profile-delete-dialog.component';
+import {AppUserProfileService} from 'app/entities/app-user-profile/app-user-profile.service';
 
 @Component({
   selector: 'jhi-app-user-profile',
@@ -19,7 +19,8 @@ export class AppUserProfileComponent implements OnInit, OnDestroy {
     protected appUserProfileService: AppUserProfileService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   loadAll(): void {
     this.appUserProfileService.query().subscribe((res: HttpResponse<IAppUserProfile[]>) => (this.appUserProfiles = res.body || []));
@@ -46,7 +47,7 @@ export class AppUserProfileComponent implements OnInit, OnDestroy {
   }
 
   delete(appUserProfile: IAppUserProfile): void {
-    const modalRef = this.modalService.open(AppUserProfileDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(AppUserProfileDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.appUserProfile = appUserProfile;
   }
 }

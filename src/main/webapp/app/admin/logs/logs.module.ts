@@ -10,4 +10,5 @@ import {logsRoute} from './logs.route';
   imports: [N42CSharedModule, RouterModule.forChild([logsRoute])],
   declarations: [LogsComponent],
 })
-export class LogsModule {}
+export class LogsModule {
+}

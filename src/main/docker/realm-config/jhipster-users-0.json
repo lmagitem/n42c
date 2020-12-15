@@ -22,12 +22,21 @@
       ],
       "disableableCredentialTypes": [],
       "requiredActions": [],
-      "realmRoles": ["offline_access", "uma_authorization"],
+      "realmRoles": [
+        "offline_access",
+        "uma_authorization"
+      ],
       "clientRoles": {
-        "account": ["view-profile", "manage-account"]
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
       },
       "notBefore": 0,
-      "groups": ["/Admins", "/Users"]
+      "groups": [
+        "/Admins",
+        "/Users"
+      ]
     },
     {
       "id": "e3ab6777-e2d7-474e-b831-64e785d8be1f",
@@ -40,10 +49,18 @@
       "credentials": [],
       "disableableCredentialTypes": [],
       "requiredActions": [],
-      "realmRoles": ["offline_access", "uma_authorization"],
+      "realmRoles": [
+        "offline_access",
+        "uma_authorization"
+      ],
       "clientRoles": {
-        "internal": ["uma_protection"],
-        "account": ["view-profile", "manage-account"]
+        "internal": [
+          "uma_protection"
+        ],
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
       },
       "notBefore": 0,
       "groups": []
@@ -69,12 +86,20 @@
       ],
       "disableableCredentialTypes": [],
       "requiredActions": [],
-      "realmRoles": ["offline_access", "uma_authorization"],
+      "realmRoles": [
+        "offline_access",
+        "uma_authorization"
+      ],
       "clientRoles": {
-        "account": ["view-profile", "manage-account"]
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
       },
       "notBefore": 0,
-      "groups": ["/Users"]
+      "groups": [
+        "/Users"
+      ]
     }
   ]
 }

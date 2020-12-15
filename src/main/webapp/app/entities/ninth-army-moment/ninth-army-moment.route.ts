@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthArmyMoment, NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
-import { NinthArmyMomentService } from './ninth-army-moment.service';
-import { NinthArmyMomentComponent } from './ninth-army-moment.component';
-import { NinthArmyMomentDetailComponent } from './ninth-army-moment-detail.component';
-import { NinthArmyMomentUpdateComponent } from './ninth-army-moment-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthArmyMoment, NinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
+import {NinthArmyMomentService} from './ninth-army-moment.service';
+import {NinthArmyMomentComponent} from './ninth-army-moment.component';
+import {NinthArmyMomentDetailComponent} from './ninth-army-moment-detail.component';
+import {NinthArmyMomentUpdateComponent} from './ninth-army-moment-update.component';
 
 @Injectable({ providedIn: 'root' })
 export class NinthArmyMomentResolve implements Resolve<INinthArmyMoment> {

@@ -1,7 +1,6 @@
 package com.n42c.config.audit;
 
 import com.n42c.domain.PersistentAuditEvent;
-
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;

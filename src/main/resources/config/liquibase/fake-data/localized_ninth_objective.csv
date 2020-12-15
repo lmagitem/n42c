@@ -1,11 +1,11 @@
 id;name;description;language;objective_id
-1;Profit-focused;../fake-data/blob/hipster.txt;RU;1
-2;granular morph compress;../fake-data/blob/hipster.txt;HU;2
-3;Kroon;../fake-data/blob/hipster.txt;IT;3
-4;Borders SAS driver;../fake-data/blob/hipster.txt;GA;4
-5;Advanced;../fake-data/blob/hipster.txt;DA;5
-6;Sausages;../fake-data/blob/hipster.txt;SR;6
-7;wireless;../fake-data/blob/hipster.txt;ID;7
-8;Executive Indiana;../fake-data/blob/hipster.txt;GA;8
-9;Oklahoma;../fake-data/blob/hipster.txt;SV;9
-10;black frame;../fake-data/blob/hipster.txt;PT;10
+1;Profit-focused;../fake-data/blob/lorem-ipsum.txt;RU;1
+2;granular morph compress;../fake-data/blob/lorem-ipsum.txt;HU;2
+3;Kroon;../fake-data/blob/lorem-ipsum.txt;IT;3
+4;Borders SAS driver;../fake-data/blob/lorem-ipsum.txt;GA;4
+5;Advanced;../fake-data/blob/lorem-ipsum.txt;DA;5
+6;Sausages;../fake-data/blob/lorem-ipsum.txt;SR;6
+7;wireless;../fake-data/blob/lorem-ipsum.txt;ID;7
+8;Executive Indiana;../fake-data/blob/lorem-ipsum.txt;GA;8
+9;Oklahoma;../fake-data/blob/lorem-ipsum.txt;SV;9
+10;black frame;../fake-data/blob/lorem-ipsum.txt;PT;10

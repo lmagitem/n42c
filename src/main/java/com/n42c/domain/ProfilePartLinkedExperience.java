@@ -1,7 +1,7 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -9,8 +9,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -70,7 +69,7 @@ public class ProfilePartLinkedExperience implements Serializable {
 
     @ManyToMany(mappedBy = "linkedSkills")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<ProfilePartSkill> linkedExperiences = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -86,17 +85,21 @@ public class ProfilePartLinkedExperience implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public ProfilePartLinkedExperience title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getSubTitle() {
         return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public ProfilePartLinkedExperience subTitle(String subTitle) {
@@ -104,12 +107,12 @@ public class ProfilePartLinkedExperience implements Serializable {
         return this;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
     public Instant getDate() {
         return date;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
     }
 
     public ProfilePartLinkedExperience date(Instant date) {
@@ -117,12 +120,12 @@ public class ProfilePartLinkedExperience implements Serializable {
         return this;
     }
 
-    public void setDate(Instant date) {
-        this.date = date;
-    }
-
     public String getContent() {
         return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public ProfilePartLinkedExperience content(String content) {
@@ -130,12 +133,12 @@ public class ProfilePartLinkedExperience implements Serializable {
         return this;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public ProfilePartPreciseItem getLinkedItem() {
         return linkedItem;
+    }
+
+    public void setLinkedItem(ProfilePartPreciseItem profilePartPreciseItem) {
+        this.linkedItem = profilePartPreciseItem;
     }
 
     public ProfilePartLinkedExperience linkedItem(ProfilePartPreciseItem profilePartPreciseItem) {
@@ -143,12 +146,12 @@ public class ProfilePartLinkedExperience implements Serializable {
         return this;
     }
 
-    public void setLinkedItem(ProfilePartPreciseItem profilePartPreciseItem) {
-        this.linkedItem = profilePartPreciseItem;
-    }
-
     public Set<ProfilePartSkill> getLinkedExperiences() {
         return linkedExperiences;
+    }
+
+    public void setLinkedExperiences(Set<ProfilePartSkill> profilePartSkills) {
+        this.linkedExperiences = profilePartSkills;
     }
 
     public ProfilePartLinkedExperience linkedExperiences(Set<ProfilePartSkill> profilePartSkills) {
@@ -166,10 +169,6 @@ public class ProfilePartLinkedExperience implements Serializable {
         this.linkedExperiences.remove(profilePartSkill);
         profilePartSkill.getLinkedSkills().remove(this);
         return this;
-    }
-
-    public void setLinkedExperiences(Set<ProfilePartSkill> profilePartSkills) {
-        this.linkedExperiences = profilePartSkills;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

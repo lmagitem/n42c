@@ -1,40 +1,45 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <div *ngIf="localizedBlog">
-      <h2><span jhiTranslate="n42cApp.localizedBlog.detail.title">Localized Blog</span> {{ localizedBlog.id }}</h2>
+    <div class="col-8">
+        <div *ngIf="localizedBlog">
+            <h2><span jhiTranslate="n42cApp.localizedBlog.detail.title">Localized Blog</span> {{ localizedBlog.id }}
+            </h2>
 
-      <hr />
+            <hr/>
 
-      <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="n42cApp.localizedBlog.name" [ngbTooltip]="'n42cApp.localizedBlog.help.name' | translate">Name</span></dt>
-        <dd>
-          <span>{{ localizedBlog.name }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="n42cApp.localizedBlog.language" [ngbTooltip]="'n42cApp.localizedBlog.help.language' | translate"
-            >Language</span
+            <dl class="row-md jh-entity-details">
+                <dt><span [ngbTooltip]="'n42cApp.localizedBlog.help.name' | translate"
+                          jhiTranslate="n42cApp.localizedBlog.name">Name</span></dt>
+                <dd>
+                    <span>{{ localizedBlog.name }}</span>
+                </dd>
+                <dt>
+          <span [ngbTooltip]="'n42cApp.localizedBlog.help.language' | translate"
+                jhiTranslate="n42cApp.localizedBlog.language"
+          >Language</span
           >
-        </dt>
-        <dd>
-          <span jhiTranslate="{{ 'n42cApp.Language.' + localizedBlog.language }}">{{ localizedBlog.language }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.localizedBlog.blog">Blog</span></dt>
-        <dd>
-          <div *ngIf="localizedBlog.blog">
-            <a [routerLink]="['/blog', localizedBlog.blog?.id, 'view']">{{ localizedBlog.blog?.name }}</a>
-          </div>
-        </dd>
-      </dl>
+                </dt>
+                <dd>
+                    <span
+                        jhiTranslate="{{ 'n42cApp.Language.' + localizedBlog.language }}">{{ localizedBlog.language }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.localizedBlog.blog">Blog</span></dt>
+                <dd>
+                    <div *ngIf="localizedBlog.blog">
+                        <a [routerLink]="['/entities', 'blog', localizedBlog.blog?.id, 'view']">{{ localizedBlog.blog?.name }}</a>
+                    </div>
+                </dd>
+            </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+            <button (click)="previousState()" class="btn btn-info" type="submit">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
-      <button type="button" [routerLink]="['/localized-blog', localizedBlog.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+            <button [routerLink]="['/entities', 'localized-blog', localizedBlog.id, 'edit']" class="btn btn-primary"
+                    type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
     </div>
-  </div>
 </div>

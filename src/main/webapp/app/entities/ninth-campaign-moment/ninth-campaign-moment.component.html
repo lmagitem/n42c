@@ -42,7 +42,7 @@
             <a [routerLink]="['/entities', 'ninth-campaign-moment', ninthCampaignMoment.id, 'view']">{{ ninthCampaignMoment.id }}</a>
           </td>
           <td>{{ ninthCampaignMoment.current }}</td>
-          <td>{{ ninthCampaignMoment.sinceInstant | date: 'medium' }}</td>
+          <td>{{ ninthCampaignMoment.sinceInstant | date: 'medium':undefined:locale }}</td>
           <td>{{ ninthCampaignMoment.name }}</td>
           <td>{{ ninthCampaignMoment.summary }}</td>
           <td>{{ ninthCampaignMoment.description }}</td>

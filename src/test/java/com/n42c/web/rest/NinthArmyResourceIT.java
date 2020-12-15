@@ -4,8 +4,9 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthArmy;
 import com.n42c.domain.Player;
+import com.n42c.domain.enumerations.Faction;
+import com.n42c.domain.enumerations.SubFaction;
 import com.n42c.repository.NinthArmyRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -24,12 +26,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Faction;
-import com.n42c.domain.enumeration.SubFaction;
 /**
  * Integration tests for the {@link NinthArmyResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthArmyResourceIT {
@@ -59,7 +59,7 @@ public class NinthArmyResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -81,9 +81,10 @@ public class NinthArmyResourceIT {
         ninthArmy.setAuthor(player);
         return ninthArmy;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -205,7 +206,7 @@ public class NinthArmyResourceIT {
             .andExpect(jsonPath("$.[*].faction").value(hasItem(DEFAULT_FACTION.toString())))
             .andExpect(jsonPath("$.[*].subfaction").value(hasItem(DEFAULT_SUBFACTION.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getNinthArmy() throws Exception {
@@ -222,6 +223,7 @@ public class NinthArmyResourceIT {
             .andExpect(jsonPath("$.faction").value(DEFAULT_FACTION.toString()))
             .andExpect(jsonPath("$.subfaction").value(DEFAULT_SUBFACTION.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthArmy() throws Exception {

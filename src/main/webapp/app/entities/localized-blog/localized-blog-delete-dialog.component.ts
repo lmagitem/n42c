@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ILocalizedBlog } from 'app/shared/model/localized-blog.model';
-import { LocalizedBlogService } from './localized-blog.service';
+import {ILocalizedBlog} from 'app/shared/model/localized-blog.model';
+import {LocalizedBlogService} from './localized-blog.service';
 
 @Component({
   templateUrl: './localized-blog-delete-dialog.component.html',
@@ -15,7 +15,8 @@ export class LocalizedBlogDeleteDialogComponent {
     protected localizedBlogService: LocalizedBlogService,
     public activeModal: NgbActiveModal,
     protected eventManager: JhiEventManager
-  ) {}
+  ) {
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

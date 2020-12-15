@@ -6,8 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -83,17 +82,21 @@ public class NinthCampaignMoment implements Serializable {
         return sinceInstant;
     }
 
+    public void setSinceInstant(Instant sinceInstant) {
+        this.sinceInstant = sinceInstant;
+    }
+
     public NinthCampaignMoment sinceInstant(Instant sinceInstant) {
         this.sinceInstant = sinceInstant;
         return this;
     }
 
-    public void setSinceInstant(Instant sinceInstant) {
-        this.sinceInstant = sinceInstant;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public NinthCampaignMoment name(String name) {
@@ -101,12 +104,12 @@ public class NinthCampaignMoment implements Serializable {
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSummary() {
         return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public NinthCampaignMoment summary(String summary) {
@@ -114,12 +117,12 @@ public class NinthCampaignMoment implements Serializable {
         return this;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public NinthCampaignMoment description(String description) {
@@ -127,12 +130,12 @@ public class NinthCampaignMoment implements Serializable {
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Set<NinthBattle> getBattles() {
         return battles;
+    }
+
+    public void setBattles(Set<NinthBattle> ninthBattles) {
+        this.battles = ninthBattles;
     }
 
     public NinthCampaignMoment battles(Set<NinthBattle> ninthBattles) {
@@ -152,21 +155,17 @@ public class NinthCampaignMoment implements Serializable {
         return this;
     }
 
-    public void setBattles(Set<NinthBattle> ninthBattles) {
-        this.battles = ninthBattles;
-    }
-
     public NinthCampaign getCampaign() {
         return campaign;
+    }
+
+    public void setCampaign(NinthCampaign ninthCampaign) {
+        this.campaign = ninthCampaign;
     }
 
     public NinthCampaignMoment campaign(NinthCampaign ninthCampaign) {
         this.campaign = ninthCampaign;
         return this;
-    }
-
-    public void setCampaign(NinthCampaign ninthCampaign) {
-        this.campaign = ninthCampaign;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

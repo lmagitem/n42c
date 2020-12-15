@@ -1,11 +1,2 @@
-id;user_name;displayed_name;admin;shop_rights;blog_rights;profile_rights;scriptorium_rights;user_id
-1;Officer Kuwait;Strategist integrated Small Frozen Fish;false;WRI;WRI;MOD;REA;2
-2;Sleek;compress Refined Metal Shirt;true;WRI;MOD;MOD;MOD;2
-3;Junction infomediaries redundant;Refined Tools silver;false;WRI;WRI;REA;MOD;2
-4;Polarised;synergies Naira Manager;true;WRI;REA;WRI;MOD;2
-5;User-friendly Progressive parse;cross-platform Hawaii SDD;false;REA;MOD;REA;WRI;1
-6;Movies;Administrator 24/365;false;REA;REA;WRI;REA;2
-7;overriding;maximized knowledge user transmit;true;MOD;WRI;WRI;REA;2
-8;conglomeration HTTP Bedfordshire;Creative;true;REA;REA;MOD;MOD;1
-9;Maine Seamless Gloves;transmitting silver;true;WRI;WRI;MOD;WRI;1
-10;New Mexico orchid;transparent Granite;true;REA;WRI;REA;MOD;1
+id;user_name;displayed_name;admin;shop_rights;blog_rights;profile_rights;scriptorium_rights;image_url;user_id
+1;Officer Kuwait;Kuwait;false;WRI;WRI;WRI;WRI;;1

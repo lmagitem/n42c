@@ -3,8 +3,8 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthArmyUnitMoment;
+import com.n42c.domain.enumerations.NinthCrusadeRank;
 import com.n42c.repository.NinthArmyUnitMomentRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -25,11 +26,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.NinthCrusadeRank;
 /**
  * Integration tests for the {@link NinthArmyUnitMomentResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthArmyUnitMomentResourceIT {
@@ -104,7 +104,7 @@ public class NinthArmyUnitMomentResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -131,9 +131,10 @@ public class NinthArmyUnitMomentResourceIT {
             .battleScars(DEFAULT_BATTLE_SCARS);
         return ninthArmyUnitMoment;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -290,7 +291,7 @@ public class NinthArmyUnitMomentResourceIT {
             .andExpect(jsonPath("$.[*].battleHonours").value(hasItem(DEFAULT_BATTLE_HONOURS)))
             .andExpect(jsonPath("$.[*].battleScars").value(hasItem(DEFAULT_BATTLE_SCARS)));
     }
-    
+
     @Test
     @Transactional
     public void getNinthArmyUnitMoment() throws Exception {
@@ -322,6 +323,7 @@ public class NinthArmyUnitMomentResourceIT {
             .andExpect(jsonPath("$.battleHonours").value(DEFAULT_BATTLE_HONOURS))
             .andExpect(jsonPath("$.battleScars").value(DEFAULT_BATTLE_SCARS));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthArmyUnitMoment() throws Exception {

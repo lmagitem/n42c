@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
-import { NinthMissionRuleService } from './ninth-mission-rule.service';
-import { NinthMissionRuleDeleteDialogComponent } from './ninth-mission-rule-delete-dialog.component';
+import {INinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
+import {NinthMissionRuleService} from './ninth-mission-rule.service';
+import {NinthMissionRuleDeleteDialogComponent} from './ninth-mission-rule-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-mission-rule',

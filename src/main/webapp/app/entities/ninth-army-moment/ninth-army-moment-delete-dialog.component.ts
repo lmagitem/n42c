@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { INinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
-import { NinthArmyMomentService } from './ninth-army-moment.service';
+import {INinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
+import {NinthArmyMomentService} from './ninth-army-moment.service';
 
 @Component({
   templateUrl: './ninth-army-moment-delete-dialog.component.html',

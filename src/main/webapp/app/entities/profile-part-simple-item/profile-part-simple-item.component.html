@@ -52,7 +52,7 @@
           </td>
           <td>{{ profilePartSimpleItem.title }}</td>
           <td>{{ profilePartSimpleItem.subTitle }}</td>
-          <td>{{ profilePartSimpleItem.date | date: 'medium' }}</td>
+          <td>{{ profilePartSimpleItem.date | date: 'medium':undefined:locale }}</td>
           <td>{{ profilePartSimpleItem.content }}</td>
           <td>
             <div *ngIf="profilePartSimpleItem.profilePart">

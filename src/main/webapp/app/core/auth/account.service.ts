@@ -10,7 +10,7 @@ import {StateStorageService} from 'app/core/auth/state-storage.service';
 import {SERVER_API_URL} from 'app/app.constants';
 import {Account} from 'app/core/user/account.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AccountService {
   private userIdentity: Account | null = null;
   private authenticationState = new ReplaySubject<Account | null>(1);
@@ -22,7 +22,8 @@ export class AccountService {
     private http: HttpClient,
     private stateStorageService: StateStorageService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   authenticate(identity: Account | null): void {
     this.userIdentity = identity;

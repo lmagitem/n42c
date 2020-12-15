@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiLanguageService, JhiParseLinks } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { IBlogPost } from 'app/shared/model/blog-post.model';
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { BlogPostDeleteDialogComponent } from './blog-post-delete-dialog.component';
-import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
-import { LocalizedPostContentService } from 'app/entities/localized-post-content/localized-post-content.service';
-import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/localization-utils';
-import { ActivatedRoute } from '@angular/router';
-import { IBlog } from 'app/shared/model/blog.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager, JhiLanguageService, JhiParseLinks} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
+import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
+import {BlogPostDeleteDialogComponent} from './blog-post-delete-dialog.component';
+import {BlogPostService} from 'app/entities/blog-post/blog-post.service';
+import {LocalizedBlogPostService} from 'app/entities/localized-blog-post/localized-blog-post.service';
+import {IItemWithLocalizations, LocalizationUtils} from 'app/shared/util/localization-utils';
+import {ActivatedRoute} from '@angular/router';
+import {IBlog} from 'app/shared/model/blog.model';
+import {ArrayUtils} from 'app/shared/util/arrays-utils';
 
 @Component({
   selector: 'jhi-blog-post',
@@ -25,10 +26,11 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  locale: string;
 
   constructor(
     protected blogPostService: BlogPostService,
-    protected localizedPostService: LocalizedPostContentService,
+    protected localizedPostService: LocalizedBlogPostService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
@@ -41,12 +43,13 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     this.links = {
       last: 0,
     };
-    this.predicate = 'id';
-    this.ascending = true;
+    this.predicate = 'published';
+    this.ascending = false;
+    this.locale = this.languageService.getCurrentLanguage();
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ blog }) => {
+    this.activatedRoute.data.subscribe(({blog}) => {
       this.blog = blog;
       this.loadAll(blog?.id || undefined);
     });
@@ -63,7 +66,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
         })
         .subscribe((res: HttpResponse<IBlogPost[]>) => {
           this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
+            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
             res.headers
           );
           LocalizationUtils.refreshLocalizations(
@@ -81,7 +84,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
         })
         .subscribe((res: HttpResponse<IBlogPost[]>) => {
           this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['excerpt']),
+            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
             res.headers
           );
           LocalizationUtils.refreshLocalizations(
@@ -110,7 +113,11 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getLocalizedField(item: IBlogPost | IBlog | null, field: string, alternateField?: string): string {
+  arrayToString(array: any, field: string): string {
+    return ArrayUtils.toStringUsingField(array, field);
+  }
+
+  getLocalizedField(item: IBlogPost | IBlog | null | undefined, field: string, alternateField?: string): string {
     return LocalizationUtils.getLocalizedField(
       item as IItemWithLocalizations,
       field,
@@ -129,7 +136,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   delete(blogPost: IBlogPost): void {
-    const modalRef = this.modalService.open(BlogPostDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(BlogPostDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.blogPost = blogPost;
   }
 

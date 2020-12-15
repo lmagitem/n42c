@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
 
 @Component({
   selector: 'jhi-ninth-objective-detail',

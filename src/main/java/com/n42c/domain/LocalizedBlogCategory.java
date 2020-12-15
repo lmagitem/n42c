@@ -1,17 +1,15 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * The localization for this category
@@ -51,6 +49,15 @@ public class LocalizedBlogCategory implements Serializable {
     @JsonIgnoreProperties(value = "localizations", allowSetters = true)
     private BlogCategory category;
 
+    public LocalizedBlogCategory() {
+    }
+
+    public LocalizedBlogCategory(Long id, @NotNull String name, @NotNull Language language) {
+        this.id = id;
+        this.name = name;
+        this.language = language;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -64,17 +71,21 @@ public class LocalizedBlogCategory implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalizedBlogCategory name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedBlogCategory language(Language language) {
@@ -82,23 +93,19 @@ public class LocalizedBlogCategory implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public BlogCategory getCategory() {
         return category;
+    }
+
+    public void setCategory(BlogCategory blogCategory) {
+        this.category = blogCategory;
     }
 
     public LocalizedBlogCategory category(BlogCategory blogCategory) {
         this.category = blogCategory;
         return this;
     }
-
-    public void setCategory(BlogCategory blogCategory) {
-        this.category = blogCategory;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {

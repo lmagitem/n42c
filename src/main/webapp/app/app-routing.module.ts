@@ -30,6 +30,10 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'user',
+          data: {
+            authorities: [Authority.USER],
+          },
+          canActivate: [UserRouteAccessService],
           loadChildren: () => import('./user/user-routing.module').then(m => m.UserRoutingModule),
         },
         {
@@ -46,10 +50,18 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
         },
         {
           path: 'campaign',
+          data: {
+            authorities: [Authority.USER],
+          },
+          canActivate: [UserRouteAccessService],
           loadChildren: () => import('./campaign/campaign-routing.module').then(m => m.CampaignRoutingModule),
         },
         {
           path: 'scriptorium',
+          data: {
+            authorities: [Authority.USER],
+          },
+          canActivate: [UserRouteAccessService],
           loadChildren: () => import('./scriptorium/scriptorium-routing.module').then(m => m.ScriptoriumRoutingModule),
         },
         ...LAYOUT_ROUTES,

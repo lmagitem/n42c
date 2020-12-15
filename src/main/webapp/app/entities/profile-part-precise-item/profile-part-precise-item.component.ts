@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiDataUtils } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks, JhiDataUtils, JhiLanguageService } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { IProfilePartPreciseItem } from 'app/shared/model/profile-part-precise-item.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ProfilePartPreciseItemService } from './profile-part-precise-item.service';
 import { ProfilePartPreciseItemDeleteDialogComponent } from './profile-part-precise-item-delete-dialog.component';
@@ -22,13 +20,15 @@ export class ProfilePartPreciseItemComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  locale: string;
 
   constructor(
     protected profilePartPreciseItemService: ProfilePartPreciseItemService,
     protected dataUtils: JhiDataUtils,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks
+    protected parseLinks: JhiParseLinks,
+    protected languageService: JhiLanguageService
   ) {
     this.profilePartPreciseItems = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -38,6 +38,7 @@ export class ProfilePartPreciseItemComponent implements OnInit, OnDestroy {
     };
     this.predicate = 'id';
     this.ascending = true;
+    this.locale = this.languageService.getCurrentLanguage();
   }
 
   loadAll(): void {

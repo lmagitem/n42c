@@ -1,37 +1,38 @@
-import { HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
-import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
-import { INinthCampaignMoment, NinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
-import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
+import {HttpResponse} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {NinthCampaignMomentService} from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
+import {NinthCampaignService} from 'app/entities/ninth-campaign/ninth-campaign.service';
+import {INinthCampaignMoment, NinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
+import {INinthCampaign, NinthCampaign} from 'app/shared/model/ninth-campaign.model';
 import * as _ from 'lodash';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class CampaignService {
   private reroutingEnabled = false;
   private selectedCampaign = new BehaviorSubject<INinthCampaign>(new NinthCampaign());
-  private selectedCampaignId = new BehaviorSubject<number>(-1);
-  private selectedCampaignMoment = new BehaviorSubject<INinthCampaignMoment>(new NinthCampaignMoment());
-  private selectedCampaignMomentId = new BehaviorSubject<number>(-1);
-  private selectedCampaignMomentsIds = new BehaviorSubject<number[]>([]);
-  private currentlyEditingCampaign = new BehaviorSubject<boolean>(false);
-  private currentlyEditingCampaignMoment = new BehaviorSubject<boolean>(false);
   public selectedCampaign$: Observable<INinthCampaign> = this.selectedCampaign.asObservable();
+  private selectedCampaignId = new BehaviorSubject<number>(-1);
   public selectedCampaignId$: Observable<number> = this.selectedCampaignId.asObservable();
+  private selectedCampaignMoment = new BehaviorSubject<INinthCampaignMoment>(new NinthCampaignMoment());
   public selectedCampaignMoment$: Observable<INinthCampaignMoment> = this.selectedCampaignMoment.asObservable();
+  private selectedCampaignMomentId = new BehaviorSubject<number>(-1);
   public selectedCampaignMomentId$: Observable<number> = this.selectedCampaignMomentId.asObservable();
+  private selectedCampaignMomentsIds = new BehaviorSubject<number[]>([]);
   public selectedCampaignMomentsIds$: Observable<number[]> = this.selectedCampaignMomentsIds.asObservable();
+  private currentlyEditingCampaign = new BehaviorSubject<boolean>(false);
   public currentlyEditingCampaign$: Observable<boolean> = this.currentlyEditingCampaign.asObservable();
+  private currentlyEditingCampaignMoment = new BehaviorSubject<boolean>(false);
   public currentlyEditingCampaignMoment$: Observable<boolean> = this.currentlyEditingCampaignMoment.asObservable();
 
   constructor(
     private campaignService: NinthCampaignService,
     private campaignMomentService: NinthCampaignMomentService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   updateSelectedCampaignId(id: number): void {
     if (id && id !== -1) {

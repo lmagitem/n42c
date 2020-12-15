@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.BlogCategory;
 import com.n42c.repository.BlogCategoryRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -26,15 +25,11 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class BlogCategoryResource {
-
-    private final Logger log = LoggerFactory.getLogger(BlogCategoryResource.class);
-
     private static final String ENTITY_NAME = "blogCategory";
-
+    private final Logger log = LoggerFactory.getLogger(BlogCategoryResource.class);
+    private final BlogCategoryRepository blogCategoryRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final BlogCategoryRepository blogCategoryRepository;
 
     public BlogCategoryResource(BlogCategoryRepository blogCategoryRepository) {
         this.blogCategoryRepository = blogCategoryRepository;
@@ -54,7 +49,8 @@ public class BlogCategoryResource {
             throw new BadRequestAlertException("A new blogCategory cannot already have an ID", ENTITY_NAME, "idexists");
         }
         BlogCategory result = blogCategoryRepository.save(blogCategory);
-        return ResponseEntity.created(new URI("/api/blog-categories/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/blog-categories/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -75,7 +71,8 @@ public class BlogCategoryResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         BlogCategory result = blogCategoryRepository.save(blogCategory);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, blogCategory.getId().toString()))
             .body(result);
     }
@@ -114,6 +111,9 @@ public class BlogCategoryResource {
     public ResponseEntity<Void> deleteBlogCategory(@PathVariable Long id) {
         log.debug("REST request to delete BlogCategory : {}", id);
         blogCategoryRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

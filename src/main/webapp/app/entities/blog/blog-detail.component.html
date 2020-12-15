@@ -1,32 +1,33 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <div *ngIf="blog">
-      <h2><span jhiTranslate="n42cApp.blog.detail.title">Blog</span> {{ blog.id }}</h2>
+    <div class="col-8">
+        <div *ngIf="blog">
+            <h2><span jhiTranslate="n42cApp.blog.detail.title">Blog</span> {{ blog.id }}</h2>
 
-      <hr />
+            <hr/>
 
-      <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="n42cApp.blog.name" [ngbTooltip]="'n42cApp.blog.help.name' | translate">Name</span></dt>
-        <dd>
-          <span>{{ blog.name }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.blog.author">Author</span></dt>
-        <dd>
-          <div *ngIf="blog.author">
-            <a [routerLink]="['/entities', 'app-user', blog.author?.id, 'view']">{{ blog.author?.displayedName }}</a>
-          </div>
-        </dd>
-      </dl>
+            <dl class="row-md jh-entity-details">
+                <dt><span [ngbTooltip]="'n42cApp.blog.help.name' | translate"
+                          jhiTranslate="n42cApp.blog.name">Name</span></dt>
+                <dd>
+                    <span>{{ blog.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.blog.author">Author</span></dt>
+                <dd>
+                    <div *ngIf="blog.author">
+                        <a [routerLink]="['/entities', 'app-user', blog.author?.id, 'view']">{{ blog.author?.displayedName }}</a>
+                    </div>
+                </dd>
+            </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+            <button (click)="previousState()" class="btn btn-info" type="submit">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
-      <button type="button" [routerLink]="['/entities', 'blog', blog.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+            <button [routerLink]="['/entities', 'blog', blog.id, 'edit']" class="btn btn-primary" type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
     </div>
-  </div>
 </div>

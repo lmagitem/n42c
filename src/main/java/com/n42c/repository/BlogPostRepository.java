@@ -1,11 +1,11 @@
 package com.n42c.repository;
 
-import com.n42c.domain.Blog;
 import com.n42c.domain.BlogPost;
-
+import com.n42c.domain.views.AuthorToPostLinkView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,14 +18,17 @@ import java.util.Optional;
 @Repository
 public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
 
-    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories",
+    @Query(value = "select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
+        "left join fetch blogPost.localizations",
         countQuery = "select count(distinct blogPost) from BlogPost blogPost")
     Page<BlogPost> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query("select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories")
+    @Query("select distinct blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
+        "left join fetch blogPost.localizations")
     List<BlogPost> findAllWithEagerRelationships();
 
-    @Query("select blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories where blogPost.id =:id")
+    @Query("select blogPost from BlogPost blogPost left join fetch blogPost.authors left join fetch blogPost.categories " +
+        "left join fetch blogPost.localizations where blogPost.id =:id")
     Optional<BlogPost> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query(value = "select distinct blogPost from BlogPost blogPost where blogPost.blog.author.user.id = ?#{principal.name} " +
@@ -58,4 +61,9 @@ public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
     @Query("select blogPost from BlogPost blogPost where (blogPost.blog.author.blogRights = 'WRI' " +
         "or blogPost.blog.author.blogRights = 'MOD') and blogPost.blog.id in :ids")
     Page<BlogPost> findByBlogIdsAndIsWriter(@Param("ids") List<Long> ids, Pageable pageable);
+
+    @Query("select blogPost.id as postId, appUser.id as appUserId, appUser.displayedName as appUserDisplayedName " +
+        "from BlogPost blogPost join blogPost.authors appUser where blogPost.id in :ids")
+    List<AuthorToPostLinkView> findPairingsBetweenBlogPostIdsAndLightweightAppUsers(@Param("ids") List<Long> ids);
+
 }

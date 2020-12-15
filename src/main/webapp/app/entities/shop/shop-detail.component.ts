@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IShop } from 'app/shared/model/shop.model';
+import {IShop} from 'app/shared/model/shop.model';
 
 @Component({
   selector: 'jhi-shop-detail',
@@ -10,10 +10,11 @@ import { IShop } from 'app/shared/model/shop.model';
 export class ShopDetailComponent implements OnInit {
   shop: IShop | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ shop }) => (this.shop = shop));
+    this.activatedRoute.data.subscribe(({shop}) => (this.shop = shop));
   }
 
   previousState(): void {

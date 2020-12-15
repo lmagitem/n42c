@@ -2,10 +2,10 @@ package com.n42c.web.rest;
 
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
-import com.n42c.domain.AppUserProfile;
 import com.n42c.domain.AppUser;
+import com.n42c.domain.AppUserProfile;
+import com.n42c.domain.enumerations.Language;
 import com.n42c.repository.AppUserProfileRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -25,11 +25,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link AppUserProfileResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class AppUserProfileResourceIT {
@@ -62,7 +61,7 @@ public class AppUserProfileResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -85,9 +84,10 @@ public class AppUserProfileResourceIT {
         appUserProfile.setUser(appUser);
         return appUserProfile;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -189,11 +189,11 @@ public class AppUserProfileResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(appUserProfile.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
+            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY)))
             .andExpect(jsonPath("$.[*].headerBackgroundURI").value(hasItem(DEFAULT_HEADER_BACKGROUND_URI)))
             .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getAppUserProfile() throws Exception {
@@ -207,10 +207,11 @@ public class AppUserProfileResourceIT {
             .andExpect(jsonPath("$.id").value(appUserProfile.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()))
+            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY))
             .andExpect(jsonPath("$.headerBackgroundURI").value(DEFAULT_HEADER_BACKGROUND_URI))
             .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingAppUserProfile() throws Exception {

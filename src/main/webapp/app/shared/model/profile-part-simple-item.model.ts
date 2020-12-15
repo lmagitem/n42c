@@ -18,5 +18,6 @@ export class ProfilePartSimpleItem implements IProfilePartSimpleItem {
     public date?: Moment,
     public content?: string,
     public profilePart?: IProfilePart
-  ) {}
+  ) {
+  }
 }

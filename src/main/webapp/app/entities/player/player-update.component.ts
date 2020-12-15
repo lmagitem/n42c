@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-import { IPlayer, Player } from 'app/shared/model/player.model';
-import { PlayerService } from './player.service';
-import { IAppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from 'app/entities/app-user/app-user.service';
+import {IPlayer, Player} from 'app/shared/model/player.model';
+import {PlayerService} from './player.service';
+import {IAppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from 'app/entities/app-user/app-user.service';
 
 @Component({
   selector: 'jhi-player-update',
@@ -30,14 +30,15 @@ export class PlayerUpdateComponent implements OnInit {
     protected appUserService: AppUserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ player }) => {
+    this.activatedRoute.data.subscribe(({player}) => {
       this.updateForm(player);
 
       this.appUserService
-        .query({ filter: 'player-is-null' })
+        .query({filter: 'player-is-null'})
         .pipe(
           map((res: HttpResponse<IAppUser[]>) => {
             return res.body || [];
@@ -82,13 +83,8 @@ export class PlayerUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IPlayer {
-    return {
-      ...new Player(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      appUser: this.editForm.get(['appUser'])!.value,
-    };
+  trackById(index: number, item: IAppUser): any {
+    return item.id;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IPlayer>>): void {
@@ -107,7 +103,12 @@ export class PlayerUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IAppUser): any {
-    return item.id;
+  private createFromForm(): IPlayer {
+    return {
+      ...new Player(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      appUser: this.editForm.get(['appUser'])!.value,
+    };
   }
 }

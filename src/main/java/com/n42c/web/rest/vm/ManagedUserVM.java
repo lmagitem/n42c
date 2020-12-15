@@ -1,16 +1,15 @@
 package com.n42c.web.rest.vm;
 
 import com.n42c.domain.AppUser;
-import com.n42c.domain.Authority;
 import com.n42c.domain.User;
 import com.n42c.service.dto.UserDTO;
-
-import java.util.stream.Collectors;
 
 /**
  * View Model extending the UserDTO, which is meant to be used in the user management UI.
  */
 public class ManagedUserVM extends UserDTO {
+
+    private AppUser appUser;
 
     public ManagedUserVM() {
         // Empty constructor needed for Jackson.
@@ -24,11 +23,8 @@ public class ManagedUserVM extends UserDTO {
     public ManagedUserVM(UserDTO user, AppUser appUser) {
         this.id = user.getId();
         this.login = user.getLogin();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.activated = user.isActivated();
-        this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -37,8 +33,6 @@ public class ManagedUserVM extends UserDTO {
         this.authorities = user.getAuthorities();
         this.appUser = appUser;
     }
-
-    private AppUser appUser;
 
     public AppUser getAppUser() {
         return appUser;

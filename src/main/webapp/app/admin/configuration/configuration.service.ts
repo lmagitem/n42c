@@ -46,9 +46,10 @@ export interface Property {
   origin?: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ConfigurationService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getBeans(): Observable<Bean[]> {
     return this.http.get<ConfigProps>(SERVER_API_URL + 'management/configprops').pipe(
@@ -56,7 +57,7 @@ export class ConfigurationService {
         Object.values(
           Object.values(configProps.contexts)
             .map(context => context.beans)
-            .reduce((allBeans: Beans, contextBeans: Beans) => ({ ...allBeans, ...contextBeans }))
+            .reduce((allBeans: Beans, contextBeans: Beans) => ({...allBeans, ...contextBeans}))
         )
       )
     );

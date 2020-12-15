@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IProduct, Product } from 'app/shared/model/product.model';
-import { ProductService } from './product.service';
-import { IAppUser } from 'app/shared/model/app-user.model';
-import { AppUserService } from 'app/entities/app-user/app-user.service';
-import { IShop } from 'app/shared/model/shop.model';
-import { ShopService } from 'app/entities/shop/shop.service';
+import {IProduct, Product} from 'app/shared/model/product.model';
+import {ProductService} from './product.service';
+import {IAppUser} from 'app/shared/model/app-user.model';
+import {AppUserService} from 'app/entities/app-user/app-user.service';
+import {IShop} from 'app/shared/model/shop.model';
+import {ShopService} from 'app/entities/shop/shop.service';
 
 type SelectableEntity = IAppUser | IShop;
 
@@ -36,10 +36,11 @@ export class ProductUpdateComponent implements OnInit {
     protected shopService: ShopService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ product }) => {
+    this.activatedRoute.data.subscribe(({product}) => {
       this.updateForm(product);
 
       this.appUserService.query().subscribe((res: HttpResponse<IAppUser[]>) => (this.appusers = res.body || []));
@@ -71,14 +72,19 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IProduct {
-    return {
-      ...new Product(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      authors: this.editForm.get(['authors'])!.value,
-      shop: this.editForm.get(['shop'])!.value,
-    };
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IProduct>>): void {
@@ -97,18 +103,13 @@ export class ProductUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
+  private createFromForm(): IProduct {
+    return {
+      ...new Product(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+      authors: this.editForm.get(['authors'])!.value,
+      shop: this.editForm.get(['shop'])!.value,
+    };
   }
 }

@@ -1,0 +1,6 @@
+id;title;excerpt;content;language;post_id
+1;Love;../fake-data/blob/excerpt1-en.txt;../fake-data/blob/content1-en.txt;EN;1
+2;Amour;../fake-data/blob/excerpt1-fr.txt;../fake-data/blob/content1-fr.txt;FR;1
+3;Passion;../fake-data/blob/excerpt2-en.txt;../fake-data/blob/content2-en.txt;EN;2
+4;Passion;../fake-data/blob/excerpt2-fr.txt;../fake-data/blob/content2-fr.txt;FR;2
+5;Ярость;../fake-data/blob/excerpt3-ru.txt;../fake-data/blob/content3-ru.txt;RU;3

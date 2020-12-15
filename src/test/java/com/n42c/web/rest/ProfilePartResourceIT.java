@@ -3,8 +3,9 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.ProfilePart;
+import com.n42c.domain.enumerations.ProfilePartOrderType;
+import com.n42c.domain.enumerations.ProfilePartType;
 import com.n42c.repository.ProfilePartRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -23,12 +25,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.ProfilePartType;
-import com.n42c.domain.enumeration.ProfilePartOrderType;
 /**
  * Integration tests for the {@link ProfilePartResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProfilePartResourceIT {
@@ -58,7 +58,7 @@ public class ProfilePartResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -70,9 +70,10 @@ public class ProfilePartResourceIT {
             .order(DEFAULT_ORDER);
         return profilePart;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -203,7 +204,7 @@ public class ProfilePartResourceIT {
             .andExpect(jsonPath("$.[*].index").value(hasItem(DEFAULT_INDEX)))
             .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProfilePart() throws Exception {
@@ -220,6 +221,7 @@ public class ProfilePartResourceIT {
             .andExpect(jsonPath("$.index").value(DEFAULT_INDEX))
             .andExpect(jsonPath("$.order").value(DEFAULT_ORDER.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingProfilePart() throws Exception {

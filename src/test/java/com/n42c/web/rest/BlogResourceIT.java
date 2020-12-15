@@ -2,19 +2,20 @@ package com.n42c.web.rest;
 
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
-import com.n42c.domain.Blog;
 import com.n42c.domain.AppUser;
+import com.n42c.domain.Blog;
 import com.n42c.repository.BlogRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link BlogResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class BlogResourceIT {
@@ -48,7 +49,7 @@ public class BlogResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -67,9 +68,10 @@ public class BlogResourceIT {
         blog.setAuthor(appUser);
         return blog;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -152,6 +154,22 @@ public class BlogResourceIT {
 
     @Test
     @Transactional
+    @WithAnonymousUser
+    public void getAllBlogsAsAnon() throws Exception {
+        // Initialize the database
+        blogRepository.saveAndFlush(blog);
+
+        // Get all the blogList
+        restBlogMockMvc
+            .perform(get("/api/blogs?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(blog.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+    }
+
+    @Test
+    @Transactional
     public void getAllBlogs() throws Exception {
         // Initialize the database
         blogRepository.saveAndFlush(blog);
@@ -163,7 +181,7 @@ public class BlogResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(blog.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getBlog() throws Exception {
@@ -177,6 +195,7 @@ public class BlogResourceIT {
             .andExpect(jsonPath("$.id").value(blog.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
+
     @Test
     @Transactional
     public void getNonExistingBlog() throws Exception {

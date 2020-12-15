@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {JhiDataUtils} from 'ng-jhipster';
 
-import { ILocalizedProduct } from 'app/shared/model/localized-product.model';
+import {ILocalizedProduct} from 'app/shared/model/localized-product.model';
 
 @Component({
   selector: 'jhi-localized-product-detail',

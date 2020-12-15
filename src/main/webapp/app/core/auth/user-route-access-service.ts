@@ -7,14 +7,15 @@ import {AccountService} from 'app/core/auth/account.service';
 import {LoginService} from 'app/core/login/login.service';
 import {StateStorageService} from './state-storage.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class UserRouteAccessService implements CanActivate {
   constructor(
     private router: Router,
     private loginService: LoginService,
     private accountService: AccountService,
     private stateStorageService: StateStorageService
-  ) {}
+  ) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const authorities = route.data['authorities'];

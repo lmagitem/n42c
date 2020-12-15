@@ -29,7 +29,8 @@ export class AuditsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.toDate = this.today();

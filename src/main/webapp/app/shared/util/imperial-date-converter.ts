@@ -25,10 +25,10 @@ export class ImperialDateConverter {
     const hoursInYear = daysInYear * 24;
     const dayOfYear =
       (Date.UTC(instant.getFullYear(), instant.getMonth(), instant.getDate()) - Date.UTC(instant.getFullYear(), 0, 0)) /
-        24 /
-        60 /
-        60 /
-        1000 -
+      24 /
+      60 /
+      60 /
+      1000 -
       1;
     const hourOfYear = dayOfYear * 24 + instant.getUTCHours();
     const yearFraction = Math.round((hourOfYear * 1000) / hoursInYear);

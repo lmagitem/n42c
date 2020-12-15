@@ -10,4 +10,5 @@ import {auditsRoute} from './audits.route';
   imports: [N42CSharedModule, RouterModule.forChild([auditsRoute])],
   declarations: [AuditsComponent],
 })
-export class AuditsModule {}
+export class AuditsModule {
+}

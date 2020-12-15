@@ -108,6 +108,7 @@ class AppUserGatlingTest extends Simulation {
                 , "blogRights":"MOD"
                 , "profileRights":"MOD"
                 , "scriptoriumRights":"MOD"
+                , "imageUrl":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_appUser_url"))).exitHereIfFailed

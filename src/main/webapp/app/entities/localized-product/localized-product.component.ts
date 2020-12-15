@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiDataUtils } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiDataUtils, JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { ILocalizedProduct } from 'app/shared/model/localized-product.model';
-import { LocalizedProductService } from './localized-product.service';
-import { LocalizedProductDeleteDialogComponent } from './localized-product-delete-dialog.component';
+import {ILocalizedProduct} from 'app/shared/model/localized-product.model';
+import {LocalizedProductService} from './localized-product.service';
+import {LocalizedProductDeleteDialogComponent} from './localized-product-delete-dialog.component';
 
 @Component({
   selector: 'jhi-localized-product',

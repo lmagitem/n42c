@@ -4,7 +4,6 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.BlogCategory;
 import com.n42c.repository.BlogCategoryRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link BlogCategoryResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class BlogCategoryResourceIT {
@@ -47,7 +47,7 @@ public class BlogCategoryResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -56,9 +56,10 @@ public class BlogCategoryResourceIT {
             .name(DEFAULT_NAME);
         return blogCategory;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -142,7 +143,7 @@ public class BlogCategoryResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(blogCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getBlogCategory() throws Exception {
@@ -156,6 +157,7 @@ public class BlogCategoryResourceIT {
             .andExpect(jsonPath("$.id").value(blogCategory.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
+
     @Test
     @Transactional
     public void getNonExistingBlogCategory() throws Exception {

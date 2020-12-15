@@ -7,8 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -55,26 +54,39 @@ public class BlogPost implements Serializable {
 
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<LocalizedPostContent> localizations = new HashSet<>();
+    private Set<LocalizedBlogPost> localizations = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "blog_post_authors",
-               joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
     private Set<AppUser> authors = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "blog_post_categories",
-               joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "blog_post_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<BlogCategory> categories = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private Blog blog;
+
+    public BlogPost() {
+    }
+
+    public BlogPost(Long id) {
+        this.id = id;
+    }
+
+    public BlogPost(Long id, @NotNull String title, Instant published) {
+        this.id = id;
+        this.title = title;
+        this.published = published;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -89,17 +101,21 @@ public class BlogPost implements Serializable {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public BlogPost title(String title) {
         this.title = title;
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Instant getPublished() {
         return published;
+    }
+
+    public void setPublished(Instant published) {
+        this.published = published;
     }
 
     public BlogPost published(Instant published) {
@@ -107,12 +123,12 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setPublished(Instant published) {
-        this.published = published;
-    }
-
     public Instant getModified() {
         return modified;
+    }
+
+    public void setModified(Instant modified) {
+        this.modified = modified;
     }
 
     public BlogPost modified(Instant modified) {
@@ -120,37 +136,37 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setModified(Instant modified) {
-        this.modified = modified;
-    }
-
-    public Set<LocalizedPostContent> getLocalizations() {
+    public Set<LocalizedBlogPost> getLocalizations() {
         return localizations;
     }
 
-    public BlogPost localizations(Set<LocalizedPostContent> localizedPostContents) {
-        this.localizations = localizedPostContents;
+    public void setLocalizations(Set<LocalizedBlogPost> localizedBlogPosts) {
+        this.localizations = localizedBlogPosts;
+    }
+
+    public BlogPost localizations(Set<LocalizedBlogPost> localizedBlogPosts) {
+        this.localizations = localizedBlogPosts;
         return this;
     }
 
-    public BlogPost addLocalizations(LocalizedPostContent localizedPostContent) {
-        this.localizations.add(localizedPostContent);
-        localizedPostContent.setPost(this);
+    public BlogPost addLocalizations(LocalizedBlogPost localizedBlogPost) {
+        this.localizations.add(localizedBlogPost);
+        localizedBlogPost.setPost(this);
         return this;
     }
 
-    public BlogPost removeLocalizations(LocalizedPostContent localizedPostContent) {
-        this.localizations.remove(localizedPostContent);
-        localizedPostContent.setPost(null);
+    public BlogPost removeLocalizations(LocalizedBlogPost localizedBlogPost) {
+        this.localizations.remove(localizedBlogPost);
+        localizedBlogPost.setPost(null);
         return this;
-    }
-
-    public void setLocalizations(Set<LocalizedPostContent> localizedPostContents) {
-        this.localizations = localizedPostContents;
     }
 
     public Set<AppUser> getAuthors() {
         return authors;
+    }
+
+    public void setAuthors(Set<AppUser> appUsers) {
+        this.authors = appUsers;
     }
 
     public BlogPost authors(Set<AppUser> appUsers) {
@@ -170,12 +186,12 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setAuthors(Set<AppUser> appUsers) {
-        this.authors = appUsers;
-    }
-
     public Set<BlogCategory> getCategories() {
         return categories;
+    }
+
+    public void setCategories(Set<BlogCategory> blogCategories) {
+        this.categories = blogCategories;
     }
 
     public BlogPost categories(Set<BlogCategory> blogCategories) {
@@ -195,21 +211,17 @@ public class BlogPost implements Serializable {
         return this;
     }
 
-    public void setCategories(Set<BlogCategory> blogCategories) {
-        this.categories = blogCategories;
-    }
-
     public Blog getBlog() {
         return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 
     public BlogPost blog(Blog blog) {
         this.blog = blog;
         return this;
-    }
-
-    public void setBlog(Blog blog) {
-        this.blog = blog;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

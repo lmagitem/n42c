@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { ILocalizedBlog } from 'app/shared/model/localized-blog.model';
-import { LocalizedBlogService } from './localized-blog.service';
-import { LocalizedBlogDeleteDialogComponent } from './localized-blog-delete-dialog.component';
+import {ILocalizedBlog} from 'app/shared/model/localized-blog.model';
+import {LocalizedBlogService} from './localized-blog.service';
+import {LocalizedBlogDeleteDialogComponent} from './localized-blog-delete-dialog.component';
 
 @Component({
   selector: 'jhi-localized-blog',
@@ -20,7 +20,8 @@ export class LocalizedBlogComponent implements OnInit, OnDestroy {
     protected localizedBlogService: LocalizedBlogService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   loadAll(): void {
     this.localizedBlogService.query().subscribe((res: HttpResponse<ILocalizedBlog[]>) => (this.localizedBlogs = res.body || []));
@@ -47,7 +48,7 @@ export class LocalizedBlogComponent implements OnInit, OnDestroy {
   }
 
   delete(localizedBlog: ILocalizedBlog): void {
-    const modalRef = this.modalService.open(LocalizedBlogDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(LocalizedBlogDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.localizedBlog = localizedBlog;
   }
 }

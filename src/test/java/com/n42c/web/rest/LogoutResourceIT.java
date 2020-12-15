@@ -64,6 +64,5 @@ public class LogoutResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.clientId").value("client-id"));
-        ;
     }
 }

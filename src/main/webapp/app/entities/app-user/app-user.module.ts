@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { N42CSharedModule } from 'app/shared/shared.module';
-import { AppUserComponent } from './app-user.component';
-import { AppUserDetailComponent } from './app-user-detail.component';
-import { AppUserUpdateComponent } from './app-user-update.component';
-import { AppUserDeleteDialogComponent } from './app-user-delete-dialog.component';
-import { appUserRoute } from './app-user.route';
+import {N42CSharedModule} from 'app/shared/shared.module';
+import {AppUserComponent} from './app-user.component';
+import {AppUserDetailComponent} from './app-user-detail.component';
+import {AppUserUpdateComponent} from './app-user-update.component';
+import {AppUserDeleteDialogComponent} from './app-user-delete-dialog.component';
+import {appUserRoute} from './app-user.route';
 
 @NgModule({
   imports: [N42CSharedModule, RouterModule.forChild(appUserRoute)],
   declarations: [AppUserComponent, AppUserDetailComponent, AppUserUpdateComponent, AppUserDeleteDialogComponent],
   entryComponents: [AppUserDeleteDialogComponent],
 })
-export class N42CAppUserModule {}
+export class N42CAppUserModule {
+}

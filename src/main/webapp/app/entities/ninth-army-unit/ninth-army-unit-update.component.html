@@ -1,63 +1,68 @@
 <div class="row justify-content-center">
-  <div class="col-12">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-ninth-army-unit-heading" jhiTranslate="n42cApp.ninthArmyUnit.home.createOrEditLabel">Create or edit a Ninth Army Unit</h2>
+    <div class="col-12">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <h2 id="jhi-ninth-army-unit-heading" jhiTranslate="n42cApp.ninthArmyUnit.home.createOrEditLabel">Create or
+                edit a Ninth Army Unit</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" [hidden]="!editForm.get('id')!.value">
-          <label for="id" jhiTranslate="global.field.id">ID</label>
-          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-        </div>
+                <div [hidden]="!editForm.get('id')!.value" class="form-group">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input class="form-control" formControlName="id" id="id" name="id" readonly type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyUnit.selectableKeywords" for="field_selectableKeywords"
-            >Selectable Keywords</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="selectableKeywords"
-            id="field_selectableKeywords"
-            formControlName="selectableKeywords"
-          />
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_selectableKeywords"
+                           jhiTranslate="n42cApp.ninthArmyUnit.selectableKeywords"
+                    >Selectable Keywords</label
+                    >
+                    <input
+                        class="form-control"
+                        formControlName="selectableKeywords"
+                        id="field_selectableKeywords"
+                        name="selectableKeywords"
+                        type="text"
+                    />
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyUnit.army" for="field_army">Army</label>
-          <select class="form-control" id="field_army" name="army" formControlName="army">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="ninthArmyOption.id === editForm.get('army')!.value?.id ? editForm.get('army')!.value : ninthArmyOption"
-              *ngFor="let ninthArmyOption of nintharmies; trackBy: trackById"
-              >{{ ninthArmyOption.id }}</option
-            >
-          </select>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_army"
+                           jhiTranslate="n42cApp.ninthArmyUnit.army">Army</label>
+                    <select class="form-control" formControlName="army" id="field_army" name="army">
+                        <option [ngValue]="null"></option>
+                        <option
+                            *ngFor="let ninthArmyOption of nintharmies; trackBy: trackById"
+                            [ngValue]="ninthArmyOption.id === editForm.get('army')!.value?.id ? editForm.get('army')!.value : ninthArmyOption"
+                        >{{ ninthArmyOption.id }}</option
+                        >
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthArmyUnit.unit" for="field_unit">Unit</label>
-          <select class="form-control" id="field_unit" name="unit" formControlName="unit">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="ninthUnitOption.id === editForm.get('unit')!.value?.id ? editForm.get('unit')!.value : ninthUnitOption"
-              *ngFor="let ninthUnitOption of ninthunits; trackBy: trackById"
-              >{{ ninthUnitOption.id }}</option
-            >
-          </select>
-        </div>
-      </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_unit"
+                           jhiTranslate="n42cApp.ninthArmyUnit.unit">Unit</label>
+                    <select class="form-control" formControlName="unit" id="field_unit" name="unit">
+                        <option [ngValue]="null"></option>
+                        <option
+                            *ngFor="let ninthUnitOption of ninthunits; trackBy: trackById"
+                            [ngValue]="ninthUnitOption.id === editForm.get('unit')!.value?.id ? editForm.get('unit')!.value : ninthUnitOption"
+                        >{{ ninthUnitOption.id }}</option
+                        >
+                    </select>
+                </div>
+            </div>
 
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
+            <div>
+                <button (click)="previousState()" class="btn btn-secondary" id="cancel-save" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
 
-        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+                <button [disabled]="editForm.invalid || isSaving" class="btn btn-primary" id="save-entity"
+                        type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

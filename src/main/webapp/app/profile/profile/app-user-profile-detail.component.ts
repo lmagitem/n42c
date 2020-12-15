@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
+import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
 
 @Component({
   selector: 'jhi-app-user-profile-detail',
@@ -10,10 +10,11 @@ import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
 export class AppUserProfileDetailComponent implements OnInit {
   appUserProfile: IAppUserProfile | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ appUserProfile }) => (this.appUserProfile = appUserProfile));
+    this.activatedRoute.data.subscribe(({appUserProfile}) => (this.appUserProfile = appUserProfile));
   }
 
   previousState(): void {

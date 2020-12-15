@@ -36,6 +36,9 @@
             <column name="scriptorium_rights" type="varchar(255)" remarks="The user rights regarding the Scriptorium.">
                 <constraints nullable="false" />
             </column>
+            <column name="image_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="varchar(100)">
                 <constraints unique="true" nullable="false" uniqueConstraintName="ux_app_user_user_id" />
             </column>
@@ -91,6 +94,7 @@
             <column name="blog_rights" type="string"/>
             <column name="profile_rights" type="string"/>
             <column name="scriptorium_rights" type="string"/>
+            <column name="image_url" type="string"/>
             <column name="user_id" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

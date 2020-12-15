@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IBlog, Blog } from 'app/shared/model/blog.model';
-import { BlogListComponent } from './blog-list.component';
-import { BlogComponent } from './blog.component';
-import { BlogService } from 'app/entities/blog/blog.service';
-import { BlogPostListComponent } from './blog-post/blog-post-list.component';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {Blog, IBlog} from 'app/shared/model/blog.model';
+import {BlogListComponent} from './blog-list.component';
+import {BlogComponent} from './blog.component';
+import {BlogService} from 'app/entities/blog/blog.service';
+import {BlogPostListComponent} from './blog-post/blog-post-list.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class BlogResolve implements Resolve<IBlog> {
-  constructor(private service: BlogService, private router: Router) {}
+  constructor(private service: BlogService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<IBlog> | Observable<never> {
     const id = route.params['id'];
@@ -38,10 +39,8 @@ export const blogRoute: Routes = [
     path: '', // Shows most recent entries from all authorized blogs
     component: BlogPostListComponent,
     data: {
-      defaultSort: 'id,asc',
       pageTitle: 'n42cApp.blog.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: 'list', // Shows the list of all blogs
@@ -50,7 +49,6 @@ export const blogRoute: Routes = [
       defaultSort: 'id,asc',
       pageTitle: 'n42cApp.blog.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new', // Create a new blog
@@ -71,7 +69,6 @@ export const blogRoute: Routes = [
   },
   {
     path: ':id/post', // The post entries of that blog
-    canActivate: [UserRouteAccessService],
     loadChildren: () => import('./blog-post/blog-post.module').then(m => m.BlogPostModule),
   },
   {
@@ -81,6 +78,7 @@ export const blogRoute: Routes = [
       blog: BlogResolve,
     },
     data: {
+      authorities: [Authority.USER],
       pageTitle: 'n42cApp.blog.home.title',
     },
     canActivate: [UserRouteAccessService],

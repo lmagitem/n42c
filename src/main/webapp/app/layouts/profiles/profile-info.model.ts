@@ -11,5 +11,6 @@ export class ProfileInfo {
     public ribbonEnv?: string,
     public inProduction?: boolean,
     public swaggerEnabled?: boolean
-  ) {}
+  ) {
+  }
 }

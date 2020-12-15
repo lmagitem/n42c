@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthDeploymentMap, NinthDeploymentMap } from 'app/shared/model/ninth-deployment-map.model';
-import { NinthDeploymentMapService } from './ninth-deployment-map.service';
-import { NinthDeploymentMapComponent } from './ninth-deployment-map.component';
-import { NinthDeploymentMapDetailComponent } from './ninth-deployment-map-detail.component';
-import { NinthDeploymentMapUpdateComponent } from './ninth-deployment-map-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthDeploymentMap, NinthDeploymentMap} from 'app/shared/model/ninth-deployment-map.model';
+import {NinthDeploymentMapService} from './ninth-deployment-map.service';
+import {NinthDeploymentMapComponent} from './ninth-deployment-map.component';
+import {NinthDeploymentMapDetailComponent} from './ninth-deployment-map-detail.component';
+import {NinthDeploymentMapUpdateComponent} from './ninth-deployment-map-update.component';
 
 @Injectable({ providedIn: 'root' })
 export class NinthDeploymentMapResolve implements Resolve<INinthDeploymentMap> {

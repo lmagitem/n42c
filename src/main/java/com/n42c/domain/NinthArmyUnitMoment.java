@@ -1,16 +1,14 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.NinthCrusadeRank;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
-
-import com.n42c.domain.enumeration.NinthCrusadeRank;
 
 /**
  * A NinthArmyUnitMoment.
@@ -117,17 +115,21 @@ public class NinthArmyUnitMoment implements Serializable {
         return sinceInstant;
     }
 
+    public void setSinceInstant(Instant sinceInstant) {
+        this.sinceInstant = sinceInstant;
+    }
+
     public NinthArmyUnitMoment sinceInstant(Instant sinceInstant) {
         this.sinceInstant = sinceInstant;
         return this;
     }
 
-    public void setSinceInstant(Instant sinceInstant) {
-        this.sinceInstant = sinceInstant;
-    }
-
     public Integer getPointsCost() {
         return pointsCost;
+    }
+
+    public void setPointsCost(Integer pointsCost) {
+        this.pointsCost = pointsCost;
     }
 
     public NinthArmyUnitMoment pointsCost(Integer pointsCost) {
@@ -135,12 +137,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setPointsCost(Integer pointsCost) {
-        this.pointsCost = pointsCost;
-    }
-
     public Integer getPowerRating() {
         return powerRating;
+    }
+
+    public void setPowerRating(Integer powerRating) {
+        this.powerRating = powerRating;
     }
 
     public NinthArmyUnitMoment powerRating(Integer powerRating) {
@@ -148,12 +150,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setPowerRating(Integer powerRating) {
-        this.powerRating = powerRating;
-    }
-
     public Integer getExperiencePoints() {
         return experiencePoints;
+    }
+
+    public void setExperiencePoints(Integer experiencePoints) {
+        this.experiencePoints = experiencePoints;
     }
 
     public NinthArmyUnitMoment experiencePoints(Integer experiencePoints) {
@@ -161,12 +163,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setExperiencePoints(Integer experiencePoints) {
-        this.experiencePoints = experiencePoints;
-    }
-
     public Integer getCrusadePoints() {
         return crusadePoints;
+    }
+
+    public void setCrusadePoints(Integer crusadePoints) {
+        this.crusadePoints = crusadePoints;
     }
 
     public NinthArmyUnitMoment crusadePoints(Integer crusadePoints) {
@@ -174,12 +176,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setCrusadePoints(Integer crusadePoints) {
-        this.crusadePoints = crusadePoints;
-    }
-
     public String getEquipment() {
         return equipment;
+    }
+
+    public void setEquipment(String equipment) {
+        this.equipment = equipment;
     }
 
     public NinthArmyUnitMoment equipment(String equipment) {
@@ -187,12 +189,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setEquipment(String equipment) {
-        this.equipment = equipment;
-    }
-
     public String getPsychicPowers() {
         return psychicPowers;
+    }
+
+    public void setPsychicPowers(String psychicPowers) {
+        this.psychicPowers = psychicPowers;
     }
 
     public NinthArmyUnitMoment psychicPowers(String psychicPowers) {
@@ -200,12 +202,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setPsychicPowers(String psychicPowers) {
-        this.psychicPowers = psychicPowers;
-    }
-
     public String getWarlordTraits() {
         return warlordTraits;
+    }
+
+    public void setWarlordTraits(String warlordTraits) {
+        this.warlordTraits = warlordTraits;
     }
 
     public NinthArmyUnitMoment warlordTraits(String warlordTraits) {
@@ -213,12 +215,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setWarlordTraits(String warlordTraits) {
-        this.warlordTraits = warlordTraits;
-    }
-
     public String getRelics() {
         return relics;
+    }
+
+    public void setRelics(String relics) {
+        this.relics = relics;
     }
 
     public NinthArmyUnitMoment relics(String relics) {
@@ -226,12 +228,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setRelics(String relics) {
-        this.relics = relics;
-    }
-
     public String getOtherUpgrades() {
         return otherUpgrades;
+    }
+
+    public void setOtherUpgrades(String otherUpgrades) {
+        this.otherUpgrades = otherUpgrades;
     }
 
     public NinthArmyUnitMoment otherUpgrades(String otherUpgrades) {
@@ -239,12 +241,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setOtherUpgrades(String otherUpgrades) {
-        this.otherUpgrades = otherUpgrades;
-    }
-
     public Integer getBattlesPlayed() {
         return battlesPlayed;
+    }
+
+    public void setBattlesPlayed(Integer battlesPlayed) {
+        this.battlesPlayed = battlesPlayed;
     }
 
     public NinthArmyUnitMoment battlesPlayed(Integer battlesPlayed) {
@@ -252,12 +254,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setBattlesPlayed(Integer battlesPlayed) {
-        this.battlesPlayed = battlesPlayed;
-    }
-
     public Integer getBattlesSurvived() {
         return battlesSurvived;
+    }
+
+    public void setBattlesSurvived(Integer battlesSurvived) {
+        this.battlesSurvived = battlesSurvived;
     }
 
     public NinthArmyUnitMoment battlesSurvived(Integer battlesSurvived) {
@@ -265,12 +267,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setBattlesSurvived(Integer battlesSurvived) {
-        this.battlesSurvived = battlesSurvived;
-    }
-
     public Integer getRangedKills() {
         return rangedKills;
+    }
+
+    public void setRangedKills(Integer rangedKills) {
+        this.rangedKills = rangedKills;
     }
 
     public NinthArmyUnitMoment rangedKills(Integer rangedKills) {
@@ -278,12 +280,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setRangedKills(Integer rangedKills) {
-        this.rangedKills = rangedKills;
-    }
-
     public Integer getMeleeKills() {
         return meleeKills;
+    }
+
+    public void setMeleeKills(Integer meleeKills) {
+        this.meleeKills = meleeKills;
     }
 
     public NinthArmyUnitMoment meleeKills(Integer meleeKills) {
@@ -291,12 +293,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setMeleeKills(Integer meleeKills) {
-        this.meleeKills = meleeKills;
-    }
-
     public Integer getPsychicKills() {
         return psychicKills;
+    }
+
+    public void setPsychicKills(Integer psychicKills) {
+        this.psychicKills = psychicKills;
     }
 
     public NinthArmyUnitMoment psychicKills(Integer psychicKills) {
@@ -304,12 +306,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setPsychicKills(Integer psychicKills) {
-        this.psychicKills = psychicKills;
-    }
-
     public NinthCrusadeRank getCrusadeRank() {
         return crusadeRank;
+    }
+
+    public void setCrusadeRank(NinthCrusadeRank crusadeRank) {
+        this.crusadeRank = crusadeRank;
     }
 
     public NinthArmyUnitMoment crusadeRank(NinthCrusadeRank crusadeRank) {
@@ -317,12 +319,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setCrusadeRank(NinthCrusadeRank crusadeRank) {
-        this.crusadeRank = crusadeRank;
-    }
-
     public String getBattleHonours() {
         return battleHonours;
+    }
+
+    public void setBattleHonours(String battleHonours) {
+        this.battleHonours = battleHonours;
     }
 
     public NinthArmyUnitMoment battleHonours(String battleHonours) {
@@ -330,12 +332,12 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setBattleHonours(String battleHonours) {
-        this.battleHonours = battleHonours;
-    }
-
     public String getBattleScars() {
         return battleScars;
+    }
+
+    public void setBattleScars(String battleScars) {
+        this.battleScars = battleScars;
     }
 
     public NinthArmyUnitMoment battleScars(String battleScars) {
@@ -343,21 +345,17 @@ public class NinthArmyUnitMoment implements Serializable {
         return this;
     }
 
-    public void setBattleScars(String battleScars) {
-        this.battleScars = battleScars;
-    }
-
     public NinthArmyUnit getArmyUnit() {
         return armyUnit;
+    }
+
+    public void setArmyUnit(NinthArmyUnit ninthArmyUnit) {
+        this.armyUnit = ninthArmyUnit;
     }
 
     public NinthArmyUnitMoment armyUnit(NinthArmyUnit ninthArmyUnit) {
         this.armyUnit = ninthArmyUnit;
         return this;
-    }
-
-    public void setArmyUnit(NinthArmyUnit ninthArmyUnit) {
-        this.armyUnit = ninthArmyUnit;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

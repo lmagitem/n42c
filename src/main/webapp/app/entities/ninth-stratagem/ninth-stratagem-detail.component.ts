@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
+import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
 
 @Component({
   selector: 'jhi-ninth-stratagem-detail',

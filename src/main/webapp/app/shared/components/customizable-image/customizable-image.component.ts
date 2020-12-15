@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'jhi-customizable-image',
@@ -15,9 +15,11 @@ export class CustomizableImageComponent implements OnInit {
   @Input() genericImage = '../../../../content/images/jhipster_family_member_2_head-512.png';
   @Output() imageUrlLoaded = new EventEmitter<string>();
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   useGenericImage(target: any): void {
     if (target instanceof HTMLImageElement) {

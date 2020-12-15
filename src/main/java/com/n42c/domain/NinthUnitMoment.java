@@ -5,8 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -66,17 +65,21 @@ public class NinthUnitMoment implements Serializable {
         return sinceInstant;
     }
 
+    public void setSinceInstant(Instant sinceInstant) {
+        this.sinceInstant = sinceInstant;
+    }
+
     public NinthUnitMoment sinceInstant(Instant sinceInstant) {
         this.sinceInstant = sinceInstant;
         return this;
     }
 
-    public void setSinceInstant(Instant sinceInstant) {
-        this.sinceInstant = sinceInstant;
-    }
-
     public String getPictureUrl() {
         return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public NinthUnitMoment pictureUrl(String pictureUrl) {
@@ -84,21 +87,17 @@ public class NinthUnitMoment implements Serializable {
         return this;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
     public NinthUnit getUnit() {
         return unit;
+    }
+
+    public void setUnit(NinthUnit ninthUnit) {
+        this.unit = ninthUnit;
     }
 
     public NinthUnitMoment unit(NinthUnit ninthUnit) {
         this.unit = ninthUnit;
         return this;
-    }
-
-    public void setUnit(NinthUnit ninthUnit) {
-        this.unit = ninthUnit;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

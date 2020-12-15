@@ -1,11 +1,11 @@
 id;name;briefing;language;mission_id
-1;users Towels;../fake-data/blob/hipster.txt;DE;1
-2;Unbranded Plastic Fish Refined Fresh Sausages Executive;../fake-data/blob/hipster.txt;FA;2
-3;Borders New Mexico;../fake-data/blob/hipster.txt;TR;3
-4;Haiti auxiliary;../fake-data/blob/hipster.txt;TR;4
-5;Awesome Fresh Salad;../fake-data/blob/hipster.txt;JA;5
-6;input;../fake-data/blob/hipster.txt;RO;6
-7;Gorgeous Plastic Car Concrete Clothing;../fake-data/blob/hipster.txt;NL;7
-8;Handcrafted Fresh Sausages yellow;../fake-data/blob/hipster.txt;FA;8
-9;Bike system;../fake-data/blob/hipster.txt;ZH;9
-10;disintermediate;../fake-data/blob/hipster.txt;EN;10
+1;users Towels;../fake-data/blob/lorem-ipsum.txt;DE;1
+2;Unbranded Plastic Fish Refined Fresh Sausages Executive;../fake-data/blob/lorem-ipsum.txt;FA;2
+3;Borders New Mexico;../fake-data/blob/lorem-ipsum.txt;TR;3
+4;Haiti auxiliary;../fake-data/blob/lorem-ipsum.txt;TR;4
+5;Awesome Fresh Salad;../fake-data/blob/lorem-ipsum.txt;JA;5
+6;input;../fake-data/blob/lorem-ipsum.txt;RO;6
+7;Gorgeous Plastic Car Concrete Clothing;../fake-data/blob/lorem-ipsum.txt;NL;7
+8;Handcrafted Fresh Sausages yellow;../fake-data/blob/lorem-ipsum.txt;FA;8
+9;Bike system;../fake-data/blob/lorem-ipsum.txt;ZH;9
+10;disintermediate;../fake-data/blob/lorem-ipsum.txt;EN;10

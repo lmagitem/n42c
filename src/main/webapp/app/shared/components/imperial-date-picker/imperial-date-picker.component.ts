@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { ImperialDateConverter } from 'app/shared/util/imperial-date-converter';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
+import {ImperialDateConverter} from 'app/shared/util/imperial-date-converter';
 import * as moment from 'moment';
 
 @Component({
@@ -19,33 +19,41 @@ export class ImperialDatePickerComponent {
   imperialMillenia = 40;
   /** The form in which to get and update values. */
   _form = new FormGroup({});
+
+  get form(): FormGroup {
+    return this._form;
+  }
+
   @Input()
   set form(form: FormGroup) {
     this._form = form;
     this.updateFromForm();
   }
-  get form(): FormGroup {
-    return this._form;
-  }
+
   /** The string to use in order to get the "Check" field from the given form. */
   _checkName = '';
+
+  get checkName(): string {
+    return this._checkName;
+  }
+
   @Input()
   set checkName(checkName: string) {
     this._checkName = checkName;
     this.updateFromForm();
   }
-  get checkName(): string {
-    return this._checkName;
-  }
+
   /** The string to use in order to get the "Instant" field from the given form. */
   _instantName = '';
+
+  get instantName(): string {
+    return this._instantName;
+  }
+
   @Input()
   set instantName(instantName: string) {
     this._instantName = instantName;
     this.updateFromForm();
-  }
-  get instantName(): string {
-    return this._instantName;
   }
 
   /** Update the component using the content of a form. */

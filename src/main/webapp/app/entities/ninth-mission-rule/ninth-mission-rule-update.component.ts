@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthMissionRule, NinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
-import { NinthMissionRuleService } from './ninth-mission-rule.service';
+import {INinthMissionRule, NinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
+import {NinthMissionRuleService} from './ninth-mission-rule.service';
 
 @Component({
   selector: 'jhi-ninth-mission-rule-update',

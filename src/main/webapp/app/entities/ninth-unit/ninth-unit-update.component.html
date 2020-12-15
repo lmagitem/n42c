@@ -1,135 +1,148 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-ninth-unit-heading" jhiTranslate="n42cApp.ninthUnit.home.createOrEditLabel">Create or edit a Ninth Unit</h2>
+    <div class="col-8">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <h2 id="jhi-ninth-unit-heading" jhiTranslate="n42cApp.ninthUnit.home.createOrEditLabel">Create or edit a
+                Ninth Unit</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" [hidden]="!editForm.get('id')!.value">
-          <label for="id" jhiTranslate="global.field.id">ID</label>
-          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-        </div>
+                <div [hidden]="!editForm.get('id')!.value" class="form-group">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input class="form-control" formControlName="id" id="id" name="id" readonly type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.name" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name"
+                           jhiTranslate="n42cApp.ninthUnit.name">Name</label>
+                    <input class="form-control" formControlName="name" id="field_name" name="name" type="text"/>
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small *ngIf="editForm.get('name')?.errors?.required" class="form-text text-danger"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.datasheet" for="field_datasheet">Datasheet</label>
-          <input type="text" class="form-control" name="datasheet" id="field_datasheet" formControlName="datasheet" />
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_datasheet" jhiTranslate="n42cApp.ninthUnit.datasheet">Datasheet</label>
+                    <input class="form-control" formControlName="datasheet" id="field_datasheet" name="datasheet"
+                           type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.faction" for="field_faction">Faction</label>
-          <select class="form-control" name="faction" formControlName="faction" id="field_faction">
-            <option value="IM">{{ 'n42cApp.Faction.IM' | translate }}</option>
-            <option value="CH">{{ 'n42cApp.Faction.CH' | translate }}</option>
-            <option value="EL">{{ 'n42cApp.Faction.EL' | translate }}</option>
-            <option value="TY">{{ 'n42cApp.Faction.TY' | translate }}</option>
-            <option value="OR">{{ 'n42cApp.Faction.OR' | translate }}</option>
-            <option value="NE">{{ 'n42cApp.Faction.NE' | translate }}</option>
-            <option value="TA">{{ 'n42cApp.Faction.TA' | translate }}</option>
-            <option value="OT">{{ 'n42cApp.Faction.OT' | translate }}</option>
-            <option value="NA">{{ 'n42cApp.Faction.NA' | translate }}</option>
-          </select>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_faction" jhiTranslate="n42cApp.ninthUnit.faction">Faction</label>
+                    <select class="form-control" formControlName="faction" id="field_faction" name="faction">
+                        <option value="IM">{{ 'n42cApp.Faction.IM' | translate }}</option>
+                        <option value="CH">{{ 'n42cApp.Faction.CH' | translate }}</option>
+                        <option value="EL">{{ 'n42cApp.Faction.EL' | translate }}</option>
+                        <option value="TY">{{ 'n42cApp.Faction.TY' | translate }}</option>
+                        <option value="OR">{{ 'n42cApp.Faction.OR' | translate }}</option>
+                        <option value="NE">{{ 'n42cApp.Faction.NE' | translate }}</option>
+                        <option value="TA">{{ 'n42cApp.Faction.TA' | translate }}</option>
+                        <option value="OT">{{ 'n42cApp.Faction.OT' | translate }}</option>
+                        <option value="NA">{{ 'n42cApp.Faction.NA' | translate }}</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.subfaction" for="field_subfaction">Subfaction</label>
-          <select class="form-control" name="subfaction" formControlName="subfaction" id="field_subfaction">
-            <option value="SM">{{ 'n42cApp.SubFaction.SM' | translate }}</option>
-            <option value="BA">{{ 'n42cApp.SubFaction.BA' | translate }}</option>
-            <option value="DA">{{ 'n42cApp.SubFaction.DA' | translate }}</option>
-            <option value="DW">{{ 'n42cApp.SubFaction.DW' | translate }}</option>
-            <option value="GK">{{ 'n42cApp.SubFaction.GK' | translate }}</option>
-            <option value="SW">{{ 'n42cApp.SubFaction.SW' | translate }}</option>
-            <option value="GU">{{ 'n42cApp.SubFaction.GU' | translate }}</option>
-            <option value="IN">{{ 'n42cApp.SubFaction.IN' | translate }}</option>
-            <option value="OA">{{ 'n42cApp.SubFaction.OA' | translate }}</option>
-            <option value="CU">{{ 'n42cApp.SubFaction.CU' | translate }}</option>
-            <option value="SO">{{ 'n42cApp.SubFaction.SO' | translate }}</option>
-            <option value="ME">{{ 'n42cApp.SubFaction.ME' | translate }}</option>
-            <option value="KN">{{ 'n42cApp.SubFaction.KN' | translate }}</option>
-            <option value="SS">{{ 'n42cApp.SubFaction.SS' | translate }}</option>
-            <option value="SQ">{{ 'n42cApp.SubFaction.SQ' | translate }}</option>
-            <option value="DZ">{{ 'n42cApp.SubFaction.DZ' | translate }}</option>
-            <option value="CK">{{ 'n42cApp.SubFaction.CK' | translate }}</option>
-            <option value="CM">{{ 'n42cApp.SubFaction.CM' | translate }}</option>
-            <option value="DG">{{ 'n42cApp.SubFaction.DG' | translate }}</option>
-            <option value="TS">{{ 'n42cApp.SubFaction.TS' | translate }}</option>
-            <option value="RH">{{ 'n42cApp.SubFaction.RH' | translate }}</option>
-            <option value="DM">{{ 'n42cApp.SubFaction.DM' | translate }}</option>
-            <option value="GC">{{ 'n42cApp.SubFaction.GC' | translate }}</option>
-            <option value="TY">{{ 'n42cApp.SubFaction.TY' | translate }}</option>
-            <option value="TA">{{ 'n42cApp.SubFaction.TA' | translate }}</option>
-            <option value="KR">{{ 'n42cApp.SubFaction.KR' | translate }}</option>
-            <option value="NE">{{ 'n42cApp.SubFaction.NE' | translate }}</option>
-            <option value="OR">{{ 'n42cApp.SubFaction.OR' | translate }}</option>
-            <option value="CE">{{ 'n42cApp.SubFaction.CE' | translate }}</option>
-            <option value="DE">{{ 'n42cApp.SubFaction.DE' | translate }}</option>
-            <option value="HA">{{ 'n42cApp.SubFaction.HA' | translate }}</option>
-            <option value="YN">{{ 'n42cApp.SubFaction.YN' | translate }}</option>
-            <option value="OT">{{ 'n42cApp.SubFaction.OT' | translate }}</option>
-            <option value="MX">{{ 'n42cApp.SubFaction.MX' | translate }}</option>
-          </select>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_subfaction"
+                           jhiTranslate="n42cApp.ninthUnit.subfaction">Subfaction</label>
+                    <select class="form-control" formControlName="subfaction" id="field_subfaction" name="subfaction">
+                        <option value="SM">{{ 'n42cApp.SubFaction.SM' | translate }}</option>
+                        <option value="BA">{{ 'n42cApp.SubFaction.BA' | translate }}</option>
+                        <option value="DA">{{ 'n42cApp.SubFaction.DA' | translate }}</option>
+                        <option value="DW">{{ 'n42cApp.SubFaction.DW' | translate }}</option>
+                        <option value="GK">{{ 'n42cApp.SubFaction.GK' | translate }}</option>
+                        <option value="SW">{{ 'n42cApp.SubFaction.SW' | translate }}</option>
+                        <option value="GU">{{ 'n42cApp.SubFaction.GU' | translate }}</option>
+                        <option value="IN">{{ 'n42cApp.SubFaction.IN' | translate }}</option>
+                        <option value="OA">{{ 'n42cApp.SubFaction.OA' | translate }}</option>
+                        <option value="CU">{{ 'n42cApp.SubFaction.CU' | translate }}</option>
+                        <option value="SO">{{ 'n42cApp.SubFaction.SO' | translate }}</option>
+                        <option value="ME">{{ 'n42cApp.SubFaction.ME' | translate }}</option>
+                        <option value="KN">{{ 'n42cApp.SubFaction.KN' | translate }}</option>
+                        <option value="SS">{{ 'n42cApp.SubFaction.SS' | translate }}</option>
+                        <option value="SQ">{{ 'n42cApp.SubFaction.SQ' | translate }}</option>
+                        <option value="DZ">{{ 'n42cApp.SubFaction.DZ' | translate }}</option>
+                        <option value="CK">{{ 'n42cApp.SubFaction.CK' | translate }}</option>
+                        <option value="CM">{{ 'n42cApp.SubFaction.CM' | translate }}</option>
+                        <option value="DG">{{ 'n42cApp.SubFaction.DG' | translate }}</option>
+                        <option value="TS">{{ 'n42cApp.SubFaction.TS' | translate }}</option>
+                        <option value="RH">{{ 'n42cApp.SubFaction.RH' | translate }}</option>
+                        <option value="DM">{{ 'n42cApp.SubFaction.DM' | translate }}</option>
+                        <option value="GC">{{ 'n42cApp.SubFaction.GC' | translate }}</option>
+                        <option value="TY">{{ 'n42cApp.SubFaction.TY' | translate }}</option>
+                        <option value="TA">{{ 'n42cApp.SubFaction.TA' | translate }}</option>
+                        <option value="KR">{{ 'n42cApp.SubFaction.KR' | translate }}</option>
+                        <option value="NE">{{ 'n42cApp.SubFaction.NE' | translate }}</option>
+                        <option value="OR">{{ 'n42cApp.SubFaction.OR' | translate }}</option>
+                        <option value="CE">{{ 'n42cApp.SubFaction.CE' | translate }}</option>
+                        <option value="DE">{{ 'n42cApp.SubFaction.DE' | translate }}</option>
+                        <option value="HA">{{ 'n42cApp.SubFaction.HA' | translate }}</option>
+                        <option value="YN">{{ 'n42cApp.SubFaction.YN' | translate }}</option>
+                        <option value="OT">{{ 'n42cApp.SubFaction.OT' | translate }}</option>
+                        <option value="MX">{{ 'n42cApp.SubFaction.MX' | translate }}</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.battlefieldRole" for="field_battlefieldRole"
-            >Battlefield Role</label
-          >
-          <select class="form-control" name="battlefieldRole" formControlName="battlefieldRole" id="field_battlefieldRole">
-            <option value="HQ">{{ 'n42cApp.NinthBattlefieldRole.HQ' | translate }}</option>
-            <option value="TR">{{ 'n42cApp.NinthBattlefieldRole.TR' | translate }}</option>
-            <option value="EL">{{ 'n42cApp.NinthBattlefieldRole.EL' | translate }}</option>
-            <option value="FA">{{ 'n42cApp.NinthBattlefieldRole.FA' | translate }}</option>
-            <option value="HS">{{ 'n42cApp.NinthBattlefieldRole.HS' | translate }}</option>
-            <option value="FL">{{ 'n42cApp.NinthBattlefieldRole.FL' | translate }}</option>
-            <option value="AT">{{ 'n42cApp.NinthBattlefieldRole.AT' | translate }}</option>
-            <option value="FO">{{ 'n42cApp.NinthBattlefieldRole.FO' | translate }}</option>
-            <option value="LW">{{ 'n42cApp.NinthBattlefieldRole.LW' | translate }}</option>
-          </select>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_battlefieldRole"
+                           jhiTranslate="n42cApp.ninthUnit.battlefieldRole"
+                    >Battlefield Role</label
+                    >
+                    <select class="form-control" formControlName="battlefieldRole" id="field_battlefieldRole"
+                            name="battlefieldRole">
+                        <option value="HQ">{{ 'n42cApp.NinthBattlefieldRole.HQ' | translate }}</option>
+                        <option value="TR">{{ 'n42cApp.NinthBattlefieldRole.TR' | translate }}</option>
+                        <option value="EL">{{ 'n42cApp.NinthBattlefieldRole.EL' | translate }}</option>
+                        <option value="FA">{{ 'n42cApp.NinthBattlefieldRole.FA' | translate }}</option>
+                        <option value="HS">{{ 'n42cApp.NinthBattlefieldRole.HS' | translate }}</option>
+                        <option value="FL">{{ 'n42cApp.NinthBattlefieldRole.FL' | translate }}</option>
+                        <option value="AT">{{ 'n42cApp.NinthBattlefieldRole.AT' | translate }}</option>
+                        <option value="FO">{{ 'n42cApp.NinthBattlefieldRole.FO' | translate }}</option>
+                        <option value="LW">{{ 'n42cApp.NinthBattlefieldRole.LW' | translate }}</option>
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.keywords" for="field_keywords">Keywords</label>
-          <input type="text" class="form-control" name="keywords" id="field_keywords" formControlName="keywords" />
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_keywords" jhiTranslate="n42cApp.ninthUnit.keywords">Keywords</label>
+                    <input class="form-control" formControlName="keywords" id="field_keywords" name="keywords"
+                           type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthUnit.owner" for="field_owner">Owner</label>
-          <select class="form-control" id="field_owner" name="owner" formControlName="owner">
-            <option *ngIf="!editForm.get('owner')!.value" [ngValue]="null" selected></option>
-            <option
-              [ngValue]="playerOption.id === editForm.get('owner')!.value?.id ? editForm.get('owner')!.value : playerOption"
-              *ngFor="let playerOption of players; trackBy: trackById"
-              >{{ playerOption.id }}</option
-            >
-          </select>
-        </div>
-        <div *ngIf="editForm.get('owner')!.invalid && (editForm.get('owner')!.dirty || editForm.get('owner')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('owner')?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-          </small>
-        </div>
-      </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_owner"
+                           jhiTranslate="n42cApp.ninthUnit.owner">Owner</label>
+                    <select class="form-control" formControlName="owner" id="field_owner" name="owner">
+                        <option *ngIf="!editForm.get('owner')!.value" [ngValue]="null" selected></option>
+                        <option
+                            *ngFor="let playerOption of players; trackBy: trackById"
+                            [ngValue]="playerOption.id === editForm.get('owner')!.value?.id ? editForm.get('owner')!.value : playerOption"
+                        >{{ playerOption.id }}</option
+                        >
+                    </select>
+                </div>
+                <div
+                    *ngIf="editForm.get('owner')!.invalid && (editForm.get('owner')!.dirty || editForm.get('owner')!.touched)">
+                    <small *ngIf="editForm.get('owner')?.errors?.required" class="form-text text-danger"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
 
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
+            <div>
+                <button (click)="previousState()" class="btn btn-secondary" id="cancel-save" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
 
-        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+                <button [disabled]="editForm.invalid || isSaving" class="btn btn-primary" id="save-entity"
+                        type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

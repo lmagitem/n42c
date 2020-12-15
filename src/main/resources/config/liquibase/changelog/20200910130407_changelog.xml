@@ -31,7 +31,7 @@
         <setTableRemarks tableName="localized_blog_category"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-8">
-        <setTableRemarks tableName="localized_post_content"/>
+        <setTableRemarks tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-9">
         <setTableRemarks tableName="localized_product"/>
@@ -70,7 +70,7 @@
         <setColumnRemarks columnName="blog_rights" tableName="app_user"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-21">
-        <setColumnRemarks columnName="content" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="content" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-22">
         <setColumnRemarks columnName="content" tableName="localized_product"/>
@@ -94,7 +94,7 @@
         <setColumnRemarks columnName="displayed_name" tableName="app_user"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-29">
-        <setColumnRemarks columnName="excerpt" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="excerpt" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-30">
         <setColumnRemarks columnName="excerpt" tableName="localized_product"/>
@@ -124,7 +124,7 @@
         <setColumnRemarks columnName="language" tableName="localized_blog_category"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-39">
-        <setColumnRemarks columnName="language" tableName="localized_post_content"/>
+        <setColumnRemarks columnName="language" tableName="localized_blog_post"/>
     </changeSet>
     <changeSet author="lukem (generated)" id="1599743057053-40">
         <setColumnRemarks columnName="language" tableName="localized_product"/>

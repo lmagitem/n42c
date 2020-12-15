@@ -1,5 +1,5 @@
-import { AppUserRights } from '../model/enumerations/app-user-rights.model';
-import { NinthGameType } from '../model/enumerations/ninth-game-type.model';
+import {AppUserRights} from '../model/enumerations/app-user-rights.model';
+import {NinthGameType} from '../model/enumerations/ninth-game-type.model';
 
 export class EnumTranslationUtils {
   public static getRightsTranslationPath(rights: AppUserRights | string): string {

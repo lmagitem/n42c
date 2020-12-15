@@ -3,39 +3,38 @@ package com.n42c.web.rest;
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthMission;
+import com.n42c.domain.enumerations.NinthGameSize;
+import com.n42c.domain.enumerations.NinthGameType;
 import com.n42c.repository.NinthMissionRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.NinthGameType;
-import com.n42c.domain.enumeration.NinthGameSize;
 /**
  * Integration tests for the {@link NinthMissionResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
@@ -66,7 +65,7 @@ public class NinthMissionResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -77,9 +76,10 @@ public class NinthMissionResourceIT {
             .shareable(DEFAULT_SHAREABLE);
         return ninthMission;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -150,7 +150,7 @@ public class NinthMissionResourceIT {
             .andExpect(jsonPath("$.[*].gameSize").value(hasItem(DEFAULT_GAME_SIZE.toString())))
             .andExpect(jsonPath("$.[*].shareable").value(hasItem(DEFAULT_SHAREABLE.booleanValue())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllNinthMissionsWithEagerRelationshipsIsEnabled() throws Exception {
         when(ninthMissionRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
@@ -186,6 +186,7 @@ public class NinthMissionResourceIT {
             .andExpect(jsonPath("$.gameSize").value(DEFAULT_GAME_SIZE.toString()))
             .andExpect(jsonPath("$.shareable").value(DEFAULT_SHAREABLE.booleanValue()));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthMission() throws Exception {

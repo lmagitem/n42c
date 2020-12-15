@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { INinthArmyUnit, NinthArmyUnit } from 'app/shared/model/ninth-army-unit.model';
-import { NinthArmyUnitService } from './ninth-army-unit.service';
-import { INinthArmy } from 'app/shared/model/ninth-army.model';
-import { NinthArmyService } from 'app/entities/ninth-army/ninth-army.service';
-import { INinthUnit } from 'app/shared/model/ninth-unit.model';
-import { NinthUnitService } from 'app/entities/ninth-unit/ninth-unit.service';
+import {INinthArmyUnit, NinthArmyUnit} from 'app/shared/model/ninth-army-unit.model';
+import {NinthArmyUnitService} from './ninth-army-unit.service';
+import {INinthArmy} from 'app/shared/model/ninth-army.model';
+import {NinthArmyService} from 'app/entities/ninth-army/ninth-army.service';
+import {INinthUnit} from 'app/shared/model/ninth-unit.model';
+import {NinthUnitService} from 'app/entities/ninth-unit/ninth-unit.service';
 
 type SelectableEntity = INinthArmy | INinthUnit;
 

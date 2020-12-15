@@ -1,13 +1,12 @@
 package com.n42c.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,12 +44,12 @@ public class NinthStratagemGroup implements Serializable {
 
     @ManyToMany(mappedBy = "campaignStratagems")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthCampaign> campaigns = new HashSet<>();
 
     @ManyToMany(mappedBy = "missionStratagems")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<NinthMission> missions = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -79,6 +78,10 @@ public class NinthStratagemGroup implements Serializable {
         return localizations;
     }
 
+    public void setLocalizations(Set<LocalizedNinthStratagemGroup> localizedNinthStratagemGroups) {
+        this.localizations = localizedNinthStratagemGroups;
+    }
+
     public NinthStratagemGroup localizations(Set<LocalizedNinthStratagemGroup> localizedNinthStratagemGroups) {
         this.localizations = localizedNinthStratagemGroups;
         return this;
@@ -96,12 +99,12 @@ public class NinthStratagemGroup implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedNinthStratagemGroup> localizedNinthStratagemGroups) {
-        this.localizations = localizedNinthStratagemGroups;
-    }
-
     public Set<NinthStratagem> getStratagems() {
         return stratagems;
+    }
+
+    public void setStratagems(Set<NinthStratagem> ninthStratagems) {
+        this.stratagems = ninthStratagems;
     }
 
     public NinthStratagemGroup stratagems(Set<NinthStratagem> ninthStratagems) {
@@ -121,12 +124,12 @@ public class NinthStratagemGroup implements Serializable {
         return this;
     }
 
-    public void setStratagems(Set<NinthStratagem> ninthStratagems) {
-        this.stratagems = ninthStratagems;
-    }
-
     public Player getAuthor() {
         return author;
+    }
+
+    public void setAuthor(Player player) {
+        this.author = player;
     }
 
     public NinthStratagemGroup author(Player player) {
@@ -134,12 +137,12 @@ public class NinthStratagemGroup implements Serializable {
         return this;
     }
 
-    public void setAuthor(Player player) {
-        this.author = player;
-    }
-
     public Set<NinthCampaign> getCampaigns() {
         return campaigns;
+    }
+
+    public void setCampaigns(Set<NinthCampaign> ninthCampaigns) {
+        this.campaigns = ninthCampaigns;
     }
 
     public NinthStratagemGroup campaigns(Set<NinthCampaign> ninthCampaigns) {
@@ -159,12 +162,12 @@ public class NinthStratagemGroup implements Serializable {
         return this;
     }
 
-    public void setCampaigns(Set<NinthCampaign> ninthCampaigns) {
-        this.campaigns = ninthCampaigns;
-    }
-
     public Set<NinthMission> getMissions() {
         return missions;
+    }
+
+    public void setMissions(Set<NinthMission> ninthMissions) {
+        this.missions = ninthMissions;
     }
 
     public NinthStratagemGroup missions(Set<NinthMission> ninthMissions) {
@@ -182,10 +185,6 @@ public class NinthStratagemGroup implements Serializable {
         this.missions.remove(ninthMission);
         ninthMission.getMissionStratagems().remove(this);
         return this;
-    }
-
-    public void setMissions(Set<NinthMission> ninthMissions) {
-        this.missions = ninthMissions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -20,5 +20,6 @@ export class NinthArmyUnit implements INinthArmyUnit {
     public army?: INinthArmy,
     public unit?: INinthUnit,
     public selections?: INinthArmyMoment[]
-  ) {}
+  ) {
+  }
 }

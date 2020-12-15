@@ -1,5 +1,5 @@
-import { INinthMission } from 'app/shared/model/ninth-mission.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {INinthMission} from 'app/shared/model/ninth-mission.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedNinthMission {
   id?: number;
@@ -16,5 +16,6 @@ export class LocalizedNinthMission implements ILocalizedNinthMission {
     public briefing?: any,
     public language?: Language,
     public mission?: INinthMission
-  ) {}
+  ) {
+  }
 }

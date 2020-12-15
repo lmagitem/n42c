@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { IBlog } from 'app/shared/model/blog.model';
-import { BlogService } from './blog.service';
+import {IBlog} from 'app/shared/model/blog.model';
+import {BlogService} from './blog.service';
 
 @Component({
   templateUrl: './blog-delete-dialog.component.html',
@@ -11,7 +11,8 @@ import { BlogService } from './blog.service';
 export class BlogDeleteDialogComponent {
   blog?: IBlog;
 
-  constructor(protected blogService: BlogService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
+  constructor(protected blogService: BlogService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {
+  }
 
   cancel(): void {
     this.activeModal.dismiss();

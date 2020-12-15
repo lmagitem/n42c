@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { INinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
-import { NinthMissionRuleService } from './ninth-mission-rule.service';
+import {INinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
+import {NinthMissionRuleService} from './ninth-mission-rule.service';
 
 @Component({
   templateUrl: './ninth-mission-rule-delete-dialog.component.html',

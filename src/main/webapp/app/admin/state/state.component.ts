@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { StateService } from './state.service';
-import { Observable } from 'rxjs';
-import { Account } from 'app/core/user/account.model';
-import { first } from 'rxjs/operators';
-import { CampaignService } from 'app/campaign/campaign.service';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {StateService} from './state.service';
+import {Observable} from 'rxjs';
+import {Account} from 'app/core/user/account.model';
+import {first} from 'rxjs/operators';
+import {CampaignService} from 'app/campaign/campaign.service';
 
 @Component({
   selector: 'jhi-state',
@@ -11,9 +11,11 @@ import { CampaignService } from 'app/campaign/campaign.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StateComponent implements OnInit {
-  constructor(private stateService: StateService, private campaignService: CampaignService) {}
+  constructor(private stateService: StateService, private campaignService: CampaignService) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   getAccount(): Observable<Account | null> {
     return this.stateService.getAccount();

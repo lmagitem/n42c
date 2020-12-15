@@ -6,12 +6,13 @@ import {Observable} from 'rxjs';
 import {SERVER_API_URL} from 'app/app.constants';
 import {InfoResponse, ProfileInfo} from './profile-info.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ProfileService {
   private infoUrl = SERVER_API_URL + 'management/info';
   private profileInfo$!: Observable<ProfileInfo>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getProfileInfo(): Observable<ProfileInfo> {
     if (this.profileInfo$) {

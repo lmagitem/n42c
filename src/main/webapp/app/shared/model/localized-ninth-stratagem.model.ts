@@ -1,5 +1,5 @@
-import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedNinthStratagem {
   id?: number;
@@ -20,5 +20,6 @@ export class LocalizedNinthStratagem implements ILocalizedNinthStratagem {
     public keywords?: any,
     public language?: Language,
     public stratagem?: INinthStratagem
-  ) {}
+  ) {
+  }
 }

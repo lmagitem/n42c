@@ -1,76 +1,87 @@
 <div>
-  <h2 id="page-heading">
-    <span jhiTranslate="n42cApp.blogPost.home.title">Blog Posts</span>
+    <h2 id="page-heading">
+        <span jhiTranslate="n42cApp.blogPost.home.title">Blog Posts</span>
 
-    <button
-      id="jh-create-entity"
-      class="btn btn-primary float-right jh-create-entity create-blog-post"
-      [routerLink]="['/entities/blog-post/new']"
-    >
-      <fa-icon icon="plus"></fa-icon>
-      <span jhiTranslate="n42cApp.blogPost.home.createLabel">
+        <button
+            [routerLink]="['/entities/blog-post/new']"
+            class="btn btn-primary float-right jh-create-entity create-blog-post"
+            id="jh-create-entity"
+        >
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="n42cApp.blogPost.home.createLabel">
         Create a new Blog Post
       </span>
-    </button>
-  </h2>
+        </button>
+    </h2>
 
-  <jhi-alert-error></jhi-alert-error>
+    <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert></jhi-alert>
+    <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="blogPosts?.length === 0">
-    <span jhiTranslate="n42cApp.blogPost.home.notFound">No blogPosts found</span>
-  </div>
+    <div *ngIf="blogPosts?.length === 0" class="alert alert-warning" id="no-result">
+        <span jhiTranslate="n42cApp.blogPost.home.notFound">No blogPosts found</span>
+    </div>
 
-  <div class="table-responsive" id="entities" *ngIf="blogPosts && blogPosts.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="title"><span jhiTranslate="n42cApp.blogPost.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="published">
-            <span jhiTranslate="n42cApp.blogPost.published">Published</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="modified">
-            <span jhiTranslate="n42cApp.blogPost.modified">Modified</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="blog.name"><span jhiTranslate="n42cApp.blogPost.blog">Blog</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
-        <tr *ngFor="let blogPost of blogPosts; trackBy: trackId">
-          <td>
-            <a [routerLink]="['/entities', 'blog-post', blogPost.id, 'view']">{{ blogPost.id }}</a>
-          </td>
-          <td>{{ blogPost.title }}</td>
-          <td>{{ blogPost.published | date: 'medium' }}</td>
-          <td>{{ blogPost.modified | date: 'medium' }}</td>
-          <td>
-            <div *ngIf="blogPost.blog">
-              <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.name }}</a>
-            </div>
-          </td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/entities', 'blog-post', blogPost.id, 'view']" class="btn btn-info btn-sm">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+    <div *ngIf="blogPosts && blogPosts.length > 0" class="table-responsive" id="entities">
+        <table aria-describedby="page-heading" class="table table-striped">
+            <thead>
+            <tr [(ascending)]="ascending" [(predicate)]="predicate" [callback]="reset.bind(this)" jhiSort>
+                <th jhiSortBy="id" scope="col"><span jhiTranslate="global.field.id">ID</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th jhiSortBy="title" scope="col"><span jhiTranslate="n42cApp.blogPost.title">Title</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th jhiSortBy="published" scope="col">
+                    <span jhiTranslate="n42cApp.blogPost.published">Published</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th jhiSortBy="modified" scope="col">
+                    <span jhiTranslate="n42cApp.blogPost.modified">Modified</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th jhiSortBy="blog.name" scope="col"><span jhiTranslate="n42cApp.blogPost.blog">Blog</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0"
+                   infinite-scroll>
+            <tr *ngFor="let blogPost of blogPosts; trackBy: trackId">
+                <td>
+                    <a [routerLink]="['/entities', 'blog-post', blogPost.id, 'view']">{{ blogPost.id }}</a>
+                </td>
+                <td>{{ blogPost.title }}</td>
+                <td>{{ blogPost.published | date: 'medium':undefined:locale }}</td>
+                <td>{{ blogPost.modified | date: 'medium':undefined:locale }}</td>
+                <td>
+                    <div *ngIf="blogPost.blog">
+                        <a [routerLink]="['/entities', 'blog', blogPost.blog?.id, 'view']">{{ blogPost.blog?.name }}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button [routerLink]="['/entities', 'blog-post', blogPost.id, 'view']" class="btn btn-info btn-sm"
+                                type="submit">
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
 
-              <button type="submit" [routerLink]="['/entities', 'blog-post', blogPost.id, 'edit']" class="btn btn-primary btn-sm">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+                        <button [routerLink]="['/entities', 'blog-post', blogPost.id, 'edit']" class="btn btn-primary btn-sm"
+                                type="submit">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
 
-              <button type="submit" (click)="delete(blogPost)" class="btn btn-danger btn-sm">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                        <button (click)="delete(blogPost)" class="btn btn-danger btn-sm" type="submit">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

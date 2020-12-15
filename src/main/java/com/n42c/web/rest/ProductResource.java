@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.Product;
 import com.n42c.repository.ProductRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,11 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -33,14 +31,11 @@ import java.util.Optional;
 @Transactional
 public class ProductResource {
 
-    private final Logger log = LoggerFactory.getLogger(ProductResource.class);
-
     private static final String ENTITY_NAME = "product";
-
+    private final Logger log = LoggerFactory.getLogger(ProductResource.class);
+    private final ProductRepository productRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final ProductRepository productRepository;
 
     public ProductResource(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -89,7 +84,7 @@ public class ProductResource {
     /**
      * {@code GET  /products} : get all the products.
      *
-     * @param pageable the pagination information.
+     * @param pageable  the pagination information.
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of products in body.
      */

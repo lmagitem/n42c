@@ -1,0 +1,1063 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="lukem (generated)" id="1607927024642-2">
+        <createTable tableName="app_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="app_userPK"/>
+            </column>
+            <column name="admin" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="blog_rights" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="displayed_name" type="VARCHAR(255)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="profile_rights" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scriptorium_rights" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_rights" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-3">
+        <createTable tableName="app_user_asked_friend_requests">
+            <column name="app_user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="asked_friend_requests_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-4">
+        <createTable tableName="app_user_given_friendships">
+            <column name="app_user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="given_friendships_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-5">
+        <createTable tableName="app_user_profile">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="app_user_profilePK"/>
+            </column>
+            <column name="header_background_uri" type="VARCHAR(255)"/>
+            <column name="language" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="summary" type="VARCHAR(2147483647)"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-6">
+        <createTable tableName="blog">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="blogPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-7">
+        <createTable tableName="blog_category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="blog_categoryPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_category_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-8">
+        <createTable tableName="blog_post">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="blog_postPK"/>
+            </column>
+            <column name="modified" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="published" type="TIMESTAMP"/>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="blog_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-9">
+        <createTable tableName="blog_post_authors">
+            <column name="blog_post_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authors_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-10">
+        <createTable tableName="blog_post_categories">
+            <column name="blog_post_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="categories_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-11">
+        <createTable tableName="jhi_authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_authorityPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-12">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="TIMESTAMP"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-13">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-14">
+        <createTable tableName="jhi_user">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="jhi_userPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP"/>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="TIMESTAMP"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(254)"/>
+            <column name="lang_key" type="VARCHAR(10)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-15">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-16">
+        <createTable tableName="localized_blog">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_blogPK"/>
+            </column>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="blog_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-17">
+        <createTable tableName="localized_blog_category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_blog_categoryPK"/>
+            </column>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-18">
+        <createTable tableName="localized_blog_post">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_blog_postPK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="excerpt" type="VARCHAR(2147483647)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-19">
+        <createTable tableName="localized_ninth_deployment_map">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_ninth_deployment_mapPK"/>
+            </column>
+            <column name="description" type="VARCHAR(2147483647)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="deployment_map_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-20">
+        <createTable tableName="localized_ninth_mission">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_ninth_missionPK"/>
+            </column>
+            <column name="briefing" type="VARCHAR(2147483647)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="mission_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-21">
+        <createTable tableName="localized_ninth_mission_rule">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_ninth_mission_rulePK"/>
+            </column>
+            <column name="description" type="VARCHAR(2147483647)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="rule_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-22">
+        <createTable tableName="localized_ninth_objective">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_ninth_objectivePK"/>
+            </column>
+            <column name="description" type="VARCHAR(2147483647)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="objective_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-23">
+        <createTable tableName="localized_ninth_stratagem">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_ninth_stratagemPK"/>
+            </column>
+            <column name="description" type="VARCHAR(2147483647)"/>
+            <column name="keywords" type="VARCHAR(2147483647)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="summary" type="VARCHAR(255)"/>
+            <column name="stratagem_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-24">
+        <createTable tableName="localized_ninth_stratagem_grp">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_ninth_stratagem_grpPK"/>
+            </column>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="stratagem_group_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-25">
+        <createTable tableName="localized_product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="localized_productPK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="excerpt" type="VARCHAR(255)"/>
+            <column name="language" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="picture_url" type="VARCHAR(255)"/>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-26">
+        <createTable tableName="ninth_army">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_armyPK"/>
+            </column>
+            <column name="crusade" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="faction" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subfaction" type="VARCHAR(255)"/>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-27">
+        <createTable tableName="ninth_army_moment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_army_momentPK"/>
+            </column>
+            <column name="current" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="draws" type="INT"/>
+            <column name="major_defeats" type="INT"/>
+            <column name="major_victories" type="INT"/>
+            <column name="minor_defeats" type="INT"/>
+            <column name="minor_victories" type="INT"/>
+            <column name="notes" type="VARCHAR(2147483647)"/>
+            <column name="objectives" type="VARCHAR(2147483647)"/>
+            <column name="requisition" type="INT"/>
+            <column name="supply_limit" type="INT"/>
+            <column name="supply_used" type="INT"/>
+            <column name="army_id" type="BIGINT"/>
+            <column name="battle_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-28">
+        <createTable tableName="ninth_army_moment_selected_objectives">
+            <column name="ninth_army_moment_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="selected_objectives_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-29">
+        <createTable tableName="ninth_army_moment_selected_units">
+            <column name="ninth_army_moment_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="selected_units_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-30">
+        <createTable tableName="ninth_army_unit">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_army_unitPK"/>
+            </column>
+            <column name="selectable_keywords" type="VARCHAR(255)"/>
+            <column name="army_id" type="BIGINT"/>
+            <column name="unit_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-31">
+        <createTable tableName="ninth_army_unit_moment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_army_unit_momentPK"/>
+            </column>
+            <column name="battle_honours" type="VARCHAR(255)"/>
+            <column name="battle_scars" type="VARCHAR(255)"/>
+            <column name="battles_played" type="INT"/>
+            <column name="battles_survived" type="INT"/>
+            <column name="crusade_points" type="INT"/>
+            <column name="crusade_rank" type="VARCHAR(255)"/>
+            <column name="current" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="equipment" type="VARCHAR(255)"/>
+            <column name="experience_points" type="INT"/>
+            <column name="melee_kills" type="INT"/>
+            <column name="other_upgrades" type="VARCHAR(255)"/>
+            <column name="points_cost" type="INT"/>
+            <column name="power_rating" type="INT"/>
+            <column name="psychic_kills" type="INT"/>
+            <column name="psychic_powers" type="VARCHAR(255)"/>
+            <column name="ranged_kills" type="INT"/>
+            <column name="relics" type="VARCHAR(255)"/>
+            <column name="since_instant" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="warlord_traits" type="VARCHAR(255)"/>
+            <column name="army_unit_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-32">
+        <createTable tableName="ninth_battle">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_battlePK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="resolved" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="campaign_moment_id" type="BIGINT"/>
+            <column name="mission_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-33">
+        <createTable tableName="ninth_campaign">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_campaignPK"/>
+            </column>
+            <column name="description" type="VARCHAR(2147483647)"/>
+            <column name="game_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="use_power_rating" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-34">
+        <createTable tableName="ninth_campaign_authors">
+            <column name="ninth_campaign_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authors_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-35">
+        <createTable tableName="ninth_campaign_campaign_stratagems">
+            <column name="ninth_campaign_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="campaign_stratagems_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-36">
+        <createTable tableName="ninth_campaign_moment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_campaign_momentPK"/>
+            </column>
+            <column name="current" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(2147483647)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="since_instant" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="summary" type="VARCHAR(2147483647)"/>
+            <column name="campaign_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-37">
+        <createTable tableName="ninth_campaign_participants">
+            <column name="ninth_campaign_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="participants_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-38">
+        <createTable tableName="ninth_deployment_map">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_deployment_mapPK"/>
+            </column>
+            <column name="shareable" type="BOOLEAN"/>
+            <column name="url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-39">
+        <createTable tableName="ninth_deployment_map_used_in_missions">
+            <column name="ninth_deployment_map_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="used_in_missions_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-40">
+        <createTable tableName="ninth_mission">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_missionPK"/>
+            </column>
+            <column name="game_size" type="VARCHAR(255)"/>
+            <column name="game_type" type="VARCHAR(255)"/>
+            <column name="shareable" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-41">
+        <createTable tableName="ninth_mission_allowed_secondaries">
+            <column name="ninth_mission_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="allowed_secondaries_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-42">
+        <createTable tableName="ninth_mission_mission_stratagems">
+            <column name="ninth_mission_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="mission_stratagems_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-43">
+        <createTable tableName="ninth_mission_primary_objectives">
+            <column name="ninth_mission_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="primary_objectives_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-44">
+        <createTable tableName="ninth_mission_rule">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_mission_rulePK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-45">
+        <createTable tableName="ninth_mission_rules">
+            <column name="ninth_mission_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="rules_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-46">
+        <createTable tableName="ninth_objective">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_objectivePK"/>
+            </column>
+            <column name="shareable" type="BOOLEAN"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-47">
+        <createTable tableName="ninth_stratagem">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_stratagemPK"/>
+            </column>
+            <column name="cost" type="INT"/>
+            <column name="faction" type="VARCHAR(255)"/>
+            <column name="phase" type="VARCHAR(255)"/>
+            <column name="subfaction" type="VARCHAR(255)"/>
+            <column name="turn" type="VARCHAR(255)"/>
+            <column name="group_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-48">
+        <createTable tableName="ninth_stratagem_group">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_stratagem_groupPK"/>
+            </column>
+            <column name="shareable" type="BOOLEAN"/>
+            <column name="author_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-49">
+        <createTable tableName="ninth_unit">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_unitPK"/>
+            </column>
+            <column name="battlefield_role" type="VARCHAR(255)"/>
+            <column name="datasheet" type="VARCHAR(255)"/>
+            <column name="faction" type="VARCHAR(255)"/>
+            <column name="keywords" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subfaction" type="VARCHAR(255)"/>
+            <column name="owner_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-50">
+        <createTable tableName="ninth_unit_moment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ninth_unit_momentPK"/>
+            </column>
+            <column name="current" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="picture_url" type="VARCHAR(255)"/>
+            <column name="since_instant" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-51">
+        <createTable tableName="player">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="playerPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-52">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="productPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-53">
+        <createTable tableName="product_authors">
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authors_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-54">
+        <createTable tableName="profile_part">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_partPK"/>
+            </column>
+            <column name="index" type="INT"/>
+            <column name="jhi_order" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-55">
+        <createTable tableName="profile_part_linked_experience">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_part_linked_experiencePK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)"/>
+            <column name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_title" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="linked_item_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-56">
+        <createTable tableName="profile_part_precise_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_part_precise_itemPK"/>
+            </column>
+            <column name="content" type="VARCHAR(2147483647)"/>
+            <column name="jhi_end" type="TIMESTAMP"/>
+            <column name="location_lat" type="DOUBLE"/>
+            <column name="location_long" type="DOUBLE"/>
+            <column name="location_name" type="VARCHAR(255)"/>
+            <column name="start" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_title" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_part_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-57">
+        <createTable tableName="profile_part_simple_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_part_simple_itemPK"/>
+            </column>
+            <column name="content" type="VARCHAR(255)"/>
+            <column name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_title" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_part_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-58">
+        <createTable tableName="profile_part_skill">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_part_skillPK"/>
+            </column>
+            <column name="index" type="INT"/>
+            <column name="level" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="skill_category_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-59">
+        <createTable tableName="profile_part_skill_category">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_part_skill_categoryPK"/>
+            </column>
+            <column name="index" type="INT"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="profile_part_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-60">
+        <createTable tableName="profile_part_skill_linked_skills">
+            <column name="profile_part_skill_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="linked_skills_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-61">
+        <createTable tableName="shop">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="shopPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-62">
+        <addUniqueConstraint columnNames="displayed_name" constraintName="UC_APP_USERDISPLAYED_NAME_COL" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-63">
+        <addUniqueConstraint columnNames="user_name" constraintName="UC_APP_USERUSER_NAME_COL" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-64">
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-65">
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-66">
+        <addUniqueConstraint columnNames="app_user_id" constraintName="UK_if605avbupy77v1r5q6p1oab5" tableName="player"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-67">
+        <addUniqueConstraint columnNames="user_id" constraintName="UK_qjho89hmbuv32f9a8tbocpr0i" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-68">
+        <addForeignKeyConstraint baseColumnNames="app_user_id" baseTableName="app_user_given_friendships" constraintName="FK1j5w8wnxqo2aqa9kteyfa963e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-69">
+        <addForeignKeyConstraint baseColumnNames="rule_id" baseTableName="localized_ninth_mission_rule" constraintName="FK1k7n6ypifk35acbotn9o0psna" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission_rule" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-70">
+        <addForeignKeyConstraint baseColumnNames="ninth_army_moment_id" baseTableName="ninth_army_moment_selected_units" constraintName="FK1uap90fume725ovks6iq6wm2u" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army_moment" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-71">
+        <addForeignKeyConstraint baseColumnNames="app_user_id" baseTableName="app_user_asked_friend_requests" constraintName="FK1wdyg1ks5q7146i3v0ieuka62" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-72">
+        <addForeignKeyConstraint baseColumnNames="campaign_moment_id" baseTableName="ninth_battle" constraintName="FK21gmpa62lejy36lfhdsptg01b" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_campaign_moment" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-73">
+        <addForeignKeyConstraint baseColumnNames="blog_post_id" baseTableName="blog_post_categories" constraintName="FK22huy5ot9a5d496ihb2y3sj31" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_post" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-74">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-75">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-76">
+        <addForeignKeyConstraint baseColumnNames="army_id" baseTableName="ninth_army_moment" constraintName="FK2qtdx2prgabcrdw8uo466ji40" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-77">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_allowed_secondaries" constraintName="FK353f9ivitjm71smniy8iic262" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-78">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="localized_blog_category" constraintName="FK3ch87a9xdxq3mqp9o05qcbbs5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_category" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-79">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="product_authors" constraintName="FK3j2895anfamggdbhhmotne52n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-80">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="localized_blog_post" constraintName="FK40cirppbw074ne4gai5svv1wg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_post" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-81">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="jhi_authority" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-82">
+        <addForeignKeyConstraint baseColumnNames="ninth_deployment_map_id" baseTableName="ninth_deployment_map_used_in_missions" constraintName="FK521m4oa1xlpl2jv7jhj7iovyb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_deployment_map" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-83">
+        <addForeignKeyConstraint baseColumnNames="linked_item_id" baseTableName="profile_part_linked_experience" constraintName="FK56ti5y0ju64h0ajsf1ak6ub7k" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part_precise_item" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-84">
+        <addForeignKeyConstraint baseColumnNames="ninth_campaign_id" baseTableName="ninth_campaign_campaign_stratagems" constraintName="FK5k8p5dfotmibc1e9co2ovpg1w" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_campaign" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-85">
+        <addForeignKeyConstraint baseColumnNames="primary_objectives_id" baseTableName="ninth_mission_primary_objectives" constraintName="FK5wl60bbwh5pw99qrb0ob5mtxg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-86">
+        <addForeignKeyConstraint baseColumnNames="stratagem_id" baseTableName="localized_ninth_stratagem" constraintName="FK678oycwilxn2755tdmfc052i6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-87">
+        <addForeignKeyConstraint baseColumnNames="blog_id" baseTableName="blog_post" constraintName="FK72d6rmcq1cen13jr3etuwk1vu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-88">
+        <addForeignKeyConstraint baseColumnNames="deployment_map_id" baseTableName="localized_ninth_deployment_map" constraintName="FK78uy4x214hm6sjyk96jpqamm1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_deployment_map" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-89">
+        <addForeignKeyConstraint baseColumnNames="profile_part_skill_id" baseTableName="profile_part_skill_linked_skills" constraintName="FK7lwg4ut7w13omwx34ewemfm3o" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part_skill" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-90">
+        <addForeignKeyConstraint baseColumnNames="profile_id" baseTableName="profile_part" constraintName="FK7sscms24cq2pxxjea71tkrl48" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user_profile" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-91">
+        <addForeignKeyConstraint baseColumnNames="blog_id" baseTableName="localized_blog" constraintName="FK84r1oelfyyaueixwc64vulyq7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-92">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="app_user_profile" constraintName="FK855x86e308aum6gsppo0mw5h8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-93">
+        <addForeignKeyConstraint baseColumnNames="selected_units_id" baseTableName="ninth_army_moment_selected_units" constraintName="FK8odka3pnxnlj8arqyuv9nn927" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army_unit" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-94">
+        <addForeignKeyConstraint baseColumnNames="shop_id" baseTableName="product" constraintName="FK94hgg8hlqfqfnt3dag950vm7n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="shop" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-95">
+        <addForeignKeyConstraint baseColumnNames="ninth_campaign_id" baseTableName="ninth_campaign_authors" constraintName="FK9swjw02kgdg7wre942c2oo068" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_campaign" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-96">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_rules" constraintName="FKahqqt6f3omrod85tn6uvcx5m7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-97">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="app_user" constraintName="FKainmitdmj6r3nw4o3gx1p3xsy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-98">
+        <addForeignKeyConstraint baseColumnNames="mission_id" baseTableName="ninth_battle" constraintName="FKaiulibkriusepxh3i81mrar4q" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-99">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="ninth_stratagem" constraintName="FKbyy3t46ak07umbr5xw7s0ni85" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-100">
+        <addForeignKeyConstraint baseColumnNames="mission_stratagems_id" baseTableName="ninth_mission_mission_stratagems" constraintName="FKc57t0wffsk90i73209gtyqt9l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-101">
+        <addForeignKeyConstraint baseColumnNames="selected_objectives_id" baseTableName="ninth_army_moment_selected_objectives" constraintName="FKcno3fh7v23c4uf1lnmomenk0l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-102">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_mission_stratagems" constraintName="FKdb0wa3ed87ujkgyqes2e62fup" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-103">
+        <addForeignKeyConstraint baseColumnNames="asked_friend_requests_id" baseTableName="app_user_asked_friend_requests" constraintName="FKdb7qmcawwneq9afq3h1fnc89y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-104">
+        <addForeignKeyConstraint baseColumnNames="ninth_army_moment_id" baseTableName="ninth_army_moment_selected_objectives" constraintName="FKeboxwgfyk9lk8dio8k2anetoj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army_moment" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-105">
+        <addForeignKeyConstraint baseColumnNames="parent_category_id" baseTableName="blog_category" constraintName="FKeyanaikn91ptx0weh96rs2rdq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_category" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-106">
+        <addForeignKeyConstraint baseColumnNames="campaign_stratagems_id" baseTableName="ninth_campaign_campaign_stratagems" constraintName="FKfj3r5qbwxd2kvypwduen3evsj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-107">
+        <addForeignKeyConstraint baseColumnNames="campaign_id" baseTableName="ninth_campaign_moment" constraintName="FKfnx00kf3161glyll11yffakq8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_campaign" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-108">
+        <addForeignKeyConstraint baseColumnNames="profile_part_id" baseTableName="profile_part_skill_category" constraintName="FKfs6tink70wcddcrng5xddmfq1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-109">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="ninth_stratagem_group" constraintName="FKg496fkusfyy1000lms4bth8he" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-110">
+        <addForeignKeyConstraint baseColumnNames="unit_id" baseTableName="ninth_unit_moment" constraintName="FKgbf47jjpg3omooegpjsfyjei6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_unit" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-111">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_primary_objectives" constraintName="FKha0tblohp47og5v8q77iv1ndb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-112">
+        <addForeignKeyConstraint baseColumnNames="participants_id" baseTableName="ninth_campaign_participants" constraintName="FKi4v13g1cr1lbxjoyxhbis7pm5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-113">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="ninth_army" constraintName="FKi9f9xgvj6lob9orv6tt5t7pvv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-114">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="localized_product" constraintName="FKic1kdgxtw5x5mfhv1w6yqjs2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-115">
+        <addForeignKeyConstraint baseColumnNames="army_unit_id" baseTableName="ninth_army_unit_moment" constraintName="FKj2oe0sw520ux5g49jpp4jdcd2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army_unit" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-116">
+        <addForeignKeyConstraint baseColumnNames="army_id" baseTableName="ninth_army_unit" constraintName="FKj5bpm5x7a002s0ifxsqt3s22d" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_army" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-117">
+        <addForeignKeyConstraint baseColumnNames="rules_id" baseTableName="ninth_mission_rules" constraintName="FKjk6bom7lpqx47kiq8skit2qqy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission_rule" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-118">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="ninth_unit" constraintName="FKkmbwn8dfkhn3uy2yna13tvvbb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-119">
+        <addForeignKeyConstraint baseColumnNames="authors_id" baseTableName="product_authors" constraintName="FKlalr9tedw91jw8a28rn4014fo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-120">
+        <addForeignKeyConstraint baseColumnNames="skill_category_id" baseTableName="profile_part_skill" constraintName="FKlewkch7xbo1lygxfkv6o8qa2t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part_skill_category" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-121">
+        <addForeignKeyConstraint baseColumnNames="profile_part_id" baseTableName="profile_part_precise_item" constraintName="FKmf2x1wdbskxbmtxn8ysl4w41g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-122">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="blog" constraintName="FKmmblqo35o3dc2049fuv079raf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-123">
+        <addForeignKeyConstraint baseColumnNames="profile_part_id" baseTableName="profile_part_simple_item" constraintName="FKmt9xcj9p3oprwgwrjgx4fvx4q" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-124">
+        <addForeignKeyConstraint baseColumnNames="authors_id" baseTableName="ninth_campaign_authors" constraintName="FKn0w5wukgj1i39xg0pr5jiy91a" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-125">
+        <addForeignKeyConstraint baseColumnNames="given_friendships_id" baseTableName="app_user_given_friendships" constraintName="FKn0wbs3yayn4ei86o5543gmwas" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-126">
+        <addForeignKeyConstraint baseColumnNames="allowed_secondaries_id" baseTableName="ninth_mission_allowed_secondaries" constraintName="FKnnwegelapedsc5vfm6nxl3vys" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-127">
+        <addForeignKeyConstraint baseColumnNames="ninth_campaign_id" baseTableName="ninth_campaign_participants" constraintName="FKnofm2a0pu7n0goyv2tdug4y3f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_campaign" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-128">
+        <addForeignKeyConstraint baseColumnNames="authors_id" baseTableName="blog_post_authors" constraintName="FKo18fjymnpfxt1j9l2jl76g77r" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-129">
+        <addForeignKeyConstraint baseColumnNames="battle_id" baseTableName="ninth_army_moment" constraintName="FKocktvx9djv5xf7wclgb9r6bm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_battle" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-130">
+        <addForeignKeyConstraint baseColumnNames="stratagem_group_id" baseTableName="localized_ninth_stratagem_grp" constraintName="FKoiipvp1b2giru5vfgckf35if7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-131">
+        <addForeignKeyConstraint baseColumnNames="categories_id" baseTableName="blog_post_categories" constraintName="FKoye8vvct96fwuc1v3kbioj30n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_category" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-132">
+        <addForeignKeyConstraint baseColumnNames="linked_skills_id" baseTableName="profile_part_skill_linked_skills" constraintName="FKpecgx98xqcckfy70gccndljrc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profile_part_linked_experience" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-133">
+        <addForeignKeyConstraint baseColumnNames="used_in_missions_id" baseTableName="ninth_deployment_map_used_in_missions" constraintName="FKq1yrlhowms9no1xbx4ob1jarc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-134">
+        <addForeignKeyConstraint baseColumnNames="unit_id" baseTableName="ninth_army_unit" constraintName="FKs1w2qb2jshax5w0ytsooimvnc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_unit" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-135">
+        <addForeignKeyConstraint baseColumnNames="blog_post_id" baseTableName="blog_post_authors" constraintName="FKsjojfmc7ap5g6h5w97xbnlbxn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog_post" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-136">
+        <addForeignKeyConstraint baseColumnNames="objective_id" baseTableName="localized_ninth_objective" constraintName="FKspk43n193j8jcv0rilrpoip8y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-137">
+        <addForeignKeyConstraint baseColumnNames="app_user_id" baseTableName="player" constraintName="FKtokaie45cjn0fwdspmpfh17pv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-138">
+        <addForeignKeyConstraint baseColumnNames="mission_id" baseTableName="localized_ninth_mission" constraintName="FKtu00uog03nnwdbgs6gferep6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1607927024642-1">
+        <alterSequence incrementBy="50" sequenceName="sequence_generator"/>
+    </changeSet>
+</databaseChangeLog>

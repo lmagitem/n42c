@@ -1,62 +1,65 @@
 <div class="row justify-content-center">
-  <div class="col-12">
-    <div *ngIf="ninthMission">
-      <h2><span jhiTranslate="n42cApp.ninthMission.detail.title">Ninth Mission</span> {{ ninthMission.id }}</h2>
+    <div class="col-12">
+        <div *ngIf="ninthMission">
+            <h2><span jhiTranslate="n42cApp.ninthMission.detail.title">Ninth Mission</span> {{ ninthMission.id }}</h2>
 
-      <hr />
+            <hr/>
 
-      <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="n42cApp.ninthMission.gameType">Game Type</span></dt>
-        <dd>
-          <span jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthMission.gameType }}">{{ ninthMission.gameType }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthMission.gameSize">Game Size</span></dt>
-        <dd>
-          <span jhiTranslate="{{ 'n42cApp.NinthGameSize.' + ninthMission.gameSize }}">{{ ninthMission.gameSize }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthMission.shareable">Shareable</span></dt>
-        <dd>
-          <span>{{ ninthMission.shareable }}</span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthMission.missionStratagems">Mission Stratagems</span></dt>
-        <dd>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="n42cApp.ninthMission.gameType">Game Type</span></dt>
+                <dd>
+                    <span
+                        jhiTranslate="{{ 'n42cApp.NinthGameType.' + ninthMission.gameType }}">{{ ninthMission.gameType }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthMission.gameSize">Game Size</span></dt>
+                <dd>
+                    <span
+                        jhiTranslate="{{ 'n42cApp.NinthGameSize.' + ninthMission.gameSize }}">{{ ninthMission.gameSize }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthMission.shareable">Shareable</span></dt>
+                <dd>
+                    <span>{{ ninthMission.shareable }}</span>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthMission.missionStratagems">Mission Stratagems</span></dt>
+                <dd>
           <span *ngFor="let missionStratagems of ninthMission.missionStratagems; let last = last">
             <a [routerLink]="['/entities', 'ninth-stratagem-group', missionStratagems?.id, 'view']">{{ missionStratagems.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthMission.primaryObjectives">Primary Objectives</span></dt>
-        <dd>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthMission.primaryObjectives">Primary Objectives</span></dt>
+                <dd>
           <span *ngFor="let primaryObjectives of ninthMission.primaryObjectives; let last = last">
             <a [routerLink]="['/entities', 'ninth-objective', primaryObjectives?.id, 'view']">{{ primaryObjectives.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthMission.allowedSecondaries">Allowed Secondaries</span></dt>
-        <dd>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthMission.allowedSecondaries">Allowed Secondaries</span></dt>
+                <dd>
           <span *ngFor="let allowedSecondaries of ninthMission.allowedSecondaries; let last = last">
             <a [routerLink]="['/entities', 'ninth-objective', allowedSecondaries?.id, 'view']">{{ allowedSecondaries.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-        <dt><span jhiTranslate="n42cApp.ninthMission.rules">Rules</span></dt>
-        <dd>
+                </dd>
+                <dt><span jhiTranslate="n42cApp.ninthMission.rules">Rules</span></dt>
+                <dd>
           <span *ngFor="let rules of ninthMission.rules; let last = last">
             <a [routerLink]="['/entities', 'ninth-mission-rule', rules?.id, 'view']">{{ rules.id }}</a
             >{{ last ? '' : ', ' }}
           </span>
-        </dd>
-      </dl>
+                </dd>
+            </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+            <button (click)="previousState()" class="btn btn-info" type="submit">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
-      <button type="button" [routerLink]="['/entities', 'ninth-mission', ninthMission.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+            <button [routerLink]="['/entities', 'ninth-mission', ninthMission.id, 'edit']" class="btn btn-primary"
+                    type="button">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
     </div>
-  </div>
 </div>

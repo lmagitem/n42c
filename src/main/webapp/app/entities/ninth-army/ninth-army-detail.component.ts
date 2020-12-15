@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthArmy } from 'app/shared/model/ninth-army.model';
+import {INinthArmy} from 'app/shared/model/ninth-army.model';
 
 @Component({
   selector: 'jhi-ninth-army-detail',
@@ -10,10 +10,11 @@ import { INinthArmy } from 'app/shared/model/ninth-army.model';
 export class NinthArmyDetailComponent implements OnInit {
   ninthArmy: INinthArmy | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthArmy }) => (this.ninthArmy = ninthArmy));
+    this.activatedRoute.data.subscribe(({ninthArmy}) => (this.ninthArmy = ninthArmy));
   }
 
   previousState(): void {

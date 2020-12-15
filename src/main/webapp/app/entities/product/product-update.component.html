@@ -1,70 +1,76 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-product-heading" jhiTranslate="n42cApp.product.home.createOrEditLabel">Create or edit a Product</h2>
+    <div class="col-8">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <h2 id="jhi-product-heading" jhiTranslate="n42cApp.product.home.createOrEditLabel">Create or edit a
+                Product</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" [hidden]="!editForm.get('id')!.value">
-          <label for="id" jhiTranslate="global.field.id">ID</label>
-          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-        </div>
+                <div [hidden]="!editForm.get('id')!.value" class="form-group">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input class="form-control" formControlName="id" id="id" name="id" readonly type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label
-            class="form-control-label"
-            jhiTranslate="n42cApp.product.name"
-            for="field_name"
-            [ngbTooltip]="'n42cApp.product.help.name' | translate"
-            >Name</label
-          >
-          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label
+                        [ngbTooltip]="'n42cApp.product.help.name' | translate"
+                        class="form-control-label"
+                        for="field_name"
+                        jhiTranslate="n42cApp.product.name"
+                    >Name</label
+                    >
+                    <input class="form-control" formControlName="name" id="field_name" name="name" type="text"/>
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small *ngIf="editForm.get('name')?.errors?.required" class="form-text text-danger"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label jhiTranslate="n42cApp.product.authors" for="field_authors">Authors</label>
-          <select class="form-control" id="field_authors" multiple name="authors" formControlName="authors">
-            <option
-              [ngValue]="getSelected(editForm.get('authors')!.value, appUserOption)"
-              *ngFor="let appUserOption of appusers; trackBy: trackById"
-              >{{ appUserOption.displayedName }}</option
-            >
-          </select>
-        </div>
+                <div class="form-group">
+                    <label for="field_authors" jhiTranslate="n42cApp.product.authors">Authors</label>
+                    <select class="form-control" formControlName="authors" id="field_authors" multiple name="authors">
+                        <option
+                            *ngFor="let appUserOption of appusers; trackBy: trackById"
+                            [ngValue]="getSelected(editForm.get('authors')!.value, appUserOption)"
+                        >{{ appUserOption.displayedName }}</option
+                        >
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.product.shop" for="field_shop">Shop</label>
-          <select class="form-control" id="field_shop" name="shop" formControlName="shop">
-            <option *ngIf="!editForm.get('shop')!.value" [ngValue]="null" selected></option>
-            <option
-              [ngValue]="shopOption.id === editForm.get('shop')!.value?.id ? editForm.get('shop')!.value : shopOption"
-              *ngFor="let shopOption of shops; trackBy: trackById"
-              >{{ shopOption.name }}</option
-            >
-          </select>
-        </div>
-        <div *ngIf="editForm.get('shop')!.invalid && (editForm.get('shop')!.dirty || editForm.get('shop')!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get('shop')?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-          </small>
-        </div>
-      </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_shop" jhiTranslate="n42cApp.product.shop">Shop</label>
+                    <select class="form-control" formControlName="shop" id="field_shop" name="shop">
+                        <option *ngIf="!editForm.get('shop')!.value" [ngValue]="null" selected></option>
+                        <option
+                            *ngFor="let shopOption of shops; trackBy: trackById"
+                            [ngValue]="shopOption.id === editForm.get('shop')!.value?.id ? editForm.get('shop')!.value : shopOption"
+                        >{{ shopOption.name }}</option
+                        >
+                    </select>
+                </div>
+                <div
+                    *ngIf="editForm.get('shop')!.invalid && (editForm.get('shop')!.dirty || editForm.get('shop')!.touched)">
+                    <small *ngIf="editForm.get('shop')?.errors?.required" class="form-text text-danger"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
 
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
+            <div>
+                <button (click)="previousState()" class="btn btn-secondary" id="cancel-save" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
 
-        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+                <button [disabled]="editForm.invalid || isSaving" class="btn btn-primary" id="save-entity"
+                        type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

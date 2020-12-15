@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.ProfilePartLinkedExperience;
 import com.n42c.repository.ProfilePartLinkedExperienceRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,14 +26,11 @@ import java.util.Optional;
 @Transactional
 public class ProfilePartLinkedExperienceResource {
 
-    private final Logger log = LoggerFactory.getLogger(ProfilePartLinkedExperienceResource.class);
-
     private static final String ENTITY_NAME = "profilePartLinkedExperience";
-
+    private final Logger log = LoggerFactory.getLogger(ProfilePartLinkedExperienceResource.class);
+    private final ProfilePartLinkedExperienceRepository profilePartLinkedExperienceRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final ProfilePartLinkedExperienceRepository profilePartLinkedExperienceRepository;
 
     public ProfilePartLinkedExperienceResource(ProfilePartLinkedExperienceRepository profilePartLinkedExperienceRepository) {
         this.profilePartLinkedExperienceRepository = profilePartLinkedExperienceRepository;

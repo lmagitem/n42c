@@ -2,10 +2,9 @@ package com.n42c.web.rest;
 
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
-import com.n42c.domain.Player;
 import com.n42c.domain.AppUser;
+import com.n42c.domain.Player;
 import com.n42c.repository.PlayerRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link PlayerResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class PlayerResourceIT {
@@ -48,7 +48,7 @@ public class PlayerResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -67,9 +67,10 @@ public class PlayerResourceIT {
         player.setAppUser(appUser);
         return player;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -163,7 +164,7 @@ public class PlayerResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(player.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @Test
     @Transactional
     public void getPlayer() throws Exception {
@@ -177,6 +178,7 @@ public class PlayerResourceIT {
             .andExpect(jsonPath("$.id").value(player.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
+
     @Test
     @Transactional
     public void getNonExistingPlayer() throws Exception {

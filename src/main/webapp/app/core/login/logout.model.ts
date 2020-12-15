@@ -1,3 +1,4 @@
 export class Logout {
-  constructor(public clientId: string, public logoutUrl: string) {}
+  constructor(public clientId: string, public logoutUrl: string) {
+  }
 }

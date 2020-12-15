@@ -1,16 +1,14 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.Language;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * A LocalizedNinthMission.
@@ -58,17 +56,21 @@ public class LocalizedNinthMission implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalizedNinthMission name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getBriefing() {
         return briefing;
+    }
+
+    public void setBriefing(String briefing) {
+        this.briefing = briefing;
     }
 
     public LocalizedNinthMission briefing(String briefing) {
@@ -76,12 +78,12 @@ public class LocalizedNinthMission implements Serializable {
         return this;
     }
 
-    public void setBriefing(String briefing) {
-        this.briefing = briefing;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public LocalizedNinthMission language(Language language) {
@@ -89,21 +91,17 @@ public class LocalizedNinthMission implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public NinthMission getMission() {
         return mission;
+    }
+
+    public void setMission(NinthMission ninthMission) {
+        this.mission = ninthMission;
     }
 
     public LocalizedNinthMission mission(NinthMission ninthMission) {
         this.mission = ninthMission;
         return this;
-    }
-
-    public void setMission(NinthMission ninthMission) {
-        this.mission = ninthMission;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

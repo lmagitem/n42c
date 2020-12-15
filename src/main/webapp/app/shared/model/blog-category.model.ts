@@ -1,5 +1,5 @@
-import { ILocalizedBlogCategory } from 'app/shared/model/localized-blog-category.model';
-import { IBlogPost } from 'app/shared/model/blog-post.model';
+import {ILocalizedBlogCategory} from 'app/shared/model/localized-blog-category.model';
+import {IBlogPost} from 'app/shared/model/blog-post.model';
 
 export interface IBlogCategory {
   id?: number;
@@ -18,5 +18,6 @@ export class BlogCategory implements IBlogCategory {
     public localizations?: ILocalizedBlogCategory[],
     public parentCategory?: IBlogCategory,
     public posts?: IBlogPost[]
-  ) {}
+  ) {
+  }
 }

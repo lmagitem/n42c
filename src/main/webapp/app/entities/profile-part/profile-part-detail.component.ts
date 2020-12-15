@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IProfilePart } from 'app/shared/model/profile-part.model';
+import {IProfilePart} from 'app/shared/model/profile-part.model';
 
 @Component({
   selector: 'jhi-profile-part-detail',
@@ -10,10 +10,11 @@ import { IProfilePart } from 'app/shared/model/profile-part.model';
 export class ProfilePartDetailComponent implements OnInit {
   profilePart: IProfilePart | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ profilePart }) => (this.profilePart = profilePart));
+    this.activatedRoute.data.subscribe(({profilePart}) => (this.profilePart = profilePart));
   }
 
   previousState(): void {

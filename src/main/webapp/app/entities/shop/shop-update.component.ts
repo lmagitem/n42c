@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
-import { IShop, Shop } from 'app/shared/model/shop.model';
-import { ShopService } from './shop.service';
+import {IShop, Shop} from 'app/shared/model/shop.model';
+import {ShopService} from './shop.service';
 
 @Component({
   selector: 'jhi-shop-update',
@@ -20,10 +20,11 @@ export class ShopUpdateComponent implements OnInit {
     name: [null, [Validators.required]],
   });
 
-  constructor(protected shopService: ShopService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(protected shopService: ShopService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ shop }) => {
+    this.activatedRoute.data.subscribe(({shop}) => {
       this.updateForm(shop);
     });
   }
@@ -49,14 +50,6 @@ export class ShopUpdateComponent implements OnInit {
     }
   }
 
-  private createFromForm(): IShop {
-    return {
-      ...new Shop(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-    };
-  }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IShop>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
@@ -71,5 +64,13 @@ export class ShopUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  private createFromForm(): IShop {
+    return {
+      ...new Shop(),
+      id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
+    };
   }
 }

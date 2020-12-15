@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { ILocalizedBlog, LocalizedBlog } from 'app/shared/model/localized-blog.model';
-import { LocalizedBlogService } from './localized-blog.service';
-import { LocalizedBlogComponent } from './localized-blog.component';
-import { LocalizedBlogDetailComponent } from './localized-blog-detail.component';
-import { LocalizedBlogUpdateComponent } from './localized-blog-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {ILocalizedBlog, LocalizedBlog} from 'app/shared/model/localized-blog.model';
+import {LocalizedBlogService} from './localized-blog.service';
+import {LocalizedBlogComponent} from './localized-blog.component';
+import {LocalizedBlogDetailComponent} from './localized-blog-detail.component';
+import {LocalizedBlogUpdateComponent} from './localized-blog-update.component';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class LocalizedBlogResolve implements Resolve<ILocalizedBlog> {
-  constructor(private service: LocalizedBlogService, private router: Router) {}
+  constructor(private service: LocalizedBlogService, private router: Router) {
+  }
 
   resolve(route: ActivatedRouteSnapshot): Observable<ILocalizedBlog> | Observable<never> {
     const id = route.params['id'];

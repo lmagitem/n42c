@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { IProduct } from 'app/shared/model/product.model';
+import {IProduct} from 'app/shared/model/product.model';
 
 @Component({
   selector: 'jhi-product-detail',
@@ -10,10 +10,11 @@ import { IProduct } from 'app/shared/model/product.model';
 export class ProductDetailComponent implements OnInit {
   product: IProduct | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ product }) => (this.product = product));
+    this.activatedRoute.data.subscribe(({product}) => (this.product = product));
   }
 
   previousState(): void {

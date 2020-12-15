@@ -1,6 +1,6 @@
-import { Moment } from 'moment';
-import { IProfilePartPreciseItem } from 'app/shared/model/profile-part-precise-item.model';
-import { IProfilePartSkill } from 'app/shared/model/profile-part-skill.model';
+import {Moment} from 'moment';
+import {IProfilePartPreciseItem} from 'app/shared/model/profile-part-precise-item.model';
+import {IProfilePartSkill} from 'app/shared/model/profile-part-skill.model';
 
 export interface IProfilePartLinkedExperience {
   id?: number;
@@ -21,5 +21,6 @@ export class ProfilePartLinkedExperience implements IProfilePartLinkedExperience
     public content?: any,
     public linkedItem?: IProfilePartPreciseItem,
     public linkedExperiences?: IProfilePartSkill[]
-  ) {}
+  ) {
+  }
 }

@@ -5,7 +5,7 @@ import {RouterModule} from "@angular/router";
 import {AccountComponent} from "app/user/account/account.component";
 
 @NgModule({
-    imports: [N42CSharedModule, RouterModule.forChild([accountRoute])],
+  imports: [N42CSharedModule, RouterModule.forChild([accountRoute])],
   declarations: [AccountComponent]
 })
 export class AccountModule {

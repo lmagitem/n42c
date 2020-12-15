@@ -1,19 +1,17 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.LevelOfMastery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.LevelOfMastery;
 
 /**
  * A skill with its level of mastery.
@@ -58,8 +56,8 @@ public class ProfilePartSkill implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "profile_part_skill_linked_skills",
-               joinColumns = @JoinColumn(name = "profile_part_skill_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "linked_skills_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "profile_part_skill_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "linked_skills_id", referencedColumnName = "id"))
     private Set<ProfilePartLinkedExperience> linkedSkills = new HashSet<>();
 
     @ManyToOne
@@ -79,17 +77,21 @@ public class ProfilePartSkill implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ProfilePartSkill name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Integer getIndex() {
         return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     public ProfilePartSkill index(Integer index) {
@@ -97,12 +99,12 @@ public class ProfilePartSkill implements Serializable {
         return this;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
-
     public LevelOfMastery getLevel() {
         return level;
+    }
+
+    public void setLevel(LevelOfMastery level) {
+        this.level = level;
     }
 
     public ProfilePartSkill level(LevelOfMastery level) {
@@ -110,12 +112,12 @@ public class ProfilePartSkill implements Serializable {
         return this;
     }
 
-    public void setLevel(LevelOfMastery level) {
-        this.level = level;
-    }
-
     public Set<ProfilePartLinkedExperience> getLinkedSkills() {
         return linkedSkills;
+    }
+
+    public void setLinkedSkills(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
+        this.linkedSkills = profilePartLinkedExperiences;
     }
 
     public ProfilePartSkill linkedSkills(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
@@ -135,21 +137,17 @@ public class ProfilePartSkill implements Serializable {
         return this;
     }
 
-    public void setLinkedSkills(Set<ProfilePartLinkedExperience> profilePartLinkedExperiences) {
-        this.linkedSkills = profilePartLinkedExperiences;
-    }
-
     public ProfilePartSkillCategory getSkillCategory() {
         return skillCategory;
+    }
+
+    public void setSkillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
+        this.skillCategory = profilePartSkillCategory;
     }
 
     public ProfilePartSkill skillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
         this.skillCategory = profilePartSkillCategory;
         return this;
-    }
-
-    public void setSkillCategory(ProfilePartSkillCategory profilePartSkillCategory) {
-        this.skillCategory = profilePartSkillCategory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

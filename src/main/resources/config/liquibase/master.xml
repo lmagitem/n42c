@@ -28,7 +28,7 @@
     <include file="config/liquibase/changelog/20200908193412_added_entity_Product.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908193512_added_entity_LocalizedProduct.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908193612_added_entity_Blog.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200908193812_added_entity_LocalizedPostContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193812_added_entity_LocalizedBlogPost.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908194012_added_entity_LocalizedBlogCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908194812_added_entity_Player.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908194912_added_entity_NinthCampaign.xml" relativeToChangelogFile="false"/>
@@ -67,7 +67,7 @@
     <include file="config/liquibase/changelog/20200908193412_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908193512_added_entity_constraints_LocalizedProduct.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908193612_added_entity_constraints_Blog.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200908193812_added_entity_constraints_LocalizedPostContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200908193812_added_entity_constraints_LocalizedBlogPost.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908194012_added_entity_constraints_LocalizedBlogCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908194812_added_entity_constraints_Player.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200908194912_added_entity_constraints_NinthCampaign.xml" relativeToChangelogFile="false"/>

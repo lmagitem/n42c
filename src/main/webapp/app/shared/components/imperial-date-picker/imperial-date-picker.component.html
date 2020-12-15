@@ -1,118 +1,120 @@
 <div
-  class="col-12 col-md-1 btn-group btn-group-toggle"
-  data-toggle="buttons"
-  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
+    [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
+    class="col-12 col-md-1 btn-group btn-group-toggle"
+    data-toggle="buttons"
 >
-  <label
-    [class]="!gregorianDisplay ? 'btn btn-primary d-flex align-items-center' : 'btn btn-secondary d-flex align-items-center'"
-    (click)="gregorianDisplay = false"
-  >
-    <input type="radio" name="options" id="datepicker-preference-i" autocomplete="off" class="align-middle" [checked]="!gregorianDisplay" />
-    <span class="text-center w-100">I</span>
-  </label>
-  <label
-    [class]="gregorianDisplay ? 'btn btn-primary d-flex align-items-center' : 'btn btn-secondary d-flex align-items-center'"
-    (click)="gregorianDisplay = true"
-  >
-    <input type="radio" name="options" id="datepicker-preference-g" autocomplete="off" class="align-middle" [checked]="gregorianDisplay" />
-    <span class="text-center w-100">G</span>
-  </label>
+    <label
+        (click)="gregorianDisplay = false"
+        [class]="!gregorianDisplay ? 'btn btn-primary d-flex align-items-center' : 'btn btn-secondary d-flex align-items-center'"
+    >
+        <input [checked]="!gregorianDisplay" autocomplete="off" class="align-middle" id="datepicker-preference-i" name="options"
+               type="radio"/>
+        <span class="text-center w-100">I</span>
+    </label>
+    <label
+        (click)="gregorianDisplay = true"
+        [class]="gregorianDisplay ? 'btn btn-primary d-flex align-items-center' : 'btn btn-secondary d-flex align-items-center'"
+    >
+        <input [checked]="gregorianDisplay" autocomplete="off" class="align-middle" id="datepicker-preference-g" name="options"
+               type="radio"/>
+        <span class="text-center w-100">G</span>
+    </label>
 </div>
-<div class="col-12 col-md-11" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate">
-  <!-- IMPERIAL -->
-  <div class="row" *ngIf="!gregorianDisplay">
-    <div class="col-12 col-md-3">
-      <label class="form-control-label" for="imperial-check">Check</label>
-      <input
-        type="number"
-        class="form-control"
-        name="imperial-check"
-        id="imperial-check"
-        min="0"
-        max="9"
-        [value]="check"
-        (change)="updateCheck($event)"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
+<div [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate" class="col-12 col-md-11">
+    <!-- IMPERIAL -->
+    <div *ngIf="!gregorianDisplay" class="row">
+        <div class="col-12 col-md-3">
+            <label class="form-control-label" for="imperial-check">Check</label>
+            <input
+                (change)="updateCheck($event)"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="check"
+                class="form-control"
+                id="imperial-check"
+                max="9"
+                min="0"
+                name="imperial-check"
+                type="number"
+            />
+        </div>
+        <div class="col-12 col-md-3">
+            <label class="form-control-label" for="imperial-fraction">Fraction</label>
+            <input
+                (change)="updateFromImperial($event, imperialYear, imperialMillenia)"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="imperialFraction"
+                class="form-control"
+                id="imperial-fraction"
+                max="999"
+                min="0"
+                name="imperial-fraction"
+                type="number"
+            />
+        </div>
+        <div class="col-12 col-md-3">
+            <label class="form-control-label" for="imperial-year">Year</label>
+            <input
+                (change)="updateFromImperial(imperialFraction, $event, imperialMillenia)"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="imperialYear"
+                class="form-control"
+                id="imperial-year"
+                name="imperial-year"
+                type="number"
+            />
+        </div>
+        <div class="col-12 col-md-3">
+            <label class="form-control-label" for="imperial-millenia">Millenia</label>
+            <input
+                (change)="updateFromImperial(imperialFraction, imperialYear, $event)"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="imperialMillenia"
+                class="form-control"
+                id="imperial-millenia"
+                name="imperial-millenia"
+                type="number"
+            />
+        </div>
     </div>
-    <div class="col-12 col-md-3">
-      <label class="form-control-label" for="imperial-fraction">Fraction</label>
-      <input
-        type="number"
-        class="form-control"
-        name="imperial-fraction"
-        id="imperial-fraction"
-        min="0"
-        max="999"
-        [value]="imperialFraction"
-        (change)="updateFromImperial($event, imperialYear, imperialMillenia)"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
+    <!-- GREGORIAN -->
+    <div *ngIf="gregorianDisplay" class="row">
+        <div class="col-12 col-md-4">
+            <label class="form-control-label" for="gregorian-check">Check</label>
+            <input
+                (change)="updateCheck($event)"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="check"
+                class="form-control"
+                id="gregorian-check"
+                max="9"
+                min="0"
+                name="gregorian-check"
+                type="number"
+            />
+        </div>
+        <div class="col-12 col-md-4">
+            <label class="form-control-label" for="gregorian-date">Date</label>
+            <input
+                (change)="updateFromGregorianDate($event, '')"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="date | date: 'yyyy-MM-dd'"
+                class="form-control"
+                id="gregorian-date"
+                name="gregorian-date"
+                type="date"
+            />
+        </div>
+        <div class="col-12 col-md-4">
+            <label class="form-control-label" for="gregorian-hour">Hour</label>
+            <input
+                (change)="updateFromGregorianDate('', $event)"
+                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                [value]="date | date: 'HH:mm'"
+                class="form-control"
+                id="gregorian-hour"
+                name="gregorian-hour"
+                type="time"
+            />
+        </div>
     </div>
-    <div class="col-12 col-md-3">
-      <label class="form-control-label" for="imperial-year">Year</label>
-      <input
-        type="number"
-        class="form-control"
-        name="imperial-year"
-        id="imperial-year"
-        [value]="imperialYear"
-        (change)="updateFromImperial(imperialFraction, $event, imperialMillenia)"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
-    </div>
-    <div class="col-12 col-md-3">
-      <label class="form-control-label" for="imperial-millenia">Millenia</label>
-      <input
-        type="number"
-        class="form-control"
-        name="imperial-millenia"
-        id="imperial-millenia"
-        [value]="imperialMillenia"
-        (change)="updateFromImperial(imperialFraction, imperialYear, $event)"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
-    </div>
-  </div>
-  <!-- GREGORIAN -->
-  <div class="row" *ngIf="gregorianDisplay">
-    <div class="col-12 col-md-4">
-      <label class="form-control-label" for="gregorian-check">Check</label>
-      <input
-        type="number"
-        class="form-control"
-        name="gregorian-check"
-        id="gregorian-check"
-        min="0"
-        max="9"
-        [value]="check"
-        (change)="updateCheck($event)"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
-    </div>
-    <div class="col-12 col-md-4">
-      <label class="form-control-label" for="gregorian-date">Date</label>
-      <input
-        type="date"
-        class="form-control"
-        name="gregorian-date"
-        id="gregorian-date"
-        [value]="date | date: 'yyyy-MM-dd'"
-        (change)="updateFromGregorianDate($event, '')"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
-    </div>
-    <div class="col-12 col-md-4">
-      <label class="form-control-label" for="gregorian-hour">Hour</label>
-      <input
-        type="time"
-        class="form-control"
-        name="gregorian-hour"
-        id="gregorian-hour"
-        [value]="date | date: 'HH:mm'"
-        (change)="updateFromGregorianDate('', $event)"
-        [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-      />
-    </div>
-  </div>
 </div>

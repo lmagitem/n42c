@@ -1,22 +1,17 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.Faction;
+import com.n42c.domain.enumerations.NinthGamePhase;
+import com.n42c.domain.enumerations.NinthGameTurn;
+import com.n42c.domain.enumerations.SubFaction;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.Faction;
-
-import com.n42c.domain.enumeration.SubFaction;
-
-import com.n42c.domain.enumeration.NinthGameTurn;
-
-import com.n42c.domain.enumeration.NinthGamePhase;
 
 /**
  * A NinthStratagem.
@@ -73,17 +68,21 @@ public class NinthStratagem implements Serializable {
         return cost;
     }
 
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+
     public NinthStratagem cost(Integer cost) {
         this.cost = cost;
         return this;
     }
 
-    public void setCost(Integer cost) {
-        this.cost = cost;
-    }
-
     public Faction getFaction() {
         return faction;
+    }
+
+    public void setFaction(Faction faction) {
+        this.faction = faction;
     }
 
     public NinthStratagem faction(Faction faction) {
@@ -91,12 +90,12 @@ public class NinthStratagem implements Serializable {
         return this;
     }
 
-    public void setFaction(Faction faction) {
-        this.faction = faction;
-    }
-
     public SubFaction getSubfaction() {
         return subfaction;
+    }
+
+    public void setSubfaction(SubFaction subfaction) {
+        this.subfaction = subfaction;
     }
 
     public NinthStratagem subfaction(SubFaction subfaction) {
@@ -104,12 +103,12 @@ public class NinthStratagem implements Serializable {
         return this;
     }
 
-    public void setSubfaction(SubFaction subfaction) {
-        this.subfaction = subfaction;
-    }
-
     public NinthGameTurn getTurn() {
         return turn;
+    }
+
+    public void setTurn(NinthGameTurn turn) {
+        this.turn = turn;
     }
 
     public NinthStratagem turn(NinthGameTurn turn) {
@@ -117,12 +116,12 @@ public class NinthStratagem implements Serializable {
         return this;
     }
 
-    public void setTurn(NinthGameTurn turn) {
-        this.turn = turn;
-    }
-
     public NinthGamePhase getPhase() {
         return phase;
+    }
+
+    public void setPhase(NinthGamePhase phase) {
+        this.phase = phase;
     }
 
     public NinthStratagem phase(NinthGamePhase phase) {
@@ -130,12 +129,12 @@ public class NinthStratagem implements Serializable {
         return this;
     }
 
-    public void setPhase(NinthGamePhase phase) {
-        this.phase = phase;
-    }
-
     public Set<LocalizedNinthStratagem> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedNinthStratagem> localizedNinthStratagems) {
+        this.localizations = localizedNinthStratagems;
     }
 
     public NinthStratagem localizations(Set<LocalizedNinthStratagem> localizedNinthStratagems) {
@@ -155,21 +154,17 @@ public class NinthStratagem implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedNinthStratagem> localizedNinthStratagems) {
-        this.localizations = localizedNinthStratagems;
-    }
-
     public NinthStratagemGroup getGroup() {
         return group;
+    }
+
+    public void setGroup(NinthStratagemGroup ninthStratagemGroup) {
+        this.group = ninthStratagemGroup;
     }
 
     public NinthStratagem group(NinthStratagemGroup ninthStratagemGroup) {
         this.group = ninthStratagemGroup;
         return this;
-    }
-
-    public void setGroup(NinthStratagemGroup ninthStratagemGroup) {
-        this.group = ninthStratagemGroup;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

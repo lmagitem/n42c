@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { INinthCampaign } from 'app/shared/model/ninth-campaign.model';
-import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
-import { CampaignDeleteDialogComponent } from './campaign-delete-dialog.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {INinthCampaign} from 'app/shared/model/ninth-campaign.model';
+import {NinthCampaignService} from 'app/entities/ninth-campaign/ninth-campaign.service';
+import {CampaignDeleteDialogComponent} from './campaign-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-campaign',
@@ -19,7 +19,8 @@ export class CampaignListComponent implements OnInit, OnDestroy {
     protected ninthCampaignService: NinthCampaignService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   loadAll(): void {
     this.ninthCampaignService.query().subscribe((res: HttpResponse<INinthCampaign[]>) => (this.ninthCampaigns = res.body || []));
@@ -46,7 +47,7 @@ export class CampaignListComponent implements OnInit, OnDestroy {
   }
 
   delete(ninthCampaign: INinthCampaign): void {
-    const modalRef = this.modalService.open(CampaignDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(CampaignDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.ninthCampaign = ninthCampaign;
   }
 }

@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { INinthObjective } from 'app/shared/model/ninth-objective.model';
-import { NinthObjectiveService } from './ninth-objective.service';
-import { NinthObjectiveDeleteDialogComponent } from './ninth-objective-delete-dialog.component';
+import {INinthObjective} from 'app/shared/model/ninth-objective.model';
+import {NinthObjectiveService} from './ninth-objective.service';
+import {NinthObjectiveDeleteDialogComponent} from './ninth-objective-delete-dialog.component';
 
 @Component({
   selector: 'jhi-ninth-objective',

@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.LocalizedBlogCategory;
 import com.n42c.repository.LocalizedBlogCategoryRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -26,15 +25,11 @@ import java.util.Optional;
 @RequestMapping("/api")
 @Transactional
 public class LocalizedBlogCategoryResource {
-
-    private final Logger log = LoggerFactory.getLogger(LocalizedBlogCategoryResource.class);
-
     private static final String ENTITY_NAME = "localizedBlogCategory";
-
+    private final Logger log = LoggerFactory.getLogger(LocalizedBlogCategoryResource.class);
+    private final LocalizedBlogCategoryRepository localizedBlogCategoryRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LocalizedBlogCategoryRepository localizedBlogCategoryRepository;
 
     public LocalizedBlogCategoryResource(LocalizedBlogCategoryRepository localizedBlogCategoryRepository) {
         this.localizedBlogCategoryRepository = localizedBlogCategoryRepository;
@@ -48,13 +43,15 @@ public class LocalizedBlogCategoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/localized-blog-categories")
-    public ResponseEntity<LocalizedBlogCategory> createLocalizedBlogCategory(@Valid @RequestBody LocalizedBlogCategory localizedBlogCategory) throws URISyntaxException {
+    public ResponseEntity<LocalizedBlogCategory> createLocalizedBlogCategory(@Valid @RequestBody LocalizedBlogCategory localizedBlogCategory)
+        throws URISyntaxException {
         log.debug("REST request to save LocalizedBlogCategory : {}", localizedBlogCategory);
         if (localizedBlogCategory.getId() != null) {
             throw new BadRequestAlertException("A new localizedBlogCategory cannot already have an ID", ENTITY_NAME, "idexists");
         }
         LocalizedBlogCategory result = localizedBlogCategoryRepository.save(localizedBlogCategory);
-        return ResponseEntity.created(new URI("/api/localized-blog-categories/" + result.getId()))
+        return ResponseEntity
+            .created(new URI("/api/localized-blog-categories/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
@@ -69,13 +66,15 @@ public class LocalizedBlogCategoryResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/localized-blog-categories")
-    public ResponseEntity<LocalizedBlogCategory> updateLocalizedBlogCategory(@Valid @RequestBody LocalizedBlogCategory localizedBlogCategory) throws URISyntaxException {
+    public ResponseEntity<LocalizedBlogCategory> updateLocalizedBlogCategory(@Valid @RequestBody LocalizedBlogCategory localizedBlogCategory)
+        throws URISyntaxException {
         log.debug("REST request to update LocalizedBlogCategory : {}", localizedBlogCategory);
         if (localizedBlogCategory.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         LocalizedBlogCategory result = localizedBlogCategoryRepository.save(localizedBlogCategory);
-        return ResponseEntity.ok()
+        return ResponseEntity
+            .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, localizedBlogCategory.getId().toString()))
             .body(result);
     }
@@ -114,6 +113,9 @@ public class LocalizedBlogCategoryResource {
     public ResponseEntity<Void> deleteLocalizedBlogCategory(@PathVariable Long id) {
         log.debug("REST request to delete LocalizedBlogCategory : {}", id);
         localizedBlogCategoryRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

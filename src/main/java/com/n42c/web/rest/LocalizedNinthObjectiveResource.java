@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.LocalizedNinthObjective;
 import com.n42c.repository.LocalizedNinthObjectiveRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,14 +26,11 @@ import java.util.Optional;
 @Transactional
 public class LocalizedNinthObjectiveResource {
 
-    private final Logger log = LoggerFactory.getLogger(LocalizedNinthObjectiveResource.class);
-
     private static final String ENTITY_NAME = "localizedNinthObjective";
-
+    private final Logger log = LoggerFactory.getLogger(LocalizedNinthObjectiveResource.class);
+    private final LocalizedNinthObjectiveRepository localizedNinthObjectiveRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LocalizedNinthObjectiveRepository localizedNinthObjectiveRepository;
 
     public LocalizedNinthObjectiveResource(LocalizedNinthObjectiveRepository localizedNinthObjectiveRepository) {
         this.localizedNinthObjectiveRepository = localizedNinthObjectiveRepository;

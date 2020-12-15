@@ -4,7 +4,6 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthUnitMoment;
 import com.n42c.repository.NinthUnitMomentRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link NinthUnitMomentResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthUnitMomentResourceIT {
@@ -55,7 +55,7 @@ public class NinthUnitMomentResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -66,9 +66,10 @@ public class NinthUnitMomentResourceIT {
             .pictureUrl(DEFAULT_PICTURE_URL);
         return ninthUnitMoment;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -177,7 +178,7 @@ public class NinthUnitMomentResourceIT {
             .andExpect(jsonPath("$.[*].sinceInstant").value(hasItem(DEFAULT_SINCE_INSTANT.toString())))
             .andExpect(jsonPath("$.[*].pictureUrl").value(hasItem(DEFAULT_PICTURE_URL)));
     }
-    
+
     @Test
     @Transactional
     public void getNinthUnitMoment() throws Exception {
@@ -193,6 +194,7 @@ public class NinthUnitMomentResourceIT {
             .andExpect(jsonPath("$.sinceInstant").value(DEFAULT_SINCE_INSTANT.toString()))
             .andExpect(jsonPath("$.pictureUrl").value(DEFAULT_PICTURE_URL));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthUnitMoment() throws Exception {

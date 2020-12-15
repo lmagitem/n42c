@@ -4,7 +4,6 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.ProfilePartSimpleItem;
 import com.n42c.repository.ProfilePartSimpleItemRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link ProfilePartSimpleItemResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProfilePartSimpleItemResourceIT {
@@ -58,7 +58,7 @@ public class ProfilePartSimpleItemResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -70,9 +70,10 @@ public class ProfilePartSimpleItemResourceIT {
             .content(DEFAULT_CONTENT);
         return profilePartSimpleItem;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -184,7 +185,7 @@ public class ProfilePartSimpleItemResourceIT {
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)));
     }
-    
+
     @Test
     @Transactional
     public void getProfilePartSimpleItem() throws Exception {
@@ -201,6 +202,7 @@ public class ProfilePartSimpleItemResourceIT {
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT));
     }
+
     @Test
     @Transactional
     public void getNonExistingProfilePartSimpleItem() throws Exception {

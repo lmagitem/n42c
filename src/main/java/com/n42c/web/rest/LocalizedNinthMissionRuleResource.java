@@ -3,7 +3,6 @@ package com.n42c.web.rest;
 import com.n42c.domain.LocalizedNinthMissionRule;
 import com.n42c.repository.LocalizedNinthMissionRuleRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -27,14 +26,11 @@ import java.util.Optional;
 @Transactional
 public class LocalizedNinthMissionRuleResource {
 
-    private final Logger log = LoggerFactory.getLogger(LocalizedNinthMissionRuleResource.class);
-
     private static final String ENTITY_NAME = "localizedNinthMissionRule";
-
+    private final Logger log = LoggerFactory.getLogger(LocalizedNinthMissionRuleResource.class);
+    private final LocalizedNinthMissionRuleRepository localizedNinthMissionRuleRepository;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final LocalizedNinthMissionRuleRepository localizedNinthMissionRuleRepository;
 
     public LocalizedNinthMissionRuleResource(LocalizedNinthMissionRuleRepository localizedNinthMissionRuleRepository) {
         this.localizedNinthMissionRuleRepository = localizedNinthMissionRuleRepository;

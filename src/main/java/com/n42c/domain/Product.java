@@ -7,8 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,8 +43,8 @@ public class Product implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "product_authors",
-               joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "authors_id", referencedColumnName = "id"))
     private Set<AppUser> authors = new HashSet<>();
 
     @ManyToOne(optional = false)
@@ -66,17 +65,21 @@ public class Product implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Product name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Set<LocalizedProduct> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedProduct> localizedProducts) {
+        this.localizations = localizedProducts;
     }
 
     public Product localizations(Set<LocalizedProduct> localizedProducts) {
@@ -96,12 +99,12 @@ public class Product implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedProduct> localizedProducts) {
-        this.localizations = localizedProducts;
-    }
-
     public Set<AppUser> getAuthors() {
         return authors;
+    }
+
+    public void setAuthors(Set<AppUser> appUsers) {
+        this.authors = appUsers;
     }
 
     public Product authors(Set<AppUser> appUsers) {
@@ -121,21 +124,17 @@ public class Product implements Serializable {
         return this;
     }
 
-    public void setAuthors(Set<AppUser> appUsers) {
-        this.authors = appUsers;
-    }
-
     public Shop getShop() {
         return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     public Product shop(Shop shop) {
         this.shop = shop;
         return this;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { INinthBattle } from 'app/shared/model/ninth-battle.model';
+import {INinthBattle} from 'app/shared/model/ninth-battle.model';
 
 @Component({
   selector: 'jhi-ninth-battle-detail',
@@ -10,10 +10,11 @@ import { INinthBattle } from 'app/shared/model/ninth-battle.model';
 export class NinthBattleDetailComponent implements OnInit {
   ninthBattle: INinthBattle | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ninthBattle }) => (this.ninthBattle = ninthBattle));
+    this.activatedRoute.data.subscribe(({ninthBattle}) => (this.ninthBattle = ninthBattle));
   }
 
   previousState(): void {

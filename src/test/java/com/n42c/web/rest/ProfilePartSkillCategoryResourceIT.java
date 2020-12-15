@@ -4,7 +4,6 @@ import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.ProfilePartSkillCategory;
 import com.n42c.repository.ProfilePartSkillCategoryRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link ProfilePartSkillCategoryResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class ProfilePartSkillCategoryResourceIT {
@@ -50,7 +50,7 @@ public class ProfilePartSkillCategoryResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -60,9 +60,10 @@ public class ProfilePartSkillCategoryResourceIT {
             .index(DEFAULT_INDEX);
         return profilePartSkillCategory;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -149,7 +150,7 @@ public class ProfilePartSkillCategoryResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].index").value(hasItem(DEFAULT_INDEX)));
     }
-    
+
     @Test
     @Transactional
     public void getProfilePartSkillCategory() throws Exception {
@@ -164,6 +165,7 @@ public class ProfilePartSkillCategoryResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.index").value(DEFAULT_INDEX));
     }
+
     @Test
     @Transactional
     public void getNonExistingProfilePartSkillCategory() throws Exception {

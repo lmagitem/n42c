@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { INinthStratagem } from 'app/shared/model/ninth-stratagem.model';
-import { NinthStratagemService } from './ninth-stratagem.service';
+import {INinthStratagem} from 'app/shared/model/ninth-stratagem.model';
+import {NinthStratagemService} from './ninth-stratagem.service';
 
 @Component({
   templateUrl: './ninth-stratagem-delete-dialog.component.html',

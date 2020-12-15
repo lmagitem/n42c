@@ -1,6 +1,7 @@
 package com.n42c.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.n42c.domain.enumerations.Language;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -8,13 +9,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.n42c.domain.enumeration.Language;
 
 /**
  * Data used to build an user profile page.
@@ -93,17 +91,21 @@ public class AppUserProfile implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public AppUserProfile name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public AppUserProfile title(String title) {
@@ -111,12 +113,12 @@ public class AppUserProfile implements Serializable {
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getSummary() {
         return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public AppUserProfile summary(String summary) {
@@ -124,12 +126,12 @@ public class AppUserProfile implements Serializable {
         return this;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public String getHeaderBackgroundURI() {
         return headerBackgroundURI;
+    }
+
+    public void setHeaderBackgroundURI(String headerBackgroundURI) {
+        this.headerBackgroundURI = headerBackgroundURI;
     }
 
     public AppUserProfile headerBackgroundURI(String headerBackgroundURI) {
@@ -137,12 +139,12 @@ public class AppUserProfile implements Serializable {
         return this;
     }
 
-    public void setHeaderBackgroundURI(String headerBackgroundURI) {
-        this.headerBackgroundURI = headerBackgroundURI;
-    }
-
     public Language getLanguage() {
         return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     public AppUserProfile language(Language language) {
@@ -150,12 +152,12 @@ public class AppUserProfile implements Serializable {
         return this;
     }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
-
     public Set<ProfilePart> getProfileParts() {
         return profileParts;
+    }
+
+    public void setProfileParts(Set<ProfilePart> profileParts) {
+        this.profileParts = profileParts;
     }
 
     public AppUserProfile profileParts(Set<ProfilePart> profileParts) {
@@ -175,21 +177,17 @@ public class AppUserProfile implements Serializable {
         return this;
     }
 
-    public void setProfileParts(Set<ProfilePart> profileParts) {
-        this.profileParts = profileParts;
-    }
-
     public AppUser getUser() {
         return user;
+    }
+
+    public void setUser(AppUser appUser) {
+        this.user = appUser;
     }
 
     public AppUserProfile user(AppUser appUser) {
         this.user = appUser;
         return this;
-    }
-
-    public void setUser(AppUser appUser) {
-        this.user = appUser;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -1,5 +1,5 @@
-import { INinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
-import { Language } from 'app/shared/model/enumerations/language.model';
+import {INinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
+import {Language} from 'app/shared/model/enumerations/language.model';
 
 export interface ILocalizedNinthMissionRule {
   id?: number;
@@ -16,5 +16,6 @@ export class LocalizedNinthMissionRule implements ILocalizedNinthMissionRule {
     public description?: any,
     public language?: Language,
     public rule?: INinthMissionRule
-  ) {}
+  ) {
+  }
 }

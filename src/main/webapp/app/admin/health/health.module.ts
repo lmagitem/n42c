@@ -12,4 +12,5 @@ import {healthRoute} from './health.route';
   declarations: [HealthComponent, HealthModalComponent],
   entryComponents: [HealthModalComponent],
 })
-export class HealthModule {}
+export class HealthModule {
+}

@@ -5,7 +5,6 @@ import com.n42c.config.TestSecurityConfiguration;
 import com.n42c.domain.NinthStratagemGroup;
 import com.n42c.domain.Player;
 import com.n42c.repository.NinthStratagemGroupRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration tests for the {@link NinthStratagemGroupResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class NinthStratagemGroupResourceIT {
@@ -48,7 +48,7 @@ public class NinthStratagemGroupResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -67,9 +67,10 @@ public class NinthStratagemGroupResourceIT {
         ninthStratagemGroup.setAuthor(player);
         return ninthStratagemGroup;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -144,7 +145,7 @@ public class NinthStratagemGroupResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(ninthStratagemGroup.getId().intValue())))
             .andExpect(jsonPath("$.[*].shareable").value(hasItem(DEFAULT_SHAREABLE.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getNinthStratagemGroup() throws Exception {
@@ -158,6 +159,7 @@ public class NinthStratagemGroupResourceIT {
             .andExpect(jsonPath("$.id").value(ninthStratagemGroup.getId().intValue()))
             .andExpect(jsonPath("$.shareable").value(DEFAULT_SHAREABLE.booleanValue()));
     }
+
     @Test
     @Transactional
     public void getNonExistingNinthStratagemGroup() throws Exception {

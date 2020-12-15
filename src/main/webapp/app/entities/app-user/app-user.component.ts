@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {HttpHeaders, HttpResponse} from '@angular/common/http';
+import {ActivatedRoute, Data, ParamMap, Router} from '@angular/router';
+import {combineLatest, Subscription} from 'rxjs';
+import {JhiEventManager} from 'ng-jhipster';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { IAppUser } from 'app/shared/model/app-user.model';
+import {IAppUser} from 'app/shared/model/app-user.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { AppUserService } from './app-user.service';
-import { AppUserDeleteDialogComponent } from './app-user-delete-dialog.component';
+import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
+import {AppUserService} from './app-user.service';
+import {AppUserDeleteDialogComponent} from './app-user-delete-dialog.component';
 
 @Component({
   selector: 'jhi-app-user',
@@ -31,7 +31,8 @@ export class AppUserComponent implements OnInit, OnDestroy {
     protected router: Router,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
@@ -53,21 +54,6 @@ export class AppUserComponent implements OnInit, OnDestroy {
     this.registerChangeInAppUsers();
   }
 
-  protected handleNavigation(): void {
-    combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
-      const page = params.get('page');
-      const pageNumber = page !== null ? +page : 1;
-      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === 'asc';
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
-        this.loadPage(pageNumber, true);
-      }
-    }).subscribe();
-  }
-
   ngOnDestroy(): void {
     if (this.eventSubscriber) {
       this.eventManager.destroy(this.eventSubscriber);
@@ -84,7 +70,7 @@ export class AppUserComponent implements OnInit, OnDestroy {
   }
 
   delete(appUser: IAppUser): void {
-    const modalRef = this.modalService.open(AppUserDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(AppUserDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
     modalRef.componentInstance.appUser = appUser;
   }
 
@@ -94,6 +80,21 @@ export class AppUserComponent implements OnInit, OnDestroy {
       result.push('id');
     }
     return result;
+  }
+
+  protected handleNavigation(): void {
+    combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
+      const page = params.get('page');
+      const pageNumber = page !== null ? +page : 1;
+      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
+      const predicate = sort[0];
+      const ascending = sort[1] === 'asc';
+      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+        this.predicate = predicate;
+        this.ascending = ascending;
+        this.loadPage(pageNumber, true);
+      }
+    }).subscribe();
   }
 
   protected onSuccess(data: IAppUser[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {

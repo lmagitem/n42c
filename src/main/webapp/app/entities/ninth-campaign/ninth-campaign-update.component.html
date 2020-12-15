@@ -1,119 +1,133 @@
 <div class="row justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-ninth-campaign-heading" jhiTranslate="n42cApp.ninthCampaign.home.createOrEditLabel">Create or edit a Ninth Campaign</h2>
+    <div class="col-8">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <h2 id="jhi-ninth-campaign-heading" jhiTranslate="n42cApp.ninthCampaign.home.createOrEditLabel">Create or
+                edit a Ninth Campaign</h2>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" [hidden]="!editForm.get('id')!.value">
-          <label for="id" jhiTranslate="global.field.id">ID</label>
-          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-        </div>
+                <div [hidden]="!editForm.get('id')!.value" class="form-group">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input class="form-control" formControlName="id" id="id" name="id" readonly type="text"/>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthCampaign.name" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
-          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-              This field is required.
-            </small>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name"
+                           jhiTranslate="n42cApp.ninthCampaign.name">Name</label>
+                    <input class="form-control" formControlName="name" id="field_name" name="name" type="text"/>
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small *ngIf="editForm.get('name')?.errors?.required" class="form-text text-danger"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthCampaign.gameType" for="field_gameType">Game Type</label>
-          <select class="form-control" name="gameType" formControlName="gameType" id="field_gameType">
-            <option value="OP">{{ 'n42cApp.NinthGameType.OP' | translate }}</option>
-            <option value="MP">{{ 'n42cApp.NinthGameType.MP' | translate }}</option>
-            <option value="CR">{{ 'n42cApp.NinthGameType.CR' | translate }}</option>
-            <option value="NG">{{ 'n42cApp.NinthGameType.NG' | translate }}</option>
-          </select>
-          <div *ngIf="editForm.get('gameType')!.invalid && (editForm.get('gameType')!.dirty || editForm.get('gameType')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('gameType')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_gameType"
+                           jhiTranslate="n42cApp.ninthCampaign.gameType">Game Type</label>
+                    <select class="form-control" formControlName="gameType" id="field_gameType" name="gameType">
+                        <option value="OP">{{ 'n42cApp.NinthGameType.OP' | translate }}</option>
+                        <option value="MP">{{ 'n42cApp.NinthGameType.MP' | translate }}</option>
+                        <option value="CR">{{ 'n42cApp.NinthGameType.CR' | translate }}</option>
+                        <option value="NG">{{ 'n42cApp.NinthGameType.NG' | translate }}</option>
+                    </select>
+                    <div
+                        *ngIf="editForm.get('gameType')!.invalid && (editForm.get('gameType')!.dirty || editForm.get('gameType')!.touched)">
+                        <small
+                            *ngIf="editForm.get('gameType')?.errors?.required"
+                            class="form-text text-danger"
+                            jhiTranslate="entity.validation.required"
+                        >
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthCampaign.usePowerRating" for="field_usePowerRating"
-            >Use Power Rating</label
-          >
-          <input type="checkbox" class="form-control" name="usePowerRating" id="field_usePowerRating" formControlName="usePowerRating" />
-          <div
-            *ngIf="
+                <div class="form-group">
+                    <label class="form-control-label" for="field_usePowerRating"
+                           jhiTranslate="n42cApp.ninthCampaign.usePowerRating"
+                    >Use Power Rating</label
+                    >
+                    <input class="form-control" formControlName="usePowerRating" id="field_usePowerRating" name="usePowerRating"
+                           type="checkbox"/>
+                    <div
+                        *ngIf="
               editForm.get('usePowerRating')!.invalid && (editForm.get('usePowerRating')!.dirty || editForm.get('usePowerRating')!.touched)
             "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('usePowerRating')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
-        </div>
+                    >
+                        <small
+                            *ngIf="editForm.get('usePowerRating')?.errors?.required"
+                            class="form-text text-danger"
+                            jhiTranslate="entity.validation.required"
+                        >
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="n42cApp.ninthCampaign.description" for="field_description">Description</label>
-          <textarea class="form-control" name="description" id="field_description" formControlName="description"></textarea>
-        </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description"
+                           jhiTranslate="n42cApp.ninthCampaign.description">Description</label>
+                    <textarea class="form-control" formControlName="description" id="field_description"
+                              name="description"></textarea>
+                </div>
 
-        <div class="form-group">
-          <label jhiTranslate="n42cApp.ninthCampaign.authors" for="field_authors">Authors</label>
-          <select class="form-control" id="field_authors" multiple name="authors" formControlName="authors">
-            <option
-              [ngValue]="getSelected(editForm.get('authors')!.value, playerOption)"
-              *ngFor="let playerOption of players; trackBy: trackById"
-              >{{ playerOption.id }}</option
-            >
-          </select>
-        </div>
+                <div class="form-group">
+                    <label for="field_authors" jhiTranslate="n42cApp.ninthCampaign.authors">Authors</label>
+                    <select class="form-control" formControlName="authors" id="field_authors" multiple name="authors">
+                        <option
+                            *ngFor="let playerOption of players; trackBy: trackById"
+                            [ngValue]="getSelected(editForm.get('authors')!.value, playerOption)"
+                        >{{ playerOption.id }}</option
+                        >
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label jhiTranslate="n42cApp.ninthCampaign.participants" for="field_participants">Participants</label>
-          <select class="form-control" id="field_participants" multiple name="participants" formControlName="participants">
-            <option
-              [ngValue]="getSelected(editForm.get('participants')!.value, playerOption)"
-              *ngFor="let playerOption of players; trackBy: trackById"
-              >{{ playerOption.id }}</option
-            >
-          </select>
-        </div>
+                <div class="form-group">
+                    <label for="field_participants"
+                           jhiTranslate="n42cApp.ninthCampaign.participants">Participants</label>
+                    <select class="form-control" formControlName="participants" id="field_participants" multiple
+                            name="participants">
+                        <option
+                            *ngFor="let playerOption of players; trackBy: trackById"
+                            [ngValue]="getSelected(editForm.get('participants')!.value, playerOption)"
+                        >{{ playerOption.id }}</option
+                        >
+                    </select>
+                </div>
 
-        <div class="form-group">
-          <label jhiTranslate="n42cApp.ninthCampaign.campaignStratagems" for="field_campaignStratagems">Campaign Stratagems</label>
-          <select
-            class="form-control"
-            id="field_campaignStratagems"
-            multiple
-            name="campaignStratagems"
-            formControlName="campaignStratagems"
-          >
-            <option
-              [ngValue]="getSelected(editForm.get('campaignStratagems')!.value, ninthStratagemGroupOption)"
-              *ngFor="let ninthStratagemGroupOption of ninthstratagemgroups; trackBy: trackById"
-              >{{ ninthStratagemGroupOption.id }}</option
-            >
-          </select>
-        </div>
-      </div>
+                <div class="form-group">
+                    <label for="field_campaignStratagems" jhiTranslate="n42cApp.ninthCampaign.campaignStratagems">Campaign
+                        Stratagems</label>
+                    <select
+                        class="form-control"
+                        formControlName="campaignStratagems"
+                        id="field_campaignStratagems"
+                        multiple
+                        name="campaignStratagems"
+                    >
+                        <option
+                            *ngFor="let ninthStratagemGroupOption of ninthstratagemgroups; trackBy: trackById"
+                            [ngValue]="getSelected(editForm.get('campaignStratagems')!.value, ninthStratagemGroupOption)"
+                        >{{ ninthStratagemGroupOption.id }}</option
+                        >
+                    </select>
+                </div>
+            </div>
 
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
+            <div>
+                <button (click)="previousState()" class="btn btn-secondary" id="cancel-save" type="button">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
 
-        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
-  </div>
+                <button [disabled]="editForm.invalid || isSaving" class="btn btn-primary" id="save-entity"
+                        type="submit">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

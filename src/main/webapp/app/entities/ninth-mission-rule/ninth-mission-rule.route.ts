@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpResponse} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, Router, Routes} from '@angular/router';
+import {EMPTY, Observable, of} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 
-import { Authority } from 'app/shared/constants/authority.constants';
-import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { INinthMissionRule, NinthMissionRule } from 'app/shared/model/ninth-mission-rule.model';
-import { NinthMissionRuleService } from './ninth-mission-rule.service';
-import { NinthMissionRuleComponent } from './ninth-mission-rule.component';
-import { NinthMissionRuleDetailComponent } from './ninth-mission-rule-detail.component';
-import { NinthMissionRuleUpdateComponent } from './ninth-mission-rule-update.component';
+import {Authority} from 'app/shared/constants/authority.constants';
+import {UserRouteAccessService} from 'app/core/auth/user-route-access-service';
+import {INinthMissionRule, NinthMissionRule} from 'app/shared/model/ninth-mission-rule.model';
+import {NinthMissionRuleService} from './ninth-mission-rule.service';
+import {NinthMissionRuleComponent} from './ninth-mission-rule.component';
+import {NinthMissionRuleDetailComponent} from './ninth-mission-rule-detail.component';
+import {NinthMissionRuleUpdateComponent} from './ninth-mission-rule-update.component';
 
 @Injectable({ providedIn: 'root' })
 export class NinthMissionRuleResolve implements Resolve<INinthMissionRule> {

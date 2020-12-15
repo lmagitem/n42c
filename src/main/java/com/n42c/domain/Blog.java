@@ -7,8 +7,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,6 +49,18 @@ public class Blog implements Serializable {
     @JsonIgnoreProperties(value = "blogs", allowSetters = true)
     private AppUser author;
 
+    public Blog() {
+    }
+
+    public Blog(Long id) {
+        this.id = id;
+    }
+
+    public Blog(Long id, @NotNull String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -63,17 +74,21 @@ public class Blog implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Blog name(String name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Set<BlogPost> getPosts() {
         return posts;
+    }
+
+    public void setPosts(Set<BlogPost> blogPosts) {
+        this.posts = blogPosts;
     }
 
     public Blog posts(Set<BlogPost> blogPosts) {
@@ -93,12 +108,12 @@ public class Blog implements Serializable {
         return this;
     }
 
-    public void setPosts(Set<BlogPost> blogPosts) {
-        this.posts = blogPosts;
-    }
-
     public Set<LocalizedBlog> getLocalizations() {
         return localizations;
+    }
+
+    public void setLocalizations(Set<LocalizedBlog> localizedBlogs) {
+        this.localizations = localizedBlogs;
     }
 
     public Blog localizations(Set<LocalizedBlog> localizedBlogs) {
@@ -118,21 +133,17 @@ public class Blog implements Serializable {
         return this;
     }
 
-    public void setLocalizations(Set<LocalizedBlog> localizedBlogs) {
-        this.localizations = localizedBlogs;
-    }
-
     public AppUser getAuthor() {
         return author;
+    }
+
+    public void setAuthor(AppUser appUser) {
+        this.author = appUser;
     }
 
     public Blog author(AppUser appUser) {
         this.author = appUser;
         return this;
-    }
-
-    public void setAuthor(AppUser appUser) {
-        this.author = appUser;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -156,8 +167,8 @@ public class Blog implements Serializable {
     @Override
     public String toString() {
         return "Blog{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
+               "id=" + getId() +
+               ", name='" + getName() + "'" +
+               "}";
     }
 }
