@@ -1,11 +1,6 @@
 id;title;excerpt;content;language;post_id
-1;Realigned;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;SR;1
-2;salmon Bedfordshire;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;ID;2
-3;Incredible;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;ID;3
-4;Pizza;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;FI;4
-5;Fresh purple;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;SR;5
-6;Small JBOD navigating;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;EL;6
-7;SCSI Bacon;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;RU;7
-8;Legacy recontextualize RSS;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;AR;8
-9;Customer Colombia;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;SV;9
-10;redundant;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;GA;10
+1;Love;../fake-data/blob/excerpt1-en.txt;../fake-data/blob/content1-en.txt;EN;1
+2;Amour;../fake-data/blob/excerpt1-fr.txt;../fake-data/blob/content1-fr.txt;FR;1
+3;Passion;../fake-data/blob/excerpt2-en.txt;../fake-data/blob/content2-en.txt;EN;2
+4;Passion;../fake-data/blob/excerpt2-fr.txt;../fake-data/blob/content2-fr.txt;FR;2
+5;Ярость;../fake-data/blob/excerpt3-ru.txt;../fake-data/blob/content3-ru.txt;RU;3

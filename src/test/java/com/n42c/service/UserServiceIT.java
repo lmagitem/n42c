@@ -43,10 +43,6 @@ public class UserServiceIT {
 
     private static final String DEFAULT_EMAIL = "johndoe@localhost";
 
-    private static final String DEFAULT_FIRSTNAME = "john";
-
-    private static final String DEFAULT_LASTNAME = "doe";
-
     private static final String DEFAULT_IMAGEURL = "http://placehold.it/50x50";
 
     private static final String DEFAULT_LANGKEY = "dummy";
@@ -68,17 +64,12 @@ public class UserServiceIT {
         user.setLogin(DEFAULT_LOGIN);
         user.setActivated(true);
         user.setEmail(DEFAULT_EMAIL);
-        user.setFirstName(DEFAULT_FIRSTNAME);
-        user.setLastName(DEFAULT_LASTNAME);
-        user.setImageUrl(DEFAULT_IMAGEURL);
         user.setLangKey(DEFAULT_LANGKEY);
 
         userDetails = new HashMap<>();
         userDetails.put("sub", DEFAULT_ID);
         userDetails.put("username", DEFAULT_LOGIN);
         userDetails.put("email", DEFAULT_EMAIL);
-        userDetails.put("given_name", DEFAULT_FIRSTNAME);
-        userDetails.put("family_name", DEFAULT_LASTNAME);
         userDetails.put("picture", DEFAULT_IMAGEURL);
     }
 
@@ -107,7 +98,6 @@ public class UserServiceIT {
         assertThat(userDTO.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(userDTO.isActivated()).isTrue();
         assertThat(userDTO.getLangKey()).isEqualTo(Constants.DEFAULT_LANGUAGE);
-        assertThat(userDTO.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(userDTO.getAuthorities()).contains(AuthoritiesConstants.ANONYMOUS);
     }
 
@@ -172,7 +162,7 @@ public class UserServiceIT {
     public void testAppUser() {
         OAuth2AuthenticationToken authentication = createMockOAuth2AuthenticationToken(userDetails);
         UserDTO userDTO = userService.getUserFromAuthentication(authentication);
-        AppUser appUser = userService.getAppUser(userDTO.getId());
+        AppUser appUser = userService.getAppUser(userDTO.getId(), authentication);
 
         assertThat(appUser).isNotNull();
         assertThat(appUser.getUser().getId()).isEqualTo(userDTO.getId());

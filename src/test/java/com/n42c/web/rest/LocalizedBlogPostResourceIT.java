@@ -2,10 +2,10 @@ package com.n42c.web.rest;
 
 import com.n42c.N42CApp;
 import com.n42c.config.TestSecurityConfiguration;
-import com.n42c.domain.LocalizedBlogPost;
 import com.n42c.domain.BlogPost;
+import com.n42c.domain.LocalizedBlogPost;
+import com.n42c.domain.enumerations.Language;
 import com.n42c.repository.LocalizedBlogPostRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -25,11 +25,10 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.n42c.domain.enumeration.Language;
 /**
  * Integration tests for the {@link LocalizedBlogPostResource} REST controller.
  */
-@SpringBootTest(classes = { N42CApp.class, TestSecurityConfiguration.class })
+@SpringBootTest(classes = {N42CApp.class, TestSecurityConfiguration.class})
 @AutoConfigureMockMvc
 @WithMockUser
 public class LocalizedBlogPostResourceIT {
@@ -59,16 +58,15 @@ public class LocalizedBlogPostResourceIT {
 
     /**
      * Create an entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
+     * <p>
+     * This is a static method, as tests for other entities might also need it, if they test an entity which requires the current entity.
      */
     public static LocalizedBlogPost createEntity(EntityManager em) {
         LocalizedBlogPost localizedBlogPost = new LocalizedBlogPost()
-            .title(DEFAULT_TITLE)
-            .excerpt(DEFAULT_EXCERPT)
-            .content(DEFAULT_CONTENT)
-            .language(DEFAULT_LANGUAGE);
+                .title(DEFAULT_TITLE)
+                .excerpt(DEFAULT_EXCERPT)
+                .content(DEFAULT_CONTENT)
+                .language(DEFAULT_LANGUAGE);
         // Add required entity
         BlogPost blogPost;
         if (TestUtil.findAll(em, BlogPost.class).isEmpty()) {
@@ -81,18 +79,18 @@ public class LocalizedBlogPostResourceIT {
         localizedBlogPost.setPost(blogPost);
         return localizedBlogPost;
     }
+
     /**
      * Create an updated entity for this test.
-     *
-     * This is a static method, as tests for other entities might also need it,
-     * if they test an entity which requires the current entity.
+     * <p>
+     * This is a static method, as tests for other entities might also need it, if they test an entity which requires the current entity.
      */
     public static LocalizedBlogPost createUpdatedEntity(EntityManager em) {
         LocalizedBlogPost localizedBlogPost = new LocalizedBlogPost()
-            .title(UPDATED_TITLE)
-            .excerpt(UPDATED_EXCERPT)
-            .content(UPDATED_CONTENT)
-            .language(UPDATED_LANGUAGE);
+                .title(UPDATED_TITLE)
+                .excerpt(UPDATED_EXCERPT)
+                .content(UPDATED_CONTENT)
+                .language(UPDATED_LANGUAGE);
         // Add required entity
         BlogPost blogPost;
         if (TestUtil.findAll(em, BlogPost.class).isEmpty()) {
@@ -117,9 +115,9 @@ public class LocalizedBlogPostResourceIT {
         int databaseSizeBeforeCreate = localizedBlogPostRepository.findAll().size();
         // Create the LocalizedBlogPost
         restLocalizedBlogPostMockMvc.perform(post("/api/localized-blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
-            .andExpect(status().isCreated());
+                                                                              .contentType(MediaType.APPLICATION_JSON)
+                                                                              .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
+                                    .andExpect(status().isCreated());
 
         // Validate the LocalizedBlogPost in the database
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();
@@ -141,9 +139,9 @@ public class LocalizedBlogPostResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restLocalizedBlogPostMockMvc.perform(post("/api/localized-blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
-            .andExpect(status().isBadRequest());
+                                                                              .contentType(MediaType.APPLICATION_JSON)
+                                                                              .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
+                                    .andExpect(status().isBadRequest());
 
         // Validate the LocalizedBlogPost in the database
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();
@@ -162,9 +160,9 @@ public class LocalizedBlogPostResourceIT {
 
 
         restLocalizedBlogPostMockMvc.perform(post("/api/localized-blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
-            .andExpect(status().isBadRequest());
+                                                                              .contentType(MediaType.APPLICATION_JSON)
+                                                                              .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
+                                    .andExpect(status().isBadRequest());
 
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();
         assertThat(localizedBlogPostList).hasSize(databaseSizeBeforeTest);
@@ -181,9 +179,9 @@ public class LocalizedBlogPostResourceIT {
 
 
         restLocalizedBlogPostMockMvc.perform(post("/api/localized-blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
-            .andExpect(status().isBadRequest());
+                                                                              .contentType(MediaType.APPLICATION_JSON)
+                                                                              .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
+                                    .andExpect(status().isBadRequest());
 
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();
         assertThat(localizedBlogPostList).hasSize(databaseSizeBeforeTest);
@@ -197,15 +195,15 @@ public class LocalizedBlogPostResourceIT {
 
         // Get all the localizedBlogPostList
         restLocalizedBlogPostMockMvc.perform(get("/api/localized-blog-posts?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(localizedBlogPost.getId().intValue())))
-            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT.toString())))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
-            .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
+                                    .andExpect(status().isOk())
+                                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                                    .andExpect(jsonPath("$.[*].id").value(hasItem(localizedBlogPost.getId().intValue())))
+                                    .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
+                                    .andExpect(jsonPath("$.[*].excerpt").value(hasItem(DEFAULT_EXCERPT.toString())))
+                                    .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+                                    .andExpect(jsonPath("$.[*].language").value(hasItem(DEFAULT_LANGUAGE.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getLocalizedBlogPost() throws Exception {
@@ -214,20 +212,21 @@ public class LocalizedBlogPostResourceIT {
 
         // Get the localizedBlogPost
         restLocalizedBlogPostMockMvc.perform(get("/api/localized-blog-posts/{id}", localizedBlogPost.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(localizedBlogPost.getId().intValue()))
-            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT.toString()))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
-            .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
+                                    .andExpect(status().isOk())
+                                    .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                                    .andExpect(jsonPath("$.id").value(localizedBlogPost.getId().intValue()))
+                                    .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
+                                    .andExpect(jsonPath("$.excerpt").value(DEFAULT_EXCERPT.toString()))
+                                    .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+                                    .andExpect(jsonPath("$.language").value(DEFAULT_LANGUAGE.toString()));
     }
+
     @Test
     @Transactional
     public void getNonExistingLocalizedBlogPost() throws Exception {
         // Get the localizedBlogPost
         restLocalizedBlogPostMockMvc.perform(get("/api/localized-blog-posts/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+                                    .andExpect(status().isNotFound());
     }
 
     @Test
@@ -243,15 +242,15 @@ public class LocalizedBlogPostResourceIT {
         // Disconnect from session so that the updates on updatedLocalizedBlogPost are not directly saved in db
         em.detach(updatedLocalizedBlogPost);
         updatedLocalizedBlogPost
-            .title(UPDATED_TITLE)
-            .excerpt(UPDATED_EXCERPT)
-            .content(UPDATED_CONTENT)
-            .language(UPDATED_LANGUAGE);
+                .title(UPDATED_TITLE)
+                .excerpt(UPDATED_EXCERPT)
+                .content(UPDATED_CONTENT)
+                .language(UPDATED_LANGUAGE);
 
         restLocalizedBlogPostMockMvc.perform(put("/api/localized-blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(updatedLocalizedBlogPost)))
-            .andExpect(status().isOk());
+                                                                             .contentType(MediaType.APPLICATION_JSON)
+                                                                             .content(TestUtil.convertObjectToJsonBytes(updatedLocalizedBlogPost)))
+                                    .andExpect(status().isOk());
 
         // Validate the LocalizedBlogPost in the database
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();
@@ -270,9 +269,9 @@ public class LocalizedBlogPostResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLocalizedBlogPostMockMvc.perform(put("/api/localized-blog-posts").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
-            .andExpect(status().isBadRequest());
+                                                                             .contentType(MediaType.APPLICATION_JSON)
+                                                                             .content(TestUtil.convertObjectToJsonBytes(localizedBlogPost)))
+                                    .andExpect(status().isBadRequest());
 
         // Validate the LocalizedBlogPost in the database
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();
@@ -289,8 +288,8 @@ public class LocalizedBlogPostResourceIT {
 
         // Delete the localizedBlogPost
         restLocalizedBlogPostMockMvc.perform(delete("/api/localized-blog-posts/{id}", localizedBlogPost.getId()).with(csrf())
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+                                                                                                                .accept(MediaType.APPLICATION_JSON))
+                                    .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
         List<LocalizedBlogPost> localizedBlogPostList = localizedBlogPostRepository.findAll();

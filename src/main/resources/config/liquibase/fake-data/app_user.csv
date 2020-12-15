@@ -1,11 +1,2 @@
 id;user_name;displayed_name;admin;shop_rights;blog_rights;profile_rights;scriptorium_rights;image_url;user_id
-1;Officer Kuwait;Strategist integrated Small Frozen Fish;false;WRI;WRI;MOD;REA;Wooden Knolls;2
-2;Refined Metal Shirt;efficient Movies;true;MOD;REA;WRI;REA;backing up;1
-3;Coordinator;Home Loan Account Berkshire;true;WRI;REA;MOD;WRI;Naira;2
-4;Italy;Supervisor;true;REA;REA;REA;REA;front-end fuchsia Practical;1
-5;Chief;digital Ranch;false;REA;WRI;WRI;REA;EXE data-warehouse;2
-6;Engineer;Dynamic;true;MOD;REA;WRI;MOD;Facilitator;2
-7;Investor hard drive sky blue;Michigan connect;false;MOD;MOD;REA;REA;Implementation;1
-8;Officer;static;true;WRI;REA;MOD;MOD;Avon;1
-9;Optimization Tools;Savings Account withdrawal;false;REA;REA;WRI;REA;Concrete Spring;1
-10;Baby Kids;deploy SAS;false;MOD;REA;WRI;REA;Berkshire;1
+1;Officer Kuwait;Kuwait;false;WRI;WRI;WRI;WRI;;1

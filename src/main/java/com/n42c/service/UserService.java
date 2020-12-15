@@ -84,33 +84,24 @@ public class UserService {
             // set langKey to default if not specified by IdP
             user.setLangKey(Constants.DEFAULT_LANGUAGE);
         }
-        if (details.get("picture") != null) {
-            user.setImageUrl((String) details.get("picture"));
-        }
         user.setActivated(true);
         return user;
     }
 
     /**
-     * Update basic information (first name, last name, email, language) for the current user.
+     * Update basic information (email, language) for the current user.
      *
-     * @param firstName first name of user.
-     * @param lastName  last name of user.
      * @param email     email id of user.
      * @param langKey   language key.
-     * @param imageUrl  image URL of user.
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String email, String langKey) {
         SecurityUtils.getCurrentUserLogin()
                      .flatMap(userRepository::findOneByLogin)
                      .ifPresent(user -> {
-                         user.setFirstName(firstName);
-                         user.setLastName(lastName);
                          if (email != null) {
                              user.setEmail(email.toLowerCase());
                          }
                          user.setLangKey(langKey);
-                         user.setImageUrl(imageUrl);
                          this.clearUserCaches(user);
                          log.debug("Changed Information for User: {}", user);
                      });
@@ -164,14 +155,12 @@ public class UserService {
                 Instant idpModifiedDate = (Instant) details.get("updated_at");
                 if (idpModifiedDate.isAfter(dbModifiedDate)) {
                     log.debug("Updating user '{}' in local database", user.getLogin());
-                    updateUser(user.getFirstName(), user.getLastName(), user.getEmail(),
-                               user.getLangKey(), user.getImageUrl());
+                    updateUser(user.getEmail(), user.getLangKey());
                 }
                 // no last updated info, blindly update
             } else {
                 log.debug("Updating user '{}' in local database", user.getLogin());
-                updateUser(user.getFirstName(), user.getLastName(), user.getEmail(),
-                           user.getLangKey(), user.getImageUrl());
+                updateUser(user.getEmail(), user.getLangKey());
             }
         } else {
             log.debug("Saving user '{}' in local database", user.getLogin());
@@ -190,14 +179,7 @@ public class UserService {
      */
     @Transactional
     public UserDTO getUserFromAuthentication(AbstractAuthenticationToken authToken) {
-        Map<String, Object> attributes;
-        if (authToken instanceof OAuth2AuthenticationToken) {
-            attributes = ((OAuth2AuthenticationToken) authToken).getPrincipal().getAttributes();
-        } else if (authToken instanceof JwtAuthenticationToken) {
-            attributes = ((JwtAuthenticationToken) authToken).getTokenAttributes();
-        } else {
-            throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT! Instead we got: " + authToken.getClass().getName());
-        }
+        Map<String, Object> attributes = getAttributesFromAuthentication(authToken);
         User user = getUser(attributes);
         user.setAuthorities(authToken.getAuthorities().stream()
                                      .map(GrantedAuthority::getAuthority)
@@ -211,7 +193,7 @@ public class UserService {
         return new UserDTO(syncUserWithIdP(attributes, user));
     }
 
-    public AppUser getAppUser(String userId) {
+    public AppUser getAppUser(String userId, AbstractAuthenticationToken authToken) {
         User user = userRepository.getOne(userId);
         AppUser appUser = null;
         if (user != null) {
@@ -226,11 +208,27 @@ public class UserService {
                 appUser.setProfileRights(AppUserRights.REA);
                 appUser.setScriptoriumRights(AppUserRights.REA);
                 appUser.setShopRights(AppUserRights.REA);
+                Map<String, Object> details = getAttributesFromAuthentication(authToken);
+                if (details.get("picture") != null) {
+                    appUser.setImageUrl((String) details.get("picture"));
+                }
                 appUser.setUser(user);
                 appUserRepository.save(appUser);
             }
         }
         return appUser;
+    }
+
+    private Map<String, Object> getAttributesFromAuthentication(AbstractAuthenticationToken authToken) {
+        Map<String, Object> attributes;
+        if (authToken instanceof OAuth2AuthenticationToken) {
+            attributes = ((OAuth2AuthenticationToken) authToken).getPrincipal().getAttributes();
+        } else if (authToken instanceof JwtAuthenticationToken) {
+            attributes = ((JwtAuthenticationToken) authToken).getTokenAttributes();
+        } else {
+            throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT! Instead we got: " + authToken.getClass().getName());
+        }
+        return attributes;
     }
 
     private void clearUserCaches(User user) {

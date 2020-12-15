@@ -1,5 +1,8 @@
 package com.n42c.web.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.n42c.domain.AppUser;
 import com.n42c.repository.AppUserRepository;
 import com.n42c.web.rest.errors.BadRequestAlertException;
@@ -45,26 +48,7 @@ public class AppUserResource {
     }
 
     /**
-     * {@code POST  /app-users} : Create a new appUser.
-     *
-     * @param appUser the appUser to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new appUser, or with status {@code 400 (Bad Request)} if the appUser has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/app-users")
-    public ResponseEntity<AppUser> createAppUser(@Valid @RequestBody AppUser appUser) throws URISyntaxException {
-        log.debug("REST request to save AppUser : {}", appUser);
-        if (appUser.getId() != null) {
-            throw new BadRequestAlertException("A new appUser cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        AppUser result = appUserRepository.save(appUser);
-        return ResponseEntity.created(new URI("/api/app-users/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * {@code PUT  /app-users} : Updates an existing appUser.
+     * {@code PUT  /app-users} : Updates an existing appUser. TODO when working on user accounts seriously
      *
      * @param appUser the appUser to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated appUser,
@@ -73,15 +57,9 @@ public class AppUserResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/app-users")
-    public ResponseEntity<AppUser> updateAppUser(@Valid @RequestBody AppUser appUser) throws URISyntaxException {
+    public ResponseEntity<AppUser> updateAppUser(@RequestBody AppUser appUser) throws URISyntaxException {
         log.debug("REST request to update AppUser : {}", appUser);
-        if (appUser.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        AppUser result = appUserRepository.save(appUser);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, appUser.getId().toString()))
-            .body(result);
+        return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 
     /**

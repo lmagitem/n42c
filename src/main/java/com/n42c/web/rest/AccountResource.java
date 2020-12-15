@@ -39,7 +39,7 @@ public class AccountResource {
     public ManagedUserVM getAccount(Principal principal) {
         if (principal instanceof AbstractAuthenticationToken) {
             UserDTO user = userService.getUserFromAuthentication((AbstractAuthenticationToken) principal);
-            AppUser appUser = userService.getAppUser(user.getId());
+            AppUser appUser = userService.getAppUser(user.getId(), (AbstractAuthenticationToken) principal);
             return new ManagedUserVM(user, appUser);
         } else {
             throw new AccountResourceException("User could not be found");

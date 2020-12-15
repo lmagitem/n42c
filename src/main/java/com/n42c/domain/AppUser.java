@@ -9,7 +9,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -114,16 +113,16 @@ public class AppUser implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "app_user_given_friendships",
-        joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "given_friendships_id", referencedColumnName = "id"))
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AppUser> givenFriendships = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JoinTable(name = "app_user_asked_friend_requests",
-        joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name = "app_user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "asked_friend_requests_id", referencedColumnName = "id"))
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<AppUser> askedFriendRequests = new HashSet<>();
 
@@ -159,7 +158,14 @@ public class AppUser implements Serializable {
         this.displayedName = displayedName;
     }
 
-    public AppUser(Long id, @NotNull String userName, String displayedName, @NotNull Boolean admin, @NotNull AppUserRights shopRights, @NotNull AppUserRights blogRights, @NotNull AppUserRights profileRights, @NotNull AppUserRights scriptoriumRights) {
+    public AppUser(Long id,
+                   @NotNull String userName,
+                   String displayedName,
+                   @NotNull Boolean admin,
+                   @NotNull AppUserRights shopRights,
+                   @NotNull AppUserRights blogRights,
+                   @NotNull AppUserRights profileRights,
+                   @NotNull AppUserRights scriptoriumRights) {
         this.id = id;
         this.userName = userName;
         this.displayedName = displayedName;
@@ -263,6 +269,11 @@ public class AppUser implements Serializable {
 
     public void setScriptoriumRights(AppUserRights scriptoriumRights) {
         this.scriptoriumRights = scriptoriumRights;
+    }
+
+    public AppUser scriptoriumRights(AppUserRights scriptoriumRights) {
+        this.scriptoriumRights = scriptoriumRights;
+        return this;
     }
 
     public String getImageUrl() {
@@ -525,15 +536,15 @@ public class AppUser implements Serializable {
     @Override
     public String toString() {
         return "AppUser{" +
-            "id=" + getId() +
-            ", userName='" + getUserName() + "'" +
-            ", displayedName='" + getDisplayedName() + "'" +
-            ", admin='" + isAdmin() + "'" +
-            ", shopRights='" + getShopRights() + "'" +
-            ", blogRights='" + getBlogRights() + "'" +
-            ", profileRights='" + getProfileRights() + "'" +
-            ", scriptoriumRights='" + getScriptoriumRights() + "'" +
-            ", imageUrl='" + getImageUrl() + "'" +
-            "}";
+               "id=" + getId() +
+               ", userName='" + getUserName() + "'" +
+               ", displayedName='" + getDisplayedName() + "'" +
+               ", admin='" + isAdmin() + "'" +
+               ", shopRights='" + getShopRights() + "'" +
+               ", blogRights='" + getBlogRights() + "'" +
+               ", profileRights='" + getProfileRights() + "'" +
+               ", scriptoriumRights='" + getScriptoriumRights() + "'" +
+               ", imageUrl='" + getImageUrl() + "'" +
+               "}";
     }
 }
