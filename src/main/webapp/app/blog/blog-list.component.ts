@@ -1,19 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpHeaders, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Data, ParamMap, Router} from '@angular/router';
-import {combineLatest, Subscription} from 'rxjs';
-import {JhiEventManager, JhiLanguageService} from 'ng-jhipster';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {IBlog} from 'app/shared/model/blog.model';
-import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
-import {BlogDeleteDialogComponent} from './blog-delete-dialog.component';
-import {BlogService} from 'app/entities/blog/blog.service';
-import {IItemWithLocalizations, LocalizationUtils} from 'app/shared/util/localization-utils';
-import {LocalizedBlogService} from 'app/entities/localized-blog/localized-blog.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
+import { combineLatest, Subscription } from 'rxjs';
+import { JhiEventManager, JhiLanguageService } from 'ng-jhipster';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IBlog } from 'app/shared/model/blog.model';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { BlogDeleteDialogComponent } from './blog-delete-dialog.component';
+import { BlogService } from 'app/entities/blog/blog.service';
+import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/localization-utils';
+import { LocalizedBlogService } from 'app/entities/localized-blog/localized-blog.service';
 
 @Component({
   selector: 'jhi-blog',
   templateUrl: './blog-list.component.html',
+  styleUrls: ['../../content/scss/blog.scss'],
 })
 export class BlogListComponent implements OnInit, OnDestroy {
   blogs?: IBlog[];
@@ -33,8 +34,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected languageService: JhiLanguageService,
     protected modalService: NgbModal
-  ) {
-  }
+  ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
@@ -81,7 +81,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
   }
 
   delete(blog: IBlog): void {
-    const modalRef = this.modalService.open(BlogDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
+    const modalRef = this.modalService.open(BlogDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.blog = blog;
   }
 

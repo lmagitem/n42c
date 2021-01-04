@@ -1,0 +1,306 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="lukem (generated)" id="1608100002686-78">
+        <addForeignKeyConstraint baseColumnNames="rule_id" baseTableName="localized_ninth_mission_rule" constraintName="FK1k7n6ypifk35acbotn9o0psna" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission_rule" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-79">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_allowed_secondaries" constraintName="FK353f9ivitjm71smniy8iic262" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-80">
+        <addForeignKeyConstraint baseColumnNames="ninth_deployment_map_id" baseTableName="ninth_deployment_map_used_in_missions" constraintName="FK521m4oa1xlpl2jv7jhj7iovyb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_deployment_map" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-81">
+        <addForeignKeyConstraint baseColumnNames="primary_objectives_id" baseTableName="ninth_mission_primary_objectives" constraintName="FK5wl60bbwh5pw99qrb0ob5mtxg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-82">
+        <addForeignKeyConstraint baseColumnNames="stratagem_id" baseTableName="localized_ninth_stratagem" constraintName="FK678oycwilxn2755tdmfc052i6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-83">
+        <addForeignKeyConstraint baseColumnNames="deployment_map_id" baseTableName="localized_ninth_deployment_map" constraintName="FK78uy4x214hm6sjyk96jpqamm1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_deployment_map" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-84">
+        <addForeignKeyConstraint baseColumnNames="blog_id" baseTableName="localized_blog" constraintName="FK84r1oelfyyaueixwc64vulyq7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="blog" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-85">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_rules" constraintName="FKahqqt6f3omrod85tn6uvcx5m7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-86">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="ninth_stratagem" constraintName="FKbyy3t46ak07umbr5xw7s0ni85" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-87">
+        <addForeignKeyConstraint baseColumnNames="mission_stratagems_id" baseTableName="ninth_mission_mission_stratagems" constraintName="FKc57t0wffsk90i73209gtyqt9l" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-88">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_mission_stratagems" constraintName="FKdb0wa3ed87ujkgyqes2e62fup" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-89">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="ninth_stratagem_group" constraintName="FKg496fkusfyy1000lms4bth8he" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-90">
+        <addForeignKeyConstraint baseColumnNames="unit_id" baseTableName="ninth_unit_moment" constraintName="FKgbf47jjpg3omooegpjsfyjei6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_unit" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-91">
+        <addForeignKeyConstraint baseColumnNames="ninth_mission_id" baseTableName="ninth_mission_primary_objectives" constraintName="FKha0tblohp47og5v8q77iv1ndb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-92">
+        <addForeignKeyConstraint baseColumnNames="rules_id" baseTableName="ninth_mission_rules" constraintName="FKjk6bom7lpqx47kiq8skit2qqy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission_rule" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-93">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="ninth_unit" constraintName="FKkmbwn8dfkhn3uy2yna13tvvbb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="player" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-94">
+        <addForeignKeyConstraint baseColumnNames="allowed_secondaries_id" baseTableName="ninth_mission_allowed_secondaries" constraintName="FKnnwegelapedsc5vfm6nxl3vys" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-95">
+        <addForeignKeyConstraint baseColumnNames="stratagem_group_id" baseTableName="localized_ninth_stratagem_grp" constraintName="FKoiipvp1b2giru5vfgckf35if7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_stratagem_group" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-96">
+        <addForeignKeyConstraint baseColumnNames="used_in_missions_id" baseTableName="ninth_deployment_map_used_in_missions" constraintName="FKq1yrlhowms9no1xbx4ob1jarc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-97">
+        <addForeignKeyConstraint baseColumnNames="objective_id" baseTableName="localized_ninth_objective" constraintName="FKspk43n193j8jcv0rilrpoip8y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_objective" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-98">
+        <addForeignKeyConstraint baseColumnNames="mission_id" baseTableName="localized_ninth_mission" constraintName="FKtu00uog03nnwdbgs6gferep6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ninth_mission" validate="true"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-99">
+        <dropColumn columnName="FIRST_NAME" tableName="JHI_USER"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-100">
+        <dropColumn columnName="IMAGE_URL" tableName="JHI_USER"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-101">
+        <dropColumn columnName="LAST_NAME" tableName="JHI_USER"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-1">
+        <alterSequence incrementBy="50" sequenceName="sequence_generator"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-2">
+        <setTableRemarks tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-3">
+        <setTableRemarks tableName="app_user_profile"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-4">
+        <setTableRemarks tableName="blog"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-5">
+        <setTableRemarks tableName="blog_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-6">
+        <setTableRemarks tableName="blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-7">
+        <setTableRemarks tableName="localized_blog"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-8">
+        <setTableRemarks tableName="localized_blog_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-9">
+        <setTableRemarks tableName="localized_blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-10">
+        <setTableRemarks tableName="localized_product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-11">
+        <setTableRemarks tableName="player"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-12">
+        <setTableRemarks tableName="product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-13">
+        <setTableRemarks tableName="profile_part"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-14">
+        <setTableRemarks tableName="profile_part_linked_experience"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-15">
+        <setTableRemarks tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-16">
+        <setTableRemarks tableName="profile_part_simple_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-17">
+        <setTableRemarks tableName="profile_part_skill"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-18">
+        <setTableRemarks tableName="profile_part_skill_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-19">
+        <setTableRemarks tableName="shop"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-20">
+        <setColumnRemarks columnName="admin" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-21">
+        <setColumnRemarks columnName="blog_rights" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-22">
+        <setColumnRemarks columnName="content" tableName="localized_blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-23">
+        <setColumnRemarks columnName="content" tableName="localized_product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-24">
+        <setColumnRemarks columnName="content" tableName="profile_part_linked_experience"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-25">
+        <setColumnRemarks columnName="content" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-26">
+        <setColumnRemarks columnName="content" tableName="profile_part_simple_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-27">
+        <setColumnRemarks columnName="date" tableName="profile_part_linked_experience"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-28">
+        <setColumnRemarks columnName="date" tableName="profile_part_simple_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-29">
+        <setColumnRemarks columnName="displayed_name" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-30">
+        <setColumnRemarks columnName="excerpt" tableName="localized_blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-31">
+        <setColumnRemarks columnName="excerpt" tableName="localized_product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-32">
+        <setColumnRemarks columnName="header_background_uri" tableName="app_user_profile"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-33">
+        <setColumnRemarks columnName="index" tableName="profile_part"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-34">
+        <setColumnRemarks columnName="index" tableName="profile_part_skill"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-35">
+        <setColumnRemarks columnName="index" tableName="profile_part_skill_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-36">
+        <setColumnRemarks columnName="jhi_end" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-37">
+        <setColumnRemarks columnName="jhi_order" tableName="profile_part"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-38">
+        <setColumnRemarks columnName="language" tableName="app_user_profile"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-39">
+        <setColumnRemarks columnName="language" tableName="localized_blog"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-40">
+        <setColumnRemarks columnName="language" tableName="localized_blog_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-41">
+        <setColumnRemarks columnName="language" tableName="localized_blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-42">
+        <setColumnRemarks columnName="language" tableName="localized_product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-43">
+        <setColumnRemarks columnName="level" tableName="profile_part_skill"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-44">
+        <setColumnRemarks columnName="location_lat" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-45">
+        <setColumnRemarks columnName="location_long" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-46">
+        <setColumnRemarks columnName="location_name" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-47">
+        <setColumnRemarks columnName="modified" tableName="blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-48">
+        <setColumnRemarks columnName="name" tableName="app_user_profile"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-49">
+        <setColumnRemarks columnName="name" tableName="blog"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-50">
+        <setColumnRemarks columnName="name" tableName="blog_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-51">
+        <setColumnRemarks columnName="name" tableName="localized_blog"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-52">
+        <setColumnRemarks columnName="name" tableName="localized_blog_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-53">
+        <setColumnRemarks columnName="name" tableName="localized_product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-54">
+        <setColumnRemarks columnName="name" tableName="player"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-55">
+        <setColumnRemarks columnName="name" tableName="product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-56">
+        <setColumnRemarks columnName="name" tableName="profile_part_skill"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-57">
+        <setColumnRemarks columnName="name" tableName="profile_part_skill_category"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-58">
+        <setColumnRemarks columnName="name" tableName="shop"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-59">
+        <setColumnRemarks columnName="picture_url" tableName="localized_product"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-60">
+        <setColumnRemarks columnName="profile_rights" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-61">
+        <setColumnRemarks columnName="published" tableName="blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-62">
+        <setColumnRemarks columnName="scriptorium_rights" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-63">
+        <setColumnRemarks columnName="shop_rights" tableName="app_user"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-64">
+        <setColumnRemarks columnName="start" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-65">
+        <setColumnRemarks columnName="sub_title" tableName="profile_part_linked_experience"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-66">
+        <setColumnRemarks columnName="sub_title" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-67">
+        <setColumnRemarks columnName="sub_title" tableName="profile_part_simple_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-68">
+        <setColumnRemarks columnName="summary" tableName="app_user_profile"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-69">
+        <setColumnRemarks columnName="title" tableName="app_user_profile"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-70">
+        <setColumnRemarks columnName="title" tableName="blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-71">
+        <setColumnRemarks columnName="title" tableName="localized_blog_post"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-72">
+        <setColumnRemarks columnName="title" tableName="profile_part"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-73">
+        <setColumnRemarks columnName="title" tableName="profile_part_linked_experience"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-74">
+        <setColumnRemarks columnName="title" tableName="profile_part_precise_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-75">
+        <setColumnRemarks columnName="title" tableName="profile_part_simple_item"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-76">
+        <setColumnRemarks columnName="type" tableName="profile_part"/>
+    </changeSet>
+    <changeSet author="lukem (generated)" id="1608100002686-77">
+        <setColumnRemarks columnName="user_name" tableName="app_user"/>
+    </changeSet>
+</databaseChangeLog>

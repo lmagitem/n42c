@@ -1,207 +1,198 @@
-<div class="card">
+<div class="card jh-card">
+  <div class="card">
     <div class="card-body">
-        <h2 class="card-title text-center" id="moment-name">{{ getMomentName() }}</h2>
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <form (ngSubmit)="save()" [formGroup]="editForm" aria-labelledby="moment-name" name="editForm" novalidate
-                      role="form">
-                    <div *ngIf="isEditing" class="flex-item">
-                        <button (click)="cancel()" *ngIf="isEditing" class="btn btn-secondary" id="cancel-save-moment"
-                                type="button">
-                            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                        </button>
+      <h2 class="card-title text-center" id="moment-name">{{ getMomentName() }}</h2>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <form (ngSubmit)="save()" [formGroup]="editForm" aria-labelledby="moment-name" name="editForm" novalidate role="form">
+            <div *ngIf="isEditing" class="flex-item">
+              <button (click)="cancel()" *ngIf="isEditing" class="btn btn-secondary" id="cancel-save-moment" type="button">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+              </button>
 
-                        <button
-                            *ngIf="isEditing"
-                            [disabled]="editForm.invalid || isSaving"
-                            class="btn btn-primary"
-                            id="save-entity-moment"
-                            type="submit"
-                        >
-                            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                        </button>
-                    </div>
-                    <div>
-                        <jhi-alert-error></jhi-alert-error>
-
-                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'" [hidden]="!editForm.get('id')!.value"
-                             class="form-group">
-                            <label [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.id' | translate" for="id-moment"
-                                   jhiTranslate="global.field.id"
-                            >ID</label
-                            >
-                            <input
-                                *ngIf="isEditing"
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.id' | translate"
-                                class="form-control"
-                                formControlName="id"
-                                id="id-moment"
-                                name="id-moment"
-                                readonly
-                                type="text"
-                            />
-                            <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.id' | translate"
-                               class="p-control">
-                                {{ editForm.get('id')?.value }}
-                            </p>
-                        </div>
-
-                        <div class="form-group">
-                            <label
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.current' | translate"
-                                class="form-control-label"
-                                for="field_current"
-                                jhiTranslate="n42cApp.ninthCampaignMoment.current"
-                            >Current</label
-                            >
-                            <input
-                                *ngIf="isEditing"
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.current' | translate"
-                                class="form-control"
-                                formControlName="current"
-                                id="field_current"
-                                name="current"
-                                type="checkbox"
-                            />
-                            <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.current' | translate"
-                               class="p-control">
-                                {{ 'entity.bool.' + editForm.get('current')?.value | translate }}
-                            </p>
-                            <div
-                                *ngIf="editForm.get('current')!.invalid && (editForm.get('current')!.dirty || editForm.get('current')!.touched)">
-                                <small
-                                    *ngIf="editForm.get('current')?.errors?.required"
-                                    class="form-text text-danger"
-                                    jhiTranslate="entity.validation.required"
-                                >
-                                    This field is required.
-                                </small>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
-                                class="form-control-label"
-                                jhiTranslate="n42cApp.ninthCampaignMoment.sinceInstant"
-                            >Since Instant</label
-                            >
-                            <jhi-imperial-date-picker
-                                *ngIf="isEditing"
-                                [checkName]="'check'"
-                                [form]="editForm"
-                                [instantName]="'sinceInstant'"
-                                class="row"
-                                id="field_sinceInstant"
-                            ></jhi-imperial-date-picker>
-                            <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
-                               class="p-control">
-                                {{ convertToImperial(editForm.get('sinceInstant')?.value, this.editForm.get('check')?.value) }}
-                            </p>
-                            <div
-                                *ngIf="
-                  editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)
-                "
-                            >
-                                <small
-                                    *ngIf="editForm.get('sinceInstant')?.errors?.required"
-                                    class="form-text text-danger"
-                                    jhiTranslate="entity.validation.required"
-                                >
-                                    This field is required.
-                                </small>
-                                <small
-                                    [hidden]="!editForm.get('sinceInstant')?.errors?.ZonedDateTimelocal"
-                                    class="form-text text-danger"
-                                    jhiTranslate="entity.validation.ZonedDateTimelocal"
-                                >
-                                    This field should be a date and time.
-                                </small>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-                                class="form-control-label"
-                                for="field_name-moment"
-                                jhiTranslate="n42cApp.ninthCampaignMoment.name"
-                            >Name</label
-                            >
-                            <input
-                                *ngIf="isEditing"
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-                                class="form-control"
-                                formControlName="name"
-                                id="field_name-moment"
-                                name="name-moment"
-                                type="text"
-                            />
-                            <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
-                               class="p-control">
-                                {{ editForm.get('name')?.value }}
-                            </p>
-                        </div>
-
-                        <div class="form-group">
-                            <label
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.summary' | translate"
-                                class="form-control-label"
-                                for="field_summary"
-                                jhiTranslate="n42cApp.ninthCampaignMoment.summary"
-                            >Summary</label
-                            >
-                            <input
-                                *ngIf="isEditing"
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.summary' | translate"
-                                class="form-control"
-                                formControlName="summary"
-                                id="field_summary"
-                                name="summary"
-                                type="text"
-                            />
-                            <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.summary' | translate"
-                               class="p-control">
-                                {{ editForm.get('summary')?.value }}
-                            </p>
-                        </div>
-
-                        <div class="form-group">
-                            <label
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate"
-                                class="form-control-label"
-                                for="field_description"
-                                jhiTranslate="n42cApp.ninthCampaignMoment.description"
-                            >Description</label
-                            >
-                            <textarea
-                                *ngIf="isEditing"
-                                [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate"
-                                class="form-control"
-                                formControlName="description"
-                                id="field_description"
-                                name="description"
-                                rows="5"
-                            ></textarea>
-                            <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate"
-                               class="p-control">
-                                {{ editForm.get('description')?.value }}
-                            </p>
-                        </div>
-
-                        <div class="row">
-                            <div *ngFor="let battle of battles" class="col-12 col-md-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h2 class="card-title text-center">{{ battle.name }}</h2>
-                                        <p>Ceci est un texte</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+              <button
+                *ngIf="isEditing"
+                [disabled]="editForm.invalid || isSaving"
+                class="btn btn-primary"
+                id="save-entity-moment"
+                type="submit"
+              >
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+              </button>
             </div>
+            <div>
+              <jhi-alert-error></jhi-alert-error>
+
+              <div *jhiHasAnyAuthority="'ROLE_ADMIN'" [hidden]="!editForm.get('id')!.value" class="form-group">
+                <label [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.id' | translate" for="id-moment" jhiTranslate="global.field.id"
+                  >ID</label
+                >
+                <input
+                  *ngIf="isEditing"
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.id' | translate"
+                  class="form-control"
+                  formControlName="id"
+                  id="id-moment"
+                  name="id-moment"
+                  readonly
+                  type="text"
+                />
+                <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.id' | translate" class="p-control">
+                  {{ editForm.get('id')?.value }}
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.current' | translate"
+                  class="form-control-label"
+                  for="field_current"
+                  jhiTranslate="n42cApp.ninthCampaignMoment.current"
+                  >Current</label
+                >
+                <input
+                  *ngIf="isEditing"
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.current' | translate"
+                  class="form-control"
+                  formControlName="current"
+                  id="field_current"
+                  name="current"
+                  type="checkbox"
+                />
+                <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.current' | translate" class="p-control">
+                  {{ 'entity.bool.' + editForm.get('current')?.value | translate }}
+                </p>
+                <div *ngIf="editForm.get('current')!.invalid && (editForm.get('current')!.dirty || editForm.get('current')!.touched)">
+                  <small
+                    *ngIf="editForm.get('current')?.errors?.required"
+                    class="form-text text-danger"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate"
+                  class="form-control-label"
+                  jhiTranslate="n42cApp.ninthCampaignMoment.sinceInstant"
+                  >Since Instant</label
+                >
+                <jhi-imperial-date-picker
+                  *ngIf="isEditing"
+                  [checkName]="'check'"
+                  [form]="editForm"
+                  [instantName]="'sinceInstant'"
+                  class="row"
+                  id="field_sinceInstant"
+                ></jhi-imperial-date-picker>
+                <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.sinceInstant' | translate" class="p-control">
+                  {{ convertToImperial(editForm.get('sinceInstant')?.value, this.editForm.get('check')?.value) }}
+                </p>
+                <div
+                  *ngIf="
+                    editForm.get('sinceInstant')!.invalid && (editForm.get('sinceInstant')!.dirty || editForm.get('sinceInstant')!.touched)
+                  "
+                >
+                  <small
+                    *ngIf="editForm.get('sinceInstant')?.errors?.required"
+                    class="form-text text-danger"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    This field is required.
+                  </small>
+                  <small
+                    [hidden]="!editForm.get('sinceInstant')?.errors?.ZonedDateTimelocal"
+                    class="form-text text-danger"
+                    jhiTranslate="entity.validation.ZonedDateTimelocal"
+                  >
+                    This field should be a date and time.
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                  class="form-control-label"
+                  for="field_name-moment"
+                  jhiTranslate="n42cApp.ninthCampaignMoment.name"
+                  >Name</label
+                >
+                <input
+                  *ngIf="isEditing"
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate"
+                  class="form-control"
+                  formControlName="name"
+                  id="field_name-moment"
+                  name="name-moment"
+                  type="text"
+                />
+                <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.name' | translate" class="p-control">
+                  {{ editForm.get('name')?.value }}
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.summary' | translate"
+                  class="form-control-label"
+                  for="field_summary"
+                  jhiTranslate="n42cApp.ninthCampaignMoment.summary"
+                  >Summary</label
+                >
+                <input
+                  *ngIf="isEditing"
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.summary' | translate"
+                  class="form-control"
+                  formControlName="summary"
+                  id="field_summary"
+                  name="summary"
+                  type="text"
+                />
+                <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.summary' | translate" class="p-control">
+                  {{ editForm.get('summary')?.value }}
+                </p>
+              </div>
+
+              <div class="form-group">
+                <label
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate"
+                  class="form-control-label"
+                  for="field_description"
+                  jhiTranslate="n42cApp.ninthCampaignMoment.description"
+                  >Description</label
+                >
+                <textarea
+                  *ngIf="isEditing"
+                  [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate"
+                  class="form-control"
+                  formControlName="description"
+                  id="field_description"
+                  name="description"
+                  rows="5"
+                ></textarea>
+                <p *ngIf="!isEditing" [ngbTooltip]="'n42cApp.ninthCampaignMoment.help.description' | translate" class="p-control">
+                  {{ editForm.get('description')?.value }}
+                </p>
+              </div>
+
+              <div class="row">
+                <div *ngFor="let battle of battles" class="col-12 col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h2 class="card-title text-center">{{ battle.name }}</h2>
+                      <p>Ceci est un texte</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>

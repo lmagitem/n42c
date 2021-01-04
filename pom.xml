@@ -5,7 +5,7 @@
 
     <groupId>com.n42c</groupId>
     <artifactId>n42c</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
     <name>N42C</name>
 

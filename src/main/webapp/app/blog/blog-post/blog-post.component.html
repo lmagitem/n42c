@@ -1,42 +1,41 @@
-<div class="row justify-content-center">
+<div class="card jh-card">
+  <div class="row justify-content-center">
     <div class="col-12">
-        <article *ngIf="blogPost">
-            <h1>{{ blogPost.title }}</h1>
+      <article *ngIf="blogPost">
+        <h1>{{ blogPost.title }}</h1>
 
-            <hr/>
+        <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+        <jhi-alert-error></jhi-alert-error>
 
-            <small
-            >Posted in <a
-                [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ getLocalizedField(blogPost.blog, 'name') }}</a
-            >, {{ blogPost.published | date: 'medium':undefined:locale }}
-                by {{ arrayToString(blogPost.authors, 'displayedName') }}. Last
-                modification: {{ blogPost.modified | date: 'medium':undefined:locale }}</small
-            >
+        <small
+          >Posted in <a [routerLink]="['/blog', blogPost.blog?.id, 'post']">{{ getLocalizedField(blogPost.blog, 'name') }}</a
+          >, {{ blogPost.published | date: 'medium':undefined:locale }} by {{ arrayToString(blogPost.authors, 'displayedName') }}. Last
+          modification: {{ blogPost.modified | date: 'medium':undefined:locale }}</small
+        >
 
-            <small
-            ><span jhiTranslate="n42cApp.blogPost.categories">Categories</span>
-                <span *ngFor="let categories of blogPost.categories; let last = last">
-          <a [routerLink]="['/entities', 'blog-category', categories?.id, 'view']">{{ categories.name }}</a
-          >{{ last ? '' : ', ' }}
-        </span>
-            </small>
+        <small
+          ><span jhiTranslate="n42cApp.blogPost.categories">Categories</span>
+          <span *ngFor="let categories of blogPost.categories; let last = last">
+            <a [routerLink]="['/entities', 'blog-category', categories?.id, 'view']">{{ categories.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </small>
 
-            <hr/>
+        <hr />
 
-            <div [innerHTML]="getLocalizedField(blogPost, 'content')"></div>
+        <div [innerHTML]="getLocalizedField(blogPost, 'content')"></div>
 
-            <hr/>
+        <hr />
 
-            <button (click)="previousState()" class="btn btn-info" type="submit">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+        <button (click)="previousState()" class="btn btn-info" type="submit">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
 
-            <button [routerLink]="['/entities', 'blog-post', blogPost.id, 'edit']" class="btn btn-primary"
-                    type="button">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </article>
+        <button [routerLink]="['/entities', 'blog-post', blogPost.id, 'edit']" class="btn btn-primary" type="button">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </article>
     </div>
+  </div>
 </div>

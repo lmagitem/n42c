@@ -1,43 +1,40 @@
-<div class="row">
+<div class="card jh-card">
+  <div class="row">
     <div class="col-md-12">
-        <div [ngSwitch]="isAuthenticated()">
-            <div *ngSwitchCase="true" class="alert alert-success">
-        <span *ngIf="account" [translateValues]="{ username: account.login }" id="home-logged-message"
-              jhiTranslate="home.logged.message"
-        >You are logged in as user "{{ account.login }} ".</span
-        >
-            </div>
+      <div [ngSwitch]="isAuthenticated()">
+        <div *ngSwitchCase="true" class="alert alert-success">
+          <span *ngIf="account" [translateValues]="{ username: account.login }" id="home-logged-message" jhiTranslate="home.logged.message"
+            >You are logged in as user "{{ account.login }} ".</span
+          >
         </div>
+      </div>
 
-        <p style="font-size: 5em; text-align: center;">🛠</p>
-        <p style="font-size: 3em; text-align: center;">
-            <span jhiTranslate="home.construction">This website is currently under construction</span>
-        </p>
+      <p style="font-size: 5em; text-align: center;">🛠</p>
+      <p style="font-size: 3em; text-align: center;">
+        <span jhiTranslate="home.construction">This website is currently under construction</span>
+      </p>
 
-        <p style="font-size: 2em; text-align: center;">
-      <span jhiTranslate="home.link.looking">If you are looking for my old blog, you can reach it at </span
-      ><a href="https://n42c.net/" jhiTranslate="home.link.oldblog" rel="noopener noreferrer" target="_blank">by
-            following this link</a
+      <p style="font-size: 2em; text-align: center;">
+        <span jhiTranslate="home.link.looking">If you are looking for my old blog, you can reach it at </span
+        ><a href="https://n42c.net/" jhiTranslate="home.link.oldblog" rel="noopener noreferrer" target="_blank">by following this link</a
         ><span>.</span>
-        </p>
+      </p>
 
-        <p>
-            <span jhiTranslate="home.like.find">You can find this project on </span>
-            <a href="https://github.com/lmagitem/n42c" jhiTranslate="home.like.github" rel="noopener noreferrer"
-               target="_blank">GitHub</a>
-            <span jhiTranslate="home.like.follow">; follow me on Twitter: </span>
-            <a href="https://twitter.com/LucMagitem" rel="noopener noreferrer" target="_blank">@LucMagitem</a>
-            <span jhiTranslate="home.like.look">; take a look at my </span>
-            <a href="https://www.instagram.com/lucmagitem/" jhiTranslate="home.like.instagram" rel="noopener noreferrer"
-               target="_blank"
-            >Instagram account</a
-            >
-            <span jhiTranslate="home.like.or"> or my </span>
-            <a href="http://www.youtube.com/user/LukeMagitem" jhiTranslate="home.like.youtube" rel="noopener noreferrer"
-               target="_blank"
-            >Youtube channel</a
-            >
-            <span jhiTranslate="home.like.mail">; and email me at: lucmagitem [at] gmail [dot] com.</span>
-        </p>
+      <p>
+        <span jhiTranslate="home.like.find">You can find this project on </span>
+        <a href="https://github.com/lmagitem/n42c" jhiTranslate="home.like.github" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <span jhiTranslate="home.like.follow">; follow me on Twitter: </span>
+        <a href="https://twitter.com/LucMagitem" rel="noopener noreferrer" target="_blank">@LucMagitem</a>
+        <span jhiTranslate="home.like.look">; take a look at my </span>
+        <a href="https://www.instagram.com/lucmagitem/" jhiTranslate="home.like.instagram" rel="noopener noreferrer" target="_blank"
+          >Instagram account</a
+        >
+        <span jhiTranslate="home.like.or"> or my </span>
+        <a href="http://www.youtube.com/user/LukeMagitem" jhiTranslate="home.like.youtube" rel="noopener noreferrer" target="_blank"
+          >Youtube channel</a
+        >
+        <span jhiTranslate="home.like.mail">; and email me at: lucmagitem [at] gmail [dot] com.</span>
+      </p>
     </div>
+  </div>
 </div>

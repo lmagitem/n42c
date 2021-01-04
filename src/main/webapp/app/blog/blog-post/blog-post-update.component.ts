@@ -1,33 +1,43 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
-import {BlogPost, IBlogPost} from 'app/shared/model/blog-post.model';
-import {IAppUser} from 'app/shared/model/app-user.model';
-import {AppUserService} from 'app/entities/app-user/app-user.service';
-import {IBlogCategory} from 'app/shared/model/blog-category.model';
-import {BlogCategoryService} from 'app/entities/blog-category/blog-category.service';
-import {IBlog} from 'app/shared/model/blog.model';
-import {BlogService} from 'app/entities/blog/blog.service';
-import {BlogPostService} from 'app/entities/blog-post/blog-post.service';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { BlogPost, IBlogPost } from 'app/shared/model/blog-post.model';
+import { IAppUser } from 'app/shared/model/app-user.model';
+import { AppUserService } from 'app/entities/app-user/app-user.service';
+import { IBlogCategory } from 'app/shared/model/blog-category.model';
+import { BlogCategoryService } from 'app/entities/blog-category/blog-category.service';
+import { IBlog } from 'app/shared/model/blog.model';
+import { BlogService } from 'app/entities/blog/blog.service';
+import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { LocalizedBlogPost } from 'app/shared/model/localized-blog-post.model';
+import { JhiLanguageService } from 'ng-jhipster';
+import { LanguageUtils } from 'app/shared/util/language-utils';
 
 type SelectableEntity = IAppUser | IBlogCategory | IBlog;
-
 type SelectableManyToManyEntity = IAppUser | IBlogCategory;
 
 @Component({
   selector: 'jhi-blog-post-update',
   templateUrl: './blog-post-update.component.html',
+  styleUrls: ['../../../content/scss/blog.scss'],
 })
 export class BlogPostUpdateComponent implements OnInit {
+  editor = ClassicEditor;
   isSaving = false;
+  page = 0;
   appusers: IAppUser[] = [];
   blogcategories: IBlogCategory[] = [];
   blogs: IBlog[] = [];
+
+  languageKeys = LanguageUtils.getLanguageKeyArray();
+  localizationsMap = new Map();
+  selectedLanguage = 'EN';
 
   editForm = this.fb.group({
     id: [],
@@ -36,6 +46,7 @@ export class BlogPostUpdateComponent implements OnInit {
     modified: [null, [Validators.required]],
     authors: [],
     categories: [],
+    localizations: [],
     blog: [],
   });
 
@@ -45,12 +56,19 @@ export class BlogPostUpdateComponent implements OnInit {
     protected blogCategoryService: BlogCategoryService,
     protected blogService: BlogService,
     protected activatedRoute: ActivatedRoute,
+    protected languageService: JhiLanguageService,
     private fb: FormBuilder
   ) {
+    LanguageUtils.getLanguageKeyArray().forEach(key => {
+      const localization = new LocalizedBlogPost();
+      localization.language = LanguageUtils.getLanguageEnumFromKey(key);
+      this.localizationsMap.set(key, localization);
+    });
+    this.selectedLanguage = this.languageService.getCurrentLanguage().toUpperCase();
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({blogPost}) => {
+    this.activatedRoute.data.subscribe(({ blogPost }) => {
       if (!blogPost.id) {
         const today = moment().startOf('day');
         blogPost.published = today;
@@ -75,6 +93,7 @@ export class BlogPostUpdateComponent implements OnInit {
       modified: blogPost.modified ? blogPost.modified.format(DATE_TIME_FORMAT) : null,
       authors: blogPost.authors,
       categories: blogPost.categories,
+      localizations: blogPost.localizations,
       blog: blogPost.blog,
     });
   }
@@ -95,6 +114,10 @@ export class BlogPostUpdateComponent implements OnInit {
 
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  getLanguageTranslationKey(key: string): string {
+    return 'n42cApp.Language.' + key;
   }
 
   getSelected(selectedVals: SelectableManyToManyEntity[], option: SelectableManyToManyEntity): SelectableManyToManyEntity {

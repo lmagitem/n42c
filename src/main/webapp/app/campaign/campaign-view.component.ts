@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {INinthCampaign, NinthCampaign} from 'app/shared/model/ninth-campaign.model';
-import {IPlayer} from 'app/shared/model/player.model';
-import {PlayerService} from 'app/entities/player/player.service';
-import {INinthStratagemGroup} from 'app/shared/model/ninth-stratagem-group.model';
-import {NinthStratagemGroupService} from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
-import {NinthCampaignService} from 'app/entities/ninth-campaign/ninth-campaign.service';
-import {NinthGameType} from 'app/shared/model/enumerations/ninth-game-type.model';
-import {EnumTranslationUtils} from 'app/shared/util/enum-translation-utils';
-import {NinthCampaignMomentService} from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
-import {CampaignService} from './campaign.service';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { INinthCampaign, NinthCampaign } from 'app/shared/model/ninth-campaign.model';
+import { IPlayer } from 'app/shared/model/player.model';
+import { PlayerService } from 'app/entities/player/player.service';
+import { INinthStratagemGroup } from 'app/shared/model/ninth-stratagem-group.model';
+import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
+import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
+import { NinthGameType } from 'app/shared/model/enumerations/ninth-game-type.model';
+import { EnumTranslationUtils } from 'app/shared/util/enum-translation-utils';
+import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
+import { CampaignService } from './campaign.service';
 
 type SelectableEntity = IPlayer | INinthStratagemGroup;
 
 @Component({
   selector: 'jhi-ninth-campaign-update',
   templateUrl: './campaign-view.component.html',
-  styleUrls: ['./campaign-view.component.scss'],
+  styleUrls: ['../../../content/scss/campaign.scss'],
 })
 export class CampaignViewComponent implements OnInit {
   isEditing = false;
@@ -50,8 +50,7 @@ export class CampaignViewComponent implements OnInit {
     private campaignService: CampaignService,
     private router: Router,
     private fb: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     // Get the current campaign and everything that it needs

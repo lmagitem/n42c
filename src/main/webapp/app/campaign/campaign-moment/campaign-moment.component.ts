@@ -1,31 +1,31 @@
-import {HttpResponse} from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {NinthCampaignMomentService} from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
-import {NinthCampaignService} from 'app/entities/ninth-campaign/ninth-campaign.service';
-import {NinthStratagemGroupService} from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
-import {PlayerService} from 'app/entities/player/player.service';
-import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
-import {NinthGameSize} from 'app/shared/model/enumerations/ninth-game-size.model';
-import {NinthGameType} from 'app/shared/model/enumerations/ninth-game-type.model';
-import {LocalizedNinthMission} from 'app/shared/model/localized-ninth-mission.model';
-import {NinthArmyMoment} from 'app/shared/model/ninth-army-moment.model';
-import {NinthArmy} from 'app/shared/model/ninth-army.model';
-import {NinthBattle} from 'app/shared/model/ninth-battle.model';
-import {INinthCampaignMoment, NinthCampaignMoment} from 'app/shared/model/ninth-campaign-moment.model';
-import {NinthMission} from 'app/shared/model/ninth-mission.model';
-import {ImperialDateConverter} from 'app/shared/util/imperial-date-converter';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NinthCampaignMomentService } from 'app/entities/ninth-campaign-moment/ninth-campaign-moment.service';
+import { NinthCampaignService } from 'app/entities/ninth-campaign/ninth-campaign.service';
+import { NinthStratagemGroupService } from 'app/entities/ninth-stratagem-group/ninth-stratagem-group.service';
+import { PlayerService } from 'app/entities/player/player.service';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { NinthGameSize } from 'app/shared/model/enumerations/ninth-game-size.model';
+import { NinthGameType } from 'app/shared/model/enumerations/ninth-game-type.model';
+import { LocalizedNinthMission } from 'app/shared/model/localized-ninth-mission.model';
+import { NinthArmyMoment } from 'app/shared/model/ninth-army-moment.model';
+import { NinthArmy } from 'app/shared/model/ninth-army.model';
+import { NinthBattle } from 'app/shared/model/ninth-battle.model';
+import { INinthCampaignMoment, NinthCampaignMoment } from 'app/shared/model/ninth-campaign-moment.model';
+import { NinthMission } from 'app/shared/model/ninth-mission.model';
+import { ImperialDateConverter } from 'app/shared/util/imperial-date-converter';
 import * as moment from 'moment';
-import {Observable} from 'rxjs';
-import {first} from 'rxjs/operators';
-import {CampaignService} from '../campaign.service';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { CampaignService } from '../campaign.service';
 
 @Component({
   selector: 'jhi-campaign-moment',
   templateUrl: './campaign-moment.component.html',
-  styleUrls: ['./campaign-moment.component.scss'],
+  styleUrls: ['../../../../content/scss/campaign.scss'],
 })
 export class CampaignMomentComponent implements OnInit {
   isEditing = false;
@@ -158,8 +158,7 @@ export class CampaignMomentComponent implements OnInit {
     private translate: TranslateService,
     private campaignService: CampaignService,
     private fb: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     // Get the current moment and everything that it needs

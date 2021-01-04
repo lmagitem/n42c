@@ -3,6 +3,7 @@
     "blogPost": {
       "home": {
         "title": "Blog Posts",
+        "recent-entries": "Recent entries",
         "createLabel": "Create a new Blog Post",
         "createOrEditLabel": "Create or edit a Blog Post",
         "notFound": "No Blog Posts found"
