@@ -104,6 +104,7 @@ class BlogPostGatlingTest extends Simulation {
                 , "title":"SAMPLE_TEXT"
                 , "published":"2020-01-01T00:00:00.000Z"
                 , "modified":"2020-01-01T00:00:00.000Z"
+                , "pictureUrl":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_blogPost_url"))).exitHereIfFailed

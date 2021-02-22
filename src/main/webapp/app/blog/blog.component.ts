@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {Blog, IBlog} from 'app/shared/model/blog.model';
-import {IAppUser} from 'app/shared/model/app-user.model';
-import {AppUserService} from 'app/entities/app-user/app-user.service';
-import {BlogService} from 'app/entities/blog/blog.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Blog, IBlog } from 'app/shared/model/blog.model';
+import { IAppUser } from 'app/shared/model/app-user.model';
+import { AppUserService } from 'app/entities/app-user/app-user.service';
+import { BlogService } from 'app/entities/blog/blog.service';
 
 @Component({
   selector: 'jhi-blog-update',
   templateUrl: './blog.component.html',
+  styleUrls: ['../../content/scss/blog.scss'],
 })
 export class BlogComponent implements OnInit {
   isSaving = false;
@@ -28,11 +29,10 @@ export class BlogComponent implements OnInit {
     protected appUserService: AppUserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({blog}) => {
+    this.activatedRoute.data.subscribe(({ blog }) => {
       this.updateForm(blog);
 
       this.appUserService.query().subscribe((res: HttpResponse<IAppUser[]>) => (this.appusers = res.body || []));

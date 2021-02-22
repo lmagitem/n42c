@@ -24,8 +24,14 @@
                           jhiTranslate="n42cApp.blogPost.modified">Modified</span></dt>
                 <dd>
                     <span>{{ blogPost.modified }}</span>
-                </dd>
-                <dt><span jhiTranslate="n42cApp.blogPost.authors">Authors</span></dt>
+        </dd>
+        <dt>
+          <span jhiTranslate="n42cApp.blogPost.pictureUrl" [ngbTooltip]="'n42cApp.blogPost.help.pictureUrl' | translate">Picture Url</span>
+        </dt>
+        <dd>
+          <span>{{ blogPost.pictureUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="n42cApp.blogPost.authors">Authors</span></dt>
                 <dd>
           <span *ngFor="let authors of blogPost.authors; let last = last">
             <a [routerLink]="['/entities', 'app-user', authors?.id, 'view']">{{ authors.displayedName }}</a

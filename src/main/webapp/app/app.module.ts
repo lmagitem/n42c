@@ -6,6 +6,8 @@ import { N42CSharedModule } from 'app/shared/shared.module';
 import { N42CCoreModule } from 'app/core/core.module';
 import { N42CAppRoutingModule } from './app-routing.module';
 import { N42CHomeModule } from './home/home.module';
+import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as Cloudinary from 'cloudinary-core';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -14,6 +16,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { registerLocaleData } from '@angular/common';
+
 import localeFr from '@angular/common/locales/fr';
 import localeEs from '@angular/common/locales/es';
 import localeDe from '@angular/common/locales/de';
@@ -46,6 +49,8 @@ registerLocaleData(localePl, 'pl');
     N42CSharedModule,
     N42CCoreModule,
     N42CHomeModule,
+    /* eslint-disable @typescript-eslint/camelcase */
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'n42c', upload_preset: 'n42c_upload' } as CloudinaryConfiguration),
     // jhipster-needle-angular-add-module JHipster will add new module here
     N42CAppRoutingModule,
   ],

@@ -1,4 +1,4 @@
-id;title;published;modified;blog_id
-1;Love;2020-07-03T10:18:06;2020-07-03T02:33:00;1
-2;Passion;2020-07-03T00:10:12;2020-07-03T07:03:53;2
-3;Rage;2020-07-02T23:05:45;2020-07-03T04:13:01;2
+id;title;published;modified;picture_url;blog_id
+1;Love;2020-07-03T10:18:06;2020-07-03T02:33:00;https://res.cloudinary.com/n42c/image/upload/c_scale,w_1170/v1611417541/chris_riwjdw.png;1
+2;Passion;2020-07-03T00:10:12;2020-07-03T07:03:53;https://res.cloudinary.com/n42c/image/upload/v1611417507/library/fond_qbnots.png;2
+3;Rage;2020-07-02T23:05:45;2020-07-03T04:13:01;https://res.cloudinary.com/n42c/image/upload/v1611417525/library/siboot_fasp2w.png;2

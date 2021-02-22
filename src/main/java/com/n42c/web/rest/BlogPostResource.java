@@ -78,6 +78,9 @@ public class BlogPostResource {
                 (appUser != null && (AppUserRights.WRI.equals(appUser.getBlogRights()) || AppUserRights.MOD.equals(appUser.getBlogRights())))
         ) {
             log.debug("REST request to save BlogPost : {}", blogPost);
+
+            log.debug("ATTENTION ! NEED TO SANITIZE URL HERE");
+
             BlogPost result = blogPostRepository.save(blogPost);
             return ResponseEntity
                     .created(new URI("/api/blog-posts/" + result.getId()))
@@ -116,6 +119,9 @@ public class BlogPostResource {
                     (old != null && appUser != null && old.getAuthors().stream().anyMatch(author -> author.getId().equals(appUser.getId())))
             ) {
                 log.debug("REST request to update BlogPost : {}", blogPost);
+
+                log.debug("ATTENTION ! NEED TO SANITIZE URL HERE");
+
                 BlogPost result = blogPostRepository.save(blogPost);
                 return ResponseEntity
                         .ok()

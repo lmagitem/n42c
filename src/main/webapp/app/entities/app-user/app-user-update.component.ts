@@ -86,19 +86,22 @@ export class AppUserUpdateComponent implements OnInit {
     }
   }
 
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
+  private createFromForm(): IAppUser {
+    return {
+      ...new AppUser(),
+      id: this.editForm.get(['id'])!.value,
+      userName: this.editForm.get(['userName'])!.value,
+      displayedName: this.editForm.get(['displayedName'])!.value,
+      admin: this.editForm.get(['admin'])!.value,
+      shopRights: this.editForm.get(['shopRights'])!.value,
+      blogRights: this.editForm.get(['blogRights'])!.value,
+      profileRights: this.editForm.get(['profileRights'])!.value,
+      scriptoriumRights: this.editForm.get(['scriptoriumRights'])!.value,
+      imageUrl: this.editForm.get(['imageUrl'])!.value,
+      user: this.editForm.get(['user'])!.value,
+      givenFriendships: this.editForm.get(['givenFriendships'])!.value,
+      askedFriendRequests: this.editForm.get(['askedFriendRequests'])!.value,
+    };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IAppUser>>): void {
@@ -120,20 +123,18 @@ export class AppUserUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private createFromForm(): IAppUser {
-    return {
-      ...new AppUser(),
-      id: this.editForm.get(['id'])!.value,
-      userName: this.editForm.get(['userName'])!.value,
-      displayedName: this.editForm.get(['displayedName'])!.value,
-      admin: this.editForm.get(['admin'])!.value,
-      shopRights: this.editForm.get(['shopRights'])!.value,
-      blogRights: this.editForm.get(['blogRights'])!.value,
-      profileRights: this.editForm.get(['profileRights'])!.value,
-      scriptoriumRights: this.editForm.get(['scriptoriumRights'])!.value,
-      user: this.editForm.get(['user'])!.value,
-      givenFriendships: this.editForm.get(['givenFriendships'])!.value,
-      askedFriendRequests: this.editForm.get(['askedFriendRequests'])!.value,
-    };
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: IAppUser[], option: IAppUser): IAppUser {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

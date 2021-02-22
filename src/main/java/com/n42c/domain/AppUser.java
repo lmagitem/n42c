@@ -92,8 +92,11 @@ public class AppUser implements Serializable {
     @Column(name = "scriptorium_rights", nullable = false)
     private AppUserRights scriptoriumRights;
 
-    @Size(max = 256)
-    @Column(name = "image_url", length = 256)
+    /**
+     * The user's avatar in the app.
+     */
+    @ApiModelProperty(value = "The user's avatar in the app.")
+    @Column(name = "image_url")
     private String imageUrl;
 
     @OneToOne(optional = false)

@@ -32,6 +32,7 @@ export class BlogPostUpdatePage {
   titleInput = element(by.id('field_title'));
   publishedInput = element(by.id('field_published'));
   modifiedInput = element(by.id('field_modified'));
+  pictureUrlInput = element(by.id('field_pictureUrl'));
 
   authorsSelect = element(by.id('field_authors'));
   categoriesSelect = element(by.id('field_categories'));
@@ -63,6 +64,14 @@ export class BlogPostUpdatePage {
 
   async getModifiedInput(): Promise<string> {
     return await this.modifiedInput.getAttribute('value');
+  }
+
+  async setPictureUrlInput(pictureUrl: string): Promise<void> {
+    await this.pictureUrlInput.sendKeys(pictureUrl);
+  }
+
+  async getPictureUrlInput(): Promise<string> {
+    return await this.pictureUrlInput.getAttribute('value');
   }
 
   async authorsSelectLastOption(): Promise<void> {

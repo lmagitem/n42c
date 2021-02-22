@@ -48,6 +48,7 @@ describe('BlogPost e2e test', () => {
             blogPostUpdatePage.setTitleInput('title'),
             blogPostUpdatePage.setPublishedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             blogPostUpdatePage.setModifiedInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
+            blogPostUpdatePage.setPictureUrlInput('pictureUrl'),
             // blogPostUpdatePage.authorsSelectLastOption(),
             // blogPostUpdatePage.categoriesSelectLastOption(),
             blogPostUpdatePage.blogSelectLastOption(),
@@ -56,6 +57,7 @@ describe('BlogPost e2e test', () => {
         expect(await blogPostUpdatePage.getTitleInput()).to.eq('title', 'Expected Title value to be equals to title');
         expect(await blogPostUpdatePage.getPublishedInput()).to.contain('2001-01-01T02:30', 'Expected published value to be equals to 2000-12-31');
         expect(await blogPostUpdatePage.getModifiedInput()).to.contain('2001-01-01T02:30', 'Expected modified value to be equals to 2000-12-31');
+        expect(await blogPostUpdatePage.getPictureUrlInput()).to.eq('pictureUrl', 'Expected PictureUrl value to be equals to pictureUrl');
 
         await blogPostUpdatePage.save();
         expect(await blogPostUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

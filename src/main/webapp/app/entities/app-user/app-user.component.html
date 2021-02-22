@@ -1,131 +1,139 @@
 <div>
-    <h2 id="page-heading">
-        <span jhiTranslate="n42cApp.appUser.home.title">App Users</span>
+  <h2 id="page-heading">
+    <span jhiTranslate="n42cApp.appUser.home.title">App Users</span>
 
-        <button
-            [routerLink]="['/entities/app-user/new']"
-            class="btn btn-primary float-right jh-create-entity create-app-user"
-            id="jh-create-entity"
-        >
-            <fa-icon icon="plus"></fa-icon>
-            <span jhiTranslate="n42cApp.appUser.home.createLabel">
+    <button
+      [routerLink]="['/entities/app-user/new']"
+      class="btn btn-primary float-right jh-create-entity create-app-user"
+      id="jh-create-entity"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      <span jhiTranslate="n42cApp.appUser.home.createLabel">
         Create a new App User
       </span>
-        </button>
-    </h2>
+    </button>
+  </h2>
 
-    <jhi-alert-error></jhi-alert-error>
+  <jhi-alert-error></jhi-alert-error>
 
-    <jhi-alert></jhi-alert>
+  <jhi-alert></jhi-alert>
 
-    <div *ngIf="appUsers?.length === 0" class="alert alert-warning" id="no-result">
-        <span jhiTranslate="n42cApp.appUser.home.notFound">No appUsers found</span>
-    </div>
+  <div *ngIf="appUsers?.length === 0" class="alert alert-warning" id="no-result">
+    <span jhiTranslate="n42cApp.appUser.home.notFound">No appUsers found</span>
+  </div>
 
-    <div *ngIf="appUsers && appUsers.length > 0" class="table-responsive" id="entities">
-        <table aria-describedby="page-heading" class="table table-striped">
-            <thead>
-            <tr [(ascending)]="ascending" [(predicate)]="predicate" [callback]="loadPage.bind(this)" jhiSort>
-                <th jhiSortBy="id" scope="col"><span jhiTranslate="global.field.id">ID</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="userName" scope="col">
-                    <span jhiTranslate="n42cApp.appUser.userName">User Name</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="displayedName" scope="col">
-                    <span jhiTranslate="n42cApp.appUser.displayedName">Displayed Name</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="admin" scope="col"><span jhiTranslate="n42cApp.appUser.admin">Admin</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="shopRights" scope="col">
-                    <span jhiTranslate="n42cApp.appUser.shopRights">Shop Rights</span>
-                    <fa-icon icon="sort"></fa-icon>
-                </th>
-                <th jhiSortBy="blogRights" scope="col">
-                    <span jhiTranslate="n42cApp.appUser.blogRights">Blog Rights</span>
-                    <fa-icon icon="sort"></fa-icon>
+  <div *ngIf="appUsers && appUsers.length > 0" class="table-responsive" id="entities">
+    <table aria-describedby="page-heading" class="table table-striped">
+      <thead>
+        <tr [(ascending)]="ascending" [(predicate)]="predicate" [callback]="loadPage.bind(this)" jhiSort>
+          <th jhiSortBy="id" scope="col">
+            <span jhiTranslate="global.field.id">ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="userName" scope="col">
+            <span jhiTranslate="n42cApp.appUser.userName">User Name</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="displayedName" scope="col">
+            <span jhiTranslate="n42cApp.appUser.displayedName">Displayed Name</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="admin" scope="col">
+            <span jhiTranslate="n42cApp.appUser.admin">Admin</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="shopRights" scope="col">
+            <span jhiTranslate="n42cApp.appUser.shopRights">Shop Rights</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="blogRights" scope="col">
+            <span jhiTranslate="n42cApp.appUser.blogRights">Blog Rights</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="profileRights" scope="col">
+            <span jhiTranslate="n42cApp.appUser.profileRights">Profile Rights</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th jhiSortBy="scriptoriumRights" scope="col">
+            <span jhiTranslate="n42cApp.appUser.scriptoriumRights">Scriptorium Rights</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="imageUrl">
             <span jhiTranslate="n42cApp.appUser.imageUrl">Image Url</span> <fa-icon icon="sort"></fa-icon>
           </th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let appUser of appUsers; trackBy: trackId">
-                <td>
-                    <a [routerLink]="['/entities', 'app-user', appUser.id, 'view']">{{ appUser.id }}</a>
-                </td>
-                <td>{{ appUser.userName }}</td>
-                <td>{{ appUser.displayedName }}</td>
-                <td>{{ appUser.admin }}</td>
-                <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</td>
-                <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</td>
-                <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
-                <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appUser of appUsers; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/entities', 'app-user', appUser.id, 'view']">{{ appUser.id }}</a>
+          </td>
+          <td>{{ appUser.userName }}</td>
+          <td>{{ appUser.displayedName }}</td>
+          <td>{{ appUser.admin }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.shopRights }}">{{ appUser.shopRights }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.blogRights }}">{{ appUser.blogRights }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.profileRights }}">{{ appUser.profileRights }}</td>
+          <td jhiTranslate="{{ 'n42cApp.AppUserRights.' + appUser.scriptoriumRights }}">{{ appUser.scriptoriumRights }}</td>
           <td>{{ appUser.imageUrl }}</td>
-                <td>
-                    {{ appUser.user?.login }}
-                </td>
-                <td>
+          <td>
+            {{ appUser.user?.login }}
+          </td>
+          <td>
             <span *ngFor="let givenFriendships of appUser.givenFriendships; let last = last">
               <a [routerLink]="['/entities', 'app-user', givenFriendships?.id, 'view']" class="form-control-static">{{
-                  givenFriendships.id
-                  }}</a
+                givenFriendships.id
+              }}</a
               >{{ last ? '' : ', ' }}
             </span>
-                </td>
-                <td>
+          </td>
+          <td>
             <span *ngFor="let askedFriendRequests of appUser.askedFriendRequests; let last = last">
               <a [routerLink]="['/entities', 'app-user', askedFriendRequests?.id, 'view']" class="form-control-static">{{
-                  askedFriendRequests.id
-                  }}</a
+                askedFriendRequests.id
+              }}</a
               >{{ last ? '' : ', ' }}
             </span>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group">
-                        <button [routerLink]="['/entities', 'app-user', appUser.id, 'view']" class="btn btn-info btn-sm"
-                                type="submit">
-                            <fa-icon icon="eye"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button [routerLink]="['/entities', 'app-user', appUser.id, 'view']" class="btn btn-info btn-sm" type="submit">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
 
-                        <button [routerLink]="['/entities', 'app-user', appUser.id, 'edit']" class="btn btn-primary btn-sm"
-                                type="submit">
-                            <fa-icon icon="pencil-alt"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
+              <button [routerLink]="['/entities', 'app-user', appUser.id, 'edit']" class="btn btn-primary btn-sm" type="submit">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
 
-                        <button (click)="delete(appUser)" class="btn btn-danger btn-sm" type="submit">
-                            <fa-icon icon="times"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+              <button (click)="delete(appUser)" class="btn btn-danger btn-sm" type="submit">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="appUsers && appUsers.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [itemsPerPage]="itemsPerPage" [page]="page" [total]="totalItems"></jhi-item-count>
     </div>
 
-    <div *ngIf="appUsers && appUsers.length > 0">
-        <div class="row justify-content-center">
-            <jhi-item-count [itemsPerPage]="itemsPerPage" [page]="page" [total]="totalItems"></jhi-item-count>
-        </div>
-
-        <div class="row justify-content-center">
-            <ngb-pagination
-                (pageChange)="loadPage($event)"
-                [(page)]="ngbPaginationPage"
-                [boundaryLinks]="true"
-                [collectionSize]="totalItems"
-                [maxSize]="5"
-                [pageSize]="itemsPerPage"
-                [rotate]="true"
-            ></ngb-pagination>
-        </div>
+    <div class="row justify-content-center">
+      <ngb-pagination
+        (pageChange)="loadPage($event)"
+        [(page)]="ngbPaginationPage"
+        [boundaryLinks]="true"
+        [collectionSize]="totalItems"
+        [maxSize]="5"
+        [pageSize]="itemsPerPage"
+        [rotate]="true"
+      ></ngb-pagination>
     </div>
+  </div>
 </div>

@@ -64,7 +64,8 @@
     },
     {
       "fieldName": "imageUrl",
-      "fieldType": "String"
+      "fieldType": "String",
+      "javadoc": "The user's avatar in the app."
     }
   ],
   "relationships": [

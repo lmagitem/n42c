@@ -35,6 +35,7 @@ export class BlogPostUpdateComponent implements OnInit {
     title: [null, [Validators.required]],
     published: [],
     modified: [null, [Validators.required]],
+    pictureUrl: [],
     authors: [],
     categories: [],
     blog: [null, Validators.required],
@@ -74,6 +75,7 @@ export class BlogPostUpdateComponent implements OnInit {
       title: blogPost.title,
       published: blogPost.published ? blogPost.published.format(DATE_TIME_FORMAT) : null,
       modified: blogPost.modified ? blogPost.modified.format(DATE_TIME_FORMAT) : null,
+      pictureUrl: blogPost.pictureUrl,
       authors: blogPost.authors,
       categories: blogPost.categories,
       blog: blogPost.blog,
@@ -94,19 +96,18 @@ export class BlogPostUpdateComponent implements OnInit {
     }
   }
 
-  trackById(index: number, item: SelectableEntity): any {
-    return item.id;
-  }
-
-  getSelected(selectedVals: SelectableManyToManyEntity[], option: SelectableManyToManyEntity): SelectableManyToManyEntity {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
+  private createFromForm(): IBlogPost {
+    return {
+      ...new BlogPost(),
+      id: this.editForm.get(['id'])!.value,
+      title: this.editForm.get(['title'])!.value,
+      published: this.editForm.get(['published'])!.value ? moment(this.editForm.get(['published'])!.value, DATE_TIME_FORMAT) : undefined,
+      modified: this.editForm.get(['modified'])!.value ? moment(this.editForm.get(['modified'])!.value, DATE_TIME_FORMAT) : undefined,
+      pictureUrl: this.editForm.get(['pictureUrl'])!.value,
+      authors: this.editForm.get(['authors'])!.value,
+      categories: this.editForm.get(['categories'])!.value,
+      blog: this.editForm.get(['blog'])!.value,
+    };
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IBlogPost>>): void {
@@ -125,16 +126,18 @@ export class BlogPostUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  private createFromForm(): IBlogPost {
-    return {
-      ...new BlogPost(),
-      id: this.editForm.get(['id'])!.value,
-      title: this.editForm.get(['title'])!.value,
-      published: this.editForm.get(['published'])!.value ? moment(this.editForm.get(['published'])!.value, DATE_TIME_FORMAT) : undefined,
-      modified: this.editForm.get(['modified'])!.value ? moment(this.editForm.get(['modified'])!.value, DATE_TIME_FORMAT) : undefined,
-      authors: this.editForm.get(['authors'])!.value,
-      categories: this.editForm.get(['categories'])!.value,
-      blog: this.editForm.get(['blog'])!.value,
-    };
+  trackById(index: number, item: SelectableEntity): any {
+    return item.id;
+  }
+
+  getSelected(selectedVals: SelectableManyToManyEntity[], option: SelectableManyToManyEntity): SelectableManyToManyEntity {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

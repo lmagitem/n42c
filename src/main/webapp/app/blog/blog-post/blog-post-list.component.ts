@@ -1,21 +1,22 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Subscription} from 'rxjs';
-import {JhiEventManager, JhiLanguageService, JhiParseLinks} from 'ng-jhipster';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {IBlogPost} from 'app/shared/model/blog-post.model';
-import {ITEMS_PER_PAGE} from 'app/shared/constants/pagination.constants';
-import {BlogPostDeleteDialogComponent} from './blog-post-delete-dialog.component';
-import {BlogPostService} from 'app/entities/blog-post/blog-post.service';
-import {LocalizedBlogPostService} from 'app/entities/localized-blog-post/localized-blog-post.service';
-import {IItemWithLocalizations, LocalizationUtils} from 'app/shared/util/localization-utils';
-import {ActivatedRoute} from '@angular/router';
-import {IBlog} from 'app/shared/model/blog.model';
-import {ArrayUtils} from 'app/shared/util/arrays-utils';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
+import { JhiEventManager, JhiLanguageService, JhiParseLinks } from 'ng-jhipster';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { IBlogPost } from 'app/shared/model/blog-post.model';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { BlogPostDeleteDialogComponent } from './blog-post-delete-dialog.component';
+import { BlogPostService } from 'app/entities/blog-post/blog-post.service';
+import { LocalizedBlogPostService } from 'app/entities/localized-blog-post/localized-blog-post.service';
+import { IItemWithLocalizations, LocalizationUtils } from 'app/shared/util/localization-utils';
+import { ActivatedRoute } from '@angular/router';
+import { IBlog } from 'app/shared/model/blog.model';
+import { ArrayUtils } from 'app/shared/util/arrays-utils';
 
 @Component({
   selector: 'jhi-blog-post',
   templateUrl: './blog-post-list.component.html',
+  styleUrls: ['../../../content/scss/blog.scss'],
 })
 export class BlogPostListComponent implements OnInit, OnDestroy {
   blogPosts: IBlogPost[];
@@ -49,7 +50,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({blog}) => {
+    this.activatedRoute.data.subscribe(({ blog }) => {
       this.blog = blog;
       this.loadAll(blog?.id || undefined);
     });
@@ -57,43 +58,33 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   loadAll(id: number | undefined): void {
+    let query: Observable<any>;
+    // Do we query a specific blog's posts or all showable content?
     if (id !== undefined && id !== null) {
-      this.blogPostService
-        .queryFor([id], {
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.sort(),
-        })
-        .subscribe((res: HttpResponse<IBlogPost[]>) => {
-          this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
-            res.headers
-          );
-          LocalizationUtils.refreshLocalizations(
-            this.blogPosts as IItemWithLocalizations[],
-            (ids: any[]) => this.localizedPostService.queryFor(ids),
-            'post'
-          );
-        });
+      query = this.blogPostService.queryFor([id], {
+        page: this.page,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      });
     } else {
-      this.blogPostService
-        .query({
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.sort(),
-        })
-        .subscribe((res: HttpResponse<IBlogPost[]>) => {
-          this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
-            res.headers
-          );
-          LocalizationUtils.refreshLocalizations(
-            this.blogPosts as IItemWithLocalizations[],
-            (ids: any[]) => this.localizedPostService.queryFor(ids),
-            'post'
-          );
-        });
+      query = this.blogPostService.query({
+        page: this.page,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      });
     }
+
+    query.subscribe((res: HttpResponse<IBlogPost[]>) => {
+      this.paginateBlogPosts(
+        LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
+        res.headers
+      );
+      LocalizationUtils.refreshLocalizations(
+        this.blogPosts as IItemWithLocalizations[],
+        (ids: any[]) => this.localizedPostService.queryFor(ids),
+        'post'
+      );
+    });
   }
 
   reset(): void {
@@ -136,7 +127,7 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   delete(blogPost: IBlogPost): void {
-    const modalRef = this.modalService.open(BlogPostDeleteDialogComponent, {size: 'lg', backdrop: 'static'});
+    const modalRef = this.modalService.open(BlogPostDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.blogPost = blogPost;
   }
 
