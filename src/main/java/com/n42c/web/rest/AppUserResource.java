@@ -59,6 +59,7 @@ public class AppUserResource {
     @PutMapping("/app-users")
     public ResponseEntity<AppUser> updateAppUser(@RequestBody AppUser appUser) throws URISyntaxException {
         log.debug("REST request to update AppUser : {}", appUser);
+        log.debug("ATTENTION ! NEED TO SANITIZE URL HERE");
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
     }
 

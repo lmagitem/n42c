@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,9 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { LocalizedBlogPost } from 'app/shared/model/localized-blog-post.model';
 import { JhiLanguageService } from 'ng-jhipster';
 import { LanguageUtils } from 'app/shared/util/language-utils';
+import { FileUploader, FileUploaderOptions } from 'ng2-file-upload';
+import { Cloudinary } from '@cloudinary/angular-5.x';
+import * as _ from 'lodash';
 
 type SelectableEntity = IAppUser | IBlogCategory | IBlog;
 type SelectableManyToManyEntity = IAppUser | IBlogCategory;
@@ -28,6 +31,10 @@ type SelectableManyToManyEntity = IAppUser | IBlogCategory;
   styleUrls: ['../../../content/scss/blog.scss'],
 })
 export class BlogPostUpdateComponent implements OnInit {
+  responses: Array<any>;
+  hasBaseDropZoneOver = false;
+  uploader: FileUploader = new FileUploader({});
+  title: string;
   editor = ClassicEditor;
   isSaving = false;
   page = 0;
@@ -44,6 +51,7 @@ export class BlogPostUpdateComponent implements OnInit {
     title: [null, [Validators.required]],
     published: [null, [Validators.required]],
     modified: [null, [Validators.required]],
+    pictureUrl: [],
     authors: [],
     categories: [],
     localizations: [],
@@ -57,7 +65,10 @@ export class BlogPostUpdateComponent implements OnInit {
     protected blogService: BlogService,
     protected activatedRoute: ActivatedRoute,
     protected languageService: JhiLanguageService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cloudinary: Cloudinary,
+    private zone: NgZone,
+    private http: HttpClient
   ) {
     LanguageUtils.getLanguageKeyArray().forEach(key => {
       const localization = new LocalizedBlogPost();
@@ -65,6 +76,9 @@ export class BlogPostUpdateComponent implements OnInit {
       this.localizationsMap.set(key, localization);
     });
     this.selectedLanguage = this.languageService.getCurrentLanguage().toUpperCase();
+
+    this.responses = [];
+    this.title = '';
   }
 
   ngOnInit(): void {
@@ -83,6 +97,131 @@ export class BlogPostUpdateComponent implements OnInit {
 
       this.blogService.query().subscribe((res: HttpResponse<IBlog[]>) => (this.blogs = res.body || []));
     });
+
+    this.initPictureUploader();
+  }
+
+  /** Create the file uploader, wire it to upload to Cloudinary. */
+  private initPictureUploader(): void {
+    const uploaderOptions: FileUploaderOptions = {
+      url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
+      // Upload files automatically upon addition to upload queue
+      autoUpload: true,
+      // Use xhrTransport in favor of iframeTransport
+      isHTML5: true,
+      // Calculate progress independently for each uploaded file
+      removeAfterUpload: true,
+      // XHR request headers
+      headers: [
+        {
+          name: 'X-Requested-With',
+          value: 'XMLHttpRequest',
+        },
+      ],
+    };
+    this.uploader = new FileUploader(uploaderOptions);
+
+    this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
+      // Add Cloudinary's unsigned upload preset to the upload form
+      form.append('upload_preset', this.cloudinary.config().upload_preset);
+      // Add built-in and custom tags for displaying the uploaded photo in the list
+      const tags = 'blog-post-picture';
+      // Add custom tags
+      form.append('tags', tags);
+      // Add file to upload
+      form.append('file', fileItem);
+
+      // Use default "withCredentials" value for CORS requests
+      fileItem.withCredentials = false;
+      return { fileItem, form };
+    };
+
+    // Insert or update an entry in the responses array
+    const upsertResponse = fileItem => {
+      this.zone.run(() => {
+        // Clear the queue and delete what was in it to not keep unwanted pictures
+        _.cloneDeep(this.responses).forEach(item => {
+          const itemIndex = this.responses.findIndex(i => i.file.name === item.file.name);
+          if (!!item && !!item?.data?.delete_token && itemIndex > -1) {
+            this.deleteImage(item.data, itemIndex);
+          }
+        });
+
+        // Update existing item with new data or make a clean array with new item
+        const existingIndex = this.responses.reduce((prev, current, index) => {
+          if (current.file.name === fileItem.file.name && !current.status) {
+            return index;
+          }
+          return prev;
+        }, -1);
+        if (existingIndex > -1) {
+          this.responses[existingIndex] = _.assign(this.responses[existingIndex], fileItem);
+        } else {
+          this.responses = [fileItem];
+        }
+
+        // Update the entity
+        if (this.responses[0]?.data?.secure_url) {
+          this.editForm.patchValue({
+            pictureUrl: this.responses[0].data.secure_url,
+          });
+        }
+      });
+    };
+
+    // Update model on completion of uploading a file
+    this.uploader.onCompleteItem = (item: any, response: string, status: number) =>
+      upsertResponse({
+        file: item.file,
+        status,
+        data: JSON.parse(response),
+      });
+
+    // Update model on upload progress event
+    this.uploader.onProgressItem = (fileItem: any, progress: any) =>
+      upsertResponse({
+        file: fileItem.file,
+        progress,
+        data: {},
+      });
+  }
+
+  // Delete an uploaded image
+  // Requires setting "Return delete token" to "Yes" in your upload preset configuration
+  // See also https://support.cloudinary.com/hc/en-us/articles/202521132-How-to-delete-an-image-from-the-client-side-
+  deleteImage(data: any, index: number): void {
+    const url = `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/delete_by_token`;
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+    };
+    const body = {
+      token: data.delete_token,
+    };
+    this.http.post(url, body, options).subscribe(response => {
+      if (_.has(response, 'result')) {
+        // tslint:disable-next-line:no-console
+        console.log(`Deleted image - ${data.public_id} ${response['result']}`);
+        this.zone.run(() => {
+          // Remove deleted item for responses
+          this.responses.splice(index, 1);
+        });
+      }
+    });
+  }
+
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  getFileProperties(fileProperties: any): Iterable<any> {
+    // Transforms Javascript Object to an iterable to be used by *ngFor
+    if (!fileProperties) {
+      return [];
+    }
+    return Object.keys(fileProperties).map(key => ({ key, value: fileProperties[key] }));
   }
 
   updateForm(blogPost: IBlogPost): void {
@@ -91,6 +230,7 @@ export class BlogPostUpdateComponent implements OnInit {
       title: blogPost.title,
       published: blogPost.published ? blogPost.published.format(DATE_TIME_FORMAT) : null,
       modified: blogPost.modified ? blogPost.modified.format(DATE_TIME_FORMAT) : null,
+      pictureUrl: blogPost.pictureUrl,
       authors: blogPost.authors,
       categories: blogPost.categories,
       localizations: blogPost.localizations,
@@ -154,6 +294,7 @@ export class BlogPostUpdateComponent implements OnInit {
       title: this.editForm.get(['title'])!.value,
       published: this.editForm.get(['published'])!.value ? moment(this.editForm.get(['published'])!.value, DATE_TIME_FORMAT) : undefined,
       modified: this.editForm.get(['modified'])!.value ? moment(this.editForm.get(['modified'])!.value, DATE_TIME_FORMAT) : undefined,
+      pictureUrl: this.editForm.get(['pictureUrl'])!.value,
       authors: this.editForm.get(['authors'])!.value,
       categories: this.editForm.get(['categories'])!.value,
       blog: this.editForm.get(['blog'])!.value,

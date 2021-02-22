@@ -1,10 +1,10 @@
-import {IUser} from 'app/core/user/user.model';
-import {IBlog} from 'app/shared/model/blog.model';
-import {IAppUserProfile} from 'app/shared/model/app-user-profile.model';
-import {IPlayer} from 'app/shared/model/player.model';
-import {IProduct} from 'app/shared/model/product.model';
-import {IBlogPost} from 'app/shared/model/blog-post.model';
-import {AppUserRights} from 'app/shared/model/enumerations/app-user-rights.model';
+import { IUser } from 'app/core/user/user.model';
+import { IBlog } from 'app/shared/model/blog.model';
+import { IAppUserProfile } from 'app/shared/model/app-user-profile.model';
+import { IPlayer } from 'app/shared/model/player.model';
+import { IProduct } from 'app/shared/model/product.model';
+import { IBlogPost } from 'app/shared/model/blog-post.model';
+import { AppUserRights } from 'app/shared/model/enumerations/app-user-rights.model';
 
 export interface IAppUser {
   id?: number;

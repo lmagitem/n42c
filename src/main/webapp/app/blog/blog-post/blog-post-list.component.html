@@ -24,9 +24,9 @@
 
   <div *ngIf="blogPosts && blogPosts.length > 0" class="table-responsive">
     <div (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" infinite-scroll>
-      <article *ngFor="let blogPost of blogPosts; trackBy: trackId">
-        <div class="post-title-bg">
-          <div class="btn-group mb-2 mt-1">
+      <article *ngFor="let blogPost of blogPosts; trackBy: trackId" class="post-title-block">
+        <div class="post-title-bg" [style.background-image]="'url(' + blogPost.pictureUrl + ')' | safe: 'style'">
+          <div class="btn-group mb-2 mt-1 btn-margin">
             <button [routerLink]="['/blog', blogPost.blog?.id, 'post', blogPost.id, 'edit']" class="btn btn-primary btn-sm" type="submit">
               <fa-icon [icon]="'pencil-alt'"></fa-icon>
               <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
@@ -47,7 +47,7 @@
             >
           </p>
         </div>
-        <div class="post-text" [innerHTML]="getLocalizedField(blogPost, 'excerpt', 'content')"></div>
+        <div class="post-text" [innerHTML]="getLocalizedField(blogPost, 'excerpt', 'content') | safe: 'html'"></div>
       </article>
     </div>
   </div>

@@ -25,7 +25,7 @@ import { CampaignService } from '../campaign.service';
 @Component({
   selector: 'jhi-campaign-moment',
   templateUrl: './campaign-moment.component.html',
-  styleUrls: ['../../../../content/scss/campaign.scss'],
+  styleUrls: ['../../../content/scss/campaign.scss'],
 })
 export class CampaignMomentComponent implements OnInit {
   isEditing = false;

@@ -85,6 +85,8 @@ entity BlogPost {
 	published Instant
     /** The last date and time at which this post was modified. */
 	modified Instant required
+    /** The url of a picture used as background for this post. */
+    pictureUrl String
 }
 /** The content of a post, in a specific language. */
 entity LocalizedBlogPost {

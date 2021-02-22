@@ -108,6 +108,70 @@
             </div>
 
             <div class="form-group">
+              <label
+                [ngbTooltip]="'n42cApp.blogPost.help.pictureUrl' | translate"
+                class="form-control-label"
+                for="field_pictureUrl"
+                jhiTranslate="n42cApp.blogPost.pictureUrl"
+                >Picture</label
+              >
+              <div
+                id="direct_upload"
+                ng2FileDrop
+                [uploader]="uploader"
+                (fileOver)="fileOverBase($event)"
+                [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
+              >
+                <form>
+                  <div *ngIf="!responses || responses.length < 1" class="form_controls">
+                    <p jhiTranslate="n42cApp.blogPost.pictureDrop">
+                      You can drag and drop an image file into the dashed area or click on the button to...
+                    </p>
+                    <div class="upload_button_holder">
+                      <label
+                        class="upload_button btn btn-primary"
+                        for="fileupload"
+                        jhiTranslate="n42cApp.blogPost.pictureButton"
+                        [ngbTooltip]="'n42cApp.blogPost.help.pictureButton' | translate"
+                        >Find a file</label
+                      >
+                      <!-- onChange hanlder resets the input value to get the change event when uploading the same file consecutively -->
+                      <input
+                        type="file"
+                        id="fileupload"
+                        #fileInput
+                        ng2FileSelect
+                        [style.display]="'none'"
+                        [uploader]="uploader"
+                        (change)="fileInput.value = ''"
+                      />
+                    </div>
+                  </div>
+                </form>
+                <div class="file" *ngFor="let response of responses; let i = index">
+                  <div
+                    class="status alert alert-primary"
+                    [ngClass]="
+                      !response.status
+                        ? 'status alert alert-primary'
+                        : response.status === 200
+                        ? 'status alert alert-success'
+                        : 'status alert alert-danger'
+                    "
+                  >
+                    <span *ngIf="!response.status"> Uploading... {{ response.progress }}%</span>
+                    <span class="status-code" *ngIf="response.status === 200"> Upload completed with success!</span>
+                    <span class="status-code" *ngIf="!!response.status && response.status !== 200">Failed to upload the file.</span>
+                    <a class="delete-image btn btn-danger" *ngIf="!!response.data.delete_token" (click)="deleteImage(response.data, i)">
+                      Delete image
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img [src]="editForm.get('pictureUrl')?.value | safe: 'url'" alt="Picture" class="edited-entity-picture" />
+            </div>
+
+            <div class="form-group">
               <label for="field_authors" jhiTranslate="n42cApp.blogPost.authors">Authors</label>
               <select class="form-control" formControlName="authors" id="field_authors" multiple name="authors">
                 <option

@@ -21,6 +21,11 @@
       "fieldValidateRules": [
         "required"
       ]
+    },
+    {
+      "fieldName": "pictureUrl",
+      "fieldType": "String",
+      "javadoc": "The url of a picture used as background for this post."
     }
   ],
   "relationships": [

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { N42CSharedModule } from 'app/shared/shared.module';
@@ -12,5 +12,6 @@ import { blogPostRoute } from './blog-post.route';
   imports: [N42CSharedModule, CKEditorModule, RouterModule.forChild(blogPostRoute)],
   declarations: [BlogPostListComponent, BlogPostComponent, BlogPostUpdateComponent, BlogPostDeleteDialogComponent],
   entryComponents: [BlogPostDeleteDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BlogPostModule {}

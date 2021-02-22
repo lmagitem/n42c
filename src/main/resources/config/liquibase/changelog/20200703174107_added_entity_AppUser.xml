@@ -36,7 +36,7 @@
             <column name="scriptorium_rights" type="varchar(255)" remarks="The user rights regarding the Scriptorium.">
                 <constraints nullable="false" />
             </column>
-            <column name="image_url" type="varchar(255)">
+            <column name="image_url" type="varchar(255)" remarks="The user&apos;s avatar in the app.">
                 <constraints nullable="true" />
             </column>
             <column name="user_id" type="varchar(100)">

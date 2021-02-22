@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { JhiEventManager, JhiLanguageService, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IBlogPost } from 'app/shared/model/blog-post.model';
@@ -58,43 +58,33 @@ export class BlogPostListComponent implements OnInit, OnDestroy {
   }
 
   loadAll(id: number | undefined): void {
+    let query: Observable<any>;
+    // Do we query a specific blog's posts or all showable content?
     if (id !== undefined && id !== null) {
-      this.blogPostService
-        .queryFor([id], {
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.sort(),
-        })
-        .subscribe((res: HttpResponse<IBlogPost[]>) => {
-          this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
-            res.headers
-          );
-          LocalizationUtils.refreshLocalizations(
-            this.blogPosts as IItemWithLocalizations[],
-            (ids: any[]) => this.localizedPostService.queryFor(ids),
-            'post'
-          );
-        });
+      query = this.blogPostService.queryFor([id], {
+        page: this.page,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      });
     } else {
-      this.blogPostService
-        .query({
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.sort(),
-        })
-        .subscribe((res: HttpResponse<IBlogPost[]>) => {
-          this.paginateBlogPosts(
-            LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
-            res.headers
-          );
-          LocalizationUtils.refreshLocalizations(
-            this.blogPosts as IItemWithLocalizations[],
-            (ids: any[]) => this.localizedPostService.queryFor(ids),
-            'post'
-          );
-        });
+      query = this.blogPostService.query({
+        page: this.page,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      });
     }
+
+    query.subscribe((res: HttpResponse<IBlogPost[]>) => {
+      this.paginateBlogPosts(
+        LocalizationUtils.withPlaceholderLocalizations(res.body as IItemWithLocalizations[], ['title', 'excerpt']),
+        res.headers
+      );
+      LocalizationUtils.refreshLocalizations(
+        this.blogPosts as IItemWithLocalizations[],
+        (ids: any[]) => this.localizedPostService.queryFor(ids),
+        'post'
+      );
+    });
   }
 
   reset(): void {

@@ -19,7 +19,7 @@ type SelectableEntity = IPlayer | INinthStratagemGroup;
 @Component({
   selector: 'jhi-ninth-campaign-update',
   templateUrl: './campaign-view.component.html',
-  styleUrls: ['../../../content/scss/campaign.scss'],
+  styleUrls: ['../../content/scss/campaign.scss'],
 })
 export class CampaignViewComponent implements OnInit {
   isEditing = false;

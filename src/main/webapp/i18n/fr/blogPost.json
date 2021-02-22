@@ -19,6 +19,7 @@
       "title": "Title",
       "published": "Published",
       "modified": "Modified",
+      "pictureUrl": "Picture Url",
       "localizations": "Localizations",
       "authors": "Authors",
       "categories": "Categories",
@@ -26,7 +27,8 @@
       "help": {
         "title": "This post's title.",
         "published": "The date and time at which this post was published.",
-        "modified": "The last date and time at which this post was modified."
+        "modified": "The last date and time at which this post was modified.",
+        "pictureUrl": "The url of a picture used as background for this post."
       }
     }
   }
