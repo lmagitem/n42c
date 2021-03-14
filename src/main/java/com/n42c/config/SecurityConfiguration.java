@@ -51,66 +51,76 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web
-            .ignoring()
-            .antMatchers(HttpMethod.OPTIONS, "/**")
-            .antMatchers("/app/**/*.{js,html}")
-            .antMatchers("/i18n/**")
-            .antMatchers("/content/**")
-            .antMatchers("/h2-console/**")
-            .antMatchers("/swagger-ui/index.html")
-            .antMatchers("/test/**");
+                .ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .antMatchers("/app/**/*.{js,html}")
+                .antMatchers("/i18n/**")
+                .antMatchers("/content/**")
+                .antMatchers("/h2-console/**")
+                .antMatchers("/swagger-ui/index.html")
+                .antMatchers("/test/**");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-            .csrf()
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            .and()
-            .addFilterBefore(corsFilter, CsrfFilter.class)
-            .exceptionHandling()
-            .authenticationEntryPoint(problemSupport)
-            .accessDeniedHandler(problemSupport)
-            .and()
-            .headers()
-            .contentSecurityPolicy("default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:")
-            .and()
-            .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
-            .and()
-            .featurePolicy("geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; speaker 'none'; fullscreen 'self'; payment 'none'")
-            .and()
-            .frameOptions()
-            .deny()
-            .and()
-            .authorizeRequests()
-            .antMatchers("/api/auth-info").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/blogs").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/blogs/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/blog-posts").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/blog-posts/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/blog-categories").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/blog-categories/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/localized-blogs").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/localized-blogs/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/localized-blog-posts").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/localized-blog-posts/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/localized-blog-categories").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/localized-blog-categories/**").permitAll()
-            .antMatchers("/api/**").authenticated()
-            .antMatchers("/management/health").permitAll()
-            .antMatchers("/management/info").permitAll()
-            .antMatchers("/management/prometheus").permitAll()
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .and()
-            .oauth2Login()
-            .and()
-            .oauth2ResourceServer()
-            .jwt()
-            .jwtAuthenticationConverter(authenticationConverter())
-            .and()
-            .and()
-            .oauth2Client();
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+                .addFilterBefore(corsFilter, CsrfFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(problemSupport)
+                .accessDeniedHandler(problemSupport)
+                .and()
+                .headers()
+                .contentSecurityPolicy(
+                        "default-src 'self'; " +
+                        "frame-src 'self' data:; " +
+                        "script-src 'self' 'unsafe-inline' 'unsafe-eval' storage.googleapis.com www.google-analytics.com; " +
+                        "connect-src 'self' api.cloudinary.com; " +
+                        "style-src 'self' 'unsafe-inline' fonts.googleapis.com res.cloudinary.com; " +
+                        "img-src 'self' res.cloudinary.com; " +
+                        "font-src 'self' fonts.gstatic.com")
+                .and()
+                .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
+                .and()
+                .featurePolicy(
+                        "geolocation 'none'; midi 'none'; sync-xhr 'none'; " +
+                        "microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; " +
+                        "speaker 'none'; fullscreen 'self'; payment 'none'")
+                .and()
+                .frameOptions()
+                .deny()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/auth-info").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/blogs").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/blogs/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/blog-posts").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/blog-posts/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/blog-categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/blog-categories/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/localized-blogs").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/localized-blogs/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/localized-blog-posts").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/localized-blog-posts/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/localized-blog-categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/localized-blog-categories/**").permitAll()
+                .antMatchers("/api/**").authenticated()
+                .antMatchers("/management/health").permitAll()
+                .antMatchers("/management/info").permitAll()
+                .antMatchers("/management/prometheus").permitAll()
+                .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+                .and()
+                .oauth2Login()
+                .and()
+                .oauth2ResourceServer()
+                .jwt()
+                .jwtAuthenticationConverter(authenticationConverter())
+                .and()
+                .and()
+                .oauth2Client();
         // @formatter:on
     }
 
@@ -123,8 +133,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * Map authorities from "groups" or "roles" claim in ID Token.
      *
-     * @return a {@link GrantedAuthoritiesMapper} that maps groups from
-     * the IdP to Spring Security Authorities.
+     * @return a {@link GrantedAuthoritiesMapper} that maps groups from the IdP to Spring Security Authorities.
      */
     @Bean
     public GrantedAuthoritiesMapper userAuthoritiesMapper() {
@@ -132,15 +141,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
 
             authorities.forEach(
-                authority -> {
-                    // Check for OidcUserAuthority because Spring Security 5.2 returns
-                    // each scope as a GrantedAuthority, which we don't care about.
-                    if (authority instanceof OidcUserAuthority) {
-                        OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
-                        mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromAttributes(oidcUserAuthority.getAttributes()));
+                    authority -> {
+                        // Check for OidcUserAuthority because Spring Security 5.2 returns
+                        // each scope as a GrantedAuthority, which we don't care about.
+                        if (authority instanceof OidcUserAuthority) {
+                            OidcUserAuthority oidcUserAuthority = (OidcUserAuthority) authority;
+                            mappedAuthorities.addAll(SecurityUtils.extractAuthorityFromAttributes(oidcUserAuthority.getAttributes()));
+                        }
                     }
-                }
-            );
+                               );
             return mappedAuthorities;
         };
     }
