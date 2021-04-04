@@ -4,8 +4,7 @@
 <configuration scan="true">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-<!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
-<!--
+    <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -22,41 +21,41 @@
         <appender-ref ref="FILE"/>
     </appender>
 
-    <root level="${logging.level.root}">
+    <root>
         <appender-ref ref="ASYNC"/>
     </root>
--->
 
-    <logger name="javax.activation" level="WARN"/>
-    <logger name="javax.mail" level="WARN"/>
-    <logger name="javax.management.remote" level="WARN"/>
-    <logger name="javax.xml.bind" level="WARN"/>
-    <logger name="ch.qos.logback" level="WARN"/>
-    <logger name="com.ryantenney" level="WARN"/>
-    <logger name="com.sun" level="WARN"/>
-    <logger name="com.zaxxer" level="WARN"/>
-    <logger name="io.undertow" level="WARN"/>
-    <logger name="io.undertow.websockets.jsr" level="ERROR"/>
-    <logger name="org.ehcache" level="WARN"/>
-    <logger name="org.apache" level="WARN"/>
-    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
-    <logger name="org.bson" level="WARN"/>
-    <logger name="org.hibernate.validator" level="WARN"/>
-    <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
-    <logger name="org.postgresql" level="WARN"/>
-    <logger name="org.springframework" level="WARN"/>
-    <logger name="org.springframework.web" level="WARN"/>
-    <logger name="org.springframework.security" level="WARN"/>
-    <logger name="org.springframework.cache" level="WARN"/>
-    <logger name="org.thymeleaf" level="WARN"/>
-    <logger name="org.xnio" level="WARN"/>
-    <logger name="springfox" level="WARN"/>
-    <logger name="sun.rmi" level="WARN"/>
-    <logger name="liquibase" level="WARN"/>
-    <logger name="LiquibaseSchemaResolver" level="INFO"/>
-    <logger name="springfox.documentation.schema.property" level="ERROR"/>
-    <logger name="sun.rmi.transport" level="WARN"/>
+
+    <logger name="javax.activation" level="DEBUG"/>
+    <logger name="javax.mail" level="DEBUG"/>
+    <logger name="javax.management.remote" level="DEBUG"/>
+    <logger name="javax.xml.bind" level="DEBUG"/>
+    <logger name="ch.qos.logback" level="DEBUG"/>
+    <logger name="com.ryantenney" level="DEBUG"/>
+    <logger name="com.sun" level="DEBUG"/>
+    <logger name="com.zaxxer" level="DEBUG"/>
+    <logger name="io.undertow" level="DEBUG"/>
+    <logger name="io.undertow.websockets.jsr" level="DEBUG"/>
+    <logger name="org.ehcache" level="DEBUG"/>
+    <logger name="org.apache" level="DEBUG"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="DEBUG"/>
+    <logger name="org.bson" level="DEBUG"/>
+    <logger name="org.hibernate.validator" level="DEBUG"/>
+    <logger name="org.hibernate" level="DEBUG"/>
+    <logger name="org.hibernate.ejb.HibernatePersistence" level="DEBUG"/>
+    <logger name="org.postgresql" level="DEBUG"/>
+    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.security" level="DEBUG"/>
+    <logger name="org.springframework.cache" level="DEBUG"/>
+    <logger name="org.thymeleaf" level="DEBUG"/>
+    <logger name="org.xnio" level="DEBUG"/>
+    <logger name="springfox" level="DEBUG"/>
+    <logger name="sun.rmi" level="DEBUG"/>
+    <logger name="liquibase" level="DEBUG"/>
+    <logger name="LiquibaseSchemaResolver" level="DEBUG"/>
+    <logger name="springfox.documentation.schema.property" level="DEBUG"/>
+    <logger name="sun.rmi.transport" level="DEBUG"/>
     <!-- jhipster-needle-logback-add-log - JHipster will add a new log with level -->
 
     <!-- https://logback.qos.ch/manual/configuration.html#shutdownHook and https://jira.qos.ch/browse/LOGBACK-1090 -->
